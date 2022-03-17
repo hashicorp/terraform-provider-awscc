@@ -17,22 +17,22 @@ Data Source schema for AWS::IoT::TopicRuleDestination
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Amazon Resource Name (ARN).
-- **http_url_properties** (Attributes) HTTP URL destination properties. (see [below for nested schema](#nestedatt--http_url_properties))
-- **status** (String) The status of the TopicRuleDestination.
-- **status_reason** (String) The reasoning for the current status of the TopicRuleDestination.
-- **vpc_properties** (Attributes) VPC destination properties. (see [below for nested schema](#nestedatt--vpc_properties))
+- `arn` (String) Amazon Resource Name (ARN).
+- `http_url_properties` (Attributes) HTTP URL destination properties. (see [below for nested schema](#nestedatt--http_url_properties))
+- `status` (String) The status of the TopicRuleDestination.
+- `status_reason` (String) The reasoning for the current status of the TopicRuleDestination.
+- `vpc_properties` (Attributes) VPC destination properties. (see [below for nested schema](#nestedatt--vpc_properties))
 
 <a id="nestedatt--http_url_properties"></a>
 ### Nested Schema for `http_url_properties`
 
 Read-Only:
 
-- **confirmation_url** (String)
+- `confirmation_url` (String)
 
 
 <a id="nestedatt--vpc_properties"></a>
@@ -40,9 +40,9 @@ Read-Only:
 
 Read-Only:
 
-- **role_arn** (String)
-- **security_groups** (List of String)
-- **subnet_ids** (List of String)
-- **vpc_id** (String)
+- `role_arn` (String)
+- `security_groups` (List of String)
+- `subnet_ids` (List of String)
+- `vpc_id` (String)
 
 

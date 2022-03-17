@@ -17,36 +17,36 @@ Data Source schema for AWS::GreengrassV2::ComponentVersion
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **component_name** (String)
-- **component_version** (String)
-- **inline_recipe** (String)
-- **lambda_function** (Attributes) (see [below for nested schema](#nestedatt--lambda_function))
-- **tags** (Map of String)
+- `arn` (String)
+- `component_name` (String)
+- `component_version` (String)
+- `inline_recipe` (String)
+- `lambda_function` (Attributes) (see [below for nested schema](#nestedatt--lambda_function))
+- `tags` (Map of String)
 
 <a id="nestedatt--lambda_function"></a>
 ### Nested Schema for `lambda_function`
 
 Read-Only:
 
-- **component_dependencies** (Attributes Map) (see [below for nested schema](#nestedatt--lambda_function--component_dependencies))
-- **component_lambda_parameters** (Attributes) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters))
-- **component_name** (String)
-- **component_platforms** (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_platforms))
-- **component_version** (String)
-- **lambda_arn** (String)
+- `component_dependencies` (Attributes Map) (see [below for nested schema](#nestedatt--lambda_function--component_dependencies))
+- `component_lambda_parameters` (Attributes) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters))
+- `component_name` (String)
+- `component_platforms` (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_platforms))
+- `component_version` (String)
+- `lambda_arn` (String)
 
 <a id="nestedatt--lambda_function--component_dependencies"></a>
 ### Nested Schema for `lambda_function.component_dependencies`
 
 Read-Only:
 
-- **dependency_type** (String)
-- **version_requirement** (String)
+- `dependency_type` (String)
+- `version_requirement` (String)
 
 
 <a id="nestedatt--lambda_function--component_lambda_parameters"></a>
@@ -54,25 +54,25 @@ Read-Only:
 
 Read-Only:
 
-- **environment_variables** (Map of String)
-- **event_sources** (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--event_sources))
-- **exec_args** (List of String)
-- **input_payload_encoding_type** (String)
-- **linux_process_params** (Attributes) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params))
-- **max_idle_time_in_seconds** (Number)
-- **max_instances_count** (Number)
-- **max_queue_size** (Number)
-- **pinned** (Boolean)
-- **status_timeout_in_seconds** (Number)
-- **timeout_in_seconds** (Number)
+- `environment_variables` (Map of String)
+- `event_sources` (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--event_sources))
+- `exec_args` (List of String)
+- `input_payload_encoding_type` (String)
+- `linux_process_params` (Attributes) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params))
+- `max_idle_time_in_seconds` (Number)
+- `max_instances_count` (Number)
+- `max_queue_size` (Number)
+- `pinned` (Boolean)
+- `status_timeout_in_seconds` (Number)
+- `timeout_in_seconds` (Number)
 
 <a id="nestedatt--lambda_function--component_lambda_parameters--event_sources"></a>
 ### Nested Schema for `lambda_function.component_lambda_parameters.event_sources`
 
 Read-Only:
 
-- **topic** (String)
-- **type** (String)
+- `topic` (String)
+- `type` (String)
 
 
 <a id="nestedatt--lambda_function--component_lambda_parameters--linux_process_params"></a>
@@ -80,27 +80,27 @@ Read-Only:
 
 Read-Only:
 
-- **container_params** (Attributes) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params--container_params))
-- **isolation_mode** (String)
+- `container_params` (Attributes) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params--container_params))
+- `isolation_mode` (String)
 
 <a id="nestedatt--lambda_function--component_lambda_parameters--linux_process_params--container_params"></a>
 ### Nested Schema for `lambda_function.component_lambda_parameters.linux_process_params.isolation_mode`
 
 Read-Only:
 
-- **devices** (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params--isolation_mode--devices))
-- **memory_size_in_kb** (Number)
-- **mount_ro_sysfs** (Boolean)
-- **volumes** (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params--isolation_mode--volumes))
+- `devices` (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params--isolation_mode--devices))
+- `memory_size_in_kb` (Number)
+- `mount_ro_sysfs` (Boolean)
+- `volumes` (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params--isolation_mode--volumes))
 
 <a id="nestedatt--lambda_function--component_lambda_parameters--linux_process_params--isolation_mode--devices"></a>
 ### Nested Schema for `lambda_function.component_lambda_parameters.linux_process_params.isolation_mode.devices`
 
 Read-Only:
 
-- **add_group_owner** (Boolean)
-- **path** (String)
-- **permission** (String)
+- `add_group_owner` (Boolean)
+- `path` (String)
+- `permission` (String)
 
 
 <a id="nestedatt--lambda_function--component_lambda_parameters--linux_process_params--isolation_mode--volumes"></a>
@@ -108,10 +108,10 @@ Read-Only:
 
 Read-Only:
 
-- **add_group_owner** (Boolean)
-- **destination_path** (String)
-- **permission** (String)
-- **source_path** (String)
+- `add_group_owner` (Boolean)
+- `destination_path` (String)
+- `permission` (String)
+- `source_path` (String)
 
 
 
@@ -122,7 +122,7 @@ Read-Only:
 
 Read-Only:
 
-- **attributes** (Map of String)
-- **name** (String)
+- `attributes` (Map of String)
+- `name` (String)
 
 

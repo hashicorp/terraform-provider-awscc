@@ -17,40 +17,40 @@ Data Source schema for AWS::LicenseManager::License
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **beneficiary** (String) Beneficiary of the license.
-- **consumption_configuration** (Attributes) (see [below for nested schema](#nestedatt--consumption_configuration))
-- **entitlements** (Attributes List) (see [below for nested schema](#nestedatt--entitlements))
-- **home_region** (String) Home region for the created license.
-- **issuer** (Attributes) (see [below for nested schema](#nestedatt--issuer))
-- **license_arn** (String) Amazon Resource Name is a unique name for each resource.
-- **license_metadata** (Attributes List) (see [below for nested schema](#nestedatt--license_metadata))
-- **license_name** (String) Name for the created license.
-- **product_name** (String) Product name for the created license.
-- **product_sku** (String) ProductSKU of the license.
-- **status** (String)
-- **validity** (Attributes) (see [below for nested schema](#nestedatt--validity))
-- **version** (String) The version of the license.
+- `beneficiary` (String) Beneficiary of the license.
+- `consumption_configuration` (Attributes) (see [below for nested schema](#nestedatt--consumption_configuration))
+- `entitlements` (Attributes List) (see [below for nested schema](#nestedatt--entitlements))
+- `home_region` (String) Home region for the created license.
+- `issuer` (Attributes) (see [below for nested schema](#nestedatt--issuer))
+- `license_arn` (String) Amazon Resource Name is a unique name for each resource.
+- `license_metadata` (Attributes List) (see [below for nested schema](#nestedatt--license_metadata))
+- `license_name` (String) Name for the created license.
+- `product_name` (String) Product name for the created license.
+- `product_sku` (String) ProductSKU of the license.
+- `status` (String)
+- `validity` (Attributes) (see [below for nested schema](#nestedatt--validity))
+- `version` (String) The version of the license.
 
 <a id="nestedatt--consumption_configuration"></a>
 ### Nested Schema for `consumption_configuration`
 
 Read-Only:
 
-- **borrow_configuration** (Attributes) (see [below for nested schema](#nestedatt--consumption_configuration--borrow_configuration))
-- **provisional_configuration** (Attributes) (see [below for nested schema](#nestedatt--consumption_configuration--provisional_configuration))
-- **renew_type** (String)
+- `borrow_configuration` (Attributes) (see [below for nested schema](#nestedatt--consumption_configuration--borrow_configuration))
+- `provisional_configuration` (Attributes) (see [below for nested schema](#nestedatt--consumption_configuration--provisional_configuration))
+- `renew_type` (String)
 
 <a id="nestedatt--consumption_configuration--borrow_configuration"></a>
 ### Nested Schema for `consumption_configuration.borrow_configuration`
 
 Read-Only:
 
-- **allow_early_check_in** (Boolean)
-- **max_time_to_live_in_minutes** (Number)
+- `allow_early_check_in` (Boolean)
+- `max_time_to_live_in_minutes` (Number)
 
 
 <a id="nestedatt--consumption_configuration--provisional_configuration"></a>
@@ -58,7 +58,7 @@ Read-Only:
 
 Read-Only:
 
-- **max_time_to_live_in_minutes** (Number)
+- `max_time_to_live_in_minutes` (Number)
 
 
 
@@ -67,12 +67,12 @@ Read-Only:
 
 Read-Only:
 
-- **allow_check_in** (Boolean)
-- **max_count** (Number)
-- **name** (String)
-- **overage** (Boolean)
-- **unit** (String)
-- **value** (String)
+- `allow_check_in` (Boolean)
+- `max_count` (Number)
+- `name` (String)
+- `overage` (Boolean)
+- `unit` (String)
+- `value` (String)
 
 
 <a id="nestedatt--issuer"></a>
@@ -80,8 +80,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String)
-- **sign_key** (String)
+- `name` (String)
+- `sign_key` (String)
 
 
 <a id="nestedatt--license_metadata"></a>
@@ -89,8 +89,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 
 <a id="nestedatt--validity"></a>
@@ -98,7 +98,7 @@ Read-Only:
 
 Read-Only:
 
-- **begin** (String) Validity begin date for the license.
-- **end** (String) Validity begin date for the license.
+- `begin` (String) Validity begin date for the license.
+- `end` (String) Validity begin date for the license.
 
 

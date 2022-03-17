@@ -17,12 +17,12 @@ Data Source schema for AWS::AppStream::ApplicationEntitlementAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **application_identifier** (String)
-- **entitlement_name** (String)
-- **stack_name** (String)
+- `application_identifier` (String)
+- `entitlement_name` (String)
+- `stack_name` (String)
 
 

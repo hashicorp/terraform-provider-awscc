@@ -17,21 +17,21 @@ Data Source schema for AWS::Route53RecoveryReadiness::ReadinessCheck
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **readiness_check_arn** (String) The Amazon Resource Name (ARN) of the readiness check.
-- **readiness_check_name** (String) Name of the ReadinessCheck to create.
-- **resource_set_name** (String) The name of the resource set to check.
-- **tags** (Attributes List) A collection of tags associated with a resource. (see [below for nested schema](#nestedatt--tags))
+- `readiness_check_arn` (String) The Amazon Resource Name (ARN) of the readiness check.
+- `readiness_check_name` (String) Name of the ReadinessCheck to create.
+- `resource_set_name` (String) The name of the resource set to check.
+- `tags` (Attributes List) A collection of tags associated with a resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (List of String)
+- `key` (String)
+- `value` (List of String)
 
 

@@ -17,11 +17,11 @@ Data Source schema for AWS::MSK::BatchScramSecret
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **cluster_arn** (String)
-- **secret_arn_list** (List of String)
+- `cluster_arn` (String)
+- `secret_arn_list` (List of String)
 
 

@@ -17,15 +17,15 @@ Data Source schema for AWS::IoT::Certificate
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **ca_certificate_pem** (String)
-- **certificate_mode** (String)
-- **certificate_pem** (String)
-- **certificate_signing_request** (String)
-- **status** (String)
+- `arn` (String)
+- `ca_certificate_pem` (String)
+- `certificate_mode` (String)
+- `certificate_pem` (String)
+- `certificate_signing_request` (String)
+- `status` (String)
 
 

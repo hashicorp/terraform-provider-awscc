@@ -17,12 +17,12 @@ AWS::S3ObjectLambda::AccessPointPolicy resource is an Amazon S3ObjectLambda poli
 
 ### Required
 
-- **object_lambda_access_point** (String) The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.
-- **policy_document** (Map of String) A policy document containing permissions to add to the specified ObjectLambdaAccessPoint. For more information, see Access Policy Language Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the Amazon Simple Storage Service Developer Guide.
+- `object_lambda_access_point` (String) The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.
+- `policy_document` (Map of String) A policy document containing permissions to add to the specified ObjectLambdaAccessPoint. For more information, see Access Policy Language Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the Amazon Simple Storage Service Developer Guide.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

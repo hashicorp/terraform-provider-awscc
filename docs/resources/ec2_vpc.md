@@ -17,37 +17,37 @@ Resource Type definition for AWS::EC2::VPC
 
 ### Required
 
-- **cidr_block** (String) The primary IPv4 CIDR block for the VPC.
+- `cidr_block` (String) The primary IPv4 CIDR block for the VPC.
 
 ### Optional
 
-- **enable_dns_hostnames** (Boolean) Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs.
-- **enable_dns_support** (Boolean) Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range "plus two" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default.
-- **instance_tenancy** (String) The allowed tenancy of instances launched into the VPC.
+- `enable_dns_hostnames` (Boolean) Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs.
+- `enable_dns_support` (Boolean) Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range "plus two" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default.
+- `instance_tenancy` (String) The allowed tenancy of instances launched into the VPC.
 
 "default": An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.
 
 "dedicated": An instance launched into the VPC is a Dedicated Instance by default, unless you explicitly specify a tenancy of host during instance launch. You cannot specify a tenancy of default during instance launch.
 
 Updating InstanceTenancy requires no replacement only if you are updating its value from "dedicated" to "default". Updating InstanceTenancy from "default" to "dedicated" requires replacement.
-- **tags** (Attributes List) The tags for the VPC. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) The tags for the VPC. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **cidr_block_associations** (List of String) A list of IPv4 CIDR block association IDs for the VPC.
-- **default_network_acl** (String) The default network ACL ID that is associated with the VPC.
-- **default_security_group** (String) The default security group ID that is associated with the VPC.
-- **id** (String) Uniquely identifies the resource.
-- **ipv_6_cidr_blocks** (List of String) A list of IPv6 CIDR blocks that are associated with the VPC.
-- **vpc_id** (String) The Id for the model.
+- `cidr_block_associations` (List of String) A list of IPv4 CIDR block association IDs for the VPC.
+- `default_network_acl` (String) The default network ACL ID that is associated with the VPC.
+- `default_security_group` (String) The default security group ID that is associated with the VPC.
+- `id` (String) Uniquely identifies the resource.
+- `ipv_6_cidr_blocks` (List of String) A list of IPv6 CIDR blocks that are associated with the VPC.
+- `vpc_id` (String) The Id for the model.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

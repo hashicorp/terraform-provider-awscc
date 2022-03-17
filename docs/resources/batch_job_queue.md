@@ -17,28 +17,28 @@ Resource Type definition for AWS::Batch::JobQueue
 
 ### Required
 
-- **compute_environment_order** (Attributes List) (see [below for nested schema](#nestedatt--compute_environment_order))
-- **priority** (Number)
+- `compute_environment_order` (Attributes List) (see [below for nested schema](#nestedatt--compute_environment_order))
+- `priority` (Number)
 
 ### Optional
 
-- **job_queue_name** (String)
-- **scheduling_policy_arn** (String)
-- **state** (String)
-- **tags** (Map of String) A key-value pair to associate with a resource.
+- `job_queue_name` (String)
+- `scheduling_policy_arn` (String)
+- `state` (String)
+- `tags` (Map of String) A key-value pair to associate with a resource.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **job_queue_arn** (String)
+- `id` (String) Uniquely identifies the resource.
+- `job_queue_arn` (String)
 
 <a id="nestedatt--compute_environment_order"></a>
 ### Nested Schema for `compute_environment_order`
 
 Required:
 
-- **compute_environment** (String)
-- **order** (Number)
+- `compute_environment` (String)
+- `order` (Number)
 
 ## Import
 

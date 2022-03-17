@@ -17,23 +17,23 @@ Resource Type definition for AWS::EC2::NetworkAcl
 
 ### Required
 
-- **vpc_id** (String) The ID of the VPC.
+- `vpc_id` (String) The ID of the VPC.
 
 ### Optional
 
-- **tags** (Attributes List) The tags to assign to the network ACL. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) The tags to assign to the network ACL. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
+- `id` (String) The ID of this resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

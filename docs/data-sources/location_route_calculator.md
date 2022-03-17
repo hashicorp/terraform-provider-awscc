@@ -17,17 +17,17 @@ Data Source schema for AWS::Location::RouteCalculator
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **calculator_arn** (String)
-- **calculator_name** (String)
-- **create_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
-- **data_source** (String)
-- **description** (String)
-- **pricing_plan** (String)
-- **update_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `arn` (String)
+- `calculator_arn` (String)
+- `calculator_name` (String)
+- `create_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `data_source` (String)
+- `description` (String)
+- `pricing_plan` (String)
+- `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 
 

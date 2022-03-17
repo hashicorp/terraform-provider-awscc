@@ -17,50 +17,50 @@ Data Source schema for AWS::SageMaker::Domain
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **app_network_access_type** (String) Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.
-- **auth_mode** (String) The mode of authentication that members use to access the domain.
-- **default_user_settings** (Attributes) The default user settings. (see [below for nested schema](#nestedatt--default_user_settings))
-- **domain_arn** (String) The Amazon Resource Name (ARN) of the created domain.
-- **domain_id** (String) The domain name.
-- **domain_name** (String) A name for the domain.
-- **home_efs_file_system_id** (String) The ID of the Amazon Elastic File System (EFS) managed by this Domain.
-- **kms_key_id** (String) SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.
-- **single_sign_on_managed_application_instance_id** (String) The SSO managed application instance ID.
-- **subnet_ids** (List of String) The VPC subnets that Studio uses for communication.
-- **tags** (Attributes List) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
-- **url** (String) The URL to the created domain.
-- **vpc_id** (String) The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
+- `app_network_access_type` (String) Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.
+- `auth_mode` (String) The mode of authentication that members use to access the domain.
+- `default_user_settings` (Attributes) The default user settings. (see [below for nested schema](#nestedatt--default_user_settings))
+- `domain_arn` (String) The Amazon Resource Name (ARN) of the created domain.
+- `domain_id` (String) The domain name.
+- `domain_name` (String) A name for the domain.
+- `home_efs_file_system_id` (String) The ID of the Amazon Elastic File System (EFS) managed by this Domain.
+- `kms_key_id` (String) SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.
+- `single_sign_on_managed_application_instance_id` (String) The SSO managed application instance ID.
+- `subnet_ids` (List of String) The VPC subnets that Studio uses for communication.
+- `tags` (Attributes List) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
+- `url` (String) The URL to the created domain.
+- `vpc_id` (String) The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
 
 <a id="nestedatt--default_user_settings"></a>
 ### Nested Schema for `default_user_settings`
 
 Read-Only:
 
-- **execution_role** (String) The user profile Amazon Resource Name (ARN).
-- **jupyter_server_app_settings** (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings))
-- **kernel_gateway_app_settings** (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings))
-- **security_groups** (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
-- **sharing_settings** (Attributes) The sharing settings. (see [below for nested schema](#nestedatt--default_user_settings--sharing_settings))
+- `execution_role` (String) The user profile Amazon Resource Name (ARN).
+- `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings))
+- `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings))
+- `security_groups` (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
+- `sharing_settings` (Attributes) The sharing settings. (see [below for nested schema](#nestedatt--default_user_settings--sharing_settings))
 
 <a id="nestedatt--default_user_settings--jupyter_server_app_settings"></a>
 ### Nested Schema for `default_user_settings.jupyter_server_app_settings`
 
 Read-Only:
 
-- **default_resource_spec** (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings--default_resource_spec))
+- `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings--default_resource_spec))
 
 <a id="nestedatt--default_user_settings--jupyter_server_app_settings--default_resource_spec"></a>
 ### Nested Schema for `default_user_settings.jupyter_server_app_settings.default_resource_spec`
 
 Read-Only:
 
-- **instance_type** (String) The instance type that the image version runs on.
-- **sage_maker_image_arn** (String) The ARN of the SageMaker image that the image version belongs to.
-- **sage_maker_image_version_arn** (String) The ARN of the image version created on the instance.
+- `instance_type` (String) The instance type that the image version runs on.
+- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
 
 
@@ -69,17 +69,17 @@ Read-Only:
 
 Read-Only:
 
-- **custom_images** (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--custom_images))
-- **default_resource_spec** (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--default_resource_spec))
+- `custom_images` (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--custom_images))
+- `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--default_resource_spec))
 
 <a id="nestedatt--default_user_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `default_user_settings.kernel_gateway_app_settings.custom_images`
 
 Read-Only:
 
-- **app_image_config_name** (String) The Name of the AppImageConfig.
-- **image_name** (String) The name of the CustomImage. Must be unique to your account.
-- **image_version_number** (Number) The version number of the CustomImage.
+- `app_image_config_name` (String) The Name of the AppImageConfig.
+- `image_name` (String) The name of the CustomImage. Must be unique to your account.
+- `image_version_number` (Number) The version number of the CustomImage.
 
 
 <a id="nestedatt--default_user_settings--kernel_gateway_app_settings--default_resource_spec"></a>
@@ -87,9 +87,9 @@ Read-Only:
 
 Read-Only:
 
-- **instance_type** (String) The instance type that the image version runs on.
-- **sage_maker_image_arn** (String) The ARN of the SageMaker image that the image version belongs to.
-- **sage_maker_image_version_arn** (String) The ARN of the image version created on the instance.
+- `instance_type` (String) The instance type that the image version runs on.
+- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
 
 
@@ -98,9 +98,9 @@ Read-Only:
 
 Read-Only:
 
-- **notebook_output_option** (String) Whether to include the notebook cell output when sharing the notebook. The default is Disabled.
-- **s3_kms_key_id** (String) When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
-- **s3_output_path** (String) When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.
+- `notebook_output_option` (String) Whether to include the notebook cell output when sharing the notebook. The default is Disabled.
+- `s3_kms_key_id` (String) When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
+- `s3_output_path` (String) When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.
 
 
 
@@ -109,7 +109,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

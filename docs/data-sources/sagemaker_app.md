@@ -17,26 +17,26 @@ Data Source schema for AWS::SageMaker::App
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **app_arn** (String) The Amazon Resource Name (ARN) of the app.
-- **app_name** (String) The name of the app.
-- **app_type** (String) The type of app.
-- **domain_id** (String) The domain ID.
-- **resource_spec** (Attributes) The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. (see [below for nested schema](#nestedatt--resource_spec))
-- **tags** (Attributes List) A list of tags to apply to the app. (see [below for nested schema](#nestedatt--tags))
-- **user_profile_name** (String) The user profile name.
+- `app_arn` (String) The Amazon Resource Name (ARN) of the app.
+- `app_name` (String) The name of the app.
+- `app_type` (String) The type of app.
+- `domain_id` (String) The domain ID.
+- `resource_spec` (Attributes) The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. (see [below for nested schema](#nestedatt--resource_spec))
+- `tags` (Attributes List) A list of tags to apply to the app. (see [below for nested schema](#nestedatt--tags))
+- `user_profile_name` (String) The user profile name.
 
 <a id="nestedatt--resource_spec"></a>
 ### Nested Schema for `resource_spec`
 
 Read-Only:
 
-- **instance_type** (String) The instance type that the image version runs on.
-- **sage_maker_image_arn** (String) The ARN of the SageMaker image that the image version belongs to.
-- **sage_maker_image_version_arn** (String) The ARN of the image version created on the instance.
+- `instance_type` (String) The instance type that the image version runs on.
+- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
 
 <a id="nestedatt--tags"></a>
@@ -44,7 +44,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

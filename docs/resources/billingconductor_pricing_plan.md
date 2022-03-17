@@ -17,20 +17,20 @@ Pricing Plan enables you to customize your billing details consistent with the u
 
 ### Required
 
-- **name** (String)
+- `name` (String)
 
 ### Optional
 
-- **description** (String)
-- **pricing_rule_arns** (List of String)
+- `description` (String)
+- `pricing_rule_arns` (List of String)
 
 ### Read-Only
 
-- **arn** (String) Pricing Plan ARN
-- **creation_time** (Number) Creation timestamp in UNIX epoch time format
-- **id** (String) Uniquely identifies the resource.
-- **last_modified_time** (Number) Latest modified timestamp in UNIX epoch time format
-- **size** (Number) Number of associated pricing rules
+- `arn` (String) Pricing Plan ARN
+- `creation_time` (Number) Creation timestamp in UNIX epoch time format
+- `id` (String) Uniquely identifies the resource.
+- `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
+- `size` (Number) Number of associated pricing rules
 
 ## Import
 

@@ -17,41 +17,41 @@ AWS Ground Station DataflowEndpointGroup schema for CloudFormation
 
 ### Required
 
-- **endpoint_details** (Attributes List) (see [below for nested schema](#nestedatt--endpoint_details))
+- `endpoint_details` (Attributes List) (see [below for nested schema](#nestedatt--endpoint_details))
 
 ### Optional
 
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 <a id="nestedatt--endpoint_details"></a>
 ### Nested Schema for `endpoint_details`
 
 Required:
 
-- **endpoint** (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--endpoint))
-- **security_details** (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--security_details))
+- `endpoint` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--endpoint))
+- `security_details` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--security_details))
 
 <a id="nestedatt--endpoint_details--endpoint"></a>
 ### Nested Schema for `endpoint_details.endpoint`
 
 Required:
 
-- **address** (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--endpoint--address))
-- **mtu** (Number)
-- **name** (String)
+- `address` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--endpoint--address))
+- `mtu` (Number)
+- `name` (String)
 
 <a id="nestedatt--endpoint_details--endpoint--address"></a>
 ### Nested Schema for `endpoint_details.endpoint.address`
 
 Required:
 
-- **name** (String)
-- **port** (Number)
+- `name` (String)
+- `port` (Number)
 
 
 
@@ -60,9 +60,9 @@ Required:
 
 Required:
 
-- **role_arn** (String)
-- **security_group_ids** (List of String)
-- **subnet_ids** (List of String)
+- `role_arn` (String)
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
 
 
 
@@ -71,8 +71,8 @@ Required:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

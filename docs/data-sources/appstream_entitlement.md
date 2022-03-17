@@ -17,24 +17,24 @@ Data Source schema for AWS::AppStream::Entitlement
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **app_visibility** (String)
-- **attributes** (Attributes Set) (see [below for nested schema](#nestedatt--attributes))
-- **created_time** (String)
-- **description** (String)
-- **last_modified_time** (String)
-- **name** (String)
-- **stack_name** (String)
+- `app_visibility` (String)
+- `attributes` (Attributes Set) (see [below for nested schema](#nestedatt--attributes))
+- `created_time` (String)
+- `description` (String)
+- `last_modified_time` (String)
+- `name` (String)
+- `stack_name` (String)
 
 <a id="nestedatt--attributes"></a>
 ### Nested Schema for `attributes`
 
 Read-Only:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 

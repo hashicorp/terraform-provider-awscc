@@ -17,32 +17,32 @@ The AWS::KMS::Key resource specifies a customer master key (CMK) in AWS Key Mana
 
 ### Required
 
-- **key_policy** (String) The key policy that authorizes use of the CMK. The key policy must observe the following rules.
+- `key_policy` (String) The key policy that authorizes use of the CMK. The key policy must observe the following rules.
 
 ### Optional
 
-- **description** (String) A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.
-- **enable_key_rotation** (Boolean) Enables automatic rotation of the key material for the specified customer master key (CMK). By default, automation key rotation is not enabled.
-- **enabled** (Boolean) Specifies whether the customer master key (CMK) is enabled. Disabled CMKs cannot be used in cryptographic operations.
-- **key_spec** (String) Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.
-- **key_usage** (String) Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.
-- **multi_region** (Boolean) Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.
-- **pending_window_in_days** (Number) Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.
+- `enable_key_rotation` (Boolean) Enables automatic rotation of the key material for the specified customer master key (CMK). By default, automation key rotation is not enabled.
+- `enabled` (Boolean) Specifies whether the customer master key (CMK) is enabled. Disabled CMKs cannot be used in cryptographic operations.
+- `key_spec` (String) Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.
+- `key_usage` (String) Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.
+- `multi_region` (Boolean) Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.
+- `pending_window_in_days` (Number) Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
-- **key_id** (String)
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
+- `key_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

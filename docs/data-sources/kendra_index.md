@@ -17,29 +17,29 @@ Data Source schema for AWS::Kendra::Index
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **capacity_units** (Attributes) Capacity units (see [below for nested schema](#nestedatt--capacity_units))
-- **description** (String) A description for the index
-- **document_metadata_configurations** (Attributes List) Document metadata configurations (see [below for nested schema](#nestedatt--document_metadata_configurations))
-- **edition** (String) Edition of index
-- **name** (String) Name of index
-- **role_arn** (String) Role Arn
-- **server_side_encryption_configuration** (Attributes) Server side encryption configuration (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
-- **tags** (Attributes List) Tags for labeling the index (see [below for nested schema](#nestedatt--tags))
-- **user_context_policy** (String)
-- **user_token_configurations** (Attributes List) (see [below for nested schema](#nestedatt--user_token_configurations))
+- `arn` (String)
+- `capacity_units` (Attributes) Capacity units (see [below for nested schema](#nestedatt--capacity_units))
+- `description` (String) A description for the index
+- `document_metadata_configurations` (Attributes List) Document metadata configurations (see [below for nested schema](#nestedatt--document_metadata_configurations))
+- `edition` (String) Edition of index
+- `name` (String) Name of index
+- `role_arn` (String) Role Arn
+- `server_side_encryption_configuration` (Attributes) Server side encryption configuration (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
+- `tags` (Attributes List) Tags for labeling the index (see [below for nested schema](#nestedatt--tags))
+- `user_context_policy` (String)
+- `user_token_configurations` (Attributes List) (see [below for nested schema](#nestedatt--user_token_configurations))
 
 <a id="nestedatt--capacity_units"></a>
 ### Nested Schema for `capacity_units`
 
 Read-Only:
 
-- **query_capacity_units** (Number)
-- **storage_capacity_units** (Number)
+- `query_capacity_units` (Number)
+- `storage_capacity_units` (Number)
 
 
 <a id="nestedatt--document_metadata_configurations"></a>
@@ -47,29 +47,29 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String)
-- **relevance** (Attributes) (see [below for nested schema](#nestedatt--document_metadata_configurations--relevance))
-- **search** (Attributes) (see [below for nested schema](#nestedatt--document_metadata_configurations--search))
-- **type** (String)
+- `name` (String)
+- `relevance` (Attributes) (see [below for nested schema](#nestedatt--document_metadata_configurations--relevance))
+- `search` (Attributes) (see [below for nested schema](#nestedatt--document_metadata_configurations--search))
+- `type` (String)
 
 <a id="nestedatt--document_metadata_configurations--relevance"></a>
 ### Nested Schema for `document_metadata_configurations.relevance`
 
 Read-Only:
 
-- **duration** (String)
-- **freshness** (Boolean)
-- **importance** (Number)
-- **rank_order** (String)
-- **value_importance_items** (Attributes List) (see [below for nested schema](#nestedatt--document_metadata_configurations--relevance--value_importance_items))
+- `duration` (String)
+- `freshness` (Boolean)
+- `importance` (Number)
+- `rank_order` (String)
+- `value_importance_items` (Attributes List) (see [below for nested schema](#nestedatt--document_metadata_configurations--relevance--value_importance_items))
 
 <a id="nestedatt--document_metadata_configurations--relevance--value_importance_items"></a>
 ### Nested Schema for `document_metadata_configurations.relevance.value_importance_items`
 
 Read-Only:
 
-- **key** (String)
-- **value** (Number)
+- `key` (String)
+- `value` (Number)
 
 
 
@@ -78,10 +78,10 @@ Read-Only:
 
 Read-Only:
 
-- **displayable** (Boolean)
-- **facetable** (Boolean)
-- **searchable** (Boolean)
-- **sortable** (Boolean)
+- `displayable` (Boolean)
+- `facetable` (Boolean)
+- `searchable` (Boolean)
+- `sortable` (Boolean)
 
 
 
@@ -90,7 +90,7 @@ Read-Only:
 
 Read-Only:
 
-- **kms_key_id** (String)
+- `kms_key_id` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -98,8 +98,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) A string used to identify this tag
-- **value** (String) A string containing the value for the tag
+- `key` (String) A string used to identify this tag
+- `value` (String) A string containing the value for the tag
 
 
 <a id="nestedatt--user_token_configurations"></a>
@@ -107,16 +107,16 @@ Read-Only:
 
 Read-Only:
 
-- **json_token_type_configuration** (Attributes) (see [below for nested schema](#nestedatt--user_token_configurations--json_token_type_configuration))
-- **jwt_token_type_configuration** (Attributes) (see [below for nested schema](#nestedatt--user_token_configurations--jwt_token_type_configuration))
+- `json_token_type_configuration` (Attributes) (see [below for nested schema](#nestedatt--user_token_configurations--json_token_type_configuration))
+- `jwt_token_type_configuration` (Attributes) (see [below for nested schema](#nestedatt--user_token_configurations--jwt_token_type_configuration))
 
 <a id="nestedatt--user_token_configurations--json_token_type_configuration"></a>
 ### Nested Schema for `user_token_configurations.json_token_type_configuration`
 
 Read-Only:
 
-- **group_attribute_field** (String)
-- **user_name_attribute_field** (String)
+- `group_attribute_field` (String)
+- `user_name_attribute_field` (String)
 
 
 <a id="nestedatt--user_token_configurations--jwt_token_type_configuration"></a>
@@ -124,12 +124,12 @@ Read-Only:
 
 Read-Only:
 
-- **claim_regex** (String)
-- **group_attribute_field** (String)
-- **issuer** (String)
-- **key_location** (String)
-- **secret_manager_arn** (String) Role Arn
-- **url** (String)
-- **user_name_attribute_field** (String)
+- `claim_regex` (String)
+- `group_attribute_field` (String)
+- `issuer` (String)
+- `key_location` (String)
+- `secret_manager_arn` (String) Role Arn
+- `url` (String)
+- `user_name_attribute_field` (String)
 
 

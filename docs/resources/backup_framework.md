@@ -17,20 +17,20 @@ Contains detailed information about a framework. Frameworks contain controls, wh
 
 ### Required
 
-- **framework_controls** (Attributes Set) Contains detailed information about all of the controls of a framework. Each framework must contain at least one control. (see [below for nested schema](#nestedatt--framework_controls))
+- `framework_controls` (Attributes Set) Contains detailed information about all of the controls of a framework. Each framework must contain at least one control. (see [below for nested schema](#nestedatt--framework_controls))
 
 ### Optional
 
-- **framework_description** (String) An optional description of the framework with a maximum 1,024 characters.
-- **framework_name** (String) The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
-- **framework_tags** (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--framework_tags))
+- `framework_description` (String) An optional description of the framework with a maximum 1,024 characters.
+- `framework_name` (String) The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
+- `framework_tags` (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--framework_tags))
 
 ### Read-Only
 
-- **creation_time** (Number) The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of `CreationTime` is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
-- **deployment_status** (String) The deployment status of a framework. The statuses are: `CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED`
-- **framework_arn** (String) An Amazon Resource Name (ARN) that uniquely identifies Framework as a resource
-- **framework_status** (String) A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn AWS Config recording on or off for each resource. The statuses are:
+- `creation_time` (Number) The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of `CreationTime` is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+- `deployment_status` (String) The deployment status of a framework. The statuses are: `CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED`
+- `framework_arn` (String) An Amazon Resource Name (ARN) that uniquely identifies Framework as a resource
+- `framework_status` (String) A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn AWS Config recording on or off for each resource. The statuses are:
 
 `ACTIVE` when recording is turned on for all resources governed by the framework.
 
@@ -39,24 +39,24 @@ Contains detailed information about a framework. Frameworks contain controls, wh
 `INACTIVE` when recording is turned off for all resources governed by the framework.
 
 `UNAVAILABLE` when AWS Backup is unable to validate recording status at this time.
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--framework_controls"></a>
 ### Nested Schema for `framework_controls`
 
 Required:
 
-- **control_input_parameters** (Attributes Set) A list of ParameterName and ParameterValue pairs. (see [below for nested schema](#nestedatt--framework_controls--control_input_parameters))
-- **control_name** (String) The name of a control. This name is between 1 and 256 characters.
-- **control_scope** (Attributes) The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. (see [below for nested schema](#nestedatt--framework_controls--control_scope))
+- `control_input_parameters` (Attributes Set) A list of ParameterName and ParameterValue pairs. (see [below for nested schema](#nestedatt--framework_controls--control_input_parameters))
+- `control_name` (String) The name of a control. This name is between 1 and 256 characters.
+- `control_scope` (Attributes) The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. (see [below for nested schema](#nestedatt--framework_controls--control_scope))
 
 <a id="nestedatt--framework_controls--control_input_parameters"></a>
 ### Nested Schema for `framework_controls.control_input_parameters`
 
 Required:
 
-- **parameter_name** (String)
-- **parameter_value** (String)
+- `parameter_name` (String)
+- `parameter_value` (String)
 
 
 <a id="nestedatt--framework_controls--control_scope"></a>
@@ -64,17 +64,17 @@ Required:
 
 Required:
 
-- **compliance_resource_ids** (List of String) The ID of the only AWS resource that you want your control scope to contain.
-- **compliance_resource_types** (List of String) Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.
-- **tags** (Attributes List) Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--framework_controls--control_scope--tags))
+- `compliance_resource_ids` (List of String) The ID of the only AWS resource that you want your control scope to contain.
+- `compliance_resource_types` (List of String) Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.
+- `tags` (Attributes List) Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--framework_controls--control_scope--tags))
 
 <a id="nestedatt--framework_controls--control_scope--tags"></a>
 ### Nested Schema for `framework_controls.control_scope.tags`
 
 Required:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 
@@ -84,8 +84,8 @@ Required:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

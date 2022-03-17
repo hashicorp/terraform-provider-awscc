@@ -17,13 +17,13 @@ AWS::RoboMaker::Fleet resource creates an AWS RoboMaker fleet. Fleets contain ro
 
 ### Optional
 
-- **name** (String) The name of the fleet.
-- **tags** (Map of String) A key-value pair to associate with a resource.
+- `name` (String) The name of the fleet.
+- `tags` (Map of String) A key-value pair to associate with a resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

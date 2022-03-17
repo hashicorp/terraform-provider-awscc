@@ -17,51 +17,51 @@ Represents a studio component which connects a non-Nimble Studio resource in you
 
 ### Required
 
-- **name** (String) <p>The name for the studio component.</p>
-- **studio_id** (String) <p>The studioId. </p>
-- **type** (String)
+- `name` (String) <p>The name for the studio component.</p>
+- `studio_id` (String) <p>The studioId. </p>
+- `type` (String)
 
 ### Optional
 
-- **configuration** (Attributes) <p>The configuration of the studio component, based on component type.</p> (see [below for nested schema](#nestedatt--configuration))
-- **description** (String) <p>The description.</p>
-- **ec_2_security_group_ids** (List of String) <p>The EC2 security groups that control access to the studio component.</p>
-- **initialization_scripts** (Attributes List) <p>Initialization scripts for studio components.</p> (see [below for nested schema](#nestedatt--initialization_scripts))
-- **script_parameters** (Attributes List) <p>Parameters for the studio component scripts.</p> (see [below for nested schema](#nestedatt--script_parameters))
-- **subtype** (String)
-- **tags** (Map of String)
+- `configuration` (Attributes) <p>The configuration of the studio component, based on component type.</p> (see [below for nested schema](#nestedatt--configuration))
+- `description` (String) <p>The description.</p>
+- `ec_2_security_group_ids` (List of String) <p>The EC2 security groups that control access to the studio component.</p>
+- `initialization_scripts` (Attributes List) <p>Initialization scripts for studio components.</p> (see [below for nested schema](#nestedatt--initialization_scripts))
+- `script_parameters` (Attributes List) <p>Parameters for the studio component scripts.</p> (see [below for nested schema](#nestedatt--script_parameters))
+- `subtype` (String)
+- `tags` (Map of String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **studio_component_id** (String)
+- `id` (String) Uniquely identifies the resource.
+- `studio_component_id` (String)
 
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
 
 Optional:
 
-- **active_directory_configuration** (Attributes) <p>The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.</p> (see [below for nested schema](#nestedatt--configuration--active_directory_configuration))
-- **compute_farm_configuration** (Attributes) <p>The configuration for a render farm that is associated with a studio resource.</p> (see [below for nested schema](#nestedatt--configuration--compute_farm_configuration))
-- **license_service_configuration** (Attributes) <p>The configuration for a license service that is associated with a studio resource.</p> (see [below for nested schema](#nestedatt--configuration--license_service_configuration))
-- **shared_file_system_configuration** (Attributes) <p>The configuration for a shared file storage system that is associated with a studio resource.</p> (see [below for nested schema](#nestedatt--configuration--shared_file_system_configuration))
+- `active_directory_configuration` (Attributes) <p>The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.</p> (see [below for nested schema](#nestedatt--configuration--active_directory_configuration))
+- `compute_farm_configuration` (Attributes) <p>The configuration for a render farm that is associated with a studio resource.</p> (see [below for nested schema](#nestedatt--configuration--compute_farm_configuration))
+- `license_service_configuration` (Attributes) <p>The configuration for a license service that is associated with a studio resource.</p> (see [below for nested schema](#nestedatt--configuration--license_service_configuration))
+- `shared_file_system_configuration` (Attributes) <p>The configuration for a shared file storage system that is associated with a studio resource.</p> (see [below for nested schema](#nestedatt--configuration--shared_file_system_configuration))
 
 <a id="nestedatt--configuration--active_directory_configuration"></a>
 ### Nested Schema for `configuration.active_directory_configuration`
 
 Optional:
 
-- **computer_attributes** (Attributes List) <p>A collection of custom attributes for an Active Directory computer.</p> (see [below for nested schema](#nestedatt--configuration--active_directory_configuration--computer_attributes))
-- **directory_id** (String) <p>The directory ID of the Directory Service for Microsoft Active Directory to access using this studio component.</p>
-- **organizational_unit_distinguished_name** (String) <p>The distinguished name (DN) and organizational unit (OU) of an Active Directory computer.</p>
+- `computer_attributes` (Attributes List) <p>A collection of custom attributes for an Active Directory computer.</p> (see [below for nested schema](#nestedatt--configuration--active_directory_configuration--computer_attributes))
+- `directory_id` (String) <p>The directory ID of the Directory Service for Microsoft Active Directory to access using this studio component.</p>
+- `organizational_unit_distinguished_name` (String) <p>The distinguished name (DN) and organizational unit (OU) of an Active Directory computer.</p>
 
 <a id="nestedatt--configuration--active_directory_configuration--computer_attributes"></a>
 ### Nested Schema for `configuration.active_directory_configuration.computer_attributes`
 
 Optional:
 
-- **name** (String) <p>The name for the LDAP attribute.</p>
-- **value** (String) <p>The value for the LDAP attribute.</p>
+- `name` (String) <p>The name for the LDAP attribute.</p>
+- `value` (String) <p>The value for the LDAP attribute.</p>
 
 
 
@@ -70,8 +70,8 @@ Optional:
 
 Optional:
 
-- **active_directory_user** (String) <p>The name of an Active Directory user that is used on ComputeFarm worker instances.</p>
-- **endpoint** (String) <p>The endpoint of the ComputeFarm that is accessed by the studio component resource.</p>
+- `active_directory_user` (String) <p>The name of an Active Directory user that is used on ComputeFarm worker instances.</p>
+- `endpoint` (String) <p>The endpoint of the ComputeFarm that is accessed by the studio component resource.</p>
 
 
 <a id="nestedatt--configuration--license_service_configuration"></a>
@@ -79,7 +79,7 @@ Optional:
 
 Optional:
 
-- **endpoint** (String) <p>The endpoint of the license service that is accessed by the studio component resource.</p>
+- `endpoint` (String) <p>The endpoint of the license service that is accessed by the studio component resource.</p>
 
 
 <a id="nestedatt--configuration--shared_file_system_configuration"></a>
@@ -87,11 +87,11 @@ Optional:
 
 Optional:
 
-- **endpoint** (String) <p>The endpoint of the shared file system that is accessed by the studio component resource.</p>
-- **file_system_id** (String) <p>The unique identifier for a file system.</p>
-- **linux_mount_point** (String) <p>The mount location for a shared file system on a Linux virtual workstation.</p>
-- **share_name** (String) <p>The name of the file share.</p>
-- **windows_mount_drive** (String) <p>The mount location for a shared file system on a Windows virtual workstation.</p>
+- `endpoint` (String) <p>The endpoint of the shared file system that is accessed by the studio component resource.</p>
+- `file_system_id` (String) <p>The unique identifier for a file system.</p>
+- `linux_mount_point` (String) <p>The mount location for a shared file system on a Linux virtual workstation.</p>
+- `share_name` (String) <p>The name of the file share.</p>
+- `windows_mount_drive` (String) <p>The mount location for a shared file system on a Windows virtual workstation.</p>
 
 
 
@@ -100,10 +100,10 @@ Optional:
 
 Optional:
 
-- **launch_profile_protocol_version** (String) <p>The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".</p>
-- **platform** (String)
-- **run_context** (String)
-- **script** (String) <p>The initialization script.</p>
+- `launch_profile_protocol_version` (String) <p>The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".</p>
+- `platform` (String)
+- `run_context` (String)
+- `script` (String) <p>The initialization script.</p>
 
 
 <a id="nestedatt--script_parameters"></a>
@@ -111,8 +111,8 @@ Optional:
 
 Optional:
 
-- **key** (String) <p>A script parameter key.</p>
-- **value** (String) <p>A script parameter value.</p>
+- `key` (String) <p>A script parameter key.</p>
+- `value` (String) <p>A script parameter value.</p>
 
 ## Import
 

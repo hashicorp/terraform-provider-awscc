@@ -17,29 +17,29 @@ Data Source schema for AWS::ApiGateway::DomainName
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **certificate_arn** (String)
-- **distribution_domain_name** (String)
-- **distribution_hosted_zone_id** (String)
-- **domain_name** (String)
-- **endpoint_configuration** (Attributes) (see [below for nested schema](#nestedatt--endpoint_configuration))
-- **mutual_tls_authentication** (Attributes) (see [below for nested schema](#nestedatt--mutual_tls_authentication))
-- **ownership_verification_certificate_arn** (String)
-- **regional_certificate_arn** (String)
-- **regional_domain_name** (String)
-- **regional_hosted_zone_id** (String)
-- **security_policy** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `certificate_arn` (String)
+- `distribution_domain_name` (String)
+- `distribution_hosted_zone_id` (String)
+- `domain_name` (String)
+- `endpoint_configuration` (Attributes) (see [below for nested schema](#nestedatt--endpoint_configuration))
+- `mutual_tls_authentication` (Attributes) (see [below for nested schema](#nestedatt--mutual_tls_authentication))
+- `ownership_verification_certificate_arn` (String)
+- `regional_certificate_arn` (String)
+- `regional_domain_name` (String)
+- `regional_hosted_zone_id` (String)
+- `security_policy` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--endpoint_configuration"></a>
 ### Nested Schema for `endpoint_configuration`
 
 Read-Only:
 
-- **types** (List of String)
+- `types` (List of String)
 
 
 <a id="nestedatt--mutual_tls_authentication"></a>
@@ -47,8 +47,8 @@ Read-Only:
 
 Read-Only:
 
-- **truststore_uri** (String)
-- **truststore_version** (String)
+- `truststore_uri` (String)
+- `truststore_version` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -56,7 +56,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

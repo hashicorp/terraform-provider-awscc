@@ -17,19 +17,19 @@ Data Source schema for AWS::BillingConductor::PricingRule
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Pricing rule ARN
-- **associated_pricing_plan_count** (Number) The number of pricing plans associated with pricing rule
-- **creation_time** (Number) Creation timestamp in UNIX epoch time format
-- **description** (String) Pricing rule description
-- **last_modified_time** (Number) Latest modified timestamp in UNIX epoch time format
-- **modifier_percentage** (Number) Pricing rule modifier percentage
-- **name** (String) Pricing rule name
-- **scope** (String) A term used to categorize the granularity of a Pricing Rule.
-- **service** (String) The service which a pricing rule is applied on
-- **type** (String) One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.
+- `arn` (String) Pricing rule ARN
+- `associated_pricing_plan_count` (Number) The number of pricing plans associated with pricing rule
+- `creation_time` (Number) Creation timestamp in UNIX epoch time format
+- `description` (String) Pricing rule description
+- `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
+- `modifier_percentage` (Number) Pricing rule modifier percentage
+- `name` (String) Pricing rule name
+- `scope` (String) A term used to categorize the granularity of a Pricing Rule.
+- `service` (String) The service which a pricing rule is applied on
+- `type` (String) One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.
 
 

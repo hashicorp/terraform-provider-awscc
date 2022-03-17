@@ -17,29 +17,29 @@ Resource Type definition for AWS::AppIntegrations::DataIntegration
 
 ### Required
 
-- **kms_key** (String) The KMS key of the data integration.
-- **name** (String) The name of the data integration.
-- **schedule_config** (Attributes) The name of the data and how often it should be pulled from the source. (see [below for nested schema](#nestedatt--schedule_config))
-- **source_uri** (String) The URI of the data source.
+- `kms_key` (String) The KMS key of the data integration.
+- `name` (String) The name of the data integration.
+- `schedule_config` (Attributes) The name of the data and how often it should be pulled from the source. (see [below for nested schema](#nestedatt--schedule_config))
+- `source_uri` (String) The URI of the data source.
 
 ### Optional
 
-- **description** (String) The data integration description.
-- **tags** (Attributes List) The tags (keys and values) associated with the data integration. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The data integration description.
+- `tags` (Attributes List) The tags (keys and values) associated with the data integration. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **data_integration_arn** (String) The Amazon Resource Name (ARN) of the data integration.
-- **id** (String) The unique identifer of the data integration.
+- `data_integration_arn` (String) The Amazon Resource Name (ARN) of the data integration.
+- `id` (String) The unique identifer of the data integration.
 
 <a id="nestedatt--schedule_config"></a>
 ### Nested Schema for `schedule_config`
 
 Required:
 
-- **first_execution_from** (String) The start date for objects to import in the first flow run. Epoch or ISO timestamp format is supported.
-- **object** (String) The name of the object to pull from the data source.
-- **schedule_expression** (String) How often the data should be pulled from data source.
+- `first_execution_from` (String) The start date for objects to import in the first flow run. Epoch or ISO timestamp format is supported.
+- `object` (String) The name of the object to pull from the data source.
+- `schedule_expression` (String) How often the data should be pulled from data source.
 
 
 <a id="nestedatt--tags"></a>
@@ -47,8 +47,8 @@ Required:
 
 Optional:
 
-- **key** (String) A key to identify the tag.
-- **value** (String) Corresponding tag value for the key.
+- `key` (String) A key to identify the tag.
+- `value` (String) Corresponding tag value for the key.
 
 ## Import
 

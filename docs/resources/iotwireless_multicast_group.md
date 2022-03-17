@@ -17,31 +17,31 @@ Create and manage Multicast groups.
 
 ### Required
 
-- **lo_ra_wan** (Attributes) Multicast group LoRaWAN (see [below for nested schema](#nestedatt--lo_ra_wan))
+- `lo_ra_wan` (Attributes) Multicast group LoRaWAN (see [below for nested schema](#nestedatt--lo_ra_wan))
 
 ### Optional
 
-- **associate_wireless_device** (String) Wireless device to associate. Only for update request.
-- **description** (String) Multicast group description
-- **disassociate_wireless_device** (String) Wireless device to disassociate. Only for update request.
-- **name** (String) Name of Multicast group
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the Multicast group. (see [below for nested schema](#nestedatt--tags))
+- `associate_wireless_device` (String) Wireless device to associate. Only for update request.
+- `description` (String) Multicast group description
+- `disassociate_wireless_device` (String) Wireless device to disassociate. Only for update request.
+- `name` (String) Name of Multicast group
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the Multicast group. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) Multicast group arn. Returned after successful create.
-- **id** (String) Multicast group id. Returned after successful create.
-- **status** (String) Multicast group status. Returned after successful read.
+- `arn` (String) Multicast group arn. Returned after successful create.
+- `id` (String) Multicast group id. Returned after successful create.
+- `status` (String) Multicast group status. Returned after successful read.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`
 
 Required:
 
-- **dl_class** (String) Multicast group LoRaWAN DL Class
-- **number_of_devices_in_group** (Number) Multicast group number of devices in group. Returned after successful read.
-- **number_of_devices_requested** (Number) Multicast group number of devices requested. Returned after successful read.
-- **rf_region** (String) Multicast group LoRaWAN RF region
+- `dl_class` (String) Multicast group LoRaWAN DL Class
+- `number_of_devices_in_group` (Number) Multicast group number of devices in group. Returned after successful read.
+- `number_of_devices_requested` (Number) Multicast group number of devices requested. Returned after successful read.
+- `rf_region` (String) Multicast group LoRaWAN RF region
 
 
 <a id="nestedatt--tags"></a>
@@ -49,8 +49,8 @@ Required:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

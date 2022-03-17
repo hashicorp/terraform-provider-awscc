@@ -17,62 +17,62 @@ A resource schema for a Detector in Amazon Fraud Detector.
 
 ### Required
 
-- **detector_id** (String) The ID of the detector
-- **event_type** (Attributes) The event type to associate this detector with. (see [below for nested schema](#nestedatt--event_type))
-- **rules** (Attributes List) (see [below for nested schema](#nestedatt--rules))
+- `detector_id` (String) The ID of the detector
+- `event_type` (Attributes) The event type to associate this detector with. (see [below for nested schema](#nestedatt--event_type))
+- `rules` (Attributes List) (see [below for nested schema](#nestedatt--rules))
 
 ### Optional
 
-- **associated_models** (Attributes List) The models to associate with this detector. (see [below for nested schema](#nestedatt--associated_models))
-- **description** (String) The description of the detector.
-- **detector_version_status** (String) The desired detector version status for the detector
-- **rule_execution_mode** (String)
-- **tags** (Attributes List) Tags associated with this detector. (see [below for nested schema](#nestedatt--tags))
+- `associated_models` (Attributes List) The models to associate with this detector. (see [below for nested schema](#nestedatt--associated_models))
+- `description` (String) The description of the detector.
+- `detector_version_status` (String) The desired detector version status for the detector
+- `rule_execution_mode` (String)
+- `tags` (Attributes List) Tags associated with this detector. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The ARN of the detector.
-- **created_time** (String) The time when the detector was created.
-- **detector_version_id** (String) The active version ID of the detector
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_time** (String) The time when the detector was last updated.
+- `arn` (String) The ARN of the detector.
+- `created_time` (String) The time when the detector was created.
+- `detector_version_id` (String) The active version ID of the detector
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_time` (String) The time when the detector was last updated.
 
 <a id="nestedatt--event_type"></a>
 ### Nested Schema for `event_type`
 
 Required:
 
-- **arn** (String) The ARN of the event type.
-- **created_time** (String) The time when the event type was created.
-- **description** (String) The description of the event type.
-- **entity_types** (Attributes List) (see [below for nested schema](#nestedatt--event_type--entity_types))
-- **event_variables** (Attributes List) (see [below for nested schema](#nestedatt--event_type--event_variables))
-- **inline** (Boolean)
-- **labels** (Attributes List) (see [below for nested schema](#nestedatt--event_type--labels))
-- **last_updated_time** (String) The time when the event type was last updated.
-- **name** (String) The name for the event type
-- **tags** (Attributes List) Tags associated with this event type. (see [below for nested schema](#nestedatt--event_type--tags))
+- `arn` (String) The ARN of the event type.
+- `created_time` (String) The time when the event type was created.
+- `description` (String) The description of the event type.
+- `entity_types` (Attributes List) (see [below for nested schema](#nestedatt--event_type--entity_types))
+- `event_variables` (Attributes List) (see [below for nested schema](#nestedatt--event_type--event_variables))
+- `inline` (Boolean)
+- `labels` (Attributes List) (see [below for nested schema](#nestedatt--event_type--labels))
+- `last_updated_time` (String) The time when the event type was last updated.
+- `name` (String) The name for the event type
+- `tags` (Attributes List) Tags associated with this event type. (see [below for nested schema](#nestedatt--event_type--tags))
 
 <a id="nestedatt--event_type--entity_types"></a>
 ### Nested Schema for `event_type.entity_types`
 
 Required:
 
-- **arn** (String)
-- **created_time** (String) The time when the entity type was created.
-- **description** (String) The description.
-- **inline** (Boolean)
-- **last_updated_time** (String) The time when the entity type was last updated.
-- **name** (String)
-- **tags** (Attributes List) Tags associated with this entity type. (see [below for nested schema](#nestedatt--event_type--entity_types--tags))
+- `arn` (String)
+- `created_time` (String) The time when the entity type was created.
+- `description` (String) The description.
+- `inline` (Boolean)
+- `last_updated_time` (String) The time when the entity type was last updated.
+- `name` (String)
+- `tags` (Attributes List) Tags associated with this entity type. (see [below for nested schema](#nestedatt--event_type--entity_types--tags))
 
 <a id="nestedatt--event_type--entity_types--tags"></a>
 ### Nested Schema for `event_type.entity_types.tags`
 
 Required:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 
@@ -81,25 +81,25 @@ Required:
 
 Required:
 
-- **arn** (String)
-- **created_time** (String) The time when the event variable was created.
-- **data_source** (String)
-- **data_type** (String)
-- **default_value** (String)
-- **description** (String) The description.
-- **inline** (Boolean)
-- **last_updated_time** (String) The time when the event variable was last updated.
-- **name** (String)
-- **tags** (Attributes List) Tags associated with this event variable. (see [below for nested schema](#nestedatt--event_type--event_variables--tags))
-- **variable_type** (String)
+- `arn` (String)
+- `created_time` (String) The time when the event variable was created.
+- `data_source` (String)
+- `data_type` (String)
+- `default_value` (String)
+- `description` (String) The description.
+- `inline` (Boolean)
+- `last_updated_time` (String) The time when the event variable was last updated.
+- `name` (String)
+- `tags` (Attributes List) Tags associated with this event variable. (see [below for nested schema](#nestedatt--event_type--event_variables--tags))
+- `variable_type` (String)
 
 <a id="nestedatt--event_type--event_variables--tags"></a>
 ### Nested Schema for `event_type.event_variables.tags`
 
 Required:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 
@@ -108,21 +108,21 @@ Required:
 
 Required:
 
-- **arn** (String)
-- **created_time** (String) The time when the label was created.
-- **description** (String) The description.
-- **inline** (Boolean)
-- **last_updated_time** (String) The time when the label was last updated.
-- **name** (String)
-- **tags** (Attributes List) Tags associated with this label. (see [below for nested schema](#nestedatt--event_type--labels--tags))
+- `arn` (String)
+- `created_time` (String) The time when the label was created.
+- `description` (String) The description.
+- `inline` (Boolean)
+- `last_updated_time` (String) The time when the label was last updated.
+- `name` (String)
+- `tags` (Attributes List) Tags associated with this label. (see [below for nested schema](#nestedatt--event_type--labels--tags))
 
 <a id="nestedatt--event_type--labels--tags"></a>
 ### Nested Schema for `event_type.labels.tags`
 
 Required:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 
@@ -131,8 +131,8 @@ Required:
 
 Required:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 
@@ -141,38 +141,38 @@ Required:
 
 Required:
 
-- **arn** (String)
-- **created_time** (String) The time when the event type was created.
-- **description** (String) The description.
-- **detector_id** (String)
-- **expression** (String)
-- **language** (String)
-- **last_updated_time** (String) The time when the event type was last updated.
-- **outcomes** (Attributes List) (see [below for nested schema](#nestedatt--rules--outcomes))
-- **rule_id** (String)
-- **rule_version** (String)
-- **tags** (Attributes List) Tags associated with this event type. (see [below for nested schema](#nestedatt--rules--tags))
+- `arn` (String)
+- `created_time` (String) The time when the event type was created.
+- `description` (String) The description.
+- `detector_id` (String)
+- `expression` (String)
+- `language` (String)
+- `last_updated_time` (String) The time when the event type was last updated.
+- `outcomes` (Attributes List) (see [below for nested schema](#nestedatt--rules--outcomes))
+- `rule_id` (String)
+- `rule_version` (String)
+- `tags` (Attributes List) Tags associated with this event type. (see [below for nested schema](#nestedatt--rules--tags))
 
 <a id="nestedatt--rules--outcomes"></a>
 ### Nested Schema for `rules.outcomes`
 
 Required:
 
-- **arn** (String)
-- **created_time** (String) The time when the outcome was created.
-- **description** (String) The description.
-- **inline** (Boolean)
-- **last_updated_time** (String) The time when the outcome was last updated.
-- **name** (String)
-- **tags** (Attributes List) Tags associated with this outcome. (see [below for nested schema](#nestedatt--rules--outcomes--tags))
+- `arn` (String)
+- `created_time` (String) The time when the outcome was created.
+- `description` (String) The description.
+- `inline` (Boolean)
+- `last_updated_time` (String) The time when the outcome was last updated.
+- `name` (String)
+- `tags` (Attributes List) Tags associated with this outcome. (see [below for nested schema](#nestedatt--rules--outcomes--tags))
 
 <a id="nestedatt--rules--outcomes--tags"></a>
 ### Nested Schema for `rules.outcomes.tags`
 
 Required:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 
@@ -181,8 +181,8 @@ Required:
 
 Required:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 
@@ -191,7 +191,7 @@ Required:
 
 Optional:
 
-- **arn** (String)
+- `arn` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -199,8 +199,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

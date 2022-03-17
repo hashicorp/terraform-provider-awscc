@@ -17,81 +17,81 @@ Data Source schema for AWS::ECS::TaskDefinition
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **container_definitions** (Attributes Set) (see [below for nested schema](#nestedatt--container_definitions))
-- **cpu** (String)
-- **ephemeral_storage** (Attributes) (see [below for nested schema](#nestedatt--ephemeral_storage))
-- **execution_role_arn** (String)
-- **family** (String)
-- **inference_accelerators** (Attributes Set) (see [below for nested schema](#nestedatt--inference_accelerators))
-- **ipc_mode** (String)
-- **memory** (String)
-- **network_mode** (String)
-- **pid_mode** (String)
-- **placement_constraints** (Attributes Set) (see [below for nested schema](#nestedatt--placement_constraints))
-- **proxy_configuration** (Attributes) (see [below for nested schema](#nestedatt--proxy_configuration))
-- **requires_compatibilities** (Set of String)
-- **runtime_platform** (Attributes) (see [below for nested schema](#nestedatt--runtime_platform))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **task_definition_arn** (String) The Amazon Resource Name (ARN) of the Amazon ECS task definition
-- **task_role_arn** (String)
-- **volumes** (Attributes Set) (see [below for nested schema](#nestedatt--volumes))
+- `container_definitions` (Attributes Set) (see [below for nested schema](#nestedatt--container_definitions))
+- `cpu` (String)
+- `ephemeral_storage` (Attributes) (see [below for nested schema](#nestedatt--ephemeral_storage))
+- `execution_role_arn` (String)
+- `family` (String)
+- `inference_accelerators` (Attributes Set) (see [below for nested schema](#nestedatt--inference_accelerators))
+- `ipc_mode` (String)
+- `memory` (String)
+- `network_mode` (String)
+- `pid_mode` (String)
+- `placement_constraints` (Attributes Set) (see [below for nested schema](#nestedatt--placement_constraints))
+- `proxy_configuration` (Attributes) (see [below for nested schema](#nestedatt--proxy_configuration))
+- `requires_compatibilities` (Set of String)
+- `runtime_platform` (Attributes) (see [below for nested schema](#nestedatt--runtime_platform))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `task_definition_arn` (String) The Amazon Resource Name (ARN) of the Amazon ECS task definition
+- `task_role_arn` (String)
+- `volumes` (Attributes Set) (see [below for nested schema](#nestedatt--volumes))
 
 <a id="nestedatt--container_definitions"></a>
 ### Nested Schema for `container_definitions`
 
 Read-Only:
 
-- **command** (List of String)
-- **cpu** (Number)
-- **depends_on** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--depends_on))
-- **disable_networking** (Boolean)
-- **dns_search_domains** (List of String)
-- **dns_servers** (List of String)
-- **docker_labels** (Map of String)
-- **docker_security_options** (List of String)
-- **entry_point** (List of String)
-- **environment** (Attributes List) The environment variables to pass to a container (see [below for nested schema](#nestedatt--container_definitions--environment))
-- **environment_files** (Attributes List) The list of one or more files that contain the environment variables to pass to a container (see [below for nested schema](#nestedatt--container_definitions--environment_files))
-- **essential** (Boolean)
-- **extra_hosts** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--extra_hosts))
-- **firelens_configuration** (Attributes) (see [below for nested schema](#nestedatt--container_definitions--firelens_configuration))
-- **health_check** (Attributes) The health check command and associated configuration parameters for the container. (see [below for nested schema](#nestedatt--container_definitions--health_check))
-- **hostname** (String)
-- **image** (String) The image used to start a container. This string is passed directly to the Docker daemon.
-- **interactive** (Boolean)
-- **links** (Set of String)
-- **linux_parameters** (Attributes) (see [below for nested schema](#nestedatt--container_definitions--linux_parameters))
-- **log_configuration** (Attributes) (see [below for nested schema](#nestedatt--container_definitions--log_configuration))
-- **memory** (Number) The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.
-- **memory_reservation** (Number)
-- **mount_points** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--mount_points))
-- **name** (String) The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed
-- **port_mappings** (Attributes Set) Port mappings allow containers to access ports on the host container instance to send or receive traffic. (see [below for nested schema](#nestedatt--container_definitions--port_mappings))
-- **privileged** (Boolean)
-- **pseudo_terminal** (Boolean)
-- **readonly_root_filesystem** (Boolean)
-- **repository_credentials** (Attributes) (see [below for nested schema](#nestedatt--container_definitions--repository_credentials))
-- **resource_requirements** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--resource_requirements))
-- **secrets** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--secrets))
-- **start_timeout** (Number)
-- **stop_timeout** (Number)
-- **system_controls** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--system_controls))
-- **ulimits** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--ulimits))
-- **user** (String)
-- **volumes_from** (Attributes Set) (see [below for nested schema](#nestedatt--container_definitions--volumes_from))
-- **working_directory** (String)
+- `command` (List of String)
+- `cpu` (Number)
+- `depends_on` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--depends_on))
+- `disable_networking` (Boolean)
+- `dns_search_domains` (List of String)
+- `dns_servers` (List of String)
+- `docker_labels` (Map of String)
+- `docker_security_options` (List of String)
+- `entry_point` (List of String)
+- `environment` (Attributes List) The environment variables to pass to a container (see [below for nested schema](#nestedatt--container_definitions--environment))
+- `environment_files` (Attributes List) The list of one or more files that contain the environment variables to pass to a container (see [below for nested schema](#nestedatt--container_definitions--environment_files))
+- `essential` (Boolean)
+- `extra_hosts` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--extra_hosts))
+- `firelens_configuration` (Attributes) (see [below for nested schema](#nestedatt--container_definitions--firelens_configuration))
+- `health_check` (Attributes) The health check command and associated configuration parameters for the container. (see [below for nested schema](#nestedatt--container_definitions--health_check))
+- `hostname` (String)
+- `image` (String) The image used to start a container. This string is passed directly to the Docker daemon.
+- `interactive` (Boolean)
+- `links` (Set of String)
+- `linux_parameters` (Attributes) (see [below for nested schema](#nestedatt--container_definitions--linux_parameters))
+- `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--container_definitions--log_configuration))
+- `memory` (Number) The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.
+- `memory_reservation` (Number)
+- `mount_points` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--mount_points))
+- `name` (String) The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed
+- `port_mappings` (Attributes Set) Port mappings allow containers to access ports on the host container instance to send or receive traffic. (see [below for nested schema](#nestedatt--container_definitions--port_mappings))
+- `privileged` (Boolean)
+- `pseudo_terminal` (Boolean)
+- `readonly_root_filesystem` (Boolean)
+- `repository_credentials` (Attributes) (see [below for nested schema](#nestedatt--container_definitions--repository_credentials))
+- `resource_requirements` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--resource_requirements))
+- `secrets` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--secrets))
+- `start_timeout` (Number)
+- `stop_timeout` (Number)
+- `system_controls` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--system_controls))
+- `ulimits` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--ulimits))
+- `user` (String)
+- `volumes_from` (Attributes Set) (see [below for nested schema](#nestedatt--container_definitions--volumes_from))
+- `working_directory` (String)
 
 <a id="nestedatt--container_definitions--depends_on"></a>
 ### Nested Schema for `container_definitions.depends_on`
 
 Read-Only:
 
-- **condition** (String)
-- **container_name** (String)
+- `condition` (String)
+- `container_name` (String)
 
 
 <a id="nestedatt--container_definitions--environment"></a>
@@ -99,8 +99,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 
 <a id="nestedatt--container_definitions--environment_files"></a>
@@ -108,8 +108,8 @@ Read-Only:
 
 Read-Only:
 
-- **type** (String)
-- **value** (String)
+- `type` (String)
+- `value` (String)
 
 
 <a id="nestedatt--container_definitions--extra_hosts"></a>
@@ -117,8 +117,8 @@ Read-Only:
 
 Read-Only:
 
-- **hostname** (String)
-- **ip_address** (String)
+- `hostname` (String)
+- `ip_address` (String)
 
 
 <a id="nestedatt--container_definitions--firelens_configuration"></a>
@@ -126,8 +126,8 @@ Read-Only:
 
 Read-Only:
 
-- **options** (Map of String)
-- **type** (String)
+- `options` (Map of String)
+- `type` (String)
 
 
 <a id="nestedatt--container_definitions--health_check"></a>
@@ -135,11 +135,11 @@ Read-Only:
 
 Read-Only:
 
-- **command** (List of String) A string array representing the command that the container runs to determine if it is healthy.
-- **interval** (Number) The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.
-- **retries** (Number) The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.
-- **start_period** (Number) The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.
-- **timeout** (Number) The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.
+- `command` (List of String) A string array representing the command that the container runs to determine if it is healthy.
+- `interval` (Number) The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.
+- `retries` (Number) The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.
+- `start_period` (Number) The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.
+- `timeout` (Number) The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.
 
 
 <a id="nestedatt--container_definitions--linux_parameters"></a>
@@ -147,21 +147,21 @@ Read-Only:
 
 Read-Only:
 
-- **capabilities** (Attributes) (see [below for nested schema](#nestedatt--container_definitions--linux_parameters--capabilities))
-- **devices** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--linux_parameters--devices))
-- **init_process_enabled** (Boolean)
-- **max_swap** (Number)
-- **shared_memory_size** (Number)
-- **swappiness** (Number)
-- **tmpfs** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--linux_parameters--tmpfs))
+- `capabilities` (Attributes) (see [below for nested schema](#nestedatt--container_definitions--linux_parameters--capabilities))
+- `devices` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--linux_parameters--devices))
+- `init_process_enabled` (Boolean)
+- `max_swap` (Number)
+- `shared_memory_size` (Number)
+- `swappiness` (Number)
+- `tmpfs` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--linux_parameters--tmpfs))
 
 <a id="nestedatt--container_definitions--linux_parameters--capabilities"></a>
 ### Nested Schema for `container_definitions.linux_parameters.capabilities`
 
 Read-Only:
 
-- **add** (List of String)
-- **drop** (List of String)
+- `add` (List of String)
+- `drop` (List of String)
 
 
 <a id="nestedatt--container_definitions--linux_parameters--devices"></a>
@@ -169,9 +169,9 @@ Read-Only:
 
 Read-Only:
 
-- **container_path** (String)
-- **host_path** (String)
-- **permissions** (Set of String)
+- `container_path` (String)
+- `host_path` (String)
+- `permissions` (Set of String)
 
 
 <a id="nestedatt--container_definitions--linux_parameters--tmpfs"></a>
@@ -179,9 +179,9 @@ Read-Only:
 
 Read-Only:
 
-- **container_path** (String)
-- **mount_options** (List of String)
-- **size** (Number)
+- `container_path` (String)
+- `mount_options` (List of String)
+- `size` (Number)
 
 
 
@@ -190,17 +190,17 @@ Read-Only:
 
 Read-Only:
 
-- **log_driver** (String)
-- **options** (Map of String)
-- **secret_options** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--log_configuration--secret_options))
+- `log_driver` (String)
+- `options` (Map of String)
+- `secret_options` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--log_configuration--secret_options))
 
 <a id="nestedatt--container_definitions--log_configuration--secret_options"></a>
 ### Nested Schema for `container_definitions.log_configuration.secret_options`
 
 Read-Only:
 
-- **name** (String)
-- **value_from** (String)
+- `name` (String)
+- `value_from` (String)
 
 
 
@@ -209,9 +209,9 @@ Read-Only:
 
 Read-Only:
 
-- **container_path** (String)
-- **read_only** (Boolean)
-- **source_volume** (String)
+- `container_path` (String)
+- `read_only` (Boolean)
+- `source_volume` (String)
 
 
 <a id="nestedatt--container_definitions--port_mappings"></a>
@@ -219,9 +219,9 @@ Read-Only:
 
 Read-Only:
 
-- **container_port** (Number)
-- **host_port** (Number)
-- **protocol** (String)
+- `container_port` (Number)
+- `host_port` (Number)
+- `protocol` (String)
 
 
 <a id="nestedatt--container_definitions--repository_credentials"></a>
@@ -229,7 +229,7 @@ Read-Only:
 
 Read-Only:
 
-- **credentials_parameter** (String)
+- `credentials_parameter` (String)
 
 
 <a id="nestedatt--container_definitions--resource_requirements"></a>
@@ -237,8 +237,8 @@ Read-Only:
 
 Read-Only:
 
-- **type** (String)
-- **value** (String)
+- `type` (String)
+- `value` (String)
 
 
 <a id="nestedatt--container_definitions--secrets"></a>
@@ -246,8 +246,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String)
-- **value_from** (String)
+- `name` (String)
+- `value_from` (String)
 
 
 <a id="nestedatt--container_definitions--system_controls"></a>
@@ -255,8 +255,8 @@ Read-Only:
 
 Read-Only:
 
-- **namespace** (String)
-- **value** (String)
+- `namespace` (String)
+- `value` (String)
 
 
 <a id="nestedatt--container_definitions--ulimits"></a>
@@ -264,9 +264,9 @@ Read-Only:
 
 Read-Only:
 
-- **hard_limit** (Number)
-- **name** (String)
-- **soft_limit** (Number)
+- `hard_limit` (Number)
+- `name` (String)
+- `soft_limit` (Number)
 
 
 <a id="nestedatt--container_definitions--volumes_from"></a>
@@ -274,8 +274,8 @@ Read-Only:
 
 Read-Only:
 
-- **read_only** (Boolean)
-- **source_container** (String)
+- `read_only` (Boolean)
+- `source_container` (String)
 
 
 
@@ -284,7 +284,7 @@ Read-Only:
 
 Read-Only:
 
-- **size_in_gi_b** (Number)
+- `size_in_gi_b` (Number)
 
 
 <a id="nestedatt--inference_accelerators"></a>
@@ -292,8 +292,8 @@ Read-Only:
 
 Read-Only:
 
-- **device_name** (String)
-- **device_type** (String)
+- `device_name` (String)
+- `device_type` (String)
 
 
 <a id="nestedatt--placement_constraints"></a>
@@ -301,8 +301,8 @@ Read-Only:
 
 Read-Only:
 
-- **expression** (String)
-- **type** (String)
+- `expression` (String)
+- `type` (String)
 
 
 <a id="nestedatt--proxy_configuration"></a>
@@ -310,17 +310,17 @@ Read-Only:
 
 Read-Only:
 
-- **container_name** (String)
-- **proxy_configuration_properties** (Attributes Set) (see [below for nested schema](#nestedatt--proxy_configuration--proxy_configuration_properties))
-- **type** (String)
+- `container_name` (String)
+- `proxy_configuration_properties` (Attributes Set) (see [below for nested schema](#nestedatt--proxy_configuration--proxy_configuration_properties))
+- `type` (String)
 
 <a id="nestedatt--proxy_configuration--proxy_configuration_properties"></a>
 ### Nested Schema for `proxy_configuration.proxy_configuration_properties`
 
 Read-Only:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 
 
@@ -329,8 +329,8 @@ Read-Only:
 
 Read-Only:
 
-- **cpu_architecture** (String)
-- **operating_system_family** (String)
+- `cpu_architecture` (String)
+- `operating_system_family` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -338,8 +338,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--volumes"></a>
@@ -347,21 +347,21 @@ Read-Only:
 
 Read-Only:
 
-- **docker_volume_configuration** (Attributes) (see [below for nested schema](#nestedatt--volumes--docker_volume_configuration))
-- **efs_volume_configuration** (Attributes) (see [below for nested schema](#nestedatt--volumes--efs_volume_configuration))
-- **host** (Attributes) (see [below for nested schema](#nestedatt--volumes--host))
-- **name** (String)
+- `docker_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--volumes--docker_volume_configuration))
+- `efs_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--volumes--efs_volume_configuration))
+- `host` (Attributes) (see [below for nested schema](#nestedatt--volumes--host))
+- `name` (String)
 
 <a id="nestedatt--volumes--docker_volume_configuration"></a>
 ### Nested Schema for `volumes.docker_volume_configuration`
 
 Read-Only:
 
-- **autoprovision** (Boolean)
-- **driver** (String)
-- **driver_opts** (Map of String)
-- **labels** (Map of String)
-- **scope** (String)
+- `autoprovision` (Boolean)
+- `driver` (String)
+- `driver_opts` (Map of String)
+- `labels` (Map of String)
+- `scope` (String)
 
 
 <a id="nestedatt--volumes--efs_volume_configuration"></a>
@@ -369,19 +369,19 @@ Read-Only:
 
 Read-Only:
 
-- **authorization_config** (Attributes) (see [below for nested schema](#nestedatt--volumes--efs_volume_configuration--authorization_config))
-- **filesystem_id** (String)
-- **root_directory** (String)
-- **transit_encryption** (String)
-- **transit_encryption_port** (Number)
+- `authorization_config` (Attributes) (see [below for nested schema](#nestedatt--volumes--efs_volume_configuration--authorization_config))
+- `filesystem_id` (String)
+- `root_directory` (String)
+- `transit_encryption` (String)
+- `transit_encryption_port` (Number)
 
 <a id="nestedatt--volumes--efs_volume_configuration--authorization_config"></a>
 ### Nested Schema for `volumes.efs_volume_configuration.authorization_config`
 
 Read-Only:
 
-- **access_point_id** (String)
-- **iam** (String)
+- `access_point_id` (String)
+- `iam` (String)
 
 
 
@@ -390,6 +390,6 @@ Read-Only:
 
 Read-Only:
 
-- **source_path** (String)
+- `source_path` (String)
 
 

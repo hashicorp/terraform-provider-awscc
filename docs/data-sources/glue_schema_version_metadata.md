@@ -17,12 +17,12 @@ Data Source schema for AWS::Glue::SchemaVersionMetadata
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **key** (String) Metadata key
-- **schema_version_id** (String) Represents the version ID associated with the schema version.
-- **value** (String) Metadata value
+- `key` (String) Metadata key
+- `schema_version_id` (String) Represents the version ID associated with the schema version.
+- `value` (String) Metadata value
 
 

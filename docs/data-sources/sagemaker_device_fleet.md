@@ -17,23 +17,23 @@ Data Source schema for AWS::SageMaker::DeviceFleet
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **description** (String) Description for the edge device fleet
-- **device_fleet_name** (String) The name of the edge device fleet
-- **output_config** (Attributes) S3 bucket and an ecryption key id (if available) to store outputs for the fleet (see [below for nested schema](#nestedatt--output_config))
-- **role_arn** (String) Role associated with the device fleet
-- **tags** (Attributes List) Associate tags with the resource (see [below for nested schema](#nestedatt--tags))
+- `description` (String) Description for the edge device fleet
+- `device_fleet_name` (String) The name of the edge device fleet
+- `output_config` (Attributes) S3 bucket and an ecryption key id (if available) to store outputs for the fleet (see [below for nested schema](#nestedatt--output_config))
+- `role_arn` (String) Role associated with the device fleet
+- `tags` (Attributes List) Associate tags with the resource (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--output_config"></a>
 ### Nested Schema for `output_config`
 
 Read-Only:
 
-- **kms_key_id** (String) The KMS key id used for encryption on the S3 bucket
-- **s3_output_location** (String) The Amazon Simple Storage (S3) bucket URI
+- `kms_key_id` (String) The KMS key id used for encryption on the S3 bucket
+- `s3_output_location` (String) The Amazon Simple Storage (S3) bucket URI
 
 
 <a id="nestedatt--tags"></a>
@@ -41,7 +41,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

@@ -17,12 +17,12 @@ Data Source schema for AWS::Route53Resolver::ResolverDNSSECConfig
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **owner_id** (String) AccountId
-- **resource_id** (String) ResourceId
-- **validation_status** (String) ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.
+- `owner_id` (String) AccountId
+- `resource_id` (String) ResourceId
+- `validation_status` (String) ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.
 
 

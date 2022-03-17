@@ -17,12 +17,12 @@ The AWS::NetworkManager::TransitGatewayRegistration type registers a transit gat
 
 ### Required
 
-- **global_network_id** (String) The ID of the global network.
-- **transit_gateway_arn** (String) The Amazon Resource Name (ARN) of the transit gateway.
+- `global_network_id` (String) The ID of the global network.
+- `transit_gateway_arn` (String) The Amazon Resource Name (ARN) of the transit gateway.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

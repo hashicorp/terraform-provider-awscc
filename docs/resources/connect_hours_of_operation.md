@@ -17,37 +17,37 @@ Resource Type definition for AWS::Connect::HoursOfOperation
 
 ### Required
 
-- **config** (Attributes Set) Configuration information for the hours of operation: day, start time, and end time. (see [below for nested schema](#nestedatt--config))
-- **instance_arn** (String) The identifier of the Amazon Connect instance.
-- **name** (String) The name of the hours of operation.
-- **time_zone** (String) The time zone of the hours of operation.
+- `config` (Attributes Set) Configuration information for the hours of operation: day, start time, and end time. (see [below for nested schema](#nestedatt--config))
+- `instance_arn` (String) The identifier of the Amazon Connect instance.
+- `name` (String) The name of the hours of operation.
+- `time_zone` (String) The time zone of the hours of operation.
 
 ### Optional
 
-- **description** (String) The description of the hours of operation.
-- **tags** (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The description of the hours of operation.
+- `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **hours_of_operation_arn** (String) The Amazon Resource Name (ARN) for the hours of operation.
-- **id** (String) Uniquely identifies the resource.
+- `hours_of_operation_arn` (String) The Amazon Resource Name (ARN) for the hours of operation.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--config"></a>
 ### Nested Schema for `config`
 
 Required:
 
-- **day** (String) The day that the hours of operation applies to.
-- **end_time** (Attributes) The end time that your contact center closes. (see [below for nested schema](#nestedatt--config--end_time))
-- **start_time** (Attributes) The start time that your contact center opens. (see [below for nested schema](#nestedatt--config--start_time))
+- `day` (String) The day that the hours of operation applies to.
+- `end_time` (Attributes) The end time that your contact center closes. (see [below for nested schema](#nestedatt--config--end_time))
+- `start_time` (Attributes) The start time that your contact center opens. (see [below for nested schema](#nestedatt--config--start_time))
 
 <a id="nestedatt--config--end_time"></a>
 ### Nested Schema for `config.end_time`
 
 Required:
 
-- **hours** (Number) The hours.
-- **minutes** (Number) The minutes.
+- `hours` (Number) The hours.
+- `minutes` (Number) The minutes.
 
 
 <a id="nestedatt--config--start_time"></a>
@@ -55,8 +55,8 @@ Required:
 
 Required:
 
-- **hours** (Number) The hours.
-- **minutes** (Number) The minutes.
+- `hours` (Number) The hours.
+- `minutes` (Number) The minutes.
 
 
 
@@ -65,8 +65,8 @@ Required:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

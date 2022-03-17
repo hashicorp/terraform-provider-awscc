@@ -17,24 +17,24 @@ Resource Type definition for AWS::APS::Workspace
 
 ### Optional
 
-- **alert_manager_definition** (String) The AMP Workspace alert manager definition data
-- **alias** (String) AMP Workspace alias.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `alert_manager_definition` (String) The AMP Workspace alert manager definition data
+- `alias` (String) AMP Workspace alias.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) Workspace arn.
-- **id** (String) Uniquely identifies the resource.
-- **prometheus_endpoint** (String) AMP Workspace prometheus endpoint
-- **workspace_id** (String) Required to identify a specific APS Workspace.
+- `arn` (String) Workspace arn.
+- `id` (String) Uniquely identifies the resource.
+- `prometheus_endpoint` (String) AMP Workspace prometheus endpoint
+- `workspace_id` (String) Required to identify a specific APS Workspace.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

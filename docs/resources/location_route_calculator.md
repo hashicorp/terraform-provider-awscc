@@ -17,21 +17,21 @@ Definition of AWS::Location::RouteCalculator Resource Type
 
 ### Required
 
-- **calculator_name** (String)
-- **data_source** (String)
+- `calculator_name` (String)
+- `data_source` (String)
 
 ### Optional
 
-- **description** (String)
-- **pricing_plan** (String)
+- `description` (String)
+- `pricing_plan` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **calculator_arn** (String)
-- **create_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
-- **id** (String) Uniquely identifies the resource.
-- **update_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `arn` (String)
+- `calculator_arn` (String)
+- `create_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `id` (String) Uniquely identifies the resource.
+- `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 
 ## Import
 

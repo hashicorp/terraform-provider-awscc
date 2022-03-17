@@ -17,21 +17,21 @@ Data Source schema for AWS::S3Outposts::AccessPoint
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the specified AccessPoint.
-- **bucket** (String) The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.
-- **name** (String) A name for the AccessPoint.
-- **policy** (Map of String) The access point policy associated with this access point.
-- **vpc_configuration** (Attributes) Virtual Private Cloud (VPC) from which requests can be made to the AccessPoint. (see [below for nested schema](#nestedatt--vpc_configuration))
+- `arn` (String) The Amazon Resource Name (ARN) of the specified AccessPoint.
+- `bucket` (String) The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.
+- `name` (String) A name for the AccessPoint.
+- `policy` (Map of String) The access point policy associated with this access point.
+- `vpc_configuration` (Attributes) Virtual Private Cloud (VPC) from which requests can be made to the AccessPoint. (see [below for nested schema](#nestedatt--vpc_configuration))
 
 <a id="nestedatt--vpc_configuration"></a>
 ### Nested Schema for `vpc_configuration`
 
 Read-Only:
 
-- **vpc_id** (String) Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.
+- `vpc_id` (String) Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.
 
 

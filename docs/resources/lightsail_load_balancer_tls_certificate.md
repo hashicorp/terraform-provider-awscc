@@ -17,20 +17,20 @@ Resource Type definition for AWS::Lightsail::LoadBalancerTlsCertificate
 
 ### Required
 
-- **certificate_domain_name** (String) The domain name (e.g., example.com ) for your SSL/TLS certificate.
-- **certificate_name** (String) The SSL/TLS certificate name.
-- **load_balancer_name** (String) The name of your load balancer.
+- `certificate_domain_name` (String) The domain name (e.g., example.com ) for your SSL/TLS certificate.
+- `certificate_name` (String) The SSL/TLS certificate name.
+- `load_balancer_name` (String) The name of your load balancer.
 
 ### Optional
 
-- **certificate_alternative_names** (Set of String) An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.
-- **is_attached** (Boolean) When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
+- `certificate_alternative_names` (Set of String) An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.
+- `is_attached` (Boolean) When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **load_balancer_tls_certificate_arn** (String)
-- **status** (String) The validation status of the SSL/TLS certificate.
+- `id` (String) Uniquely identifies the resource.
+- `load_balancer_tls_certificate_arn` (String)
+- `status` (String) The validation status of the SSL/TLS certificate.
 
 ## Import
 

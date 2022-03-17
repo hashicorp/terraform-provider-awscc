@@ -17,38 +17,38 @@ Data Source schema for AWS::EKS::Nodegroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **ami_type** (String) The AMI type for your node group.
-- **arn** (String)
-- **capacity_type** (String) The capacity type of your managed node group.
-- **cluster_name** (String) Name of the cluster to create the node group in.
-- **disk_size** (Number) The root device disk size (in GiB) for your node group instances.
-- **force_update_enabled** (Boolean) Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.
-- **instance_types** (List of String) Specify the instance types for a node group.
-- **labels** (Map of String) The Kubernetes labels to be applied to the nodes in the node group when they are created.
-- **launch_template** (Attributes) An object representing a node group's launch template specification. (see [below for nested schema](#nestedatt--launch_template))
-- **node_role** (String) The Amazon Resource Name (ARN) of the IAM role to associate with your node group.
-- **nodegroup_name** (String) The unique name to give your node group.
-- **release_version** (String) The AMI version of the Amazon EKS-optimized AMI to use with your node group.
-- **remote_access** (Attributes) The remote access (SSH) configuration to use with your node group. (see [below for nested schema](#nestedatt--remote_access))
-- **scaling_config** (Attributes) The scaling configuration details for the Auto Scaling group that is created for your node group. (see [below for nested schema](#nestedatt--scaling_config))
-- **subnets** (List of String) The subnets to use for the Auto Scaling group that is created for your node group.
-- **tags** (Map of String) The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.
-- **taints** (Attributes List) The Kubernetes taints to be applied to the nodes in the node group when they are created. (see [below for nested schema](#nestedatt--taints))
-- **update_config** (Attributes) The node group update configuration. (see [below for nested schema](#nestedatt--update_config))
-- **version** (String) The Kubernetes version to use for your managed nodes.
+- `ami_type` (String) The AMI type for your node group.
+- `arn` (String)
+- `capacity_type` (String) The capacity type of your managed node group.
+- `cluster_name` (String) Name of the cluster to create the node group in.
+- `disk_size` (Number) The root device disk size (in GiB) for your node group instances.
+- `force_update_enabled` (Boolean) Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.
+- `instance_types` (List of String) Specify the instance types for a node group.
+- `labels` (Map of String) The Kubernetes labels to be applied to the nodes in the node group when they are created.
+- `launch_template` (Attributes) An object representing a node group's launch template specification. (see [below for nested schema](#nestedatt--launch_template))
+- `node_role` (String) The Amazon Resource Name (ARN) of the IAM role to associate with your node group.
+- `nodegroup_name` (String) The unique name to give your node group.
+- `release_version` (String) The AMI version of the Amazon EKS-optimized AMI to use with your node group.
+- `remote_access` (Attributes) The remote access (SSH) configuration to use with your node group. (see [below for nested schema](#nestedatt--remote_access))
+- `scaling_config` (Attributes) The scaling configuration details for the Auto Scaling group that is created for your node group. (see [below for nested schema](#nestedatt--scaling_config))
+- `subnets` (List of String) The subnets to use for the Auto Scaling group that is created for your node group.
+- `tags` (Map of String) The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.
+- `taints` (Attributes List) The Kubernetes taints to be applied to the nodes in the node group when they are created. (see [below for nested schema](#nestedatt--taints))
+- `update_config` (Attributes) The node group update configuration. (see [below for nested schema](#nestedatt--update_config))
+- `version` (String) The Kubernetes version to use for your managed nodes.
 
 <a id="nestedatt--launch_template"></a>
 ### Nested Schema for `launch_template`
 
 Read-Only:
 
-- **id** (String) The ID of this resource.
-- **name** (String)
-- **version** (String)
+- `id` (String) The ID of this resource.
+- `name` (String)
+- `version` (String)
 
 
 <a id="nestedatt--remote_access"></a>
@@ -56,8 +56,8 @@ Read-Only:
 
 Read-Only:
 
-- **ec_2_ssh_key** (String)
-- **source_security_groups** (List of String)
+- `ec_2_ssh_key` (String)
+- `source_security_groups` (List of String)
 
 
 <a id="nestedatt--scaling_config"></a>
@@ -65,9 +65,9 @@ Read-Only:
 
 Read-Only:
 
-- **desired_size** (Number)
-- **max_size** (Number)
-- **min_size** (Number)
+- `desired_size` (Number)
+- `max_size` (Number)
+- `min_size` (Number)
 
 
 <a id="nestedatt--taints"></a>
@@ -75,9 +75,9 @@ Read-Only:
 
 Read-Only:
 
-- **effect** (String)
-- **key** (String)
-- **value** (String)
+- `effect` (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--update_config"></a>
@@ -85,7 +85,7 @@ Read-Only:
 
 Read-Only:
 
-- **max_unavailable** (Number) The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100.
-- **max_unavailable_percentage** (Number) The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.
+- `max_unavailable` (Number) The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100.
+- `max_unavailable_percentage` (Number) The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.
 
 

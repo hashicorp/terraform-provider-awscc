@@ -17,30 +17,30 @@ Resource schema for AWS::DataSync::LocationSMB.
 
 ### Required
 
-- **agent_arns** (List of String) The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.
-- **password** (String) The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.
-- **server_hostname** (String) The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.
-- **subdirectory** (String) The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination
-- **user** (String) The user who can mount the share, has the permissions to access files and folders in the SMB share.
+- `agent_arns` (List of String) The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.
+- `password` (String) The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.
+- `server_hostname` (String) The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.
+- `subdirectory` (String) The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination
+- `user` (String) The user who can mount the share, has the permissions to access files and folders in the SMB share.
 
 ### Optional
 
-- **domain** (String) The name of the Windows domain that the SMB server belongs to.
-- **mount_options** (Attributes) The mount options used by DataSync to access the SMB server. (see [below for nested schema](#nestedatt--mount_options))
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `domain` (String) The name of the Windows domain that the SMB server belongs to.
+- `mount_options` (Attributes) The mount options used by DataSync to access the SMB server. (see [below for nested schema](#nestedatt--mount_options))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **location_arn** (String) The Amazon Resource Name (ARN) of the SMB location that is created.
-- **location_uri** (String) The URL of the SMB location that was described.
+- `id` (String) Uniquely identifies the resource.
+- `location_arn` (String) The Amazon Resource Name (ARN) of the SMB location that is created.
+- `location_uri` (String) The URL of the SMB location that was described.
 
 <a id="nestedatt--mount_options"></a>
 ### Nested Schema for `mount_options`
 
 Optional:
 
-- **version** (String) The specific SMB version that you want DataSync to use to mount your SMB share.
+- `version` (String) The specific SMB version that you want DataSync to use to mount your SMB share.
 
 
 <a id="nestedatt--tags"></a>
@@ -48,8 +48,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key for an AWS resource tag.
-- **value** (String) The value for an AWS resource tag.
+- `key` (String) The key for an AWS resource tag.
+- `value` (String) The value for an AWS resource tag.
 
 ## Import
 

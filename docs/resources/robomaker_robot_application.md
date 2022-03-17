@@ -17,28 +17,28 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Required
 
-- **robot_software_suite** (Attributes) The robot software suite used by the robot application. (see [below for nested schema](#nestedatt--robot_software_suite))
+- `robot_software_suite` (Attributes) The robot software suite used by the robot application. (see [below for nested schema](#nestedatt--robot_software_suite))
 
 ### Optional
 
-- **current_revision_id** (String) The revision ID of robot application.
-- **environment** (String) The URI of the Docker image for the robot application.
-- **name** (String) The name of the robot application.
-- **sources** (Attributes List) The sources of the robot application. (see [below for nested schema](#nestedatt--sources))
-- **tags** (Map of String) A key-value pair to associate with a resource.
+- `current_revision_id` (String) The revision ID of robot application.
+- `environment` (String) The URI of the Docker image for the robot application.
+- `name` (String) The name of the robot application.
+- `sources` (Attributes List) The sources of the robot application. (see [below for nested schema](#nestedatt--sources))
+- `tags` (Map of String) A key-value pair to associate with a resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--robot_software_suite"></a>
 ### Nested Schema for `robot_software_suite`
 
 Required:
 
-- **name** (String) The name of robot software suite.
-- **version** (String) The version of robot software suite.
+- `name` (String) The name of robot software suite.
+- `version` (String) The version of robot software suite.
 
 
 <a id="nestedatt--sources"></a>
@@ -46,9 +46,9 @@ Required:
 
 Optional:
 
-- **architecture** (String) The architecture of robot application.
-- **s3_bucket** (String) The Arn of the S3Bucket that stores the robot application source.
-- **s3_key** (String) The s3 key of robot application source.
+- `architecture` (String) The architecture of robot application.
+- `s3_bucket` (String) The Arn of the S3Bucket that stores the robot application source.
+- `s3_key` (String) The s3 key of robot application source.
 
 ## Import
 

@@ -17,11 +17,11 @@ Resource Type definition for AWS::EC2::EgressOnlyInternetGateway
 
 ### Required
 
-- **vpc_id** (String) The ID of the VPC for which to create the egress-only internet gateway.
+- `vpc_id` (String) The ID of the VPC for which to create the egress-only internet gateway.
 
 ### Read-Only
 
-- **id** (String) Service Generated ID of the EgressOnlyInternetGateway
+- `id` (String) Service Generated ID of the EgressOnlyInternetGateway
 
 ## Import
 

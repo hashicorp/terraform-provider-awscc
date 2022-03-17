@@ -17,29 +17,29 @@ Definition of AWS::Wisdom::KnowledgeBase Resource Type
 
 ### Required
 
-- **knowledge_base_type** (String)
-- **name** (String)
+- `knowledge_base_type` (String)
+- `name` (String)
 
 ### Optional
 
-- **description** (String)
-- **rendering_configuration** (Attributes) (see [below for nested schema](#nestedatt--rendering_configuration))
-- **server_side_encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
-- **source_configuration** (Attributes) (see [below for nested schema](#nestedatt--source_configuration))
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `description` (String)
+- `rendering_configuration` (Attributes) (see [below for nested schema](#nestedatt--rendering_configuration))
+- `server_side_encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
+- `source_configuration` (Attributes) (see [below for nested schema](#nestedatt--source_configuration))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **knowledge_base_arn** (String)
-- **knowledge_base_id** (String)
+- `id` (String) Uniquely identifies the resource.
+- `knowledge_base_arn` (String)
+- `knowledge_base_id` (String)
 
 <a id="nestedatt--rendering_configuration"></a>
 ### Nested Schema for `rendering_configuration`
 
 Optional:
 
-- **template_uri** (String)
+- `template_uri` (String)
 
 
 <a id="nestedatt--server_side_encryption_configuration"></a>
@@ -47,7 +47,7 @@ Optional:
 
 Optional:
 
-- **kms_key_id** (String)
+- `kms_key_id` (String)
 
 
 <a id="nestedatt--source_configuration"></a>
@@ -55,15 +55,15 @@ Optional:
 
 Optional:
 
-- **app_integrations** (Attributes) (see [below for nested schema](#nestedatt--source_configuration--app_integrations))
+- `app_integrations` (Attributes) (see [below for nested schema](#nestedatt--source_configuration--app_integrations))
 
 <a id="nestedatt--source_configuration--app_integrations"></a>
 ### Nested Schema for `source_configuration.app_integrations`
 
 Optional:
 
-- **app_integration_arn** (String)
-- **object_fields** (List of String)
+- `app_integration_arn` (String)
+- `object_fields` (List of String)
 
 
 
@@ -72,8 +72,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

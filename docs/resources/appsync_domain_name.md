@@ -17,18 +17,18 @@ Resource Type definition for AWS::AppSync::DomainName
 
 ### Required
 
-- **certificate_arn** (String)
-- **domain_name** (String)
+- `certificate_arn` (String)
+- `domain_name` (String)
 
 ### Optional
 
-- **description** (String)
+- `description` (String)
 
 ### Read-Only
 
-- **app_sync_domain_name** (String)
-- **hosted_zone_id** (String)
-- **id** (String) Uniquely identifies the resource.
+- `app_sync_domain_name` (String)
+- `hosted_zone_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

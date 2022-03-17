@@ -17,25 +17,25 @@ Data Source schema for AWS::Signer::SigningProfile
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the specified signing profile.
-- **platform_id** (String) The ID of the target signing platform.
-- **profile_name** (String) A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name.
-- **profile_version** (String) A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.
-- **profile_version_arn** (String) The Amazon Resource Name (ARN) of the specified signing profile version.
-- **signature_validity_period** (Attributes) Signature validity period of the profile. (see [below for nested schema](#nestedatt--signature_validity_period))
-- **tags** (Attributes List) A list of tags associated with the signing profile. (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) The Amazon Resource Name (ARN) of the specified signing profile.
+- `platform_id` (String) The ID of the target signing platform.
+- `profile_name` (String) A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name.
+- `profile_version` (String) A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.
+- `profile_version_arn` (String) The Amazon Resource Name (ARN) of the specified signing profile version.
+- `signature_validity_period` (Attributes) Signature validity period of the profile. (see [below for nested schema](#nestedatt--signature_validity_period))
+- `tags` (Attributes List) A list of tags associated with the signing profile. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--signature_validity_period"></a>
 ### Nested Schema for `signature_validity_period`
 
 Read-Only:
 
-- **type** (String)
-- **value** (Number)
+- `type` (String)
+- `value` (Number)
 
 
 <a id="nestedatt--tags"></a>
@@ -43,7 +43,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

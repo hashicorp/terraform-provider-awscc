@@ -17,34 +17,34 @@ Resource Schema for AWS::ServiceCatalog::CloudFormationProvisionedProduct
 
 ### Optional
 
-- **accept_language** (String)
-- **notification_arns** (List of String)
-- **path_id** (String)
-- **path_name** (String)
-- **product_id** (String)
-- **product_name** (String)
-- **provisioned_product_name** (String)
-- **provisioning_artifact_id** (String)
-- **provisioning_artifact_name** (String)
-- **provisioning_parameters** (Attributes List) (see [below for nested schema](#nestedatt--provisioning_parameters))
-- **provisioning_preferences** (Attributes) (see [below for nested schema](#nestedatt--provisioning_preferences))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `accept_language` (String)
+- `notification_arns` (List of String)
+- `path_id` (String)
+- `path_name` (String)
+- `product_id` (String)
+- `product_name` (String)
+- `provisioned_product_name` (String)
+- `provisioning_artifact_id` (String)
+- `provisioning_artifact_name` (String)
+- `provisioning_parameters` (Attributes List) (see [below for nested schema](#nestedatt--provisioning_parameters))
+- `provisioning_preferences` (Attributes) (see [below for nested schema](#nestedatt--provisioning_preferences))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **cloudformation_stack_arn** (String)
-- **id** (String) Uniquely identifies the resource.
-- **outputs** (Map of String) List of key-value pair outputs.
-- **provisioned_product_id** (String)
-- **record_id** (String)
+- `cloudformation_stack_arn` (String)
+- `id` (String) Uniquely identifies the resource.
+- `outputs` (Map of String) List of key-value pair outputs.
+- `provisioned_product_id` (String)
+- `record_id` (String)
 
 <a id="nestedatt--provisioning_parameters"></a>
 ### Nested Schema for `provisioning_parameters`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--provisioning_preferences"></a>
@@ -52,13 +52,13 @@ Optional:
 
 Optional:
 
-- **stack_set_accounts** (List of String)
-- **stack_set_failure_tolerance_count** (Number)
-- **stack_set_failure_tolerance_percentage** (Number)
-- **stack_set_max_concurrency_count** (Number)
-- **stack_set_max_concurrency_percentage** (Number)
-- **stack_set_operation_type** (String)
-- **stack_set_regions** (List of String)
+- `stack_set_accounts` (List of String)
+- `stack_set_failure_tolerance_count` (Number)
+- `stack_set_failure_tolerance_percentage` (Number)
+- `stack_set_max_concurrency_count` (Number)
+- `stack_set_max_concurrency_percentage` (Number)
+- `stack_set_operation_type` (String)
+- `stack_set_regions` (List of String)
 
 
 <a id="nestedatt--tags"></a>
@@ -66,8 +66,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

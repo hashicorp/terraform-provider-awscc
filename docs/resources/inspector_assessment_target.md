@@ -17,13 +17,13 @@ Resource Type definition for AWS::Inspector::AssessmentTarget
 
 ### Optional
 
-- **assessment_target_name** (String)
-- **resource_group_arn** (String)
+- `assessment_target_name` (String)
+- `resource_group_arn` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

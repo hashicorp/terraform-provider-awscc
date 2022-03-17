@@ -17,29 +17,29 @@ Data Source schema for AWS::NetworkFirewall::Firewall
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **delete_protection** (Boolean)
-- **description** (String)
-- **endpoint_ids** (List of String)
-- **firewall_arn** (String) A resource ARN.
-- **firewall_id** (String)
-- **firewall_name** (String)
-- **firewall_policy_arn** (String) A resource ARN.
-- **firewall_policy_change_protection** (Boolean)
-- **subnet_change_protection** (Boolean)
-- **subnet_mappings** (Attributes Set) (see [below for nested schema](#nestedatt--subnet_mappings))
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
-- **vpc_id** (String)
+- `delete_protection` (Boolean)
+- `description` (String)
+- `endpoint_ids` (List of String)
+- `firewall_arn` (String) A resource ARN.
+- `firewall_id` (String)
+- `firewall_name` (String)
+- `firewall_policy_arn` (String) A resource ARN.
+- `firewall_policy_change_protection` (Boolean)
+- `subnet_change_protection` (Boolean)
+- `subnet_mappings` (Attributes Set) (see [below for nested schema](#nestedatt--subnet_mappings))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String)
 
 <a id="nestedatt--subnet_mappings"></a>
 ### Nested Schema for `subnet_mappings`
 
 Read-Only:
 
-- **subnet_id** (String) A SubnetId.
+- `subnet_id` (String) A SubnetId.
 
 
 <a id="nestedatt--tags"></a>
@@ -47,7 +47,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

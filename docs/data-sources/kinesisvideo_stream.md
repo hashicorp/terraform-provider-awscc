@@ -17,24 +17,24 @@ Data Source schema for AWS::KinesisVideo::Stream
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the Kinesis Video stream.
-- **data_retention_in_hours** (Number) The number of hours till which Kinesis Video will retain the data in the stream
-- **device_name** (String) The name of the device that is writing to the stream.
-- **kms_key_id** (String) AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.
-- **media_type** (String) The media type of the stream. Consumers of the stream can use this information when processing the stream.
-- **name** (String) The name of the Kinesis Video stream.
-- **tags** (Attributes List) An array of key-value pairs associated with the Kinesis Video Stream. (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) The Amazon Resource Name (ARN) of the Kinesis Video stream.
+- `data_retention_in_hours` (Number) The number of hours till which Kinesis Video will retain the data in the stream
+- `device_name` (String) The name of the device that is writing to the stream.
+- `kms_key_id` (String) AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.
+- `media_type` (String) The media type of the stream. Consumers of the stream can use this information when processing the stream.
+- `name` (String) The name of the Kinesis Video stream.
+- `tags` (Attributes List) An array of key-value pairs associated with the Kinesis Video Stream. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

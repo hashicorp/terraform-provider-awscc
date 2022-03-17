@@ -17,32 +17,32 @@ Data Source schema for AWS::MediaConnect::FlowEntitlement
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **data_transfer_subscriber_fee_percent** (Number) Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
-- **description** (String) A description of the entitlement.
-- **encryption** (Attributes) The type of encryption that will be used on the output that is associated with this entitlement. (see [below for nested schema](#nestedatt--encryption))
-- **entitlement_arn** (String) The ARN of the entitlement.
-- **entitlement_status** (String) An indication of whether the entitlement is enabled.
-- **flow_arn** (String) The ARN of the flow.
-- **name** (String) The name of the entitlement.
-- **subscribers** (List of String) The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
+- `data_transfer_subscriber_fee_percent` (Number) Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+- `description` (String) A description of the entitlement.
+- `encryption` (Attributes) The type of encryption that will be used on the output that is associated with this entitlement. (see [below for nested schema](#nestedatt--encryption))
+- `entitlement_arn` (String) The ARN of the entitlement.
+- `entitlement_status` (String) An indication of whether the entitlement is enabled.
+- `flow_arn` (String) The ARN of the flow.
+- `name` (String) The name of the entitlement.
+- `subscribers` (List of String) The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
 
 <a id="nestedatt--encryption"></a>
 ### Nested Schema for `encryption`
 
 Read-Only:
 
-- **algorithm** (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
-- **constant_initialization_vector** (String) A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.
-- **device_id** (String) The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-- **key_type** (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
-- **region** (String) The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-- **resource_id** (String) An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-- **role_arn** (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
-- **secret_arn** (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
-- **url** (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+- `algorithm` (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
+- `constant_initialization_vector` (String) A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.
+- `device_id` (String) The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+- `key_type` (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
+- `region` (String) The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+- `resource_id` (String) An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
+- `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
+- `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
 
 

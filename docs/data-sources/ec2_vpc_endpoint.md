@@ -17,20 +17,20 @@ Data Source schema for AWS::EC2::VPCEndpoint
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **creation_timestamp** (String)
-- **dns_entries** (List of String)
-- **network_interface_ids** (List of String)
-- **policy_document** (Map of String)
-- **private_dns_enabled** (Boolean)
-- **route_table_ids** (List of String)
-- **security_group_ids** (List of String)
-- **service_name** (String)
-- **subnet_ids** (List of String)
-- **vpc_endpoint_type** (String)
-- **vpc_id** (String)
+- `creation_timestamp` (String)
+- `dns_entries` (List of String)
+- `network_interface_ids` (List of String)
+- `policy_document` (Map of String)
+- `private_dns_enabled` (Boolean)
+- `route_table_ids` (List of String)
+- `security_group_ids` (List of String)
+- `service_name` (String)
+- `subnet_ids` (List of String)
+- `vpc_endpoint_type` (String)
+- `vpc_id` (String)
 
 

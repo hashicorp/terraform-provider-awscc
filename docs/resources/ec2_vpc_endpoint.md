@@ -17,24 +17,24 @@ Resource Type definition for AWS::EC2::VPCEndpoint
 
 ### Required
 
-- **service_name** (String)
-- **vpc_id** (String)
+- `service_name` (String)
+- `vpc_id` (String)
 
 ### Optional
 
-- **policy_document** (Map of String)
-- **private_dns_enabled** (Boolean)
-- **route_table_ids** (List of String)
-- **security_group_ids** (List of String)
-- **subnet_ids** (List of String)
-- **vpc_endpoint_type** (String)
+- `policy_document` (Map of String)
+- `private_dns_enabled` (Boolean)
+- `route_table_ids` (List of String)
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
+- `vpc_endpoint_type` (String)
 
 ### Read-Only
 
-- **creation_timestamp** (String)
-- **dns_entries** (List of String)
-- **id** (String) The ID of this resource.
-- **network_interface_ids** (List of String)
+- `creation_timestamp` (String)
+- `dns_entries` (List of String)
+- `id` (String) The ID of this resource.
+- `network_interface_ids` (List of String)
 
 ## Import
 

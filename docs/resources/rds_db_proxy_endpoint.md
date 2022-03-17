@@ -17,31 +17,31 @@ Resource schema for AWS::RDS::DBProxyEndpoint.
 
 ### Required
 
-- **db_proxy_endpoint_name** (String) The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.
-- **db_proxy_name** (String) The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.
-- **vpc_subnet_ids** (List of String) VPC subnet IDs to associate with the new DB proxy endpoint.
+- `db_proxy_endpoint_name` (String) The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.
+- `db_proxy_name` (String) The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.
+- `vpc_subnet_ids` (List of String) VPC subnet IDs to associate with the new DB proxy endpoint.
 
 ### Optional
 
-- **tags** (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the DB proxy endpoint. (see [below for nested schema](#nestedatt--tags))
-- **target_role** (String) A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.
-- **vpc_security_group_ids** (List of String) VPC security group IDs to associate with the new DB proxy endpoint.
+- `tags` (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the DB proxy endpoint. (see [below for nested schema](#nestedatt--tags))
+- `target_role` (String) A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.
+- `vpc_security_group_ids` (List of String) VPC security group IDs to associate with the new DB proxy endpoint.
 
 ### Read-Only
 
-- **db_proxy_endpoint_arn** (String) The Amazon Resource Name (ARN) for the DB proxy endpoint.
-- **endpoint** (String) The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.
-- **id** (String) Uniquely identifies the resource.
-- **is_default** (Boolean) A value that indicates whether this endpoint is the default endpoint for the associated DB proxy. Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the DB proxy can be either read/write or read-only.
-- **vpc_id** (String) VPC ID to associate with the new DB proxy endpoint.
+- `db_proxy_endpoint_arn` (String) The Amazon Resource Name (ARN) for the DB proxy endpoint.
+- `endpoint` (String) The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.
+- `id` (String) Uniquely identifies the resource.
+- `is_default` (Boolean) A value that indicates whether this endpoint is the default endpoint for the associated DB proxy. Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the DB proxy can be either read/write or read-only.
+- `vpc_id` (String) VPC ID to associate with the new DB proxy endpoint.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

@@ -17,63 +17,63 @@ Resource schema for AWS::ApplicationInsights::Application
 
 ### Required
 
-- **resource_group_name** (String) The name of the resource group.
+- `resource_group_name` (String) The name of the resource group.
 
 ### Optional
 
-- **auto_configuration_enabled** (Boolean) If set to true, application will be configured with recommended monitoring configuration.
-- **component_monitoring_settings** (Attributes List) The monitoring settings of the components. (see [below for nested schema](#nestedatt--component_monitoring_settings))
-- **custom_components** (Attributes List) The custom grouped components. (see [below for nested schema](#nestedatt--custom_components))
-- **cwe_monitor_enabled** (Boolean) Indicates whether Application Insights can listen to CloudWatch events for the application resources.
-- **log_pattern_sets** (Attributes List) The log pattern sets. (see [below for nested schema](#nestedatt--log_pattern_sets))
-- **ops_center_enabled** (Boolean) When set to true, creates opsItems for any problems detected on an application.
-- **ops_item_sns_topic_arn** (String) The SNS topic provided to Application Insights that is associated to the created opsItem.
-- **tags** (Attributes List) The tags of Application Insights application. (see [below for nested schema](#nestedatt--tags))
+- `auto_configuration_enabled` (Boolean) If set to true, application will be configured with recommended monitoring configuration.
+- `component_monitoring_settings` (Attributes List) The monitoring settings of the components. (see [below for nested schema](#nestedatt--component_monitoring_settings))
+- `custom_components` (Attributes List) The custom grouped components. (see [below for nested schema](#nestedatt--custom_components))
+- `cwe_monitor_enabled` (Boolean) Indicates whether Application Insights can listen to CloudWatch events for the application resources.
+- `log_pattern_sets` (Attributes List) The log pattern sets. (see [below for nested schema](#nestedatt--log_pattern_sets))
+- `ops_center_enabled` (Boolean) When set to true, creates opsItems for any problems detected on an application.
+- `ops_item_sns_topic_arn` (String) The SNS topic provided to Application Insights that is associated to the created opsItem.
+- `tags` (Attributes List) The tags of Application Insights application. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **application_arn** (String) The ARN of the ApplicationInsights application.
-- **id** (String) Uniquely identifies the resource.
+- `application_arn` (String) The ARN of the ApplicationInsights application.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--component_monitoring_settings"></a>
 ### Nested Schema for `component_monitoring_settings`
 
 Optional:
 
-- **component_arn** (String) The ARN of the compnonent.
-- **component_configuration_mode** (String) The component monitoring configuration mode.
-- **component_name** (String) The name of the component.
-- **custom_component_configuration** (Attributes) The monitoring configuration of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration))
-- **default_overwrite_component_configuration** (Attributes) The overwritten settings on default component monitoring configuration. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration))
-- **tier** (String) The tier of the application component.
+- `component_arn` (String) The ARN of the compnonent.
+- `component_configuration_mode` (String) The component monitoring configuration mode.
+- `component_name` (String) The name of the component.
+- `custom_component_configuration` (Attributes) The monitoring configuration of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration))
+- `default_overwrite_component_configuration` (Attributes) The overwritten settings on default component monitoring configuration. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration))
+- `tier` (String) The tier of the application component.
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration`
 
 Optional:
 
-- **configuration_details** (Attributes) The configuration settings (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details))
-- **sub_component_type_configurations** (Attributes List) Sub component configurations of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations))
+- `configuration_details` (Attributes) The configuration settings (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details))
+- `sub_component_type_configurations` (Attributes List) Sub component configurations of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations))
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details`
 
 Optional:
 
-- **alarm_metrics** (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarm_metrics))
-- **alarms** (Attributes List) A list of alarms to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarms))
-- **ha_cluster_prometheus_exporter** (Attributes) The HA cluster Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--ha_cluster_prometheus_exporter))
-- **hana_prometheus_exporter** (Attributes) The HANA DB Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--hana_prometheus_exporter))
-- **jmx_prometheus_exporter** (Attributes) The JMX Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--jmx_prometheus_exporter))
-- **logs** (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--logs))
-- **windows_events** (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events))
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarm_metrics))
+- `alarms` (Attributes List) A list of alarms to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarms))
+- `ha_cluster_prometheus_exporter` (Attributes) The HA cluster Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--ha_cluster_prometheus_exporter))
+- `hana_prometheus_exporter` (Attributes) The HANA DB Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--hana_prometheus_exporter))
+- `jmx_prometheus_exporter` (Attributes) The JMX Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--jmx_prometheus_exporter))
+- `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--logs))
+- `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events))
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarm_metrics"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
 
 Optional:
 
-- **alarm_metric_name** (String) The name of the metric to be monitored for the component.
+- `alarm_metric_name` (String) The name of the metric to be monitored for the component.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarms"></a>
@@ -81,8 +81,8 @@ Optional:
 
 Optional:
 
-- **alarm_name** (String) The name of the CloudWatch alarm to be monitored for the component.
-- **severity** (String) Indicates the degree of outage when the alarm goes off.
+- `alarm_name` (String) The name of the CloudWatch alarm to be monitored for the component.
+- `severity` (String) Indicates the degree of outage when the alarm goes off.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--ha_cluster_prometheus_exporter"></a>
@@ -90,7 +90,7 @@ Optional:
 
 Optional:
 
-- **prometheus_port** (String) Prometheus exporter port.
+- `prometheus_port` (String) Prometheus exporter port.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--hana_prometheus_exporter"></a>
@@ -98,14 +98,14 @@ Optional:
 
 Optional:
 
-- **agree_to_install_hanadb_client** (Boolean) A flag which indicates agreeing to install SAP HANA DB client.
-- **hana_port** (String) The HANA DB port.
-- **hana_secret_name** (String) The secret name which manages the HANA DB credentials e.g. {
+- `agree_to_install_hanadb_client` (Boolean) A flag which indicates agreeing to install SAP HANA DB client.
+- `hana_port` (String) The HANA DB port.
+- `hana_secret_name` (String) The secret name which manages the HANA DB credentials e.g. {
   "username": "<>",
   "password": "<>"
 }.
-- **hanasid** (String) HANA DB SID.
-- **prometheus_port** (String) Prometheus exporter port.
+- `hanasid` (String) HANA DB SID.
+- `prometheus_port` (String) Prometheus exporter port.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--jmx_prometheus_exporter"></a>
@@ -113,9 +113,9 @@ Optional:
 
 Optional:
 
-- **host_port** (String) Java agent host port
-- **jmxurl** (String) JMX service URL.
-- **prometheus_port** (String) Prometheus exporter port.
+- `host_port` (String) Java agent host port
+- `jmxurl` (String) JMX service URL.
+- `prometheus_port` (String) Prometheus exporter port.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--logs"></a>
@@ -123,11 +123,11 @@ Optional:
 
 Optional:
 
-- **encoding** (String) The type of encoding of the logs to be monitored.
-- **log_group_name** (String) The CloudWatch log group name to be associated to the monitored log.
-- **log_path** (String) The path of the logs to be monitored.
-- **log_type** (String) The log type decides the log patterns against which Application Insights analyzes the log.
-- **pattern_set** (String) The name of the log pattern set.
+- `encoding` (String) The type of encoding of the logs to be monitored.
+- `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+- `log_path` (String) The path of the logs to be monitored.
+- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
+- `pattern_set` (String) The name of the log pattern set.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events"></a>
@@ -135,10 +135,10 @@ Optional:
 
 Optional:
 
-- **event_levels** (List of String) The levels of event to log.
-- **event_name** (String) The type of Windows Events to log.
-- **log_group_name** (String) The CloudWatch log group name to be associated to the monitored log.
-- **pattern_set** (String) The name of the log pattern set.
+- `event_levels` (List of String) The levels of event to log.
+- `event_name` (String) The type of Windows Events to log.
+- `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+- `pattern_set` (String) The name of the log pattern set.
 
 
 
@@ -147,24 +147,24 @@ Optional:
 
 Optional:
 
-- **sub_component_configuration_details** (Attributes) The configuration settings of sub components. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details))
-- **sub_component_type** (String) The sub component type.
+- `sub_component_configuration_details` (Attributes) The configuration settings of sub components. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details))
+- `sub_component_type` (String) The sub component type.
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type`
 
 Optional:
 
-- **alarm_metrics** (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics))
-- **logs** (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--logs))
-- **windows_events** (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--windows_events))
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics))
+- `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--logs))
+- `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--windows_events))
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.alarm_metrics`
 
 Optional:
 
-- **alarm_metric_name** (String) The name of the metric to be monitored for the component.
+- `alarm_metric_name` (String) The name of the metric to be monitored for the component.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--logs"></a>
@@ -172,11 +172,11 @@ Optional:
 
 Optional:
 
-- **encoding** (String) The type of encoding of the logs to be monitored.
-- **log_group_name** (String) The CloudWatch log group name to be associated to the monitored log.
-- **log_path** (String) The path of the logs to be monitored.
-- **log_type** (String) The log type decides the log patterns against which Application Insights analyzes the log.
-- **pattern_set** (String) The name of the log pattern set.
+- `encoding` (String) The type of encoding of the logs to be monitored.
+- `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+- `log_path` (String) The path of the logs to be monitored.
+- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
+- `pattern_set` (String) The name of the log pattern set.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--windows_events"></a>
@@ -184,10 +184,10 @@ Optional:
 
 Optional:
 
-- **event_levels** (List of String) The levels of event to log.
-- **event_name** (String) The type of Windows Events to log.
-- **log_group_name** (String) The CloudWatch log group name to be associated to the monitored log.
-- **pattern_set** (String) The name of the log pattern set.
+- `event_levels` (List of String) The levels of event to log.
+- `event_name` (String) The type of Windows Events to log.
+- `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+- `pattern_set` (String) The name of the log pattern set.
 
 
 
@@ -198,28 +198,28 @@ Optional:
 
 Optional:
 
-- **configuration_details** (Attributes) The configuration settings (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details))
-- **sub_component_type_configurations** (Attributes List) Sub component configurations of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations))
+- `configuration_details` (Attributes) The configuration settings (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details))
+- `sub_component_type_configurations` (Attributes List) Sub component configurations of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations))
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details`
 
 Optional:
 
-- **alarm_metrics** (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarm_metrics))
-- **alarms** (Attributes List) A list of alarms to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarms))
-- **ha_cluster_prometheus_exporter** (Attributes) The HA cluster Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--ha_cluster_prometheus_exporter))
-- **hana_prometheus_exporter** (Attributes) The HANA DB Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--hana_prometheus_exporter))
-- **jmx_prometheus_exporter** (Attributes) The JMX Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--jmx_prometheus_exporter))
-- **logs** (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--logs))
-- **windows_events** (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events))
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarm_metrics))
+- `alarms` (Attributes List) A list of alarms to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarms))
+- `ha_cluster_prometheus_exporter` (Attributes) The HA cluster Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--ha_cluster_prometheus_exporter))
+- `hana_prometheus_exporter` (Attributes) The HANA DB Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--hana_prometheus_exporter))
+- `jmx_prometheus_exporter` (Attributes) The JMX Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--jmx_prometheus_exporter))
+- `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--logs))
+- `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events))
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarm_metrics"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
 
 Optional:
 
-- **alarm_metric_name** (String) The name of the metric to be monitored for the component.
+- `alarm_metric_name` (String) The name of the metric to be monitored for the component.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarms"></a>
@@ -227,8 +227,8 @@ Optional:
 
 Optional:
 
-- **alarm_name** (String) The name of the CloudWatch alarm to be monitored for the component.
-- **severity** (String) Indicates the degree of outage when the alarm goes off.
+- `alarm_name` (String) The name of the CloudWatch alarm to be monitored for the component.
+- `severity` (String) Indicates the degree of outage when the alarm goes off.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--ha_cluster_prometheus_exporter"></a>
@@ -236,7 +236,7 @@ Optional:
 
 Optional:
 
-- **prometheus_port** (String) Prometheus exporter port.
+- `prometheus_port` (String) Prometheus exporter port.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--hana_prometheus_exporter"></a>
@@ -244,14 +244,14 @@ Optional:
 
 Optional:
 
-- **agree_to_install_hanadb_client** (Boolean) A flag which indicates agreeing to install SAP HANA DB client.
-- **hana_port** (String) The HANA DB port.
-- **hana_secret_name** (String) The secret name which manages the HANA DB credentials e.g. {
+- `agree_to_install_hanadb_client` (Boolean) A flag which indicates agreeing to install SAP HANA DB client.
+- `hana_port` (String) The HANA DB port.
+- `hana_secret_name` (String) The secret name which manages the HANA DB credentials e.g. {
   "username": "<>",
   "password": "<>"
 }.
-- **hanasid** (String) HANA DB SID.
-- **prometheus_port** (String) Prometheus exporter port.
+- `hanasid` (String) HANA DB SID.
+- `prometheus_port` (String) Prometheus exporter port.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--jmx_prometheus_exporter"></a>
@@ -259,9 +259,9 @@ Optional:
 
 Optional:
 
-- **host_port** (String) Java agent host port
-- **jmxurl** (String) JMX service URL.
-- **prometheus_port** (String) Prometheus exporter port.
+- `host_port` (String) Java agent host port
+- `jmxurl` (String) JMX service URL.
+- `prometheus_port` (String) Prometheus exporter port.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--logs"></a>
@@ -269,11 +269,11 @@ Optional:
 
 Optional:
 
-- **encoding** (String) The type of encoding of the logs to be monitored.
-- **log_group_name** (String) The CloudWatch log group name to be associated to the monitored log.
-- **log_path** (String) The path of the logs to be monitored.
-- **log_type** (String) The log type decides the log patterns against which Application Insights analyzes the log.
-- **pattern_set** (String) The name of the log pattern set.
+- `encoding` (String) The type of encoding of the logs to be monitored.
+- `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+- `log_path` (String) The path of the logs to be monitored.
+- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
+- `pattern_set` (String) The name of the log pattern set.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events"></a>
@@ -281,10 +281,10 @@ Optional:
 
 Optional:
 
-- **event_levels** (List of String) The levels of event to log.
-- **event_name** (String) The type of Windows Events to log.
-- **log_group_name** (String) The CloudWatch log group name to be associated to the monitored log.
-- **pattern_set** (String) The name of the log pattern set.
+- `event_levels` (List of String) The levels of event to log.
+- `event_name` (String) The type of Windows Events to log.
+- `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+- `pattern_set` (String) The name of the log pattern set.
 
 
 
@@ -293,24 +293,24 @@ Optional:
 
 Optional:
 
-- **sub_component_configuration_details** (Attributes) The configuration settings of sub components. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details))
-- **sub_component_type** (String) The sub component type.
+- `sub_component_configuration_details` (Attributes) The configuration settings of sub components. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details))
+- `sub_component_type` (String) The sub component type.
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type`
 
 Optional:
 
-- **alarm_metrics** (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics))
-- **logs** (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--logs))
-- **windows_events** (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--windows_events))
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics))
+- `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--logs))
+- `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--windows_events))
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.alarm_metrics`
 
 Optional:
 
-- **alarm_metric_name** (String) The name of the metric to be monitored for the component.
+- `alarm_metric_name` (String) The name of the metric to be monitored for the component.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--logs"></a>
@@ -318,11 +318,11 @@ Optional:
 
 Optional:
 
-- **encoding** (String) The type of encoding of the logs to be monitored.
-- **log_group_name** (String) The CloudWatch log group name to be associated to the monitored log.
-- **log_path** (String) The path of the logs to be monitored.
-- **log_type** (String) The log type decides the log patterns against which Application Insights analyzes the log.
-- **pattern_set** (String) The name of the log pattern set.
+- `encoding` (String) The type of encoding of the logs to be monitored.
+- `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+- `log_path` (String) The path of the logs to be monitored.
+- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
+- `pattern_set` (String) The name of the log pattern set.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--windows_events"></a>
@@ -330,10 +330,10 @@ Optional:
 
 Optional:
 
-- **event_levels** (List of String) The levels of event to log.
-- **event_name** (String) The type of Windows Events to log.
-- **log_group_name** (String) The CloudWatch log group name to be associated to the monitored log.
-- **pattern_set** (String) The name of the log pattern set.
+- `event_levels` (List of String) The levels of event to log.
+- `event_name` (String) The type of Windows Events to log.
+- `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+- `pattern_set` (String) The name of the log pattern set.
 
 
 
@@ -345,8 +345,8 @@ Optional:
 
 Optional:
 
-- **component_name** (String) The name of the component.
-- **resource_list** (List of String) The list of resource ARNs that belong to the component.
+- `component_name` (String) The name of the component.
+- `resource_list` (List of String) The list of resource ARNs that belong to the component.
 
 
 <a id="nestedatt--log_pattern_sets"></a>
@@ -354,17 +354,17 @@ Optional:
 
 Optional:
 
-- **log_patterns** (Attributes List) The log patterns of a set. (see [below for nested schema](#nestedatt--log_pattern_sets--log_patterns))
-- **pattern_set_name** (String) The name of the log pattern set.
+- `log_patterns` (Attributes List) The log patterns of a set. (see [below for nested schema](#nestedatt--log_pattern_sets--log_patterns))
+- `pattern_set_name` (String) The name of the log pattern set.
 
 <a id="nestedatt--log_pattern_sets--log_patterns"></a>
 ### Nested Schema for `log_pattern_sets.log_patterns`
 
 Optional:
 
-- **pattern** (String) The log pattern.
-- **pattern_name** (String) The name of the log pattern.
-- **rank** (Number) Rank of the log pattern.
+- `pattern` (String) The log pattern.
+- `pattern_name` (String) The name of the log pattern.
+- `rank` (Number) Rank of the log pattern.
 
 
 
@@ -373,8 +373,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

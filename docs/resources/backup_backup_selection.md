@@ -17,43 +17,43 @@ Resource Type definition for AWS::Backup::BackupSelection
 
 ### Required
 
-- **backup_plan_id** (String)
-- **backup_selection** (Attributes) (see [below for nested schema](#nestedatt--backup_selection))
+- `backup_plan_id` (String)
+- `backup_selection` (Attributes) (see [below for nested schema](#nestedatt--backup_selection))
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
-- **selection_id** (String)
+- `id` (String) The ID of this resource.
+- `selection_id` (String)
 
 <a id="nestedatt--backup_selection"></a>
 ### Nested Schema for `backup_selection`
 
 Required:
 
-- **conditions** (Attributes) (see [below for nested schema](#nestedatt--backup_selection--conditions))
-- **iam_role_arn** (String)
-- **list_of_tags** (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--list_of_tags))
-- **not_resources** (List of String)
-- **resources** (List of String)
-- **selection_name** (String)
+- `conditions` (Attributes) (see [below for nested schema](#nestedatt--backup_selection--conditions))
+- `iam_role_arn` (String)
+- `list_of_tags` (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--list_of_tags))
+- `not_resources` (List of String)
+- `resources` (List of String)
+- `selection_name` (String)
 
 <a id="nestedatt--backup_selection--conditions"></a>
 ### Nested Schema for `backup_selection.conditions`
 
 Required:
 
-- **string_equals** (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--conditions--string_equals))
-- **string_like** (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--conditions--string_like))
-- **string_not_equals** (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--conditions--string_not_equals))
-- **string_not_like** (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--conditions--string_not_like))
+- `string_equals` (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--conditions--string_equals))
+- `string_like` (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--conditions--string_like))
+- `string_not_equals` (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--conditions--string_not_equals))
+- `string_not_like` (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--conditions--string_not_like))
 
 <a id="nestedatt--backup_selection--conditions--string_equals"></a>
 ### Nested Schema for `backup_selection.conditions.string_equals`
 
 Required:
 
-- **condition_key** (String)
-- **condition_value** (String)
+- `condition_key` (String)
+- `condition_value` (String)
 
 
 <a id="nestedatt--backup_selection--conditions--string_like"></a>
@@ -61,8 +61,8 @@ Required:
 
 Required:
 
-- **condition_key** (String)
-- **condition_value** (String)
+- `condition_key` (String)
+- `condition_value` (String)
 
 
 <a id="nestedatt--backup_selection--conditions--string_not_equals"></a>
@@ -70,8 +70,8 @@ Required:
 
 Required:
 
-- **condition_key** (String)
-- **condition_value** (String)
+- `condition_key` (String)
+- `condition_value` (String)
 
 
 <a id="nestedatt--backup_selection--conditions--string_not_like"></a>
@@ -79,8 +79,8 @@ Required:
 
 Required:
 
-- **condition_key** (String)
-- **condition_value** (String)
+- `condition_key` (String)
+- `condition_value` (String)
 
 
 
@@ -89,9 +89,9 @@ Required:
 
 Required:
 
-- **condition_key** (String)
-- **condition_type** (String)
-- **condition_value** (String)
+- `condition_key` (String)
+- `condition_type` (String)
+- `condition_value` (String)
 
 ## Import
 

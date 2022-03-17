@@ -17,35 +17,35 @@ Data Source schema for AWS::MediaConnect::FlowOutput
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **cidr_allow_list** (List of String) The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
-- **description** (String) A description of the output.
-- **destination** (String) The address where you want to send the output.
-- **encryption** (Attributes) The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). (see [below for nested schema](#nestedatt--encryption))
-- **flow_arn** (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
-- **max_latency** (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
-- **min_latency** (Number) The minimum latency in milliseconds.
-- **name** (String) The name of the output. This value must be unique within the current flow.
-- **output_arn** (String) The ARN of the output.
-- **port** (Number) The port to use when content is distributed to this output.
-- **protocol** (String) The protocol that is used by the source or output.
-- **remote_id** (String) The remote ID for the Zixi-pull stream.
-- **smoothing_latency** (Number) The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
-- **stream_id** (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
-- **vpc_interface_attachment** (Attributes) The name of the VPC interface attachment to use for this output. (see [below for nested schema](#nestedatt--vpc_interface_attachment))
+- `cidr_allow_list` (List of String) The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+- `description` (String) A description of the output.
+- `destination` (String) The address where you want to send the output.
+- `encryption` (Attributes) The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). (see [below for nested schema](#nestedatt--encryption))
+- `flow_arn` (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
+- `max_latency` (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+- `min_latency` (Number) The minimum latency in milliseconds.
+- `name` (String) The name of the output. This value must be unique within the current flow.
+- `output_arn` (String) The ARN of the output.
+- `port` (Number) The port to use when content is distributed to this output.
+- `protocol` (String) The protocol that is used by the source or output.
+- `remote_id` (String) The remote ID for the Zixi-pull stream.
+- `smoothing_latency` (Number) The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
+- `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+- `vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this output. (see [below for nested schema](#nestedatt--vpc_interface_attachment))
 
 <a id="nestedatt--encryption"></a>
 ### Nested Schema for `encryption`
 
 Read-Only:
 
-- **algorithm** (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
-- **key_type** (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
-- **role_arn** (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
-- **secret_arn** (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
+- `algorithm` (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
+- `key_type` (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
+- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
+- `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 
 
 <a id="nestedatt--vpc_interface_attachment"></a>
@@ -53,6 +53,6 @@ Read-Only:
 
 Read-Only:
 
-- **vpc_interface_name** (String) The name of the VPC interface to use for this output.
+- `vpc_interface_name` (String) The name of the VPC interface to use for this output.
 
 

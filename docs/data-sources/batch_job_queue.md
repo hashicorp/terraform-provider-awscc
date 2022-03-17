@@ -17,24 +17,24 @@ Data Source schema for AWS::Batch::JobQueue
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **compute_environment_order** (Attributes List) (see [below for nested schema](#nestedatt--compute_environment_order))
-- **job_queue_arn** (String)
-- **job_queue_name** (String)
-- **priority** (Number)
-- **scheduling_policy_arn** (String)
-- **state** (String)
-- **tags** (Map of String) A key-value pair to associate with a resource.
+- `compute_environment_order` (Attributes List) (see [below for nested schema](#nestedatt--compute_environment_order))
+- `job_queue_arn` (String)
+- `job_queue_name` (String)
+- `priority` (Number)
+- `scheduling_policy_arn` (String)
+- `state` (String)
+- `tags` (Map of String) A key-value pair to associate with a resource.
 
 <a id="nestedatt--compute_environment_order"></a>
 ### Nested Schema for `compute_environment_order`
 
 Read-Only:
 
-- **compute_environment** (String)
-- **order** (Number)
+- `compute_environment` (String)
+- `order` (Number)
 
 

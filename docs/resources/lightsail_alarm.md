@@ -17,26 +17,26 @@ Resource Type definition for AWS::Lightsail::Alarm
 
 ### Required
 
-- **alarm_name** (String) The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.
-- **comparison_operator** (String) The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.
-- **evaluation_periods** (Number) The number of most recent periods over which data is compared to the specified threshold. If you are setting an "M out of N" alarm, this value (evaluationPeriods) is the N.
-- **metric_name** (String) The name of the metric to associate with the alarm.
-- **monitored_resource_name** (String) The validation status of the SSL/TLS certificate.
-- **threshold** (Number) The value against which the specified statistic is compared.
+- `alarm_name` (String) The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.
+- `comparison_operator` (String) The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.
+- `evaluation_periods` (Number) The number of most recent periods over which data is compared to the specified threshold. If you are setting an "M out of N" alarm, this value (evaluationPeriods) is the N.
+- `metric_name` (String) The name of the metric to associate with the alarm.
+- `monitored_resource_name` (String) The validation status of the SSL/TLS certificate.
+- `threshold` (Number) The value against which the specified statistic is compared.
 
 ### Optional
 
-- **contact_protocols** (Set of String) The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.
-- **datapoints_to_alarm** (Number) The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an "M out of N" alarm, this value (datapointsToAlarm) is the M.
-- **notification_enabled** (Boolean) Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.
-- **notification_triggers** (Set of String) The alarm states that trigger a notification.
-- **treat_missing_data** (String) Sets how this alarm will handle missing data points.
+- `contact_protocols` (Set of String) The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.
+- `datapoints_to_alarm` (Number) The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an "M out of N" alarm, this value (datapointsToAlarm) is the M.
+- `notification_enabled` (Boolean) Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.
+- `notification_triggers` (Set of String) The alarm states that trigger a notification.
+- `treat_missing_data` (String) Sets how this alarm will handle missing data points.
 
 ### Read-Only
 
-- **alarm_arn** (String)
-- **id** (String) Uniquely identifies the resource.
-- **state** (String) The current state of the alarm.
+- `alarm_arn` (String)
+- `id` (String) Uniquely identifies the resource.
+- `state` (String) The current state of the alarm.
 
 ## Import
 

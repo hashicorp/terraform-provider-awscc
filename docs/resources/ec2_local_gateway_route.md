@@ -17,15 +17,15 @@ Describes a route for a local gateway route table.
 
 ### Required
 
-- **destination_cidr_block** (String) The CIDR block used for destination matches.
-- **local_gateway_route_table_id** (String) The ID of the local gateway route table.
-- **local_gateway_virtual_interface_group_id** (String) The ID of the virtual interface group.
+- `destination_cidr_block` (String) The CIDR block used for destination matches.
+- `local_gateway_route_table_id` (String) The ID of the local gateway route table.
+- `local_gateway_virtual_interface_group_id` (String) The ID of the virtual interface group.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **state** (String) The state of the route.
-- **type** (String) The route type.
+- `id` (String) Uniquely identifies the resource.
+- `state` (String) The state of the route.
+- `type` (String) The route type.
 
 ## Import
 

@@ -17,15 +17,15 @@ Data Source schema for AWS::CloudFormation::ResourceDefaultVersion
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion
-- **type_name** (String) The name of the type being registered.
+- `arn` (String) The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion
+- `type_name` (String) The name of the type being registered.
 
 We recommend that type names adhere to the following pattern: company_or_organization::service::type.
-- **type_version_arn** (String) The Amazon Resource Name (ARN) of the type version.
-- **version_id** (String) The ID of an existing version of the resource to set as the default.
+- `type_version_arn` (String) The Amazon Resource Name (ARN) of the type version.
+- `version_id` (String) The ID of an existing version of the resource to set as the default.
 
 

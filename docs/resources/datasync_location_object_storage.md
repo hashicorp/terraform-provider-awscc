@@ -17,32 +17,32 @@ Resource schema for AWS::DataSync::LocationObjectStorage.
 
 ### Required
 
-- **agent_arns** (List of String) The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
-- **bucket_name** (String) The name of the bucket on the self-managed object storage server.
-- **server_hostname** (String) The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.
+- `agent_arns` (List of String) The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+- `bucket_name` (String) The name of the bucket on the self-managed object storage server.
+- `server_hostname` (String) The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.
 
 ### Optional
 
-- **access_key** (String) Optional. The access key is used if credentials are required to access the self-managed object storage server.
-- **secret_key** (String) Optional. The secret key is used if credentials are required to access the self-managed object storage server.
-- **server_port** (Number) The port that your self-managed server accepts inbound network traffic on.
-- **server_protocol** (String) The protocol that the object storage server uses to communicate.
-- **subdirectory** (String) The subdirectory in the self-managed object storage server that is used to read data from.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `access_key` (String) Optional. The access key is used if credentials are required to access the self-managed object storage server.
+- `secret_key` (String) Optional. The secret key is used if credentials are required to access the self-managed object storage server.
+- `server_port` (Number) The port that your self-managed server accepts inbound network traffic on.
+- `server_protocol` (String) The protocol that the object storage server uses to communicate.
+- `subdirectory` (String) The subdirectory in the self-managed object storage server that is used to read data from.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **location_arn** (String) The Amazon Resource Name (ARN) of the location that is created.
-- **location_uri** (String) The URL of the object storage location that was described.
+- `id` (String) Uniquely identifies the resource.
+- `location_arn` (String) The Amazon Resource Name (ARN) of the location that is created.
+- `location_uri` (String) The URL of the object storage location that was described.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key for an AWS resource tag.
-- **value** (String) The value for an AWS resource tag.
+- `key` (String) The key for an AWS resource tag.
+- `value` (String) The value for an AWS resource tag.
 
 ## Import
 

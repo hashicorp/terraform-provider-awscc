@@ -17,20 +17,20 @@ Macie CustomDataIdentifier resource schema
 
 ### Required
 
-- **name** (String) Name of custom data identifier.
-- **regex** (String) Regular expression for custom data identifier.
+- `name` (String) Name of custom data identifier.
+- `regex` (String) Regular expression for custom data identifier.
 
 ### Optional
 
-- **description** (String) Description of custom data identifier.
-- **ignore_words** (List of String) Words to be ignored.
-- **keywords** (List of String) Keywords to be matched against.
-- **maximum_match_distance** (Number) Maximum match distance.
+- `description` (String) Description of custom data identifier.
+- `ignore_words` (List of String) Words to be ignored.
+- `keywords` (List of String) Keywords to be matched against.
+- `maximum_match_distance` (Number) Maximum match distance.
 
 ### Read-Only
 
-- **arn** (String) Custom data identifier ARN.
-- **id** (String) Custom data identifier ID.
+- `arn` (String) Custom data identifier ARN.
+- `id` (String) Custom data identifier ID.
 
 ## Import
 

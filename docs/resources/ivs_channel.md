@@ -17,27 +17,27 @@ Resource Type definition for AWS::IVS::Channel
 
 ### Optional
 
-- **authorized** (Boolean) Whether the channel is authorized.
-- **latency_mode** (String) Channel latency mode.
-- **name** (String) Channel
-- **recording_configuration_arn** (String) Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
-- **type** (String) Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.
+- `authorized` (Boolean) Whether the channel is authorized.
+- `latency_mode` (String) Channel latency mode.
+- `name` (String) Channel
+- `recording_configuration_arn` (String) Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.
 
 ### Read-Only
 
-- **arn** (String) Channel ARN is automatically generated on creation and assigned as the unique identifier.
-- **id** (String) Uniquely identifies the resource.
-- **ingest_endpoint** (String) Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
-- **playback_url** (String) Channel Playback URL.
+- `arn` (String) Channel ARN is automatically generated on creation and assigned as the unique identifier.
+- `id` (String) Uniquely identifies the resource.
+- `ingest_endpoint` (String) Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
+- `playback_url` (String) Channel Playback URL.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

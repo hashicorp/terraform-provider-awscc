@@ -17,23 +17,23 @@ Data Source schema for AWS::XRay::Group
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **filter_expression** (String) The filter expression defining criteria by which to group traces.
-- **group_arn** (String) The ARN of the group that was generated on creation.
-- **group_name** (String) The case-sensitive name of the new group. Names must be unique.
-- **insights_configuration** (Attributes) (see [below for nested schema](#nestedatt--insights_configuration))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `filter_expression` (String) The filter expression defining criteria by which to group traces.
+- `group_arn` (String) The ARN of the group that was generated on creation.
+- `group_name` (String) The case-sensitive name of the new group. Names must be unique.
+- `insights_configuration` (Attributes) (see [below for nested schema](#nestedatt--insights_configuration))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--insights_configuration"></a>
 ### Nested Schema for `insights_configuration`
 
 Read-Only:
 
-- **insights_enabled** (Boolean) Set the InsightsEnabled value to true to enable insights or false to disable insights.
-- **notifications_enabled** (Boolean) Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.
+- `insights_enabled` (Boolean) Set the InsightsEnabled value to true to enable insights or false to disable insights.
+- `notifications_enabled` (Boolean) Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.
 
 
 <a id="nestedatt--tags"></a>
@@ -41,7 +41,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

@@ -17,18 +17,18 @@ Resource Schema for AWS::Personalize::DatasetGroup.
 
 ### Required
 
-- **name** (String) The name for the new dataset group.
+- `name` (String) The name for the new dataset group.
 
 ### Optional
 
-- **domain** (String) The domain of a Domain dataset group.
-- **kms_key_arn** (String) The Amazon Resource Name(ARN) of a AWS Key Management Service (KMS) key used to encrypt the datasets.
-- **role_arn** (String) The ARN of the AWS Identity and Access Management (IAM) role that has permissions to access the AWS Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.
+- `domain` (String) The domain of a Domain dataset group.
+- `kms_key_arn` (String) The Amazon Resource Name(ARN) of a AWS Key Management Service (KMS) key used to encrypt the datasets.
+- `role_arn` (String) The ARN of the AWS Identity and Access Management (IAM) role that has permissions to access the AWS Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.
 
 ### Read-Only
 
-- **dataset_group_arn** (String) The Amazon Resource Name (ARN) of the dataset group.
-- **id** (String) Uniquely identifies the resource.
+- `dataset_group_arn` (String) The Amazon Resource Name (ARN) of the dataset group.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

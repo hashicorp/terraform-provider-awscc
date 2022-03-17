@@ -17,13 +17,13 @@ This resource adds Key-Value metadata to a Schema version of Glue Schema Registr
 
 ### Required
 
-- **key** (String) Metadata key
-- **schema_version_id** (String) Represents the version ID associated with the schema version.
-- **value** (String) Metadata value
+- `key` (String) Metadata key
+- `schema_version_id` (String) Represents the version ID associated with the schema version.
+- `value` (String) Metadata value
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

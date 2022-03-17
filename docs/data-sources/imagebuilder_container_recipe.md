@@ -17,33 +17,33 @@ Data Source schema for AWS::ImageBuilder::ContainerRecipe
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the container recipe.
-- **components** (Attributes List) Components for build and test that are included in the container recipe. (see [below for nested schema](#nestedatt--components))
-- **container_type** (String) Specifies the type of container, such as Docker.
-- **description** (String) The description of the container recipe.
-- **dockerfile_template_data** (String) Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.
-- **dockerfile_template_uri** (String) The S3 URI for the Dockerfile that will be used to build your container image.
-- **image_os_version_override** (String) Specifies the operating system version for the source image.
-- **instance_configuration** (Attributes) A group of options that can be used to configure an instance for building and testing container images. (see [below for nested schema](#nestedatt--instance_configuration))
-- **kms_key_id** (String) Identifies which KMS key is used to encrypt the container image.
-- **name** (String) The name of the container recipe.
-- **parent_image** (String) The source image for the container recipe.
-- **platform_override** (String) Specifies the operating system platform when you use a custom source image.
-- **tags** (Map of String) Tags that are attached to the container recipe.
-- **target_repository** (Attributes) The destination repository for the container image. (see [below for nested schema](#nestedatt--target_repository))
-- **version** (String) The semantic version of the container recipe (<major>.<minor>.<patch>).
-- **working_directory** (String) The working directory to be used during build and test workflows.
+- `arn` (String) The Amazon Resource Name (ARN) of the container recipe.
+- `components` (Attributes List) Components for build and test that are included in the container recipe. (see [below for nested schema](#nestedatt--components))
+- `container_type` (String) Specifies the type of container, such as Docker.
+- `description` (String) The description of the container recipe.
+- `dockerfile_template_data` (String) Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.
+- `dockerfile_template_uri` (String) The S3 URI for the Dockerfile that will be used to build your container image.
+- `image_os_version_override` (String) Specifies the operating system version for the source image.
+- `instance_configuration` (Attributes) A group of options that can be used to configure an instance for building and testing container images. (see [below for nested schema](#nestedatt--instance_configuration))
+- `kms_key_id` (String) Identifies which KMS key is used to encrypt the container image.
+- `name` (String) The name of the container recipe.
+- `parent_image` (String) The source image for the container recipe.
+- `platform_override` (String) Specifies the operating system platform when you use a custom source image.
+- `tags` (Map of String) Tags that are attached to the container recipe.
+- `target_repository` (Attributes) The destination repository for the container image. (see [below for nested schema](#nestedatt--target_repository))
+- `version` (String) The semantic version of the container recipe (<major>.<minor>.<patch>).
+- `working_directory` (String) The working directory to be used during build and test workflows.
 
 <a id="nestedatt--components"></a>
 ### Nested Schema for `components`
 
 Read-Only:
 
-- **component_arn** (String) The Amazon Resource Name (ARN) of the component.
+- `component_arn` (String) The Amazon Resource Name (ARN) of the component.
 
 
 <a id="nestedatt--instance_configuration"></a>
@@ -51,32 +51,32 @@ Read-Only:
 
 Read-Only:
 
-- **block_device_mappings** (Attributes List) Defines the block devices to attach for building an instance from this Image Builder AMI. (see [below for nested schema](#nestedatt--instance_configuration--block_device_mappings))
-- **image** (String) The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.
+- `block_device_mappings` (Attributes List) Defines the block devices to attach for building an instance from this Image Builder AMI. (see [below for nested schema](#nestedatt--instance_configuration--block_device_mappings))
+- `image` (String) The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.
 
 <a id="nestedatt--instance_configuration--block_device_mappings"></a>
 ### Nested Schema for `instance_configuration.block_device_mappings`
 
 Read-Only:
 
-- **device_name** (String) The device to which these mappings apply.
-- **ebs** (Attributes) Use to manage Amazon EBS-specific configuration for this mapping. (see [below for nested schema](#nestedatt--instance_configuration--block_device_mappings--ebs))
-- **no_device** (String) Use to remove a mapping from the parent image.
-- **virtual_name** (String) Use to manage instance ephemeral devices.
+- `device_name` (String) The device to which these mappings apply.
+- `ebs` (Attributes) Use to manage Amazon EBS-specific configuration for this mapping. (see [below for nested schema](#nestedatt--instance_configuration--block_device_mappings--ebs))
+- `no_device` (String) Use to remove a mapping from the parent image.
+- `virtual_name` (String) Use to manage instance ephemeral devices.
 
 <a id="nestedatt--instance_configuration--block_device_mappings--ebs"></a>
 ### Nested Schema for `instance_configuration.block_device_mappings.ebs`
 
 Read-Only:
 
-- **delete_on_termination** (Boolean) Use to configure delete on termination of the associated device.
-- **encrypted** (Boolean) Use to configure device encryption.
-- **iops** (Number) Use to configure device IOPS.
-- **kms_key_id** (String) Use to configure the KMS key to use when encrypting the device.
-- **snapshot_id** (String) The snapshot that defines the device contents.
-- **throughput** (Number) For GP3 volumes only ? The throughput in MiB/s that the volume supports.
-- **volume_size** (Number) Use to override the device's volume size.
-- **volume_type** (String) Use to override the device's volume type.
+- `delete_on_termination` (Boolean) Use to configure delete on termination of the associated device.
+- `encrypted` (Boolean) Use to configure device encryption.
+- `iops` (Number) Use to configure device IOPS.
+- `kms_key_id` (String) Use to configure the KMS key to use when encrypting the device.
+- `snapshot_id` (String) The snapshot that defines the device contents.
+- `throughput` (Number) For GP3 volumes only ? The throughput in MiB/s that the volume supports.
+- `volume_size` (Number) Use to override the device's volume size.
+- `volume_type` (String) Use to override the device's volume type.
 
 
 
@@ -86,7 +86,7 @@ Read-Only:
 
 Read-Only:
 
-- **repository_name** (String) The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
-- **service** (String) Specifies the service in which this image was registered.
+- `repository_name` (String) The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
+- `service` (String) Specifies the service in which this image was registered.
 
 

@@ -17,25 +17,25 @@ Schema for PackageVersion Resource Type
 
 ### Required
 
-- **package_id** (String)
-- **package_version** (String)
-- **patch_version** (String)
+- `package_id` (String)
+- `package_version` (String)
+- `patch_version` (String)
 
 ### Optional
 
-- **mark_latest** (Boolean)
-- **owner_account** (String)
-- **updated_latest_patch_version** (String)
+- `mark_latest` (Boolean)
+- `owner_account` (String)
+- `updated_latest_patch_version` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **is_latest_patch** (Boolean)
-- **package_arn** (String)
-- **package_name** (String)
-- **registered_time** (Number)
-- **status** (String)
-- **status_description** (String)
+- `id` (String) Uniquely identifies the resource.
+- `is_latest_patch` (Boolean)
+- `package_arn` (String)
+- `package_name` (String)
+- `registered_time` (Number)
+- `status` (String)
+- `status_description` (String)
 
 ## Import
 

@@ -17,19 +17,19 @@ AWS::RoboMaker::Robot resource creates an AWS RoboMaker fleet.
 
 ### Required
 
-- **architecture** (String) The target architecture of the robot.
-- **greengrass_group_id** (String) The Greengrass group id.
+- `architecture` (String) The target architecture of the robot.
+- `greengrass_group_id` (String) The Greengrass group id.
 
 ### Optional
 
-- **fleet** (String) The Amazon Resource Name (ARN) of the fleet.
-- **name** (String) The name for the robot.
-- **tags** (Map of String) A key-value pair to associate with a resource.
+- `fleet` (String) The Amazon Resource Name (ARN) of the fleet.
+- `name` (String) The name for the robot.
+- `tags` (Map of String) A key-value pair to associate with a resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

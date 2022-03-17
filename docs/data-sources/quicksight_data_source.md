@@ -17,11 +17,11 @@ Data Source schema for AWS::QuickSight::DataSource
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **alternate_data_source_parameters** (Attributes List) <p>A set of alternate data source parameters that you want to share for the credentials
+- `alternate_data_source_parameters` (Attributes List) <p>A set of alternate data source parameters that you want to share for the credentials
             stored with this data source. The credentials are applied in tandem with the data source
             parameters when you copy a data source by using a create or update request. The API
             operation compares the <code>DataSourceParameters</code> structure that's in the request
@@ -30,57 +30,57 @@ Data Source schema for AWS::QuickSight::DataSource
             existing data source. If the <code>AlternateDataSourceParameters</code> list is null,
             the <code>Credentials</code> originally used with this <code>DataSourceParameters</code>
             are automatically allowed.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters))
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the data source.</p>
-- **aws_account_id** (String)
-- **created_time** (String) <p>The time that this data source was created.</p>
-- **credentials** (Attributes) <p>Data source credentials. This is a variant type structure. For this structure to be
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the data source.</p>
+- `aws_account_id` (String)
+- `created_time` (String) <p>The time that this data source was created.</p>
+- `credentials` (Attributes) <p>Data source credentials. This is a variant type structure. For this structure to be
             valid, only one of the attributes can be non-null.</p> (see [below for nested schema](#nestedatt--credentials))
-- **data_source_id** (String)
-- **data_source_parameters** (Attributes) <p>The parameters that Amazon QuickSight uses to connect to your underlying data source.
+- `data_source_id` (String)
+- `data_source_parameters` (Attributes) <p>The parameters that Amazon QuickSight uses to connect to your underlying data source.
             This is a variant type structure. For this structure to be valid, only one of the
             attributes can be non-null.</p> (see [below for nested schema](#nestedatt--data_source_parameters))
-- **error_info** (Attributes) <p>Error information for the data source creation or update.</p> (see [below for nested schema](#nestedatt--error_info))
-- **last_updated_time** (String) <p>The last time that this data source was updated.</p>
-- **name** (String) <p>A display name for the data source.</p>
-- **permissions** (Attributes List) <p>A list of resource permissions on the data source.</p> (see [below for nested schema](#nestedatt--permissions))
-- **ssl_properties** (Attributes) <p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
+- `error_info` (Attributes) <p>Error information for the data source creation or update.</p> (see [below for nested schema](#nestedatt--error_info))
+- `last_updated_time` (String) <p>The last time that this data source was updated.</p>
+- `name` (String) <p>A display name for the data source.</p>
+- `permissions` (Attributes List) <p>A list of resource permissions on the data source.</p> (see [below for nested schema](#nestedatt--permissions))
+- `ssl_properties` (Attributes) <p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
             underlying data source.</p> (see [below for nested schema](#nestedatt--ssl_properties))
-- **status** (String)
-- **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p> (see [below for nested schema](#nestedatt--tags))
-- **type** (String)
-- **vpc_connection_properties** (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--vpc_connection_properties))
+- `status` (String)
+- `tags` (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p> (see [below for nested schema](#nestedatt--tags))
+- `type` (String)
+- `vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--vpc_connection_properties))
 
 <a id="nestedatt--alternate_data_source_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters`
 
 Read-Only:
 
-- **amazon_elasticsearch_parameters** (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--amazon_elasticsearch_parameters))
-- **amazon_open_search_parameters** (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--amazon_open_search_parameters))
-- **athena_parameters** (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--athena_parameters))
-- **aurora_parameters** (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_parameters))
-- **aurora_postgre_sql_parameters** (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_postgre_sql_parameters))
-- **maria_db_parameters** (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--maria_db_parameters))
-- **my_sql_parameters** (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--my_sql_parameters))
-- **oracle_parameters** (Attributes) (see [below for nested schema](#nestedatt--alternate_data_source_parameters--oracle_parameters))
-- **postgre_sql_parameters** (Attributes) <p>PostgreSQL parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--postgre_sql_parameters))
-- **presto_parameters** (Attributes) <p>Presto parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--presto_parameters))
-- **rds_parameters** (Attributes) <p>Amazon RDS parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--rds_parameters))
-- **redshift_parameters** (Attributes) <p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if
+- `amazon_elasticsearch_parameters` (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--amazon_elasticsearch_parameters))
+- `amazon_open_search_parameters` (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--amazon_open_search_parameters))
+- `athena_parameters` (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--athena_parameters))
+- `aurora_parameters` (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_parameters))
+- `aurora_postgre_sql_parameters` (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_postgre_sql_parameters))
+- `maria_db_parameters` (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--maria_db_parameters))
+- `my_sql_parameters` (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--my_sql_parameters))
+- `oracle_parameters` (Attributes) (see [below for nested schema](#nestedatt--alternate_data_source_parameters--oracle_parameters))
+- `postgre_sql_parameters` (Attributes) <p>PostgreSQL parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--postgre_sql_parameters))
+- `presto_parameters` (Attributes) <p>Presto parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--presto_parameters))
+- `rds_parameters` (Attributes) <p>Amazon RDS parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--rds_parameters))
+- `redshift_parameters` (Attributes) <p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if
             <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and
             <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--redshift_parameters))
-- **s3_parameters** (Attributes) <p>S3 parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters))
-- **snowflake_parameters** (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--snowflake_parameters))
-- **spark_parameters** (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--spark_parameters))
-- **sql_server_parameters** (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--sql_server_parameters))
-- **teradata_parameters** (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--teradata_parameters))
+- `s3_parameters` (Attributes) <p>S3 parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters))
+- `snowflake_parameters` (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--snowflake_parameters))
+- `spark_parameters` (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--spark_parameters))
+- `sql_server_parameters` (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--sql_server_parameters))
+- `teradata_parameters` (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--teradata_parameters))
 
 <a id="nestedatt--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.amazon_elasticsearch_parameters`
 
 Read-Only:
 
-- **domain** (String) <p>The Amazon Elasticsearch Service domain.</p>
+- `domain` (String) <p>The Amazon Elasticsearch Service domain.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--amazon_open_search_parameters"></a>
@@ -88,7 +88,7 @@ Read-Only:
 
 Read-Only:
 
-- **domain** (String) <p>The Amazon OpenSearch Service domain.</p>
+- `domain` (String) <p>The Amazon OpenSearch Service domain.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--athena_parameters"></a>
@@ -96,7 +96,7 @@ Read-Only:
 
 Read-Only:
 
-- **work_group** (String) <p>The workgroup that Amazon Athena uses.</p>
+- `work_group` (String) <p>The workgroup that Amazon Athena uses.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--aurora_parameters"></a>
@@ -104,9 +104,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--aurora_postgre_sql_parameters"></a>
@@ -114,9 +114,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--maria_db_parameters"></a>
@@ -124,9 +124,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--my_sql_parameters"></a>
@@ -134,9 +134,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--oracle_parameters"></a>
@@ -144,9 +144,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String)
-- **host** (String)
-- **port** (Number)
+- `database` (String)
+- `host` (String)
+- `port` (Number)
 
 
 <a id="nestedatt--alternate_data_source_parameters--postgre_sql_parameters"></a>
@@ -154,9 +154,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--presto_parameters"></a>
@@ -164,9 +164,9 @@ Read-Only:
 
 Read-Only:
 
-- **catalog** (String) <p>Catalog.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `catalog` (String) <p>Catalog.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--rds_parameters"></a>
@@ -174,8 +174,8 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **instance_id** (String) <p>Instance ID.</p>
+- `database` (String) <p>Database.</p>
+- `instance_id` (String) <p>Instance ID.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--redshift_parameters"></a>
@@ -183,11 +183,11 @@ Read-Only:
 
 Read-Only:
 
-- **cluster_id** (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
+- `cluster_id` (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
             provided.</p>
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
-- **port** (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
+- `port` (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--s3_parameters"></a>
@@ -195,15 +195,15 @@ Read-Only:
 
 Read-Only:
 
-- **manifest_file_location** (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters--manifest_file_location))
+- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters--manifest_file_location))
 
 <a id="nestedatt--alternate_data_source_parameters--s3_parameters--manifest_file_location"></a>
 ### Nested Schema for `alternate_data_source_parameters.s3_parameters.manifest_file_location`
 
 Read-Only:
 
-- **bucket** (String) <p>Amazon S3 bucket.</p>
-- **key** (String) <p>Amazon S3 key that identifies an object.</p>
+- `bucket` (String) <p>Amazon S3 bucket.</p>
+- `key` (String) <p>Amazon S3 key that identifies an object.</p>
 
 
 
@@ -212,9 +212,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **warehouse** (String) <p>Warehouse.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `warehouse` (String) <p>Warehouse.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--spark_parameters"></a>
@@ -222,8 +222,8 @@ Read-Only:
 
 Read-Only:
 
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--sql_server_parameters"></a>
@@ -231,9 +231,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--teradata_parameters"></a>
@@ -241,9 +241,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 
@@ -252,18 +252,18 @@ Read-Only:
 
 Read-Only:
 
-- **copy_source_arn** (String) <p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you
+- `copy_source_arn` (String) <p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you
             want to use. When <code>CopySourceArn</code> is not null, the credential pair from the
             data source in the ARN is used as the credentials for the
             <code>DataSourceCredentials</code> structure.</p>
-- **credential_pair** (Attributes) <p>The combination of user name and password that are used as credentials.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair))
+- `credential_pair` (Attributes) <p>The combination of user name and password that are used as credentials.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair))
 
 <a id="nestedatt--credentials--credential_pair"></a>
 ### Nested Schema for `credentials.credential_pair`
 
 Read-Only:
 
-- **alternate_data_source_parameters** (Attributes List) <p>A set of alternate data source parameters that you want to share for these
+- `alternate_data_source_parameters` (Attributes List) <p>A set of alternate data source parameters that you want to share for these
             credentials. The credentials are applied in tandem with the data source parameters when
             you copy a data source by using a create or update request. The API operation compares
             the <code>DataSourceParameters</code> structure that's in the request with the
@@ -272,40 +272,40 @@ Read-Only:
             the existing credentials. If the <code>AlternateDataSourceParameters</code> list is
             null, the <code>DataSourceParameters</code> originally used with these
                 <code>Credentials</code> is automatically allowed.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters))
-- **password** (String) <p>Password.</p>
-- **username** (String) <p>User name.</p>
+- `password` (String) <p>Password.</p>
+- `username` (String) <p>User name.</p>
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters`
 
 Read-Only:
 
-- **amazon_elasticsearch_parameters** (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters))
-- **amazon_open_search_parameters** (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters))
-- **athena_parameters** (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters))
-- **aurora_parameters** (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters))
-- **aurora_postgre_sql_parameters** (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters))
-- **maria_db_parameters** (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters))
-- **my_sql_parameters** (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters))
-- **oracle_parameters** (Attributes) (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters))
-- **postgre_sql_parameters** (Attributes) <p>PostgreSQL parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters))
-- **presto_parameters** (Attributes) <p>Presto parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--presto_parameters))
-- **rds_parameters** (Attributes) <p>Amazon RDS parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--rds_parameters))
-- **redshift_parameters** (Attributes) <p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if
+- `amazon_elasticsearch_parameters` (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters))
+- `amazon_open_search_parameters` (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters))
+- `athena_parameters` (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters))
+- `aurora_parameters` (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters))
+- `aurora_postgre_sql_parameters` (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters))
+- `maria_db_parameters` (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters))
+- `my_sql_parameters` (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters))
+- `oracle_parameters` (Attributes) (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters))
+- `postgre_sql_parameters` (Attributes) <p>PostgreSQL parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters))
+- `presto_parameters` (Attributes) <p>Presto parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--presto_parameters))
+- `rds_parameters` (Attributes) <p>Amazon RDS parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--rds_parameters))
+- `redshift_parameters` (Attributes) <p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if
             <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and
             <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters))
-- **s3_parameters** (Attributes) <p>S3 parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters))
-- **snowflake_parameters** (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters))
-- **spark_parameters** (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters))
-- **sql_server_parameters** (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters))
-- **teradata_parameters** (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters))
+- `s3_parameters` (Attributes) <p>S3 parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters))
+- `snowflake_parameters` (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters))
+- `spark_parameters` (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters))
+- `sql_server_parameters` (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters))
+- `teradata_parameters` (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters))
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
 Read-Only:
 
-- **domain** (String) <p>The Amazon Elasticsearch Service domain.</p>
+- `domain` (String) <p>The Amazon Elasticsearch Service domain.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters"></a>
@@ -313,7 +313,7 @@ Read-Only:
 
 Read-Only:
 
-- **domain** (String) <p>The Amazon OpenSearch Service domain.</p>
+- `domain` (String) <p>The Amazon OpenSearch Service domain.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters"></a>
@@ -321,7 +321,7 @@ Read-Only:
 
 Read-Only:
 
-- **work_group** (String) <p>The workgroup that Amazon Athena uses.</p>
+- `work_group` (String) <p>The workgroup that Amazon Athena uses.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters"></a>
@@ -329,9 +329,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters"></a>
@@ -339,9 +339,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters"></a>
@@ -349,9 +349,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters"></a>
@@ -359,9 +359,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters"></a>
@@ -369,9 +369,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String)
-- **host** (String)
-- **port** (Number)
+- `database` (String)
+- `host` (String)
+- `port` (Number)
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters"></a>
@@ -379,9 +379,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--presto_parameters"></a>
@@ -389,9 +389,9 @@ Read-Only:
 
 Read-Only:
 
-- **catalog** (String) <p>Catalog.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `catalog` (String) <p>Catalog.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--rds_parameters"></a>
@@ -399,8 +399,8 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **instance_id** (String) <p>Instance ID.</p>
+- `database` (String) <p>Database.</p>
+- `instance_id` (String) <p>Instance ID.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters"></a>
@@ -408,11 +408,11 @@ Read-Only:
 
 Read-Only:
 
-- **cluster_id** (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
+- `cluster_id` (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
             provided.</p>
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
-- **port** (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
+- `port` (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters"></a>
@@ -420,15 +420,15 @@ Read-Only:
 
 Read-Only:
 
-- **manifest_file_location** (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters--manifest_file_location))
+- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters--manifest_file_location))
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters--manifest_file_location"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters.manifest_file_location`
 
 Read-Only:
 
-- **bucket** (String) <p>Amazon S3 bucket.</p>
-- **key** (String) <p>Amazon S3 key that identifies an object.</p>
+- `bucket` (String) <p>Amazon S3 bucket.</p>
+- `key` (String) <p>Amazon S3 key that identifies an object.</p>
 
 
 
@@ -437,9 +437,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **warehouse** (String) <p>Warehouse.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `warehouse` (String) <p>Warehouse.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters"></a>
@@ -447,8 +447,8 @@ Read-Only:
 
 Read-Only:
 
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters"></a>
@@ -456,9 +456,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters"></a>
@@ -466,9 +466,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 
@@ -479,32 +479,32 @@ Read-Only:
 
 Read-Only:
 
-- **amazon_elasticsearch_parameters** (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--amazon_elasticsearch_parameters))
-- **amazon_open_search_parameters** (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--amazon_open_search_parameters))
-- **athena_parameters** (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--athena_parameters))
-- **aurora_parameters** (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_parameters))
-- **aurora_postgre_sql_parameters** (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_postgre_sql_parameters))
-- **maria_db_parameters** (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--maria_db_parameters))
-- **my_sql_parameters** (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--my_sql_parameters))
-- **oracle_parameters** (Attributes) (see [below for nested schema](#nestedatt--data_source_parameters--oracle_parameters))
-- **postgre_sql_parameters** (Attributes) <p>PostgreSQL parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--postgre_sql_parameters))
-- **presto_parameters** (Attributes) <p>Presto parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--presto_parameters))
-- **rds_parameters** (Attributes) <p>Amazon RDS parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--rds_parameters))
-- **redshift_parameters** (Attributes) <p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if
+- `amazon_elasticsearch_parameters` (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--amazon_elasticsearch_parameters))
+- `amazon_open_search_parameters` (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--amazon_open_search_parameters))
+- `athena_parameters` (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--athena_parameters))
+- `aurora_parameters` (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_parameters))
+- `aurora_postgre_sql_parameters` (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_postgre_sql_parameters))
+- `maria_db_parameters` (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--maria_db_parameters))
+- `my_sql_parameters` (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--my_sql_parameters))
+- `oracle_parameters` (Attributes) (see [below for nested schema](#nestedatt--data_source_parameters--oracle_parameters))
+- `postgre_sql_parameters` (Attributes) <p>PostgreSQL parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--postgre_sql_parameters))
+- `presto_parameters` (Attributes) <p>Presto parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--presto_parameters))
+- `rds_parameters` (Attributes) <p>Amazon RDS parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--rds_parameters))
+- `redshift_parameters` (Attributes) <p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if
             <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and
             <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--data_source_parameters--redshift_parameters))
-- **s3_parameters** (Attributes) <p>S3 parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters))
-- **snowflake_parameters** (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--snowflake_parameters))
-- **spark_parameters** (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--spark_parameters))
-- **sql_server_parameters** (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--sql_server_parameters))
-- **teradata_parameters** (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--teradata_parameters))
+- `s3_parameters` (Attributes) <p>S3 parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters))
+- `snowflake_parameters` (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--snowflake_parameters))
+- `spark_parameters` (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--spark_parameters))
+- `sql_server_parameters` (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--sql_server_parameters))
+- `teradata_parameters` (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--teradata_parameters))
 
 <a id="nestedatt--data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `data_source_parameters.amazon_elasticsearch_parameters`
 
 Read-Only:
 
-- **domain** (String) <p>The Amazon Elasticsearch Service domain.</p>
+- `domain` (String) <p>The Amazon Elasticsearch Service domain.</p>
 
 
 <a id="nestedatt--data_source_parameters--amazon_open_search_parameters"></a>
@@ -512,7 +512,7 @@ Read-Only:
 
 Read-Only:
 
-- **domain** (String) <p>The Amazon OpenSearch Service domain.</p>
+- `domain` (String) <p>The Amazon OpenSearch Service domain.</p>
 
 
 <a id="nestedatt--data_source_parameters--athena_parameters"></a>
@@ -520,7 +520,7 @@ Read-Only:
 
 Read-Only:
 
-- **work_group** (String) <p>The workgroup that Amazon Athena uses.</p>
+- `work_group` (String) <p>The workgroup that Amazon Athena uses.</p>
 
 
 <a id="nestedatt--data_source_parameters--aurora_parameters"></a>
@@ -528,9 +528,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--aurora_postgre_sql_parameters"></a>
@@ -538,9 +538,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--maria_db_parameters"></a>
@@ -548,9 +548,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--my_sql_parameters"></a>
@@ -558,9 +558,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--oracle_parameters"></a>
@@ -568,9 +568,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String)
-- **host** (String)
-- **port** (Number)
+- `database` (String)
+- `host` (String)
+- `port` (Number)
 
 
 <a id="nestedatt--data_source_parameters--postgre_sql_parameters"></a>
@@ -578,9 +578,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--presto_parameters"></a>
@@ -588,9 +588,9 @@ Read-Only:
 
 Read-Only:
 
-- **catalog** (String) <p>Catalog.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `catalog` (String) <p>Catalog.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--rds_parameters"></a>
@@ -598,8 +598,8 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **instance_id** (String) <p>Instance ID.</p>
+- `database` (String) <p>Database.</p>
+- `instance_id` (String) <p>Instance ID.</p>
 
 
 <a id="nestedatt--data_source_parameters--redshift_parameters"></a>
@@ -607,11 +607,11 @@ Read-Only:
 
 Read-Only:
 
-- **cluster_id** (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
+- `cluster_id` (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
             provided.</p>
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
-- **port** (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
+- `port` (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
 
 
 <a id="nestedatt--data_source_parameters--s3_parameters"></a>
@@ -619,15 +619,15 @@ Read-Only:
 
 Read-Only:
 
-- **manifest_file_location** (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters--manifest_file_location))
+- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters--manifest_file_location))
 
 <a id="nestedatt--data_source_parameters--s3_parameters--manifest_file_location"></a>
 ### Nested Schema for `data_source_parameters.s3_parameters.manifest_file_location`
 
 Read-Only:
 
-- **bucket** (String) <p>Amazon S3 bucket.</p>
-- **key** (String) <p>Amazon S3 key that identifies an object.</p>
+- `bucket` (String) <p>Amazon S3 bucket.</p>
+- `key` (String) <p>Amazon S3 key that identifies an object.</p>
 
 
 
@@ -636,9 +636,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **warehouse** (String) <p>Warehouse.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `warehouse` (String) <p>Warehouse.</p>
 
 
 <a id="nestedatt--data_source_parameters--spark_parameters"></a>
@@ -646,8 +646,8 @@ Read-Only:
 
 Read-Only:
 
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--sql_server_parameters"></a>
@@ -655,9 +655,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--teradata_parameters"></a>
@@ -665,9 +665,9 @@ Read-Only:
 
 Read-Only:
 
-- **database** (String) <p>Database.</p>
-- **host** (String) <p>Host.</p>
-- **port** (Number) <p>Port.</p>
+- `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
 
 
 
@@ -676,8 +676,8 @@ Read-Only:
 
 Read-Only:
 
-- **message** (String) <p>Error message.</p>
-- **type** (String)
+- `message` (String) <p>Error message.</p>
+- `type` (String)
 
 
 <a id="nestedatt--permissions"></a>
@@ -685,8 +685,8 @@ Read-Only:
 
 Read-Only:
 
-- **actions** (List of String) <p>The IAM action to grant or revoke permissions on.</p>
-- **principal** (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
+- `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
+- `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
             following:</p>
         <ul>
             <li>
@@ -708,7 +708,7 @@ Read-Only:
 
 Read-Only:
 
-- **disable_ssl** (Boolean) <p>A Boolean option to control whether SSL should be disabled.</p>
+- `disable_ssl` (Boolean) <p>A Boolean option to control whether SSL should be disabled.</p>
 
 
 <a id="nestedatt--tags"></a>
@@ -716,8 +716,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) <p>Tag key.</p>
-- **value** (String) <p>Tag value.</p>
+- `key` (String) <p>Tag key.</p>
+- `value` (String) <p>Tag value.</p>
 
 
 <a id="nestedatt--vpc_connection_properties"></a>
@@ -725,6 +725,6 @@ Read-Only:
 
 Read-Only:
 
-- **vpc_connection_arn** (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
 
 

@@ -17,29 +17,29 @@ Definition of the AWS::QuickSight::DataSet Resource Type.
 
 ### Optional
 
-- **aws_account_id** (String)
-- **column_groups** (Attributes List) <p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p> (see [below for nested schema](#nestedatt--column_groups))
-- **column_level_permission_rules** (Attributes List) (see [below for nested schema](#nestedatt--column_level_permission_rules))
-- **data_set_id** (String)
-- **field_folders** (Attributes Map) (see [below for nested schema](#nestedatt--field_folders))
-- **import_mode** (String)
-- **ingestion_wait_policy** (Attributes) <p>Wait policy to use when creating/updating dataset. Default is to wait for SPICE ingestion to finish with timeout of 36 hours.</p> (see [below for nested schema](#nestedatt--ingestion_wait_policy))
-- **logical_table_map** (Attributes Map) (see [below for nested schema](#nestedatt--logical_table_map))
-- **name** (String) <p>The display name for the dataset.</p>
-- **permissions** (Attributes List) <p>A list of resource permissions on the dataset.</p> (see [below for nested schema](#nestedatt--permissions))
-- **physical_table_map** (Attributes Map) (see [below for nested schema](#nestedatt--physical_table_map))
-- **row_level_permission_data_set** (Attributes) <p>The row-level security configuration for the dataset.</p> (see [below for nested schema](#nestedatt--row_level_permission_data_set))
-- **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p> (see [below for nested schema](#nestedatt--tags))
+- `aws_account_id` (String)
+- `column_groups` (Attributes List) <p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p> (see [below for nested schema](#nestedatt--column_groups))
+- `column_level_permission_rules` (Attributes List) (see [below for nested schema](#nestedatt--column_level_permission_rules))
+- `data_set_id` (String)
+- `field_folders` (Attributes Map) (see [below for nested schema](#nestedatt--field_folders))
+- `import_mode` (String)
+- `ingestion_wait_policy` (Attributes) <p>Wait policy to use when creating/updating dataset. Default is to wait for SPICE ingestion to finish with timeout of 36 hours.</p> (see [below for nested schema](#nestedatt--ingestion_wait_policy))
+- `logical_table_map` (Attributes Map) (see [below for nested schema](#nestedatt--logical_table_map))
+- `name` (String) <p>The display name for the dataset.</p>
+- `permissions` (Attributes List) <p>A list of resource permissions on the dataset.</p> (see [below for nested schema](#nestedatt--permissions))
+- `physical_table_map` (Attributes Map) (see [below for nested schema](#nestedatt--physical_table_map))
+- `row_level_permission_data_set` (Attributes) <p>The row-level security configuration for the dataset.</p> (see [below for nested schema](#nestedatt--row_level_permission_data_set))
+- `tags` (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p> (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-- **consumed_spice_capacity_in_bytes** (Number) <p>The amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
+- `consumed_spice_capacity_in_bytes` (Number) <p>The amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't
             imported into SPICE.</p>
-- **created_time** (String) <p>The time that this dataset was created.</p>
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_time** (String) <p>The last time that this dataset was updated.</p>
-- **output_columns** (Attributes List) <p>The list of columns after all transforms. These columns are available in templates,
+- `created_time` (String) <p>The time that this dataset was created.</p>
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_time` (String) <p>The last time that this dataset was updated.</p>
+- `output_columns` (Attributes List) <p>The list of columns after all transforms. These columns are available in templates,
             analyses, and dashboards.</p> (see [below for nested schema](#nestedatt--output_columns))
 
 <a id="nestedatt--column_groups"></a>
@@ -47,16 +47,16 @@ Definition of the AWS::QuickSight::DataSet Resource Type.
 
 Optional:
 
-- **geo_spatial_column_group** (Attributes) <p>Geospatial column group that denotes a hierarchy.</p> (see [below for nested schema](#nestedatt--column_groups--geo_spatial_column_group))
+- `geo_spatial_column_group` (Attributes) <p>Geospatial column group that denotes a hierarchy.</p> (see [below for nested schema](#nestedatt--column_groups--geo_spatial_column_group))
 
 <a id="nestedatt--column_groups--geo_spatial_column_group"></a>
 ### Nested Schema for `column_groups.geo_spatial_column_group`
 
 Optional:
 
-- **columns** (List of String) <p>Columns in this hierarchy.</p>
-- **country_code** (String)
-- **name** (String) <p>A display name for the hierarchy.</p>
+- `columns` (List of String) <p>Columns in this hierarchy.</p>
+- `country_code` (String)
+- `name` (String) <p>A display name for the hierarchy.</p>
 
 
 
@@ -65,8 +65,8 @@ Optional:
 
 Optional:
 
-- **column_names** (List of String)
-- **principals** (List of String)
+- `column_names` (List of String)
+- `principals` (List of String)
 
 
 <a id="nestedatt--field_folders"></a>
@@ -74,8 +74,8 @@ Optional:
 
 Optional:
 
-- **columns** (List of String)
-- **description** (String)
+- `columns` (List of String)
+- `description` (String)
 
 
 <a id="nestedatt--ingestion_wait_policy"></a>
@@ -83,9 +83,9 @@ Optional:
 
 Optional:
 
-- **ingestion_wait_time_in_hours** (Number) <p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.
+- `ingestion_wait_time_in_hours` (Number) <p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.
  Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.</p>
-- **wait_for_spice_ingestion** (Boolean) <p>Wait for SPICE ingestion to finish to mark dataset creation/update successful. Default (true).
+- `wait_for_spice_ingestion` (Boolean) <p>Wait for SPICE ingestion to finish to mark dataset creation/update successful. Default (true).
   Applicable only when DataSetImportMode mode is set to SPICE.</p>
 
 
@@ -94,9 +94,9 @@ Optional:
 
 Optional:
 
-- **alias** (String) <p>A display name for the logical table.</p>
-- **data_transforms** (Attributes List) <p>Transform operations that act on this logical table.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms))
-- **source** (Attributes) <p>Information about the source of a logical table. This is a variant type structure. For
+- `alias` (String) <p>A display name for the logical table.</p>
+- `data_transforms` (Attributes List) <p>Transform operations that act on this logical table.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms))
+- `source` (Attributes) <p>Information about the source of a logical table. This is a variant type structure. For
             this structure to be valid, only one of the attributes can be non-null.</p> (see [below for nested schema](#nestedatt--logical_table_map--source))
 
 <a id="nestedatt--logical_table_map--data_transforms"></a>
@@ -104,24 +104,24 @@ Optional:
 
 Optional:
 
-- **cast_column_type_operation** (Attributes) <p>A transform operation that casts a column to a different type.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--cast_column_type_operation))
-- **create_columns_operation** (Attributes) <p>A transform operation that creates calculated columns. Columns created in one such
+- `cast_column_type_operation` (Attributes) <p>A transform operation that casts a column to a different type.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--cast_column_type_operation))
+- `create_columns_operation` (Attributes) <p>A transform operation that creates calculated columns. Columns created in one such
             operation form a lexical closure.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--create_columns_operation))
-- **filter_operation** (Attributes) <p>A transform operation that filters rows based on a condition.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--filter_operation))
-- **project_operation** (Attributes) <p>A transform operation that projects columns. Operations that come after a projection
+- `filter_operation` (Attributes) <p>A transform operation that filters rows based on a condition.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--filter_operation))
+- `project_operation` (Attributes) <p>A transform operation that projects columns. Operations that come after a projection
             can only refer to projected columns.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--project_operation))
-- **rename_column_operation** (Attributes) <p>A transform operation that renames a column.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--rename_column_operation))
-- **tag_column_operation** (Attributes) <p>A transform operation that tags a column with additional information.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--tag_column_operation))
+- `rename_column_operation` (Attributes) <p>A transform operation that renames a column.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--rename_column_operation))
+- `tag_column_operation` (Attributes) <p>A transform operation that tags a column with additional information.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--tag_column_operation))
 
 <a id="nestedatt--logical_table_map--data_transforms--cast_column_type_operation"></a>
 ### Nested Schema for `logical_table_map.data_transforms.cast_column_type_operation`
 
 Optional:
 
-- **column_name** (String) <p>Column name.</p>
-- **format** (String) <p>When casting a column from string to datetime type, you can supply a string in a
+- `column_name` (String) <p>Column name.</p>
+- `format` (String) <p>When casting a column from string to datetime type, you can supply a string in a
             format supported by Amazon QuickSight to denote the source data format.</p>
-- **new_column_type** (String)
+- `new_column_type` (String)
 
 
 <a id="nestedatt--logical_table_map--data_transforms--create_columns_operation"></a>
@@ -129,18 +129,18 @@ Optional:
 
 Optional:
 
-- **columns** (Attributes List) <p>Calculated columns to create.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--create_columns_operation--columns))
+- `columns` (Attributes List) <p>Calculated columns to create.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--create_columns_operation--columns))
 
 <a id="nestedatt--logical_table_map--data_transforms--create_columns_operation--columns"></a>
 ### Nested Schema for `logical_table_map.data_transforms.create_columns_operation.columns`
 
 Optional:
 
-- **column_id** (String) <p>A unique ID to identify a calculated column. During a dataset update, if the column ID
+- `column_id` (String) <p>A unique ID to identify a calculated column. During a dataset update, if the column ID
             of a calculated column matches that of an existing calculated column, Amazon QuickSight
             preserves the existing calculated column.</p>
-- **column_name** (String) <p>Column name.</p>
-- **expression** (String) <p>An expression that defines the calculated column.</p>
+- `column_name` (String) <p>Column name.</p>
+- `expression` (String) <p>An expression that defines the calculated column.</p>
 
 
 
@@ -149,7 +149,7 @@ Optional:
 
 Optional:
 
-- **condition_expression** (String) <p>An expression that must evaluate to a Boolean value. Rows for which the expression
+- `condition_expression` (String) <p>An expression that must evaluate to a Boolean value. Rows for which the expression
             evaluates to true are kept in the dataset.</p>
 
 
@@ -158,7 +158,7 @@ Optional:
 
 Optional:
 
-- **projected_columns** (List of String) <p>Projected columns.</p>
+- `projected_columns` (List of String) <p>Projected columns.</p>
 
 
 <a id="nestedatt--logical_table_map--data_transforms--rename_column_operation"></a>
@@ -166,8 +166,8 @@ Optional:
 
 Optional:
 
-- **column_name** (String) <p>The name of the column to be renamed.</p>
-- **new_column_name** (String) <p>The new name for the column.</p>
+- `column_name` (String) <p>The name of the column to be renamed.</p>
+- `new_column_name` (String) <p>The new name for the column.</p>
 
 
 <a id="nestedatt--logical_table_map--data_transforms--tag_column_operation"></a>
@@ -175,8 +175,8 @@ Optional:
 
 Optional:
 
-- **column_name** (String) <p>The column that this operation acts on.</p>
-- **tags** (Attributes List) <p>The dataset column tag, currently only used for geospatial type tagging. .</p>
+- `column_name` (String) <p>The column that this operation acts on.</p>
+- `tags` (Attributes List) <p>The dataset column tag, currently only used for geospatial type tagging. .</p>
         <note>
             <p>This is not tags for the AWS tagging feature. .</p>
         </note> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--tag_column_operation--tags))
@@ -186,15 +186,15 @@ Optional:
 
 Optional:
 
-- **column_description** (Attributes) <p>Metadata that contains a description for a column.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--tag_column_operation--tags--column_description))
-- **column_geographic_role** (String)
+- `column_description` (Attributes) <p>Metadata that contains a description for a column.</p> (see [below for nested schema](#nestedatt--logical_table_map--data_transforms--tag_column_operation--tags--column_description))
+- `column_geographic_role` (String)
 
 <a id="nestedatt--logical_table_map--data_transforms--tag_column_operation--tags--column_description"></a>
 ### Nested Schema for `logical_table_map.data_transforms.tag_column_operation.tags.column_description`
 
 Optional:
 
-- **text** (String) <p>The text of a description for a column.</p>
+- `text` (String) <p>The text of a description for a column.</p>
 
 
 
@@ -205,27 +205,27 @@ Optional:
 
 Optional:
 
-- **join_instruction** (Attributes) <p>Join instruction.</p> (see [below for nested schema](#nestedatt--logical_table_map--source--join_instruction))
-- **physical_table_id** (String) <p>Physical table ID.</p>
+- `join_instruction` (Attributes) <p>Join instruction.</p> (see [below for nested schema](#nestedatt--logical_table_map--source--join_instruction))
+- `physical_table_id` (String) <p>Physical table ID.</p>
 
 <a id="nestedatt--logical_table_map--source--join_instruction"></a>
 ### Nested Schema for `logical_table_map.source.join_instruction`
 
 Optional:
 
-- **left_join_key_properties** (Attributes) (see [below for nested schema](#nestedatt--logical_table_map--source--join_instruction--left_join_key_properties))
-- **left_operand** (String) <p>Left operand.</p>
-- **on_clause** (String) <p>On Clause.</p>
-- **right_join_key_properties** (Attributes) (see [below for nested schema](#nestedatt--logical_table_map--source--join_instruction--right_join_key_properties))
-- **right_operand** (String) <p>Right operand.</p>
-- **type** (String)
+- `left_join_key_properties` (Attributes) (see [below for nested schema](#nestedatt--logical_table_map--source--join_instruction--left_join_key_properties))
+- `left_operand` (String) <p>Left operand.</p>
+- `on_clause` (String) <p>On Clause.</p>
+- `right_join_key_properties` (Attributes) (see [below for nested schema](#nestedatt--logical_table_map--source--join_instruction--right_join_key_properties))
+- `right_operand` (String) <p>Right operand.</p>
+- `type` (String)
 
 <a id="nestedatt--logical_table_map--source--join_instruction--left_join_key_properties"></a>
 ### Nested Schema for `logical_table_map.source.join_instruction.type`
 
 Optional:
 
-- **unique_key** (Boolean)
+- `unique_key` (Boolean)
 
 
 <a id="nestedatt--logical_table_map--source--join_instruction--right_join_key_properties"></a>
@@ -233,7 +233,7 @@ Optional:
 
 Optional:
 
-- **unique_key** (Boolean)
+- `unique_key` (Boolean)
 
 
 
@@ -244,8 +244,8 @@ Optional:
 
 Optional:
 
-- **actions** (List of String) <p>The IAM action to grant or revoke permissions on.</p>
-- **principal** (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
+- `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
+- `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
             following:</p>
         <ul>
             <li>
@@ -267,27 +267,27 @@ Optional:
 
 Optional:
 
-- **custom_sql** (Attributes) <p>A physical table type built from the results of the custom SQL query.</p> (see [below for nested schema](#nestedatt--physical_table_map--custom_sql))
-- **relational_table** (Attributes) <p>A physical table type for relational data sources.</p> (see [below for nested schema](#nestedatt--physical_table_map--relational_table))
-- **s3_source** (Attributes) <p>A physical table type for as S3 data source.</p> (see [below for nested schema](#nestedatt--physical_table_map--s3_source))
+- `custom_sql` (Attributes) <p>A physical table type built from the results of the custom SQL query.</p> (see [below for nested schema](#nestedatt--physical_table_map--custom_sql))
+- `relational_table` (Attributes) <p>A physical table type for relational data sources.</p> (see [below for nested schema](#nestedatt--physical_table_map--relational_table))
+- `s3_source` (Attributes) <p>A physical table type for as S3 data source.</p> (see [below for nested schema](#nestedatt--physical_table_map--s3_source))
 
 <a id="nestedatt--physical_table_map--custom_sql"></a>
 ### Nested Schema for `physical_table_map.custom_sql`
 
 Optional:
 
-- **columns** (Attributes List) <p>The column schema from the SQL query result set.</p> (see [below for nested schema](#nestedatt--physical_table_map--custom_sql--columns))
-- **data_source_arn** (String) <p>The Amazon Resource Name (ARN) of the data source.</p>
-- **name** (String) <p>A display name for the SQL query result.</p>
-- **sql_query** (String) <p>The SQL query.</p>
+- `columns` (Attributes List) <p>The column schema from the SQL query result set.</p> (see [below for nested schema](#nestedatt--physical_table_map--custom_sql--columns))
+- `data_source_arn` (String) <p>The Amazon Resource Name (ARN) of the data source.</p>
+- `name` (String) <p>A display name for the SQL query result.</p>
+- `sql_query` (String) <p>The SQL query.</p>
 
 <a id="nestedatt--physical_table_map--custom_sql--columns"></a>
 ### Nested Schema for `physical_table_map.custom_sql.columns`
 
 Optional:
 
-- **name** (String) <p>The name of this column in the underlying data source.</p>
-- **type** (String)
+- `name` (String) <p>The name of this column in the underlying data source.</p>
+- `type` (String)
 
 
 
@@ -296,19 +296,19 @@ Optional:
 
 Optional:
 
-- **catalog** (String) <p>The catalog associated with a table.</p>
-- **data_source_arn** (String) <p>The Amazon Resource Name (ARN) for the data source.</p>
-- **input_columns** (Attributes List) <p>The column schema of the table.</p> (see [below for nested schema](#nestedatt--physical_table_map--relational_table--input_columns))
-- **name** (String) <p>The name of the relational table.</p>
-- **schema** (String) <p>The schema name. This name applies to certain relational database engines.</p>
+- `catalog` (String) <p>The catalog associated with a table.</p>
+- `data_source_arn` (String) <p>The Amazon Resource Name (ARN) for the data source.</p>
+- `input_columns` (Attributes List) <p>The column schema of the table.</p> (see [below for nested schema](#nestedatt--physical_table_map--relational_table--input_columns))
+- `name` (String) <p>The name of the relational table.</p>
+- `schema` (String) <p>The schema name. This name applies to certain relational database engines.</p>
 
 <a id="nestedatt--physical_table_map--relational_table--input_columns"></a>
 ### Nested Schema for `physical_table_map.relational_table.input_columns`
 
 Optional:
 
-- **name** (String) <p>The name of this column in the underlying data source.</p>
-- **type** (String)
+- `name` (String) <p>The name of this column in the underlying data source.</p>
+- `type` (String)
 
 
 
@@ -317,17 +317,17 @@ Optional:
 
 Optional:
 
-- **data_source_arn** (String) <p>The amazon Resource Name (ARN) for the data source.</p>
-- **input_columns** (Attributes List) <p>A physical table type for as S3 data source.</p> (see [below for nested schema](#nestedatt--physical_table_map--s3_source--input_columns))
-- **upload_settings** (Attributes) <p>Information about the format for a source file or files.</p> (see [below for nested schema](#nestedatt--physical_table_map--s3_source--upload_settings))
+- `data_source_arn` (String) <p>The amazon Resource Name (ARN) for the data source.</p>
+- `input_columns` (Attributes List) <p>A physical table type for as S3 data source.</p> (see [below for nested schema](#nestedatt--physical_table_map--s3_source--input_columns))
+- `upload_settings` (Attributes) <p>Information about the format for a source file or files.</p> (see [below for nested schema](#nestedatt--physical_table_map--s3_source--upload_settings))
 
 <a id="nestedatt--physical_table_map--s3_source--input_columns"></a>
 ### Nested Schema for `physical_table_map.s3_source.input_columns`
 
 Optional:
 
-- **name** (String) <p>The name of this column in the underlying data source.</p>
-- **type** (String)
+- `name` (String) <p>The name of this column in the underlying data source.</p>
+- `type` (String)
 
 
 <a id="nestedatt--physical_table_map--s3_source--upload_settings"></a>
@@ -335,11 +335,11 @@ Optional:
 
 Optional:
 
-- **contains_header** (Boolean) <p>Whether the file has a header row, or the files each have a header row.</p>
-- **delimiter** (String) <p>The delimiter between values in the file.</p>
-- **format** (String)
-- **start_from_row** (Number) <p>A row number to start reading data from.</p>
-- **text_qualifier** (String)
+- `contains_header` (Boolean) <p>Whether the file has a header row, or the files each have a header row.</p>
+- `delimiter` (String) <p>The delimiter between values in the file.</p>
+- `format` (String)
+- `start_from_row` (Number) <p>A row number to start reading data from.</p>
+- `text_qualifier` (String)
 
 
 
@@ -349,10 +349,10 @@ Optional:
 
 Optional:
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the permission dataset.</p>
-- **format_version** (String)
-- **namespace** (String) <p>The namespace associated with the row-level permissions dataset.</p>
-- **permission_policy** (String)
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the permission dataset.</p>
+- `format_version` (String)
+- `namespace` (String) <p>The namespace associated with the row-level permissions dataset.</p>
+- `permission_policy` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -360,8 +360,8 @@ Optional:
 
 Optional:
 
-- **key** (String) <p>Tag key.</p>
-- **value** (String) <p>Tag value.</p>
+- `key` (String) <p>Tag key.</p>
+- `value` (String) <p>Tag value.</p>
 
 
 <a id="nestedatt--output_columns"></a>
@@ -369,9 +369,9 @@ Optional:
 
 Read-Only:
 
-- **description** (String) <p>A description for a column.</p>
-- **name** (String) <p>A display name for the dataset.</p>
-- **type** (String)
+- `description` (String) <p>A description for a column.</p>
+- `name` (String) <p>A display name for the dataset.</p>
+- `type` (String)
 
 ## Import
 

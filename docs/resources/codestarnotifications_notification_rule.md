@@ -17,32 +17,32 @@ Resource Type definition for AWS::CodeStarNotifications::NotificationRule
 
 ### Required
 
-- **detail_type** (String)
-- **event_type_ids** (List of String)
-- **name** (String)
-- **resource** (String)
-- **targets** (Attributes List) (see [below for nested schema](#nestedatt--targets))
+- `detail_type` (String)
+- `event_type_ids` (List of String)
+- `name` (String)
+- `resource` (String)
+- `targets` (Attributes List) (see [below for nested schema](#nestedatt--targets))
 
 ### Optional
 
-- **created_by** (String)
-- **event_type_id** (String)
-- **status** (String)
-- **tags** (Map of String)
-- **target_address** (String)
+- `created_by` (String)
+- `event_type_id` (String)
+- `status` (String)
+- `tags` (Map of String)
+- `target_address` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--targets"></a>
 ### Nested Schema for `targets`
 
 Required:
 
-- **target_address** (String)
-- **target_type** (String)
+- `target_address` (String)
+- `target_type` (String)
 
 ## Import
 

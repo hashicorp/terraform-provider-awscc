@@ -17,19 +17,19 @@ Use the AWS::IoT::Certificate resource to declare an AWS IoT X.509 certificate.
 
 ### Required
 
-- **status** (String)
+- `status` (String)
 
 ### Optional
 
-- **ca_certificate_pem** (String)
-- **certificate_mode** (String)
-- **certificate_pem** (String)
-- **certificate_signing_request** (String)
+- `ca_certificate_pem` (String)
+- `certificate_mode` (String)
+- `certificate_pem` (String)
+- `certificate_signing_request` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 ## Import
 

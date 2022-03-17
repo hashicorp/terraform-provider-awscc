@@ -17,23 +17,23 @@ AWS Route53 Recovery Control Cluster resource schema
 
 ### Optional
 
-- **name** (String) Name of a Cluster. You can use any non-white space character in the name
-- **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
+- `name` (String) Name of a Cluster. You can use any non-white space character in the name
+- `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **cluster_arn** (String) The Amazon Resource Name (ARN) of the cluster.
-- **cluster_endpoints** (Attributes List) Endpoints for the cluster. (see [below for nested schema](#nestedatt--cluster_endpoints))
-- **id** (String) Uniquely identifies the resource.
-- **status** (String) Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
+- `cluster_arn` (String) The Amazon Resource Name (ARN) of the cluster.
+- `cluster_endpoints` (Attributes List) Endpoints for the cluster. (see [below for nested schema](#nestedatt--cluster_endpoints))
+- `id` (String) Uniquely identifies the resource.
+- `status` (String) Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--cluster_endpoints"></a>
@@ -41,8 +41,8 @@ Optional:
 
 Read-Only:
 
-- **endpoint** (String)
-- **region** (String)
+- `endpoint` (String)
+- `region` (String)
 
 ## Import
 

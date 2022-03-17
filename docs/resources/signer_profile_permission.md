@@ -17,18 +17,18 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Required
 
-- **action** (String)
-- **principal** (String)
-- **profile_name** (String)
-- **statement_id** (String)
+- `action` (String)
+- `principal` (String)
+- `profile_name` (String)
+- `statement_id` (String)
 
 ### Optional
 
-- **profile_version** (String)
+- `profile_version` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

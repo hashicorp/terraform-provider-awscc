@@ -17,30 +17,30 @@ AWS Ground Station Mission Profile resource type for CloudFormation.
 
 ### Required
 
-- **dataflow_edges** (Attributes List) (see [below for nested schema](#nestedatt--dataflow_edges))
-- **minimum_viable_contact_duration_seconds** (Number) Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.
-- **name** (String) A name used to identify a mission profile.
-- **tracking_config_arn** (String)
+- `dataflow_edges` (Attributes List) (see [below for nested schema](#nestedatt--dataflow_edges))
+- `minimum_viable_contact_duration_seconds` (Number) Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.
+- `name` (String) A name used to identify a mission profile.
+- `tracking_config_arn` (String)
 
 ### Optional
 
-- **contact_post_pass_duration_seconds** (Number) Post-pass time needed after the contact.
-- **contact_pre_pass_duration_seconds** (Number) Pre-pass time needed before the contact.
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `contact_post_pass_duration_seconds` (Number) Post-pass time needed after the contact.
+- `contact_pre_pass_duration_seconds` (Number) Pre-pass time needed before the contact.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
-- **region** (String)
+- `arn` (String)
+- `id` (String) The ID of this resource.
+- `region` (String)
 
 <a id="nestedatt--dataflow_edges"></a>
 ### Nested Schema for `dataflow_edges`
 
 Required:
 
-- **destination** (String)
-- **source** (String)
+- `destination` (String)
+- `source` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -48,8 +48,8 @@ Required:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

@@ -17,32 +17,32 @@ Data Source schema for AWS::AppStream::Application
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **app_block_arn** (String)
-- **arn** (String)
-- **attributes_to_delete** (Set of String)
-- **created_time** (String)
-- **description** (String)
-- **display_name** (String)
-- **icon_s3_location** (Attributes) (see [below for nested schema](#nestedatt--icon_s3_location))
-- **instance_families** (Set of String)
-- **launch_parameters** (String)
-- **launch_path** (String)
-- **name** (String)
-- **platforms** (Set of String)
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
-- **working_directory** (String)
+- `app_block_arn` (String)
+- `arn` (String)
+- `attributes_to_delete` (Set of String)
+- `created_time` (String)
+- `description` (String)
+- `display_name` (String)
+- `icon_s3_location` (Attributes) (see [below for nested schema](#nestedatt--icon_s3_location))
+- `instance_families` (Set of String)
+- `launch_parameters` (String)
+- `launch_path` (String)
+- `name` (String)
+- `platforms` (Set of String)
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `working_directory` (String)
 
 <a id="nestedatt--icon_s3_location"></a>
 ### Nested Schema for `icon_s3_location`
 
 Read-Only:
 
-- **s3_bucket** (String)
-- **s3_key** (String)
+- `s3_bucket` (String)
+- `s3_key` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -50,7 +50,7 @@ Read-Only:
 
 Read-Only:
 
-- **tag_key** (String)
-- **tag_value** (String)
+- `tag_key` (String)
+- `tag_value` (String)
 
 

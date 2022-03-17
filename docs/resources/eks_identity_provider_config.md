@@ -17,40 +17,40 @@ An object representing an Amazon EKS IdentityProviderConfig.
 
 ### Required
 
-- **cluster_name** (String) The name of the identity provider configuration.
-- **type** (String) The type of the identity provider configuration.
+- `cluster_name` (String) The name of the identity provider configuration.
+- `type` (String) The type of the identity provider configuration.
 
 ### Optional
 
-- **identity_provider_config_name** (String) The name of the OIDC provider configuration.
-- **oidc** (Attributes) An object representing an OpenID Connect (OIDC) configuration. (see [below for nested schema](#nestedatt--oidc))
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `identity_provider_config_name` (String) The name of the OIDC provider configuration.
+- `oidc` (Attributes) An object representing an OpenID Connect (OIDC) configuration. (see [below for nested schema](#nestedatt--oidc))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **identity_provider_config_arn** (String) The ARN of the configuration.
+- `id` (String) Uniquely identifies the resource.
+- `identity_provider_config_arn` (String) The ARN of the configuration.
 
 <a id="nestedatt--oidc"></a>
 ### Nested Schema for `oidc`
 
 Optional:
 
-- **client_id** (String) This is also known as audience. The ID for the client application that makes authentication requests to the OpenID identity provider.
-- **groups_claim** (String) The JWT claim that the provider uses to return your groups.
-- **groups_prefix** (String) The prefix that is prepended to group claims to prevent clashes with existing names (such as system: groups).
-- **issuer_url** (String) The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens.
-- **required_claims** (Attributes Set) (see [below for nested schema](#nestedatt--oidc--required_claims))
-- **username_claim** (String) The JSON Web Token (JWT) claim to use as the username. The default is sub, which is expected to be a unique identifier of the end user. You can choose other claims, such as email or name, depending on the OpenID identity provider. Claims other than email are prefixed with the issuer URL to prevent naming clashes with other plug-ins.
-- **username_prefix** (String) The prefix that is prepended to username claims to prevent clashes with existing names. If you do not provide this field, and username is a value other than email, the prefix defaults to issuerurl#. You can use the value - to disable all prefixing.
+- `client_id` (String) This is also known as audience. The ID for the client application that makes authentication requests to the OpenID identity provider.
+- `groups_claim` (String) The JWT claim that the provider uses to return your groups.
+- `groups_prefix` (String) The prefix that is prepended to group claims to prevent clashes with existing names (such as system: groups).
+- `issuer_url` (String) The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens.
+- `required_claims` (Attributes Set) (see [below for nested schema](#nestedatt--oidc--required_claims))
+- `username_claim` (String) The JSON Web Token (JWT) claim to use as the username. The default is sub, which is expected to be a unique identifier of the end user. You can choose other claims, such as email or name, depending on the OpenID identity provider. Claims other than email are prefixed with the issuer URL to prevent naming clashes with other plug-ins.
+- `username_prefix` (String) The prefix that is prepended to username claims to prevent clashes with existing names. If you do not provide this field, and username is a value other than email, the prefix defaults to issuerurl#. You can use the value - to disable all prefixing.
 
 <a id="nestedatt--oidc--required_claims"></a>
 ### Nested Schema for `oidc.required_claims`
 
 Optional:
 
-- **key** (String) The key of the requiredClaims.
-- **value** (String) The value for the requiredClaims.
+- `key` (String) The key of the requiredClaims.
+- `value` (String) The value for the requiredClaims.
 
 
 
@@ -59,8 +59,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

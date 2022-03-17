@@ -17,19 +17,19 @@ Data Source schema for AWS::IoTEvents::DetectorModel
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **detector_model_definition** (Attributes) Information that defines how a detector operates. (see [below for nested schema](#nestedatt--detector_model_definition))
-- **detector_model_description** (String) A brief description of the detector model.
-- **detector_model_name** (String) The name of the detector model.
-- **evaluation_method** (String) Information about the order in which events are evaluated and how actions are executed.
-- **key** (String) The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding detector instance based on this identifying information.
+- `detector_model_definition` (Attributes) Information that defines how a detector operates. (see [below for nested schema](#nestedatt--detector_model_definition))
+- `detector_model_description` (String) A brief description of the detector model.
+- `detector_model_name` (String) The name of the detector model.
+- `evaluation_method` (String) Information about the order in which events are evaluated and how actions are executed.
+- `key` (String) The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding detector instance based on this identifying information.
 
 This parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.
-- **role_arn** (String) The ARN of the role that grants permission to AWS IoT Events to perform its operations.
-- **tags** (Attributes List) An array of key-value pairs to apply to this resource.
+- `role_arn` (String) The ARN of the role that grants permission to AWS IoT Events to perform its operations.
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource.
 
 For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html). (see [below for nested schema](#nestedatt--tags))
 
@@ -38,62 +38,62 @@ For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/la
 
 Read-Only:
 
-- **initial_state_name** (String) The state that is entered at the creation of each detector (instance).
-- **states** (Attributes List) Information about the states of the detector. (see [below for nested schema](#nestedatt--detector_model_definition--states))
+- `initial_state_name` (String) The state that is entered at the creation of each detector (instance).
+- `states` (Attributes List) Information about the states of the detector. (see [below for nested schema](#nestedatt--detector_model_definition--states))
 
 <a id="nestedatt--detector_model_definition--states"></a>
 ### Nested Schema for `detector_model_definition.states`
 
 Read-Only:
 
-- **on_enter** (Attributes) When entering this state, perform these `actions` if the `condition` is `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter))
-- **on_exit** (Attributes) When exiting this state, perform these `actions` if the specified `condition` is `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit))
-- **on_input** (Attributes) When an input is received and the `condition` is `TRUE`, perform the specified `actions`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input))
-- **state_name** (String) The name of the state.
+- `on_enter` (Attributes) When entering this state, perform these `actions` if the `condition` is `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter))
+- `on_exit` (Attributes) When exiting this state, perform these `actions` if the specified `condition` is `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit))
+- `on_input` (Attributes) When an input is received and the `condition` is `TRUE`, perform the specified `actions`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input))
+- `state_name` (String) The name of the state.
 
 <a id="nestedatt--detector_model_definition--states--on_enter"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter`
 
 Read-Only:
 
-- **events** (Attributes List) Specifies the `actions` that are performed when the state is entered and the `condition` is `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events))
+- `events` (Attributes List) Specifies the `actions` that are performed when the state is entered and the `condition` is `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events))
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter.events`
 
 Read-Only:
 
-- **actions** (Attributes List) The actions to be performed. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions))
-- **condition** (String) The Boolean expression that, when `TRUE`, causes the `actions` to be performed. If not present, the `actions` are performed (=`TRUE`). If the expression result is not a `Boolean` value, the `actions` are not performed (=`FALSE`).
-- **event_name** (String) The name of the event.
+- `actions` (Attributes List) The actions to be performed. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions))
+- `condition` (String) The Boolean expression that, when `TRUE`, causes the `actions` to be performed. If not present, the `actions` are performed (=`TRUE`). If the expression result is not a `Boolean` value, the `actions` are not performed (=`FALSE`).
+- `event_name` (String) The name of the event.
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter.events.actions`
 
 Read-Only:
 
-- **clear_timer** (Attributes) Information needed to clear the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--clear_timer))
-- **dynamo_d_bv_2** (Attributes) Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.
+- `clear_timer` (Attributes) Information needed to clear the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--clear_timer))
+- `dynamo_d_bv_2` (Attributes) Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.
 
 You can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--dynamo_d_bv_2))
-- **dynamo_db** (Attributes) Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--dynamo_db))
-- **firehose** (Attributes) Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--firehose))
-- **iot_events** (Attributes) Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_events))
-- **iot_site_wise** (Attributes) Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_site_wise))
-- **iot_topic_publish** (Attributes) Information required to publish the MQTT message through the AWS IoT message broker. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_topic_publish))
-- **lambda** (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--lambda))
-- **reset_timer** (Attributes) Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--reset_timer))
-- **set_timer** (Attributes) Information needed to set the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--set_timer))
-- **set_variable** (Attributes) Information about the variable and its new value. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--set_variable))
-- **sns** (Attributes) Information required to publish the Amazon SNS message. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sns))
-- **sqs** (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs))
+- `dynamo_db` (Attributes) Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--dynamo_db))
+- `firehose` (Attributes) Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--firehose))
+- `iot_events` (Attributes) Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_events))
+- `iot_site_wise` (Attributes) Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_site_wise))
+- `iot_topic_publish` (Attributes) Information required to publish the MQTT message through the AWS IoT message broker. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_topic_publish))
+- `lambda` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--lambda))
+- `reset_timer` (Attributes) Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--reset_timer))
+- `set_timer` (Attributes) Information needed to set the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--set_timer))
+- `set_variable` (Attributes) Information about the variable and its new value. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--set_variable))
+- `sns` (Attributes) Information required to publish the Amazon SNS message. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sns))
+- `sqs` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs))
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--clear_timer"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
 
 Read-Only:
 
-- **timer_name** (String)
+- `timer_name` (String)
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--dynamo_d_bv_2"></a>
@@ -101,18 +101,18 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
-- **table_name** (String) The name of the DynamoDB table.
+- `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.table_name`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -121,16 +121,16 @@ Read-Only:
 
 Read-Only:
 
-- **hash_key_field** (String) The name of the hash key (also called the partition key).
-- **hash_key_type** (String) The data type for the hash key (also called the partition key). You can specify the following values:
+- `hash_key_field` (String) The name of the hash key (also called the partition key).
+- `hash_key_type` (String) The data type for the hash key (also called the partition key). You can specify the following values:
 
 * `STRING` - The hash key is a string.
 
 * `NUMBER` - The hash key is a number.
 
 If you don't specify `hashKeyType`, the default value is `STRING`.
-- **hash_key_value** (String) The value of the hash key (also called the partition key).
-- **operation** (String) The type of operation to perform. You can specify the following values:
+- `hash_key_value` (String) The value of the hash key (also called the partition key).
+- `operation` (String) The type of operation to perform. You can specify the following values:
 
 * `INSERT` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.
 
@@ -139,30 +139,30 @@ If you don't specify `hashKeyType`, the default value is `STRING`.
 * `DELETE` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.
 
 If you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
-- **payload_field** (String) The name of the DynamoDB column that receives the action payload.
+- `payload_field` (String) The name of the DynamoDB column that receives the action payload.
 
 If you don't specify this parameter, the name of the DynamoDB column is `payload`.
-- **range_key_field** (String) The name of the range key (also called the sort key).
-- **range_key_type** (String) The data type for the range key (also called the sort key), You can specify the following values:
+- `range_key_field` (String) The name of the range key (also called the sort key).
+- `range_key_type` (String) The data type for the range key (also called the sort key), You can specify the following values:
 
 * `STRING` - The range key is a string.
 
 * `NUMBER` - The range key is number.
 
 If you don't specify `rangeKeyField`, the default value is `STRING`.
-- **range_key_value** (String) The value of the range key (also called the sort key).
-- **table_name** (String) The name of the DynamoDB table.
+- `range_key_value` (String) The value of the range key (also called the sort key).
+- `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.table_name`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -171,19 +171,19 @@ Read-Only:
 
 Read-Only:
 
-- **delivery_stream_name** (String) The name of the Kinesis Data Firehose delivery stream where the data is written.
-- **payload** (Attributes) Information needed to configure the payload.
+- `delivery_stream_name` (String) The name of the Kinesis Data Firehose delivery stream where the data is written.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
-- **separator** (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
+- `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.separator`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -192,8 +192,8 @@ Read-Only:
 
 Read-Only:
 
-- **input_name** (String) The name of the AWS IoT Events input where the data is sent.
-- **payload** (Attributes) Information needed to configure the payload.
+- `input_name` (String) The name of the AWS IoT Events input where the data is sent.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
 
@@ -202,8 +202,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -212,28 +212,28 @@ Read-Only:
 
 Read-Only:
 
-- **asset_id** (String) The ID of the asset that has the specified property. You can specify an expression.
-- **entry_id** (String) A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
-- **property_alias** (String) The alias of the asset property. You can also specify an expression.
-- **property_id** (String) The ID of the asset property. You can specify an expression.
-- **property_value** (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value))
+- `asset_id` (String) The ID of the asset that has the specified property. You can specify an expression.
+- `entry_id` (String) A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
+- `property_alias` (String) The alias of the asset property. You can also specify an expression.
+- `property_id` (String) The ID of the asset property. You can specify an expression.
+- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value))
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.property_value`
 
 Read-Only:
 
-- **quality** (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
-- **timestamp** (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value--timestamp))
-- **value** (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value--value))
+- `quality` (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
+- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value--timestamp))
+- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value--value))
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value--timestamp"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.property_value.value`
 
 Read-Only:
 
-- **offset_in_nanos** (String) The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.
-- **time_in_seconds** (String) The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.
+- `offset_in_nanos` (String) The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.
+- `time_in_seconds` (String) The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value--value"></a>
@@ -241,10 +241,10 @@ Read-Only:
 
 Read-Only:
 
-- **boolean_value** (String) The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
-- **double_value** (String) The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
-- **integer_value** (String) The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
-- **string_value** (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
+- `boolean_value` (String) The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
+- `double_value` (String) The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
+- `integer_value` (String) The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
+- `string_value` (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
 
 
 
@@ -254,8 +254,8 @@ Read-Only:
 
 Read-Only:
 
-- **mqtt_topic** (String) The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.
-- **payload** (Attributes) Information needed to configure the payload.
+- `mqtt_topic` (String) The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
 
@@ -264,8 +264,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -274,8 +274,8 @@ Read-Only:
 
 Read-Only:
 
-- **function_arn** (String) The ARN of the Lambda function that is executed.
-- **payload** (Attributes) Information needed to configure the payload.
+- `function_arn` (String) The ARN of the Lambda function that is executed.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
 
@@ -284,8 +284,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -294,7 +294,7 @@ Read-Only:
 
 Read-Only:
 
-- **timer_name** (String) The name of the timer to reset.
+- `timer_name` (String) The name of the timer to reset.
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--set_timer"></a>
@@ -302,9 +302,9 @@ Read-Only:
 
 Read-Only:
 
-- **duration_expression** (String) The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.
-- **seconds** (Number) The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.
-- **timer_name** (String) The name of the timer.
+- `duration_expression` (String) The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.
+- `seconds` (Number) The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.
+- `timer_name` (String) The name of the timer.
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--set_variable"></a>
@@ -312,8 +312,8 @@ Read-Only:
 
 Read-Only:
 
-- **value** (String) The new value of the variable.
-- **variable_name** (String) The name of the variable.
+- `value` (String) The new value of the variable.
+- `variable_name` (String) The name of the variable.
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sns"></a>
@@ -321,18 +321,18 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
-- **target_arn** (String) The ARN of the Amazon SNS target where the message is sent.
+- `target_arn` (String) The ARN of the Amazon SNS target where the message is sent.
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.target_arn`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -341,19 +341,19 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
-- **queue_url** (String) The URL of the SQS queue where the data is written.
-- **use_base_64** (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
+- `queue_url` (String) The URL of the SQS queue where the data is written.
+- `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.use_base_64`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -365,44 +365,44 @@ Read-Only:
 
 Read-Only:
 
-- **events** (Attributes List) Specifies the `actions` that are performed when the state is exited and the `condition` is `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events))
+- `events` (Attributes List) Specifies the `actions` that are performed when the state is exited and the `condition` is `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events))
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events"></a>
 ### Nested Schema for `detector_model_definition.states.on_exit.events`
 
 Read-Only:
 
-- **actions** (Attributes List) The actions to be performed. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions))
-- **condition** (String) The Boolean expression that, when `TRUE`, causes the `actions` to be performed. If not present, the `actions` are performed (=`TRUE`). If the expression result is not a `Boolean` value, the `actions` are not performed (=`FALSE`).
-- **event_name** (String) The name of the event.
+- `actions` (Attributes List) The actions to be performed. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions))
+- `condition` (String) The Boolean expression that, when `TRUE`, causes the `actions` to be performed. If not present, the `actions` are performed (=`TRUE`). If the expression result is not a `Boolean` value, the `actions` are not performed (=`FALSE`).
+- `event_name` (String) The name of the event.
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions"></a>
 ### Nested Schema for `detector_model_definition.states.on_exit.events.actions`
 
 Read-Only:
 
-- **clear_timer** (Attributes) Information needed to clear the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--clear_timer))
-- **dynamo_d_bv_2** (Attributes) Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.
+- `clear_timer` (Attributes) Information needed to clear the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--clear_timer))
+- `dynamo_d_bv_2` (Attributes) Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.
 
 You can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--dynamo_d_bv_2))
-- **dynamo_db** (Attributes) Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--dynamo_db))
-- **firehose** (Attributes) Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--firehose))
-- **iot_events** (Attributes) Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_events))
-- **iot_site_wise** (Attributes) Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_site_wise))
-- **iot_topic_publish** (Attributes) Information required to publish the MQTT message through the AWS IoT message broker. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_topic_publish))
-- **lambda** (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--lambda))
-- **reset_timer** (Attributes) Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--reset_timer))
-- **set_timer** (Attributes) Information needed to set the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--set_timer))
-- **set_variable** (Attributes) Information about the variable and its new value. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--set_variable))
-- **sns** (Attributes) Information required to publish the Amazon SNS message. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sns))
-- **sqs** (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs))
+- `dynamo_db` (Attributes) Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--dynamo_db))
+- `firehose` (Attributes) Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--firehose))
+- `iot_events` (Attributes) Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_events))
+- `iot_site_wise` (Attributes) Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_site_wise))
+- `iot_topic_publish` (Attributes) Information required to publish the MQTT message through the AWS IoT message broker. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_topic_publish))
+- `lambda` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--lambda))
+- `reset_timer` (Attributes) Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--reset_timer))
+- `set_timer` (Attributes) Information needed to set the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--set_timer))
+- `set_variable` (Attributes) Information about the variable and its new value. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--set_variable))
+- `sns` (Attributes) Information required to publish the Amazon SNS message. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sns))
+- `sqs` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs))
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--clear_timer"></a>
 ### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
 
 Read-Only:
 
-- **timer_name** (String)
+- `timer_name` (String)
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--dynamo_d_bv_2"></a>
@@ -410,18 +410,18 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
-- **table_name** (String) The name of the DynamoDB table.
+- `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.table_name`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -430,16 +430,16 @@ Read-Only:
 
 Read-Only:
 
-- **hash_key_field** (String) The name of the hash key (also called the partition key).
-- **hash_key_type** (String) The data type for the hash key (also called the partition key). You can specify the following values:
+- `hash_key_field` (String) The name of the hash key (also called the partition key).
+- `hash_key_type` (String) The data type for the hash key (also called the partition key). You can specify the following values:
 
 * `STRING` - The hash key is a string.
 
 * `NUMBER` - The hash key is a number.
 
 If you don't specify `hashKeyType`, the default value is `STRING`.
-- **hash_key_value** (String) The value of the hash key (also called the partition key).
-- **operation** (String) The type of operation to perform. You can specify the following values:
+- `hash_key_value` (String) The value of the hash key (also called the partition key).
+- `operation` (String) The type of operation to perform. You can specify the following values:
 
 * `INSERT` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.
 
@@ -448,30 +448,30 @@ If you don't specify `hashKeyType`, the default value is `STRING`.
 * `DELETE` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.
 
 If you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
-- **payload_field** (String) The name of the DynamoDB column that receives the action payload.
+- `payload_field` (String) The name of the DynamoDB column that receives the action payload.
 
 If you don't specify this parameter, the name of the DynamoDB column is `payload`.
-- **range_key_field** (String) The name of the range key (also called the sort key).
-- **range_key_type** (String) The data type for the range key (also called the sort key), You can specify the following values:
+- `range_key_field` (String) The name of the range key (also called the sort key).
+- `range_key_type` (String) The data type for the range key (also called the sort key), You can specify the following values:
 
 * `STRING` - The range key is a string.
 
 * `NUMBER` - The range key is number.
 
 If you don't specify `rangeKeyField`, the default value is `STRING`.
-- **range_key_value** (String) The value of the range key (also called the sort key).
-- **table_name** (String) The name of the DynamoDB table.
+- `range_key_value` (String) The value of the range key (also called the sort key).
+- `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.table_name`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -480,19 +480,19 @@ Read-Only:
 
 Read-Only:
 
-- **delivery_stream_name** (String) The name of the Kinesis Data Firehose delivery stream where the data is written.
-- **payload** (Attributes) Information needed to configure the payload.
+- `delivery_stream_name` (String) The name of the Kinesis Data Firehose delivery stream where the data is written.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
-- **separator** (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
+- `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.separator`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -501,8 +501,8 @@ Read-Only:
 
 Read-Only:
 
-- **input_name** (String) The name of the AWS IoT Events input where the data is sent.
-- **payload** (Attributes) Information needed to configure the payload.
+- `input_name` (String) The name of the AWS IoT Events input where the data is sent.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
 
@@ -511,8 +511,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -521,28 +521,28 @@ Read-Only:
 
 Read-Only:
 
-- **asset_id** (String) The ID of the asset that has the specified property. You can specify an expression.
-- **entry_id** (String) A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
-- **property_alias** (String) The alias of the asset property. You can also specify an expression.
-- **property_id** (String) The ID of the asset property. You can specify an expression.
-- **property_value** (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value))
+- `asset_id` (String) The ID of the asset that has the specified property. You can specify an expression.
+- `entry_id` (String) A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
+- `property_alias` (String) The alias of the asset property. You can also specify an expression.
+- `property_id` (String) The ID of the asset property. You can specify an expression.
+- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value))
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value"></a>
 ### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.property_value`
 
 Read-Only:
 
-- **quality** (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
-- **timestamp** (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value--timestamp))
-- **value** (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value--value))
+- `quality` (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
+- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value--timestamp))
+- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value--value))
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value--timestamp"></a>
 ### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.property_value.value`
 
 Read-Only:
 
-- **offset_in_nanos** (String) The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.
-- **time_in_seconds** (String) The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.
+- `offset_in_nanos` (String) The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.
+- `time_in_seconds` (String) The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value--value"></a>
@@ -550,10 +550,10 @@ Read-Only:
 
 Read-Only:
 
-- **boolean_value** (String) The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
-- **double_value** (String) The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
-- **integer_value** (String) The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
-- **string_value** (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
+- `boolean_value` (String) The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
+- `double_value` (String) The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
+- `integer_value` (String) The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
+- `string_value` (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
 
 
 
@@ -563,8 +563,8 @@ Read-Only:
 
 Read-Only:
 
-- **mqtt_topic** (String) The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.
-- **payload** (Attributes) Information needed to configure the payload.
+- `mqtt_topic` (String) The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
 
@@ -573,8 +573,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -583,8 +583,8 @@ Read-Only:
 
 Read-Only:
 
-- **function_arn** (String) The ARN of the Lambda function that is executed.
-- **payload** (Attributes) Information needed to configure the payload.
+- `function_arn` (String) The ARN of the Lambda function that is executed.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
 
@@ -593,8 +593,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -603,7 +603,7 @@ Read-Only:
 
 Read-Only:
 
-- **timer_name** (String) The name of the timer to reset.
+- `timer_name` (String) The name of the timer to reset.
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--set_timer"></a>
@@ -611,9 +611,9 @@ Read-Only:
 
 Read-Only:
 
-- **duration_expression** (String) The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.
-- **seconds** (Number) The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.
-- **timer_name** (String) The name of the timer.
+- `duration_expression` (String) The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.
+- `seconds` (Number) The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.
+- `timer_name` (String) The name of the timer.
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--set_variable"></a>
@@ -621,8 +621,8 @@ Read-Only:
 
 Read-Only:
 
-- **value** (String) The new value of the variable.
-- **variable_name** (String) The name of the variable.
+- `value` (String) The new value of the variable.
+- `variable_name` (String) The name of the variable.
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sns"></a>
@@ -630,18 +630,18 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
-- **target_arn** (String) The ARN of the Amazon SNS target where the message is sent.
+- `target_arn` (String) The ARN of the Amazon SNS target where the message is sent.
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.target_arn`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -650,19 +650,19 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
-- **queue_url** (String) The URL of the SQS queue where the data is written.
-- **use_base_64** (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
+- `queue_url` (String) The URL of the SQS queue where the data is written.
+- `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.use_base_64`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -674,45 +674,45 @@ Read-Only:
 
 Read-Only:
 
-- **events** (Attributes List) Specifies the `actions` performed when the `condition` evaluates to `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events))
-- **transition_events** (Attributes List) Specifies the `actions` performed, and the next `state` entered, when a `condition` evaluates to `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events))
+- `events` (Attributes List) Specifies the `actions` performed when the `condition` evaluates to `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events))
+- `transition_events` (Attributes List) Specifies the `actions` performed, and the next `state` entered, when a `condition` evaluates to `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events))
 
 <a id="nestedatt--detector_model_definition--states--on_input--events"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events`
 
 Read-Only:
 
-- **actions** (Attributes List) The actions to be performed. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions))
-- **condition** (String) The Boolean expression that, when `TRUE`, causes the `actions` to be performed. If not present, the `actions` are performed (=`TRUE`). If the expression result is not a `Boolean` value, the `actions` are not performed (=`FALSE`).
-- **event_name** (String) The name of the event.
+- `actions` (Attributes List) The actions to be performed. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions))
+- `condition` (String) The Boolean expression that, when `TRUE`, causes the `actions` to be performed. If not present, the `actions` are performed (=`TRUE`). If the expression result is not a `Boolean` value, the `actions` are not performed (=`FALSE`).
+- `event_name` (String) The name of the event.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions`
 
 Read-Only:
 
-- **clear_timer** (Attributes) Information needed to clear the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--clear_timer))
-- **dynamo_d_bv_2** (Attributes) Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.
+- `clear_timer` (Attributes) Information needed to clear the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--clear_timer))
+- `dynamo_d_bv_2` (Attributes) Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.
 
 You can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_d_bv_2))
-- **dynamo_db** (Attributes) Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_db))
-- **firehose** (Attributes) Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--firehose))
-- **iot_events** (Attributes) Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_events))
-- **iot_site_wise** (Attributes) Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise))
-- **iot_topic_publish** (Attributes) Information required to publish the MQTT message through the AWS IoT message broker. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_topic_publish))
-- **lambda** (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--lambda))
-- **reset_timer** (Attributes) Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--reset_timer))
-- **set_timer** (Attributes) Information needed to set the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_timer))
-- **set_variable** (Attributes) Information about the variable and its new value. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_variable))
-- **sns** (Attributes) Information required to publish the Amazon SNS message. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns))
-- **sqs** (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs))
+- `dynamo_db` (Attributes) Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_db))
+- `firehose` (Attributes) Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--firehose))
+- `iot_events` (Attributes) Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_events))
+- `iot_site_wise` (Attributes) Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise))
+- `iot_topic_publish` (Attributes) Information required to publish the MQTT message through the AWS IoT message broker. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_topic_publish))
+- `lambda` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--lambda))
+- `reset_timer` (Attributes) Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--reset_timer))
+- `set_timer` (Attributes) Information needed to set the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_timer))
+- `set_variable` (Attributes) Information about the variable and its new value. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_variable))
+- `sns` (Attributes) Information required to publish the Amazon SNS message. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns))
+- `sqs` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs))
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--clear_timer"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
 
 Read-Only:
 
-- **timer_name** (String)
+- `timer_name` (String)
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_d_bv_2"></a>
@@ -720,18 +720,18 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
-- **table_name** (String) The name of the DynamoDB table.
+- `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.table_name`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -740,16 +740,16 @@ Read-Only:
 
 Read-Only:
 
-- **hash_key_field** (String) The name of the hash key (also called the partition key).
-- **hash_key_type** (String) The data type for the hash key (also called the partition key). You can specify the following values:
+- `hash_key_field` (String) The name of the hash key (also called the partition key).
+- `hash_key_type` (String) The data type for the hash key (also called the partition key). You can specify the following values:
 
 * `STRING` - The hash key is a string.
 
 * `NUMBER` - The hash key is a number.
 
 If you don't specify `hashKeyType`, the default value is `STRING`.
-- **hash_key_value** (String) The value of the hash key (also called the partition key).
-- **operation** (String) The type of operation to perform. You can specify the following values:
+- `hash_key_value` (String) The value of the hash key (also called the partition key).
+- `operation` (String) The type of operation to perform. You can specify the following values:
 
 * `INSERT` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.
 
@@ -758,30 +758,30 @@ If you don't specify `hashKeyType`, the default value is `STRING`.
 * `DELETE` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.
 
 If you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
-- **payload_field** (String) The name of the DynamoDB column that receives the action payload.
+- `payload_field` (String) The name of the DynamoDB column that receives the action payload.
 
 If you don't specify this parameter, the name of the DynamoDB column is `payload`.
-- **range_key_field** (String) The name of the range key (also called the sort key).
-- **range_key_type** (String) The data type for the range key (also called the sort key), You can specify the following values:
+- `range_key_field` (String) The name of the range key (also called the sort key).
+- `range_key_type` (String) The data type for the range key (also called the sort key), You can specify the following values:
 
 * `STRING` - The range key is a string.
 
 * `NUMBER` - The range key is number.
 
 If you don't specify `rangeKeyField`, the default value is `STRING`.
-- **range_key_value** (String) The value of the range key (also called the sort key).
-- **table_name** (String) The name of the DynamoDB table.
+- `range_key_value` (String) The value of the range key (also called the sort key).
+- `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.table_name`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -790,19 +790,19 @@ Read-Only:
 
 Read-Only:
 
-- **delivery_stream_name** (String) The name of the Kinesis Data Firehose delivery stream where the data is written.
-- **payload** (Attributes) Information needed to configure the payload.
+- `delivery_stream_name` (String) The name of the Kinesis Data Firehose delivery stream where the data is written.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
-- **separator** (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
+- `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.separator`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -811,8 +811,8 @@ Read-Only:
 
 Read-Only:
 
-- **input_name** (String) The name of the AWS IoT Events input where the data is sent.
-- **payload** (Attributes) Information needed to configure the payload.
+- `input_name` (String) The name of the AWS IoT Events input where the data is sent.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
 
@@ -821,8 +821,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -831,28 +831,28 @@ Read-Only:
 
 Read-Only:
 
-- **asset_id** (String) The ID of the asset that has the specified property. You can specify an expression.
-- **entry_id** (String) A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
-- **property_alias** (String) The alias of the asset property. You can also specify an expression.
-- **property_id** (String) The ID of the asset property. You can specify an expression.
-- **property_value** (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value))
+- `asset_id` (String) The ID of the asset that has the specified property. You can specify an expression.
+- `entry_id` (String) A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
+- `property_alias` (String) The alias of the asset property. You can also specify an expression.
+- `property_id` (String) The ID of the asset property. You can specify an expression.
+- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value))
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_value`
 
 Read-Only:
 
-- **quality** (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
-- **timestamp** (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--timestamp))
-- **value** (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--value))
+- `quality` (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
+- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--timestamp))
+- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--value))
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--timestamp"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_value.value`
 
 Read-Only:
 
-- **offset_in_nanos** (String) The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.
-- **time_in_seconds** (String) The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.
+- `offset_in_nanos` (String) The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.
+- `time_in_seconds` (String) The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--value"></a>
@@ -860,10 +860,10 @@ Read-Only:
 
 Read-Only:
 
-- **boolean_value** (String) The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
-- **double_value** (String) The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
-- **integer_value** (String) The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
-- **string_value** (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
+- `boolean_value` (String) The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
+- `double_value` (String) The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
+- `integer_value` (String) The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
+- `string_value` (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
 
 
 
@@ -873,8 +873,8 @@ Read-Only:
 
 Read-Only:
 
-- **mqtt_topic** (String) The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.
-- **payload** (Attributes) Information needed to configure the payload.
+- `mqtt_topic` (String) The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
 
@@ -883,8 +883,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -893,8 +893,8 @@ Read-Only:
 
 Read-Only:
 
-- **function_arn** (String) The ARN of the Lambda function that is executed.
-- **payload** (Attributes) Information needed to configure the payload.
+- `function_arn` (String) The ARN of the Lambda function that is executed.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
 
@@ -903,8 +903,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -913,7 +913,7 @@ Read-Only:
 
 Read-Only:
 
-- **timer_name** (String) The name of the timer to reset.
+- `timer_name` (String) The name of the timer to reset.
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_timer"></a>
@@ -921,9 +921,9 @@ Read-Only:
 
 Read-Only:
 
-- **duration_expression** (String) The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.
-- **seconds** (Number) The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.
-- **timer_name** (String) The name of the timer.
+- `duration_expression` (String) The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.
+- `seconds` (Number) The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.
+- `timer_name` (String) The name of the timer.
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_variable"></a>
@@ -931,8 +931,8 @@ Read-Only:
 
 Read-Only:
 
-- **value** (String) The new value of the variable.
-- **variable_name** (String) The name of the variable.
+- `value` (String) The new value of the variable.
+- `variable_name` (String) The name of the variable.
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns"></a>
@@ -940,18 +940,18 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
-- **target_arn** (String) The ARN of the Amazon SNS target where the message is sent.
+- `target_arn` (String) The ARN of the Amazon SNS target where the message is sent.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.target_arn`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -960,19 +960,19 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
-- **queue_url** (String) The URL of the SQS queue where the data is written.
-- **use_base_64** (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
+- `queue_url` (String) The URL of the SQS queue where the data is written.
+- `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.use_base_64`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -983,38 +983,38 @@ Read-Only:
 
 Read-Only:
 
-- **actions** (Attributes List) The actions to be performed. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions))
-- **condition** (String) A Boolean expression that when `TRUE` causes the `actions` to be performed and the `nextState` to be entered.
-- **event_name** (String) The name of the event.
-- **next_state** (String) The next state to enter.
+- `actions` (Attributes List) The actions to be performed. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions))
+- `condition` (String) A Boolean expression that when `TRUE` causes the `actions` to be performed and the `nextState` to be entered.
+- `event_name` (String) The name of the event.
+- `next_state` (String) The next state to enter.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions`
 
 Read-Only:
 
-- **clear_timer** (Attributes) Information needed to clear the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--clear_timer))
-- **dynamo_d_bv_2** (Attributes) Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.
+- `clear_timer` (Attributes) Information needed to clear the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--clear_timer))
+- `dynamo_d_bv_2` (Attributes) Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.
 
 You can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_d_bv_2))
-- **dynamo_db** (Attributes) Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_db))
-- **firehose** (Attributes) Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--firehose))
-- **iot_events** (Attributes) Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_events))
-- **iot_site_wise** (Attributes) Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise))
-- **iot_topic_publish** (Attributes) Information required to publish the MQTT message through the AWS IoT message broker. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_topic_publish))
-- **lambda** (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--lambda))
-- **reset_timer** (Attributes) Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--reset_timer))
-- **set_timer** (Attributes) Information needed to set the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_timer))
-- **set_variable** (Attributes) Information about the variable and its new value. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_variable))
-- **sns** (Attributes) Information required to publish the Amazon SNS message. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns))
-- **sqs** (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs))
+- `dynamo_db` (Attributes) Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_db))
+- `firehose` (Attributes) Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--firehose))
+- `iot_events` (Attributes) Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_events))
+- `iot_site_wise` (Attributes) Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise))
+- `iot_topic_publish` (Attributes) Information required to publish the MQTT message through the AWS IoT message broker. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_topic_publish))
+- `lambda` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--lambda))
+- `reset_timer` (Attributes) Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--reset_timer))
+- `set_timer` (Attributes) Information needed to set the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_timer))
+- `set_variable` (Attributes) Information about the variable and its new value. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_variable))
+- `sns` (Attributes) Information required to publish the Amazon SNS message. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns))
+- `sqs` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs))
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--clear_timer"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
 
 Read-Only:
 
-- **timer_name** (String)
+- `timer_name` (String)
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_d_bv_2"></a>
@@ -1022,18 +1022,18 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
-- **table_name** (String) The name of the DynamoDB table.
+- `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.table_name`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -1042,16 +1042,16 @@ Read-Only:
 
 Read-Only:
 
-- **hash_key_field** (String) The name of the hash key (also called the partition key).
-- **hash_key_type** (String) The data type for the hash key (also called the partition key). You can specify the following values:
+- `hash_key_field` (String) The name of the hash key (also called the partition key).
+- `hash_key_type` (String) The data type for the hash key (also called the partition key). You can specify the following values:
 
 * `STRING` - The hash key is a string.
 
 * `NUMBER` - The hash key is a number.
 
 If you don't specify `hashKeyType`, the default value is `STRING`.
-- **hash_key_value** (String) The value of the hash key (also called the partition key).
-- **operation** (String) The type of operation to perform. You can specify the following values:
+- `hash_key_value` (String) The value of the hash key (also called the partition key).
+- `operation` (String) The type of operation to perform. You can specify the following values:
 
 * `INSERT` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.
 
@@ -1060,30 +1060,30 @@ If you don't specify `hashKeyType`, the default value is `STRING`.
 * `DELETE` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.
 
 If you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
-- **payload_field** (String) The name of the DynamoDB column that receives the action payload.
+- `payload_field` (String) The name of the DynamoDB column that receives the action payload.
 
 If you don't specify this parameter, the name of the DynamoDB column is `payload`.
-- **range_key_field** (String) The name of the range key (also called the sort key).
-- **range_key_type** (String) The data type for the range key (also called the sort key), You can specify the following values:
+- `range_key_field` (String) The name of the range key (also called the sort key).
+- `range_key_type` (String) The data type for the range key (also called the sort key), You can specify the following values:
 
 * `STRING` - The range key is a string.
 
 * `NUMBER` - The range key is number.
 
 If you don't specify `rangeKeyField`, the default value is `STRING`.
-- **range_key_value** (String) The value of the range key (also called the sort key).
-- **table_name** (String) The name of the DynamoDB table.
+- `range_key_value` (String) The value of the range key (also called the sort key).
+- `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.table_name`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -1092,19 +1092,19 @@ Read-Only:
 
 Read-Only:
 
-- **delivery_stream_name** (String) The name of the Kinesis Data Firehose delivery stream where the data is written.
-- **payload** (Attributes) Information needed to configure the payload.
+- `delivery_stream_name` (String) The name of the Kinesis Data Firehose delivery stream where the data is written.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
-- **separator** (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
+- `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.separator`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -1113,8 +1113,8 @@ Read-Only:
 
 Read-Only:
 
-- **input_name** (String) The name of the AWS IoT Events input where the data is sent.
-- **payload** (Attributes) Information needed to configure the payload.
+- `input_name` (String) The name of the AWS IoT Events input where the data is sent.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
 
@@ -1123,8 +1123,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -1133,28 +1133,28 @@ Read-Only:
 
 Read-Only:
 
-- **asset_id** (String) The ID of the asset that has the specified property. You can specify an expression.
-- **entry_id** (String) A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
-- **property_alias** (String) The alias of the asset property. You can also specify an expression.
-- **property_id** (String) The ID of the asset property. You can specify an expression.
-- **property_value** (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value))
+- `asset_id` (String) The ID of the asset that has the specified property. You can specify an expression.
+- `entry_id` (String) A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
+- `property_alias` (String) The alias of the asset property. You can also specify an expression.
+- `property_id` (String) The ID of the asset property. You can specify an expression.
+- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value))
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_value`
 
 Read-Only:
 
-- **quality** (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
-- **timestamp** (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--timestamp))
-- **value** (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--value))
+- `quality` (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
+- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--timestamp))
+- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--value))
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--timestamp"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_value.value`
 
 Read-Only:
 
-- **offset_in_nanos** (String) The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.
-- **time_in_seconds** (String) The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.
+- `offset_in_nanos` (String) The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.
+- `time_in_seconds` (String) The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--value"></a>
@@ -1162,10 +1162,10 @@ Read-Only:
 
 Read-Only:
 
-- **boolean_value** (String) The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
-- **double_value** (String) The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
-- **integer_value** (String) The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
-- **string_value** (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
+- `boolean_value` (String) The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
+- `double_value` (String) The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
+- `integer_value` (String) The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
+- `string_value` (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
 
 
 
@@ -1175,8 +1175,8 @@ Read-Only:
 
 Read-Only:
 
-- **mqtt_topic** (String) The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.
-- **payload** (Attributes) Information needed to configure the payload.
+- `mqtt_topic` (String) The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
 
@@ -1185,8 +1185,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -1195,8 +1195,8 @@ Read-Only:
 
 Read-Only:
 
-- **function_arn** (String) The ARN of the Lambda function that is executed.
-- **payload** (Attributes) Information needed to configure the payload.
+- `function_arn` (String) The ARN of the Lambda function that is executed.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
 
@@ -1205,8 +1205,8 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -1215,7 +1215,7 @@ Read-Only:
 
 Read-Only:
 
-- **timer_name** (String) The name of the timer to reset.
+- `timer_name` (String) The name of the timer to reset.
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_timer"></a>
@@ -1223,9 +1223,9 @@ Read-Only:
 
 Read-Only:
 
-- **duration_expression** (String) The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.
-- **seconds** (Number) The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.
-- **timer_name** (String) The name of the timer.
+- `duration_expression` (String) The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.
+- `seconds` (Number) The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.
+- `timer_name` (String) The name of the timer.
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_variable"></a>
@@ -1233,8 +1233,8 @@ Read-Only:
 
 Read-Only:
 
-- **value** (String) The new value of the variable.
-- **variable_name** (String) The name of the variable.
+- `value` (String) The new value of the variable.
+- `variable_name` (String) The name of the variable.
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns"></a>
@@ -1242,18 +1242,18 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
-- **target_arn** (String) The ARN of the Amazon SNS target where the message is sent.
+- `target_arn` (String) The ARN of the Amazon SNS target where the message is sent.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.target_arn`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -1262,19 +1262,19 @@ Read-Only:
 
 Read-Only:
 
-- **payload** (Attributes) Information needed to configure the payload.
+- `payload` (Attributes) Information needed to configure the payload.
 
 By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
-- **queue_url** (String) The URL of the SQS queue where the data is written.
-- **use_base_64** (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
+- `queue_url` (String) The URL of the SQS queue where the data is written.
+- `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
 ### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.use_base_64`
 
 Read-Only:
 
-- **content_expression** (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
-- **type** (String) The value of the payload type can be either `STRING` or `JSON`.
+- `content_expression` (String) The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.
+- `type` (String) The value of the payload type can be either `STRING` or `JSON`.
 
 
 
@@ -1288,7 +1288,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) Key of the Tag.
-- **value** (String) Value of the Tag.
+- `key` (String) Key of the Tag.
+- `value` (String) Value of the Tag.
 
 

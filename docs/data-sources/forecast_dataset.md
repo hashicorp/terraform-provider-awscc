@@ -17,26 +17,26 @@ Data Source schema for AWS::Forecast::Dataset
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **data_frequency** (String) Frequency of data collection. This parameter is required for RELATED_TIME_SERIES
-- **dataset_name** (String) A name for the dataset
-- **dataset_type** (String) The dataset type
-- **domain** (String) The domain associated with the dataset
-- **encryption_config** (Attributes) (see [below for nested schema](#nestedatt--encryption_config))
-- **schema** (Attributes) (see [below for nested schema](#nestedatt--schema))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `arn` (String)
+- `data_frequency` (String) Frequency of data collection. This parameter is required for RELATED_TIME_SERIES
+- `dataset_name` (String) A name for the dataset
+- `dataset_type` (String) The dataset type
+- `domain` (String) The domain associated with the dataset
+- `encryption_config` (Attributes) (see [below for nested schema](#nestedatt--encryption_config))
+- `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--encryption_config"></a>
 ### Nested Schema for `encryption_config`
 
 Read-Only:
 
-- **kms_key_arn** (String) KMS key used to encrypt the Dataset data
-- **role_arn** (String) The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS key.
+- `kms_key_arn` (String) KMS key used to encrypt the Dataset data
+- `role_arn` (String) The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS key.
 
 
 <a id="nestedatt--schema"></a>
@@ -44,15 +44,15 @@ Read-Only:
 
 Read-Only:
 
-- **attributes** (Attributes List) (see [below for nested schema](#nestedatt--schema--attributes))
+- `attributes` (Attributes List) (see [below for nested schema](#nestedatt--schema--attributes))
 
 <a id="nestedatt--schema--attributes"></a>
 ### Nested Schema for `schema.attributes`
 
 Read-Only:
 
-- **attribute_name** (String) Name of the dataset field
-- **attribute_type** (String) Data type of the field
+- `attribute_name` (String) Name of the dataset field
+- `attribute_type` (String) Data type of the field
 
 
 
@@ -61,7 +61,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

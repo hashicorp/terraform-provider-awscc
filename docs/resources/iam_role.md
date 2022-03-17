@@ -17,32 +17,32 @@ Resource Type definition for AWS::IAM::Role
 
 ### Required
 
-- **assume_role_policy_document** (String) The trust policy that is associated with this role.
+- `assume_role_policy_document` (String) The trust policy that is associated with this role.
 
 ### Optional
 
-- **description** (String) A description of the role that you provide.
-- **managed_policy_arns** (Set of String) A list of Amazon Resource Names (ARNs) of the IAM managed policies that you want to attach to the role.
-- **max_session_duration** (Number) The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
-- **path** (String) The path to the role.
-- **permissions_boundary** (String) The ARN of the policy used to set the permissions boundary for the role.
-- **policies** (Attributes List) Adds or updates an inline policy document that is embedded in the specified IAM role. (see [below for nested schema](#nestedatt--policies))
-- **role_name** (String) A name for the IAM role, up to 64 characters in length.
-- **tags** (Attributes List) A list of tags that are attached to the role. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) A description of the role that you provide.
+- `managed_policy_arns` (Set of String) A list of Amazon Resource Names (ARNs) of the IAM managed policies that you want to attach to the role.
+- `max_session_duration` (Number) The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
+- `path` (String) The path to the role.
+- `permissions_boundary` (String) The ARN of the policy used to set the permissions boundary for the role.
+- `policies` (Attributes List) Adds or updates an inline policy document that is embedded in the specified IAM role. (see [below for nested schema](#nestedatt--policies))
+- `role_name` (String) A name for the IAM role, up to 64 characters in length.
+- `tags` (Attributes List) A list of tags that are attached to the role. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) for the role.
-- **id** (String) Uniquely identifies the resource.
-- **role_id** (String) The stable and unique string identifying the role.
+- `arn` (String) The Amazon Resource Name (ARN) for the role.
+- `id` (String) Uniquely identifies the resource.
+- `role_id` (String) The stable and unique string identifying the role.
 
 <a id="nestedatt--policies"></a>
 ### Nested Schema for `policies`
 
 Optional:
 
-- **policy_document** (String) The policy document.
-- **policy_name** (String) The friendly name (not ARN) identifying the policy.
+- `policy_document` (String) The policy document.
+- `policy_name` (String) The friendly name (not ARN) identifying the policy.
 
 
 <a id="nestedatt--tags"></a>
@@ -50,8 +50,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

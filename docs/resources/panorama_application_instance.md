@@ -17,38 +17,38 @@ Schema for ApplicationInstance CloudFormation Resource
 
 ### Required
 
-- **default_runtime_context_device** (String)
-- **manifest_payload** (Attributes) (see [below for nested schema](#nestedatt--manifest_payload))
+- `default_runtime_context_device` (String)
+- `manifest_payload` (Attributes) (see [below for nested schema](#nestedatt--manifest_payload))
 
 ### Optional
 
-- **application_instance_id_to_replace** (String)
-- **description** (String)
-- **device_id** (String)
-- **manifest_overrides_payload** (Attributes) (see [below for nested schema](#nestedatt--manifest_overrides_payload))
-- **name** (String)
-- **runtime_role_arn** (String)
-- **status_filter** (String)
-- **tags** (Attributes Set) List of tags (see [below for nested schema](#nestedatt--tags))
+- `application_instance_id_to_replace` (String)
+- `description` (String)
+- `device_id` (String)
+- `manifest_overrides_payload` (Attributes) (see [below for nested schema](#nestedatt--manifest_overrides_payload))
+- `name` (String)
+- `runtime_role_arn` (String)
+- `status_filter` (String)
+- `tags` (Attributes Set) List of tags (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **application_instance_id** (String)
-- **arn** (String)
-- **created_time** (Number)
-- **default_runtime_context_device_name** (String)
-- **health_status** (String)
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_time** (Number)
-- **status** (String)
-- **status_description** (String)
+- `application_instance_id` (String)
+- `arn` (String)
+- `created_time` (Number)
+- `default_runtime_context_device_name` (String)
+- `health_status` (String)
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_time` (Number)
+- `status` (String)
+- `status_description` (String)
 
 <a id="nestedatt--manifest_payload"></a>
 ### Nested Schema for `manifest_payload`
 
 Required:
 
-- **payload_data** (String)
+- `payload_data` (String)
 
 
 <a id="nestedatt--manifest_overrides_payload"></a>
@@ -56,7 +56,7 @@ Required:
 
 Optional:
 
-- **payload_data** (String)
+- `payload_data` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -64,8 +64,8 @@ Optional:
 
 Optional:
 
-- **key** (String) A string used to identify this tag
-- **value** (String) A string containing the value for the tag
+- `key` (String) A string used to identify this tag
+- `value` (String) A string containing the value for the tag
 
 ## Import
 

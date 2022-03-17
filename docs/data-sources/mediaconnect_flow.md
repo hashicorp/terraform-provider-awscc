@@ -17,52 +17,52 @@ Data Source schema for AWS::MediaConnect::Flow
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **availability_zone** (String) The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
-- **flow_arn** (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
-- **flow_availability_zone** (String) The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.(ReadOnly)
-- **name** (String) The name of the flow.
-- **source** (Attributes) The source of the flow. (see [below for nested schema](#nestedatt--source))
-- **source_failover_config** (Attributes) The source failover config of the flow. (see [below for nested schema](#nestedatt--source_failover_config))
+- `availability_zone` (String) The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
+- `flow_arn` (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
+- `flow_availability_zone` (String) The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.(ReadOnly)
+- `name` (String) The name of the flow.
+- `source` (Attributes) The source of the flow. (see [below for nested schema](#nestedatt--source))
+- `source_failover_config` (Attributes) The source failover config of the flow. (see [below for nested schema](#nestedatt--source_failover_config))
 
 <a id="nestedatt--source"></a>
 ### Nested Schema for `source`
 
 Read-Only:
 
-- **decryption** (Attributes) The type of decryption that is used on the content ingested from this source. (see [below for nested schema](#nestedatt--source--decryption))
-- **description** (String) A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
-- **entitlement_arn** (String) The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
-- **ingest_ip** (String) The IP address that the flow will be listening on for incoming content.
-- **ingest_port** (Number) The port that the flow will be listening on for incoming content.
-- **max_bitrate** (Number) The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
-- **max_latency** (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
-- **min_latency** (Number) The minimum latency in milliseconds.
-- **name** (String) The name of the source.
-- **protocol** (String) The protocol that is used by the source or output.
-- **source_arn** (String) The ARN of the source.
-- **source_ingest_port** (String) The port that the flow will be listening on for incoming content.(ReadOnly)
-- **stream_id** (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
-- **vpc_interface_name** (String) The name of the VPC Interface this Source is configured with.
-- **whitelist_cidr** (String) The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
+- `decryption` (Attributes) The type of decryption that is used on the content ingested from this source. (see [below for nested schema](#nestedatt--source--decryption))
+- `description` (String) A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
+- `entitlement_arn` (String) The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
+- `ingest_ip` (String) The IP address that the flow will be listening on for incoming content.
+- `ingest_port` (Number) The port that the flow will be listening on for incoming content.
+- `max_bitrate` (Number) The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
+- `max_latency` (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+- `min_latency` (Number) The minimum latency in milliseconds.
+- `name` (String) The name of the source.
+- `protocol` (String) The protocol that is used by the source or output.
+- `source_arn` (String) The ARN of the source.
+- `source_ingest_port` (String) The port that the flow will be listening on for incoming content.(ReadOnly)
+- `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+- `vpc_interface_name` (String) The name of the VPC Interface this Source is configured with.
+- `whitelist_cidr` (String) The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
 
 <a id="nestedatt--source--decryption"></a>
 ### Nested Schema for `source.decryption`
 
 Read-Only:
 
-- **algorithm** (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
-- **constant_initialization_vector** (String) A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.
-- **device_id** (String) The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-- **key_type** (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
-- **region** (String) The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-- **resource_id** (String) An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-- **role_arn** (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
-- **secret_arn** (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
-- **url** (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+- `algorithm` (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
+- `constant_initialization_vector` (String) A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.
+- `device_id` (String) The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+- `key_type` (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
+- `region` (String) The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+- `resource_id` (String) An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
+- `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
+- `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
 
 
 
@@ -71,7 +71,7 @@ Read-Only:
 
 Read-Only:
 
-- **recovery_window** (Number) Search window time to look for dash-7 packets
-- **state** (String)
+- `recovery_window` (Number) Search window time to look for dash-7 packets
+- `state` (String)
 
 

@@ -17,15 +17,15 @@ Data Source schema for AWS::Route53Resolver::ResolverQueryLoggingConfigAssociati
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **creation_time** (String) Rfc3339TimeString
-- **error** (String) ResolverQueryLogConfigAssociationError
-- **error_message** (String) ResolverQueryLogConfigAssociationErrorMessage
-- **resolver_query_log_config_id** (String) ResolverQueryLogConfigId
-- **resource_id** (String) ResourceId
-- **status** (String) ResolverQueryLogConfigAssociationStatus
+- `creation_time` (String) Rfc3339TimeString
+- `error` (String) ResolverQueryLogConfigAssociationError
+- `error_message` (String) ResolverQueryLogConfigAssociationErrorMessage
+- `resolver_query_log_config_id` (String) ResolverQueryLogConfigId
+- `resource_id` (String) ResourceId
+- `status` (String) ResolverQueryLogConfigAssociationStatus
 
 

@@ -17,28 +17,28 @@ Resource Type definition for AWS::GlobalAccelerator::Accelerator
 
 ### Required
 
-- **name** (String) Name of accelerator.
+- `name` (String) Name of accelerator.
 
 ### Optional
 
-- **enabled** (Boolean) Indicates whether an accelerator is enabled. The value is true or false.
-- **ip_address_type** (String) IP Address type.
-- **ip_addresses** (List of String) The IP addresses from BYOIP Prefix pool.
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `enabled` (Boolean) Indicates whether an accelerator is enabled. The value is true or false.
+- `ip_address_type` (String) IP Address type.
+- `ip_addresses` (List of String) The IP addresses from BYOIP Prefix pool.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **accelerator_arn** (String) The Amazon Resource Name (ARN) of the accelerator.
-- **dns_name** (String) The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.
-- **id** (String) Uniquely identifies the resource.
+- `accelerator_arn` (String) The Amazon Resource Name (ARN) of the accelerator.
+- `dns_name` (String) The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) Key of the tag. Value can be 1 to 127 characters.
-- **value** (String) Value for the tag. Value can be 1 to 255 characters.
+- `key` (String) Key of the tag. Value can be 1 to 127 characters.
+- `value` (String) Value for the tag. Value can be 1 to 255 characters.
 
 ## Import
 

@@ -17,27 +17,27 @@ An outcome for rule evaluation.
 
 ### Required
 
-- **name** (String) The name of the outcome.
+- `name` (String) The name of the outcome.
 
 ### Optional
 
-- **description** (String) The outcome description.
-- **tags** (Attributes List) Tags associated with this outcome. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The outcome description.
+- `tags` (Attributes List) Tags associated with this outcome. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The outcome ARN.
-- **created_time** (String) The timestamp when the outcome was created.
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_time** (String) The timestamp when the outcome was last updated.
+- `arn` (String) The outcome ARN.
+- `created_time` (String) The timestamp when the outcome was created.
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_time` (String) The timestamp when the outcome was last updated.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

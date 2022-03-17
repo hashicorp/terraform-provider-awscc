@@ -17,14 +17,14 @@ Resource schema for AWS::Route53Resolver::ResolverConfig.
 
 ### Required
 
-- **autodefined_reverse_flag** (String) Represents the desired status of AutodefinedReverse. The only supported value on creation is DISABLE. Deletion of this resource will return AutodefinedReverse to its default value (ENABLED).
-- **resource_id** (String) ResourceId
+- `autodefined_reverse_flag` (String) Represents the desired status of AutodefinedReverse. The only supported value on creation is DISABLE. Deletion of this resource will return AutodefinedReverse to its default value (ENABLED).
+- `resource_id` (String) ResourceId
 
 ### Read-Only
 
-- **autodefined_reverse** (String) ResolverAutodefinedReverseStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.
-- **id** (String) Id
-- **owner_id** (String) AccountId
+- `autodefined_reverse` (String) ResolverAutodefinedReverseStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.
+- `id` (String) Id
+- `owner_id` (String) AccountId
 
 ## Import
 

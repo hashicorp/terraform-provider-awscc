@@ -17,15 +17,15 @@ Data Source schema for AWS::RoboMaker::Robot
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **architecture** (String) The target architecture of the robot.
-- **arn** (String)
-- **fleet** (String) The Amazon Resource Name (ARN) of the fleet.
-- **greengrass_group_id** (String) The Greengrass group id.
-- **name** (String) The name for the robot.
-- **tags** (Map of String) A key-value pair to associate with a resource.
+- `architecture` (String) The target architecture of the robot.
+- `arn` (String)
+- `fleet` (String) The Amazon Resource Name (ARN) of the fleet.
+- `greengrass_group_id` (String) The Greengrass group id.
+- `name` (String) The name for the robot.
+- `tags` (Map of String) A key-value pair to associate with a resource.
 
 

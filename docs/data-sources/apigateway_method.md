@@ -17,54 +17,54 @@ Data Source schema for AWS::ApiGateway::Method
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **api_key_required** (Boolean) Indicates whether the method requires clients to submit a valid API key.
-- **authorization_scopes** (List of String) A list of authorization scopes configured on the method.
-- **authorization_type** (String) The method's authorization type.
-- **authorizer_id** (String) The identifier of the authorizer to use on this method.
-- **http_method** (String) The backend system that the method calls when it receives a request.
-- **integration** (Attributes) The backend system that the method calls when it receives a request. (see [below for nested schema](#nestedatt--integration))
-- **method_responses** (Attributes List) The responses that can be sent to the client who calls the method. (see [below for nested schema](#nestedatt--method_responses))
-- **operation_name** (String) A friendly operation name for the method.
-- **request_models** (Map of String) The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.
-- **request_parameters** (Map of Boolean) The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.
-- **request_validator_id** (String) The ID of the associated request validator.
-- **resource_id** (String) The ID of an API Gateway resource.
-- **rest_api_id** (String) The ID of the RestApi resource in which API Gateway creates the method.
+- `api_key_required` (Boolean) Indicates whether the method requires clients to submit a valid API key.
+- `authorization_scopes` (List of String) A list of authorization scopes configured on the method.
+- `authorization_type` (String) The method's authorization type.
+- `authorizer_id` (String) The identifier of the authorizer to use on this method.
+- `http_method` (String) The backend system that the method calls when it receives a request.
+- `integration` (Attributes) The backend system that the method calls when it receives a request. (see [below for nested schema](#nestedatt--integration))
+- `method_responses` (Attributes List) The responses that can be sent to the client who calls the method. (see [below for nested schema](#nestedatt--method_responses))
+- `operation_name` (String) A friendly operation name for the method.
+- `request_models` (Map of String) The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.
+- `request_parameters` (Map of Boolean) The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.
+- `request_validator_id` (String) The ID of the associated request validator.
+- `resource_id` (String) The ID of an API Gateway resource.
+- `rest_api_id` (String) The ID of the RestApi resource in which API Gateway creates the method.
 
 <a id="nestedatt--integration"></a>
 ### Nested Schema for `integration`
 
 Read-Only:
 
-- **cache_key_parameters** (List of String) A list of request parameters whose values API Gateway caches.
-- **cache_namespace** (String) An API-specific tag group of related cached parameters.
-- **connection_id** (String) The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.
-- **connection_type** (String) The type of the network connection to the integration endpoint.
-- **content_handling** (String) Specifies how to handle request payload content type conversions.
-- **credentials** (String) The credentials that are required for the integration.
-- **integration_http_method** (String) The integration's HTTP method type.
-- **integration_responses** (Attributes List) The response that API Gateway provides after a method's backend completes processing a request. (see [below for nested schema](#nestedatt--integration--integration_responses))
-- **passthrough_behavior** (String) Indicates when API Gateway passes requests to the targeted backend.
-- **request_parameters** (Map of String) The request parameters that API Gateway sends with the backend request.
-- **request_templates** (Map of String) A map of Apache Velocity templates that are applied on the request payload.
-- **timeout_in_millis** (Number) Custom timeout between 50 and 29,000 milliseconds.
-- **type** (String) The type of backend that your method is running.
-- **uri** (String) The Uniform Resource Identifier (URI) for the integration.
+- `cache_key_parameters` (List of String) A list of request parameters whose values API Gateway caches.
+- `cache_namespace` (String) An API-specific tag group of related cached parameters.
+- `connection_id` (String) The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.
+- `connection_type` (String) The type of the network connection to the integration endpoint.
+- `content_handling` (String) Specifies how to handle request payload content type conversions.
+- `credentials` (String) The credentials that are required for the integration.
+- `integration_http_method` (String) The integration's HTTP method type.
+- `integration_responses` (Attributes List) The response that API Gateway provides after a method's backend completes processing a request. (see [below for nested schema](#nestedatt--integration--integration_responses))
+- `passthrough_behavior` (String) Indicates when API Gateway passes requests to the targeted backend.
+- `request_parameters` (Map of String) The request parameters that API Gateway sends with the backend request.
+- `request_templates` (Map of String) A map of Apache Velocity templates that are applied on the request payload.
+- `timeout_in_millis` (Number) Custom timeout between 50 and 29,000 milliseconds.
+- `type` (String) The type of backend that your method is running.
+- `uri` (String) The Uniform Resource Identifier (URI) for the integration.
 
 <a id="nestedatt--integration--integration_responses"></a>
 ### Nested Schema for `integration.integration_responses`
 
 Read-Only:
 
-- **content_handling** (String) Specifies how to handle request payload content type conversions.
-- **response_parameters** (Map of String) The response parameters from the backend response that API Gateway sends to the method response.
-- **response_templates** (Map of String) The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.
-- **selection_pattern** (String) A regular expression that specifies which error strings or status codes from the backend map to the integration response.
-- **status_code** (String) The status code that API Gateway uses to map the integration response to a MethodResponse status code.
+- `content_handling` (String) Specifies how to handle request payload content type conversions.
+- `response_parameters` (Map of String) The response parameters from the backend response that API Gateway sends to the method response.
+- `response_templates` (Map of String) The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.
+- `selection_pattern` (String) A regular expression that specifies which error strings or status codes from the backend map to the integration response.
+- `status_code` (String) The status code that API Gateway uses to map the integration response to a MethodResponse status code.
 
 
 
@@ -73,8 +73,8 @@ Read-Only:
 
 Read-Only:
 
-- **response_models** (Map of String) The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.
-- **response_parameters** (Map of Boolean) Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value.
-- **status_code** (String) The method response's status code, which you map to an IntegrationResponse.
+- `response_models` (Map of String) The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.
+- `response_parameters` (Map of Boolean) Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value.
+- `status_code` (String) The method response's status code, which you map to an IntegrationResponse.
 
 

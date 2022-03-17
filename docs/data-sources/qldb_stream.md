@@ -17,26 +17,26 @@ Data Source schema for AWS::QLDB::Stream
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **exclusive_end_time** (String)
-- **inclusive_start_time** (String)
-- **kinesis_configuration** (Attributes) (see [below for nested schema](#nestedatt--kinesis_configuration))
-- **ledger_name** (String)
-- **role_arn** (String)
-- **stream_name** (String)
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `arn` (String)
+- `exclusive_end_time` (String)
+- `inclusive_start_time` (String)
+- `kinesis_configuration` (Attributes) (see [below for nested schema](#nestedatt--kinesis_configuration))
+- `ledger_name` (String)
+- `role_arn` (String)
+- `stream_name` (String)
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--kinesis_configuration"></a>
 ### Nested Schema for `kinesis_configuration`
 
 Read-Only:
 
-- **aggregation_enabled** (Boolean)
-- **stream_arn** (String)
+- `aggregation_enabled` (Boolean)
+- `stream_arn` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -44,7 +44,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

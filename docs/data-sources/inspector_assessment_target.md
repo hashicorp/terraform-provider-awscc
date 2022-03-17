@@ -17,12 +17,12 @@ Data Source schema for AWS::Inspector::AssessmentTarget
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **assessment_target_name** (String)
-- **resource_group_arn** (String)
+- `arn` (String)
+- `assessment_target_name` (String)
+- `resource_group_arn` (String)
 
 

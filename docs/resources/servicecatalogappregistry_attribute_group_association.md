@@ -17,14 +17,14 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation.
 
 ### Required
 
-- **application** (String) The name or the Id of the Application.
-- **attribute_group** (String) The name or the Id of the AttributeGroup.
+- `application` (String) The name or the Id of the Application.
+- `attribute_group` (String) The name or the Id of the AttributeGroup.
 
 ### Read-Only
 
-- **application_arn** (String)
-- **attribute_group_arn** (String)
-- **id** (String) The ID of this resource.
+- `application_arn` (String)
+- `attribute_group_arn` (String)
+- `id` (String) The ID of this resource.
 
 ## Import
 

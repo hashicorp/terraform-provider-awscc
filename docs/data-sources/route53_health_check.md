@@ -17,44 +17,44 @@ Data Source schema for AWS::Route53::HealthCheck
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **health_check_config** (Attributes) A complex type that contains information about the health check. (see [below for nested schema](#nestedatt--health_check_config))
-- **health_check_id** (String)
-- **health_check_tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--health_check_tags))
+- `health_check_config` (Attributes) A complex type that contains information about the health check. (see [below for nested schema](#nestedatt--health_check_config))
+- `health_check_id` (String)
+- `health_check_tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--health_check_tags))
 
 <a id="nestedatt--health_check_config"></a>
 ### Nested Schema for `health_check_config`
 
 Read-Only:
 
-- **alarm_identifier** (Attributes) A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy. (see [below for nested schema](#nestedatt--health_check_config--alarm_identifier))
-- **child_health_checks** (List of String)
-- **enable_sni** (Boolean)
-- **failure_threshold** (Number)
-- **fully_qualified_domain_name** (String)
-- **health_threshold** (Number)
-- **insufficient_data_health_status** (String)
-- **inverted** (Boolean)
-- **ip_address** (String)
-- **measure_latency** (Boolean)
-- **port** (Number)
-- **regions** (List of String)
-- **request_interval** (Number)
-- **resource_path** (String)
-- **routing_control_arn** (String)
-- **search_string** (String)
-- **type** (String)
+- `alarm_identifier` (Attributes) A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy. (see [below for nested schema](#nestedatt--health_check_config--alarm_identifier))
+- `child_health_checks` (List of String)
+- `enable_sni` (Boolean)
+- `failure_threshold` (Number)
+- `fully_qualified_domain_name` (String)
+- `health_threshold` (Number)
+- `insufficient_data_health_status` (String)
+- `inverted` (Boolean)
+- `ip_address` (String)
+- `measure_latency` (Boolean)
+- `port` (Number)
+- `regions` (List of String)
+- `request_interval` (Number)
+- `resource_path` (String)
+- `routing_control_arn` (String)
+- `search_string` (String)
+- `type` (String)
 
 <a id="nestedatt--health_check_config--alarm_identifier"></a>
 ### Nested Schema for `health_check_config.alarm_identifier`
 
 Read-Only:
 
-- **name** (String) The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.
-- **region** (String) For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in.
+- `name` (String) The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.
+- `region` (String) For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in.
 
 
 
@@ -63,7 +63,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag.
-- **value** (String) The value for the tag.
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 

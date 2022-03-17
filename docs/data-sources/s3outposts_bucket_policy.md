@@ -17,11 +17,11 @@ Data Source schema for AWS::S3Outposts::BucketPolicy
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **bucket** (String) The Amazon Resource Name (ARN) of the specified bucket.
-- **policy_document** (Map of String) A policy document containing permissions to add to the specified bucket.
+- `bucket` (String) The Amazon Resource Name (ARN) of the specified bucket.
+- `policy_document` (Map of String) A policy document containing permissions to add to the specified bucket.
 
 

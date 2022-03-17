@@ -17,30 +17,30 @@ Creates an authorizer.
 
 ### Required
 
-- **authorizer_function_arn** (String)
+- `authorizer_function_arn` (String)
 
 ### Optional
 
-- **authorizer_name** (String)
-- **enable_caching_for_http** (Boolean)
-- **signing_disabled** (Boolean)
-- **status** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **token_key_name** (String)
-- **token_signing_public_keys** (Map of String)
+- `authorizer_name` (String)
+- `enable_caching_for_http` (Boolean)
+- `signing_disabled` (Boolean)
+- `status` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `token_key_name` (String)
+- `token_signing_public_keys` (Map of String)
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

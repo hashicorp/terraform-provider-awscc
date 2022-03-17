@@ -17,29 +17,29 @@ Resource schema for AWS::MediaPackage::Asset
 
 ### Required
 
-- **id** (String) The unique identifier for the Asset.
-- **packaging_group_id** (String) The ID of the PackagingGroup for the Asset.
-- **source_arn** (String) ARN of the source object in S3.
-- **source_role_arn** (String) The IAM role_arn used to access the source S3 bucket.
+- `id` (String) The unique identifier for the Asset.
+- `packaging_group_id` (String) The ID of the PackagingGroup for the Asset.
+- `source_arn` (String) ARN of the source object in S3.
+- `source_role_arn` (String) The IAM role_arn used to access the source S3 bucket.
 
 ### Optional
 
-- **resource_id** (String) The resource ID to include in SPEKE key requests.
-- **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
+- `resource_id` (String) The resource ID to include in SPEKE key requests.
+- `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The ARN of the Asset.
-- **created_at** (String) The time the Asset was initially submitted for Ingest.
-- **egress_endpoints** (Attributes List) The list of egress endpoints available for the Asset. (see [below for nested schema](#nestedatt--egress_endpoints))
+- `arn` (String) The ARN of the Asset.
+- `created_at` (String) The time the Asset was initially submitted for Ingest.
+- `egress_endpoints` (Attributes List) The list of egress endpoints available for the Asset. (see [below for nested schema](#nestedatt--egress_endpoints))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--egress_endpoints"></a>
@@ -47,8 +47,8 @@ Optional:
 
 Read-Only:
 
-- **packaging_configuration_id** (String) The ID of the PackagingConfiguration being applied to the Asset.
-- **url** (String) The URL of the parent manifest for the repackaged Asset.
+- `packaging_configuration_id` (String) The ID of the PackagingConfiguration being applied to the Asset.
+- `url` (String) The URL of the parent manifest for the repackaged Asset.
 
 ## Import
 

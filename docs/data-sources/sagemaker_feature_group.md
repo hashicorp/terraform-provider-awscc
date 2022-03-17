@@ -17,27 +17,27 @@ Data Source schema for AWS::SageMaker::FeatureGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **description** (String) Description about the FeatureGroup.
-- **event_time_feature_name** (String) The Event Time Feature Name.
-- **feature_definitions** (Attributes List) An Array of Feature Definition (see [below for nested schema](#nestedatt--feature_definitions))
-- **feature_group_name** (String) The Name of the FeatureGroup.
-- **offline_store_config** (Attributes) (see [below for nested schema](#nestedatt--offline_store_config))
-- **online_store_config** (Attributes) (see [below for nested schema](#nestedatt--online_store_config))
-- **record_identifier_feature_name** (String) The Record Identifier Feature Name.
-- **role_arn** (String) Role Arn
-- **tags** (Attributes List) An array of key-value pair to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) Description about the FeatureGroup.
+- `event_time_feature_name` (String) The Event Time Feature Name.
+- `feature_definitions` (Attributes List) An Array of Feature Definition (see [below for nested schema](#nestedatt--feature_definitions))
+- `feature_group_name` (String) The Name of the FeatureGroup.
+- `offline_store_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config))
+- `online_store_config` (Attributes) (see [below for nested schema](#nestedatt--online_store_config))
+- `record_identifier_feature_name` (String) The Record Identifier Feature Name.
+- `role_arn` (String) Role Arn
+- `tags` (Attributes List) An array of key-value pair to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--feature_definitions"></a>
 ### Nested Schema for `feature_definitions`
 
 Read-Only:
 
-- **feature_name** (String)
-- **feature_type** (String)
+- `feature_name` (String)
+- `feature_type` (String)
 
 
 <a id="nestedatt--offline_store_config"></a>
@@ -45,18 +45,18 @@ Read-Only:
 
 Read-Only:
 
-- **data_catalog_config** (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--data_catalog_config))
-- **disable_glue_table_creation** (Boolean)
-- **s3_storage_config** (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--s3_storage_config))
+- `data_catalog_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--data_catalog_config))
+- `disable_glue_table_creation` (Boolean)
+- `s3_storage_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--s3_storage_config))
 
 <a id="nestedatt--offline_store_config--data_catalog_config"></a>
 ### Nested Schema for `offline_store_config.data_catalog_config`
 
 Read-Only:
 
-- **catalog** (String)
-- **database** (String)
-- **table_name** (String)
+- `catalog` (String)
+- `database` (String)
+- `table_name` (String)
 
 
 <a id="nestedatt--offline_store_config--s3_storage_config"></a>
@@ -64,8 +64,8 @@ Read-Only:
 
 Read-Only:
 
-- **kms_key_id** (String)
-- **s3_uri** (String)
+- `kms_key_id` (String)
+- `s3_uri` (String)
 
 
 
@@ -74,15 +74,15 @@ Read-Only:
 
 Read-Only:
 
-- **enable_online_store** (Boolean)
-- **security_config** (Attributes) (see [below for nested schema](#nestedatt--online_store_config--security_config))
+- `enable_online_store` (Boolean)
+- `security_config` (Attributes) (see [below for nested schema](#nestedatt--online_store_config--security_config))
 
 <a id="nestedatt--online_store_config--security_config"></a>
 ### Nested Schema for `online_store_config.security_config`
 
 Read-Only:
 
-- **kms_key_id** (String)
+- `kms_key_id` (String)
 
 
 
@@ -91,7 +91,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

@@ -17,36 +17,36 @@ Data Source schema for AWS::IoT::MitigationAction
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **action_name** (String) A unique identifier for the mitigation action.
-- **action_params** (Attributes) The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action). (see [below for nested schema](#nestedatt--action_params))
-- **mitigation_action_arn** (String)
-- **mitigation_action_id** (String)
-- **role_arn** (String)
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `action_name` (String) A unique identifier for the mitigation action.
+- `action_params` (Attributes) The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action). (see [below for nested schema](#nestedatt--action_params))
+- `mitigation_action_arn` (String)
+- `mitigation_action_id` (String)
+- `role_arn` (String)
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--action_params"></a>
 ### Nested Schema for `action_params`
 
 Read-Only:
 
-- **add_things_to_thing_group_params** (Attributes) Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine. (see [below for nested schema](#nestedatt--action_params--add_things_to_thing_group_params))
-- **enable_io_t_logging_params** (Attributes) Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail. (see [below for nested schema](#nestedatt--action_params--enable_io_t_logging_params))
-- **publish_finding_to_sns_params** (Attributes) Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages. (see [below for nested schema](#nestedatt--action_params--publish_finding_to_sns_params))
-- **replace_default_policy_version_params** (Attributes) Parameters to define a mitigation action that adds a blank policy to restrict permissions. (see [below for nested schema](#nestedatt--action_params--replace_default_policy_version_params))
-- **update_ca_certificate_params** (Attributes) Parameters to define a mitigation action that changes the state of the CA certificate to inactive. (see [below for nested schema](#nestedatt--action_params--update_ca_certificate_params))
-- **update_device_certificate_params** (Attributes) Parameters to define a mitigation action that changes the state of the device certificate to inactive. (see [below for nested schema](#nestedatt--action_params--update_device_certificate_params))
+- `add_things_to_thing_group_params` (Attributes) Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine. (see [below for nested schema](#nestedatt--action_params--add_things_to_thing_group_params))
+- `enable_io_t_logging_params` (Attributes) Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail. (see [below for nested schema](#nestedatt--action_params--enable_io_t_logging_params))
+- `publish_finding_to_sns_params` (Attributes) Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages. (see [below for nested schema](#nestedatt--action_params--publish_finding_to_sns_params))
+- `replace_default_policy_version_params` (Attributes) Parameters to define a mitigation action that adds a blank policy to restrict permissions. (see [below for nested schema](#nestedatt--action_params--replace_default_policy_version_params))
+- `update_ca_certificate_params` (Attributes) Parameters to define a mitigation action that changes the state of the CA certificate to inactive. (see [below for nested schema](#nestedatt--action_params--update_ca_certificate_params))
+- `update_device_certificate_params` (Attributes) Parameters to define a mitigation action that changes the state of the device certificate to inactive. (see [below for nested schema](#nestedatt--action_params--update_device_certificate_params))
 
 <a id="nestedatt--action_params--add_things_to_thing_group_params"></a>
 ### Nested Schema for `action_params.add_things_to_thing_group_params`
 
 Read-Only:
 
-- **override_dynamic_groups** (Boolean) Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.
-- **thing_group_names** (Set of String) The list of groups to which you want to add the things that triggered the mitigation action.
+- `override_dynamic_groups` (Boolean) Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.
+- `thing_group_names` (Set of String) The list of groups to which you want to add the things that triggered the mitigation action.
 
 
 <a id="nestedatt--action_params--enable_io_t_logging_params"></a>
@@ -54,8 +54,8 @@ Read-Only:
 
 Read-Only:
 
-- **log_level** (String) Specifies which types of information are logged.
-- **role_arn_for_logging** (String) The ARN of the IAM role used for logging.
+- `log_level` (String) Specifies which types of information are logged.
+- `role_arn_for_logging` (String) The ARN of the IAM role used for logging.
 
 
 <a id="nestedatt--action_params--publish_finding_to_sns_params"></a>
@@ -63,7 +63,7 @@ Read-Only:
 
 Read-Only:
 
-- **topic_arn** (String) The ARN of the topic to which you want to publish the findings.
+- `topic_arn` (String) The ARN of the topic to which you want to publish the findings.
 
 
 <a id="nestedatt--action_params--replace_default_policy_version_params"></a>
@@ -71,7 +71,7 @@ Read-Only:
 
 Read-Only:
 
-- **template_name** (String)
+- `template_name` (String)
 
 
 <a id="nestedatt--action_params--update_ca_certificate_params"></a>
@@ -79,7 +79,7 @@ Read-Only:
 
 Read-Only:
 
-- **action** (String)
+- `action` (String)
 
 
 <a id="nestedatt--action_params--update_device_certificate_params"></a>
@@ -87,7 +87,7 @@ Read-Only:
 
 Read-Only:
 
-- **action** (String)
+- `action` (String)
 
 
 
@@ -96,7 +96,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The tag's key.
-- **value** (String) The tag's value.
+- `key` (String) The tag's key.
+- `value` (String) The tag's value.
 
 

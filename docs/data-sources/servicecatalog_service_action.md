@@ -17,22 +17,22 @@ Data Source schema for AWS::ServiceCatalog::ServiceAction
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **accept_language** (String)
-- **definition** (Attributes List) (see [below for nested schema](#nestedatt--definition))
-- **definition_type** (String)
-- **description** (String)
-- **name** (String)
+- `accept_language` (String)
+- `definition` (Attributes List) (see [below for nested schema](#nestedatt--definition))
+- `definition_type` (String)
+- `description` (String)
+- `name` (String)
 
 <a id="nestedatt--definition"></a>
 ### Nested Schema for `definition`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

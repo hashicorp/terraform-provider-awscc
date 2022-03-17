@@ -17,28 +17,28 @@ Resource schema for AWS::IoTSiteWise::Dashboard
 
 ### Required
 
-- **dashboard_definition** (String) The dashboard definition specified in a JSON literal.
-- **dashboard_description** (String) A description for the dashboard.
-- **dashboard_name** (String) A friendly name for the dashboard.
+- `dashboard_definition` (String) The dashboard definition specified in a JSON literal.
+- `dashboard_description` (String) A description for the dashboard.
+- `dashboard_name` (String) A friendly name for the dashboard.
 
 ### Optional
 
-- **project_id** (String) The ID of the project in which to create the dashboard.
-- **tags** (Attributes List) A list of key-value pairs that contain metadata for the dashboard. (see [below for nested schema](#nestedatt--tags))
+- `project_id` (String) The ID of the project in which to create the dashboard.
+- `tags` (Attributes List) A list of key-value pairs that contain metadata for the dashboard. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **dashboard_arn** (String) The ARN of the dashboard.
-- **dashboard_id** (String) The ID of the dashboard.
-- **id** (String) Uniquely identifies the resource.
+- `dashboard_arn` (String) The ARN of the dashboard.
+- `dashboard_id` (String) The ID of the dashboard.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

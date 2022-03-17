@@ -17,25 +17,25 @@ Data Source schema for AWS::Location::PlaceIndex
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **create_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
-- **data_source** (String)
-- **data_source_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration))
-- **description** (String)
-- **index_arn** (String)
-- **index_name** (String)
-- **pricing_plan** (String)
-- **update_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `arn` (String)
+- `create_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `data_source` (String)
+- `data_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration))
+- `description` (String)
+- `index_arn` (String)
+- `index_name` (String)
+- `pricing_plan` (String)
+- `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 
 <a id="nestedatt--data_source_configuration"></a>
 ### Nested Schema for `data_source_configuration`
 
 Read-Only:
 
-- **intended_use** (String)
+- `intended_use` (String)
 
 

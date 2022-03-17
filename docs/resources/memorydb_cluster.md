@@ -17,52 +17,52 @@ The AWS::MemoryDB::Cluster resource creates an Amazon MemoryDB Cluster.
 
 ### Required
 
-- **acl_name** (String) The name of the Access Control List to associate with the cluster.
-- **cluster_name** (String) The name of the cluster. This value must be unique as it also serves as the cluster identifier.
-- **node_type** (String) The compute and memory capacity of the nodes in the cluster.
+- `acl_name` (String) The name of the Access Control List to associate with the cluster.
+- `cluster_name` (String) The name of the cluster. This value must be unique as it also serves as the cluster identifier.
+- `node_type` (String) The compute and memory capacity of the nodes in the cluster.
 
 ### Optional
 
-- **auto_minor_version_upgrade** (Boolean) A flag that enables automatic minor version upgrade when set to true.
+- `auto_minor_version_upgrade` (Boolean) A flag that enables automatic minor version upgrade when set to true.
 
 You cannot modify the value of AutoMinorVersionUpgrade after the cluster is created. To enable AutoMinorVersionUpgrade on a cluster you must set AutoMinorVersionUpgrade to true when you create a cluster.
-- **cluster_endpoint** (Attributes) The cluster endpoint. (see [below for nested schema](#nestedatt--cluster_endpoint))
-- **description** (String) An optional description of the cluster.
-- **engine_version** (String) The Redis engine version used by the cluster.
-- **final_snapshot_name** (String) The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.
-- **kms_key_id** (String) The ID of the KMS key used to encrypt the cluster.
-- **maintenance_window** (String) Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.
-- **num_replicas_per_shard** (Number) The number of replicas to apply to each shard. The limit is 5.
-- **num_shards** (Number) The number of shards the cluster will contain.
-- **parameter_group_name** (String) The name of the parameter group associated with the cluster.
-- **port** (Number) The port number on which each member of the cluster accepts connections.
-- **security_group_ids** (List of String) One or more Amazon VPC security groups associated with this cluster.
-- **snapshot_arns** (List of String) A list of Amazon Resource Names (ARN) that uniquely identify the RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new cluster. The Amazon S3 object name in the ARN cannot contain any commas.
-- **snapshot_name** (String) The name of a snapshot from which to restore data into the new cluster. The snapshot status changes to restoring while the new cluster is being created.
-- **snapshot_retention_limit** (Number) The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.
-- **snapshot_window** (String) The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your cluster.
-- **sns_topic_arn** (String) The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.
-- **sns_topic_status** (String) The status of the Amazon SNS notification topic. Notifications are sent only if the status is enabled.
-- **subnet_group_name** (String) The name of the subnet group to be used for the cluster.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this cluster. (see [below for nested schema](#nestedatt--tags))
-- **tls_enabled** (Boolean) A flag that enables in-transit encryption when set to true.
+- `cluster_endpoint` (Attributes) The cluster endpoint. (see [below for nested schema](#nestedatt--cluster_endpoint))
+- `description` (String) An optional description of the cluster.
+- `engine_version` (String) The Redis engine version used by the cluster.
+- `final_snapshot_name` (String) The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.
+- `kms_key_id` (String) The ID of the KMS key used to encrypt the cluster.
+- `maintenance_window` (String) Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.
+- `num_replicas_per_shard` (Number) The number of replicas to apply to each shard. The limit is 5.
+- `num_shards` (Number) The number of shards the cluster will contain.
+- `parameter_group_name` (String) The name of the parameter group associated with the cluster.
+- `port` (Number) The port number on which each member of the cluster accepts connections.
+- `security_group_ids` (List of String) One or more Amazon VPC security groups associated with this cluster.
+- `snapshot_arns` (List of String) A list of Amazon Resource Names (ARN) that uniquely identify the RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new cluster. The Amazon S3 object name in the ARN cannot contain any commas.
+- `snapshot_name` (String) The name of a snapshot from which to restore data into the new cluster. The snapshot status changes to restoring while the new cluster is being created.
+- `snapshot_retention_limit` (Number) The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.
+- `snapshot_window` (String) The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your cluster.
+- `sns_topic_arn` (String) The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.
+- `sns_topic_status` (String) The status of the Amazon SNS notification topic. Notifications are sent only if the status is enabled.
+- `subnet_group_name` (String) The name of the subnet group to be used for the cluster.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this cluster. (see [below for nested schema](#nestedatt--tags))
+- `tls_enabled` (Boolean) A flag that enables in-transit encryption when set to true.
 
 You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the cluster.
-- **id** (String) Uniquely identifies the resource.
-- **parameter_group_status** (String) The status of the parameter group used by the cluster.
-- **status** (String) The status of the cluster. For example, Available, Updating, Creating.
+- `arn` (String) The Amazon Resource Name (ARN) of the cluster.
+- `id` (String) Uniquely identifies the resource.
+- `parameter_group_status` (String) The status of the parameter group used by the cluster.
+- `status` (String) The status of the cluster. For example, Available, Updating, Creating.
 
 <a id="nestedatt--cluster_endpoint"></a>
 ### Nested Schema for `cluster_endpoint`
 
 Optional:
 
-- **address** (String) The DNS address of the primary read-write node.
-- **port** (Number) The port number that the engine is listening on.
+- `address` (String) The DNS address of the primary read-write node.
+- `port` (Number) The port number that the engine is listening on.
 
 
 <a id="nestedatt--tags"></a>
@@ -70,8 +70,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key for the tag. May not be null.
-- **value** (String) The tag's value. May be null.
+- `key` (String) The key for the tag. May not be null.
+- `value` (String) The tag's value. May be null.
 
 ## Import
 

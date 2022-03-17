@@ -17,26 +17,26 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Required
 
-- **vpc_id** (String) The ID of the VPC.
+- `vpc_id` (String) The ID of the VPC.
 
 ### Optional
 
-- **tags** (Attributes Set) The tags for the carrier gateway. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) The tags for the carrier gateway. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **carrier_gateway_id** (String) The ID of the carrier gateway.
-- **id** (String) Uniquely identifies the resource.
-- **owner_id** (String) The ID of the owner.
-- **state** (String) The state of the carrier gateway.
+- `carrier_gateway_id` (String) The ID of the carrier gateway.
+- `id` (String) Uniquely identifies the resource.
+- `owner_id` (String) The ID of the owner.
+- `state` (String) The state of the carrier gateway.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

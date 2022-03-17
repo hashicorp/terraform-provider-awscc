@@ -17,22 +17,22 @@ AWS Cost Anomaly Detection leverages advanced Machine Learning technologies to i
 
 ### Required
 
-- **monitor_name** (String) The name of the monitor.
-- **monitor_type** (String)
+- `monitor_name` (String) The name of the monitor.
+- `monitor_type` (String)
 
 ### Optional
 
-- **monitor_dimension** (String) The dimensions to evaluate
-- **monitor_specification** (String)
+- `monitor_dimension` (String) The dimensions to evaluate
+- `monitor_specification` (String)
 
 ### Read-Only
 
-- **creation_date** (String) The date when the monitor was created.
-- **dimensional_value_count** (Number) The value for evaluated dimensions.
-- **id** (String) Uniquely identifies the resource.
-- **last_evaluated_date** (String) The date when the monitor last evaluated for anomalies.
-- **last_updated_date** (String) The date when the monitor was last updated.
-- **monitor_arn** (String) Monitor ARN
+- `creation_date` (String) The date when the monitor was created.
+- `dimensional_value_count` (Number) The value for evaluated dimensions.
+- `id` (String) Uniquely identifies the resource.
+- `last_evaluated_date` (String) The date when the monitor last evaluated for anomalies.
+- `last_updated_date` (String) The date when the monitor was last updated.
+- `monitor_arn` (String) Monitor ARN
 
 ## Import
 

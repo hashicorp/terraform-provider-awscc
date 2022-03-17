@@ -17,21 +17,21 @@ Resource Type definition for AWS::SES::Template
 
 ### Optional
 
-- **template** (Attributes) The content of the email, composed of a subject line, an HTML part, and a text-only part (see [below for nested schema](#nestedatt--template))
+- `template` (Attributes) The content of the email, composed of a subject line, an HTML part, and a text-only part (see [below for nested schema](#nestedatt--template))
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
+- `id` (String) The ID of this resource.
 
 <a id="nestedatt--template"></a>
 ### Nested Schema for `template`
 
 Optional:
 
-- **html_part** (String) The HTML body of the email.
-- **subject_part** (String) The subject line of the email.
-- **template_name** (String) The name of the template.
-- **text_part** (String) The email body that is visible to recipients whose email clients do not display HTML content.
+- `html_part` (String) The HTML body of the email.
+- `subject_part` (String) The subject line of the email.
+- `template_name` (String) The name of the template.
+- `text_part` (String) The email body that is visible to recipients whose email clients do not display HTML content.
 
 ## Import
 

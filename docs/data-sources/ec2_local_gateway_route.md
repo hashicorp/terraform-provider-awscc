@@ -17,14 +17,14 @@ Data Source schema for AWS::EC2::LocalGatewayRoute
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **destination_cidr_block** (String) The CIDR block used for destination matches.
-- **local_gateway_route_table_id** (String) The ID of the local gateway route table.
-- **local_gateway_virtual_interface_group_id** (String) The ID of the virtual interface group.
-- **state** (String) The state of the route.
-- **type** (String) The route type.
+- `destination_cidr_block` (String) The CIDR block used for destination matches.
+- `local_gateway_route_table_id` (String) The ID of the local gateway route table.
+- `local_gateway_virtual_interface_group_id` (String) The ID of the virtual interface group.
+- `state` (String) The state of the route.
+- `type` (String) The route type.
 
 

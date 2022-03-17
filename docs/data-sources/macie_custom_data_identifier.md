@@ -17,16 +17,16 @@ Data Source schema for AWS::Macie::CustomDataIdentifier
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Custom data identifier ARN.
-- **description** (String) Description of custom data identifier.
-- **ignore_words** (List of String) Words to be ignored.
-- **keywords** (List of String) Keywords to be matched against.
-- **maximum_match_distance** (Number) Maximum match distance.
-- **name** (String) Name of custom data identifier.
-- **regex** (String) Regular expression for custom data identifier.
+- `arn` (String) Custom data identifier ARN.
+- `description` (String) Description of custom data identifier.
+- `ignore_words` (List of String) Words to be ignored.
+- `keywords` (List of String) Keywords to be matched against.
+- `maximum_match_distance` (Number) Maximum match distance.
+- `name` (String) Name of custom data identifier.
+- `regex` (String) Regular expression for custom data identifier.
 
 

@@ -17,26 +17,26 @@ An Amazon Lookout for Metrics Detector
 
 ### Required
 
-- **anomaly_detector_config** (Attributes) Configuration options for the AnomalyDetector (see [below for nested schema](#nestedatt--anomaly_detector_config))
-- **metric_set_list** (Attributes List) List of metric sets for anomaly detection (see [below for nested schema](#nestedatt--metric_set_list))
+- `anomaly_detector_config` (Attributes) Configuration options for the AnomalyDetector (see [below for nested schema](#nestedatt--anomaly_detector_config))
+- `metric_set_list` (Attributes List) List of metric sets for anomaly detection (see [below for nested schema](#nestedatt--metric_set_list))
 
 ### Optional
 
-- **anomaly_detector_description** (String) A description for the AnomalyDetector.
-- **anomaly_detector_name** (String) Name for the Amazon Lookout for Metrics Anomaly Detector
-- **kms_key_arn** (String) KMS key used to encrypt the AnomalyDetector data
+- `anomaly_detector_description` (String) A description for the AnomalyDetector.
+- `anomaly_detector_name` (String) Name for the Amazon Lookout for Metrics Anomaly Detector
+- `kms_key_arn` (String) KMS key used to encrypt the AnomalyDetector data
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--anomaly_detector_config"></a>
 ### Nested Schema for `anomaly_detector_config`
 
 Required:
 
-- **anomaly_detector_frequency** (String) Frequency of anomaly detection
+- `anomaly_detector_frequency` (String) Frequency of anomaly detection
 
 
 <a id="nestedatt--metric_set_list"></a>
@@ -44,24 +44,24 @@ Required:
 
 Required:
 
-- **dimension_list** (List of String) Dimensions for this MetricSet.
-- **metric_list** (Attributes List) Metrics captured by this MetricSet. (see [below for nested schema](#nestedatt--metric_set_list--metric_list))
-- **metric_set_description** (String) A description for the MetricSet.
-- **metric_set_frequency** (String) A frequency period to aggregate the data
-- **metric_set_name** (String) The name of the MetricSet.
-- **metric_source** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source))
-- **offset** (Number) Offset, in seconds, between the frequency interval and the time at which the metrics are available.
-- **timestamp_column** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--timestamp_column))
-- **timezone** (String)
+- `dimension_list` (List of String) Dimensions for this MetricSet.
+- `metric_list` (Attributes List) Metrics captured by this MetricSet. (see [below for nested schema](#nestedatt--metric_set_list--metric_list))
+- `metric_set_description` (String) A description for the MetricSet.
+- `metric_set_frequency` (String) A frequency period to aggregate the data
+- `metric_set_name` (String) The name of the MetricSet.
+- `metric_source` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source))
+- `offset` (Number) Offset, in seconds, between the frequency interval and the time at which the metrics are available.
+- `timestamp_column` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--timestamp_column))
+- `timezone` (String)
 
 <a id="nestedatt--metric_set_list--metric_list"></a>
 ### Nested Schema for `metric_set_list.metric_list`
 
 Required:
 
-- **aggregation_function** (String) Operator used to aggregate metric values
-- **metric_name** (String) Name of a column in the data.
-- **namespace** (String)
+- `aggregation_function` (String) Operator used to aggregate metric values
+- `metric_name` (String) Name of a column in the data.
+- `namespace` (String)
 
 
 <a id="nestedatt--metric_set_list--metric_source"></a>
@@ -69,19 +69,19 @@ Required:
 
 Required:
 
-- **app_flow_config** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--app_flow_config))
-- **cloudwatch_config** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--cloudwatch_config))
-- **rds_source_config** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--rds_source_config))
-- **redshift_source_config** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--redshift_source_config))
-- **s3_source_config** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config))
+- `app_flow_config` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--app_flow_config))
+- `cloudwatch_config` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--cloudwatch_config))
+- `rds_source_config` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--rds_source_config))
+- `redshift_source_config` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--redshift_source_config))
+- `s3_source_config` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config))
 
 <a id="nestedatt--metric_set_list--metric_source--app_flow_config"></a>
 ### Nested Schema for `metric_set_list.metric_source.app_flow_config`
 
 Required:
 
-- **flow_name** (String)
-- **role_arn** (String)
+- `flow_name` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--metric_set_list--metric_source--cloudwatch_config"></a>
@@ -89,7 +89,7 @@ Required:
 
 Required:
 
-- **role_arn** (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--metric_set_list--metric_source--rds_source_config"></a>
@@ -97,22 +97,22 @@ Required:
 
 Required:
 
-- **database_host** (String)
-- **database_name** (String)
-- **database_port** (Number)
-- **db_instance_identifier** (String)
-- **role_arn** (String)
-- **secret_manager_arn** (String)
-- **table_name** (String)
-- **vpc_configuration** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--rds_source_config--vpc_configuration))
+- `database_host` (String)
+- `database_name` (String)
+- `database_port` (Number)
+- `db_instance_identifier` (String)
+- `role_arn` (String)
+- `secret_manager_arn` (String)
+- `table_name` (String)
+- `vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--rds_source_config--vpc_configuration))
 
 <a id="nestedatt--metric_set_list--metric_source--rds_source_config--vpc_configuration"></a>
 ### Nested Schema for `metric_set_list.metric_source.rds_source_config.vpc_configuration`
 
 Required:
 
-- **security_group_id_list** (List of String)
-- **subnet_id_list** (List of String)
+- `security_group_id_list` (List of String)
+- `subnet_id_list` (List of String)
 
 
 
@@ -121,22 +121,22 @@ Required:
 
 Required:
 
-- **cluster_identifier** (String)
-- **database_host** (String)
-- **database_name** (String)
-- **database_port** (Number)
-- **role_arn** (String)
-- **secret_manager_arn** (String)
-- **table_name** (String)
-- **vpc_configuration** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--redshift_source_config--vpc_configuration))
+- `cluster_identifier` (String)
+- `database_host` (String)
+- `database_name` (String)
+- `database_port` (Number)
+- `role_arn` (String)
+- `secret_manager_arn` (String)
+- `table_name` (String)
+- `vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--redshift_source_config--vpc_configuration))
 
 <a id="nestedatt--metric_set_list--metric_source--redshift_source_config--vpc_configuration"></a>
 ### Nested Schema for `metric_set_list.metric_source.redshift_source_config.vpc_configuration`
 
 Required:
 
-- **security_group_id_list** (List of String)
-- **subnet_id_list** (List of String)
+- `security_group_id_list` (List of String)
+- `subnet_id_list` (List of String)
 
 
 
@@ -145,30 +145,30 @@ Required:
 
 Required:
 
-- **file_format_descriptor** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor))
-- **historical_data_path_list** (List of String)
-- **role_arn** (String)
-- **templated_path_list** (List of String)
+- `file_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor))
+- `historical_data_path_list` (List of String)
+- `role_arn` (String)
+- `templated_path_list` (List of String)
 
 <a id="nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor"></a>
 ### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list`
 
 Required:
 
-- **csv_format_descriptor** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--csv_format_descriptor))
-- **json_format_descriptor** (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--json_format_descriptor))
+- `csv_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--csv_format_descriptor))
+- `json_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--json_format_descriptor))
 
 <a id="nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--csv_format_descriptor"></a>
 ### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list.csv_format_descriptor`
 
 Required:
 
-- **charset** (String)
-- **contains_header** (Boolean)
-- **delimiter** (String)
-- **file_compression** (String)
-- **header_list** (List of String)
-- **quote_symbol** (String)
+- `charset` (String)
+- `contains_header` (Boolean)
+- `delimiter` (String)
+- `file_compression` (String)
+- `header_list` (List of String)
+- `quote_symbol` (String)
 
 
 <a id="nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--json_format_descriptor"></a>
@@ -176,8 +176,8 @@ Required:
 
 Required:
 
-- **charset** (String)
-- **file_compression** (String)
+- `charset` (String)
+- `file_compression` (String)
 
 
 
@@ -188,8 +188,8 @@ Required:
 
 Required:
 
-- **column_format** (String) A timestamp format for the timestamps in the dataset
-- **column_name** (String) Name of a column in the data.
+- `column_format` (String) A timestamp format for the timestamps in the dataset
+- `column_name` (String) Name of a column in the data.
 
 ## Import
 

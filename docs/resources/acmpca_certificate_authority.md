@@ -17,52 +17,52 @@ Private certificate authority.
 
 ### Required
 
-- **key_algorithm** (String) Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.
-- **signing_algorithm** (String) Algorithm your CA uses to sign certificate requests.
-- **subject** (Attributes) Structure that contains X.500 distinguished name information for your CA. (see [below for nested schema](#nestedatt--subject))
-- **type** (String) The type of the certificate authority.
+- `key_algorithm` (String) Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.
+- `signing_algorithm` (String) Algorithm your CA uses to sign certificate requests.
+- `subject` (Attributes) Structure that contains X.500 distinguished name information for your CA. (see [below for nested schema](#nestedatt--subject))
+- `type` (String) The type of the certificate authority.
 
 ### Optional
 
-- **csr_extensions** (Attributes) Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action. (see [below for nested schema](#nestedatt--csr_extensions))
-- **key_storage_security_standard** (String) KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.
-- **revocation_configuration** (Attributes) Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions. (see [below for nested schema](#nestedatt--revocation_configuration))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `csr_extensions` (Attributes) Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action. (see [below for nested schema](#nestedatt--csr_extensions))
+- `key_storage_security_standard` (String) KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.
+- `revocation_configuration` (Attributes) Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions. (see [below for nested schema](#nestedatt--revocation_configuration))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the certificate authority.
-- **certificate_signing_request** (String) The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The Amazon Resource Name (ARN) of the certificate authority.
+- `certificate_signing_request` (String) The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--subject"></a>
 ### Nested Schema for `subject`
 
 Required:
 
-- **common_name** (String)
-- **country** (String)
-- **custom_attributes** (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--subject--custom_attributes))
-- **distinguished_name_qualifier** (String)
-- **generation_qualifier** (String)
-- **given_name** (String)
-- **initials** (String)
-- **locality** (String)
-- **organization** (String)
-- **organizational_unit** (String)
-- **pseudonym** (String)
-- **serial_number** (String)
-- **state** (String)
-- **surname** (String)
-- **title** (String)
+- `common_name` (String)
+- `country` (String)
+- `custom_attributes` (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--subject--custom_attributes))
+- `distinguished_name_qualifier` (String)
+- `generation_qualifier` (String)
+- `given_name` (String)
+- `initials` (String)
+- `locality` (String)
+- `organization` (String)
+- `organizational_unit` (String)
+- `pseudonym` (String)
+- `serial_number` (String)
+- `state` (String)
+- `surname` (String)
+- `title` (String)
 
 <a id="nestedatt--subject--custom_attributes"></a>
 ### Nested Schema for `subject.custom_attributes`
 
 Required:
 
-- **object_identifier** (String) String that contains X.509 ObjectIdentifier information.
-- **value** (String)
+- `object_identifier` (String) String that contains X.509 ObjectIdentifier information.
+- `value` (String)
 
 
 
@@ -71,23 +71,23 @@ Required:
 
 Optional:
 
-- **key_usage** (Attributes) Structure that contains X.509 KeyUsage information. (see [below for nested schema](#nestedatt--csr_extensions--key_usage))
-- **subject_information_access** (Attributes List) Array of X.509 AccessDescription. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access))
+- `key_usage` (Attributes) Structure that contains X.509 KeyUsage information. (see [below for nested schema](#nestedatt--csr_extensions--key_usage))
+- `subject_information_access` (Attributes List) Array of X.509 AccessDescription. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access))
 
 <a id="nestedatt--csr_extensions--key_usage"></a>
 ### Nested Schema for `csr_extensions.key_usage`
 
 Optional:
 
-- **crl_sign** (Boolean)
-- **data_encipherment** (Boolean)
-- **decipher_only** (Boolean)
-- **digital_signature** (Boolean)
-- **encipher_only** (Boolean)
-- **key_agreement** (Boolean)
-- **key_cert_sign** (Boolean)
-- **key_encipherment** (Boolean)
-- **non_repudiation** (Boolean)
+- `crl_sign` (Boolean)
+- `data_encipherment` (Boolean)
+- `decipher_only` (Boolean)
+- `digital_signature` (Boolean)
+- `encipher_only` (Boolean)
+- `key_agreement` (Boolean)
+- `key_cert_sign` (Boolean)
+- `key_encipherment` (Boolean)
+- `non_repudiation` (Boolean)
 
 
 <a id="nestedatt--csr_extensions--subject_information_access"></a>
@@ -95,51 +95,51 @@ Optional:
 
 Optional:
 
-- **access_location** (Attributes) Structure that contains X.509 GeneralName information. Assign one and ONLY one field. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location))
-- **access_method** (Attributes) Structure that contains X.509 AccessMethod information. Assign one and ONLY one field. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_method))
+- `access_location` (Attributes) Structure that contains X.509 GeneralName information. Assign one and ONLY one field. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location))
+- `access_method` (Attributes) Structure that contains X.509 AccessMethod information. Assign one and ONLY one field. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_method))
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location"></a>
 ### Nested Schema for `csr_extensions.subject_information_access.access_location`
 
 Optional:
 
-- **directory_name** (Attributes) Structure that contains X.500 distinguished name information for your CA. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--directory_name))
-- **dns_name** (String) String that contains X.509 DnsName information.
-- **edi_party_name** (Attributes) Structure that contains X.509 EdiPartyName information. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--edi_party_name))
-- **ip_address** (String) String that contains X.509 IpAddress information.
-- **other_name** (Attributes) Structure that contains X.509 OtherName information. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--other_name))
-- **registered_id** (String) String that contains X.509 ObjectIdentifier information.
-- **rfc_822_name** (String) String that contains X.509 Rfc822Name information.
-- **uniform_resource_identifier** (String) String that contains X.509 UniformResourceIdentifier information.
+- `directory_name` (Attributes) Structure that contains X.500 distinguished name information for your CA. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--directory_name))
+- `dns_name` (String) String that contains X.509 DnsName information.
+- `edi_party_name` (Attributes) Structure that contains X.509 EdiPartyName information. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--edi_party_name))
+- `ip_address` (String) String that contains X.509 IpAddress information.
+- `other_name` (Attributes) Structure that contains X.509 OtherName information. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--other_name))
+- `registered_id` (String) String that contains X.509 ObjectIdentifier information.
+- `rfc_822_name` (String) String that contains X.509 Rfc822Name information.
+- `uniform_resource_identifier` (String) String that contains X.509 UniformResourceIdentifier information.
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--directory_name"></a>
 ### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
 
 Optional:
 
-- **common_name** (String)
-- **country** (String)
-- **custom_attributes** (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--uniform_resource_identifier--custom_attributes))
-- **distinguished_name_qualifier** (String)
-- **generation_qualifier** (String)
-- **given_name** (String)
-- **initials** (String)
-- **locality** (String)
-- **organization** (String)
-- **organizational_unit** (String)
-- **pseudonym** (String)
-- **serial_number** (String)
-- **state** (String)
-- **surname** (String)
-- **title** (String)
+- `common_name` (String)
+- `country` (String)
+- `custom_attributes` (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--uniform_resource_identifier--custom_attributes))
+- `distinguished_name_qualifier` (String)
+- `generation_qualifier` (String)
+- `given_name` (String)
+- `initials` (String)
+- `locality` (String)
+- `organization` (String)
+- `organizational_unit` (String)
+- `pseudonym` (String)
+- `serial_number` (String)
+- `state` (String)
+- `surname` (String)
+- `title` (String)
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--uniform_resource_identifier--custom_attributes"></a>
 ### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier.custom_attributes`
 
 Optional:
 
-- **object_identifier** (String) String that contains X.509 ObjectIdentifier information.
-- **value** (String)
+- `object_identifier` (String) String that contains X.509 ObjectIdentifier information.
+- `value` (String)
 
 
 
@@ -148,8 +148,8 @@ Optional:
 
 Optional:
 
-- **name_assigner** (String)
-- **party_name** (String)
+- `name_assigner` (String)
+- `party_name` (String)
 
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--other_name"></a>
@@ -157,8 +157,8 @@ Optional:
 
 Optional:
 
-- **type_id** (String) String that contains X.509 ObjectIdentifier information.
-- **value** (String)
+- `type_id` (String) String that contains X.509 ObjectIdentifier information.
+- `value` (String)
 
 
 
@@ -167,8 +167,8 @@ Optional:
 
 Optional:
 
-- **access_method_type** (String) Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.
-- **custom_object_identifier** (String) String that contains X.509 ObjectIdentifier information.
+- `access_method_type` (String) Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.
+- `custom_object_identifier` (String) String that contains X.509 ObjectIdentifier information.
 
 
 
@@ -178,19 +178,19 @@ Optional:
 
 Optional:
 
-- **crl_configuration** (Attributes) Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked. (see [below for nested schema](#nestedatt--revocation_configuration--crl_configuration))
-- **ocsp_configuration** (Attributes) Helps to configure online certificate status protocol (OCSP) responder for your certificate authority (see [below for nested schema](#nestedatt--revocation_configuration--ocsp_configuration))
+- `crl_configuration` (Attributes) Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked. (see [below for nested schema](#nestedatt--revocation_configuration--crl_configuration))
+- `ocsp_configuration` (Attributes) Helps to configure online certificate status protocol (OCSP) responder for your certificate authority (see [below for nested schema](#nestedatt--revocation_configuration--ocsp_configuration))
 
 <a id="nestedatt--revocation_configuration--crl_configuration"></a>
 ### Nested Schema for `revocation_configuration.crl_configuration`
 
 Optional:
 
-- **custom_cname** (String)
-- **enabled** (Boolean)
-- **expiration_in_days** (Number)
-- **s3_bucket_name** (String)
-- **s3_object_acl** (String)
+- `custom_cname` (String)
+- `enabled` (Boolean)
+- `expiration_in_days` (Number)
+- `s3_bucket_name` (String)
+- `s3_object_acl` (String)
 
 
 <a id="nestedatt--revocation_configuration--ocsp_configuration"></a>
@@ -198,8 +198,8 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **ocsp_custom_cname** (String)
+- `enabled` (Boolean)
+- `ocsp_custom_cname` (String)
 
 
 
@@ -208,8 +208,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

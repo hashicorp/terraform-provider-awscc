@@ -17,30 +17,30 @@ Resource schema for AWS::ImageBuilder::ImagePipeline
 
 ### Optional
 
-- **container_recipe_arn** (String) The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
-- **description** (String) The description of the image pipeline.
-- **distribution_configuration_arn** (String) The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.
-- **enhanced_image_metadata_enabled** (Boolean) Collects additional information about the image being created, including the operating system (OS) version and package list.
-- **image_recipe_arn** (String) The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
-- **image_tests_configuration** (Attributes) The image tests configuration of the image pipeline. (see [below for nested schema](#nestedatt--image_tests_configuration))
-- **infrastructure_configuration_arn** (String) The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.
-- **name** (String) The name of the image pipeline.
-- **schedule** (Attributes) The schedule of the image pipeline. (see [below for nested schema](#nestedatt--schedule))
-- **status** (String) The status of the image pipeline.
-- **tags** (Map of String) The tags of this image pipeline.
+- `container_recipe_arn` (String) The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
+- `description` (String) The description of the image pipeline.
+- `distribution_configuration_arn` (String) The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.
+- `enhanced_image_metadata_enabled` (Boolean) Collects additional information about the image being created, including the operating system (OS) version and package list.
+- `image_recipe_arn` (String) The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
+- `image_tests_configuration` (Attributes) The image tests configuration of the image pipeline. (see [below for nested schema](#nestedatt--image_tests_configuration))
+- `infrastructure_configuration_arn` (String) The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.
+- `name` (String) The name of the image pipeline.
+- `schedule` (Attributes) The schedule of the image pipeline. (see [below for nested schema](#nestedatt--schedule))
+- `status` (String) The status of the image pipeline.
+- `tags` (Map of String) The tags of this image pipeline.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the image pipeline.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The Amazon Resource Name (ARN) of the image pipeline.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--image_tests_configuration"></a>
 ### Nested Schema for `image_tests_configuration`
 
 Optional:
 
-- **image_tests_enabled** (Boolean) Defines if tests should be executed when building this image.
-- **timeout_minutes** (Number) The maximum time in minutes that tests are permitted to run.
+- `image_tests_enabled` (Boolean) Defines if tests should be executed when building this image.
+- `timeout_minutes` (Number) The maximum time in minutes that tests are permitted to run.
 
 
 <a id="nestedatt--schedule"></a>
@@ -48,8 +48,8 @@ Optional:
 
 Optional:
 
-- **pipeline_execution_start_condition** (String) The condition configures when the pipeline should trigger a new image build.
-- **schedule_expression** (String) The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.
+- `pipeline_execution_start_condition` (String) The condition configures when the pipeline should trigger a new image build.
+- `schedule_expression` (String) The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.
 
 ## Import
 

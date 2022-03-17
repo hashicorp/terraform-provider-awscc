@@ -17,20 +17,20 @@ Test and Publish a resource that has been registered in the CloudFormation Regis
 
 ### Optional
 
-- **arn** (String) The Amazon Resource Number (ARN) of the extension.
-- **log_delivery_bucket** (String) A url to the S3 bucket where logs for the testType run will be available
-- **public_version_number** (String) The version number of a public third-party extension
-- **type** (String) The kind of extension
-- **type_name** (String) The name of the type being registered.
+- `arn` (String) The Amazon Resource Number (ARN) of the extension.
+- `log_delivery_bucket` (String) A url to the S3 bucket where logs for the testType run will be available
+- `public_version_number` (String) The version number of a public third-party extension
+- `type` (String) The kind of extension
+- `type_name` (String) The name of the type being registered.
 
 We recommend that type names adhere to the following pattern: company_or_organization::service::type.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **public_type_arn** (String) The Amazon Resource Number (ARN) assigned to the public extension upon publication
-- **publisher_id** (String) The publisher id assigned by CloudFormation for publishing in this region.
-- **type_version_arn** (String) The Amazon Resource Number (ARN) of the extension with the versionId.
+- `id` (String) Uniquely identifies the resource.
+- `public_type_arn` (String) The Amazon Resource Number (ARN) assigned to the public extension upon publication
+- `publisher_id` (String) The publisher id assigned by CloudFormation for publishing in this region.
+- `type_version_arn` (String) The Amazon Resource Number (ARN) of the extension with the versionId.
 
 ## Import
 

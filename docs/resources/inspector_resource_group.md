@@ -17,20 +17,20 @@ Resource Type definition for AWS::Inspector::ResourceGroup
 
 ### Required
 
-- **resource_group_tags** (Attributes List) (see [below for nested schema](#nestedatt--resource_group_tags))
+- `resource_group_tags` (Attributes List) (see [below for nested schema](#nestedatt--resource_group_tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--resource_group_tags"></a>
 ### Nested Schema for `resource_group_tags`
 
 Required:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

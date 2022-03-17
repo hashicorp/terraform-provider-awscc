@@ -17,27 +17,27 @@ An entity type for fraud detector.
 
 ### Required
 
-- **name** (String) The name of the entity type.
+- `name` (String) The name of the entity type.
 
 ### Optional
 
-- **description** (String) The entity type description.
-- **tags** (Attributes List) Tags associated with this entity type. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The entity type description.
+- `tags` (Attributes List) Tags associated with this entity type. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The entity type ARN.
-- **created_time** (String) The timestamp when the entity type was created.
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_time** (String) The timestamp when the entity type was last updated.
+- `arn` (String) The entity type ARN.
+- `created_time` (String) The timestamp when the entity type was created.
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_time` (String) The timestamp when the entity type was last updated.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

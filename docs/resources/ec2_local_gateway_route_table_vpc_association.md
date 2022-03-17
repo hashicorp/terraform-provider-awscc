@@ -17,27 +17,27 @@ Describes an association between a local gateway route table and a VPC.
 
 ### Required
 
-- **local_gateway_route_table_id** (String) The ID of the local gateway route table.
-- **vpc_id** (String) The ID of the VPC.
+- `local_gateway_route_table_id` (String) The ID of the local gateway route table.
+- `vpc_id` (String) The ID of the VPC.
 
 ### Optional
 
-- **tags** (Attributes Set) The tags for the association. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) The tags for the association. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **local_gateway_id** (String) The ID of the local gateway.
-- **local_gateway_route_table_vpc_association_id** (String) The ID of the association.
-- **state** (String) The state of the association.
+- `id` (String) Uniquely identifies the resource.
+- `local_gateway_id` (String) The ID of the local gateway.
+- `local_gateway_route_table_vpc_association_id` (String) The ID of the association.
+- `state` (String) The state of the association.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

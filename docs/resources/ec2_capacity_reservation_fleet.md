@@ -17,33 +17,33 @@ Resource Type definition for AWS::EC2::CapacityReservationFleet
 
 ### Optional
 
-- **allocation_strategy** (String)
-- **end_date** (String)
-- **instance_match_criteria** (String)
-- **instance_type_specifications** (Attributes Set) (see [below for nested schema](#nestedatt--instance_type_specifications))
-- **no_remove_end_date** (Boolean)
-- **remove_end_date** (Boolean)
-- **tag_specifications** (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications))
-- **tenancy** (String)
-- **total_target_capacity** (Number)
+- `allocation_strategy` (String)
+- `end_date` (String)
+- `instance_match_criteria` (String)
+- `instance_type_specifications` (Attributes Set) (see [below for nested schema](#nestedatt--instance_type_specifications))
+- `no_remove_end_date` (Boolean)
+- `remove_end_date` (Boolean)
+- `tag_specifications` (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications))
+- `tenancy` (String)
+- `total_target_capacity` (Number)
 
 ### Read-Only
 
-- **capacity_reservation_fleet_id** (String)
-- **id** (String) Uniquely identifies the resource.
+- `capacity_reservation_fleet_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--instance_type_specifications"></a>
 ### Nested Schema for `instance_type_specifications`
 
 Optional:
 
-- **availability_zone** (String)
-- **availability_zone_id** (String)
-- **ebs_optimized** (Boolean)
-- **instance_platform** (String)
-- **instance_type** (String)
-- **priority** (Number)
-- **weight** (Number)
+- `availability_zone` (String)
+- `availability_zone_id` (String)
+- `ebs_optimized` (Boolean)
+- `instance_platform` (String)
+- `instance_type` (String)
+- `priority` (Number)
+- `weight` (Number)
 
 
 <a id="nestedatt--tag_specifications"></a>
@@ -51,16 +51,16 @@ Optional:
 
 Optional:
 
-- **resource_type** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications--tags))
+- `resource_type` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications--tags))
 
 <a id="nestedatt--tag_specifications--tags"></a>
 ### Nested Schema for `tag_specifications.tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

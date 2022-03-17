@@ -17,21 +17,21 @@ Data Source schema for AWS::ECS::ClusterCapacityProviderAssociations
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **capacity_providers** (List of String) List of capacity providers to associate with the cluster
-- **cluster** (String) The name of the cluster
-- **default_capacity_provider_strategy** (Attributes List) List of capacity providers to associate with the cluster (see [below for nested schema](#nestedatt--default_capacity_provider_strategy))
+- `capacity_providers` (List of String) List of capacity providers to associate with the cluster
+- `cluster` (String) The name of the cluster
+- `default_capacity_provider_strategy` (Attributes List) List of capacity providers to associate with the cluster (see [below for nested schema](#nestedatt--default_capacity_provider_strategy))
 
 <a id="nestedatt--default_capacity_provider_strategy"></a>
 ### Nested Schema for `default_capacity_provider_strategy`
 
 Read-Only:
 
-- **base** (Number)
-- **capacity_provider** (String) If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.
-- **weight** (Number)
+- `base` (Number)
+- `capacity_provider` (String) If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.
+- `weight` (Number)
 
 

@@ -17,49 +17,49 @@ Resource Type definition for AWS::Lightsail::Instance
 
 ### Required
 
-- **blueprint_id** (String) The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0 ). Use the get blueprints operation to return a list of available images (or blueprints ).
-- **bundle_id** (String) The bundle of specification information for your virtual private server (or instance ), including the pricing plan (e.g., micro_1_0 ).
-- **instance_name** (String) The names to use for your new Lightsail instance.
+- `blueprint_id` (String) The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0 ). Use the get blueprints operation to return a list of available images (or blueprints ).
+- `bundle_id` (String) The bundle of specification information for your virtual private server (or instance ), including the pricing plan (e.g., micro_1_0 ).
+- `instance_name` (String) The names to use for your new Lightsail instance.
 
 ### Optional
 
-- **add_ons** (Attributes List) An array of objects representing the add-ons to enable for the new instance. (see [below for nested schema](#nestedatt--add_ons))
-- **availability_zone** (String) The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
-- **hardware** (Attributes) Hardware of the Instance. (see [below for nested schema](#nestedatt--hardware))
-- **key_pair_name** (String) The name of your key pair.
-- **location** (Attributes) Location of a resource. (see [below for nested schema](#nestedatt--location))
-- **networking** (Attributes) Networking of the Instance. (see [below for nested schema](#nestedatt--networking))
-- **state** (Attributes) Current State of the Instance. (see [below for nested schema](#nestedatt--state))
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
-- **user_data** (String) A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.
+- `add_ons` (Attributes List) An array of objects representing the add-ons to enable for the new instance. (see [below for nested schema](#nestedatt--add_ons))
+- `availability_zone` (String) The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
+- `hardware` (Attributes) Hardware of the Instance. (see [below for nested schema](#nestedatt--hardware))
+- `key_pair_name` (String) The name of your key pair.
+- `location` (Attributes) Location of a resource. (see [below for nested schema](#nestedatt--location))
+- `networking` (Attributes) Networking of the Instance. (see [below for nested schema](#nestedatt--networking))
+- `state` (Attributes) Current State of the Instance. (see [below for nested schema](#nestedatt--state))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `user_data` (String) A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **instance_arn** (String)
-- **is_static_ip** (Boolean) Is the IP Address of the Instance is the static IP
-- **private_ip_address** (String) Private IP Address of the Instance
-- **public_ip_address** (String) Public IP Address of the Instance
-- **resource_type** (String) Resource type of Lightsail instance.
-- **ssh_key_name** (String) SSH Key Name of the  Lightsail instance.
-- **support_code** (String) Support code to help identify any issues
-- **user_name** (String) Username of the  Lightsail instance.
+- `id` (String) Uniquely identifies the resource.
+- `instance_arn` (String)
+- `is_static_ip` (Boolean) Is the IP Address of the Instance is the static IP
+- `private_ip_address` (String) Private IP Address of the Instance
+- `public_ip_address` (String) Public IP Address of the Instance
+- `resource_type` (String) Resource type of Lightsail instance.
+- `ssh_key_name` (String) SSH Key Name of the  Lightsail instance.
+- `support_code` (String) Support code to help identify any issues
+- `user_name` (String) Username of the  Lightsail instance.
 
 <a id="nestedatt--add_ons"></a>
 ### Nested Schema for `add_ons`
 
 Optional:
 
-- **add_on_type** (String) The add-on type
-- **auto_snapshot_add_on_request** (Attributes) An object that represents additional parameters when enabling or modifying the automatic snapshot add-on (see [below for nested schema](#nestedatt--add_ons--auto_snapshot_add_on_request))
-- **status** (String) Status of the Addon
+- `add_on_type` (String) The add-on type
+- `auto_snapshot_add_on_request` (Attributes) An object that represents additional parameters when enabling or modifying the automatic snapshot add-on (see [below for nested schema](#nestedatt--add_ons--auto_snapshot_add_on_request))
+- `status` (String) Status of the Addon
 
 <a id="nestedatt--add_ons--auto_snapshot_add_on_request"></a>
 ### Nested Schema for `add_ons.auto_snapshot_add_on_request`
 
 Optional:
 
-- **snapshot_time_of_day** (String) The daily time when an automatic snapshot will be created.
+- `snapshot_time_of_day` (String) The daily time when an automatic snapshot will be created.
 
 
 
@@ -68,22 +68,22 @@ Optional:
 
 Optional:
 
-- **cpu_count** (Number) CPU count of the Instance.
-- **disks** (Attributes Set) Disks attached to the Instance. (see [below for nested schema](#nestedatt--hardware--disks))
-- **ram_size_in_gb** (Number) RAM Size of the Instance.
+- `cpu_count` (Number) CPU count of the Instance.
+- `disks` (Attributes Set) Disks attached to the Instance. (see [below for nested schema](#nestedatt--hardware--disks))
+- `ram_size_in_gb` (Number) RAM Size of the Instance.
 
 <a id="nestedatt--hardware--disks"></a>
 ### Nested Schema for `hardware.disks`
 
 Optional:
 
-- **attached_to** (String) Instance attached to the disk.
-- **attachment_state** (String) Attachment state of the disk.
-- **disk_name** (String) The names to use for your new Lightsail disk.
-- **iops** (Number) IOPS of disk.
-- **is_system_disk** (Boolean) Is the Attached disk is the system disk of the Instance.
-- **path** (String) Path of the disk attached to the instance.
-- **size_in_gb** (String) Size of the disk attached to the Instance.
+- `attached_to` (String) Instance attached to the disk.
+- `attachment_state` (String) Attachment state of the disk.
+- `disk_name` (String) The names to use for your new Lightsail disk.
+- `iops` (Number) IOPS of disk.
+- `is_system_disk` (Boolean) Is the Attached disk is the system disk of the Instance.
+- `path` (String) Path of the disk attached to the instance.
+- `size_in_gb` (String) Size of the disk attached to the Instance.
 
 
 
@@ -92,8 +92,8 @@ Optional:
 
 Optional:
 
-- **availability_zone** (String) The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
-- **region_name** (String) The Region Name in which to create your instance.
+- `availability_zone` (String) The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
+- `region_name` (String) The Region Name in which to create your instance.
 
 
 <a id="nestedatt--networking"></a>
@@ -101,15 +101,15 @@ Optional:
 
 Optional:
 
-- **monthly_transfer** (Attributes) Monthly Transfer of the Instance. (see [below for nested schema](#nestedatt--networking--monthly_transfer))
-- **ports** (Attributes Set) Ports to the Instance. (see [below for nested schema](#nestedatt--networking--ports))
+- `monthly_transfer` (Attributes) Monthly Transfer of the Instance. (see [below for nested schema](#nestedatt--networking--monthly_transfer))
+- `ports` (Attributes Set) Ports to the Instance. (see [below for nested schema](#nestedatt--networking--ports))
 
 <a id="nestedatt--networking--monthly_transfer"></a>
 ### Nested Schema for `networking.monthly_transfer`
 
 Optional:
 
-- **gb_per_month_allocated** (String) GbPerMonthAllocated of the Instance.
+- `gb_per_month_allocated` (String) GbPerMonthAllocated of the Instance.
 
 
 <a id="nestedatt--networking--ports"></a>
@@ -117,16 +117,16 @@ Optional:
 
 Optional:
 
-- **access_direction** (String) Access Direction for Protocol of the Instance(inbound/outbound).
-- **access_from** (String) Access From Protocol of the Instance.
-- **access_type** (String) Access Type Protocol of the Instance.
-- **cidr_list_aliases** (List of String) cidr List Aliases
-- **cidrs** (List of String) cidrs
-- **common_name** (String) CommonName for Protocol of the Instance.
-- **from_port** (Number) From Port of the Instance.
-- **ipv_6_cidrs** (List of String) IPv6 Cidrs
-- **protocol** (String) Port Protocol of the Instance.
-- **to_port** (Number) To Port of the Instance.
+- `access_direction` (String) Access Direction for Protocol of the Instance(inbound/outbound).
+- `access_from` (String) Access From Protocol of the Instance.
+- `access_type` (String) Access Type Protocol of the Instance.
+- `cidr_list_aliases` (List of String) cidr List Aliases
+- `cidrs` (List of String) cidrs
+- `common_name` (String) CommonName for Protocol of the Instance.
+- `from_port` (Number) From Port of the Instance.
+- `ipv_6_cidrs` (List of String) IPv6 Cidrs
+- `protocol` (String) Port Protocol of the Instance.
+- `to_port` (Number) To Port of the Instance.
 
 
 
@@ -135,8 +135,8 @@ Optional:
 
 Optional:
 
-- **code** (Number) Status code of the Instance.
-- **name** (String) Status code of the Instance.
+- `code` (Number) Status code of the Instance.
+- `name` (String) Status code of the Instance.
 
 
 <a id="nestedatt--tags"></a>
@@ -144,8 +144,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

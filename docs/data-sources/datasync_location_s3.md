@@ -17,24 +17,24 @@ Data Source schema for AWS::DataSync::LocationS3
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **location_arn** (String) The Amazon Resource Name (ARN) of the Amazon S3 bucket location.
-- **location_uri** (String) The URL of the S3 location that was described.
-- **s3_bucket_arn** (String) The Amazon Resource Name (ARN) of the Amazon S3 bucket.
-- **s3_config** (Attributes) The Amazon Resource Name (ARN) of the AWS IAM role that is used to access an Amazon S3 bucket. (see [below for nested schema](#nestedatt--s3_config))
-- **s3_storage_class** (String) The Amazon S3 storage class you want to store your files in when this location is used as a task destination.
-- **subdirectory** (String) A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `location_arn` (String) The Amazon Resource Name (ARN) of the Amazon S3 bucket location.
+- `location_uri` (String) The URL of the S3 location that was described.
+- `s3_bucket_arn` (String) The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+- `s3_config` (Attributes) The Amazon Resource Name (ARN) of the AWS IAM role that is used to access an Amazon S3 bucket. (see [below for nested schema](#nestedatt--s3_config))
+- `s3_storage_class` (String) The Amazon S3 storage class you want to store your files in when this location is used as a task destination.
+- `subdirectory` (String) A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--s3_config"></a>
 ### Nested Schema for `s3_config`
 
 Read-Only:
 
-- **bucket_access_role_arn** (String) The ARN of the IAM role of the Amazon S3 bucket.
+- `bucket_access_role_arn` (String) The ARN of the IAM role of the Amazon S3 bucket.
 
 
 <a id="nestedatt--tags"></a>
@@ -42,7 +42,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key for an AWS resource tag.
-- **value** (String) The value for an AWS resource tag.
+- `key` (String) The key for an AWS resource tag.
+- `value` (String) The value for an AWS resource tag.
 
 

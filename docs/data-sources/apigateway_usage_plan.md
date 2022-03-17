@@ -17,33 +17,33 @@ Data Source schema for AWS::ApiGateway::UsagePlan
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **api_stages** (Attributes List) The API stages to associate with this usage plan. (see [below for nested schema](#nestedatt--api_stages))
-- **description** (String) A description of the usage plan.
-- **quota** (Attributes) Configures the number of requests that users can make within a given interval. (see [below for nested schema](#nestedatt--quota))
-- **tags** (Attributes List) An array of arbitrary tags (key-value pairs) to associate with the usage plan. (see [below for nested schema](#nestedatt--tags))
-- **throttle** (Attributes) Configures the overall request rate (average requests per second) and burst capacity. (see [below for nested schema](#nestedatt--throttle))
-- **usage_plan_name** (String) A name for the usage plan.
+- `api_stages` (Attributes List) The API stages to associate with this usage plan. (see [below for nested schema](#nestedatt--api_stages))
+- `description` (String) A description of the usage plan.
+- `quota` (Attributes) Configures the number of requests that users can make within a given interval. (see [below for nested schema](#nestedatt--quota))
+- `tags` (Attributes List) An array of arbitrary tags (key-value pairs) to associate with the usage plan. (see [below for nested schema](#nestedatt--tags))
+- `throttle` (Attributes) Configures the overall request rate (average requests per second) and burst capacity. (see [below for nested schema](#nestedatt--throttle))
+- `usage_plan_name` (String) A name for the usage plan.
 
 <a id="nestedatt--api_stages"></a>
 ### Nested Schema for `api_stages`
 
 Read-Only:
 
-- **api_id** (String) The ID of an API that is in the specified Stage property that you want to associate with the usage plan.
-- **stage** (String) The name of the stage to associate with the usage plan.
-- **throttle** (Attributes Map) Map containing method-level throttling information for an API stage in a usage plan. The key for the map is the path and method for which to configure custom throttling, for example, '/pets/GET'. Duplicates are not allowed. (see [below for nested schema](#nestedatt--api_stages--throttle))
+- `api_id` (String) The ID of an API that is in the specified Stage property that you want to associate with the usage plan.
+- `stage` (String) The name of the stage to associate with the usage plan.
+- `throttle` (Attributes Map) Map containing method-level throttling information for an API stage in a usage plan. The key for the map is the path and method for which to configure custom throttling, for example, '/pets/GET'. Duplicates are not allowed. (see [below for nested schema](#nestedatt--api_stages--throttle))
 
 <a id="nestedatt--api_stages--throttle"></a>
 ### Nested Schema for `api_stages.throttle`
 
 Read-Only:
 
-- **burst_limit** (Number) The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.
-- **rate_limit** (Number) The API request steady-state rate limit (average requests per second over an extended period of time).
+- `burst_limit` (Number) The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.
+- `rate_limit` (Number) The API request steady-state rate limit (average requests per second over an extended period of time).
 
 
 
@@ -52,9 +52,9 @@ Read-Only:
 
 Read-Only:
 
-- **limit** (Number) The maximum number of requests that users can make within the specified time period.
-- **offset** (Number) For the initial time period, the number of requests to subtract from the specified limit. When you first implement a usage plan, the plan might start in the middle of the week or month. With this property, you can decrease the limit for this initial time period.
-- **period** (String) The time period for which the maximum limit of requests applies, such as DAY or WEEK. For valid values, see the period property for the UsagePlan resource in the Amazon API Gateway REST API Reference.
+- `limit` (Number) The maximum number of requests that users can make within the specified time period.
+- `offset` (Number) For the initial time period, the number of requests to subtract from the specified limit. When you first implement a usage plan, the plan might start in the middle of the week or month. With this property, you can decrease the limit for this initial time period.
+- `period` (String) The time period for which the maximum limit of requests applies, such as DAY or WEEK. For valid values, see the period property for the UsagePlan resource in the Amazon API Gateway REST API Reference.
 
 
 <a id="nestedatt--tags"></a>
@@ -62,8 +62,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 <a id="nestedatt--throttle"></a>
@@ -71,7 +71,7 @@ Read-Only:
 
 Read-Only:
 
-- **burst_limit** (Number) The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.
-- **rate_limit** (Number) The API request steady-state rate limit (average requests per second over an extended period of time).
+- `burst_limit` (Number) The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.
+- `rate_limit` (Number) The API request steady-state rate limit (average requests per second over an extended period of time).
 
 

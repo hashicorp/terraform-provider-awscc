@@ -17,33 +17,33 @@ Data Source schema for AWS::EKS::FargateProfile
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **cluster_name** (String) Name of the Cluster
-- **fargate_profile_name** (String) Name of FargateProfile
-- **pod_execution_role_arn** (String) The IAM policy arn for pods
-- **selectors** (Attributes List) (see [below for nested schema](#nestedatt--selectors))
-- **subnets** (List of String)
-- **tags** (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `arn` (String)
+- `cluster_name` (String) Name of the Cluster
+- `fargate_profile_name` (String) Name of FargateProfile
+- `pod_execution_role_arn` (String) The IAM policy arn for pods
+- `selectors` (Attributes List) (see [below for nested schema](#nestedatt--selectors))
+- `subnets` (List of String)
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--selectors"></a>
 ### Nested Schema for `selectors`
 
 Read-Only:
 
-- **labels** (Attributes List) (see [below for nested schema](#nestedatt--selectors--labels))
-- **namespace** (String)
+- `labels` (Attributes List) (see [below for nested schema](#nestedatt--selectors--labels))
+- `namespace` (String)
 
 <a id="nestedatt--selectors--labels"></a>
 ### Nested Schema for `selectors.labels`
 
 Read-Only:
 
-- **key** (String) The key name of the label.
-- **value** (String) The value for the label.
+- `key` (String) The key name of the label.
+- `value` (String) The value for the label.
 
 
 
@@ -52,7 +52,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

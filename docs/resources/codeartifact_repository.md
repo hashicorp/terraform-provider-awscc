@@ -17,31 +17,31 @@ The resource schema to create a CodeArtifact repository.
 
 ### Required
 
-- **domain_name** (String) The name of the domain that contains the repository.
-- **repository_name** (String) The name of the repository.
+- `domain_name` (String) The name of the domain that contains the repository.
+- `repository_name` (String) The name of the repository.
 
 ### Optional
 
-- **description** (String) A text description of the repository.
-- **external_connections** (List of String) A list of external connections associated with the repository.
-- **permissions_policy_document** (Map of String) The access control resource policy on the provided repository.
-- **tags** (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
-- **upstreams** (List of String) A list of upstream repositories associated with the repository.
+- `description` (String) A text description of the repository.
+- `external_connections` (List of String) A list of external connections associated with the repository.
+- `permissions_policy_document` (Map of String) The access control resource policy on the provided repository.
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `upstreams` (List of String) A list of upstream repositories associated with the repository.
 
 ### Read-Only
 
-- **arn** (String) The ARN of the repository.
-- **domain_owner** (String) The 12-digit account ID of the AWS account that owns the domain.
-- **id** (String) Uniquely identifies the resource.
-- **name** (String) The name of the repository. This is used for GetAtt
+- `arn` (String) The ARN of the repository.
+- `domain_owner` (String) The 12-digit account ID of the AWS account that owns the domain.
+- `id` (String) Uniquely identifies the resource.
+- `name` (String) The name of the repository. This is used for GetAtt
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

@@ -17,27 +17,27 @@ Resource Type definition for AWS::AppIntegrations::EventIntegration
 
 ### Required
 
-- **event_bridge_bus** (String) The Amazon Eventbridge bus for the event integration.
-- **event_filter** (Attributes) The EventFilter (source) associated with the event integration. (see [below for nested schema](#nestedatt--event_filter))
-- **name** (String) The name of the event integration.
+- `event_bridge_bus` (String) The Amazon Eventbridge bus for the event integration.
+- `event_filter` (Attributes) The EventFilter (source) associated with the event integration. (see [below for nested schema](#nestedatt--event_filter))
+- `name` (String) The name of the event integration.
 
 ### Optional
 
-- **description** (String) The event integration description.
-- **tags** (Attributes List) The tags (keys and values) associated with the event integration. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The event integration description.
+- `tags` (Attributes List) The tags (keys and values) associated with the event integration. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **associations** (Attributes List) The associations with the event integration. (see [below for nested schema](#nestedatt--associations))
-- **event_integration_arn** (String) The Amazon Resource Name (ARN) of the event integration.
-- **id** (String) Uniquely identifies the resource.
+- `associations` (Attributes List) The associations with the event integration. (see [below for nested schema](#nestedatt--associations))
+- `event_integration_arn` (String) The Amazon Resource Name (ARN) of the event integration.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--event_filter"></a>
 ### Nested Schema for `event_filter`
 
 Required:
 
-- **source** (String) The source of the events.
+- `source` (String) The source of the events.
 
 
 <a id="nestedatt--tags"></a>
@@ -45,8 +45,8 @@ Required:
 
 Optional:
 
-- **key** (String) A key to identify the tag.
-- **value** (String) Corresponding tag value for the key.
+- `key` (String) A key to identify the tag.
+- `value` (String) Corresponding tag value for the key.
 
 
 <a id="nestedatt--associations"></a>
@@ -54,19 +54,19 @@ Optional:
 
 Read-Only:
 
-- **client_association_metadata** (Attributes List) The metadata associated with the client. (see [below for nested schema](#nestedatt--associations--client_association_metadata))
-- **client_id** (String) The identifier for the client that is associated with the event integration.
-- **event_bridge_rule_name** (String) The name of the Eventbridge rule.
-- **event_integration_association_arn** (String) The Amazon Resource Name (ARN) for the event integration association.
-- **event_integration_association_id** (String) The identifier for the event integration association.
+- `client_association_metadata` (Attributes List) The metadata associated with the client. (see [below for nested schema](#nestedatt--associations--client_association_metadata))
+- `client_id` (String) The identifier for the client that is associated with the event integration.
+- `event_bridge_rule_name` (String) The name of the Eventbridge rule.
+- `event_integration_association_arn` (String) The Amazon Resource Name (ARN) for the event integration association.
+- `event_integration_association_id` (String) The identifier for the event integration association.
 
 <a id="nestedatt--associations--client_association_metadata"></a>
 ### Nested Schema for `associations.client_association_metadata`
 
 Read-Only:
 
-- **key** (String) A key to identify the metadata.
-- **value** (String) Corresponding metadata value for the key.
+- `key` (String) A key to identify the metadata.
+- `value` (String) Corresponding metadata value for the key.
 
 ## Import
 

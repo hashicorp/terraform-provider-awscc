@@ -17,39 +17,39 @@ Macie FindingsFilter resource schema.
 
 ### Required
 
-- **finding_criteria** (Attributes) Findings filter criteria. (see [below for nested schema](#nestedatt--finding_criteria))
-- **name** (String) Findings filter name
+- `finding_criteria` (Attributes) Findings filter criteria. (see [below for nested schema](#nestedatt--finding_criteria))
+- `name` (String) Findings filter name
 
 ### Optional
 
-- **action** (String) Findings filter action.
-- **description** (String) Findings filter description
-- **position** (Number) Findings filter position.
+- `action` (String) Findings filter action.
+- `description` (String) Findings filter description
+- `position` (Number) Findings filter position.
 
 ### Read-Only
 
-- **arn** (String) Findings filter ARN.
-- **findings_filter_list_items** (Attributes List) Findings filters list. (see [below for nested schema](#nestedatt--findings_filter_list_items))
-- **id** (String) Findings filter ID.
+- `arn` (String) Findings filter ARN.
+- `findings_filter_list_items` (Attributes List) Findings filters list. (see [below for nested schema](#nestedatt--findings_filter_list_items))
+- `id` (String) Findings filter ID.
 
 <a id="nestedatt--finding_criteria"></a>
 ### Nested Schema for `finding_criteria`
 
 Required:
 
-- **criterion** (Attributes Map) Map of filter criteria. (see [below for nested schema](#nestedatt--finding_criteria--criterion))
+- `criterion` (Attributes Map) Map of filter criteria. (see [below for nested schema](#nestedatt--finding_criteria--criterion))
 
 <a id="nestedatt--finding_criteria--criterion"></a>
 ### Nested Schema for `finding_criteria.criterion`
 
 Required:
 
-- **eq** (List of String)
-- **gt** (Number)
-- **gte** (Number)
-- **lt** (Number)
-- **lte** (Number)
-- **neq** (List of String)
+- `eq` (List of String)
+- `gt` (Number)
+- `gte` (Number)
+- `lt` (Number)
+- `lte` (Number)
+- `neq` (List of String)
 
 
 
@@ -58,8 +58,8 @@ Required:
 
 Read-Only:
 
-- **id** (String) The ID of this resource.
-- **name** (String)
+- `id` (String) The ID of this resource.
+- `name` (String)
 
 ## Import
 

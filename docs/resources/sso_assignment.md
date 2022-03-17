@@ -17,16 +17,16 @@ Resource Type definition for SSO assignmet
 
 ### Required
 
-- **instance_arn** (String) The sso instance that the permission set is owned.
-- **permission_set_arn** (String) The permission set that the assignemt will be assigned
-- **principal_id** (String) The assignee's identifier, user id/group id
-- **principal_type** (String) The assignee's type, user/group
-- **target_id** (String) The account id to be provisioned.
-- **target_type** (String) The type of resource to be provsioned to, only aws account now
+- `instance_arn` (String) The sso instance that the permission set is owned.
+- `permission_set_arn` (String) The permission set that the assignemt will be assigned
+- `principal_id` (String) The assignee's identifier, user id/group id
+- `principal_type` (String) The assignee's type, user/group
+- `target_id` (String) The account id to be provisioned.
+- `target_type` (String) The type of resource to be provsioned to, only aws account now
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

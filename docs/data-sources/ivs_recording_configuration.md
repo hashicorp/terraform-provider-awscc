@@ -17,30 +17,30 @@ Data Source schema for AWS::IVS::RecordingConfiguration
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.
-- **destination_configuration** (Attributes) Recording Destination Configuration. (see [below for nested schema](#nestedatt--destination_configuration))
-- **name** (String) Recording Configuration Name.
-- **state** (String) Recording Configuration State.
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
-- **thumbnail_configuration** (Attributes) Recording Thumbnail Configuration. (see [below for nested schema](#nestedatt--thumbnail_configuration))
+- `arn` (String) Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.
+- `destination_configuration` (Attributes) Recording Destination Configuration. (see [below for nested schema](#nestedatt--destination_configuration))
+- `name` (String) Recording Configuration Name.
+- `state` (String) Recording Configuration State.
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
+- `thumbnail_configuration` (Attributes) Recording Thumbnail Configuration. (see [below for nested schema](#nestedatt--thumbnail_configuration))
 
 <a id="nestedatt--destination_configuration"></a>
 ### Nested Schema for `destination_configuration`
 
 Read-Only:
 
-- **s3** (Attributes) Recording S3 Destination Configuration. (see [below for nested schema](#nestedatt--destination_configuration--s3))
+- `s3` (Attributes) Recording S3 Destination Configuration. (see [below for nested schema](#nestedatt--destination_configuration--s3))
 
 <a id="nestedatt--destination_configuration--s3"></a>
 ### Nested Schema for `destination_configuration.s3`
 
 Read-Only:
 
-- **bucket_name** (String)
+- `bucket_name` (String)
 
 
 
@@ -49,8 +49,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--thumbnail_configuration"></a>
@@ -58,7 +58,7 @@ Read-Only:
 
 Read-Only:
 
-- **recording_mode** (String) Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.
-- **target_interval_seconds** (Number) Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.
+- `recording_mode` (String) Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.
+- `target_interval_seconds` (Number) Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.
 
 

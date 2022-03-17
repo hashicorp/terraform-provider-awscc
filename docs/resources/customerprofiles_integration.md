@@ -17,50 +17,50 @@ The resource schema for creating an Amazon Connect Customer Profiles Integration
 
 ### Required
 
-- **domain_name** (String) The unique name of the domain.
+- `domain_name` (String) The unique name of the domain.
 
 ### Optional
 
-- **flow_definition** (Attributes) (see [below for nested schema](#nestedatt--flow_definition))
-- **object_type_name** (String) The name of the ObjectType defined for the 3rd party data in Profile Service
-- **object_type_names** (Attributes List) The mapping between 3rd party event types and ObjectType names (see [below for nested schema](#nestedatt--object_type_names))
-- **tags** (Attributes List) The tags (keys and values) associated with the integration (see [below for nested schema](#nestedatt--tags))
-- **uri** (String) The URI of the S3 bucket or any other type of data source.
+- `flow_definition` (Attributes) (see [below for nested schema](#nestedatt--flow_definition))
+- `object_type_name` (String) The name of the ObjectType defined for the 3rd party data in Profile Service
+- `object_type_names` (Attributes List) The mapping between 3rd party event types and ObjectType names (see [below for nested schema](#nestedatt--object_type_names))
+- `tags` (Attributes List) The tags (keys and values) associated with the integration (see [below for nested schema](#nestedatt--tags))
+- `uri` (String) The URI of the S3 bucket or any other type of data source.
 
 ### Read-Only
 
-- **created_at** (String) The time of this integration got created
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_at** (String) The time of this integration got last updated at
+- `created_at` (String) The time of this integration got created
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_at` (String) The time of this integration got last updated at
 
 <a id="nestedatt--flow_definition"></a>
 ### Nested Schema for `flow_definition`
 
 Optional:
 
-- **description** (String)
-- **flow_name** (String)
-- **kms_arn** (String)
-- **source_flow_config** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config))
-- **tasks** (Attributes List) (see [below for nested schema](#nestedatt--flow_definition--tasks))
-- **trigger_config** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--trigger_config))
+- `description` (String)
+- `flow_name` (String)
+- `kms_arn` (String)
+- `source_flow_config` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config))
+- `tasks` (Attributes List) (see [below for nested schema](#nestedatt--flow_definition--tasks))
+- `trigger_config` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--trigger_config))
 
 <a id="nestedatt--flow_definition--source_flow_config"></a>
 ### Nested Schema for `flow_definition.source_flow_config`
 
 Optional:
 
-- **connector_profile_name** (String)
-- **connector_type** (String)
-- **incremental_pull_config** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--incremental_pull_config))
-- **source_connector_properties** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties))
+- `connector_profile_name` (String)
+- `connector_type` (String)
+- `incremental_pull_config` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--incremental_pull_config))
+- `source_connector_properties` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties))
 
 <a id="nestedatt--flow_definition--source_flow_config--incremental_pull_config"></a>
 ### Nested Schema for `flow_definition.source_flow_config.incremental_pull_config`
 
 Optional:
 
-- **datetime_type_field_name** (String)
+- `datetime_type_field_name` (String)
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties"></a>
@@ -68,18 +68,18 @@ Optional:
 
 Optional:
 
-- **marketo** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--marketo))
-- **s3** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--s3))
-- **salesforce** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--salesforce))
-- **service_now** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--service_now))
-- **zendesk** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--zendesk))
+- `marketo` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--marketo))
+- `s3` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--s3))
+- `salesforce` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--salesforce))
+- `service_now` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--service_now))
+- `zendesk` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--zendesk))
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--marketo"></a>
 ### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
 
 Optional:
 
-- **object** (String)
+- `object` (String)
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--s3"></a>
@@ -87,8 +87,8 @@ Optional:
 
 Optional:
 
-- **bucket_name** (String)
-- **bucket_prefix** (String)
+- `bucket_name` (String)
+- `bucket_prefix` (String)
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--salesforce"></a>
@@ -96,9 +96,9 @@ Optional:
 
 Optional:
 
-- **enable_dynamic_field_update** (Boolean)
-- **include_deleted_records** (Boolean)
-- **object** (String)
+- `enable_dynamic_field_update` (Boolean)
+- `include_deleted_records` (Boolean)
+- `object` (String)
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--service_now"></a>
@@ -106,7 +106,7 @@ Optional:
 
 Optional:
 
-- **object** (String)
+- `object` (String)
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--zendesk"></a>
@@ -114,7 +114,7 @@ Optional:
 
 Optional:
 
-- **object** (String)
+- `object` (String)
 
 
 
@@ -124,22 +124,22 @@ Optional:
 
 Optional:
 
-- **connector_operator** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--tasks--connector_operator))
-- **destination_field** (String)
-- **source_fields** (List of String)
-- **task_properties** (Attributes List) (see [below for nested schema](#nestedatt--flow_definition--tasks--task_properties))
-- **task_type** (String)
+- `connector_operator` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--tasks--connector_operator))
+- `destination_field` (String)
+- `source_fields` (List of String)
+- `task_properties` (Attributes List) (see [below for nested schema](#nestedatt--flow_definition--tasks--task_properties))
+- `task_type` (String)
 
 <a id="nestedatt--flow_definition--tasks--connector_operator"></a>
 ### Nested Schema for `flow_definition.tasks.connector_operator`
 
 Optional:
 
-- **marketo** (String)
-- **s3** (String)
-- **salesforce** (String)
-- **service_now** (String)
-- **zendesk** (String)
+- `marketo` (String)
+- `s3` (String)
+- `salesforce` (String)
+- `service_now` (String)
+- `zendesk` (String)
 
 
 <a id="nestedatt--flow_definition--tasks--task_properties"></a>
@@ -147,8 +147,8 @@ Optional:
 
 Optional:
 
-- **operator_property_key** (String)
-- **property** (String)
+- `operator_property_key` (String)
+- `property` (String)
 
 
 
@@ -157,28 +157,28 @@ Optional:
 
 Optional:
 
-- **trigger_properties** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--trigger_config--trigger_properties))
-- **trigger_type** (String)
+- `trigger_properties` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--trigger_config--trigger_properties))
+- `trigger_type` (String)
 
 <a id="nestedatt--flow_definition--trigger_config--trigger_properties"></a>
 ### Nested Schema for `flow_definition.trigger_config.trigger_properties`
 
 Optional:
 
-- **scheduled** (Attributes) (see [below for nested schema](#nestedatt--flow_definition--trigger_config--trigger_properties--scheduled))
+- `scheduled` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--trigger_config--trigger_properties--scheduled))
 
 <a id="nestedatt--flow_definition--trigger_config--trigger_properties--scheduled"></a>
 ### Nested Schema for `flow_definition.trigger_config.trigger_properties.scheduled`
 
 Optional:
 
-- **data_pull_mode** (String)
-- **first_execution_from** (Number)
-- **schedule_end_time** (Number)
-- **schedule_expression** (String)
-- **schedule_offset** (Number)
-- **schedule_start_time** (Number)
-- **timezone** (String)
+- `data_pull_mode` (String)
+- `first_execution_from` (Number)
+- `schedule_end_time` (Number)
+- `schedule_expression` (String)
+- `schedule_offset` (Number)
+- `schedule_start_time` (Number)
+- `timezone` (String)
 
 
 
@@ -189,8 +189,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -198,8 +198,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

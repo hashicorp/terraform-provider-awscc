@@ -17,42 +17,42 @@ Resource Type definition for AWS::ECS::Service
 
 ### Optional
 
-- **capacity_provider_strategy** (Attributes List) (see [below for nested schema](#nestedatt--capacity_provider_strategy))
-- **cluster** (String)
-- **deployment_configuration** (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration))
-- **deployment_controller** (Attributes) (see [below for nested schema](#nestedatt--deployment_controller))
-- **desired_count** (Number)
-- **enable_ecs_managed_tags** (Boolean)
-- **enable_execute_command** (Boolean)
-- **health_check_grace_period_seconds** (Number)
-- **launch_type** (String)
-- **load_balancers** (Attributes List) (see [below for nested schema](#nestedatt--load_balancers))
-- **network_configuration** (Attributes) (see [below for nested schema](#nestedatt--network_configuration))
-- **placement_constraints** (Attributes List) (see [below for nested schema](#nestedatt--placement_constraints))
-- **placement_strategies** (Attributes List) (see [below for nested schema](#nestedatt--placement_strategies))
-- **platform_version** (String)
-- **propagate_tags** (String)
-- **role** (String)
-- **scheduling_strategy** (String)
-- **service_name** (String)
-- **service_registries** (Attributes List) (see [below for nested schema](#nestedatt--service_registries))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **task_definition** (String)
+- `capacity_provider_strategy` (Attributes List) (see [below for nested schema](#nestedatt--capacity_provider_strategy))
+- `cluster` (String)
+- `deployment_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration))
+- `deployment_controller` (Attributes) (see [below for nested schema](#nestedatt--deployment_controller))
+- `desired_count` (Number)
+- `enable_ecs_managed_tags` (Boolean)
+- `enable_execute_command` (Boolean)
+- `health_check_grace_period_seconds` (Number)
+- `launch_type` (String)
+- `load_balancers` (Attributes List) (see [below for nested schema](#nestedatt--load_balancers))
+- `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--network_configuration))
+- `placement_constraints` (Attributes List) (see [below for nested schema](#nestedatt--placement_constraints))
+- `placement_strategies` (Attributes List) (see [below for nested schema](#nestedatt--placement_strategies))
+- `platform_version` (String)
+- `propagate_tags` (String)
+- `role` (String)
+- `scheduling_strategy` (String)
+- `service_name` (String)
+- `service_registries` (Attributes List) (see [below for nested schema](#nestedatt--service_registries))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `task_definition` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **name** (String)
-- **service_arn** (String)
+- `id` (String) Uniquely identifies the resource.
+- `name` (String)
+- `service_arn` (String)
 
 <a id="nestedatt--capacity_provider_strategy"></a>
 ### Nested Schema for `capacity_provider_strategy`
 
 Optional:
 
-- **base** (Number)
-- **capacity_provider** (String)
-- **weight** (Number)
+- `base` (Number)
+- `capacity_provider` (String)
+- `weight` (Number)
 
 
 <a id="nestedatt--deployment_configuration"></a>
@@ -60,17 +60,17 @@ Optional:
 
 Optional:
 
-- **deployment_circuit_breaker** (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
-- **maximum_percent** (Number)
-- **minimum_healthy_percent** (Number)
+- `deployment_circuit_breaker` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
+- `maximum_percent` (Number)
+- `minimum_healthy_percent` (Number)
 
 <a id="nestedatt--deployment_configuration--deployment_circuit_breaker"></a>
 ### Nested Schema for `deployment_configuration.deployment_circuit_breaker`
 
 Optional:
 
-- **enable** (Boolean)
-- **rollback** (Boolean)
+- `enable` (Boolean)
+- `rollback` (Boolean)
 
 
 
@@ -79,7 +79,7 @@ Optional:
 
 Optional:
 
-- **type** (String)
+- `type` (String)
 
 
 <a id="nestedatt--load_balancers"></a>
@@ -87,10 +87,10 @@ Optional:
 
 Optional:
 
-- **container_name** (String)
-- **container_port** (Number)
-- **load_balancer_name** (String)
-- **target_group_arn** (String)
+- `container_name` (String)
+- `container_port` (Number)
+- `load_balancer_name` (String)
+- `target_group_arn` (String)
 
 
 <a id="nestedatt--network_configuration"></a>
@@ -98,16 +98,16 @@ Optional:
 
 Optional:
 
-- **awsvpc_configuration** (Attributes) (see [below for nested schema](#nestedatt--network_configuration--awsvpc_configuration))
+- `awsvpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--network_configuration--awsvpc_configuration))
 
 <a id="nestedatt--network_configuration--awsvpc_configuration"></a>
 ### Nested Schema for `network_configuration.awsvpc_configuration`
 
 Optional:
 
-- **assign_public_ip** (String)
-- **security_groups** (List of String)
-- **subnets** (List of String)
+- `assign_public_ip` (String)
+- `security_groups` (List of String)
+- `subnets` (List of String)
 
 
 
@@ -116,8 +116,8 @@ Optional:
 
 Optional:
 
-- **expression** (String)
-- **type** (String)
+- `expression` (String)
+- `type` (String)
 
 
 <a id="nestedatt--placement_strategies"></a>
@@ -125,8 +125,8 @@ Optional:
 
 Optional:
 
-- **field** (String)
-- **type** (String)
+- `field` (String)
+- `type` (String)
 
 
 <a id="nestedatt--service_registries"></a>
@@ -134,10 +134,10 @@ Optional:
 
 Optional:
 
-- **container_name** (String)
-- **container_port** (Number)
-- **port** (Number)
-- **registry_arn** (String)
+- `container_name` (String)
+- `container_port` (Number)
+- `port` (Number)
+- `registry_arn` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -145,8 +145,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

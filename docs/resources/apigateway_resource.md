@@ -17,14 +17,14 @@ Resource Type definition for AWS::ApiGateway::Resource
 
 ### Required
 
-- **parent_id** (String) The parent resource's identifier.
-- **path_part** (String) The last path segment for this resource.
-- **rest_api_id** (String) The ID of the RestApi resource in which you want to create this resource..
+- `parent_id` (String) The parent resource's identifier.
+- `path_part` (String) The last path segment for this resource.
+- `rest_api_id` (String) The ID of the RestApi resource in which you want to create this resource..
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **resource_id** (String) A unique primary identifier for a Resource
+- `id` (String) Uniquely identifies the resource.
+- `resource_id` (String) A unique primary identifier for a Resource
 
 ## Import
 

@@ -17,25 +17,25 @@ AWS::S3::MultiRegionAccessPoint is an Amazon S3 resource type that dynamically r
 
 ### Required
 
-- **regions** (Attributes List) The list of buckets that you want to associate this Multi Region Access Point with. (see [below for nested schema](#nestedatt--regions))
+- `regions` (Attributes List) The list of buckets that you want to associate this Multi Region Access Point with. (see [below for nested schema](#nestedatt--regions))
 
 ### Optional
 
-- **name** (String) The name you want to assign to this Multi Region Access Point.
-- **public_access_block_configuration** (Attributes) The PublicAccessBlock configuration that you want to apply to this Multi Region Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide. (see [below for nested schema](#nestedatt--public_access_block_configuration))
+- `name` (String) The name you want to assign to this Multi Region Access Point.
+- `public_access_block_configuration` (Attributes) The PublicAccessBlock configuration that you want to apply to this Multi Region Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide. (see [below for nested schema](#nestedatt--public_access_block_configuration))
 
 ### Read-Only
 
-- **alias** (String) The alias is a unique identifier to, and is part of the public DNS name for this Multi Region Access Point
-- **created_at** (String) The timestamp of the when the Multi Region Access Point is created
-- **id** (String) Uniquely identifies the resource.
+- `alias` (String) The alias is a unique identifier to, and is part of the public DNS name for this Multi Region Access Point
+- `created_at` (String) The timestamp of the when the Multi Region Access Point is created
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--regions"></a>
 ### Nested Schema for `regions`
 
 Required:
 
-- **bucket** (String)
+- `bucket` (String)
 
 
 <a id="nestedatt--public_access_block_configuration"></a>
@@ -43,14 +43,14 @@ Required:
 
 Optional:
 
-- **block_public_acls** (Boolean) Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:
+- `block_public_acls` (Boolean) Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:
 - PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.
  - PUT Object calls fail if the request includes a public ACL.
 . - PUT Bucket calls fail if the request includes a public ACL.
 Enabling this setting doesn't affect existing policies or ACLs.
-- **block_public_policy** (Boolean) Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. Enabling this setting doesn't affect existing bucket policies.
-- **ignore_public_acls** (Boolean) Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.
-- **restrict_public_buckets** (Boolean) Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.
+- `block_public_policy` (Boolean) Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. Enabling this setting doesn't affect existing bucket policies.
+- `ignore_public_acls` (Boolean) Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.
+- `restrict_public_buckets` (Boolean) Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.
 Enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.
 
 ## Import

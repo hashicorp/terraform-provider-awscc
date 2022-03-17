@@ -17,26 +17,26 @@ Data Source schema for AWS::IoTWireless::WirelessGateway
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Arn for Wireless Gateway. Returned upon successful create.
-- **description** (String) Description of Wireless Gateway.
-- **last_uplink_received_at** (String) The date and time when the most recent uplink was received.
-- **lo_ra_wan** (Attributes) The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Gateway. (see [below for nested schema](#nestedatt--lo_ra_wan))
-- **name** (String) Name of Wireless Gateway.
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
-- **thing_arn** (String) Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.
-- **thing_name** (String) Thing Arn. If there is a Thing created, this can be returned with a Get call.
+- `arn` (String) Arn for Wireless Gateway. Returned upon successful create.
+- `description` (String) Description of Wireless Gateway.
+- `last_uplink_received_at` (String) The date and time when the most recent uplink was received.
+- `lo_ra_wan` (Attributes) The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Gateway. (see [below for nested schema](#nestedatt--lo_ra_wan))
+- `name` (String) Name of Wireless Gateway.
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
+- `thing_arn` (String) Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.
+- `thing_name` (String) Thing Arn. If there is a Thing created, this can be returned with a Get call.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`
 
 Read-Only:
 
-- **gateway_eui** (String)
-- **rf_region** (String)
+- `gateway_eui` (String)
+- `rf_region` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -44,7 +44,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

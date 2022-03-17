@@ -17,10 +17,10 @@ Data Source schema for AWS::EC2::EgressOnlyInternetGateway
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **vpc_id** (String) The ID of the VPC for which to create the egress-only internet gateway.
+- `vpc_id` (String) The ID of the VPC for which to create the egress-only internet gateway.
 
 

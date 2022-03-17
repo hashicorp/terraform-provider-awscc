@@ -17,26 +17,26 @@ Data Source schema for AWS::Lightsail::LoadBalancer
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **attached_instances** (Set of String) The names of the instances attached to the load balancer.
-- **health_check_path** (String) The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., "/").
-- **instance_port** (Number) The instance port where you're creating your load balancer.
-- **ip_address_type** (String) The IP address type for the load balancer. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
-- **load_balancer_arn** (String)
-- **load_balancer_name** (String) The name of your load balancer.
-- **session_stickiness_enabled** (Boolean) Configuration option to enable session stickiness.
-- **session_stickiness_lb_cookie_duration_seconds** (String) Configuration option to adjust session stickiness cookie duration parameter.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `attached_instances` (Set of String) The names of the instances attached to the load balancer.
+- `health_check_path` (String) The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., "/").
+- `instance_port` (Number) The instance port where you're creating your load balancer.
+- `ip_address_type` (String) The IP address type for the load balancer. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+- `load_balancer_arn` (String)
+- `load_balancer_name` (String) The name of your load balancer.
+- `session_stickiness_enabled` (Boolean) Configuration option to enable session stickiness.
+- `session_stickiness_lb_cookie_duration_seconds` (String) Configuration option to adjust session stickiness cookie duration parameter.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

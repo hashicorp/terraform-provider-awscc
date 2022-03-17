@@ -17,24 +17,24 @@ Resource Type definition for AWS::Config::ConfigurationAggregator
 
 ### Optional
 
-- **account_aggregation_sources** (Attributes List) (see [below for nested schema](#nestedatt--account_aggregation_sources))
-- **configuration_aggregator_name** (String) The name of the aggregator.
-- **organization_aggregation_source** (Attributes) (see [below for nested schema](#nestedatt--organization_aggregation_source))
-- **tags** (Attributes List) The tags for the configuration aggregator. (see [below for nested schema](#nestedatt--tags))
+- `account_aggregation_sources` (Attributes List) (see [below for nested schema](#nestedatt--account_aggregation_sources))
+- `configuration_aggregator_name` (String) The name of the aggregator.
+- `organization_aggregation_source` (Attributes) (see [below for nested schema](#nestedatt--organization_aggregation_source))
+- `tags` (Attributes List) The tags for the configuration aggregator. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **configuration_aggregator_arn** (String) The Amazon Resource Name (ARN) of the aggregator.
-- **id** (String) Uniquely identifies the resource.
+- `configuration_aggregator_arn` (String) The Amazon Resource Name (ARN) of the aggregator.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--account_aggregation_sources"></a>
 ### Nested Schema for `account_aggregation_sources`
 
 Optional:
 
-- **account_ids** (List of String)
-- **all_aws_regions** (Boolean)
-- **aws_regions** (List of String)
+- `account_ids` (List of String)
+- `all_aws_regions` (Boolean)
+- `aws_regions` (List of String)
 
 
 <a id="nestedatt--organization_aggregation_source"></a>
@@ -42,9 +42,9 @@ Optional:
 
 Optional:
 
-- **all_aws_regions** (Boolean)
-- **aws_regions** (List of String)
-- **role_arn** (String)
+- `all_aws_regions` (Boolean)
+- `aws_regions` (List of String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -52,8 +52,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

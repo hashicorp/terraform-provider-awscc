@@ -17,19 +17,19 @@ Data Source schema for AWS::EC2::NetworkAcl
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **tags** (Attributes List) The tags to assign to the network ACL. (see [below for nested schema](#nestedatt--tags))
-- **vpc_id** (String) The ID of the VPC.
+- `tags` (Attributes List) The tags to assign to the network ACL. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String) The ID of the VPC.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

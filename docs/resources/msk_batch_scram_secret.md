@@ -17,15 +17,15 @@ Resource Type definition for AWS::MSK::BatchScramSecret
 
 ### Required
 
-- **cluster_arn** (String)
+- `cluster_arn` (String)
 
 ### Optional
 
-- **secret_arn_list** (List of String)
+- `secret_arn_list` (List of String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

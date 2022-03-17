@@ -17,7 +17,7 @@ Plural Data Source schema for AWS::GreengrassV2::ComponentVersion
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the data source.
-- **ids** (Set of String) Set of Resource Identifiers.
+- `id` (String) Uniquely identifies the data source.
+- `ids` (Set of String) Set of Resource Identifiers.
 
 

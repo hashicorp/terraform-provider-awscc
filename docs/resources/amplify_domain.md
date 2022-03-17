@@ -17,31 +17,31 @@ The AWS::Amplify::Domain resource allows you to connect a custom domain to your 
 
 ### Required
 
-- **app_id** (String)
-- **domain_name** (String)
-- **sub_domain_settings** (Attributes List) (see [below for nested schema](#nestedatt--sub_domain_settings))
+- `app_id` (String)
+- `domain_name` (String)
+- `sub_domain_settings` (Attributes List) (see [below for nested schema](#nestedatt--sub_domain_settings))
 
 ### Optional
 
-- **auto_sub_domain_creation_patterns** (List of String)
-- **auto_sub_domain_iam_role** (String)
-- **enable_auto_sub_domain** (Boolean)
+- `auto_sub_domain_creation_patterns` (List of String)
+- `auto_sub_domain_iam_role` (String)
+- `enable_auto_sub_domain` (Boolean)
 
 ### Read-Only
 
-- **arn** (String)
-- **certificate_record** (String)
-- **domain_status** (String)
-- **id** (String) Uniquely identifies the resource.
-- **status_reason** (String)
+- `arn` (String)
+- `certificate_record` (String)
+- `domain_status` (String)
+- `id` (String) Uniquely identifies the resource.
+- `status_reason` (String)
 
 <a id="nestedatt--sub_domain_settings"></a>
 ### Nested Schema for `sub_domain_settings`
 
 Required:
 
-- **branch_name** (String)
-- **prefix** (String)
+- `branch_name` (String)
+- `prefix` (String)
 
 ## Import
 

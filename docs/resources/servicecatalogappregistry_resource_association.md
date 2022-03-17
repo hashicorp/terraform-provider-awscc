@@ -17,15 +17,15 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::ResourceAssociation
 
 ### Required
 
-- **application** (String) The name or the Id of the Application.
-- **resource** (String) The name or the Id of the Resource.
-- **resource_type** (String) The type of the CFN Resource for now it's enum CFN_STACK.
+- `application` (String) The name or the Id of the Application.
+- `resource` (String) The name or the Id of the Resource.
+- `resource_type` (String) The type of the CFN Resource for now it's enum CFN_STACK.
 
 ### Read-Only
 
-- **application_arn** (String)
-- **id** (String) The ID of this resource.
-- **resource_arn** (String)
+- `application_arn` (String)
+- `id` (String) The ID of this resource.
+- `resource_arn` (String)
 
 ## Import
 

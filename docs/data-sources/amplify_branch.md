@@ -17,32 +17,32 @@ Data Source schema for AWS::Amplify::Branch
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **app_id** (String)
-- **arn** (String)
-- **basic_auth_config** (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
-- **branch_name** (String)
-- **build_spec** (String)
-- **description** (String)
-- **enable_auto_build** (Boolean)
-- **enable_performance_mode** (Boolean)
-- **enable_pull_request_preview** (Boolean)
-- **environment_variables** (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
-- **pull_request_environment_name** (String)
-- **stage** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `app_id` (String)
+- `arn` (String)
+- `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
+- `branch_name` (String)
+- `build_spec` (String)
+- `description` (String)
+- `enable_auto_build` (Boolean)
+- `enable_performance_mode` (Boolean)
+- `enable_pull_request_preview` (Boolean)
+- `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
+- `pull_request_environment_name` (String)
+- `stage` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--basic_auth_config"></a>
 ### Nested Schema for `basic_auth_config`
 
 Read-Only:
 
-- **enable_basic_auth** (Boolean)
-- **password** (String)
-- **username** (String)
+- `enable_basic_auth` (Boolean)
+- `password` (String)
+- `username` (String)
 
 
 <a id="nestedatt--environment_variables"></a>
@@ -50,8 +50,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -59,7 +59,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

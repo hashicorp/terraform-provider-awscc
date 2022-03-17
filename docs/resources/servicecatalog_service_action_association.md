@@ -17,13 +17,13 @@ Resource Schema for AWS::ServiceCatalog::ServiceActionAssociation
 
 ### Required
 
-- **product_id** (String)
-- **provisioning_artifact_id** (String)
-- **service_action_id** (String)
+- `product_id` (String)
+- `provisioning_artifact_id` (String)
+- `service_action_id` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

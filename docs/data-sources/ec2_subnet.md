@@ -17,34 +17,34 @@ Data Source schema for AWS::EC2::Subnet
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **assign_ipv_6_address_on_creation** (Boolean)
-- **availability_zone** (String)
-- **availability_zone_id** (String)
-- **cidr_block** (String)
-- **enable_dns_64** (Boolean)
-- **ipv_6_cidr_block** (String)
-- **ipv_6_cidr_blocks** (List of String)
-- **ipv_6_native** (Boolean)
-- **map_public_ip_on_launch** (Boolean)
-- **network_acl_association_id** (String)
-- **outpost_arn** (String)
-- **private_dns_name_options_on_launch** (Attributes) (see [below for nested schema](#nestedatt--private_dns_name_options_on_launch))
-- **subnet_id** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **vpc_id** (String)
+- `assign_ipv_6_address_on_creation` (Boolean)
+- `availability_zone` (String)
+- `availability_zone_id` (String)
+- `cidr_block` (String)
+- `enable_dns_64` (Boolean)
+- `ipv_6_cidr_block` (String)
+- `ipv_6_cidr_blocks` (List of String)
+- `ipv_6_native` (Boolean)
+- `map_public_ip_on_launch` (Boolean)
+- `network_acl_association_id` (String)
+- `outpost_arn` (String)
+- `private_dns_name_options_on_launch` (Attributes) (see [below for nested schema](#nestedatt--private_dns_name_options_on_launch))
+- `subnet_id` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String)
 
 <a id="nestedatt--private_dns_name_options_on_launch"></a>
 ### Nested Schema for `private_dns_name_options_on_launch`
 
 Read-Only:
 
-- **enable_resource_name_dns_a_record** (Boolean)
-- **enable_resource_name_dns_aaaa_record** (Boolean)
-- **hostname_type** (String)
+- `enable_resource_name_dns_a_record` (Boolean)
+- `enable_resource_name_dns_aaaa_record` (Boolean)
+- `hostname_type` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -52,7 +52,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

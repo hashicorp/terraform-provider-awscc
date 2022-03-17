@@ -187,34 +187,34 @@ provider "awscc" {
 
 ### Optional
 
-- **access_key** (String) This is the AWS access key. It must be provided, but it can also be sourced from the `AWS_ACCESS_KEY_ID` environment variable, or via a shared credentials file if `profile` is specified.
-- **assume_role** (Attributes) An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role))
-- **http_proxy** (String) The address of an HTTP proxy to use when accessing the AWS API. Can also be configured using the `HTTP_PROXY` or `HTTPS_PROXY` environment variables.
-- **insecure** (Boolean) Explicitly allow the provider to perform "insecure" SSL requests. If not set, defaults to `false`.
-- **max_retries** (Number) The maximum number of times an AWS API request is retried on failure. If not set, defaults to 25.
-- **profile** (String) This is the AWS profile name as set in the shared credentials file.
-- **region** (String) This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, or via a shared config file.
-- **role_arn** (String) Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.
-- **secret_key** (String) This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.
-- **shared_config_files** (List of String) List of paths to shared config files. If not set, defaults to `~/.aws/config`.
-- **shared_credentials_files** (List of String) List of paths to shared credentials files. If not set, defaults to `~/.aws/credentials`.
-- **skip_medatadata_api_check** (Boolean) Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.
-- **token** (String) Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.
-- **user_agent** (Attributes List) Product details to append to User-Agent string in all AWS API calls. (see [below for nested schema](#nestedatt--user_agent))
+- `access_key` (String) This is the AWS access key. It must be provided, but it can also be sourced from the `AWS_ACCESS_KEY_ID` environment variable, or via a shared credentials file if `profile` is specified.
+- `assume_role` (Attributes) An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role))
+- `http_proxy` (String) The address of an HTTP proxy to use when accessing the AWS API. Can also be configured using the `HTTP_PROXY` or `HTTPS_PROXY` environment variables.
+- `insecure` (Boolean) Explicitly allow the provider to perform "insecure" SSL requests. If not set, defaults to `false`.
+- `max_retries` (Number) The maximum number of times an AWS API request is retried on failure. If not set, defaults to 25.
+- `profile` (String) This is the AWS profile name as set in the shared credentials file.
+- `region` (String) This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, or via a shared config file.
+- `role_arn` (String) Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.
+- `secret_key` (String) This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.
+- `shared_config_files` (List of String) List of paths to shared config files. If not set, defaults to `~/.aws/config`.
+- `shared_credentials_files` (List of String) List of paths to shared credentials files. If not set, defaults to `~/.aws/credentials`.
+- `skip_medatadata_api_check` (Boolean) Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.
+- `token` (String) Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.
+- `user_agent` (Attributes List) Product details to append to User-Agent string in all AWS API calls. (see [below for nested schema](#nestedatt--user_agent))
 
 <a id="nestedatt--assume_role"></a>
 ### Nested Schema for `assume_role`
 
 Optional:
 
-- **duration** (String) Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. A sequence of numbers with a unit suffix, "h" for hour, "m" for minute, and "s" for second. Default value is 1h0m0s
-- **external_id** (String) External identifier to use when assuming the role.
-- **policy** (String) IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.
-- **policy_arns** (List of String) Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.
-- **role_arn** (String) Amazon Resource Name (ARN) of the IAM Role to assume.
-- **session_name** (String) Session name to use when assuming the role.
-- **tags** (Map of String) Map of assume role session tags.
-- **transitive_tag_keys** (Set of String) Set of assume role session tag keys to pass to any subsequent sessions.
+- `duration` (String) Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. A sequence of numbers with a unit suffix, "h" for hour, "m" for minute, and "s" for second. Default value is 1h0m0s
+- `external_id` (String) External identifier to use when assuming the role.
+- `policy` (String) IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.
+- `policy_arns` (List of String) Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.
+- `role_arn` (String) Amazon Resource Name (ARN) of the IAM Role to assume.
+- `session_name` (String) Session name to use when assuming the role.
+- `tags` (Map of String) Map of assume role session tags.
+- `transitive_tag_keys` (Set of String) Set of assume role session tag keys to pass to any subsequent sessions.
 
 
 <a id="nestedatt--user_agent"></a>
@@ -222,6 +222,6 @@ Optional:
 
 Optional:
 
-- **comment** (String) User-Agent comment. At least one of `comment` or `product_name` must be set.
-- **product_name** (String) Product name. At least one of `product_name` or `comment` must be set.
-- **product_version** (String) Product version. Optional, and should only be set when `product_name` is set.
+- `comment` (String) User-Agent comment. At least one of `comment` or `product_name` must be set.
+- `product_name` (String) Product name. At least one of `product_name` or `comment` must be set.
+- `product_version` (String) Product version. Optional, and should only be set when `product_name` is set.

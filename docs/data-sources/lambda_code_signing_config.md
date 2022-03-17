@@ -17,22 +17,22 @@ Data Source schema for AWS::Lambda::CodeSigningConfig
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **allowed_publishers** (Attributes) When the CodeSigningConfig is later on attached to a function, the function code will be expected to be signed by profiles from this list (see [below for nested schema](#nestedatt--allowed_publishers))
-- **code_signing_config_arn** (String) A unique Arn for CodeSigningConfig resource
-- **code_signing_config_id** (String) A unique identifier for CodeSigningConfig resource
-- **code_signing_policies** (Attributes) Policies to control how to act if a signature is invalid (see [below for nested schema](#nestedatt--code_signing_policies))
-- **description** (String) A description of the CodeSigningConfig
+- `allowed_publishers` (Attributes) When the CodeSigningConfig is later on attached to a function, the function code will be expected to be signed by profiles from this list (see [below for nested schema](#nestedatt--allowed_publishers))
+- `code_signing_config_arn` (String) A unique Arn for CodeSigningConfig resource
+- `code_signing_config_id` (String) A unique identifier for CodeSigningConfig resource
+- `code_signing_policies` (Attributes) Policies to control how to act if a signature is invalid (see [below for nested schema](#nestedatt--code_signing_policies))
+- `description` (String) A description of the CodeSigningConfig
 
 <a id="nestedatt--allowed_publishers"></a>
 ### Nested Schema for `allowed_publishers`
 
 Read-Only:
 
-- **signing_profile_version_arns** (List of String) List of Signing profile version Arns
+- `signing_profile_version_arns` (List of String) List of Signing profile version Arns
 
 
 <a id="nestedatt--code_signing_policies"></a>
@@ -40,6 +40,6 @@ Read-Only:
 
 Read-Only:
 
-- **untrusted_artifact_on_deployment** (String) Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided
+- `untrusted_artifact_on_deployment` (String) Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided
 
 

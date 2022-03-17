@@ -17,13 +17,13 @@ Data Source schema for AWS::Logs::QueryDefinition
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **log_group_names** (List of String) Optionally define specific log groups as part of your query definition
-- **name** (String) A name for the saved query definition
-- **query_definition_id** (String) Unique identifier of a query definition
-- **query_string** (String) The query string to use for this definition
+- `log_group_names` (List of String) Optionally define specific log groups as part of your query definition
+- `name` (String) A name for the saved query definition
+- `query_definition_id` (String) Unique identifier of a query definition
+- `query_string` (String) The query string to use for this definition
 
 

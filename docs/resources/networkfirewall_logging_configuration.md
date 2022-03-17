@@ -17,32 +17,32 @@ Resource type definition for AWS::NetworkFirewall::LoggingConfiguration
 
 ### Required
 
-- **firewall_arn** (String) A resource ARN.
-- **logging_configuration** (Attributes) (see [below for nested schema](#nestedatt--logging_configuration))
+- `firewall_arn` (String) A resource ARN.
+- `logging_configuration` (Attributes) (see [below for nested schema](#nestedatt--logging_configuration))
 
 ### Optional
 
-- **firewall_name** (String)
+- `firewall_name` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--logging_configuration"></a>
 ### Nested Schema for `logging_configuration`
 
 Required:
 
-- **log_destination_configs** (Attributes List) (see [below for nested schema](#nestedatt--logging_configuration--log_destination_configs))
+- `log_destination_configs` (Attributes List) (see [below for nested schema](#nestedatt--logging_configuration--log_destination_configs))
 
 <a id="nestedatt--logging_configuration--log_destination_configs"></a>
 ### Nested Schema for `logging_configuration.log_destination_configs`
 
 Required:
 
-- **log_destination** (Map of String) A key-value pair to configure the logDestinations.
-- **log_destination_type** (String)
-- **log_type** (String)
+- `log_destination` (Map of String) A key-value pair to configure the logDestinations.
+- `log_destination_type` (String)
+- `log_type` (String)
 
 ## Import
 

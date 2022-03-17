@@ -17,46 +17,46 @@ The AWS::SSM::Association resource associates an SSM document in AWS Systems Man
 
 ### Required
 
-- **name** (String) The name of the SSM document.
+- `name` (String) The name of the SSM document.
 
 ### Optional
 
-- **apply_only_at_cron_interval** (Boolean)
-- **association_name** (String) The name of the association.
-- **automation_target_parameter_name** (String)
-- **calendar_names** (List of String)
-- **compliance_severity** (String)
-- **document_version** (String) The version of the SSM document to associate with the target.
-- **instance_id** (String) The ID of the instance that the SSM document is associated with.
-- **max_concurrency** (String)
-- **max_errors** (String)
-- **output_location** (Attributes) (see [below for nested schema](#nestedatt--output_location))
-- **parameters** (Map of List of String) Parameter values that the SSM document uses at runtime.
-- **schedule_expression** (String) A Cron or Rate expression that specifies when the association is applied to the target.
-- **sync_compliance** (String)
-- **targets** (Attributes List) The targets that the SSM document sends commands to. (see [below for nested schema](#nestedatt--targets))
-- **wait_for_success_timeout_seconds** (Number)
+- `apply_only_at_cron_interval` (Boolean)
+- `association_name` (String) The name of the association.
+- `automation_target_parameter_name` (String)
+- `calendar_names` (List of String)
+- `compliance_severity` (String)
+- `document_version` (String) The version of the SSM document to associate with the target.
+- `instance_id` (String) The ID of the instance that the SSM document is associated with.
+- `max_concurrency` (String)
+- `max_errors` (String)
+- `output_location` (Attributes) (see [below for nested schema](#nestedatt--output_location))
+- `parameters` (Map of List of String) Parameter values that the SSM document uses at runtime.
+- `schedule_expression` (String) A Cron or Rate expression that specifies when the association is applied to the target.
+- `sync_compliance` (String)
+- `targets` (Attributes List) The targets that the SSM document sends commands to. (see [below for nested schema](#nestedatt--targets))
+- `wait_for_success_timeout_seconds` (Number)
 
 ### Read-Only
 
-- **association_id** (String) Unique identifier of the association.
-- **id** (String) Uniquely identifies the resource.
+- `association_id` (String) Unique identifier of the association.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--output_location"></a>
 ### Nested Schema for `output_location`
 
 Optional:
 
-- **s3_location** (Attributes) (see [below for nested schema](#nestedatt--output_location--s3_location))
+- `s3_location` (Attributes) (see [below for nested schema](#nestedatt--output_location--s3_location))
 
 <a id="nestedatt--output_location--s3_location"></a>
 ### Nested Schema for `output_location.s3_location`
 
 Optional:
 
-- **output_s3_bucket_name** (String)
-- **output_s3_key_prefix** (String)
-- **output_s3_region** (String)
+- `output_s3_bucket_name` (String)
+- `output_s3_key_prefix` (String)
+- `output_s3_region` (String)
 
 
 
@@ -65,8 +65,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **values** (List of String)
+- `key` (String)
+- `values` (List of String)
 
 ## Import
 

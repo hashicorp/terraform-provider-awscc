@@ -17,14 +17,14 @@ Data Source schema for AWS::ApiGateway::Model
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **content_type** (String) The content type for the model.
-- **description** (String) A description that identifies this model.
-- **name** (String) A name for the model. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name.
-- **rest_api_id** (String) The ID of a REST API with which to associate this model.
-- **schema** (String) The schema to use to transform data to one or more output formats. Specify null ({}) if you don't want to specify a schema.
+- `content_type` (String) The content type for the model.
+- `description` (String) A description that identifies this model.
+- `name` (String) A name for the model. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name.
+- `rest_api_id` (String) The ID of a REST API with which to associate this model.
+- `schema` (String) The schema to use to transform data to one or more output formats. Specify null ({}) if you don't want to specify a schema.
 
 

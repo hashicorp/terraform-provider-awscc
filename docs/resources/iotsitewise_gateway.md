@@ -17,33 +17,33 @@ Resource schema for AWS::IoTSiteWise::Gateway
 
 ### Required
 
-- **gateway_name** (String) A unique, friendly name for the gateway.
-- **gateway_platform** (Attributes) The gateway's platform. You can only specify one platform in a gateway. (see [below for nested schema](#nestedatt--gateway_platform))
+- `gateway_name` (String) A unique, friendly name for the gateway.
+- `gateway_platform` (Attributes) The gateway's platform. You can only specify one platform in a gateway. (see [below for nested schema](#nestedatt--gateway_platform))
 
 ### Optional
 
-- **gateway_capability_summaries** (Attributes List) A list of gateway capability summaries that each contain a namespace and status. (see [below for nested schema](#nestedatt--gateway_capability_summaries))
-- **tags** (Attributes List) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
+- `gateway_capability_summaries` (Attributes List) A list of gateway capability summaries that each contain a namespace and status. (see [below for nested schema](#nestedatt--gateway_capability_summaries))
+- `tags` (Attributes List) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **gateway_id** (String) The ID of the gateway device.
-- **id** (String) Uniquely identifies the resource.
+- `gateway_id` (String) The ID of the gateway device.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--gateway_platform"></a>
 ### Nested Schema for `gateway_platform`
 
 Required:
 
-- **greengrass** (Attributes) A gateway that runs on AWS IoT Greengrass V1. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
-- **greengrass_v2** (Attributes) A gateway that runs on AWS IoT Greengrass V2. (see [below for nested schema](#nestedatt--gateway_platform--greengrass_v2))
+- `greengrass` (Attributes) A gateway that runs on AWS IoT Greengrass V1. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
+- `greengrass_v2` (Attributes) A gateway that runs on AWS IoT Greengrass V2. (see [below for nested schema](#nestedatt--gateway_platform--greengrass_v2))
 
 <a id="nestedatt--gateway_platform--greengrass"></a>
 ### Nested Schema for `gateway_platform.greengrass`
 
 Required:
 
-- **group_arn** (String) The ARN of the Greengrass group.
+- `group_arn` (String) The ARN of the Greengrass group.
 
 
 <a id="nestedatt--gateway_platform--greengrass_v2"></a>
@@ -51,7 +51,7 @@ Required:
 
 Required:
 
-- **core_device_thing_name** (String) The name of the CoreDevice in GreenGrass V2.
+- `core_device_thing_name` (String) The name of the CoreDevice in GreenGrass V2.
 
 
 
@@ -60,8 +60,8 @@ Required:
 
 Optional:
 
-- **capability_configuration** (String) The JSON document that defines the gateway capability's configuration.
-- **capability_namespace** (String) The namespace of the capability configuration.
+- `capability_configuration` (String) The JSON document that defines the gateway capability's configuration.
+- `capability_namespace` (String) The namespace of the capability configuration.
 
 
 <a id="nestedatt--tags"></a>
@@ -69,8 +69,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

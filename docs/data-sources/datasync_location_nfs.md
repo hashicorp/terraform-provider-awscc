@@ -17,24 +17,24 @@ Data Source schema for AWS::DataSync::LocationNFS
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **location_arn** (String) The Amazon Resource Name (ARN) of the NFS location.
-- **location_uri** (String) The URL of the NFS location that was described.
-- **mount_options** (Attributes) The NFS mount options that DataSync can use to mount your NFS share. (see [below for nested schema](#nestedatt--mount_options))
-- **on_prem_config** (Attributes) Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect an NFS server. (see [below for nested schema](#nestedatt--on_prem_config))
-- **server_hostname** (String) The name of the NFS server. This value is the IP address or DNS name of the NFS server.
-- **subdirectory** (String) The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `location_arn` (String) The Amazon Resource Name (ARN) of the NFS location.
+- `location_uri` (String) The URL of the NFS location that was described.
+- `mount_options` (Attributes) The NFS mount options that DataSync can use to mount your NFS share. (see [below for nested schema](#nestedatt--mount_options))
+- `on_prem_config` (Attributes) Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect an NFS server. (see [below for nested schema](#nestedatt--on_prem_config))
+- `server_hostname` (String) The name of the NFS server. This value is the IP address or DNS name of the NFS server.
+- `subdirectory` (String) The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--mount_options"></a>
 ### Nested Schema for `mount_options`
 
 Read-Only:
 
-- **version** (String) The specific NFS version that you want DataSync to use to mount your NFS share.
+- `version` (String) The specific NFS version that you want DataSync to use to mount your NFS share.
 
 
 <a id="nestedatt--on_prem_config"></a>
@@ -42,7 +42,7 @@ Read-Only:
 
 Read-Only:
 
-- **agent_arns** (List of String) ARN(s) of the agent(s) to use for an NFS location.
+- `agent_arns` (List of String) ARN(s) of the agent(s) to use for an NFS location.
 
 
 <a id="nestedatt--tags"></a>
@@ -50,7 +50,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key for an AWS resource tag.
-- **value** (String) The value for an AWS resource tag.
+- `key` (String) The key for an AWS resource tag.
+- `value` (String) The value for an AWS resource tag.
 
 

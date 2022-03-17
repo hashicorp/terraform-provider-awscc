@@ -17,11 +17,11 @@ Data Source schema for AWS::ECR::PullThroughCacheRule
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **ecr_repository_prefix** (String) The ECRRepositoryPrefix is a custom alias for upstream registry url.
-- **upstream_registry_url** (String) The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached
+- `ecr_repository_prefix` (String) The ECRRepositoryPrefix is a custom alias for upstream registry url.
+- `upstream_registry_url` (String) The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached
 
 

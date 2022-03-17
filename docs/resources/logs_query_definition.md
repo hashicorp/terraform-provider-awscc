@@ -17,17 +17,17 @@ The resource schema for AWSLogs QueryDefinition
 
 ### Required
 
-- **name** (String) A name for the saved query definition
-- **query_string** (String) The query string to use for this definition
+- `name` (String) A name for the saved query definition
+- `query_string` (String) The query string to use for this definition
 
 ### Optional
 
-- **log_group_names** (List of String) Optionally define specific log groups as part of your query definition
+- `log_group_names` (List of String) Optionally define specific log groups as part of your query definition
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **query_definition_id** (String) Unique identifier of a query definition
+- `id` (String) Uniquely identifies the resource.
+- `query_definition_id` (String) Unique identifier of a query definition
 
 ## Import
 

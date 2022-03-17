@@ -17,16 +17,16 @@ A snapshot of the documentation of an API.
 
 ### Required
 
-- **documentation_version** (String) The version identifier of the API documentation snapshot.
-- **rest_api_id** (String) The identifier of the API.
+- `documentation_version` (String) The version identifier of the API documentation snapshot.
+- `rest_api_id` (String) The identifier of the API.
 
 ### Optional
 
-- **description** (String) The description of the API documentation snapshot.
+- `description` (String) The description of the API documentation snapshot.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

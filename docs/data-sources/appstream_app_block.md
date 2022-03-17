@@ -17,36 +17,36 @@ Data Source schema for AWS::AppStream::AppBlock
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **created_time** (String)
-- **description** (String)
-- **display_name** (String)
-- **name** (String)
-- **setup_script_details** (Attributes) (see [below for nested schema](#nestedatt--setup_script_details))
-- **source_s3_location** (Attributes) (see [below for nested schema](#nestedatt--source_s3_location))
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `arn` (String)
+- `created_time` (String)
+- `description` (String)
+- `display_name` (String)
+- `name` (String)
+- `setup_script_details` (Attributes) (see [below for nested schema](#nestedatt--setup_script_details))
+- `source_s3_location` (Attributes) (see [below for nested schema](#nestedatt--source_s3_location))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--setup_script_details"></a>
 ### Nested Schema for `setup_script_details`
 
 Read-Only:
 
-- **executable_parameters** (String)
-- **executable_path** (String)
-- **script_s3_location** (Attributes) (see [below for nested schema](#nestedatt--setup_script_details--script_s3_location))
-- **timeout_in_seconds** (Number)
+- `executable_parameters` (String)
+- `executable_path` (String)
+- `script_s3_location` (Attributes) (see [below for nested schema](#nestedatt--setup_script_details--script_s3_location))
+- `timeout_in_seconds` (Number)
 
 <a id="nestedatt--setup_script_details--script_s3_location"></a>
 ### Nested Schema for `setup_script_details.script_s3_location`
 
 Read-Only:
 
-- **s3_bucket** (String)
-- **s3_key** (String)
+- `s3_bucket` (String)
+- `s3_key` (String)
 
 
 
@@ -55,8 +55,8 @@ Read-Only:
 
 Read-Only:
 
-- **s3_bucket** (String)
-- **s3_key** (String)
+- `s3_bucket` (String)
+- `s3_key` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -64,7 +64,7 @@ Read-Only:
 
 Read-Only:
 
-- **tag_key** (String)
-- **tag_value** (String)
+- `tag_key` (String)
+- `tag_value` (String)
 
 

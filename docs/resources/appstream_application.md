@@ -17,35 +17,35 @@ Resource Type definition for AWS::AppStream::Application
 
 ### Required
 
-- **app_block_arn** (String)
-- **icon_s3_location** (Attributes) (see [below for nested schema](#nestedatt--icon_s3_location))
-- **instance_families** (Set of String)
-- **launch_path** (String)
-- **name** (String)
-- **platforms** (Set of String)
+- `app_block_arn` (String)
+- `icon_s3_location` (Attributes) (see [below for nested schema](#nestedatt--icon_s3_location))
+- `instance_families` (Set of String)
+- `launch_path` (String)
+- `name` (String)
+- `platforms` (Set of String)
 
 ### Optional
 
-- **attributes_to_delete** (Set of String)
-- **description** (String)
-- **display_name** (String)
-- **launch_parameters** (String)
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
-- **working_directory** (String)
+- `attributes_to_delete` (Set of String)
+- `description` (String)
+- `display_name` (String)
+- `launch_parameters` (String)
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `working_directory` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **created_time** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `created_time` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--icon_s3_location"></a>
 ### Nested Schema for `icon_s3_location`
 
 Required:
 
-- **s3_bucket** (String)
-- **s3_key** (String)
+- `s3_bucket` (String)
+- `s3_key` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -53,8 +53,8 @@ Required:
 
 Optional:
 
-- **tag_key** (String)
-- **tag_value** (String)
+- `tag_key` (String)
+- `tag_value` (String)
 
 ## Import
 

@@ -17,12 +17,12 @@ Data Source schema for AWS::EC2::SubnetNetworkAclAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **association_id** (String)
-- **network_acl_id** (String) The ID of the network ACL
-- **subnet_id** (String) The ID of the subnet
+- `association_id` (String)
+- `network_acl_id` (String) The ID of the network ACL
+- `subnet_id` (String) The ID of the subnet
 
 

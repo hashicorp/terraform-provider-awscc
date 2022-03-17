@@ -17,27 +17,27 @@ Definition of AWS::Wisdom::AssistantAssociation Resource Type
 
 ### Required
 
-- **assistant_id** (String)
-- **association** (Attributes) (see [below for nested schema](#nestedatt--association))
-- **association_type** (String)
+- `assistant_id` (String)
+- `association` (Attributes) (see [below for nested schema](#nestedatt--association))
+- `association_type` (String)
 
 ### Optional
 
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **assistant_arn** (String)
-- **assistant_association_arn** (String)
-- **assistant_association_id** (String)
-- **id** (String) Uniquely identifies the resource.
+- `assistant_arn` (String)
+- `assistant_association_arn` (String)
+- `assistant_association_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--association"></a>
 ### Nested Schema for `association`
 
 Required:
 
-- **knowledge_base_id** (String)
+- `knowledge_base_id` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -45,8 +45,8 @@ Required:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

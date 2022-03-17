@@ -17,28 +17,28 @@ Resource Type definition for AWS::CloudFront::Function
 
 ### Required
 
-- **name** (String)
+- `name` (String)
 
 ### Optional
 
-- **auto_publish** (Boolean)
-- **function_code** (String)
-- **function_config** (Attributes) (see [below for nested schema](#nestedatt--function_config))
-- **function_metadata** (Attributes) (see [below for nested schema](#nestedatt--function_metadata))
+- `auto_publish` (Boolean)
+- `function_code` (String)
+- `function_config` (Attributes) (see [below for nested schema](#nestedatt--function_config))
+- `function_metadata` (Attributes) (see [below for nested schema](#nestedatt--function_metadata))
 
 ### Read-Only
 
-- **function_arn** (String)
-- **id** (String) Uniquely identifies the resource.
-- **stage** (String)
+- `function_arn` (String)
+- `id` (String) Uniquely identifies the resource.
+- `stage` (String)
 
 <a id="nestedatt--function_config"></a>
 ### Nested Schema for `function_config`
 
 Optional:
 
-- **comment** (String)
-- **runtime** (String)
+- `comment` (String)
+- `runtime` (String)
 
 
 <a id="nestedatt--function_metadata"></a>
@@ -46,7 +46,7 @@ Optional:
 
 Optional:
 
-- **function_arn** (String)
+- `function_arn` (String)
 
 ## Import
 

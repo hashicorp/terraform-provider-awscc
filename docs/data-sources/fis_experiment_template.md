@@ -17,28 +17,28 @@ Data Source schema for AWS::FIS::ExperimentTemplate
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **actions** (Attributes Map) The actions for the experiment. (see [below for nested schema](#nestedatt--actions))
-- **description** (String) A description for the experiment template.
-- **log_configuration** (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
-- **role_arn** (String) The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
-- **stop_conditions** (Attributes List) One or more stop conditions. (see [below for nested schema](#nestedatt--stop_conditions))
-- **tags** (Map of String)
-- **targets** (Attributes Map) The targets for the experiment. (see [below for nested schema](#nestedatt--targets))
+- `actions` (Attributes Map) The actions for the experiment. (see [below for nested schema](#nestedatt--actions))
+- `description` (String) A description for the experiment template.
+- `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
+- `role_arn` (String) The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+- `stop_conditions` (Attributes List) One or more stop conditions. (see [below for nested schema](#nestedatt--stop_conditions))
+- `tags` (Map of String)
+- `targets` (Attributes Map) The targets for the experiment. (see [below for nested schema](#nestedatt--targets))
 
 <a id="nestedatt--actions"></a>
 ### Nested Schema for `actions`
 
 Read-Only:
 
-- **action_id** (String) The ID of the action.
-- **description** (String) A description for the action.
-- **parameters** (Map of String) The parameters for the action, if applicable.
-- **start_after** (List of String) The names of the actions that must be completed before the current action starts.
-- **targets** (Map of String) One or more targets for the action.
+- `action_id` (String) The ID of the action.
+- `description` (String) A description for the action.
+- `parameters` (Map of String) The parameters for the action, if applicable.
+- `start_after` (List of String) The names of the actions that must be completed before the current action starts.
+- `targets` (Map of String) One or more targets for the action.
 
 
 <a id="nestedatt--log_configuration"></a>
@@ -46,16 +46,16 @@ Read-Only:
 
 Read-Only:
 
-- **cloudwatch_logs_configuration** (Attributes) (see [below for nested schema](#nestedatt--log_configuration--cloudwatch_logs_configuration))
-- **log_schema_version** (Number)
-- **s3_configuration** (Attributes) (see [below for nested schema](#nestedatt--log_configuration--s3_configuration))
+- `cloudwatch_logs_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--cloudwatch_logs_configuration))
+- `log_schema_version` (Number)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--s3_configuration))
 
 <a id="nestedatt--log_configuration--cloudwatch_logs_configuration"></a>
 ### Nested Schema for `log_configuration.cloudwatch_logs_configuration`
 
 Read-Only:
 
-- **log_group_arn** (String)
+- `log_group_arn` (String)
 
 
 <a id="nestedatt--log_configuration--s3_configuration"></a>
@@ -63,8 +63,8 @@ Read-Only:
 
 Read-Only:
 
-- **bucket_name** (String)
-- **prefix** (String)
+- `bucket_name` (String)
+- `prefix` (String)
 
 
 
@@ -73,8 +73,8 @@ Read-Only:
 
 Read-Only:
 
-- **source** (String)
-- **value** (String)
+- `source` (String)
+- `value` (String)
 
 
 <a id="nestedatt--targets"></a>
@@ -82,19 +82,19 @@ Read-Only:
 
 Read-Only:
 
-- **filters** (Attributes List) (see [below for nested schema](#nestedatt--targets--filters))
-- **parameters** (Map of String)
-- **resource_arns** (List of String) The Amazon Resource Names (ARNs) of the target resources.
-- **resource_tags** (Map of String)
-- **resource_type** (String) The AWS resource type. The resource type must be supported for the specified action.
-- **selection_mode** (String) Scopes the identified resources to a specific number of the resources at random, or a percentage of the resources.
+- `filters` (Attributes List) (see [below for nested schema](#nestedatt--targets--filters))
+- `parameters` (Map of String)
+- `resource_arns` (List of String) The Amazon Resource Names (ARNs) of the target resources.
+- `resource_tags` (Map of String)
+- `resource_type` (String) The AWS resource type. The resource type must be supported for the specified action.
+- `selection_mode` (String) Scopes the identified resources to a specific number of the resources at random, or a percentage of the resources.
 
 <a id="nestedatt--targets--filters"></a>
 ### Nested Schema for `targets.filters`
 
 Read-Only:
 
-- **path** (String) The attribute path for the filter.
-- **values** (List of String) The attribute values for the filter.
+- `path` (String) The attribute path for the filter.
+- `values` (List of String) The attribute values for the filter.
 
 

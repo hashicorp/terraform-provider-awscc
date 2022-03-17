@@ -17,13 +17,13 @@ Data Source schema for AWS::ServiceCatalogAppRegistry::Application
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **description** (String) The description of the application.
-- **name** (String) The name of the application.
-- **tags** (Map of String)
+- `arn` (String)
+- `description` (String) The description of the application.
+- `name` (String) The name of the application.
+- `tags` (Map of String)
 
 

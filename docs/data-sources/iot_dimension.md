@@ -17,22 +17,22 @@ Data Source schema for AWS::IoT::Dimension
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The ARN (Amazon resource name) of the created dimension.
-- **name** (String) A unique identifier for the dimension.
-- **string_values** (Set of String) Specifies the value or list of values for the dimension.
-- **tags** (Attributes Set) Metadata that can be used to manage the dimension. (see [below for nested schema](#nestedatt--tags))
-- **type** (String) Specifies the type of the dimension.
+- `arn` (String) The ARN (Amazon resource name) of the created dimension.
+- `name` (String) A unique identifier for the dimension.
+- `string_values` (Set of String) Specifies the value or list of values for the dimension.
+- `tags` (Attributes Set) Metadata that can be used to manage the dimension. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) Specifies the type of the dimension.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) The tag's key.
-- **value** (String) The tag's value.
+- `key` (String) The tag's key.
+- `value` (String) The tag's value.
 
 

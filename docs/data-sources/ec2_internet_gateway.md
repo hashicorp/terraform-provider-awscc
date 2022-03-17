@@ -17,19 +17,19 @@ Data Source schema for AWS::EC2::InternetGateway
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **internet_gateway_id** (String) ID of internet gateway.
-- **tags** (Attributes List) Any tags to assign to the internet gateway. (see [below for nested schema](#nestedatt--tags))
+- `internet_gateway_id` (String) ID of internet gateway.
+- `tags` (Attributes List) Any tags to assign to the internet gateway. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

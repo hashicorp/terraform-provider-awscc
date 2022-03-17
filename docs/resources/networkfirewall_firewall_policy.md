@@ -17,39 +17,39 @@ Resource type definition for AWS::NetworkFirewall::FirewallPolicy
 
 ### Required
 
-- **firewall_policy** (Attributes) (see [below for nested schema](#nestedatt--firewall_policy))
-- **firewall_policy_name** (String)
+- `firewall_policy` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy))
+- `firewall_policy_name` (String)
 
 ### Optional
 
-- **description** (String)
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `description` (String)
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **firewall_policy_arn** (String) A resource ARN.
-- **firewall_policy_id** (String)
-- **id** (String) Uniquely identifies the resource.
+- `firewall_policy_arn` (String) A resource ARN.
+- `firewall_policy_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--firewall_policy"></a>
 ### Nested Schema for `firewall_policy`
 
 Required:
 
-- **stateful_default_actions** (List of String)
-- **stateful_engine_options** (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options))
-- **stateful_rule_group_references** (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references))
-- **stateless_custom_actions** (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions))
-- **stateless_default_actions** (List of String)
-- **stateless_fragment_default_actions** (List of String)
-- **stateless_rule_group_references** (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_rule_group_references))
+- `stateful_default_actions` (List of String)
+- `stateful_engine_options` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options))
+- `stateful_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references))
+- `stateless_custom_actions` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions))
+- `stateless_default_actions` (List of String)
+- `stateless_fragment_default_actions` (List of String)
+- `stateless_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_rule_group_references))
 
 <a id="nestedatt--firewall_policy--stateful_engine_options"></a>
 ### Nested Schema for `firewall_policy.stateful_engine_options`
 
 Required:
 
-- **rule_order** (String)
+- `rule_order` (String)
 
 
 <a id="nestedatt--firewall_policy--stateful_rule_group_references"></a>
@@ -57,8 +57,8 @@ Required:
 
 Required:
 
-- **priority** (Number)
-- **resource_arn** (String) A resource ARN.
+- `priority` (Number)
+- `resource_arn` (String) A resource ARN.
 
 
 <a id="nestedatt--firewall_policy--stateless_custom_actions"></a>
@@ -66,29 +66,29 @@ Required:
 
 Required:
 
-- **action_definition** (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition))
-- **action_name** (String)
+- `action_definition` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition))
+- `action_name` (String)
 
 <a id="nestedatt--firewall_policy--stateless_custom_actions--action_definition"></a>
 ### Nested Schema for `firewall_policy.stateless_custom_actions.action_definition`
 
 Required:
 
-- **publish_metric_action** (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action))
+- `publish_metric_action` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action))
 
 <a id="nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action"></a>
 ### Nested Schema for `firewall_policy.stateless_custom_actions.action_definition.publish_metric_action`
 
 Required:
 
-- **dimensions** (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action--dimensions))
+- `dimensions` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action--dimensions))
 
 <a id="nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action--dimensions"></a>
 ### Nested Schema for `firewall_policy.stateless_custom_actions.action_definition.publish_metric_action.dimensions`
 
 Required:
 
-- **value** (String)
+- `value` (String)
 
 
 
@@ -99,8 +99,8 @@ Required:
 
 Required:
 
-- **priority** (Number)
-- **resource_arn** (String) A resource ARN.
+- `priority` (Number)
+- `resource_arn` (String) A resource ARN.
 
 
 
@@ -109,8 +109,8 @@ Required:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

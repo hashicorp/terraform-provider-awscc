@@ -17,30 +17,30 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Required
 
-- **robot_software_suite** (Attributes) The robot software suite used by the simulation application. (see [below for nested schema](#nestedatt--robot_software_suite))
-- **simulation_software_suite** (Attributes) The simulation software suite used by the simulation application. (see [below for nested schema](#nestedatt--simulation_software_suite))
+- `robot_software_suite` (Attributes) The robot software suite used by the simulation application. (see [below for nested schema](#nestedatt--robot_software_suite))
+- `simulation_software_suite` (Attributes) The simulation software suite used by the simulation application. (see [below for nested schema](#nestedatt--simulation_software_suite))
 
 ### Optional
 
-- **current_revision_id** (String) The current revision id.
-- **environment** (String) The URI of the Docker image for the robot application.
-- **name** (String) The name of the simulation application.
-- **rendering_engine** (Attributes) The rendering engine for the simulation application. (see [below for nested schema](#nestedatt--rendering_engine))
-- **sources** (Attributes List) The sources of the simulation application. (see [below for nested schema](#nestedatt--sources))
-- **tags** (Map of String) A key-value pair to associate with a resource.
+- `current_revision_id` (String) The current revision id.
+- `environment` (String) The URI of the Docker image for the robot application.
+- `name` (String) The name of the simulation application.
+- `rendering_engine` (Attributes) The rendering engine for the simulation application. (see [below for nested schema](#nestedatt--rendering_engine))
+- `sources` (Attributes List) The sources of the simulation application. (see [below for nested schema](#nestedatt--sources))
+- `tags` (Map of String) A key-value pair to associate with a resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--robot_software_suite"></a>
 ### Nested Schema for `robot_software_suite`
 
 Required:
 
-- **name** (String) The name of the robot software suite.
-- **version** (String) The version of the robot software suite.
+- `name` (String) The name of the robot software suite.
+- `version` (String) The version of the robot software suite.
 
 
 <a id="nestedatt--simulation_software_suite"></a>
@@ -48,8 +48,8 @@ Required:
 
 Required:
 
-- **name** (String) The name of the simulation software suite.
-- **version** (String) The version of the simulation software suite.
+- `name` (String) The name of the simulation software suite.
+- `version` (String) The version of the simulation software suite.
 
 
 <a id="nestedatt--rendering_engine"></a>
@@ -57,8 +57,8 @@ Required:
 
 Optional:
 
-- **name** (String) The name of the rendering engine.
-- **version** (String) The version of the rendering engine.
+- `name` (String) The name of the rendering engine.
+- `version` (String) The version of the rendering engine.
 
 
 <a id="nestedatt--sources"></a>
@@ -66,9 +66,9 @@ Optional:
 
 Optional:
 
-- **architecture** (String) The target processor architecture for the application.
-- **s3_bucket** (String) The Amazon S3 bucket name.
-- **s3_key** (String) The s3 object key.
+- `architecture` (String) The target processor architecture for the application.
+- `s3_bucket` (String) The Amazon S3 bucket name.
+- `s3_key` (String) The s3 object key.
 
 ## Import
 

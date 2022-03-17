@@ -17,21 +17,21 @@ Resource Type definition for AWS::CloudFront::KeyGroup
 
 ### Required
 
-- **key_group_config** (Attributes) (see [below for nested schema](#nestedatt--key_group_config))
+- `key_group_config` (Attributes) (see [below for nested schema](#nestedatt--key_group_config))
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
-- **last_modified_time** (String)
+- `id` (String) The ID of this resource.
+- `last_modified_time` (String)
 
 <a id="nestedatt--key_group_config"></a>
 ### Nested Schema for `key_group_config`
 
 Required:
 
-- **comment** (String)
-- **items** (List of String)
-- **name** (String)
+- `comment` (String)
+- `items` (List of String)
+- `name` (String)
 
 ## Import
 

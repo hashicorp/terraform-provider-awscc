@@ -17,14 +17,14 @@ Data Source schema for AWS::AppSync::DomainName
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **app_sync_domain_name** (String)
-- **certificate_arn** (String)
-- **description** (String)
-- **domain_name** (String)
-- **hosted_zone_id** (String)
+- `app_sync_domain_name` (String)
+- `certificate_arn` (String)
+- `description` (String)
+- `domain_name` (String)
+- `hosted_zone_id` (String)
 
 

@@ -17,32 +17,32 @@ Data Source schema for AWS::Backup::BackupPlan
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **backup_plan** (Attributes) (see [below for nested schema](#nestedatt--backup_plan))
-- **backup_plan_arn** (String)
-- **backup_plan_id** (String)
-- **backup_plan_tags** (Map of String)
-- **version_id** (String)
+- `backup_plan` (Attributes) (see [below for nested schema](#nestedatt--backup_plan))
+- `backup_plan_arn` (String)
+- `backup_plan_id` (String)
+- `backup_plan_tags` (Map of String)
+- `version_id` (String)
 
 <a id="nestedatt--backup_plan"></a>
 ### Nested Schema for `backup_plan`
 
 Read-Only:
 
-- **advanced_backup_settings** (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--advanced_backup_settings))
-- **backup_plan_name** (String)
-- **backup_plan_rule** (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule))
+- `advanced_backup_settings` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--advanced_backup_settings))
+- `backup_plan_name` (String)
+- `backup_plan_rule` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule))
 
 <a id="nestedatt--backup_plan--advanced_backup_settings"></a>
 ### Nested Schema for `backup_plan.advanced_backup_settings`
 
 Read-Only:
 
-- **backup_options** (Map of String)
-- **resource_type** (String)
+- `backup_options` (Map of String)
+- `resource_type` (String)
 
 
 <a id="nestedatt--backup_plan--backup_plan_rule"></a>
@@ -50,31 +50,31 @@ Read-Only:
 
 Read-Only:
 
-- **completion_window_minutes** (Number)
-- **copy_actions** (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--copy_actions))
-- **enable_continuous_backup** (Boolean)
-- **lifecycle** (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--lifecycle))
-- **recovery_point_tags** (Map of String)
-- **rule_name** (String)
-- **schedule_expression** (String)
-- **start_window_minutes** (Number)
-- **target_backup_vault** (String)
+- `completion_window_minutes` (Number)
+- `copy_actions` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--copy_actions))
+- `enable_continuous_backup` (Boolean)
+- `lifecycle` (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--lifecycle))
+- `recovery_point_tags` (Map of String)
+- `rule_name` (String)
+- `schedule_expression` (String)
+- `start_window_minutes` (Number)
+- `target_backup_vault` (String)
 
 <a id="nestedatt--backup_plan--backup_plan_rule--copy_actions"></a>
 ### Nested Schema for `backup_plan.backup_plan_rule.copy_actions`
 
 Read-Only:
 
-- **destination_backup_vault_arn** (String)
-- **lifecycle** (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--copy_actions--lifecycle))
+- `destination_backup_vault_arn` (String)
+- `lifecycle` (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--copy_actions--lifecycle))
 
 <a id="nestedatt--backup_plan--backup_plan_rule--copy_actions--lifecycle"></a>
 ### Nested Schema for `backup_plan.backup_plan_rule.copy_actions.lifecycle`
 
 Read-Only:
 
-- **delete_after_days** (Number)
-- **move_to_cold_storage_after_days** (Number)
+- `delete_after_days` (Number)
+- `move_to_cold_storage_after_days` (Number)
 
 
 
@@ -83,7 +83,7 @@ Read-Only:
 
 Read-Only:
 
-- **delete_after_days** (Number)
-- **move_to_cold_storage_after_days** (Number)
+- `delete_after_days` (Number)
+- `move_to_cold_storage_after_days` (Number)
 
 

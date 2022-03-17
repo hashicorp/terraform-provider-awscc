@@ -17,35 +17,35 @@ Data Source schema for AWS::Route53Resolver::FirewallRuleGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Arn
-- **creation_time** (String) Rfc3339TimeString
-- **creator_request_id** (String) The id of the creator request.
-- **firewall_rules** (Attributes Set) FirewallRules (see [below for nested schema](#nestedatt--firewall_rules))
-- **modification_time** (String) Rfc3339TimeString
-- **name** (String) FirewallRuleGroupName
-- **owner_id** (String) AccountId
-- **rule_count** (Number) Count
-- **share_status** (String) ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.
-- **status** (String) ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.
-- **status_message** (String) FirewallRuleGroupStatus
-- **tags** (Attributes Set) Tags (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) Arn
+- `creation_time` (String) Rfc3339TimeString
+- `creator_request_id` (String) The id of the creator request.
+- `firewall_rules` (Attributes Set) FirewallRules (see [below for nested schema](#nestedatt--firewall_rules))
+- `modification_time` (String) Rfc3339TimeString
+- `name` (String) FirewallRuleGroupName
+- `owner_id` (String) AccountId
+- `rule_count` (Number) Count
+- `share_status` (String) ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.
+- `status` (String) ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.
+- `status_message` (String) FirewallRuleGroupStatus
+- `tags` (Attributes Set) Tags (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--firewall_rules"></a>
 ### Nested Schema for `firewall_rules`
 
 Read-Only:
 
-- **action** (String) Rule Action
-- **block_override_dns_type** (String) BlockOverrideDnsType
-- **block_override_domain** (String) BlockOverrideDomain
-- **block_override_ttl** (Number) BlockOverrideTtl
-- **block_response** (String) BlockResponse
-- **firewall_domain_list_id** (String) ResourceId
-- **priority** (Number) Rule Priority
+- `action` (String) Rule Action
+- `block_override_dns_type` (String) BlockOverrideDnsType
+- `block_override_domain` (String) BlockOverrideDomain
+- `block_override_ttl` (Number) BlockOverrideTtl
+- `block_response` (String) BlockResponse
+- `firewall_domain_list_id` (String) ResourceId
+- `priority` (Number) Rule Priority
 
 
 <a id="nestedatt--tags"></a>
@@ -53,7 +53,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

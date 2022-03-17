@@ -17,15 +17,15 @@ Data Source schema for AWS::CloudFormation::HookTypeConfig
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **configuration** (String) The configuration data for the extension, in this account and region.
-- **configuration_alias** (String) An alias by which to refer to this extension configuration data.
-- **configuration_arn** (String) The Amazon Resource Name (ARN) for the configuration data, in this account and region.
-- **type_arn** (String) The Amazon Resource Name (ARN) of the type version.
-- **type_name** (String) The name of the type being registered.
+- `configuration` (String) The configuration data for the extension, in this account and region.
+- `configuration_alias` (String) An alias by which to refer to this extension configuration data.
+- `configuration_arn` (String) The Amazon Resource Name (ARN) for the configuration data, in this account and region.
+- `type_arn` (String) The Amazon Resource Name (ARN) of the type version.
+- `type_name` (String) The name of the type being registered.
 
 We recommend that type names adhere to the following pattern: company_or_organization::service::type.
 

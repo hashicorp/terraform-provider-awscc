@@ -17,28 +17,28 @@ Resource schema for AWS::IoTSiteWise::Project
 
 ### Required
 
-- **portal_id** (String) The ID of the portal in which to create the project.
-- **project_name** (String) A friendly name for the project.
+- `portal_id` (String) The ID of the portal in which to create the project.
+- `project_name` (String) A friendly name for the project.
 
 ### Optional
 
-- **asset_ids** (List of String) The IDs of the assets to be associated to the project.
-- **project_description** (String) A description for the project.
-- **tags** (Attributes List) A list of key-value pairs that contain metadata for the project. (see [below for nested schema](#nestedatt--tags))
+- `asset_ids` (List of String) The IDs of the assets to be associated to the project.
+- `project_description` (String) A description for the project.
+- `tags` (Attributes List) A list of key-value pairs that contain metadata for the project. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **project_arn** (String) The ARN of the project.
-- **project_id** (String) The ID of the project.
+- `id` (String) Uniquely identifies the resource.
+- `project_arn` (String) The ARN of the project.
+- `project_id` (String) The ID of the project.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

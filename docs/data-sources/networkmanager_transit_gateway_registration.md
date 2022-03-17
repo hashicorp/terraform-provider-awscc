@@ -17,11 +17,11 @@ Data Source schema for AWS::NetworkManager::TransitGatewayRegistration
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **global_network_id** (String) The ID of the global network.
-- **transit_gateway_arn** (String) The Amazon Resource Name (ARN) of the transit gateway.
+- `global_network_id` (String) The ID of the global network.
+- `transit_gateway_arn` (String) The Amazon Resource Name (ARN) of the transit gateway.
 
 

@@ -17,26 +17,26 @@ Resource Schema for AWS::ServiceCatalog::ServiceAction
 
 ### Required
 
-- **definition** (Attributes List) (see [below for nested schema](#nestedatt--definition))
-- **definition_type** (String)
-- **name** (String)
+- `definition` (Attributes List) (see [below for nested schema](#nestedatt--definition))
+- `definition_type` (String)
+- `name` (String)
 
 ### Optional
 
-- **accept_language** (String)
-- **description** (String)
+- `accept_language` (String)
+- `description` (String)
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
+- `id` (String) The ID of this resource.
 
 <a id="nestedatt--definition"></a>
 ### Nested Schema for `definition`
 
 Required:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

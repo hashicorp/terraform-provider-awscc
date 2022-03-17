@@ -17,53 +17,53 @@ Data Source schema for AWS::Amplify::App
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **access_token** (String)
-- **app_id** (String)
-- **app_name** (String)
-- **arn** (String)
-- **auto_branch_creation_config** (Attributes) (see [below for nested schema](#nestedatt--auto_branch_creation_config))
-- **basic_auth_config** (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
-- **build_spec** (String)
-- **custom_headers** (String)
-- **custom_rules** (Attributes List) (see [below for nested schema](#nestedatt--custom_rules))
-- **default_domain** (String)
-- **description** (String)
-- **enable_branch_auto_deletion** (Boolean)
-- **environment_variables** (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
-- **iam_service_role** (String)
-- **name** (String)
-- **oauth_token** (String)
-- **repository** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `access_token` (String)
+- `app_id` (String)
+- `app_name` (String)
+- `arn` (String)
+- `auto_branch_creation_config` (Attributes) (see [below for nested schema](#nestedatt--auto_branch_creation_config))
+- `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
+- `build_spec` (String)
+- `custom_headers` (String)
+- `custom_rules` (Attributes List) (see [below for nested schema](#nestedatt--custom_rules))
+- `default_domain` (String)
+- `description` (String)
+- `enable_branch_auto_deletion` (Boolean)
+- `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
+- `iam_service_role` (String)
+- `name` (String)
+- `oauth_token` (String)
+- `repository` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--auto_branch_creation_config"></a>
 ### Nested Schema for `auto_branch_creation_config`
 
 Read-Only:
 
-- **auto_branch_creation_patterns** (List of String)
-- **basic_auth_config** (Attributes) (see [below for nested schema](#nestedatt--auto_branch_creation_config--basic_auth_config))
-- **build_spec** (String)
-- **enable_auto_branch_creation** (Boolean)
-- **enable_auto_build** (Boolean)
-- **enable_performance_mode** (Boolean)
-- **enable_pull_request_preview** (Boolean)
-- **environment_variables** (Attributes List) (see [below for nested schema](#nestedatt--auto_branch_creation_config--environment_variables))
-- **pull_request_environment_name** (String)
-- **stage** (String)
+- `auto_branch_creation_patterns` (List of String)
+- `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--auto_branch_creation_config--basic_auth_config))
+- `build_spec` (String)
+- `enable_auto_branch_creation` (Boolean)
+- `enable_auto_build` (Boolean)
+- `enable_performance_mode` (Boolean)
+- `enable_pull_request_preview` (Boolean)
+- `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--auto_branch_creation_config--environment_variables))
+- `pull_request_environment_name` (String)
+- `stage` (String)
 
 <a id="nestedatt--auto_branch_creation_config--basic_auth_config"></a>
 ### Nested Schema for `auto_branch_creation_config.basic_auth_config`
 
 Read-Only:
 
-- **enable_basic_auth** (Boolean)
-- **password** (String)
-- **username** (String)
+- `enable_basic_auth` (Boolean)
+- `password` (String)
+- `username` (String)
 
 
 <a id="nestedatt--auto_branch_creation_config--environment_variables"></a>
@@ -71,8 +71,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 
 
@@ -81,9 +81,9 @@ Read-Only:
 
 Read-Only:
 
-- **enable_basic_auth** (Boolean)
-- **password** (String)
-- **username** (String)
+- `enable_basic_auth` (Boolean)
+- `password` (String)
+- `username` (String)
 
 
 <a id="nestedatt--custom_rules"></a>
@@ -91,10 +91,10 @@ Read-Only:
 
 Read-Only:
 
-- **condition** (String)
-- **source** (String)
-- **status** (String)
-- **target** (String)
+- `condition` (String)
+- `source` (String)
+- `status` (String)
+- `target` (String)
 
 
 <a id="nestedatt--environment_variables"></a>
@@ -102,8 +102,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -111,7 +111,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

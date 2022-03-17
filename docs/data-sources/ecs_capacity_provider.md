@@ -17,33 +17,33 @@ Data Source schema for AWS::ECS::CapacityProvider
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **auto_scaling_group_provider** (Attributes) (see [below for nested schema](#nestedatt--auto_scaling_group_provider))
-- **name** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `auto_scaling_group_provider` (Attributes) (see [below for nested schema](#nestedatt--auto_scaling_group_provider))
+- `name` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--auto_scaling_group_provider"></a>
 ### Nested Schema for `auto_scaling_group_provider`
 
 Read-Only:
 
-- **auto_scaling_group_arn** (String)
-- **managed_scaling** (Attributes) The managed scaling settings for the Auto Scaling group capacity provider. (see [below for nested schema](#nestedatt--auto_scaling_group_provider--managed_scaling))
-- **managed_termination_protection** (String)
+- `auto_scaling_group_arn` (String)
+- `managed_scaling` (Attributes) The managed scaling settings for the Auto Scaling group capacity provider. (see [below for nested schema](#nestedatt--auto_scaling_group_provider--managed_scaling))
+- `managed_termination_protection` (String)
 
 <a id="nestedatt--auto_scaling_group_provider--managed_scaling"></a>
 ### Nested Schema for `auto_scaling_group_provider.managed_scaling`
 
 Read-Only:
 
-- **instance_warmup_period** (Number)
-- **maximum_scaling_step_size** (Number)
-- **minimum_scaling_step_size** (Number)
-- **status** (String)
-- **target_capacity** (Number)
+- `instance_warmup_period` (Number)
+- `maximum_scaling_step_size` (Number)
+- `minimum_scaling_step_size` (Number)
+- `status` (String)
+- `target_capacity` (Number)
 
 
 
@@ -52,7 +52,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

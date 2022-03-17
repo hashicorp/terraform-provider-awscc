@@ -17,34 +17,34 @@ Resource schema for AWS::EC2::NetworkInsightsAnalysis
 
 ### Required
 
-- **network_insights_path_id** (String)
+- `network_insights_path_id` (String)
 
 ### Optional
 
-- **filter_in_arns** (List of String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `filter_in_arns` (List of String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **alternate_path_hints** (Attributes List) (see [below for nested schema](#nestedatt--alternate_path_hints))
-- **explanations** (Attributes List) (see [below for nested schema](#nestedatt--explanations))
-- **forward_path_components** (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components))
-- **id** (String) Uniquely identifies the resource.
-- **network_insights_analysis_arn** (String)
-- **network_insights_analysis_id** (String)
-- **network_path_found** (Boolean)
-- **return_path_components** (Attributes List) (see [below for nested schema](#nestedatt--return_path_components))
-- **start_date** (String)
-- **status** (String)
-- **status_message** (String)
+- `alternate_path_hints` (Attributes List) (see [below for nested schema](#nestedatt--alternate_path_hints))
+- `explanations` (Attributes List) (see [below for nested schema](#nestedatt--explanations))
+- `forward_path_components` (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components))
+- `id` (String) Uniquely identifies the resource.
+- `network_insights_analysis_arn` (String)
+- `network_insights_analysis_id` (String)
+- `network_path_found` (Boolean)
+- `return_path_components` (Attributes List) (see [below for nested schema](#nestedatt--return_path_components))
+- `start_date` (String)
+- `status` (String)
+- `status_message` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--alternate_path_hints"></a>
@@ -52,8 +52,8 @@ Optional:
 
 Read-Only:
 
-- **component_arn** (String)
-- **component_id** (String)
+- `component_arn` (String)
+- `component_id` (String)
 
 
 <a id="nestedatt--explanations"></a>
@@ -61,59 +61,59 @@ Read-Only:
 
 Read-Only:
 
-- **acl** (Attributes) (see [below for nested schema](#nestedatt--explanations--acl))
-- **acl_rule** (Attributes) (see [below for nested schema](#nestedatt--explanations--acl_rule))
-- **address** (String)
-- **addresses** (List of String)
-- **attached_to** (Attributes) (see [below for nested schema](#nestedatt--explanations--attached_to))
-- **availability_zones** (List of String)
-- **cidrs** (List of String)
-- **classic_load_balancer_listener** (Attributes) (see [below for nested schema](#nestedatt--explanations--classic_load_balancer_listener))
-- **component** (Attributes) (see [below for nested schema](#nestedatt--explanations--component))
-- **customer_gateway** (Attributes) (see [below for nested schema](#nestedatt--explanations--customer_gateway))
-- **destination** (Attributes) (see [below for nested schema](#nestedatt--explanations--destination))
-- **destination_vpc** (Attributes) (see [below for nested schema](#nestedatt--explanations--destination_vpc))
-- **direction** (String)
-- **elastic_load_balancer_listener** (Attributes) (see [below for nested schema](#nestedatt--explanations--elastic_load_balancer_listener))
-- **explanation_code** (String)
-- **ingress_route_table** (Attributes) (see [below for nested schema](#nestedatt--explanations--ingress_route_table))
-- **internet_gateway** (Attributes) (see [below for nested schema](#nestedatt--explanations--internet_gateway))
-- **load_balancer_arn** (String)
-- **load_balancer_listener_port** (Number)
-- **load_balancer_target** (Attributes) (see [below for nested schema](#nestedatt--explanations--load_balancer_target))
-- **load_balancer_target_group** (Attributes) (see [below for nested schema](#nestedatt--explanations--load_balancer_target_group))
-- **load_balancer_target_groups** (Attributes List) (see [below for nested schema](#nestedatt--explanations--load_balancer_target_groups))
-- **load_balancer_target_port** (Number)
-- **missing_component** (String)
-- **nat_gateway** (Attributes) (see [below for nested schema](#nestedatt--explanations--nat_gateway))
-- **network_interface** (Attributes) (see [below for nested schema](#nestedatt--explanations--network_interface))
-- **packet_field** (String)
-- **port** (Number)
-- **port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--explanations--port_ranges))
-- **prefix_list** (Attributes) (see [below for nested schema](#nestedatt--explanations--prefix_list))
-- **protocols** (List of String)
-- **route_table** (Attributes) (see [below for nested schema](#nestedatt--explanations--route_table))
-- **route_table_route** (Attributes) (see [below for nested schema](#nestedatt--explanations--route_table_route))
-- **security_group** (Attributes) (see [below for nested schema](#nestedatt--explanations--security_group))
-- **security_group_rule** (Attributes) (see [below for nested schema](#nestedatt--explanations--security_group_rule))
-- **security_groups** (Attributes List) (see [below for nested schema](#nestedatt--explanations--security_groups))
-- **source_vpc** (Attributes) (see [below for nested schema](#nestedatt--explanations--source_vpc))
-- **state** (String)
-- **subnet** (Attributes) (see [below for nested schema](#nestedatt--explanations--subnet))
-- **subnet_route_table** (Attributes) (see [below for nested schema](#nestedatt--explanations--subnet_route_table))
-- **vpc** (Attributes) (see [below for nested schema](#nestedatt--explanations--vpc))
-- **vpc_endpoint** (Attributes) (see [below for nested schema](#nestedatt--explanations--vpc_endpoint))
-- **vpc_peering_connection** (Attributes) (see [below for nested schema](#nestedatt--explanations--vpc_peering_connection))
-- **vpn_connection** (Attributes) (see [below for nested schema](#nestedatt--explanations--vpn_connection))
-- **vpn_gateway** (Attributes) (see [below for nested schema](#nestedatt--explanations--vpn_gateway))
+- `acl` (Attributes) (see [below for nested schema](#nestedatt--explanations--acl))
+- `acl_rule` (Attributes) (see [below for nested schema](#nestedatt--explanations--acl_rule))
+- `address` (String)
+- `addresses` (List of String)
+- `attached_to` (Attributes) (see [below for nested schema](#nestedatt--explanations--attached_to))
+- `availability_zones` (List of String)
+- `cidrs` (List of String)
+- `classic_load_balancer_listener` (Attributes) (see [below for nested schema](#nestedatt--explanations--classic_load_balancer_listener))
+- `component` (Attributes) (see [below for nested schema](#nestedatt--explanations--component))
+- `customer_gateway` (Attributes) (see [below for nested schema](#nestedatt--explanations--customer_gateway))
+- `destination` (Attributes) (see [below for nested schema](#nestedatt--explanations--destination))
+- `destination_vpc` (Attributes) (see [below for nested schema](#nestedatt--explanations--destination_vpc))
+- `direction` (String)
+- `elastic_load_balancer_listener` (Attributes) (see [below for nested schema](#nestedatt--explanations--elastic_load_balancer_listener))
+- `explanation_code` (String)
+- `ingress_route_table` (Attributes) (see [below for nested schema](#nestedatt--explanations--ingress_route_table))
+- `internet_gateway` (Attributes) (see [below for nested schema](#nestedatt--explanations--internet_gateway))
+- `load_balancer_arn` (String)
+- `load_balancer_listener_port` (Number)
+- `load_balancer_target` (Attributes) (see [below for nested schema](#nestedatt--explanations--load_balancer_target))
+- `load_balancer_target_group` (Attributes) (see [below for nested schema](#nestedatt--explanations--load_balancer_target_group))
+- `load_balancer_target_groups` (Attributes List) (see [below for nested schema](#nestedatt--explanations--load_balancer_target_groups))
+- `load_balancer_target_port` (Number)
+- `missing_component` (String)
+- `nat_gateway` (Attributes) (see [below for nested schema](#nestedatt--explanations--nat_gateway))
+- `network_interface` (Attributes) (see [below for nested schema](#nestedatt--explanations--network_interface))
+- `packet_field` (String)
+- `port` (Number)
+- `port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--explanations--port_ranges))
+- `prefix_list` (Attributes) (see [below for nested schema](#nestedatt--explanations--prefix_list))
+- `protocols` (List of String)
+- `route_table` (Attributes) (see [below for nested schema](#nestedatt--explanations--route_table))
+- `route_table_route` (Attributes) (see [below for nested schema](#nestedatt--explanations--route_table_route))
+- `security_group` (Attributes) (see [below for nested schema](#nestedatt--explanations--security_group))
+- `security_group_rule` (Attributes) (see [below for nested schema](#nestedatt--explanations--security_group_rule))
+- `security_groups` (Attributes List) (see [below for nested schema](#nestedatt--explanations--security_groups))
+- `source_vpc` (Attributes) (see [below for nested schema](#nestedatt--explanations--source_vpc))
+- `state` (String)
+- `subnet` (Attributes) (see [below for nested schema](#nestedatt--explanations--subnet))
+- `subnet_route_table` (Attributes) (see [below for nested schema](#nestedatt--explanations--subnet_route_table))
+- `vpc` (Attributes) (see [below for nested schema](#nestedatt--explanations--vpc))
+- `vpc_endpoint` (Attributes) (see [below for nested schema](#nestedatt--explanations--vpc_endpoint))
+- `vpc_peering_connection` (Attributes) (see [below for nested schema](#nestedatt--explanations--vpc_peering_connection))
+- `vpn_connection` (Attributes) (see [below for nested schema](#nestedatt--explanations--vpn_connection))
+- `vpn_gateway` (Attributes) (see [below for nested schema](#nestedatt--explanations--vpn_gateway))
 
 <a id="nestedatt--explanations--acl"></a>
 ### Nested Schema for `explanations.acl`
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--acl_rule"></a>
@@ -121,20 +121,20 @@ Read-Only:
 
 Read-Only:
 
-- **cidr** (String)
-- **egress** (Boolean)
-- **port_range** (Attributes) (see [below for nested schema](#nestedatt--explanations--acl_rule--port_range))
-- **protocol** (String)
-- **rule_action** (String)
-- **rule_number** (Number)
+- `cidr` (String)
+- `egress` (Boolean)
+- `port_range` (Attributes) (see [below for nested schema](#nestedatt--explanations--acl_rule--port_range))
+- `protocol` (String)
+- `rule_action` (String)
+- `rule_number` (Number)
 
 <a id="nestedatt--explanations--acl_rule--port_range"></a>
 ### Nested Schema for `explanations.acl_rule.port_range`
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 
@@ -143,8 +143,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--classic_load_balancer_listener"></a>
@@ -152,8 +152,8 @@ Read-Only:
 
 Read-Only:
 
-- **instance_port** (Number)
-- **load_balancer_port** (Number)
+- `instance_port` (Number)
+- `load_balancer_port` (Number)
 
 
 <a id="nestedatt--explanations--component"></a>
@@ -161,8 +161,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--customer_gateway"></a>
@@ -170,8 +170,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--destination"></a>
@@ -179,8 +179,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--destination_vpc"></a>
@@ -188,8 +188,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--elastic_load_balancer_listener"></a>
@@ -197,8 +197,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--ingress_route_table"></a>
@@ -206,8 +206,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--internet_gateway"></a>
@@ -215,8 +215,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--load_balancer_target"></a>
@@ -224,18 +224,18 @@ Read-Only:
 
 Read-Only:
 
-- **address** (String)
-- **availability_zone** (String)
-- **instance** (Attributes) (see [below for nested schema](#nestedatt--explanations--load_balancer_target--instance))
-- **port** (Number)
+- `address` (String)
+- `availability_zone` (String)
+- `instance` (Attributes) (see [below for nested schema](#nestedatt--explanations--load_balancer_target--instance))
+- `port` (Number)
 
 <a id="nestedatt--explanations--load_balancer_target--instance"></a>
 ### Nested Schema for `explanations.load_balancer_target.instance`
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 
@@ -244,8 +244,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--load_balancer_target_groups"></a>
@@ -253,8 +253,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--nat_gateway"></a>
@@ -262,8 +262,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--network_interface"></a>
@@ -271,8 +271,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--port_ranges"></a>
@@ -280,8 +280,8 @@ Read-Only:
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 <a id="nestedatt--explanations--prefix_list"></a>
@@ -289,8 +289,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--route_table"></a>
@@ -298,8 +298,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--route_table_route"></a>
@@ -307,16 +307,16 @@ Read-Only:
 
 Read-Only:
 
-- **destination_cidr** (String)
-- **destination_prefix_list_id** (String)
-- **egress_only_internet_gateway_id** (String)
-- **gateway_id** (String)
-- **instance_id** (String)
-- **nat_gateway_id** (String)
-- **network_interface_id** (String)
-- **origin** (String)
-- **transit_gateway_id** (String)
-- **vpc_peering_connection_id** (String)
+- `destination_cidr` (String)
+- `destination_prefix_list_id` (String)
+- `egress_only_internet_gateway_id` (String)
+- `gateway_id` (String)
+- `instance_id` (String)
+- `nat_gateway_id` (String)
+- `network_interface_id` (String)
+- `origin` (String)
+- `transit_gateway_id` (String)
+- `vpc_peering_connection_id` (String)
 
 
 <a id="nestedatt--explanations--security_group"></a>
@@ -324,8 +324,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--security_group_rule"></a>
@@ -333,20 +333,20 @@ Read-Only:
 
 Read-Only:
 
-- **cidr** (String)
-- **direction** (String)
-- **port_range** (Attributes) (see [below for nested schema](#nestedatt--explanations--security_group_rule--port_range))
-- **prefix_list_id** (String)
-- **protocol** (String)
-- **security_group_id** (String)
+- `cidr` (String)
+- `direction` (String)
+- `port_range` (Attributes) (see [below for nested schema](#nestedatt--explanations--security_group_rule--port_range))
+- `prefix_list_id` (String)
+- `protocol` (String)
+- `security_group_id` (String)
 
 <a id="nestedatt--explanations--security_group_rule--port_range"></a>
 ### Nested Schema for `explanations.security_group_rule.port_range`
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 
@@ -355,8 +355,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--source_vpc"></a>
@@ -364,8 +364,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--subnet"></a>
@@ -373,8 +373,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--subnet_route_table"></a>
@@ -382,8 +382,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--vpc"></a>
@@ -391,8 +391,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--vpc_endpoint"></a>
@@ -400,8 +400,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--vpc_peering_connection"></a>
@@ -409,8 +409,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--vpn_connection"></a>
@@ -418,8 +418,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--explanations--vpn_gateway"></a>
@@ -427,8 +427,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 
@@ -437,37 +437,37 @@ Read-Only:
 
 Read-Only:
 
-- **acl_rule** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--acl_rule))
-- **component** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--component))
-- **destination_vpc** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--destination_vpc))
-- **inbound_header** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--inbound_header))
-- **outbound_header** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--outbound_header))
-- **route_table_route** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--route_table_route))
-- **security_group_rule** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--security_group_rule))
-- **sequence_number** (Number)
-- **source_vpc** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--source_vpc))
-- **subnet** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--subnet))
-- **vpc** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--vpc))
+- `acl_rule` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--acl_rule))
+- `component` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--component))
+- `destination_vpc` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--destination_vpc))
+- `inbound_header` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--inbound_header))
+- `outbound_header` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--outbound_header))
+- `route_table_route` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--route_table_route))
+- `security_group_rule` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--security_group_rule))
+- `sequence_number` (Number)
+- `source_vpc` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--source_vpc))
+- `subnet` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--subnet))
+- `vpc` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--vpc))
 
 <a id="nestedatt--forward_path_components--acl_rule"></a>
 ### Nested Schema for `forward_path_components.acl_rule`
 
 Read-Only:
 
-- **cidr** (String)
-- **egress** (Boolean)
-- **port_range** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--acl_rule--port_range))
-- **protocol** (String)
-- **rule_action** (String)
-- **rule_number** (Number)
+- `cidr` (String)
+- `egress` (Boolean)
+- `port_range` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--acl_rule--port_range))
+- `protocol` (String)
+- `rule_action` (String)
+- `rule_number` (Number)
 
 <a id="nestedatt--forward_path_components--acl_rule--port_range"></a>
 ### Nested Schema for `forward_path_components.acl_rule.port_range`
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 
@@ -476,8 +476,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--forward_path_components--destination_vpc"></a>
@@ -485,8 +485,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--forward_path_components--inbound_header"></a>
@@ -494,19 +494,19 @@ Read-Only:
 
 Read-Only:
 
-- **destination_addresses** (List of String)
-- **destination_port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components--inbound_header--destination_port_ranges))
-- **protocol** (String)
-- **source_addresses** (List of String)
-- **source_port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components--inbound_header--source_port_ranges))
+- `destination_addresses` (List of String)
+- `destination_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components--inbound_header--destination_port_ranges))
+- `protocol` (String)
+- `source_addresses` (List of String)
+- `source_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components--inbound_header--source_port_ranges))
 
 <a id="nestedatt--forward_path_components--inbound_header--destination_port_ranges"></a>
 ### Nested Schema for `forward_path_components.inbound_header.destination_port_ranges`
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 <a id="nestedatt--forward_path_components--inbound_header--source_port_ranges"></a>
@@ -514,8 +514,8 @@ Read-Only:
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 
@@ -524,19 +524,19 @@ Read-Only:
 
 Read-Only:
 
-- **destination_addresses** (List of String)
-- **destination_port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components--outbound_header--destination_port_ranges))
-- **protocol** (String)
-- **source_addresses** (List of String)
-- **source_port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components--outbound_header--source_port_ranges))
+- `destination_addresses` (List of String)
+- `destination_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components--outbound_header--destination_port_ranges))
+- `protocol` (String)
+- `source_addresses` (List of String)
+- `source_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components--outbound_header--source_port_ranges))
 
 <a id="nestedatt--forward_path_components--outbound_header--destination_port_ranges"></a>
 ### Nested Schema for `forward_path_components.outbound_header.destination_port_ranges`
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 <a id="nestedatt--forward_path_components--outbound_header--source_port_ranges"></a>
@@ -544,8 +544,8 @@ Read-Only:
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 
@@ -554,16 +554,16 @@ Read-Only:
 
 Read-Only:
 
-- **destination_cidr** (String)
-- **destination_prefix_list_id** (String)
-- **egress_only_internet_gateway_id** (String)
-- **gateway_id** (String)
-- **instance_id** (String)
-- **nat_gateway_id** (String)
-- **network_interface_id** (String)
-- **origin** (String)
-- **transit_gateway_id** (String)
-- **vpc_peering_connection_id** (String)
+- `destination_cidr` (String)
+- `destination_prefix_list_id` (String)
+- `egress_only_internet_gateway_id` (String)
+- `gateway_id` (String)
+- `instance_id` (String)
+- `nat_gateway_id` (String)
+- `network_interface_id` (String)
+- `origin` (String)
+- `transit_gateway_id` (String)
+- `vpc_peering_connection_id` (String)
 
 
 <a id="nestedatt--forward_path_components--security_group_rule"></a>
@@ -571,20 +571,20 @@ Read-Only:
 
 Read-Only:
 
-- **cidr** (String)
-- **direction** (String)
-- **port_range** (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--security_group_rule--port_range))
-- **prefix_list_id** (String)
-- **protocol** (String)
-- **security_group_id** (String)
+- `cidr` (String)
+- `direction` (String)
+- `port_range` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--security_group_rule--port_range))
+- `prefix_list_id` (String)
+- `protocol` (String)
+- `security_group_id` (String)
 
 <a id="nestedatt--forward_path_components--security_group_rule--port_range"></a>
 ### Nested Schema for `forward_path_components.security_group_rule.port_range`
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 
@@ -593,8 +593,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--forward_path_components--subnet"></a>
@@ -602,8 +602,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--forward_path_components--vpc"></a>
@@ -611,8 +611,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 
@@ -621,37 +621,37 @@ Read-Only:
 
 Read-Only:
 
-- **acl_rule** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--acl_rule))
-- **component** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--component))
-- **destination_vpc** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--destination_vpc))
-- **inbound_header** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--inbound_header))
-- **outbound_header** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--outbound_header))
-- **route_table_route** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--route_table_route))
-- **security_group_rule** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--security_group_rule))
-- **sequence_number** (Number)
-- **source_vpc** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--source_vpc))
-- **subnet** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--subnet))
-- **vpc** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--vpc))
+- `acl_rule` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--acl_rule))
+- `component` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--component))
+- `destination_vpc` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--destination_vpc))
+- `inbound_header` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--inbound_header))
+- `outbound_header` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--outbound_header))
+- `route_table_route` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--route_table_route))
+- `security_group_rule` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--security_group_rule))
+- `sequence_number` (Number)
+- `source_vpc` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--source_vpc))
+- `subnet` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--subnet))
+- `vpc` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--vpc))
 
 <a id="nestedatt--return_path_components--acl_rule"></a>
 ### Nested Schema for `return_path_components.acl_rule`
 
 Read-Only:
 
-- **cidr** (String)
-- **egress** (Boolean)
-- **port_range** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--acl_rule--port_range))
-- **protocol** (String)
-- **rule_action** (String)
-- **rule_number** (Number)
+- `cidr` (String)
+- `egress` (Boolean)
+- `port_range` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--acl_rule--port_range))
+- `protocol` (String)
+- `rule_action` (String)
+- `rule_number` (Number)
 
 <a id="nestedatt--return_path_components--acl_rule--port_range"></a>
 ### Nested Schema for `return_path_components.acl_rule.port_range`
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 
@@ -660,8 +660,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--return_path_components--destination_vpc"></a>
@@ -669,8 +669,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--return_path_components--inbound_header"></a>
@@ -678,19 +678,19 @@ Read-Only:
 
 Read-Only:
 
-- **destination_addresses** (List of String)
-- **destination_port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--return_path_components--inbound_header--destination_port_ranges))
-- **protocol** (String)
-- **source_addresses** (List of String)
-- **source_port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--return_path_components--inbound_header--source_port_ranges))
+- `destination_addresses` (List of String)
+- `destination_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--return_path_components--inbound_header--destination_port_ranges))
+- `protocol` (String)
+- `source_addresses` (List of String)
+- `source_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--return_path_components--inbound_header--source_port_ranges))
 
 <a id="nestedatt--return_path_components--inbound_header--destination_port_ranges"></a>
 ### Nested Schema for `return_path_components.inbound_header.destination_port_ranges`
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 <a id="nestedatt--return_path_components--inbound_header--source_port_ranges"></a>
@@ -698,8 +698,8 @@ Read-Only:
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 
@@ -708,19 +708,19 @@ Read-Only:
 
 Read-Only:
 
-- **destination_addresses** (List of String)
-- **destination_port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--return_path_components--outbound_header--destination_port_ranges))
-- **protocol** (String)
-- **source_addresses** (List of String)
-- **source_port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--return_path_components--outbound_header--source_port_ranges))
+- `destination_addresses` (List of String)
+- `destination_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--return_path_components--outbound_header--destination_port_ranges))
+- `protocol` (String)
+- `source_addresses` (List of String)
+- `source_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--return_path_components--outbound_header--source_port_ranges))
 
 <a id="nestedatt--return_path_components--outbound_header--destination_port_ranges"></a>
 ### Nested Schema for `return_path_components.outbound_header.destination_port_ranges`
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 <a id="nestedatt--return_path_components--outbound_header--source_port_ranges"></a>
@@ -728,8 +728,8 @@ Read-Only:
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 
@@ -738,16 +738,16 @@ Read-Only:
 
 Read-Only:
 
-- **destination_cidr** (String)
-- **destination_prefix_list_id** (String)
-- **egress_only_internet_gateway_id** (String)
-- **gateway_id** (String)
-- **instance_id** (String)
-- **nat_gateway_id** (String)
-- **network_interface_id** (String)
-- **origin** (String)
-- **transit_gateway_id** (String)
-- **vpc_peering_connection_id** (String)
+- `destination_cidr` (String)
+- `destination_prefix_list_id` (String)
+- `egress_only_internet_gateway_id` (String)
+- `gateway_id` (String)
+- `instance_id` (String)
+- `nat_gateway_id` (String)
+- `network_interface_id` (String)
+- `origin` (String)
+- `transit_gateway_id` (String)
+- `vpc_peering_connection_id` (String)
 
 
 <a id="nestedatt--return_path_components--security_group_rule"></a>
@@ -755,20 +755,20 @@ Read-Only:
 
 Read-Only:
 
-- **cidr** (String)
-- **direction** (String)
-- **port_range** (Attributes) (see [below for nested schema](#nestedatt--return_path_components--security_group_rule--port_range))
-- **prefix_list_id** (String)
-- **protocol** (String)
-- **security_group_id** (String)
+- `cidr` (String)
+- `direction` (String)
+- `port_range` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--security_group_rule--port_range))
+- `prefix_list_id` (String)
+- `protocol` (String)
+- `security_group_id` (String)
 
 <a id="nestedatt--return_path_components--security_group_rule--port_range"></a>
 ### Nested Schema for `return_path_components.security_group_rule.port_range`
 
 Read-Only:
 
-- **from** (Number)
-- **to** (Number)
+- `from` (Number)
+- `to` (Number)
 
 
 
@@ -777,8 +777,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--return_path_components--subnet"></a>
@@ -786,8 +786,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 
 <a id="nestedatt--return_path_components--vpc"></a>
@@ -795,8 +795,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 ## Import
 

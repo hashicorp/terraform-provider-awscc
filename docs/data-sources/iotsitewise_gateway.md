@@ -17,23 +17,23 @@ Data Source schema for AWS::IoTSiteWise::Gateway
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **gateway_capability_summaries** (Attributes List) A list of gateway capability summaries that each contain a namespace and status. (see [below for nested schema](#nestedatt--gateway_capability_summaries))
-- **gateway_id** (String) The ID of the gateway device.
-- **gateway_name** (String) A unique, friendly name for the gateway.
-- **gateway_platform** (Attributes) The gateway's platform. You can only specify one platform in a gateway. (see [below for nested schema](#nestedatt--gateway_platform))
-- **tags** (Attributes List) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
+- `gateway_capability_summaries` (Attributes List) A list of gateway capability summaries that each contain a namespace and status. (see [below for nested schema](#nestedatt--gateway_capability_summaries))
+- `gateway_id` (String) The ID of the gateway device.
+- `gateway_name` (String) A unique, friendly name for the gateway.
+- `gateway_platform` (Attributes) The gateway's platform. You can only specify one platform in a gateway. (see [below for nested schema](#nestedatt--gateway_platform))
+- `tags` (Attributes List) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--gateway_capability_summaries"></a>
 ### Nested Schema for `gateway_capability_summaries`
 
 Read-Only:
 
-- **capability_configuration** (String) The JSON document that defines the gateway capability's configuration.
-- **capability_namespace** (String) The namespace of the capability configuration.
+- `capability_configuration` (String) The JSON document that defines the gateway capability's configuration.
+- `capability_namespace` (String) The namespace of the capability configuration.
 
 
 <a id="nestedatt--gateway_platform"></a>
@@ -41,15 +41,15 @@ Read-Only:
 
 Read-Only:
 
-- **greengrass** (Attributes) A gateway that runs on AWS IoT Greengrass V1. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
-- **greengrass_v2** (Attributes) A gateway that runs on AWS IoT Greengrass V2. (see [below for nested schema](#nestedatt--gateway_platform--greengrass_v2))
+- `greengrass` (Attributes) A gateway that runs on AWS IoT Greengrass V1. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
+- `greengrass_v2` (Attributes) A gateway that runs on AWS IoT Greengrass V2. (see [below for nested schema](#nestedatt--gateway_platform--greengrass_v2))
 
 <a id="nestedatt--gateway_platform--greengrass"></a>
 ### Nested Schema for `gateway_platform.greengrass`
 
 Read-Only:
 
-- **group_arn** (String) The ARN of the Greengrass group.
+- `group_arn` (String) The ARN of the Greengrass group.
 
 
 <a id="nestedatt--gateway_platform--greengrass_v2"></a>
@@ -57,7 +57,7 @@ Read-Only:
 
 Read-Only:
 
-- **core_device_thing_name** (String) The name of the CoreDevice in GreenGrass V2.
+- `core_device_thing_name` (String) The name of the CoreDevice in GreenGrass V2.
 
 
 
@@ -66,7 +66,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

@@ -17,27 +17,27 @@ Data Source schema for AWS::SageMaker::Project
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **creation_time** (String) The time at which the project was created.
-- **project_arn** (String) The Amazon Resource Name (ARN) of the Project.
-- **project_description** (String) The description of the project.
-- **project_id** (String) Project Id.
-- **project_name** (String) The name of the project.
-- **project_status** (String) The status of a project.
-- **service_catalog_provisioned_product_details** (Attributes) Provisioned ServiceCatalog  Details (see [below for nested schema](#nestedatt--service_catalog_provisioned_product_details))
-- **service_catalog_provisioning_details** (Attributes) Input ServiceCatalog Provisioning Details (see [below for nested schema](#nestedatt--service_catalog_provisioning_details))
-- **tags** (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `creation_time` (String) The time at which the project was created.
+- `project_arn` (String) The Amazon Resource Name (ARN) of the Project.
+- `project_description` (String) The description of the project.
+- `project_id` (String) Project Id.
+- `project_name` (String) The name of the project.
+- `project_status` (String) The status of a project.
+- `service_catalog_provisioned_product_details` (Attributes) Provisioned ServiceCatalog  Details (see [below for nested schema](#nestedatt--service_catalog_provisioned_product_details))
+- `service_catalog_provisioning_details` (Attributes) Input ServiceCatalog Provisioning Details (see [below for nested schema](#nestedatt--service_catalog_provisioning_details))
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--service_catalog_provisioned_product_details"></a>
 ### Nested Schema for `service_catalog_provisioned_product_details`
 
 Read-Only:
 
-- **provisioned_product_id** (String) The identifier of the provisioning artifact (also known as a version).
-- **provisioned_product_status_message** (String) Provisioned Product Status Message
+- `provisioned_product_id` (String) The identifier of the provisioning artifact (also known as a version).
+- `provisioned_product_status_message` (String) Provisioned Product Status Message
 
 
 <a id="nestedatt--service_catalog_provisioning_details"></a>
@@ -45,18 +45,18 @@ Read-Only:
 
 Read-Only:
 
-- **path_id** (String) The path identifier of the product.
-- **product_id** (String) Service Catalog product identifier.
-- **provisioning_artifact_id** (String) The identifier of the provisioning artifact (also known as a version).
-- **provisioning_parameters** (Attributes List) Parameters specified by the administrator that are required for provisioning the product. (see [below for nested schema](#nestedatt--service_catalog_provisioning_details--provisioning_parameters))
+- `path_id` (String) The path identifier of the product.
+- `product_id` (String) Service Catalog product identifier.
+- `provisioning_artifact_id` (String) The identifier of the provisioning artifact (also known as a version).
+- `provisioning_parameters` (Attributes List) Parameters specified by the administrator that are required for provisioning the product. (see [below for nested schema](#nestedatt--service_catalog_provisioning_details--provisioning_parameters))
 
 <a id="nestedatt--service_catalog_provisioning_details--provisioning_parameters"></a>
 ### Nested Schema for `service_catalog_provisioning_details.provisioning_parameters`
 
 Read-Only:
 
-- **key** (String) The parameter key.
-- **value** (String) The parameter value.
+- `key` (String) The parameter key.
+- `value` (String) The parameter value.
 
 
 
@@ -65,7 +65,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

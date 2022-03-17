@@ -17,23 +17,23 @@ A markup/discount that is defined for a specific set of services that can later 
 
 ### Required
 
-- **modifier_percentage** (Number) Pricing rule modifier percentage
-- **name** (String) Pricing rule name
-- **scope** (String) A term used to categorize the granularity of a Pricing Rule.
-- **type** (String) One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.
+- `modifier_percentage` (Number) Pricing rule modifier percentage
+- `name` (String) Pricing rule name
+- `scope` (String) A term used to categorize the granularity of a Pricing Rule.
+- `type` (String) One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.
 
 ### Optional
 
-- **description** (String) Pricing rule description
-- **service** (String) The service which a pricing rule is applied on
+- `description` (String) Pricing rule description
+- `service` (String) The service which a pricing rule is applied on
 
 ### Read-Only
 
-- **arn** (String) Pricing rule ARN
-- **associated_pricing_plan_count** (Number) The number of pricing plans associated with pricing rule
-- **creation_time** (Number) Creation timestamp in UNIX epoch time format
-- **id** (String) Uniquely identifies the resource.
-- **last_modified_time** (Number) Latest modified timestamp in UNIX epoch time format
+- `arn` (String) Pricing rule ARN
+- `associated_pricing_plan_count` (Number) The number of pricing plans associated with pricing rule
+- `creation_time` (Number) Creation timestamp in UNIX epoch time format
+- `id` (String) Uniquely identifies the resource.
+- `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
 
 ## Import
 

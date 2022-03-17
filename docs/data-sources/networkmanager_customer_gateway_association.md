@@ -17,13 +17,13 @@ Data Source schema for AWS::NetworkManager::CustomerGatewayAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **customer_gateway_arn** (String) The Amazon Resource Name (ARN) of the customer gateway.
-- **device_id** (String) The ID of the device
-- **global_network_id** (String) The ID of the global network.
-- **link_id** (String) The ID of the link
+- `customer_gateway_arn` (String) The Amazon Resource Name (ARN) of the customer gateway.
+- `device_id` (String) The ID of the device
+- `global_network_id` (String) The ID of the global network.
+- `link_id` (String) The ID of the link
 
 

@@ -17,38 +17,38 @@ Data Source schema for AWS::Pinpoint::InAppTemplate
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **content** (Attributes List) (see [below for nested schema](#nestedatt--content))
-- **custom_config** (Map of String)
-- **layout** (String)
-- **tags** (Map of String)
-- **template_description** (String)
-- **template_name** (String)
+- `arn` (String)
+- `content` (Attributes List) (see [below for nested schema](#nestedatt--content))
+- `custom_config` (Map of String)
+- `layout` (String)
+- `tags` (Map of String)
+- `template_description` (String)
+- `template_name` (String)
 
 <a id="nestedatt--content"></a>
 ### Nested Schema for `content`
 
 Read-Only:
 
-- **background_color** (String)
-- **body_config** (Attributes) (see [below for nested schema](#nestedatt--content--body_config))
-- **header_config** (Attributes) (see [below for nested schema](#nestedatt--content--header_config))
-- **image_url** (String)
-- **primary_btn** (Attributes) (see [below for nested schema](#nestedatt--content--primary_btn))
-- **secondary_btn** (Attributes) (see [below for nested schema](#nestedatt--content--secondary_btn))
+- `background_color` (String)
+- `body_config` (Attributes) (see [below for nested schema](#nestedatt--content--body_config))
+- `header_config` (Attributes) (see [below for nested schema](#nestedatt--content--header_config))
+- `image_url` (String)
+- `primary_btn` (Attributes) (see [below for nested schema](#nestedatt--content--primary_btn))
+- `secondary_btn` (Attributes) (see [below for nested schema](#nestedatt--content--secondary_btn))
 
 <a id="nestedatt--content--body_config"></a>
 ### Nested Schema for `content.body_config`
 
 Read-Only:
 
-- **alignment** (String)
-- **body** (String)
-- **text_color** (String)
+- `alignment` (String)
+- `body` (String)
+- `text_color` (String)
 
 
 <a id="nestedatt--content--header_config"></a>
@@ -56,9 +56,9 @@ Read-Only:
 
 Read-Only:
 
-- **alignment** (String)
-- **header** (String)
-- **text_color** (String)
+- `alignment` (String)
+- `header` (String)
+- `text_color` (String)
 
 
 <a id="nestedatt--content--primary_btn"></a>
@@ -66,18 +66,18 @@ Read-Only:
 
 Read-Only:
 
-- **android** (Attributes) (see [below for nested schema](#nestedatt--content--primary_btn--android))
-- **default_config** (Attributes) (see [below for nested schema](#nestedatt--content--primary_btn--default_config))
-- **ios** (Attributes) (see [below for nested schema](#nestedatt--content--primary_btn--ios))
-- **web** (Attributes) (see [below for nested schema](#nestedatt--content--primary_btn--web))
+- `android` (Attributes) (see [below for nested schema](#nestedatt--content--primary_btn--android))
+- `default_config` (Attributes) (see [below for nested schema](#nestedatt--content--primary_btn--default_config))
+- `ios` (Attributes) (see [below for nested schema](#nestedatt--content--primary_btn--ios))
+- `web` (Attributes) (see [below for nested schema](#nestedatt--content--primary_btn--web))
 
 <a id="nestedatt--content--primary_btn--android"></a>
 ### Nested Schema for `content.primary_btn.android`
 
 Read-Only:
 
-- **button_action** (String)
-- **link** (String)
+- `button_action` (String)
+- `link` (String)
 
 
 <a id="nestedatt--content--primary_btn--default_config"></a>
@@ -85,12 +85,12 @@ Read-Only:
 
 Read-Only:
 
-- **background_color** (String)
-- **border_radius** (Number)
-- **button_action** (String)
-- **link** (String)
-- **text** (String)
-- **text_color** (String)
+- `background_color` (String)
+- `border_radius` (Number)
+- `button_action` (String)
+- `link` (String)
+- `text` (String)
+- `text_color` (String)
 
 
 <a id="nestedatt--content--primary_btn--ios"></a>
@@ -98,8 +98,8 @@ Read-Only:
 
 Read-Only:
 
-- **button_action** (String)
-- **link** (String)
+- `button_action` (String)
+- `link` (String)
 
 
 <a id="nestedatt--content--primary_btn--web"></a>
@@ -107,8 +107,8 @@ Read-Only:
 
 Read-Only:
 
-- **button_action** (String)
-- **link** (String)
+- `button_action` (String)
+- `link` (String)
 
 
 
@@ -117,18 +117,18 @@ Read-Only:
 
 Read-Only:
 
-- **android** (Attributes) (see [below for nested schema](#nestedatt--content--secondary_btn--android))
-- **default_config** (Attributes) (see [below for nested schema](#nestedatt--content--secondary_btn--default_config))
-- **ios** (Attributes) (see [below for nested schema](#nestedatt--content--secondary_btn--ios))
-- **web** (Attributes) (see [below for nested schema](#nestedatt--content--secondary_btn--web))
+- `android` (Attributes) (see [below for nested schema](#nestedatt--content--secondary_btn--android))
+- `default_config` (Attributes) (see [below for nested schema](#nestedatt--content--secondary_btn--default_config))
+- `ios` (Attributes) (see [below for nested schema](#nestedatt--content--secondary_btn--ios))
+- `web` (Attributes) (see [below for nested schema](#nestedatt--content--secondary_btn--web))
 
 <a id="nestedatt--content--secondary_btn--android"></a>
 ### Nested Schema for `content.secondary_btn.android`
 
 Read-Only:
 
-- **button_action** (String)
-- **link** (String)
+- `button_action` (String)
+- `link` (String)
 
 
 <a id="nestedatt--content--secondary_btn--default_config"></a>
@@ -136,12 +136,12 @@ Read-Only:
 
 Read-Only:
 
-- **background_color** (String)
-- **border_radius** (Number)
-- **button_action** (String)
-- **link** (String)
-- **text** (String)
-- **text_color** (String)
+- `background_color` (String)
+- `border_radius` (Number)
+- `button_action` (String)
+- `link` (String)
+- `text` (String)
+- `text_color` (String)
 
 
 <a id="nestedatt--content--secondary_btn--ios"></a>
@@ -149,8 +149,8 @@ Read-Only:
 
 Read-Only:
 
-- **button_action** (String)
-- **link** (String)
+- `button_action` (String)
+- `link` (String)
 
 
 <a id="nestedatt--content--secondary_btn--web"></a>
@@ -158,7 +158,7 @@ Read-Only:
 
 Read-Only:
 
-- **button_action** (String)
-- **link** (String)
+- `button_action` (String)
+- `link` (String)
 
 

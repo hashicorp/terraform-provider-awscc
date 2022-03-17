@@ -17,13 +17,13 @@ Data Source schema for AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **application** (String) The name or the Id of the Application.
-- **application_arn** (String)
-- **attribute_group** (String) The name or the Id of the AttributeGroup.
-- **attribute_group_arn** (String)
+- `application` (String) The name or the Id of the Application.
+- `application_arn` (String)
+- `attribute_group` (String) The name or the Id of the AttributeGroup.
+- `attribute_group_arn` (String)
 
 

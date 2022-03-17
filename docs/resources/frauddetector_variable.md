@@ -17,31 +17,31 @@ A resource schema for a Variable in Amazon Fraud Detector.
 
 ### Required
 
-- **data_source** (String) The source of the data.
-- **data_type** (String) The data type.
-- **default_value** (String) The default value for the variable when no value is received.
-- **name** (String) The name of the variable.
+- `data_source` (String) The source of the data.
+- `data_type` (String) The data type.
+- `default_value` (String) The default value for the variable when no value is received.
+- `name` (String) The name of the variable.
 
 ### Optional
 
-- **description** (String) The description.
-- **tags** (Attributes List) Tags associated with this variable. (see [below for nested schema](#nestedatt--tags))
-- **variable_type** (String) The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
+- `description` (String) The description.
+- `tags` (Attributes List) Tags associated with this variable. (see [below for nested schema](#nestedatt--tags))
+- `variable_type` (String) The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
 
 ### Read-Only
 
-- **arn** (String) The ARN of the variable.
-- **created_time** (String) The time when the variable was created.
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_time** (String) The time when the variable was last updated.
+- `arn` (String) The ARN of the variable.
+- `created_time` (String) The time when the variable was created.
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_time` (String) The time when the variable was last updated.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

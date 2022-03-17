@@ -17,12 +17,12 @@ Designates the IAM role and Amazon Simple Notification Service (SNS) topic that 
 
 ### Required
 
-- **sns_role_name** (String) A resource ARN.
-- **sns_topic_arn** (String) A resource ARN.
+- `sns_role_name` (String) A resource ARN.
+- `sns_topic_arn` (String) A resource ARN.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

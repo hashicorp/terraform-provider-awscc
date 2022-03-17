@@ -17,43 +17,43 @@ Data Source schema for AWS::Lambda::Function
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **architectures** (List of String)
-- **arn** (String) Unique identifier for function resources
-- **code** (Attributes) The code for the function. (see [below for nested schema](#nestedatt--code))
-- **code_signing_config_arn** (String) A unique Arn for CodeSigningConfig resource
-- **dead_letter_config** (Attributes) A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. (see [below for nested schema](#nestedatt--dead_letter_config))
-- **description** (String) A description of the function.
-- **environment** (Attributes) Environment variables that are accessible from function code during execution. (see [below for nested schema](#nestedatt--environment))
-- **file_system_configs** (Attributes List) Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an AWS::EFS::MountTarget resource, you must also specify a DependsOn attribute to ensure that the mount target is created or updated before the function. (see [below for nested schema](#nestedatt--file_system_configs))
-- **function_name** (String) The name of the Lambda function, up to 64 characters in length. If you don't specify a name, AWS CloudFormation generates one.
-- **handler** (String) The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime
-- **image_config** (Attributes) ImageConfig (see [below for nested schema](#nestedatt--image_config))
-- **kms_key_arn** (String) The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.
-- **layers** (List of String) A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
-- **memory_size** (Number) The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
-- **package_type** (String) PackageType.
-- **reserved_concurrent_executions** (Number) The number of simultaneous executions to reserve for the function.
-- **role** (String) The Amazon Resource Name (ARN) of the function's execution role.
-- **runtime** (String) The identifier of the function's runtime.
-- **tags** (Attributes Set) A list of tags to apply to the function. (see [below for nested schema](#nestedatt--tags))
-- **timeout** (Number) The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
-- **tracing_config** (Attributes) Set Mode to Active to sample and trace a subset of incoming requests with AWS X-Ray. (see [below for nested schema](#nestedatt--tracing_config))
-- **vpc_config** (Attributes) For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. (see [below for nested schema](#nestedatt--vpc_config))
+- `architectures` (List of String)
+- `arn` (String) Unique identifier for function resources
+- `code` (Attributes) The code for the function. (see [below for nested schema](#nestedatt--code))
+- `code_signing_config_arn` (String) A unique Arn for CodeSigningConfig resource
+- `dead_letter_config` (Attributes) A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. (see [below for nested schema](#nestedatt--dead_letter_config))
+- `description` (String) A description of the function.
+- `environment` (Attributes) Environment variables that are accessible from function code during execution. (see [below for nested schema](#nestedatt--environment))
+- `file_system_configs` (Attributes List) Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an AWS::EFS::MountTarget resource, you must also specify a DependsOn attribute to ensure that the mount target is created or updated before the function. (see [below for nested schema](#nestedatt--file_system_configs))
+- `function_name` (String) The name of the Lambda function, up to 64 characters in length. If you don't specify a name, AWS CloudFormation generates one.
+- `handler` (String) The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime
+- `image_config` (Attributes) ImageConfig (see [below for nested schema](#nestedatt--image_config))
+- `kms_key_arn` (String) The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.
+- `layers` (List of String) A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
+- `memory_size` (Number) The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
+- `package_type` (String) PackageType.
+- `reserved_concurrent_executions` (Number) The number of simultaneous executions to reserve for the function.
+- `role` (String) The Amazon Resource Name (ARN) of the function's execution role.
+- `runtime` (String) The identifier of the function's runtime.
+- `tags` (Attributes Set) A list of tags to apply to the function. (see [below for nested schema](#nestedatt--tags))
+- `timeout` (Number) The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+- `tracing_config` (Attributes) Set Mode to Active to sample and trace a subset of incoming requests with AWS X-Ray. (see [below for nested schema](#nestedatt--tracing_config))
+- `vpc_config` (Attributes) For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. (see [below for nested schema](#nestedatt--vpc_config))
 
 <a id="nestedatt--code"></a>
 ### Nested Schema for `code`
 
 Read-Only:
 
-- **image_uri** (String) ImageUri.
-- **s3_bucket** (String) An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
-- **s3_key** (String) The Amazon S3 key of the deployment package.
-- **s3_object_version** (String) For versioned objects, the version of the deployment package object to use.
-- **zip_file** (String) The source code of your Lambda function. If you include your function source inline with this parameter, AWS CloudFormation places it in a file named index and zips it to create a deployment package..
+- `image_uri` (String) ImageUri.
+- `s3_bucket` (String) An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+- `s3_key` (String) The Amazon S3 key of the deployment package.
+- `s3_object_version` (String) For versioned objects, the version of the deployment package object to use.
+- `zip_file` (String) The source code of your Lambda function. If you include your function source inline with this parameter, AWS CloudFormation places it in a file named index and zips it to create a deployment package..
 
 
 <a id="nestedatt--dead_letter_config"></a>
@@ -61,7 +61,7 @@ Read-Only:
 
 Read-Only:
 
-- **target_arn** (String) The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+- `target_arn` (String) The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
 
 
 <a id="nestedatt--environment"></a>
@@ -69,7 +69,7 @@ Read-Only:
 
 Read-Only:
 
-- **variables** (Map of String) Environment variable key-value pairs.
+- `variables` (Map of String) Environment variable key-value pairs.
 
 
 <a id="nestedatt--file_system_configs"></a>
@@ -77,8 +77,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String) The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.
-- **local_mount_path** (String) The path where the function can access the file system, starting with /mnt/.
+- `arn` (String) The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.
+- `local_mount_path` (String) The path where the function can access the file system, starting with /mnt/.
 
 
 <a id="nestedatt--image_config"></a>
@@ -86,9 +86,9 @@ Read-Only:
 
 Read-Only:
 
-- **command** (List of String) Command.
-- **entry_point** (List of String) EntryPoint.
-- **working_directory** (String) WorkingDirectory.
+- `command` (List of String) Command.
+- `entry_point` (List of String) EntryPoint.
+- `working_directory` (String) WorkingDirectory.
 
 
 <a id="nestedatt--tags"></a>
@@ -96,8 +96,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 <a id="nestedatt--tracing_config"></a>
@@ -105,7 +105,7 @@ Read-Only:
 
 Read-Only:
 
-- **mode** (String) The tracing mode.
+- `mode` (String) The tracing mode.
 
 
 <a id="nestedatt--vpc_config"></a>
@@ -113,7 +113,7 @@ Read-Only:
 
 Read-Only:
 
-- **security_group_ids** (List of String) A list of VPC security groups IDs.
-- **subnet_ids** (List of String) A list of VPC subnet IDs.
+- `security_group_ids` (List of String) A list of VPC security groups IDs.
+- `subnet_ids` (List of String) A list of VPC subnet IDs.
 
 

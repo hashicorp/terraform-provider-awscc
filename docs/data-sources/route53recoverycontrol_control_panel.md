@@ -17,24 +17,24 @@ Data Source schema for AWS::Route53RecoveryControl::ControlPanel
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **cluster_arn** (String) Cluster to associate with the Control Panel
-- **control_panel_arn** (String) The Amazon Resource Name (ARN) of the cluster.
-- **default_control_panel** (Boolean) A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.
-- **name** (String) The name of the control panel. You can use any non-white space character in the name.
-- **routing_control_count** (Number) Count of associated routing controls
-- **status** (String) The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
-- **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
+- `cluster_arn` (String) Cluster to associate with the Control Panel
+- `control_panel_arn` (String) The Amazon Resource Name (ARN) of the cluster.
+- `default_control_panel` (Boolean) A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.
+- `name` (String) The name of the control panel. You can use any non-white space character in the name.
+- `routing_control_count` (Number) Count of associated routing controls
+- `status` (String) The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
+- `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

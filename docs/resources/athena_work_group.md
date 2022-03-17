@@ -17,29 +17,29 @@ Resource schema for AWS::Athena::WorkGroup
 
 ### Required
 
-- **name** (String) The workGroup name.
+- `name` (String) The workGroup name.
 
 ### Optional
 
-- **description** (String) The workgroup description.
-- **recursive_delete_option** (Boolean) The option to delete the workgroup and its contents even if the workgroup contains any named queries.
-- **state** (String) The state of the workgroup: ENABLED or DISABLED.
-- **tags** (Attributes List) One or more tags, separated by commas, that you want to attach to the workgroup as you create it (see [below for nested schema](#nestedatt--tags))
-- **work_group_configuration** (Attributes) The workgroup configuration (see [below for nested schema](#nestedatt--work_group_configuration))
-- **work_group_configuration_updates** (Attributes) The workgroup configuration update object (see [below for nested schema](#nestedatt--work_group_configuration_updates))
+- `description` (String) The workgroup description.
+- `recursive_delete_option` (Boolean) The option to delete the workgroup and its contents even if the workgroup contains any named queries.
+- `state` (String) The state of the workgroup: ENABLED or DISABLED.
+- `tags` (Attributes List) One or more tags, separated by commas, that you want to attach to the workgroup as you create it (see [below for nested schema](#nestedatt--tags))
+- `work_group_configuration` (Attributes) The workgroup configuration (see [below for nested schema](#nestedatt--work_group_configuration))
+- `work_group_configuration_updates` (Attributes) The workgroup configuration update object (see [below for nested schema](#nestedatt--work_group_configuration_updates))
 
 ### Read-Only
 
-- **creation_time** (String) The date and time the workgroup was created.
-- **id** (String) Uniquely identifies the resource.
+- `creation_time` (String) The date and time the workgroup was created.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--work_group_configuration"></a>
@@ -47,20 +47,20 @@ Optional:
 
 Optional:
 
-- **bytes_scanned_cutoff_per_query** (Number) The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.
-- **enforce_work_group_configuration** (Boolean) If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used
-- **engine_version** (Attributes) The Athena engine version for running queries. (see [below for nested schema](#nestedatt--work_group_configuration--engine_version))
-- **publish_cloudwatch_metrics_enabled** (Boolean) Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
-- **requester_pays_enabled** (Boolean) If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error.
-- **result_configuration** (Attributes) The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as "client-side settings". If workgroup settings override client-side settings, then the query uses the workgroup settings. (see [below for nested schema](#nestedatt--work_group_configuration--result_configuration))
+- `bytes_scanned_cutoff_per_query` (Number) The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.
+- `enforce_work_group_configuration` (Boolean) If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used
+- `engine_version` (Attributes) The Athena engine version for running queries. (see [below for nested schema](#nestedatt--work_group_configuration--engine_version))
+- `publish_cloudwatch_metrics_enabled` (Boolean) Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
+- `requester_pays_enabled` (Boolean) If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error.
+- `result_configuration` (Attributes) The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as "client-side settings". If workgroup settings override client-side settings, then the query uses the workgroup settings. (see [below for nested schema](#nestedatt--work_group_configuration--result_configuration))
 
 <a id="nestedatt--work_group_configuration--engine_version"></a>
 ### Nested Schema for `work_group_configuration.engine_version`
 
 Optional:
 
-- **effective_engine_version** (String) Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
-- **selected_engine_version** (String) The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
+- `effective_engine_version` (String) Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
+- `selected_engine_version` (String) The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
 
 
 <a id="nestedatt--work_group_configuration--result_configuration"></a>
@@ -68,16 +68,16 @@ Optional:
 
 Optional:
 
-- **encryption_configuration** (Attributes) If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information. (see [below for nested schema](#nestedatt--work_group_configuration--result_configuration--encryption_configuration))
-- **output_location** (String) The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration
+- `encryption_configuration` (Attributes) If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information. (see [below for nested schema](#nestedatt--work_group_configuration--result_configuration--encryption_configuration))
+- `output_location` (String) The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration
 
 <a id="nestedatt--work_group_configuration--result_configuration--encryption_configuration"></a>
 ### Nested Schema for `work_group_configuration.result_configuration.encryption_configuration`
 
 Optional:
 
-- **encryption_option** (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
-- **kms_key** (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+- `encryption_option` (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
+- `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 
 
 
@@ -87,21 +87,21 @@ Optional:
 
 Optional:
 
-- **bytes_scanned_cutoff_per_query** (Number) The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.
-- **enforce_work_group_configuration** (Boolean) If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used
-- **engine_version** (Attributes) The Athena engine version for running queries. (see [below for nested schema](#nestedatt--work_group_configuration_updates--engine_version))
-- **publish_cloudwatch_metrics_enabled** (Boolean) Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
-- **remove_bytes_scanned_cutoff_per_query** (Boolean) Indicates that the data usage control limit per query is removed.
-- **requester_pays_enabled** (Boolean) If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error.
-- **result_configuration_updates** (Attributes) The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. (see [below for nested schema](#nestedatt--work_group_configuration_updates--result_configuration_updates))
+- `bytes_scanned_cutoff_per_query` (Number) The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.
+- `enforce_work_group_configuration` (Boolean) If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used
+- `engine_version` (Attributes) The Athena engine version for running queries. (see [below for nested schema](#nestedatt--work_group_configuration_updates--engine_version))
+- `publish_cloudwatch_metrics_enabled` (Boolean) Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
+- `remove_bytes_scanned_cutoff_per_query` (Boolean) Indicates that the data usage control limit per query is removed.
+- `requester_pays_enabled` (Boolean) If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error.
+- `result_configuration_updates` (Attributes) The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. (see [below for nested schema](#nestedatt--work_group_configuration_updates--result_configuration_updates))
 
 <a id="nestedatt--work_group_configuration_updates--engine_version"></a>
 ### Nested Schema for `work_group_configuration_updates.engine_version`
 
 Optional:
 
-- **effective_engine_version** (String) Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
-- **selected_engine_version** (String) The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
+- `effective_engine_version` (String) Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
+- `selected_engine_version` (String) The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
 
 
 <a id="nestedatt--work_group_configuration_updates--result_configuration_updates"></a>
@@ -109,18 +109,18 @@ Optional:
 
 Optional:
 
-- **encryption_configuration** (Attributes) If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information. (see [below for nested schema](#nestedatt--work_group_configuration_updates--result_configuration_updates--encryption_configuration))
-- **output_location** (String) The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration
-- **remove_encryption_configuration** (Boolean)
-- **remove_output_location** (Boolean)
+- `encryption_configuration` (Attributes) If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information. (see [below for nested schema](#nestedatt--work_group_configuration_updates--result_configuration_updates--encryption_configuration))
+- `output_location` (String) The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration
+- `remove_encryption_configuration` (Boolean)
+- `remove_output_location` (Boolean)
 
 <a id="nestedatt--work_group_configuration_updates--result_configuration_updates--encryption_configuration"></a>
 ### Nested Schema for `work_group_configuration_updates.result_configuration_updates.encryption_configuration`
 
 Optional:
 
-- **encryption_option** (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
-- **kms_key** (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+- `encryption_option` (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
+- `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 
 ## Import
 

@@ -17,21 +17,21 @@ Data Source schema for AWS::Config::AggregationAuthorization
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **aggregation_authorization_arn** (String) The ARN of the AggregationAuthorization.
-- **authorized_account_id** (String) The 12-digit account ID of the account authorized to aggregate data.
-- **authorized_aws_region** (String) The region authorized to collect aggregated data.
-- **tags** (Attributes List) The tags for the AggregationAuthorization. (see [below for nested schema](#nestedatt--tags))
+- `aggregation_authorization_arn` (String) The ARN of the AggregationAuthorization.
+- `authorized_account_id` (String) The 12-digit account ID of the account authorized to aggregate data.
+- `authorized_aws_region` (String) The region authorized to collect aggregated data.
+- `tags` (Attributes List) The tags for the AggregationAuthorization. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

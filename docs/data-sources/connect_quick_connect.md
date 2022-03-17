@@ -17,33 +17,33 @@ Data Source schema for AWS::Connect::QuickConnect
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **description** (String) The description of the quick connect.
-- **instance_arn** (String) The identifier of the Amazon Connect instance.
-- **name** (String) The name of the quick connect.
-- **quick_connect_arn** (String) The Amazon Resource Name (ARN) for the quick connect.
-- **quick_connect_config** (Attributes) Configuration settings for the quick connect. (see [below for nested schema](#nestedatt--quick_connect_config))
-- **tags** (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The description of the quick connect.
+- `instance_arn` (String) The identifier of the Amazon Connect instance.
+- `name` (String) The name of the quick connect.
+- `quick_connect_arn` (String) The Amazon Resource Name (ARN) for the quick connect.
+- `quick_connect_config` (Attributes) Configuration settings for the quick connect. (see [below for nested schema](#nestedatt--quick_connect_config))
+- `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--quick_connect_config"></a>
 ### Nested Schema for `quick_connect_config`
 
 Read-Only:
 
-- **phone_config** (Attributes) The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER. (see [below for nested schema](#nestedatt--quick_connect_config--phone_config))
-- **queue_config** (Attributes) The queue configuration. This is required only if QuickConnectType is QUEUE. (see [below for nested schema](#nestedatt--quick_connect_config--queue_config))
-- **quick_connect_type** (String) The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
-- **user_config** (Attributes) The user configuration. This is required only if QuickConnectType is USER. (see [below for nested schema](#nestedatt--quick_connect_config--user_config))
+- `phone_config` (Attributes) The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER. (see [below for nested schema](#nestedatt--quick_connect_config--phone_config))
+- `queue_config` (Attributes) The queue configuration. This is required only if QuickConnectType is QUEUE. (see [below for nested schema](#nestedatt--quick_connect_config--queue_config))
+- `quick_connect_type` (String) The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
+- `user_config` (Attributes) The user configuration. This is required only if QuickConnectType is USER. (see [below for nested schema](#nestedatt--quick_connect_config--user_config))
 
 <a id="nestedatt--quick_connect_config--phone_config"></a>
 ### Nested Schema for `quick_connect_config.phone_config`
 
 Read-Only:
 
-- **phone_number** (String) The phone number in E.164 format.
+- `phone_number` (String) The phone number in E.164 format.
 
 
 <a id="nestedatt--quick_connect_config--queue_config"></a>
@@ -51,8 +51,8 @@ Read-Only:
 
 Read-Only:
 
-- **contact_flow_arn** (String) The identifier of the contact flow.
-- **queue_arn** (String) The identifier for the queue.
+- `contact_flow_arn` (String) The identifier of the contact flow.
+- `queue_arn` (String) The identifier for the queue.
 
 
 <a id="nestedatt--quick_connect_config--user_config"></a>
@@ -60,8 +60,8 @@ Read-Only:
 
 Read-Only:
 
-- **contact_flow_arn** (String) The identifier of the contact flow.
-- **user_arn** (String) The identifier of the user.
+- `contact_flow_arn` (String) The identifier of the contact flow.
+- `user_arn` (String) The identifier of the user.
 
 
 
@@ -70,7 +70,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

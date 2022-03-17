@@ -17,17 +17,17 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::Application
 
 ### Required
 
-- **name** (String) The name of the application.
+- `name` (String) The name of the application.
 
 ### Optional
 
-- **description** (String) The description of the application.
-- **tags** (Map of String)
+- `description` (String) The description of the application.
+- `tags` (Map of String)
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 ## Import
 

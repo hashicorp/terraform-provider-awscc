@@ -17,34 +17,34 @@ Resource Type definition for AWS::Evidently::Project
 
 ### Required
 
-- **name** (String)
+- `name` (String)
 
 ### Optional
 
-- **data_delivery** (Attributes) Destinations for data. (see [below for nested schema](#nestedatt--data_delivery))
-- **description** (String)
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `data_delivery` (Attributes) Destinations for data. (see [below for nested schema](#nestedatt--data_delivery))
+- `description` (String)
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--data_delivery"></a>
 ### Nested Schema for `data_delivery`
 
 Optional:
 
-- **log_group** (String)
-- **s3** (Attributes) (see [below for nested schema](#nestedatt--data_delivery--s3))
+- `log_group` (String)
+- `s3` (Attributes) (see [below for nested schema](#nestedatt--data_delivery--s3))
 
 <a id="nestedatt--data_delivery--s3"></a>
 ### Nested Schema for `data_delivery.s3`
 
 Optional:
 
-- **bucket_name** (String)
-- **prefix** (String)
+- `bucket_name` (String)
+- `prefix` (String)
 
 
 
@@ -53,8 +53,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

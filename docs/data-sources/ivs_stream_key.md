@@ -17,21 +17,21 @@ Data Source schema for AWS::IVS::StreamKey
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Stream Key ARN is automatically generated on creation and assigned as the unique identifier.
-- **channel_arn** (String) Channel ARN for the stream.
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
-- **value** (String) Stream-key value.
+- `arn` (String) Stream Key ARN is automatically generated on creation and assigned as the unique identifier.
+- `channel_arn` (String) Channel ARN for the stream.
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
+- `value` (String) Stream-key value.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

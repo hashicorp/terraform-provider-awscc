@@ -17,27 +17,27 @@ Data Source schema for AWS::GroundStation::MissionProfile
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **contact_post_pass_duration_seconds** (Number) Post-pass time needed after the contact.
-- **contact_pre_pass_duration_seconds** (Number) Pre-pass time needed before the contact.
-- **dataflow_edges** (Attributes List) (see [below for nested schema](#nestedatt--dataflow_edges))
-- **minimum_viable_contact_duration_seconds** (Number) Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.
-- **name** (String) A name used to identify a mission profile.
-- **region** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **tracking_config_arn** (String)
+- `arn` (String)
+- `contact_post_pass_duration_seconds` (Number) Post-pass time needed after the contact.
+- `contact_pre_pass_duration_seconds` (Number) Pre-pass time needed before the contact.
+- `dataflow_edges` (Attributes List) (see [below for nested schema](#nestedatt--dataflow_edges))
+- `minimum_viable_contact_duration_seconds` (Number) Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.
+- `name` (String) A name used to identify a mission profile.
+- `region` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tracking_config_arn` (String)
 
 <a id="nestedatt--dataflow_edges"></a>
 ### Nested Schema for `dataflow_edges`
 
 Read-Only:
 
-- **destination** (String)
-- **source** (String)
+- `destination` (String)
+- `source` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -45,7 +45,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

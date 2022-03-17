@@ -17,33 +17,33 @@ The AWS::NetworkManager::Device type describes a device.
 
 ### Required
 
-- **global_network_id** (String) The ID of the global network.
+- `global_network_id` (String) The ID of the global network.
 
 ### Optional
 
-- **description** (String) The description of the device.
-- **location** (Attributes) The site location. (see [below for nested schema](#nestedatt--location))
-- **model** (String) The device model
-- **serial_number** (String) The device serial number.
-- **site_id** (String) The site ID.
-- **tags** (Attributes List) The tags for the device. (see [below for nested schema](#nestedatt--tags))
-- **type** (String) The device type.
-- **vendor** (String) The device vendor.
+- `description` (String) The description of the device.
+- `location` (Attributes) The site location. (see [below for nested schema](#nestedatt--location))
+- `model` (String) The device model
+- `serial_number` (String) The device serial number.
+- `site_id` (String) The site ID.
+- `tags` (Attributes List) The tags for the device. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) The device type.
+- `vendor` (String) The device vendor.
 
 ### Read-Only
 
-- **device_arn** (String) The Amazon Resource Name (ARN) of the device.
-- **device_id** (String) The ID of the device.
-- **id** (String) Uniquely identifies the resource.
+- `device_arn` (String) The Amazon Resource Name (ARN) of the device.
+- `device_id` (String) The ID of the device.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--location"></a>
 ### Nested Schema for `location`
 
 Optional:
 
-- **address** (String) The physical address.
-- **latitude** (String) The latitude.
-- **longitude** (String) The longitude.
+- `address` (String) The physical address.
+- `latitude` (String) The latitude.
+- `longitude` (String) The longitude.
 
 
 <a id="nestedatt--tags"></a>
@@ -51,8 +51,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

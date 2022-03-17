@@ -17,30 +17,30 @@ Resource schema for AWS::DataSync::LocationFSxWindows.
 
 ### Required
 
-- **fsx_filesystem_arn** (String) The Amazon Resource Name (ARN) for the FSx for Windows file system.
-- **password** (String) The password of the user who has the permissions to access files and folders in the FSx for Windows file system.
-- **security_group_arns** (List of String) The ARNs of the security groups that are to use to configure the FSx for Windows file system.
-- **user** (String) The user who has the permissions to access files and folders in the FSx for Windows file system.
+- `fsx_filesystem_arn` (String) The Amazon Resource Name (ARN) for the FSx for Windows file system.
+- `password` (String) The password of the user who has the permissions to access files and folders in the FSx for Windows file system.
+- `security_group_arns` (List of String) The ARNs of the security groups that are to use to configure the FSx for Windows file system.
+- `user` (String) The user who has the permissions to access files and folders in the FSx for Windows file system.
 
 ### Optional
 
-- **domain** (String) The name of the Windows domain that the FSx for Windows server belongs to.
-- **subdirectory** (String) A subdirectory in the location's path.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `domain` (String) The name of the Windows domain that the FSx for Windows server belongs to.
+- `subdirectory` (String) A subdirectory in the location's path.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **location_arn** (String) The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.
-- **location_uri** (String) The URL of the FSx for Windows location that was described.
+- `id` (String) Uniquely identifies the resource.
+- `location_arn` (String) The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.
+- `location_uri` (String) The URL of the FSx for Windows location that was described.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key for an AWS resource tag.
-- **value** (String) The value for an AWS resource tag.
+- `key` (String) The key for an AWS resource tag.
+- `value` (String) The value for an AWS resource tag.
 
 ## Import
 

@@ -17,18 +17,18 @@ Resource Type definition for AWS::EC2::Host
 
 ### Required
 
-- **availability_zone** (String) The Availability Zone in which to allocate the Dedicated Host.
-- **instance_type** (String) Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only.
+- `availability_zone` (String) The Availability Zone in which to allocate the Dedicated Host.
+- `instance_type` (String) Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only.
 
 ### Optional
 
-- **auto_placement** (String) Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID.
-- **host_recovery** (String) Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default.
+- `auto_placement` (String) Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID.
+- `host_recovery` (String) Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default.
 
 ### Read-Only
 
-- **host_id** (String) Id of the host created.
-- **id** (String) Uniquely identifies the resource.
+- `host_id` (String) Id of the host created.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

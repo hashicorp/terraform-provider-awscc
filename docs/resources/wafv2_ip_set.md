@@ -17,28 +17,28 @@ Contains a list of IP addresses. This can be either IPV4 or IPV6. The list will 
 
 ### Required
 
-- **addresses** (List of String) List of IPAddresses.
-- **ip_address_version** (String) Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.
-- **scope** (String) Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.
+- `addresses` (List of String) List of IPAddresses.
+- `ip_address_version` (String) Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.
+- `scope` (String) Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.
 
 ### Optional
 
-- **description** (String) Description of the entity.
-- **name** (String) Name of the IPSet.
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `description` (String) Description of the entity.
+- `name` (String) Name of the IPSet.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) ARN of the WAF entity.
-- **id** (String) Id of the IPSet
+- `arn` (String) ARN of the WAF entity.
+- `id` (String) Id of the IPSet
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

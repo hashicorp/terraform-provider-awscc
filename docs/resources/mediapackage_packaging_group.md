@@ -17,26 +17,26 @@ Resource schema for AWS::MediaPackage::PackagingGroup
 
 ### Required
 
-- **id** (String) The ID of the PackagingGroup.
+- `id` (String) The ID of the PackagingGroup.
 
 ### Optional
 
-- **authorization** (Attributes) CDN Authorization (see [below for nested schema](#nestedatt--authorization))
-- **egress_access_logs** (Attributes) The configuration parameters for egress access logging. (see [below for nested schema](#nestedatt--egress_access_logs))
-- **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
+- `authorization` (Attributes) CDN Authorization (see [below for nested schema](#nestedatt--authorization))
+- `egress_access_logs` (Attributes) The configuration parameters for egress access logging. (see [below for nested schema](#nestedatt--egress_access_logs))
+- `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The ARN of the PackagingGroup.
-- **domain_name** (String) The fully qualified domain name for Assets in the PackagingGroup.
+- `arn` (String) The ARN of the PackagingGroup.
+- `domain_name` (String) The fully qualified domain name for Assets in the PackagingGroup.
 
 <a id="nestedatt--authorization"></a>
 ### Nested Schema for `authorization`
 
 Optional:
 
-- **cdn_identifier_secret** (String) The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
-- **secrets_role_arn** (String) The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+- `cdn_identifier_secret` (String) The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+- `secrets_role_arn` (String) The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
 
 
 <a id="nestedatt--egress_access_logs"></a>
@@ -44,7 +44,7 @@ Optional:
 
 Optional:
 
-- **log_group_name** (String) Sets a custom AWS CloudWatch log group name for egress logs. If a log group name isn't specified, the default name is used: /aws/MediaPackage/VodEgressAccessLogs.
+- `log_group_name` (String) Sets a custom AWS CloudWatch log group name for egress logs. If a log group name isn't specified, the default name is used: /aws/MediaPackage/VodEgressAccessLogs.
 
 
 <a id="nestedatt--tags"></a>
@@ -52,8 +52,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

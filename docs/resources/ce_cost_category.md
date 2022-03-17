@@ -17,20 +17,20 @@ Cost Category enables you to map your cost and usage into meaningful categories.
 
 ### Required
 
-- **name** (String)
-- **rule_version** (String)
-- **rules** (String) JSON array format of Expression in Billing and Cost Management API
+- `name` (String)
+- `rule_version` (String)
+- `rules` (String) JSON array format of Expression in Billing and Cost Management API
 
 ### Optional
 
-- **default_value** (String) The default value for the cost category
-- **split_charge_rules** (String) Json array format of CostCategorySplitChargeRule in Billing and Cost Management API
+- `default_value` (String) The default value for the cost category
+- `split_charge_rules` (String) Json array format of CostCategorySplitChargeRule in Billing and Cost Management API
 
 ### Read-Only
 
-- **arn** (String) Cost category ARN
-- **effective_start** (String) ISO 8601 date time with offset format
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) Cost category ARN
+- `effective_start` (String) ISO 8601 date time with offset format
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

@@ -17,27 +17,27 @@ The AWS::EC2::TransitGatewayConnect type
 
 ### Required
 
-- **options** (Attributes) The Connect attachment options. (see [below for nested schema](#nestedatt--options))
-- **transport_transit_gateway_attachment_id** (String) The ID of the attachment from which the Connect attachment was created.
+- `options` (Attributes) The Connect attachment options. (see [below for nested schema](#nestedatt--options))
+- `transport_transit_gateway_attachment_id` (String) The ID of the attachment from which the Connect attachment was created.
 
 ### Optional
 
-- **tags** (Attributes List) The tags for the attachment. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) The tags for the attachment. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **creation_time** (String) The creation time.
-- **id** (String) Uniquely identifies the resource.
-- **state** (String) The state of the attachment.
-- **transit_gateway_attachment_id** (String) The ID of the Connect attachment.
-- **transit_gateway_id** (String) The ID of the transit gateway.
+- `creation_time` (String) The creation time.
+- `id` (String) Uniquely identifies the resource.
+- `state` (String) The state of the attachment.
+- `transit_gateway_attachment_id` (String) The ID of the Connect attachment.
+- `transit_gateway_id` (String) The ID of the transit gateway.
 
 <a id="nestedatt--options"></a>
 ### Nested Schema for `options`
 
 Required:
 
-- **protocol** (String) The tunnel protocol.
+- `protocol` (String) The tunnel protocol.
 
 
 <a id="nestedatt--tags"></a>
@@ -45,8 +45,8 @@ Required:
 
 Optional:
 
-- **key** (String) The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.
-- **value** (String) The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
+- `key` (String) The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.
+- `value` (String) The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
 
 ## Import
 

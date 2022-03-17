@@ -17,39 +17,39 @@ Data Source schema for AWS::IoT::JobTemplate
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **abort_config** (Attributes) The criteria that determine when and how a job abort takes place. (see [below for nested schema](#nestedatt--abort_config))
-- **arn** (String)
-- **description** (String) A description of the Job Template.
-- **document** (String) The job document. Required if you don't specify a value for documentSource.
-- **document_source** (String) An S3 link to the job document to use in the template. Required if you don't specify a value for document.
-- **job_arn** (String) Optional for copying a JobTemplate from a pre-existing Job configuration.
-- **job_executions_retry_config** (Attributes) (see [below for nested schema](#nestedatt--job_executions_retry_config))
-- **job_executions_rollout_config** (Attributes) Allows you to create a staged rollout of a job. (see [below for nested schema](#nestedatt--job_executions_rollout_config))
-- **job_template_id** (String)
-- **presigned_url_config** (Attributes) Configuration for pre-signed S3 URLs. (see [below for nested schema](#nestedatt--presigned_url_config))
-- **tags** (Attributes Set) Metadata that can be used to manage the JobTemplate. (see [below for nested schema](#nestedatt--tags))
-- **timeout_config** (Attributes) Specifies the amount of time each device has to finish its execution of the job. (see [below for nested schema](#nestedatt--timeout_config))
+- `abort_config` (Attributes) The criteria that determine when and how a job abort takes place. (see [below for nested schema](#nestedatt--abort_config))
+- `arn` (String)
+- `description` (String) A description of the Job Template.
+- `document` (String) The job document. Required if you don't specify a value for documentSource.
+- `document_source` (String) An S3 link to the job document to use in the template. Required if you don't specify a value for document.
+- `job_arn` (String) Optional for copying a JobTemplate from a pre-existing Job configuration.
+- `job_executions_retry_config` (Attributes) (see [below for nested schema](#nestedatt--job_executions_retry_config))
+- `job_executions_rollout_config` (Attributes) Allows you to create a staged rollout of a job. (see [below for nested schema](#nestedatt--job_executions_rollout_config))
+- `job_template_id` (String)
+- `presigned_url_config` (Attributes) Configuration for pre-signed S3 URLs. (see [below for nested schema](#nestedatt--presigned_url_config))
+- `tags` (Attributes Set) Metadata that can be used to manage the JobTemplate. (see [below for nested schema](#nestedatt--tags))
+- `timeout_config` (Attributes) Specifies the amount of time each device has to finish its execution of the job. (see [below for nested schema](#nestedatt--timeout_config))
 
 <a id="nestedatt--abort_config"></a>
 ### Nested Schema for `abort_config`
 
 Read-Only:
 
-- **criteria_list** (Attributes List) (see [below for nested schema](#nestedatt--abort_config--criteria_list))
+- `criteria_list` (Attributes List) (see [below for nested schema](#nestedatt--abort_config--criteria_list))
 
 <a id="nestedatt--abort_config--criteria_list"></a>
 ### Nested Schema for `abort_config.criteria_list`
 
 Read-Only:
 
-- **action** (String) The type of job action to take to initiate the job abort.
-- **failure_type** (String) The type of job execution failures that can initiate a job abort.
-- **min_number_of_executed_things** (Number) The minimum number of things which must receive job execution notifications before the job can be aborted.
-- **threshold_percentage** (Number) The minimum percentage of job execution failures that must occur to initiate the job abort.
+- `action` (String) The type of job action to take to initiate the job abort.
+- `failure_type` (String) The type of job execution failures that can initiate a job abort.
+- `min_number_of_executed_things` (Number) The minimum number of things which must receive job execution notifications before the job can be aborted.
+- `threshold_percentage` (Number) The minimum percentage of job execution failures that must occur to initiate the job abort.
 
 
 
@@ -58,15 +58,15 @@ Read-Only:
 
 Read-Only:
 
-- **retry_criteria_list** (Attributes List) (see [below for nested schema](#nestedatt--job_executions_retry_config--retry_criteria_list))
+- `retry_criteria_list` (Attributes List) (see [below for nested schema](#nestedatt--job_executions_retry_config--retry_criteria_list))
 
 <a id="nestedatt--job_executions_retry_config--retry_criteria_list"></a>
 ### Nested Schema for `job_executions_retry_config.retry_criteria_list`
 
 Read-Only:
 
-- **failure_type** (String)
-- **number_of_retries** (Number)
+- `failure_type` (String)
+- `number_of_retries` (Number)
 
 
 
@@ -75,25 +75,25 @@ Read-Only:
 
 Read-Only:
 
-- **exponential_rollout_rate** (Attributes) The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout. (see [below for nested schema](#nestedatt--job_executions_rollout_config--exponential_rollout_rate))
-- **maximum_per_minute** (Number) The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.
+- `exponential_rollout_rate` (Attributes) The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout. (see [below for nested schema](#nestedatt--job_executions_rollout_config--exponential_rollout_rate))
+- `maximum_per_minute` (Number) The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.
 
 <a id="nestedatt--job_executions_rollout_config--exponential_rollout_rate"></a>
 ### Nested Schema for `job_executions_rollout_config.exponential_rollout_rate`
 
 Read-Only:
 
-- **base_rate_per_minute** (Number) The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.
-- **increment_factor** (Number) The exponential factor to increase the rate of rollout for a job.
-- **rate_increase_criteria** (Attributes) The criteria to initiate the increase in rate of rollout for a job. (see [below for nested schema](#nestedatt--job_executions_rollout_config--exponential_rollout_rate--rate_increase_criteria))
+- `base_rate_per_minute` (Number) The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.
+- `increment_factor` (Number) The exponential factor to increase the rate of rollout for a job.
+- `rate_increase_criteria` (Attributes) The criteria to initiate the increase in rate of rollout for a job. (see [below for nested schema](#nestedatt--job_executions_rollout_config--exponential_rollout_rate--rate_increase_criteria))
 
 <a id="nestedatt--job_executions_rollout_config--exponential_rollout_rate--rate_increase_criteria"></a>
 ### Nested Schema for `job_executions_rollout_config.exponential_rollout_rate.rate_increase_criteria`
 
 Read-Only:
 
-- **number_of_notified_things** (Number)
-- **number_of_succeeded_things** (Number)
+- `number_of_notified_things` (Number)
+- `number_of_succeeded_things` (Number)
 
 
 
@@ -103,8 +103,8 @@ Read-Only:
 
 Read-Only:
 
-- **expires_in_sec** (Number) How number (in seconds) pre-signed URLs are valid.
-- **role_arn** (String) The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.
+- `expires_in_sec` (Number) How number (in seconds) pre-signed URLs are valid.
+- `role_arn` (String) The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.
 
 
 <a id="nestedatt--tags"></a>
@@ -112,8 +112,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The tag's key.
-- **value** (String) The tag's value.
+- `key` (String) The tag's key.
+- `value` (String) The tag's value.
 
 
 <a id="nestedatt--timeout_config"></a>
@@ -121,6 +121,6 @@ Read-Only:
 
 Read-Only:
 
-- **in_progress_timeout_in_minutes** (Number) Specifies the amount of time, in minutes, this device has to finish execution of this job.
+- `in_progress_timeout_in_minutes` (Number) Specifies the amount of time, in minutes, this device has to finish execution of this job.
 
 

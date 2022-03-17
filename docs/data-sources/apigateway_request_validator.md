@@ -17,14 +17,14 @@ Data Source schema for AWS::ApiGateway::RequestValidator
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **name** (String) Name of the request validator.
-- **request_validator_id** (String) ID of the request validator.
-- **rest_api_id** (String) The identifier of the targeted API entity.
-- **validate_request_body** (Boolean) Indicates whether to validate the request body according to the configured schema for the targeted API and method.
-- **validate_request_parameters** (Boolean) Indicates whether to validate request parameters.
+- `name` (String) Name of the request validator.
+- `request_validator_id` (String) ID of the request validator.
+- `rest_api_id` (String) The identifier of the targeted API entity.
+- `validate_request_body` (Boolean) Indicates whether to validate the request body according to the configured schema for the targeted API and method.
+- `validate_request_parameters` (Boolean) Indicates whether to validate request parameters.
 
 

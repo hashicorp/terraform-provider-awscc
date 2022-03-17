@@ -17,25 +17,25 @@ Data Source schema for AWS::EFS::AccessPoint
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **access_point_id** (String)
-- **access_point_tags** (Attributes Set) (see [below for nested schema](#nestedatt--access_point_tags))
-- **arn** (String)
-- **client_token** (String) (optional) A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
-- **file_system_id** (String) The ID of the EFS file system that the access point provides access to.
-- **posix_user** (Attributes) The operating system user and group applied to all file system requests made using the access point. (see [below for nested schema](#nestedatt--posix_user))
-- **root_directory** (Attributes) Specifies the directory on the Amazon EFS file system that the access point exposes as the root directory of your file system to NFS clients using the access point. The clients using the access point can only access the root directory and below. If the RootDirectory>Path specified does not exist, EFS creates it and applies the CreationInfo settings when a client connects to an access point. When specifying a RootDirectory, you need to provide the Path, and the CreationInfo is optional. (see [below for nested schema](#nestedatt--root_directory))
+- `access_point_id` (String)
+- `access_point_tags` (Attributes Set) (see [below for nested schema](#nestedatt--access_point_tags))
+- `arn` (String)
+- `client_token` (String) (optional) A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
+- `file_system_id` (String) The ID of the EFS file system that the access point provides access to.
+- `posix_user` (Attributes) The operating system user and group applied to all file system requests made using the access point. (see [below for nested schema](#nestedatt--posix_user))
+- `root_directory` (Attributes) Specifies the directory on the Amazon EFS file system that the access point exposes as the root directory of your file system to NFS clients using the access point. The clients using the access point can only access the root directory and below. If the RootDirectory>Path specified does not exist, EFS creates it and applies the CreationInfo settings when a client connects to an access point. When specifying a RootDirectory, you need to provide the Path, and the CreationInfo is optional. (see [below for nested schema](#nestedatt--root_directory))
 
 <a id="nestedatt--access_point_tags"></a>
 ### Nested Schema for `access_point_tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--posix_user"></a>
@@ -43,9 +43,9 @@ Read-Only:
 
 Read-Only:
 
-- **gid** (String) The POSIX group ID used for all file system operations using this access point.
-- **secondary_gids** (List of String) Secondary POSIX group IDs used for all file system operations using this access point.
-- **uid** (String) The POSIX user ID used for all file system operations using this access point.
+- `gid` (String) The POSIX group ID used for all file system operations using this access point.
+- `secondary_gids` (List of String) Secondary POSIX group IDs used for all file system operations using this access point.
+- `uid` (String) The POSIX user ID used for all file system operations using this access point.
 
 
 <a id="nestedatt--root_directory"></a>
@@ -53,16 +53,16 @@ Read-Only:
 
 Read-Only:
 
-- **creation_info** (Attributes) (Optional) Specifies the POSIX IDs and permissions to apply to the access point's RootDirectory. If the RootDirectory>Path specified does not exist, EFS creates the root directory using the CreationInfo settings when a client connects to an access point. When specifying the CreationInfo, you must provide values for all properties.   If you do not provide CreationInfo and the specified RootDirectory>Path does not exist, attempts to mount the file system using the access point will fail. (see [below for nested schema](#nestedatt--root_directory--creation_info))
-- **path** (String) Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.
+- `creation_info` (Attributes) (Optional) Specifies the POSIX IDs and permissions to apply to the access point's RootDirectory. If the RootDirectory>Path specified does not exist, EFS creates the root directory using the CreationInfo settings when a client connects to an access point. When specifying the CreationInfo, you must provide values for all properties.   If you do not provide CreationInfo and the specified RootDirectory>Path does not exist, attempts to mount the file system using the access point will fail. (see [below for nested schema](#nestedatt--root_directory--creation_info))
+- `path` (String) Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.
 
 <a id="nestedatt--root_directory--creation_info"></a>
 ### Nested Schema for `root_directory.creation_info`
 
 Read-Only:
 
-- **owner_gid** (String) Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).
-- **owner_uid** (String) Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).
-- **permissions** (String) Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.
+- `owner_gid` (String) Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).
+- `owner_uid` (String) Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).
+- `permissions` (String) Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.
 
 

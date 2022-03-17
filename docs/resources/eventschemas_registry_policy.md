@@ -17,16 +17,16 @@ Resource Type definition for AWS::EventSchemas::RegistryPolicy
 
 ### Required
 
-- **policy** (Map of String)
-- **registry_name** (String)
+- `policy` (Map of String)
+- `registry_name` (String)
 
 ### Optional
 
-- **revision_id** (String)
+- `revision_id` (String)
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
+- `id` (String) The ID of this resource.
 
 ## Import
 

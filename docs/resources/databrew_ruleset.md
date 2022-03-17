@@ -17,38 +17,38 @@ Resource schema for AWS::DataBrew::Ruleset.
 
 ### Required
 
-- **name** (String) Name of the Ruleset
-- **rules** (Attributes List) List of the data quality rules in the ruleset (see [below for nested schema](#nestedatt--rules))
-- **target_arn** (String) Arn of the target resource (dataset) to apply the ruleset to
+- `name` (String) Name of the Ruleset
+- `rules` (Attributes List) List of the data quality rules in the ruleset (see [below for nested schema](#nestedatt--rules))
+- `target_arn` (String) Arn of the target resource (dataset) to apply the ruleset to
 
 ### Optional
 
-- **description** (String) Description of the Ruleset
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `description` (String) Description of the Ruleset
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--rules"></a>
 ### Nested Schema for `rules`
 
 Required:
 
-- **check_expression** (String) Expression with rule conditions
-- **column_selectors** (Attributes List) (see [below for nested schema](#nestedatt--rules--column_selectors))
-- **disabled** (Boolean) Boolean value to disable/enable a rule
-- **name** (String) Name of the rule
-- **substitution_map** (Attributes List) (see [below for nested schema](#nestedatt--rules--substitution_map))
-- **threshold** (Attributes) (see [below for nested schema](#nestedatt--rules--threshold))
+- `check_expression` (String) Expression with rule conditions
+- `column_selectors` (Attributes List) (see [below for nested schema](#nestedatt--rules--column_selectors))
+- `disabled` (Boolean) Boolean value to disable/enable a rule
+- `name` (String) Name of the rule
+- `substitution_map` (Attributes List) (see [below for nested schema](#nestedatt--rules--substitution_map))
+- `threshold` (Attributes) (see [below for nested schema](#nestedatt--rules--threshold))
 
 <a id="nestedatt--rules--column_selectors"></a>
 ### Nested Schema for `rules.column_selectors`
 
 Required:
 
-- **name** (String) The name of a column from a dataset
-- **regex** (String) A regular expression for selecting a column from a dataset
+- `name` (String) The name of a column from a dataset
+- `regex` (String) A regular expression for selecting a column from a dataset
 
 
 <a id="nestedatt--rules--substitution_map"></a>
@@ -56,8 +56,8 @@ Required:
 
 Required:
 
-- **value** (String) Value or column name
-- **value_reference** (String) Variable name
+- `value` (String) Value or column name
+- `value_reference` (String) Variable name
 
 
 <a id="nestedatt--rules--threshold"></a>
@@ -65,9 +65,9 @@ Required:
 
 Required:
 
-- **type** (String) Threshold type for a rule
-- **unit** (String) Threshold unit for a rule
-- **value** (Number) Threshold value for a rule
+- `type` (String) Threshold type for a rule
+- `unit` (String) Threshold unit for a rule
+- `value` (Number) Threshold value for a rule
 
 
 
@@ -76,8 +76,8 @@ Required:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

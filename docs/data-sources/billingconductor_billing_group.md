@@ -17,28 +17,28 @@ Data Source schema for AWS::BillingConductor::BillingGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **account_grouping** (Attributes) (see [below for nested schema](#nestedatt--account_grouping))
-- **arn** (String) Billing Group ARN
-- **computation_preference** (Attributes) (see [below for nested schema](#nestedatt--computation_preference))
-- **creation_time** (Number) Creation timestamp in UNIX epoch time format
-- **description** (String)
-- **last_modified_time** (Number) Latest modified timestamp in UNIX epoch time format
-- **name** (String)
-- **primary_account_id** (String) This account will act as a virtual payer account of the billing group
-- **size** (Number) Number of accounts in the billing group
-- **status** (String)
-- **status_reason** (String)
+- `account_grouping` (Attributes) (see [below for nested schema](#nestedatt--account_grouping))
+- `arn` (String) Billing Group ARN
+- `computation_preference` (Attributes) (see [below for nested schema](#nestedatt--computation_preference))
+- `creation_time` (Number) Creation timestamp in UNIX epoch time format
+- `description` (String)
+- `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
+- `name` (String)
+- `primary_account_id` (String) This account will act as a virtual payer account of the billing group
+- `size` (Number) Number of accounts in the billing group
+- `status` (String)
+- `status_reason` (String)
 
 <a id="nestedatt--account_grouping"></a>
 ### Nested Schema for `account_grouping`
 
 Read-Only:
 
-- **linked_account_ids** (Set of String)
+- `linked_account_ids` (Set of String)
 
 
 <a id="nestedatt--computation_preference"></a>
@@ -46,6 +46,6 @@ Read-Only:
 
 Read-Only:
 
-- **pricing_plan_arn** (String) ARN of the attached pricing plan
+- `pricing_plan_arn` (String) ARN of the attached pricing plan
 
 

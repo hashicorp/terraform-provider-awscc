@@ -17,11 +17,11 @@ Resource used to control (enable/disable) DNSSEC in a specific hosted zone.
 
 ### Required
 
-- **hosted_zone_id** (String) The unique string (ID) used to identify a hosted zone.
+- `hosted_zone_id` (String) The unique string (ID) used to identify a hosted zone.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

@@ -17,22 +17,22 @@ Data Source schema for AWS::SES::ContactList
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **contact_list_name** (String) The name of the contact list.
-- **description** (String) The description of the contact list.
-- **tags** (Attributes List) The tags (keys and values) associated with the contact list. (see [below for nested schema](#nestedatt--tags))
-- **topics** (Attributes List) The topics associated with the contact list. (see [below for nested schema](#nestedatt--topics))
+- `contact_list_name` (String) The name of the contact list.
+- `description` (String) The description of the contact list.
+- `tags` (Attributes List) The tags (keys and values) associated with the contact list. (see [below for nested schema](#nestedatt--tags))
+- `topics` (Attributes List) The topics associated with the contact list. (see [below for nested schema](#nestedatt--topics))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--topics"></a>
@@ -40,9 +40,9 @@ Read-Only:
 
 Read-Only:
 
-- **default_subscription_status** (String)
-- **description** (String) The description of the topic.
-- **display_name** (String) The display name of the topic.
-- **topic_name** (String) The name of the topic.
+- `default_subscription_status` (String)
+- `description` (String) The description of the topic.
+- `display_name` (String) The display name of the topic.
+- `topic_name` (String) The name of the topic.
 
 

@@ -17,26 +17,26 @@ Data Source schema for AWS::IoT::Authorizer
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **authorizer_function_arn** (String)
-- **authorizer_name** (String)
-- **enable_caching_for_http** (Boolean)
-- **signing_disabled** (Boolean)
-- **status** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **token_key_name** (String)
-- **token_signing_public_keys** (Map of String)
+- `arn` (String)
+- `authorizer_function_arn` (String)
+- `authorizer_name` (String)
+- `enable_caching_for_http` (Boolean)
+- `signing_disabled` (Boolean)
+- `status` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `token_key_name` (String)
+- `token_signing_public_keys` (Map of String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

@@ -17,24 +17,24 @@ Data Source schema for AWS::ResilienceHub::ResiliencyPolicy
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **data_location_constraint** (String) Data Location Constraint of the Policy.
-- **policy** (Attributes Map) (see [below for nested schema](#nestedatt--policy))
-- **policy_arn** (String) Amazon Resource Name (ARN) of the Resiliency Policy.
-- **policy_description** (String) Description of Resiliency Policy.
-- **policy_name** (String) Name of Resiliency Policy.
-- **tags** (Map of String)
-- **tier** (String) Resiliency Policy Tier.
+- `data_location_constraint` (String) Data Location Constraint of the Policy.
+- `policy` (Attributes Map) (see [below for nested schema](#nestedatt--policy))
+- `policy_arn` (String) Amazon Resource Name (ARN) of the Resiliency Policy.
+- `policy_description` (String) Description of Resiliency Policy.
+- `policy_name` (String) Name of Resiliency Policy.
+- `tags` (Map of String)
+- `tier` (String) Resiliency Policy Tier.
 
 <a id="nestedatt--policy"></a>
 ### Nested Schema for `policy`
 
 Read-Only:
 
-- **rpo_in_secs** (Number) RPO in seconds.
-- **rto_in_secs** (Number) RTO in seconds.
+- `rpo_in_secs` (Number) RPO in seconds.
+- `rto_in_secs` (Number) RTO in seconds.
 
 

@@ -17,28 +17,28 @@ AWS Route53 Recovery Control Control Panel resource schema .
 
 ### Required
 
-- **name** (String) The name of the control panel. You can use any non-white space character in the name.
+- `name` (String) The name of the control panel. You can use any non-white space character in the name.
 
 ### Optional
 
-- **cluster_arn** (String) Cluster to associate with the Control Panel
-- **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
+- `cluster_arn` (String) Cluster to associate with the Control Panel
+- `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **control_panel_arn** (String) The Amazon Resource Name (ARN) of the cluster.
-- **default_control_panel** (Boolean) A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.
-- **id** (String) Uniquely identifies the resource.
-- **routing_control_count** (Number) Count of associated routing controls
-- **status** (String) The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
+- `control_panel_arn` (String) The Amazon Resource Name (ARN) of the cluster.
+- `default_control_panel` (Boolean) A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.
+- `id` (String) Uniquely identifies the resource.
+- `routing_control_count` (Number) Count of associated routing controls
+- `status` (String) The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

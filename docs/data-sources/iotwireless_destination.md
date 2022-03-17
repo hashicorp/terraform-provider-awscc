@@ -17,24 +17,24 @@ Data Source schema for AWS::IoTWireless::Destination
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Destination arn. Returned after successful create.
-- **description** (String) Destination description
-- **expression** (String) Destination expression
-- **expression_type** (String) Must be RuleName
-- **name** (String) Unique name of destination
-- **role_arn** (String) AWS role ARN that grants access
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) Destination arn. Returned after successful create.
+- `description` (String) Destination description
+- `expression` (String) Destination expression
+- `expression_type` (String) Must be RuleName
+- `name` (String) Unique name of destination
+- `role_arn` (String) AWS role ARN that grants access
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

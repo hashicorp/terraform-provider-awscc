@@ -17,36 +17,36 @@ Data Source schema for AWS::NimbleStudio::LaunchProfile
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **description** (String) <p>The description.</p>
-- **ec_2_subnet_ids** (List of String) <p>Specifies the IDs of the EC2 subnets where streaming sessions will be accessible from.
+- `description` (String) <p>The description.</p>
+- `ec_2_subnet_ids` (List of String) <p>Specifies the IDs of the EC2 subnets where streaming sessions will be accessible from.
             These subnets must support the specified instance types. </p>
-- **launch_profile_id** (String)
-- **launch_profile_protocol_versions** (List of String) <p>The version number of the protocol that is used by the launch profile. The only valid
+- `launch_profile_id` (String)
+- `launch_profile_protocol_versions` (List of String) <p>The version number of the protocol that is used by the launch profile. The only valid
             version is "2021-03-31".</p>
-- **name** (String) <p>The name for the launch profile.</p>
-- **stream_configuration** (Attributes) <p>A configuration for a streaming session.</p> (see [below for nested schema](#nestedatt--stream_configuration))
-- **studio_component_ids** (List of String) <p>Unique identifiers for a collection of studio components that can be used with this
+- `name` (String) <p>The name for the launch profile.</p>
+- `stream_configuration` (Attributes) <p>A configuration for a streaming session.</p> (see [below for nested schema](#nestedatt--stream_configuration))
+- `studio_component_ids` (List of String) <p>Unique identifiers for a collection of studio components that can be used with this
             launch profile.</p>
-- **studio_id** (String) <p>The studio ID. </p>
-- **tags** (Map of String)
+- `studio_id` (String) <p>The studio ID. </p>
+- `tags` (Map of String)
 
 <a id="nestedatt--stream_configuration"></a>
 ### Nested Schema for `stream_configuration`
 
 Read-Only:
 
-- **clipboard_mode** (String)
-- **ec_2_instance_types** (List of String) <p>The EC2 instance types that users can select from when launching a streaming session
+- `clipboard_mode` (String)
+- `ec_2_instance_types` (List of String) <p>The EC2 instance types that users can select from when launching a streaming session
             with this launch profile.</p>
-- **max_session_length_in_minutes** (Number) <p>The length of time, in minutes, that a streaming session can be active before it is
+- `max_session_length_in_minutes` (Number) <p>The length of time, in minutes, that a streaming session can be active before it is
             stopped or terminated. After this point, Nimble Studio automatically terminates or
             stops the session. The default length of time is 690 minutes, and the maximum length of
             time is 30 days.</p>
-- **max_stopped_session_length_in_minutes** (Number) <p>Integer that determines if you can start and stop your sessions and how long a session
+- `max_stopped_session_length_in_minutes` (Number) <p>Integer that determines if you can start and stop your sessions and how long a session
             can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>
         <p>If the value is missing or set to 0, your sessions can’t be stopped. If you then call
             StopStreamingSession, the session fails. If the time that a session stays in the READY
@@ -56,8 +56,8 @@ Read-Only:
             StopStreamingSession to stop sessions in the READY state. If the time that a session
             stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will
             automatically be stopped by AWS (instead of terminated).</p>
-- **session_storage** (Attributes) <p>The configuration for a streaming session’s upload storage.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage))
-- **streaming_image_ids** (List of String) <p>The streaming images that users can select from when launching a streaming session
+- `session_storage` (Attributes) <p>The configuration for a streaming session’s upload storage.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage))
+- `streaming_image_ids` (List of String) <p>The streaming images that users can select from when launching a streaming session
             with this launch profile.</p>
 
 <a id="nestedatt--stream_configuration--session_storage"></a>
@@ -65,9 +65,9 @@ Read-Only:
 
 Read-Only:
 
-- **mode** (List of String) <p>Allows artists to upload files to their workstations. The only valid option is
+- `mode` (List of String) <p>Allows artists to upload files to their workstations. The only valid option is
                 <code>UPLOAD</code>.</p>
-- **root** (Attributes) <p>The upload storage root location (folder) on streaming workstations where files are
+- `root` (Attributes) <p>The upload storage root location (folder) on streaming workstations where files are
             uploaded.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage--root))
 
 <a id="nestedatt--stream_configuration--session_storage--root"></a>
@@ -75,7 +75,7 @@ Read-Only:
 
 Read-Only:
 
-- **linux** (String) <p>The folder path in Linux workstations where files are uploaded.</p>
-- **windows** (String) <p>The folder path in Windows workstations where files are uploaded.</p>
+- `linux` (String) <p>The folder path in Linux workstations where files are uploaded.</p>
+- `windows` (String) <p>The folder path in Windows workstations where files are uploaded.</p>
 
 

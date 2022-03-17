@@ -17,40 +17,40 @@ Resource Schema of AWS::EMRContainers::VirtualCluster Type
 
 ### Required
 
-- **container_provider** (Attributes) Container provider of the virtual cluster. (see [below for nested schema](#nestedatt--container_provider))
-- **name** (String) Name of the virtual cluster.
+- `container_provider` (Attributes) Container provider of the virtual cluster. (see [below for nested schema](#nestedatt--container_provider))
+- `name` (String) Name of the virtual cluster.
 
 ### Optional
 
-- **tags** (Attributes Set) An array of key-value pairs to apply to this virtual cluster. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this virtual cluster. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Id of the virtual cluster.
+- `arn` (String)
+- `id` (String) Id of the virtual cluster.
 
 <a id="nestedatt--container_provider"></a>
 ### Nested Schema for `container_provider`
 
 Required:
 
-- **id** (String) The ID of the container cluster
-- **info** (Attributes) (see [below for nested schema](#nestedatt--container_provider--info))
-- **type** (String) The type of the container provider
+- `id` (String) The ID of the container cluster
+- `info` (Attributes) (see [below for nested schema](#nestedatt--container_provider--info))
+- `type` (String) The type of the container provider
 
 <a id="nestedatt--container_provider--info"></a>
 ### Nested Schema for `container_provider.info`
 
 Required:
 
-- **eks_info** (Attributes) (see [below for nested schema](#nestedatt--container_provider--info--eks_info))
+- `eks_info` (Attributes) (see [below for nested schema](#nestedatt--container_provider--info--eks_info))
 
 <a id="nestedatt--container_provider--info--eks_info"></a>
 ### Nested Schema for `container_provider.info.eks_info`
 
 Required:
 
-- **namespace** (String)
+- `namespace` (String)
 
 
 
@@ -60,8 +60,8 @@ Required:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

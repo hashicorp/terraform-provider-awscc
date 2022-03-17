@@ -17,24 +17,24 @@ Data Source schema for AWS::DataBrew::Project
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **dataset_name** (String) Dataset name
-- **name** (String) Project name
-- **recipe_name** (String) Recipe name
-- **role_arn** (String) Role arn
-- **sample** (Attributes) Sample (see [below for nested schema](#nestedatt--sample))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `dataset_name` (String) Dataset name
+- `name` (String) Project name
+- `recipe_name` (String) Recipe name
+- `role_arn` (String) Role arn
+- `sample` (Attributes) Sample (see [below for nested schema](#nestedatt--sample))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--sample"></a>
 ### Nested Schema for `sample`
 
 Read-Only:
 
-- **size** (Number) Sample size
-- **type** (String) Sample type
+- `size` (Number) Sample size
+- `type` (String) Sample type
 
 
 <a id="nestedatt--tags"></a>
@@ -42,7 +42,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

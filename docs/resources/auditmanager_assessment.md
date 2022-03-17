@@ -17,31 +17,31 @@ An entity that defines the scope of audit evidence collected by AWS Audit Manage
 
 ### Optional
 
-- **assessment_reports_destination** (Attributes) The destination in which evidence reports are stored for the specified assessment. (see [below for nested schema](#nestedatt--assessment_reports_destination))
-- **aws_account** (Attributes) The AWS account associated with the assessment. (see [below for nested schema](#nestedatt--aws_account))
-- **description** (String) The description of the specified assessment.
-- **framework_id** (String) The identifier for the specified framework.
-- **name** (String) The name of the related assessment.
-- **roles** (Attributes List) The list of roles for the specified assessment. (see [below for nested schema](#nestedatt--roles))
-- **scope** (Attributes) The wrapper that contains the AWS accounts and AWS services in scope for the assessment. (see [below for nested schema](#nestedatt--scope))
-- **status** (String) The status of the specified assessment.
-- **tags** (Attributes List) The tags associated with the assessment. (see [below for nested schema](#nestedatt--tags))
+- `assessment_reports_destination` (Attributes) The destination in which evidence reports are stored for the specified assessment. (see [below for nested schema](#nestedatt--assessment_reports_destination))
+- `aws_account` (Attributes) The AWS account associated with the assessment. (see [below for nested schema](#nestedatt--aws_account))
+- `description` (String) The description of the specified assessment.
+- `framework_id` (String) The identifier for the specified framework.
+- `name` (String) The name of the related assessment.
+- `roles` (Attributes List) The list of roles for the specified assessment. (see [below for nested schema](#nestedatt--roles))
+- `scope` (Attributes) The wrapper that contains the AWS accounts and AWS services in scope for the assessment. (see [below for nested schema](#nestedatt--scope))
+- `status` (String) The status of the specified assessment.
+- `tags` (Attributes List) The tags associated with the assessment. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the assessment.
-- **assessment_id** (String)
-- **creation_time** (Number) The sequence of characters that identifies when the event occurred.
-- **delegations** (Attributes List) The list of delegations. (see [below for nested schema](#nestedatt--delegations))
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The Amazon Resource Name (ARN) of the assessment.
+- `assessment_id` (String)
+- `creation_time` (Number) The sequence of characters that identifies when the event occurred.
+- `delegations` (Attributes List) The list of delegations. (see [below for nested schema](#nestedatt--delegations))
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--assessment_reports_destination"></a>
 ### Nested Schema for `assessment_reports_destination`
 
 Optional:
 
-- **destination** (String) The URL of the specified Amazon S3 bucket.
-- **destination_type** (String) The destination type, such as Amazon S3.
+- `destination` (String) The URL of the specified Amazon S3 bucket.
+- `destination_type` (String) The destination type, such as Amazon S3.
 
 
 <a id="nestedatt--aws_account"></a>
@@ -49,9 +49,9 @@ Optional:
 
 Optional:
 
-- **email_address** (String) The unique identifier for the email account.
-- **id** (String) The identifier for the specified AWS account.
-- **name** (String) The name of the specified AWS account.
+- `email_address` (String) The unique identifier for the email account.
+- `id` (String) The identifier for the specified AWS account.
+- `name` (String) The name of the specified AWS account.
 
 
 <a id="nestedatt--roles"></a>
@@ -59,8 +59,8 @@ Optional:
 
 Optional:
 
-- **role_arn** (String) The Amazon Resource Name (ARN) of the IAM user or role.
-- **role_type** (String) The IAM role type.
+- `role_arn` (String) The Amazon Resource Name (ARN) of the IAM user or role.
+- `role_type` (String) The IAM role type.
 
 
 <a id="nestedatt--scope"></a>
@@ -68,17 +68,17 @@ Optional:
 
 Optional:
 
-- **aws_accounts** (Attributes List) The AWS accounts included in scope. (see [below for nested schema](#nestedatt--scope--aws_accounts))
-- **aws_services** (Attributes List) The AWS services included in scope. (see [below for nested schema](#nestedatt--scope--aws_services))
+- `aws_accounts` (Attributes List) The AWS accounts included in scope. (see [below for nested schema](#nestedatt--scope--aws_accounts))
+- `aws_services` (Attributes List) The AWS services included in scope. (see [below for nested schema](#nestedatt--scope--aws_services))
 
 <a id="nestedatt--scope--aws_accounts"></a>
 ### Nested Schema for `scope.aws_accounts`
 
 Optional:
 
-- **email_address** (String) The unique identifier for the email account.
-- **id** (String) The identifier for the specified AWS account.
-- **name** (String) The name of the specified AWS account.
+- `email_address` (String) The unique identifier for the email account.
+- `id` (String) The identifier for the specified AWS account.
+- `name` (String) The name of the specified AWS account.
 
 
 <a id="nestedatt--scope--aws_services"></a>
@@ -86,7 +86,7 @@ Optional:
 
 Optional:
 
-- **service_name** (String) The name of the AWS service.
+- `service_name` (String) The name of the AWS service.
 
 
 
@@ -95,8 +95,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 <a id="nestedatt--delegations"></a>
@@ -104,17 +104,17 @@ Optional:
 
 Read-Only:
 
-- **assessment_id** (String)
-- **assessment_name** (String) The name of the related assessment.
-- **comment** (String) The comment related to the delegation.
-- **control_set_id** (String) The identifier for the specified control set.
-- **created_by** (String) The IAM user or role that performed the action.
-- **creation_time** (Number) The sequence of characters that identifies when the event occurred.
-- **id** (String) The ID of this resource.
-- **last_updated** (Number) The sequence of characters that identifies when the event occurred.
-- **role_arn** (String) The Amazon Resource Name (ARN) of the IAM user or role.
-- **role_type** (String) The IAM role type.
-- **status** (String) The status of the delegation.
+- `assessment_id` (String)
+- `assessment_name` (String) The name of the related assessment.
+- `comment` (String) The comment related to the delegation.
+- `control_set_id` (String) The identifier for the specified control set.
+- `created_by` (String) The IAM user or role that performed the action.
+- `creation_time` (Number) The sequence of characters that identifies when the event occurred.
+- `id` (String) The ID of this resource.
+- `last_updated` (Number) The sequence of characters that identifies when the event occurred.
+- `role_arn` (String) The Amazon Resource Name (ARN) of the IAM user or role.
+- `role_type` (String) The IAM role type.
+- `status` (String) The status of the delegation.
 
 ## Import
 

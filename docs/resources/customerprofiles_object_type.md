@@ -17,42 +17,42 @@ An ObjectType resource of Amazon Connect Customer Profiles
 
 ### Required
 
-- **domain_name** (String) The unique name of the domain.
+- `domain_name` (String) The unique name of the domain.
 
 ### Optional
 
-- **allow_profile_creation** (Boolean) Indicates whether a profile should be created when data is received.
-- **description** (String) Description of the profile object type.
-- **encryption_key** (String) The default encryption key
-- **expiration_days** (Number) The default number of days until the data within the domain expires.
-- **fields** (Attributes List) A list of the name and ObjectType field. (see [below for nested schema](#nestedatt--fields))
-- **keys** (Attributes List) A list of unique keys that can be used to map data to the profile. (see [below for nested schema](#nestedatt--keys))
-- **object_type_name** (String) The name of the profile object type.
-- **tags** (Attributes List) The tags (keys and values) associated with the integration. (see [below for nested schema](#nestedatt--tags))
-- **template_id** (String) A unique identifier for the object template.
+- `allow_profile_creation` (Boolean) Indicates whether a profile should be created when data is received.
+- `description` (String) Description of the profile object type.
+- `encryption_key` (String) The default encryption key
+- `expiration_days` (Number) The default number of days until the data within the domain expires.
+- `fields` (Attributes List) A list of the name and ObjectType field. (see [below for nested schema](#nestedatt--fields))
+- `keys` (Attributes List) A list of unique keys that can be used to map data to the profile. (see [below for nested schema](#nestedatt--keys))
+- `object_type_name` (String) The name of the profile object type.
+- `tags` (Attributes List) The tags (keys and values) associated with the integration. (see [below for nested schema](#nestedatt--tags))
+- `template_id` (String) A unique identifier for the object template.
 
 ### Read-Only
 
-- **created_at** (String) The time of this integration got created.
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_at** (String) The time of this integration got last updated at.
+- `created_at` (String) The time of this integration got created.
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_at` (String) The time of this integration got last updated at.
 
 <a id="nestedatt--fields"></a>
 ### Nested Schema for `fields`
 
 Optional:
 
-- **name** (String)
-- **object_type_field** (Attributes) Represents a field in a ProfileObjectType. (see [below for nested schema](#nestedatt--fields--object_type_field))
+- `name` (String)
+- `object_type_field` (Attributes) Represents a field in a ProfileObjectType. (see [below for nested schema](#nestedatt--fields--object_type_field))
 
 <a id="nestedatt--fields--object_type_field"></a>
 ### Nested Schema for `fields.object_type_field`
 
 Optional:
 
-- **content_type** (String) The content type of the field. Used for determining equality when searching.
-- **source** (String) A field of a ProfileObject. For example: _source.FirstName, where "_source" is a ProfileObjectType of a Zendesk user and "FirstName" is a field in that ObjectType.
-- **target** (String) The location of the data in the standard ProfileObject model. For example: _profile.Address.PostalCode.
+- `content_type` (String) The content type of the field. Used for determining equality when searching.
+- `source` (String) A field of a ProfileObject. For example: _source.FirstName, where "_source" is a ProfileObjectType of a Zendesk user and "FirstName" is a field in that ObjectType.
+- `target` (String) The location of the data in the standard ProfileObject model. For example: _profile.Address.PostalCode.
 
 
 
@@ -61,16 +61,16 @@ Optional:
 
 Optional:
 
-- **name** (String)
-- **object_type_key_list** (Attributes List) (see [below for nested schema](#nestedatt--keys--object_type_key_list))
+- `name` (String)
+- `object_type_key_list` (Attributes List) (see [below for nested schema](#nestedatt--keys--object_type_key_list))
 
 <a id="nestedatt--keys--object_type_key_list"></a>
 ### Nested Schema for `keys.object_type_key_list`
 
 Optional:
 
-- **field_names** (List of String) The reference for the key name of the fields map.
-- **standard_identifiers** (List of String) The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.
+- `field_names` (List of String) The reference for the key name of the fields map.
+- `standard_identifiers` (List of String) The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.
 
 
 
@@ -79,8 +79,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

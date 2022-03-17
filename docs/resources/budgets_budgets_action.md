@@ -17,30 +17,30 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Required
 
-- **action_threshold** (Attributes) (see [below for nested schema](#nestedatt--action_threshold))
-- **action_type** (String)
-- **budget_name** (String)
-- **definition** (Attributes) (see [below for nested schema](#nestedatt--definition))
-- **execution_role_arn** (String)
-- **notification_type** (String)
-- **subscribers** (Attributes List) (see [below for nested schema](#nestedatt--subscribers))
+- `action_threshold` (Attributes) (see [below for nested schema](#nestedatt--action_threshold))
+- `action_type` (String)
+- `budget_name` (String)
+- `definition` (Attributes) (see [below for nested schema](#nestedatt--definition))
+- `execution_role_arn` (String)
+- `notification_type` (String)
+- `subscribers` (Attributes List) (see [below for nested schema](#nestedatt--subscribers))
 
 ### Optional
 
-- **approval_model** (String)
+- `approval_model` (String)
 
 ### Read-Only
 
-- **action_id** (String)
-- **id** (String) Uniquely identifies the resource.
+- `action_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--action_threshold"></a>
 ### Nested Schema for `action_threshold`
 
 Required:
 
-- **type** (String)
-- **value** (Number)
+- `type` (String)
+- `value` (Number)
 
 
 <a id="nestedatt--definition"></a>
@@ -48,19 +48,19 @@ Required:
 
 Required:
 
-- **iam_action_definition** (Attributes) (see [below for nested schema](#nestedatt--definition--iam_action_definition))
-- **scp_action_definition** (Attributes) (see [below for nested schema](#nestedatt--definition--scp_action_definition))
-- **ssm_action_definition** (Attributes) (see [below for nested schema](#nestedatt--definition--ssm_action_definition))
+- `iam_action_definition` (Attributes) (see [below for nested schema](#nestedatt--definition--iam_action_definition))
+- `scp_action_definition` (Attributes) (see [below for nested schema](#nestedatt--definition--scp_action_definition))
+- `ssm_action_definition` (Attributes) (see [below for nested schema](#nestedatt--definition--ssm_action_definition))
 
 <a id="nestedatt--definition--iam_action_definition"></a>
 ### Nested Schema for `definition.iam_action_definition`
 
 Required:
 
-- **groups** (List of String)
-- **policy_arn** (String)
-- **roles** (List of String)
-- **users** (List of String)
+- `groups` (List of String)
+- `policy_arn` (String)
+- `roles` (List of String)
+- `users` (List of String)
 
 
 <a id="nestedatt--definition--scp_action_definition"></a>
@@ -68,8 +68,8 @@ Required:
 
 Required:
 
-- **policy_id** (String)
-- **target_ids** (List of String)
+- `policy_id` (String)
+- `target_ids` (List of String)
 
 
 <a id="nestedatt--definition--ssm_action_definition"></a>
@@ -77,9 +77,9 @@ Required:
 
 Required:
 
-- **instance_ids** (List of String)
-- **region** (String)
-- **subtype** (String)
+- `instance_ids` (List of String)
+- `region` (String)
+- `subtype` (String)
 
 
 
@@ -88,8 +88,8 @@ Required:
 
 Required:
 
-- **address** (String)
-- **type** (String)
+- `address` (String)
+- `type` (String)
 
 ## Import
 

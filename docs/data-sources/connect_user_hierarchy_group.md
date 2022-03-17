@@ -17,13 +17,13 @@ Data Source schema for AWS::Connect::UserHierarchyGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **instance_arn** (String) The identifier of the Amazon Connect instance.
-- **name** (String) The name of the user hierarchy group.
-- **parent_group_arn** (String) The Amazon Resource Name (ARN) for the parent user hierarchy group.
-- **user_hierarchy_group_arn** (String) The Amazon Resource Name (ARN) for the user hierarchy group.
+- `instance_arn` (String) The identifier of the Amazon Connect instance.
+- `name` (String) The name of the user hierarchy group.
+- `parent_group_arn` (String) The Amazon Resource Name (ARN) for the parent user hierarchy group.
+- `user_hierarchy_group_arn` (String) The Amazon Resource Name (ARN) for the user hierarchy group.
 
 

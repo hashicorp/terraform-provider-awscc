@@ -17,25 +17,25 @@ Data Source schema for AWS::WorkSpaces::ConnectionAlias
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **alias_id** (String)
-- **associations** (Attributes List) (see [below for nested schema](#nestedatt--associations))
-- **connection_alias_state** (String)
-- **connection_string** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `alias_id` (String)
+- `associations` (Attributes List) (see [below for nested schema](#nestedatt--associations))
+- `connection_alias_state` (String)
+- `connection_string` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--associations"></a>
 ### Nested Schema for `associations`
 
 Read-Only:
 
-- **associated_account_id** (String)
-- **association_status** (String)
-- **connection_identifier** (String)
-- **resource_id** (String)
+- `associated_account_id` (String)
+- `association_status` (String)
+- `connection_identifier` (String)
+- `resource_id` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -43,7 +43,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

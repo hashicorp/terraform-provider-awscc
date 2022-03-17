@@ -17,45 +17,45 @@ Resource type definition for AWS::NetworkFirewall::RuleGroup
 
 ### Required
 
-- **capacity** (Number)
-- **rule_group_name** (String)
-- **type** (String)
+- `capacity` (Number)
+- `rule_group_name` (String)
+- `type` (String)
 
 ### Optional
 
-- **description** (String)
-- **rule_group** (Attributes) (see [below for nested schema](#nestedatt--rule_group))
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `description` (String)
+- `rule_group` (Attributes) (see [below for nested schema](#nestedatt--rule_group))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **rule_group_arn** (String) A resource ARN.
-- **rule_group_id** (String)
+- `id` (String) Uniquely identifies the resource.
+- `rule_group_arn` (String) A resource ARN.
+- `rule_group_id` (String)
 
 <a id="nestedatt--rule_group"></a>
 ### Nested Schema for `rule_group`
 
 Optional:
 
-- **rule_variables** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rule_variables))
-- **rules_source** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source))
-- **stateful_rule_options** (Attributes) (see [below for nested schema](#nestedatt--rule_group--stateful_rule_options))
+- `rule_variables` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rule_variables))
+- `rules_source` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source))
+- `stateful_rule_options` (Attributes) (see [below for nested schema](#nestedatt--rule_group--stateful_rule_options))
 
 <a id="nestedatt--rule_group--rule_variables"></a>
 ### Nested Schema for `rule_group.rule_variables`
 
 Optional:
 
-- **ip_sets** (Attributes Map) (see [below for nested schema](#nestedatt--rule_group--rule_variables--ip_sets))
-- **port_sets** (Attributes Map) (see [below for nested schema](#nestedatt--rule_group--rule_variables--port_sets))
+- `ip_sets` (Attributes Map) (see [below for nested schema](#nestedatt--rule_group--rule_variables--ip_sets))
+- `port_sets` (Attributes Map) (see [below for nested schema](#nestedatt--rule_group--rule_variables--port_sets))
 
 <a id="nestedatt--rule_group--rule_variables--ip_sets"></a>
 ### Nested Schema for `rule_group.rule_variables.ip_sets`
 
 Optional:
 
-- **definition** (List of String)
+- `definition` (List of String)
 
 
 <a id="nestedatt--rule_group--rule_variables--port_sets"></a>
@@ -63,7 +63,7 @@ Optional:
 
 Optional:
 
-- **definition** (List of String)
+- `definition` (List of String)
 
 
 
@@ -72,19 +72,19 @@ Optional:
 
 Optional:
 
-- **rules_source_list** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--rules_source_list))
-- **rules_string** (String)
-- **stateful_rules** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateful_rules))
-- **stateless_rules_and_custom_actions** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions))
+- `rules_source_list` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--rules_source_list))
+- `rules_string` (String)
+- `stateful_rules` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateful_rules))
+- `stateless_rules_and_custom_actions` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions))
 
 <a id="nestedatt--rule_group--rules_source--rules_source_list"></a>
 ### Nested Schema for `rule_group.rules_source.rules_source_list`
 
 Optional:
 
-- **generated_rules_type** (String)
-- **target_types** (List of String)
-- **targets** (List of String)
+- `generated_rules_type` (String)
+- `target_types` (List of String)
+- `targets` (List of String)
 
 
 <a id="nestedatt--rule_group--rules_source--stateful_rules"></a>
@@ -92,21 +92,21 @@ Optional:
 
 Optional:
 
-- **action** (String)
-- **header** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateful_rules--header))
-- **rule_options** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateful_rules--rule_options))
+- `action` (String)
+- `header` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateful_rules--header))
+- `rule_options` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateful_rules--rule_options))
 
 <a id="nestedatt--rule_group--rules_source--stateful_rules--header"></a>
 ### Nested Schema for `rule_group.rules_source.stateful_rules.rule_options`
 
 Optional:
 
-- **destination** (String)
-- **destination_port** (String)
-- **direction** (String)
-- **protocol** (String)
-- **source** (String)
-- **source_port** (String)
+- `destination` (String)
+- `destination_port` (String)
+- `direction` (String)
+- `protocol` (String)
+- `source` (String)
+- `source_port` (String)
 
 
 <a id="nestedatt--rule_group--rules_source--stateful_rules--rule_options"></a>
@@ -114,8 +114,8 @@ Optional:
 
 Optional:
 
-- **keyword** (String)
-- **settings** (List of String)
+- `keyword` (String)
+- `settings` (List of String)
 
 
 
@@ -124,37 +124,37 @@ Optional:
 
 Optional:
 
-- **custom_actions** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions))
-- **stateless_rules** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules))
+- `custom_actions` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions))
+- `stateless_rules` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules))
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions"></a>
 ### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules`
 
 Optional:
 
-- **action_definition** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition))
-- **action_name** (String)
+- `action_definition` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition))
+- `action_name` (String)
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition"></a>
 ### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.action_definition`
 
 Optional:
 
-- **publish_metric_action** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action))
+- `publish_metric_action` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action))
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action"></a>
 ### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.action_definition.publish_metric_action`
 
 Optional:
 
-- **dimensions** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action--dimensions))
+- `dimensions` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action--dimensions))
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action--dimensions"></a>
 ### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.action_definition.publish_metric_action.dimensions`
 
 Optional:
 
-- **value** (String)
+- `value` (String)
 
 
 
@@ -165,36 +165,36 @@ Optional:
 
 Optional:
 
-- **priority** (Number)
-- **rule_definition** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition))
+- `priority` (Number)
+- `rule_definition` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition))
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition"></a>
 ### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition`
 
 Optional:
 
-- **actions** (List of String)
-- **match_attributes** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes))
+- `actions` (List of String)
+- `match_attributes` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes))
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes"></a>
 ### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition.match_attributes`
 
 Optional:
 
-- **destination_ports** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--destination_ports))
-- **destinations** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--destinations))
-- **protocols** (List of Number)
-- **source_ports** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--source_ports))
-- **sources** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--sources))
-- **tcp_flags** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--tcp_flags))
+- `destination_ports` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--destination_ports))
+- `destinations` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--destinations))
+- `protocols` (List of Number)
+- `source_ports` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--source_ports))
+- `sources` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--sources))
+- `tcp_flags` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--tcp_flags))
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--destination_ports"></a>
 ### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition.match_attributes.tcp_flags`
 
 Optional:
 
-- **from_port** (Number)
-- **to_port** (Number)
+- `from_port` (Number)
+- `to_port` (Number)
 
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--destinations"></a>
@@ -202,7 +202,7 @@ Optional:
 
 Optional:
 
-- **address_definition** (String)
+- `address_definition` (String)
 
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--source_ports"></a>
@@ -210,8 +210,8 @@ Optional:
 
 Optional:
 
-- **from_port** (Number)
-- **to_port** (Number)
+- `from_port` (Number)
+- `to_port` (Number)
 
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--sources"></a>
@@ -219,7 +219,7 @@ Optional:
 
 Optional:
 
-- **address_definition** (String)
+- `address_definition` (String)
 
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--tcp_flags"></a>
@@ -227,8 +227,8 @@ Optional:
 
 Optional:
 
-- **flags** (List of String)
-- **masks** (List of String)
+- `flags` (List of String)
+- `masks` (List of String)
 
 
 
@@ -241,7 +241,7 @@ Optional:
 
 Optional:
 
-- **rule_order** (String)
+- `rule_order` (String)
 
 
 
@@ -250,8 +250,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

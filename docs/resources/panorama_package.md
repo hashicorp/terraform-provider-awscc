@@ -17,27 +17,27 @@ Schema for Package CloudFormation Resource
 
 ### Required
 
-- **package_name** (String)
+- `package_name` (String)
 
 ### Optional
 
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **created_time** (Number)
-- **id** (String) Uniquely identifies the resource.
-- **package_id** (String)
-- **storage_location** (Attributes) (see [below for nested schema](#nestedatt--storage_location))
+- `arn` (String)
+- `created_time` (Number)
+- `id` (String) Uniquely identifies the resource.
+- `package_id` (String)
+- `storage_location` (Attributes) (see [below for nested schema](#nestedatt--storage_location))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--storage_location"></a>
@@ -45,11 +45,11 @@ Optional:
 
 Read-Only:
 
-- **binary_prefix_location** (String)
-- **bucket** (String)
-- **generated_prefix_location** (String)
-- **manifest_prefix_location** (String)
-- **repo_prefix_location** (String)
+- `binary_prefix_location` (String)
+- `bucket` (String)
+- `generated_prefix_location` (String)
+- `manifest_prefix_location` (String)
+- `repo_prefix_location` (String)
 
 ## Import
 

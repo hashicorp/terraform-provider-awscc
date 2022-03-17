@@ -17,26 +17,26 @@ This resource schema represents the ResourceCollection resource in the Amazon De
 
 ### Required
 
-- **resource_collection_filter** (Attributes) Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru. (see [below for nested schema](#nestedatt--resource_collection_filter))
+- `resource_collection_filter` (Attributes) Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru. (see [below for nested schema](#nestedatt--resource_collection_filter))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **resource_collection_type** (String) The type of ResourceCollection
+- `id` (String) Uniquely identifies the resource.
+- `resource_collection_type` (String) The type of ResourceCollection
 
 <a id="nestedatt--resource_collection_filter"></a>
 ### Nested Schema for `resource_collection_filter`
 
 Required:
 
-- **cloudformation** (Attributes) CloudFormation resource for DevOps Guru to monitor (see [below for nested schema](#nestedatt--resource_collection_filter--cloudformation))
+- `cloudformation` (Attributes) CloudFormation resource for DevOps Guru to monitor (see [below for nested schema](#nestedatt--resource_collection_filter--cloudformation))
 
 <a id="nestedatt--resource_collection_filter--cloudformation"></a>
 ### Nested Schema for `resource_collection_filter.cloudformation`
 
 Required:
 
-- **stack_names** (List of String) An array of CloudFormation stack names.
+- `stack_names` (List of String) An array of CloudFormation stack names.
 
 ## Import
 

@@ -17,34 +17,34 @@ Device Profile's resource schema demonstrating some basic constructs and validat
 
 ### Optional
 
-- **lo_ra_wan** (Attributes) LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
-- **name** (String) Name of service profile
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the device profile. (see [below for nested schema](#nestedatt--tags))
+- `lo_ra_wan` (Attributes) LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
+- `name` (String) Name of service profile
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the device profile. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) Service profile Arn. Returned after successful create.
-- **id** (String) Service profile Id. Returned after successful create.
+- `arn` (String) Service profile Arn. Returned after successful create.
+- `id` (String) Service profile Id. Returned after successful create.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`
 
 Optional:
 
-- **class_b_timeout** (Number)
-- **class_c_timeout** (Number)
-- **mac_version** (String)
-- **max_duty_cycle** (Number)
-- **max_eirp** (Number)
-- **ping_slot_dr** (Number)
-- **ping_slot_freq** (Number)
-- **ping_slot_period** (Number)
-- **reg_params_revision** (String)
-- **rf_region** (String)
-- **supports_32_bit_f_cnt** (Boolean)
-- **supports_class_b** (Boolean)
-- **supports_class_c** (Boolean)
-- **supports_join** (Boolean)
+- `class_b_timeout` (Number)
+- `class_c_timeout` (Number)
+- `mac_version` (String)
+- `max_duty_cycle` (Number)
+- `max_eirp` (Number)
+- `ping_slot_dr` (Number)
+- `ping_slot_freq` (Number)
+- `ping_slot_period` (Number)
+- `reg_params_revision` (String)
+- `rf_region` (String)
+- `supports_32_bit_f_cnt` (Boolean)
+- `supports_class_b` (Boolean)
+- `supports_class_c` (Boolean)
+- `supports_join` (Boolean)
 
 
 <a id="nestedatt--tags"></a>
@@ -52,8 +52,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

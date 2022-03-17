@@ -17,43 +17,43 @@ Resource Type definition for AWS::EC2::EC2Fleet
 
 ### Required
 
-- **launch_template_configs** (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs))
-- **target_capacity_specification** (Attributes) (see [below for nested schema](#nestedatt--target_capacity_specification))
+- `launch_template_configs` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs))
+- `target_capacity_specification` (Attributes) (see [below for nested schema](#nestedatt--target_capacity_specification))
 
 ### Optional
 
-- **context** (String)
-- **excess_capacity_termination_policy** (String)
-- **on_demand_options** (Attributes) (see [below for nested schema](#nestedatt--on_demand_options))
-- **replace_unhealthy_instances** (Boolean)
-- **spot_options** (Attributes) (see [below for nested schema](#nestedatt--spot_options))
-- **tag_specifications** (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications))
-- **terminate_instances_with_expiration** (Boolean)
-- **type** (String)
-- **valid_from** (String)
-- **valid_until** (String)
+- `context` (String)
+- `excess_capacity_termination_policy` (String)
+- `on_demand_options` (Attributes) (see [below for nested schema](#nestedatt--on_demand_options))
+- `replace_unhealthy_instances` (Boolean)
+- `spot_options` (Attributes) (see [below for nested schema](#nestedatt--spot_options))
+- `tag_specifications` (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications))
+- `terminate_instances_with_expiration` (Boolean)
+- `type` (String)
+- `valid_from` (String)
+- `valid_until` (String)
 
 ### Read-Only
 
-- **fleet_id** (String)
-- **id** (String) Uniquely identifies the resource.
+- `fleet_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--launch_template_configs"></a>
 ### Nested Schema for `launch_template_configs`
 
 Required:
 
-- **launch_template_specification** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--launch_template_specification))
-- **overrides** (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides))
+- `launch_template_specification` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--launch_template_specification))
+- `overrides` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides))
 
 <a id="nestedatt--launch_template_configs--launch_template_specification"></a>
 ### Nested Schema for `launch_template_configs.launch_template_specification`
 
 Required:
 
-- **launch_template_id** (String)
-- **launch_template_name** (String)
-- **version** (String)
+- `launch_template_id` (String)
+- `launch_template_name` (String)
+- `version` (String)
 
 
 <a id="nestedatt--launch_template_configs--overrides"></a>
@@ -61,49 +61,49 @@ Required:
 
 Required:
 
-- **availability_zone** (String)
-- **instance_requirements** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements))
-- **instance_type** (String)
-- **max_price** (String)
-- **placement** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--placement))
-- **priority** (Number)
-- **subnet_id** (String)
-- **weighted_capacity** (Number)
+- `availability_zone` (String)
+- `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements))
+- `instance_type` (String)
+- `max_price` (String)
+- `placement` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--placement))
+- `priority` (Number)
+- `subnet_id` (String)
+- `weighted_capacity` (Number)
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements`
 
 Required:
 
-- **accelerator_count** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_count))
-- **accelerator_manufacturers** (List of String)
-- **accelerator_names** (List of String)
-- **accelerator_total_memory_mi_b** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_total_memory_mi_b))
-- **accelerator_types** (List of String)
-- **bare_metal** (String)
-- **baseline_ebs_bandwidth_mbps** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--baseline_ebs_bandwidth_mbps))
-- **burstable_performance** (String)
-- **cpu_manufacturers** (List of String)
-- **excluded_instance_types** (List of String)
-- **instance_generations** (List of String)
-- **local_storage** (String)
-- **local_storage_types** (List of String)
-- **memory_gi_b_per_v_cpu** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--memory_gi_b_per_v_cpu))
-- **memory_mi_b** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--memory_mi_b))
-- **network_interface_count** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--network_interface_count))
-- **on_demand_max_price_percentage_over_lowest_price** (Number)
-- **require_hibernate_support** (Boolean)
-- **spot_max_price_percentage_over_lowest_price** (Number)
-- **total_local_storage_gb** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--total_local_storage_gb))
-- **v_cpu_count** (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--v_cpu_count))
+- `accelerator_count` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_count))
+- `accelerator_manufacturers` (List of String)
+- `accelerator_names` (List of String)
+- `accelerator_total_memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_total_memory_mi_b))
+- `accelerator_types` (List of String)
+- `bare_metal` (String)
+- `baseline_ebs_bandwidth_mbps` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--baseline_ebs_bandwidth_mbps))
+- `burstable_performance` (String)
+- `cpu_manufacturers` (List of String)
+- `excluded_instance_types` (List of String)
+- `instance_generations` (List of String)
+- `local_storage` (String)
+- `local_storage_types` (List of String)
+- `memory_gi_b_per_v_cpu` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--memory_gi_b_per_v_cpu))
+- `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--memory_mi_b))
+- `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--network_interface_count))
+- `on_demand_max_price_percentage_over_lowest_price` (Number)
+- `require_hibernate_support` (Boolean)
+- `spot_max_price_percentage_over_lowest_price` (Number)
+- `total_local_storage_gb` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--total_local_storage_gb))
+- `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--v_cpu_count))
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_count"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
 
 Required:
 
-- **max** (Number)
-- **min** (Number)
+- `max` (Number)
+- `min` (Number)
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_total_memory_mi_b"></a>
@@ -111,8 +111,8 @@ Required:
 
 Required:
 
-- **max** (Number)
-- **min** (Number)
+- `max` (Number)
+- `min` (Number)
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--baseline_ebs_bandwidth_mbps"></a>
@@ -120,8 +120,8 @@ Required:
 
 Required:
 
-- **max** (Number)
-- **min** (Number)
+- `max` (Number)
+- `min` (Number)
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--memory_gi_b_per_v_cpu"></a>
@@ -129,8 +129,8 @@ Required:
 
 Required:
 
-- **max** (Number)
-- **min** (Number)
+- `max` (Number)
+- `min` (Number)
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--memory_mi_b"></a>
@@ -138,8 +138,8 @@ Required:
 
 Required:
 
-- **max** (Number)
-- **min** (Number)
+- `max` (Number)
+- `min` (Number)
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--network_interface_count"></a>
@@ -147,8 +147,8 @@ Required:
 
 Required:
 
-- **max** (Number)
-- **min** (Number)
+- `max` (Number)
+- `min` (Number)
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--total_local_storage_gb"></a>
@@ -156,8 +156,8 @@ Required:
 
 Required:
 
-- **max** (Number)
-- **min** (Number)
+- `max` (Number)
+- `min` (Number)
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--v_cpu_count"></a>
@@ -165,8 +165,8 @@ Required:
 
 Required:
 
-- **max** (Number)
-- **min** (Number)
+- `max` (Number)
+- `min` (Number)
 
 
 
@@ -175,14 +175,14 @@ Required:
 
 Required:
 
-- **affinity** (String)
-- **availability_zone** (String)
-- **group_name** (String)
-- **host_id** (String)
-- **host_resource_group_arn** (String)
-- **partition_number** (Number)
-- **spread_domain** (String)
-- **tenancy** (String)
+- `affinity` (String)
+- `availability_zone` (String)
+- `group_name` (String)
+- `host_id` (String)
+- `host_resource_group_arn` (String)
+- `partition_number` (Number)
+- `spread_domain` (String)
+- `tenancy` (String)
 
 
 
@@ -192,11 +192,11 @@ Required:
 
 Required:
 
-- **default_target_capacity_type** (String)
-- **on_demand_target_capacity** (Number)
-- **spot_target_capacity** (Number)
-- **target_capacity_unit_type** (String)
-- **total_target_capacity** (Number)
+- `default_target_capacity_type` (String)
+- `on_demand_target_capacity` (Number)
+- `spot_target_capacity` (Number)
+- `target_capacity_unit_type` (String)
+- `total_target_capacity` (Number)
 
 
 <a id="nestedatt--on_demand_options"></a>
@@ -204,19 +204,19 @@ Required:
 
 Optional:
 
-- **allocation_strategy** (String)
-- **capacity_reservation_options** (Attributes) (see [below for nested schema](#nestedatt--on_demand_options--capacity_reservation_options))
-- **max_total_price** (String)
-- **min_target_capacity** (Number)
-- **single_availability_zone** (Boolean)
-- **single_instance_type** (Boolean)
+- `allocation_strategy` (String)
+- `capacity_reservation_options` (Attributes) (see [below for nested schema](#nestedatt--on_demand_options--capacity_reservation_options))
+- `max_total_price` (String)
+- `min_target_capacity` (Number)
+- `single_availability_zone` (Boolean)
+- `single_instance_type` (Boolean)
 
 <a id="nestedatt--on_demand_options--capacity_reservation_options"></a>
 ### Nested Schema for `on_demand_options.capacity_reservation_options`
 
 Optional:
 
-- **usage_strategy** (String)
+- `usage_strategy` (String)
 
 
 
@@ -225,29 +225,29 @@ Optional:
 
 Optional:
 
-- **allocation_strategy** (String)
-- **instance_interruption_behavior** (String)
-- **instance_pools_to_use_count** (Number)
-- **maintenance_strategies** (Attributes) (see [below for nested schema](#nestedatt--spot_options--maintenance_strategies))
-- **max_total_price** (String)
-- **min_target_capacity** (Number)
-- **single_availability_zone** (Boolean)
-- **single_instance_type** (Boolean)
+- `allocation_strategy` (String)
+- `instance_interruption_behavior` (String)
+- `instance_pools_to_use_count` (Number)
+- `maintenance_strategies` (Attributes) (see [below for nested schema](#nestedatt--spot_options--maintenance_strategies))
+- `max_total_price` (String)
+- `min_target_capacity` (Number)
+- `single_availability_zone` (Boolean)
+- `single_instance_type` (Boolean)
 
 <a id="nestedatt--spot_options--maintenance_strategies"></a>
 ### Nested Schema for `spot_options.maintenance_strategies`
 
 Optional:
 
-- **capacity_rebalance** (Attributes) (see [below for nested schema](#nestedatt--spot_options--maintenance_strategies--capacity_rebalance))
+- `capacity_rebalance` (Attributes) (see [below for nested schema](#nestedatt--spot_options--maintenance_strategies--capacity_rebalance))
 
 <a id="nestedatt--spot_options--maintenance_strategies--capacity_rebalance"></a>
 ### Nested Schema for `spot_options.maintenance_strategies.capacity_rebalance`
 
 Optional:
 
-- **replacement_strategy** (String)
-- **termination_delay** (Number)
+- `replacement_strategy` (String)
+- `termination_delay` (Number)
 
 
 
@@ -257,16 +257,16 @@ Optional:
 
 Optional:
 
-- **resource_type** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications--tags))
+- `resource_type` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications--tags))
 
 <a id="nestedatt--tag_specifications--tags"></a>
 ### Nested Schema for `tag_specifications.tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

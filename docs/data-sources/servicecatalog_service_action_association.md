@@ -17,12 +17,12 @@ Data Source schema for AWS::ServiceCatalog::ServiceActionAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **product_id** (String)
-- **provisioning_artifact_id** (String)
-- **service_action_id** (String)
+- `product_id` (String)
+- `provisioning_artifact_id` (String)
+- `service_action_id` (String)
 
 

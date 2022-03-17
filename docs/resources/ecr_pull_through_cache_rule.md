@@ -17,12 +17,12 @@ The AWS::ECR::PullThroughCacheRule resource configures the upstream registry con
 
 ### Optional
 
-- **ecr_repository_prefix** (String) The ECRRepositoryPrefix is a custom alias for upstream registry url.
-- **upstream_registry_url** (String) The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached
+- `ecr_repository_prefix` (String) The ECRRepositoryPrefix is a custom alias for upstream registry url.
+- `upstream_registry_url` (String) The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

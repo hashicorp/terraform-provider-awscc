@@ -17,18 +17,18 @@ AWS Route53 Recovery Control Routing Control resource schema .
 
 ### Required
 
-- **name** (String) The name of the routing control. You can use any non-white space character in the name.
+- `name` (String) The name of the routing control. You can use any non-white space character in the name.
 
 ### Optional
 
-- **cluster_arn** (String) Arn associated with Control Panel
-- **control_panel_arn** (String) The Amazon Resource Name (ARN) of the control panel.
+- `cluster_arn` (String) Arn associated with Control Panel
+- `control_panel_arn` (String) The Amazon Resource Name (ARN) of the control panel.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **routing_control_arn** (String) The Amazon Resource Name (ARN) of the routing control.
-- **status** (String) The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
+- `id` (String) Uniquely identifies the resource.
+- `routing_control_arn` (String) The Amazon Resource Name (ARN) of the routing control.
+- `status` (String) The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
 
 ## Import
 

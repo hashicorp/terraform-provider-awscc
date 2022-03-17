@@ -17,21 +17,21 @@ Data Source schema for AWS::Redshift::EndpointAuthorization
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **account** (String) The target AWS account ID to grant or revoke access for.
-- **allowed_all_vp_cs** (Boolean) Indicates whether all VPCs in the grantee account are allowed access to the cluster.
-- **allowed_vp_cs** (List of String) The VPCs allowed access to the cluster.
-- **authorize_time** (String) The time (UTC) when the authorization was created.
-- **cluster_identifier** (String) The cluster identifier.
-- **cluster_status** (String) The status of the cluster.
-- **endpoint_count** (Number) The number of Redshift-managed VPC endpoints created for the authorization.
-- **force** (Boolean) Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.
-- **grantee** (String) The AWS account ID of the grantee of the cluster.
-- **grantor** (String) The AWS account ID of the cluster owner.
-- **status** (String) The status of the authorization action.
-- **vpc_ids** (List of String) The virtual private cloud (VPC) identifiers to grant or revoke access to.
+- `account` (String) The target AWS account ID to grant or revoke access for.
+- `allowed_all_vp_cs` (Boolean) Indicates whether all VPCs in the grantee account are allowed access to the cluster.
+- `allowed_vp_cs` (List of String) The VPCs allowed access to the cluster.
+- `authorize_time` (String) The time (UTC) when the authorization was created.
+- `cluster_identifier` (String) The cluster identifier.
+- `cluster_status` (String) The status of the cluster.
+- `endpoint_count` (Number) The number of Redshift-managed VPC endpoints created for the authorization.
+- `force` (Boolean) Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.
+- `grantee` (String) The AWS account ID of the grantee of the cluster.
+- `grantor` (String) The AWS account ID of the cluster owner.
+- `status` (String) The status of the authorization action.
+- `vpc_ids` (List of String) The virtual private cloud (VPC) identifiers to grant or revoke access to.
 
 

@@ -17,25 +17,25 @@ This resource schema represents the NotificationChannel resource in the Amazon D
 
 ### Required
 
-- **config** (Attributes) Information about notification channels you have configured with DevOps Guru. (see [below for nested schema](#nestedatt--config))
+- `config` (Attributes) Information about notification channels you have configured with DevOps Guru. (see [below for nested schema](#nestedatt--config))
 
 ### Read-Only
 
-- **id** (String) The ID of a notification channel.
+- `id` (String) The ID of a notification channel.
 
 <a id="nestedatt--config"></a>
 ### Nested Schema for `config`
 
 Required:
 
-- **sns** (Attributes) Information about a notification channel configured in DevOps Guru to send notifications when insights are created. (see [below for nested schema](#nestedatt--config--sns))
+- `sns` (Attributes) Information about a notification channel configured in DevOps Guru to send notifications when insights are created. (see [below for nested schema](#nestedatt--config--sns))
 
 <a id="nestedatt--config--sns"></a>
 ### Nested Schema for `config.sns`
 
 Required:
 
-- **topic_arn** (String)
+- `topic_arn` (String)
 
 ## Import
 

@@ -17,12 +17,12 @@ The AWS::LookoutVision::Project type creates an Amazon Lookout for Vision projec
 
 ### Required
 
-- **project_name** (String) The name of the Amazon Lookout for Vision project
+- `project_name` (String) The name of the Amazon Lookout for Vision project
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

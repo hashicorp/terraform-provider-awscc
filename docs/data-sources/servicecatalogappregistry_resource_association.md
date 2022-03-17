@@ -17,14 +17,14 @@ Data Source schema for AWS::ServiceCatalogAppRegistry::ResourceAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **application** (String) The name or the Id of the Application.
-- **application_arn** (String)
-- **resource** (String) The name or the Id of the Resource.
-- **resource_arn** (String)
-- **resource_type** (String) The type of the CFN Resource for now it's enum CFN_STACK.
+- `application` (String) The name or the Id of the Application.
+- `application_arn` (String)
+- `resource` (String) The name or the Id of the Resource.
+- `resource_arn` (String)
+- `resource_type` (String) The type of the CFN Resource for now it's enum CFN_STACK.
 
 

@@ -17,26 +17,26 @@ A dimension can be used to limit the scope of a metric used in a security profil
 
 ### Required
 
-- **string_values** (Set of String) Specifies the value or list of values for the dimension.
-- **type** (String) Specifies the type of the dimension.
+- `string_values` (Set of String) Specifies the value or list of values for the dimension.
+- `type` (String) Specifies the type of the dimension.
 
 ### Optional
 
-- **name** (String) A unique identifier for the dimension.
-- **tags** (Attributes Set) Metadata that can be used to manage the dimension. (see [below for nested schema](#nestedatt--tags))
+- `name` (String) A unique identifier for the dimension.
+- `tags` (Attributes Set) Metadata that can be used to manage the dimension. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The ARN (Amazon resource name) of the created dimension.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The ARN (Amazon resource name) of the created dimension.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The tag's key.
-- **value** (String) The tag's value.
+- `key` (String) The tag's key.
+- `value` (String) The tag's value.
 
 ## Import
 

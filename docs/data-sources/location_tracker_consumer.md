@@ -17,11 +17,11 @@ Data Source schema for AWS::Location::TrackerConsumer
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **consumer_arn** (String)
-- **tracker_name** (String)
+- `consumer_arn` (String)
+- `tracker_name` (String)
 
 

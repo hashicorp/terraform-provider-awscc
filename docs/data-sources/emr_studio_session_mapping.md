@@ -17,13 +17,13 @@ Data Source schema for AWS::EMR::StudioSessionMapping
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **identity_name** (String) The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
-- **identity_type** (String) Specifies whether the identity to map to the Studio is a user or a group.
-- **session_policy_arn** (String) The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.
-- **studio_id** (String) The ID of the Amazon EMR Studio to which the user or group will be mapped.
+- `identity_name` (String) The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+- `identity_type` (String) Specifies whether the identity to map to the Studio is a user or a group.
+- `session_policy_arn` (String) The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.
+- `studio_id` (String) The ID of the Amazon EMR Studio to which the user or group will be mapped.
 
 

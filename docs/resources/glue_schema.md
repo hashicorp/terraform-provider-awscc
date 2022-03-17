@@ -17,31 +17,31 @@ This resource represents a schema of Glue Schema Registry.
 
 ### Required
 
-- **compatibility** (String) Compatibility setting for the schema.
-- **data_format** (String) Data format name to use for the schema. Accepted values: 'AVRO', 'JSON', 'PROTOBUF'
-- **name** (String) Name of the schema.
-- **schema_definition** (String) Definition for the initial schema version in plain-text.
+- `compatibility` (String) Compatibility setting for the schema.
+- `data_format` (String) Data format name to use for the schema. Accepted values: 'AVRO', 'JSON', 'PROTOBUF'
+- `name` (String) Name of the schema.
+- `schema_definition` (String) Definition for the initial schema version in plain-text.
 
 ### Optional
 
-- **checkpoint_version** (Attributes) Specify checkpoint version for update. This is only required to update the Compatibility. (see [below for nested schema](#nestedatt--checkpoint_version))
-- **description** (String) A description of the schema. If description is not provided, there will not be any default value for this.
-- **registry** (Attributes) Identifier for the registry which the schema is part of. (see [below for nested schema](#nestedatt--registry))
-- **tags** (Attributes List) List of tags to tag the schema (see [below for nested schema](#nestedatt--tags))
+- `checkpoint_version` (Attributes) Specify checkpoint version for update. This is only required to update the Compatibility. (see [below for nested schema](#nestedatt--checkpoint_version))
+- `description` (String) A description of the schema. If description is not provided, there will not be any default value for this.
+- `registry` (Attributes) Identifier for the registry which the schema is part of. (see [below for nested schema](#nestedatt--registry))
+- `tags` (Attributes List) List of tags to tag the schema (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) Amazon Resource Name for the Schema.
-- **id** (String) Uniquely identifies the resource.
-- **initial_schema_version_id** (String) Represents the version ID associated with the initial schema version.
+- `arn` (String) Amazon Resource Name for the Schema.
+- `id` (String) Uniquely identifies the resource.
+- `initial_schema_version_id` (String) Represents the version ID associated with the initial schema version.
 
 <a id="nestedatt--checkpoint_version"></a>
 ### Nested Schema for `checkpoint_version`
 
 Optional:
 
-- **is_latest** (Boolean) Indicates if the latest version needs to be updated.
-- **version_number** (Number) Indicates the version number in the schema to update.
+- `is_latest` (Boolean) Indicates if the latest version needs to be updated.
+- `version_number` (Number) Indicates the version number in the schema to update.
 
 
 <a id="nestedatt--registry"></a>
@@ -49,8 +49,8 @@ Optional:
 
 Optional:
 
-- **arn** (String) Amazon Resource Name for the Registry.
-- **name** (String) Name of the registry in which the schema will be created.
+- `arn` (String) Amazon Resource Name for the Registry.
+- `name` (String) Name of the registry in which the schema will be created.
 
 
 <a id="nestedatt--tags"></a>
@@ -58,8 +58,8 @@ Optional:
 
 Optional:
 
-- **key** (String) A key to identify the tag.
-- **value** (String) Corresponding tag value for the key.
+- `key` (String) A key to identify the tag.
+- `value` (String) Corresponding tag value for the key.
 
 ## Import
 

@@ -17,31 +17,31 @@ Resource schema for AWS::EC2::NetworkInsightsAccessScopeAnalysis
 
 ### Required
 
-- **network_insights_access_scope_id** (String)
+- `network_insights_access_scope_id` (String)
 
 ### Optional
 
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **analyzed_eni_count** (Number)
-- **end_date** (String)
-- **findings_found** (String)
-- **id** (String) Uniquely identifies the resource.
-- **network_insights_access_scope_analysis_arn** (String)
-- **network_insights_access_scope_analysis_id** (String)
-- **start_date** (String)
-- **status** (String)
-- **status_message** (String)
+- `analyzed_eni_count` (Number)
+- `end_date` (String)
+- `findings_found` (String)
+- `id` (String) Uniquely identifies the resource.
+- `network_insights_access_scope_analysis_arn` (String)
+- `network_insights_access_scope_analysis_id` (String)
+- `start_date` (String)
+- `status` (String)
+- `status_message` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 
