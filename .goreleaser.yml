@@ -35,11 +35,11 @@ checksum:
 publishers:
   - name: hc-releases
     checksum: true
-#     extra_files:
-#       - glob: 'terraform-registry-manifest.json'
-#         name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
+    extra_files:
+      - glob: 'terraform-registry-manifest.json'
+        name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
     signature: true
-    cmd: hc-releases upload-file {{ abs .ArtifactPath }}
+    cmd: hc-releases upload-file {{ abs .ArtifactPath }} -upload-name={{ .ArtifactName }}
     env:
       - AWS_ACCESS_KEY_ID={{ .Env.AWS_ACCESS_KEY_ID }}
       - AWS_SECRET_ACCESS_KEY={{ .Env.AWS_SECRET_ACCESS_KEY }}
