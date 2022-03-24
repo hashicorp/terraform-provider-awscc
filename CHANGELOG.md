@@ -1,4 +1,11 @@
 ## 0.16.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_iotevents_alarm_model`
+* **New Data Source:** `awscc_iotevents_alarm_models`
+* **New Resource:** `awscc_iotevents_alarm_model`
+
 ## [0.15.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.15.0) (March 17, 2022)
 
 FEATURES:
