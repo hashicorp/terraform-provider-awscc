@@ -53,7 +53,7 @@ jobs:
           # https://github.com/actions/setup-go/pull/62
           go-version: ${{ steps.go-version.outputs.content }}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         continue-on-error: true
         id: cache-go-pkg-mod
         timeout-minutes: 2

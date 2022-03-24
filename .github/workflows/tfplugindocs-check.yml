@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         continue-on-error: true
         timeout-minutes: 2
         with:
@@ -48,7 +48,7 @@ jobs:
           path: ${{ env.GOCACHE }}
           key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         continue-on-error: true
         timeout-minutes: 2
         with:
