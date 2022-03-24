@@ -1261,11 +1261,6 @@ resource_schema "aws_iotcoredeviceadvisor_suite_definition" {
 
 resource_schema "aws_iotevents_alarm_model" {
   cloudformation_type_name = "AWS::IoTEvents::AlarmModel"
-
-  # Need to be able to handle escape sequences in property descriptions.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iotevents_detector_model" {
