@@ -145,7 +145,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 {{- end }}
 
 	schema := tfsdk.Schema{
-		Description: "{{ .SchemaDescription }}",
+		Description: {{ .SchemaDescription | printf "%q" }},
 		Version:     {{ .SchemaVersion }},
 		Attributes:  attributes,
 	}
