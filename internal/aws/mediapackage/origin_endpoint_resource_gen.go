@@ -116,6 +116,31 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//               "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 			//               "type": "string"
 			//             },
+			//             "EncryptionContractConfiguration": {
+			//               "additionalProperties": false,
+			//               "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+			//               "properties": {
+			//                 "PresetSpeke20Audio": {
+			//                   "description": "A collection of audio encryption presets.",
+			//                   "enum": [
+			//                     "PRESET-AUDIO-1"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "PresetSpeke20Video": {
+			//                   "description": "A collection of video encryption presets.",
+			//                   "enum": [
+			//                     "PRESET-VIDEO-1"
+			//                   ],
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "PresetSpeke20Audio",
+			//                 "PresetSpeke20Video"
+			//               ],
+			//               "type": "object"
+			//             },
 			//             "ResourceId": {
 			//               "description": "The resource ID to include in key requests.",
 			//               "type": "string"
@@ -302,6 +327,37 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
+											},
+											"encryption_contract_configuration": {
+												// Property: EncryptionContractConfiguration
+												Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"preset_speke_20_audio": {
+															// Property: PresetSpeke20Audio
+															Description: "A collection of audio encryption presets.",
+															Type:        types.StringType,
+															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"PRESET-AUDIO-1",
+																}),
+															},
+														},
+														"preset_speke_20_video": {
+															// Property: PresetSpeke20Video
+															Description: "A collection of video encryption presets.",
+															Type:        types.StringType,
+															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"PRESET-VIDEO-1",
+																}),
+															},
+														},
+													},
+												),
+												Optional: true,
 											},
 											"resource_id": {
 												// Property: ResourceId
@@ -540,6 +596,31 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//               "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 			//               "type": "string"
 			//             },
+			//             "EncryptionContractConfiguration": {
+			//               "additionalProperties": false,
+			//               "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+			//               "properties": {
+			//                 "PresetSpeke20Audio": {
+			//                   "description": "A collection of audio encryption presets.",
+			//                   "enum": [
+			//                     "PRESET-AUDIO-1"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "PresetSpeke20Video": {
+			//                   "description": "A collection of video encryption presets.",
+			//                   "enum": [
+			//                     "PRESET-VIDEO-1"
+			//                   ],
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "PresetSpeke20Audio",
+			//                 "PresetSpeke20Video"
+			//               ],
+			//               "type": "object"
+			//             },
 			//             "ResourceId": {
 			//               "description": "The resource ID to include in key requests.",
 			//               "type": "string"
@@ -726,6 +807,37 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
+											},
+											"encryption_contract_configuration": {
+												// Property: EncryptionContractConfiguration
+												Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"preset_speke_20_audio": {
+															// Property: PresetSpeke20Audio
+															Description: "A collection of audio encryption presets.",
+															Type:        types.StringType,
+															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"PRESET-AUDIO-1",
+																}),
+															},
+														},
+														"preset_speke_20_video": {
+															// Property: PresetSpeke20Video
+															Description: "A collection of video encryption presets.",
+															Type:        types.StringType,
+															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"PRESET-VIDEO-1",
+																}),
+															},
+														},
+													},
+												),
+												Optional: true,
 											},
 											"resource_id": {
 												// Property: ResourceId
@@ -982,6 +1094,31 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//               "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 			//               "type": "string"
 			//             },
+			//             "EncryptionContractConfiguration": {
+			//               "additionalProperties": false,
+			//               "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+			//               "properties": {
+			//                 "PresetSpeke20Audio": {
+			//                   "description": "A collection of audio encryption presets.",
+			//                   "enum": [
+			//                     "PRESET-AUDIO-1"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "PresetSpeke20Video": {
+			//                   "description": "A collection of video encryption presets.",
+			//                   "enum": [
+			//                     "PRESET-VIDEO-1"
+			//                   ],
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "PresetSpeke20Audio",
+			//                 "PresetSpeke20Video"
+			//               ],
+			//               "type": "object"
+			//             },
 			//             "ResourceId": {
 			//               "description": "The resource ID to include in key requests.",
 			//               "type": "string"
@@ -1167,6 +1304,37 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Type:        types.StringType,
 												Optional:    true,
 											},
+											"encryption_contract_configuration": {
+												// Property: EncryptionContractConfiguration
+												Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"preset_speke_20_audio": {
+															// Property: PresetSpeke20Audio
+															Description: "A collection of audio encryption presets.",
+															Type:        types.StringType,
+															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"PRESET-AUDIO-1",
+																}),
+															},
+														},
+														"preset_speke_20_video": {
+															// Property: PresetSpeke20Video
+															Description: "A collection of video encryption presets.",
+															Type:        types.StringType,
+															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"PRESET-VIDEO-1",
+																}),
+															},
+														},
+													},
+												),
+												Optional: true,
+											},
 											"resource_id": {
 												// Property: ResourceId
 												Description: "The resource ID to include in key requests.",
@@ -1330,6 +1498,31 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//               "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 			//               "type": "string"
 			//             },
+			//             "EncryptionContractConfiguration": {
+			//               "additionalProperties": false,
+			//               "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+			//               "properties": {
+			//                 "PresetSpeke20Audio": {
+			//                   "description": "A collection of audio encryption presets.",
+			//                   "enum": [
+			//                     "PRESET-AUDIO-1"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "PresetSpeke20Video": {
+			//                   "description": "A collection of video encryption presets.",
+			//                   "enum": [
+			//                     "PRESET-VIDEO-1"
+			//                   ],
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "PresetSpeke20Audio",
+			//                 "PresetSpeke20Video"
+			//               ],
+			//               "type": "object"
+			//             },
 			//             "ResourceId": {
 			//               "description": "The resource ID to include in key requests.",
 			//               "type": "string"
@@ -1417,6 +1610,37 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
+											},
+											"encryption_contract_configuration": {
+												// Property: EncryptionContractConfiguration
+												Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"preset_speke_20_audio": {
+															// Property: PresetSpeke20Audio
+															Description: "A collection of audio encryption presets.",
+															Type:        types.StringType,
+															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"PRESET-AUDIO-1",
+																}),
+															},
+														},
+														"preset_speke_20_video": {
+															// Property: PresetSpeke20Video
+															Description: "A collection of video encryption presets.",
+															Type:        types.StringType,
+															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"PRESET-VIDEO-1",
+																}),
+															},
+														},
+													},
+												),
+												Optional: true,
 											},
 											"resource_id": {
 												// Property: ResourceId
@@ -1643,6 +1867,7 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"dash_package":                         "DashPackage",
 		"description":                          "Description",
 		"encryption":                           "Encryption",
+		"encryption_contract_configuration":    "EncryptionContractConfiguration",
 		"encryption_method":                    "EncryptionMethod",
 		"hls_manifests":                        "HlsManifests",
 		"hls_package":                          "HlsPackage",
@@ -1662,6 +1887,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"period_triggers":                      "PeriodTriggers",
 		"playlist_type":                        "PlaylistType",
 		"playlist_window_seconds":              "PlaylistWindowSeconds",
+		"preset_speke_20_audio":                "PresetSpeke20Audio",
+		"preset_speke_20_video":                "PresetSpeke20Video",
 		"profile":                              "Profile",
 		"program_date_time_interval_seconds":   "ProgramDateTimeIntervalSeconds",
 		"repeat_ext_x_key":                     "RepeatExtXKey",

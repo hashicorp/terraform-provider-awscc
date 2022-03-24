@@ -38,12 +38,40 @@ func resourceCollectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//             "pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$",
 			//             "type": "string"
 			//           },
-			//           "maxItems": 200,
+			//           "maxItems": 1000,
 			//           "minItems": 1,
 			//           "type": "array"
 			//         }
 			//       },
 			//       "type": "object"
+			//     },
+			//     "Tags": {
+			//       "description": "Tagged resources for DevOps Guru to monitor",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "Tagged resource for DevOps Guru to monitor",
+			//         "properties": {
+			//           "AppBoundaryKey": {
+			//             "description": "A Tag key for DevOps Guru app boundary.",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "TagValues": {
+			//             "description": "Tag values of DevOps Guru app boundary.",
+			//             "items": {
+			//               "maxLength": 256,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             },
+			//             "maxItems": 1000,
+			//             "minItems": 1,
+			//             "type": "array"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "type": "array"
 			//     }
 			//   },
 			//   "type": "object"
@@ -66,6 +94,28 @@ func resourceCollectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 						),
 						Computed: true,
 					},
+					"tags": {
+						// Property: Tags
+						Description: "Tagged resources for DevOps Guru to monitor",
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"app_boundary_key": {
+									// Property: AppBoundaryKey
+									Description: "A Tag key for DevOps Guru app boundary.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"tag_values": {
+									// Property: TagValues
+									Description: "Tag values of DevOps Guru app boundary.",
+									Type:        types.ListType{ElemType: types.StringType},
+									Computed:    true,
+								},
+							},
+							tfsdk.ListNestedAttributesOptions{},
+						),
+						Computed: true,
+					},
 				},
 			),
 			Computed: true,
@@ -76,7 +126,8 @@ func resourceCollectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			// {
 			//   "description": "The type of ResourceCollection",
 			//   "enum": [
-			//     "AWS_CLOUD_FORMATION"
+			//     "AWS_CLOUD_FORMATION",
+			//     "AWS_TAGS"
 			//   ],
 			//   "type": "string"
 			// }
@@ -103,10 +154,13 @@ func resourceCollectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::ResourceCollection").WithTerraformTypeName("awscc_devopsguru_resource_collection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_boundary_key":           "AppBoundaryKey",
 		"cloudformation":             "CloudFormation",
 		"resource_collection_filter": "ResourceCollectionFilter",
 		"resource_collection_type":   "ResourceCollectionType",
 		"stack_names":                "StackNames",
+		"tag_values":                 "TagValues",
+		"tags":                       "Tags",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

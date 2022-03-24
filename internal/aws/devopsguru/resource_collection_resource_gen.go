@@ -40,12 +40,40 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//             "pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$",
 			//             "type": "string"
 			//           },
-			//           "maxItems": 200,
+			//           "maxItems": 1000,
 			//           "minItems": 1,
 			//           "type": "array"
 			//         }
 			//       },
 			//       "type": "object"
+			//     },
+			//     "Tags": {
+			//       "description": "Tagged resources for DevOps Guru to monitor",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "Tagged resource for DevOps Guru to monitor",
+			//         "properties": {
+			//           "AppBoundaryKey": {
+			//             "description": "A Tag key for DevOps Guru app boundary.",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "TagValues": {
+			//             "description": "Tag values of DevOps Guru app boundary.",
+			//             "items": {
+			//               "maxLength": 256,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             },
+			//             "maxItems": 1000,
+			//             "minItems": 1,
+			//             "type": "array"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "type": "array"
 			//     }
 			//   },
 			//   "type": "object"
@@ -64,12 +92,41 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(1, 200),
+										validate.ArrayLenBetween(1, 1000),
 										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z*]+[a-zA-Z0-9-]*$"), "")),
 									},
 								},
 							},
+						),
+						Optional: true,
+					},
+					"tags": {
+						// Property: Tags
+						Description: "Tagged resources for DevOps Guru to monitor",
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"app_boundary_key": {
+									// Property: AppBoundaryKey
+									Description: "A Tag key for DevOps Guru app boundary.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 128),
+									},
+								},
+								"tag_values": {
+									// Property: TagValues
+									Description: "Tag values of DevOps Guru app boundary.",
+									Type:        types.ListType{ElemType: types.StringType},
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 1000),
+										validate.ArrayForEach(validate.StringLenBetween(1, 256)),
+									},
+								},
+							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -83,7 +140,8 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// {
 			//   "description": "The type of ResourceCollection",
 			//   "enum": [
-			//     "AWS_CLOUD_FORMATION"
+			//     "AWS_CLOUD_FORMATION",
+			//     "AWS_TAGS"
 			//   ],
 			//   "type": "string"
 			// }
@@ -117,10 +175,13 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_boundary_key":           "AppBoundaryKey",
 		"cloudformation":             "CloudFormation",
 		"resource_collection_filter": "ResourceCollectionFilter",
 		"resource_collection_type":   "ResourceCollectionType",
 		"stack_names":                "StackNames",
+		"tag_values":                 "TagValues",
+		"tags":                       "Tags",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

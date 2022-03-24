@@ -23,10 +23,10 @@ func flowLogDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: DeliverLogsPermissionArn
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn or LogGroupName.",
+			//   "description": "The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
 			//   "type": "string"
 			// }
-			Description: "The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn or LogGroupName.",
+			Description: "The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -93,10 +93,10 @@ func flowLogDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: LogDestination
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType.",
+			//   "description": "Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group, an Amazon S3 bucket, or a Kinesis Firehose stream. The value specified for this parameter depends on the value specified for LogDestinationType.",
 			//   "type": "string"
 			// }
-			Description: "Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType.",
+			Description: "Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group, an Amazon S3 bucket, or a Kinesis Firehose stream. The value specified for this parameter depends on the value specified for LogDestinationType.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -107,7 +107,8 @@ func flowLogDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "Specifies the type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3.",
 			//   "enum": [
 			//     "cloud-watch-logs",
-			//     "s3"
+			//     "s3",
+			//     "kinesis-data-firehose"
 			//   ],
 			//   "type": "string"
 			// }
@@ -130,10 +131,10 @@ func flowLogDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: LogGroupName
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs. If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn or LogGroupName.",
+			//   "description": "The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
 			//   "type": "string"
 			// }
-			Description: "The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs. If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn or LogGroupName.",
+			Description: "The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
 			Type:        types.StringType,
 			Computed:    true,
 		},

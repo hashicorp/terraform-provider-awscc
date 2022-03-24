@@ -77,7 +77,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//           "LogDestination": {
 			//             "additionalProperties": false,
 			//             "description": "A key-value pair to configure the logDestinations.",
-			//             "minItems": 1,
 			//             "patternProperties": {
 			//               "": {
 			//                 "maxLength": 1024,

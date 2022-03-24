@@ -59,7 +59,6 @@ func loggingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			//           "LogDestination": {
 			//             "additionalProperties": false,
 			//             "description": "A key-value pair to configure the logDestinations.",
-			//             "minItems": 1,
 			//             "patternProperties": {
 			//               "": {
 			//                 "maxLength": 1024,
