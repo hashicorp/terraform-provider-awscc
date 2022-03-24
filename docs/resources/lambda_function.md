@@ -27,6 +27,7 @@ Resource Type definition for AWS::Lambda::Function
 - `dead_letter_config` (Attributes) A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. (see [below for nested schema](#nestedatt--dead_letter_config))
 - `description` (String) A description of the function.
 - `environment` (Attributes) Environment variables that are accessible from function code during execution. (see [below for nested schema](#nestedatt--environment))
+- `ephemeral_storage` (Attributes) A function's ephemeral storage settings. (see [below for nested schema](#nestedatt--ephemeral_storage))
 - `file_system_configs` (Attributes List) Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an AWS::EFS::MountTarget resource, you must also specify a DependsOn attribute to ensure that the mount target is created or updated before the function. (see [below for nested schema](#nestedatt--file_system_configs))
 - `function_name` (String) The name of the Lambda function, up to 64 characters in length. If you don't specify a name, AWS CloudFormation generates one.
 - `handler` (String) The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime
@@ -73,6 +74,14 @@ Optional:
 Optional:
 
 - `variables` (Map of String) Environment variable key-value pairs.
+
+
+<a id="nestedatt--ephemeral_storage"></a>
+### Nested Schema for `ephemeral_storage`
+
+Optional:
+
+- `size` (Number) The amount of ephemeral storage that your function has access to.
 
 
 <a id="nestedatt--file_system_configs"></a>

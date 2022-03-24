@@ -30,6 +30,7 @@ Data Source schema for AWS::DevOpsGuru::ResourceCollection
 Read-Only:
 
 - `cloudformation` (Attributes) CloudFormation resource for DevOps Guru to monitor (see [below for nested schema](#nestedatt--resource_collection_filter--cloudformation))
+- `tags` (Attributes List) Tagged resources for DevOps Guru to monitor (see [below for nested schema](#nestedatt--resource_collection_filter--tags))
 
 <a id="nestedatt--resource_collection_filter--cloudformation"></a>
 ### Nested Schema for `resource_collection_filter.cloudformation`
@@ -37,5 +38,14 @@ Read-Only:
 Read-Only:
 
 - `stack_names` (List of String) An array of CloudFormation stack names.
+
+
+<a id="nestedatt--resource_collection_filter--tags"></a>
+### Nested Schema for `resource_collection_filter.tags`
+
+Read-Only:
+
+- `app_boundary_key` (String) A Tag key for DevOps Guru app boundary.
+- `tag_values` (List of String) Tag values of DevOps Guru app boundary.
 
 

@@ -132,8 +132,8 @@ Read-Only:
 
 Read-Only:
 
-- `cloudwatch_log_group_arn` (String) A string used to identify this tag
-- `log_prefix` (String) A string containing the value for the tag
+- `cloudwatch_log_group_arn` (String) A string used to identify the groupArn for the Cloudwatch Log Group
+- `log_prefix` (String) A string containing the value for the Log Prefix
 
 
 
