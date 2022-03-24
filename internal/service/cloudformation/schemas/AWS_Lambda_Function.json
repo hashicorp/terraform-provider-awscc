@@ -24,6 +24,10 @@
             "description" : "Environment variables that are accessible from function code during execution.",
             "$ref" : "#/definitions/Environment"
         },
+        "EphemeralStorage" : {
+            "description" : "A function's ephemeral storage settings.",
+            "$ref" : "#/definitions/EphemeralStorage"
+        },
         "FileSystemConfigs" : {
             "description" : "Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an AWS::EFS::MountTarget resource, you must also specify a DependsOn attribute to ensure that the mount target is created or updated before the function.",
             "maxItems" : 1,
@@ -189,6 +193,22 @@
                     }
                 }
             }
+        },
+        "EphemeralStorage" : {
+            "type" : "object",
+            "additionalProperties" : false,
+            "description" : "A function's ephemeral storage settings.",
+            "properties" : {
+                "Size" : {
+                    "type": "integer",
+                    "description": "The amount of ephemeral storage that your function has access to.",
+                    "minimum": 512,
+                    "maximum": 10240
+                }
+            },
+            "required" : [
+                "Size"
+            ]
         },
         "FileSystemConfig" : {
             "type" : "object",

@@ -209,6 +209,38 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			),
 			Computed: true,
 		},
+		"ephemeral_storage": {
+			// Property: EphemeralStorage
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "A function's ephemeral storage settings.",
+			//   "properties": {
+			//     "Size": {
+			//       "description": "The amount of ephemeral storage that your function has access to.",
+			//       "maximum": 10240,
+			//       "minimum": 512,
+			//       "type": "integer"
+			//     }
+			//   },
+			//   "required": [
+			//     "Size"
+			//   ],
+			//   "type": "object"
+			// }
+			Description: "A function's ephemeral storage settings.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"size": {
+						// Property: Size
+						Description: "The amount of ephemeral storage that your function has access to.",
+						Type:        types.Int64Type,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"file_system_configs": {
 			// Property: FileSystemConfigs
 			// CloudFormation resource type schema:
@@ -597,6 +629,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"description":                    "Description",
 		"entry_point":                    "EntryPoint",
 		"environment":                    "Environment",
+		"ephemeral_storage":              "EphemeralStorage",
 		"file_system_configs":            "FileSystemConfigs",
 		"function_name":                  "FunctionName",
 		"handler":                        "Handler",
@@ -616,6 +649,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"s3_key":                         "S3Key",
 		"s3_object_version":              "S3ObjectVersion",
 		"security_group_ids":             "SecurityGroupIds",
+		"size":                           "Size",
 		"subnet_ids":                     "SubnetIds",
 		"tags":                           "Tags",
 		"target_arn":                     "TargetArn",

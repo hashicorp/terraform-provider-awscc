@@ -371,13 +371,13 @@ func botAliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                 "additionalProperties": false,
 			//                 "properties": {
 			//                   "CloudWatchLogGroupArn": {
-			//                     "description": "A string used to identify this tag",
+			//                     "description": "A string used to identify the groupArn for the Cloudwatch Log Group",
 			//                     "maxLength": 2048,
 			//                     "minLength": 1,
 			//                     "type": "string"
 			//                   },
 			//                   "LogPrefix": {
-			//                     "description": "A string containing the value for the tag",
+			//                     "description": "A string containing the value for the Log Prefix",
 			//                     "maxLength": 1024,
 			//                     "minLength": 0,
 			//                     "type": "string"
@@ -484,13 +484,13 @@ func botAliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 													map[string]tfsdk.Attribute{
 														"cloudwatch_log_group_arn": {
 															// Property: CloudWatchLogGroupArn
-															Description: "A string used to identify this tag",
+															Description: "A string used to identify the groupArn for the Cloudwatch Log Group",
 															Type:        types.StringType,
 															Computed:    true,
 														},
 														"log_prefix": {
 															// Property: LogPrefix
-															Description: "A string containing the value for the tag",
+															Description: "A string containing the value for the Log Prefix",
 															Type:        types.StringType,
 															Computed:    true,
 														},

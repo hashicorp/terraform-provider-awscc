@@ -31,6 +31,7 @@ Data Source schema for AWS::Lex::Bot
 - `idle_session_ttl_in_seconds` (Number) IdleSessionTTLInSeconds of the resource
 - `name` (String) Unique name for a resource.
 - `role_arn` (String) The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.
+- `test_bot_alias_settings` (Attributes) Configuring the test bot alias settings for a given bot (see [below for nested schema](#nestedatt--test_bot_alias_settings))
 - `test_bot_alias_tags` (Attributes Set) A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation. (see [below for nested schema](#nestedatt--test_bot_alias_tags))
 
 <a id="nestedatt--bot_file_s3_location"></a>
@@ -48,12 +49,30 @@ Read-Only:
 
 Read-Only:
 
+- `custom_vocabulary` (Attributes) A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input. (see [below for nested schema](#nestedatt--bot_locales--custom_vocabulary))
 - `description` (String) A description of the resource
 - `intents` (Attributes Set) List of intents (see [below for nested schema](#nestedatt--bot_locales--intents))
 - `locale_id` (String) The identifier of the language and locale that the bot will be used in.
 - `nlu_confidence_threshold` (Number) The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.
 - `slot_types` (Attributes Set) List of SlotTypes (see [below for nested schema](#nestedatt--bot_locales--slot_types))
 - `voice_settings` (Attributes) Settings for using an Amazon Polly voice to communicate with a user. (see [below for nested schema](#nestedatt--bot_locales--voice_settings))
+
+<a id="nestedatt--bot_locales--custom_vocabulary"></a>
+### Nested Schema for `bot_locales.custom_vocabulary`
+
+Read-Only:
+
+- `custom_vocabulary_items` (Attributes Set) (see [below for nested schema](#nestedatt--bot_locales--custom_vocabulary--custom_vocabulary_items))
+
+<a id="nestedatt--bot_locales--custom_vocabulary--custom_vocabulary_items"></a>
+### Nested Schema for `bot_locales.custom_vocabulary.custom_vocabulary_items`
+
+Read-Only:
+
+- `phrase` (String) Phrase that should be recognized.
+- `weight` (Number) The degree to which the phrase recognition is boosted.
+
+
 
 <a id="nestedatt--bot_locales--intents"></a>
 ### Nested Schema for `bot_locales.intents`
@@ -1864,8 +1883,17 @@ Read-Only:
 
 Read-Only:
 
+- `advanced_recognition_setting` (Attributes) Provides settings that enable advanced recognition settings for slot values. (see [below for nested schema](#nestedatt--bot_locales--slot_types--value_selection_setting--advanced_recognition_setting))
 - `regex_filter` (Attributes) A regular expression used to validate the value of a slot. (see [below for nested schema](#nestedatt--bot_locales--slot_types--value_selection_setting--regex_filter))
 - `resolution_strategy` (String)
+
+<a id="nestedatt--bot_locales--slot_types--value_selection_setting--advanced_recognition_setting"></a>
+### Nested Schema for `bot_locales.slot_types.value_selection_setting.resolution_strategy`
+
+Read-Only:
+
+- `audio_recognition_strategy` (String) Enables using slot values as a custom vocabulary when recognizing user utterances.
+
 
 <a id="nestedatt--bot_locales--slot_types--value_selection_setting--regex_filter"></a>
 ### Nested Schema for `bot_locales.slot_types.value_selection_setting.resolution_strategy`
@@ -1901,6 +1929,122 @@ Read-Only:
 Read-Only:
 
 - `child_directed` (Boolean)
+
+
+<a id="nestedatt--test_bot_alias_settings"></a>
+### Nested Schema for `test_bot_alias_settings`
+
+Read-Only:
+
+- `bot_alias_locale_settings` (Attributes Set) A list of bot alias locale settings to add to the bot alias. (see [below for nested schema](#nestedatt--test_bot_alias_settings--bot_alias_locale_settings))
+- `conversation_log_settings` (Attributes) Contains information about code hooks that Amazon Lex calls during a conversation. (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings))
+- `description` (String) A description of the resource
+- `sentiment_analysis_settings` (Attributes) Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances. (see [below for nested schema](#nestedatt--test_bot_alias_settings--sentiment_analysis_settings))
+
+<a id="nestedatt--test_bot_alias_settings--bot_alias_locale_settings"></a>
+### Nested Schema for `test_bot_alias_settings.bot_alias_locale_settings`
+
+Read-Only:
+
+- `bot_alias_locale_setting` (Attributes) You can use this parameter to specify a specific Lambda function to run different functions in different locales. (see [below for nested schema](#nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting))
+- `locale_id` (String) A string used to identify the locale
+
+<a id="nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting"></a>
+### Nested Schema for `test_bot_alias_settings.bot_alias_locale_settings.bot_alias_locale_setting`
+
+Read-Only:
+
+- `code_hook_specification` (Attributes) Contains information about code hooks that Amazon Lex calls during a conversation. (see [below for nested schema](#nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting--code_hook_specification))
+- `enabled` (Boolean) Whether the Lambda code hook is enabled
+
+<a id="nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting--code_hook_specification"></a>
+### Nested Schema for `test_bot_alias_settings.bot_alias_locale_settings.bot_alias_locale_setting.enabled`
+
+Read-Only:
+
+- `lambda_code_hook` (Attributes) Contains information about code hooks that Amazon Lex calls during a conversation. (see [below for nested schema](#nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting--enabled--lambda_code_hook))
+
+<a id="nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting--enabled--lambda_code_hook"></a>
+### Nested Schema for `test_bot_alias_settings.bot_alias_locale_settings.bot_alias_locale_setting.enabled.lambda_code_hook`
+
+Read-Only:
+
+- `code_hook_interface_version` (String) The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.
+- `lambda_arn` (String) The Amazon Resource Name (ARN) of the Lambda function.
+
+
+
+
+
+<a id="nestedatt--test_bot_alias_settings--conversation_log_settings"></a>
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings`
+
+Read-Only:
+
+- `audio_log_settings` (Attributes Set) List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias. (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings))
+- `text_log_settings` (Attributes Set) List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings))
+
+<a id="nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings"></a>
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings`
+
+Read-Only:
+
+- `destination` (Attributes) The location of audio log files collected when conversation logging is enabled for a bot. (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--destination))
+- `enabled` (Boolean)
+
+<a id="nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--destination"></a>
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings.enabled`
+
+Read-Only:
+
+- `s3_bucket` (Attributes) Specifies an Amazon S3 bucket for logging audio conversations (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--enabled--s3_bucket))
+
+<a id="nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--enabled--s3_bucket"></a>
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings.enabled.s3_bucket`
+
+Read-Only:
+
+- `kms_key_arn` (String) The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.
+- `log_prefix` (String) The Amazon S3 key of the deployment package.
+- `s3_bucket_arn` (String) The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.
+
+
+
+
+<a id="nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings"></a>
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings`
+
+Read-Only:
+
+- `destination` (Attributes) Defines the Amazon CloudWatch Logs destination log group for conversation text logs. (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--destination))
+- `enabled` (Boolean)
+
+<a id="nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--destination"></a>
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings.enabled`
+
+Read-Only:
+
+- `cloudwatch` (Attributes) (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--enabled--cloudwatch))
+
+<a id="nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--enabled--cloudwatch"></a>
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings.enabled.cloudwatch`
+
+Read-Only:
+
+- `cloudwatch_log_group_arn` (String) A string used to identify the groupArn for the Cloudwatch Log Group
+- `log_prefix` (String) A string containing the value for the Log Prefix
+
+
+
+
+
+<a id="nestedatt--test_bot_alias_settings--sentiment_analysis_settings"></a>
+### Nested Schema for `test_bot_alias_settings.sentiment_analysis_settings`
+
+Read-Only:
+
+- `detect_sentiment` (Boolean) Enable to call Amazon Comprehend for Sentiment natively within Lex
+
 
 
 <a id="nestedatt--test_bot_alias_tags"></a>
