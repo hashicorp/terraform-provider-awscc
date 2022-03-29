@@ -3,11 +3,11 @@ module github.com/hashicorp/terraform-provider-awscc
 go 1.17
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.16.0
+	github.com/aws/aws-sdk-go-v2 v1.16.1
 	github.com/aws/aws-sdk-go-v2/config v1.15.1
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.8.1
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.20.1
-	github.com/aws/smithy-go v1.11.1
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.20.2
+	github.com/aws/smithy-go v1.11.2
 	github.com/google/go-cmp v0.5.7
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.16.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.13
@@ -33,8 +33,8 @@ require (
 	github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.11.0 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.1 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.7 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.1 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.8 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.2 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.3.8 // indirect
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.1 // indirect
