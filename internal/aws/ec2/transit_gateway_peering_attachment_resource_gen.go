@@ -237,9 +237,6 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 		"value":                         "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Options",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
