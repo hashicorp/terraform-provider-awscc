@@ -127,5 +127,7 @@
     "/properties/LogGroupName"
   ],
   "additionalProperties": false,
-  "taggable": true
+  "tagging": {
+    "taggable": true
+  }
 }

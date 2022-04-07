@@ -89,6 +89,23 @@
             "type" : "string",
             "description" : "The SSO managed application instance ID.",
             "maxLength" : 256
+        },
+        "DomainSettings": {
+            "$ref": "#/definitions/DomainSettings"
+        },
+        "AppSecurityGroupManagement": {
+            "type": "string",
+            "description": "The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.",
+            "enum": [
+                "Service",
+                "Customer"
+            ]
+        },
+        "SecurityGroupIdForDomainBoundary": {
+            "type": "string",
+            "description": "The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.",
+            "maxLength": 32,
+            "pattern": "[-0-9a-zA-Z]+"
         }
     },
     "definitions": {
@@ -111,6 +128,9 @@
                 "KernelGatewayAppSettings": {
                     "$ref": "#/definitions/KernelGatewayAppSettings",
                     "description": "The kernel gateway app settings."
+                },
+                "RStudioServerProAppSettings": {
+                    "$ref": "#/definitions/RStudioServerProAppSettings"
                 },
                 "SecurityGroups": {
                     "type": "array",
@@ -291,6 +311,79 @@
                 "Key",
                 "Value"
             ]
+        },
+        "DomainSettings": {
+            "type": "object",
+            "description":"A collection of Domain settings.",
+            "additionalProperties": false,
+            "properties": {
+                "SecurityGroupIds": {
+                    "type": "array",
+                    "description": "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
+                    "uniqueItems": false,
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "items": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "pattern": "[-0-9a-zA-Z]+"
+                    }
+                },
+                "RStudioServerProDomainSettings": {
+                    "$ref": "#/definitions/RStudioServerProDomainSettings"
+                }
+            }
+        },
+        "RStudioServerProDomainSettings": {
+            "type": "object",
+            "description": "A collection of settings that update the current configuration for the RStudioServerPro Domain-level app.",
+            "additionalProperties": false,
+            "properties": {
+                "DomainExecutionRoleArn": {
+                    "type": "string",
+                    "description": "The ARN of the execution role for the RStudioServerPro Domain-level app.",
+                    "minLength": 20,
+                    "maxLength": 2048,
+                    "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+                },
+                "RStudioConnectUrl": {
+                    "type": "string",
+                    "description": "A URL pointing to an RStudio Connect server.",
+                    "pattern": "^(https:|http:|www\\.)\\S*"
+                },
+                "RStudioPackageManagerUrl": {
+                    "type": "string",
+                    "description": "A URL pointing to an RStudio Package Manager server.",
+                    "pattern": "^(https:|http:|www\\.)\\S*"
+                },
+                "DefaultResourceSpec": {
+                    "$ref": "#/definitions/ResourceSpec"
+                }
+            },
+            "required":["DomainExecutionRoleArn"]
+        },
+        "RStudioServerProAppSettings": {
+            "type": "object",
+            "description": "A collection of settings that configure user interaction with the RStudioServerPro app.",
+            "additionalProperties": false,
+            "properties": {
+                "AccessStatus": {
+                    "type": "string",
+                    "description": "Indicates whether the current user has access to the RStudioServerPro app.",
+                    "enum": [
+                        "ENABLED",
+                        "DISABLED"
+                    ]
+                },
+                "UserGroup": {
+                    "type": "string",
+                    "description": "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
+                    "enum": [
+                        "R_STUDIO_ADMIN",
+                        "R_STUDIO_USER"
+                    ]
+                }
+            }
         }
     },
     "required": [
@@ -302,8 +395,12 @@
     ],
     "createOnlyProperties": [
         "/properties/AppNetworkAccessType",
+        "/properties/AppSecurityGroupManagement",
         "/properties/AuthMode",
         "/properties/DomainName",
+        "/properties/DomainSettings/SecurityGroupIds",
+        "/properties/DomainSettings/RStudioServerProDomainSettings/DomainExecutionRoleArn",
+        "/properties/DomainSettings/RStudioServerProDomainSettings/DefaultResourceSpec",
         "/properties/KmsKeyId",
         "/properties/SubnetIds",
         "/properties/VpcId",
@@ -320,11 +417,13 @@
         "/properties/Url",
         "/properties/DomainId",
         "/properties/HomeEfsFileSystemId",
+        "/properties/SecurityGroupIdForDomainBoundary",
         "/properties/SingleSignOnManagedApplicationInstanceId"
     ],
     "handlers": {
         "create": {
             "permissions": [
+                "sagemaker:CreateApp",
                 "sagemaker:CreateDomain",
                 "sagemaker:DescribeDomain",
                 "sagemaker:DescribeImage",
@@ -354,6 +453,7 @@
         },
         "delete": {
             "permissions": [
+                "sagemaker:DeleteApp",
                 "sagemaker:DeleteDomain",
                 "sagemaker:DescribeDomain"
             ]

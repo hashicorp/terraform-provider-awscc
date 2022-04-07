@@ -346,7 +346,7 @@
         "cloudformation:DescribeStackSetOperation",
         "cloudformation:TagResource"
       ],
-      "timeoutInMinutes": 720
+      "timeoutInMinutes": 2160
     },
     "read": {
       "permissions": [
@@ -366,7 +366,7 @@
         "cloudformation:TagResource",
         "cloudformation:UntagResource"
       ],
-      "timeoutInMinutes": 720
+      "timeoutInMinutes": 2160
     },
     "delete": {
       "permissions": [
@@ -375,7 +375,7 @@
         "cloudformation:DescribeStackSetOperation",
         "cloudformation:UntagResource"
       ],
-      "timeoutInMinutes": 720
+      "timeoutInMinutes": 2160
     },
     "list": {
       "permissions": [
