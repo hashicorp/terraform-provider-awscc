@@ -30,7 +30,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "CSV",
 			//     "JSON",
 			//     "PARQUET",
-			//     "EXCEL"
+			//     "EXCEL",
+			//     "ORC"
 			//   ],
 			//   "type": "string"
 			// }
@@ -43,6 +44,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"JSON",
 					"PARQUET",
 					"EXCEL",
+					"ORC",
 				}),
 			},
 		},

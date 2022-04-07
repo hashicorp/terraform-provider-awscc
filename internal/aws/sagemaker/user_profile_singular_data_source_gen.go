@@ -307,6 +307,29 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       },
 			//       "type": "object"
 			//     },
+			//     "RStudioServerProAppSettings": {
+			//       "additionalProperties": false,
+			//       "description": "A collection of settings that configure user interaction with the RStudioServerPro app.",
+			//       "properties": {
+			//         "AccessStatus": {
+			//           "description": "Indicates whether the current user has access to the RStudioServerPro app.",
+			//           "enum": [
+			//             "ENABLED",
+			//             "DISABLED"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "UserGroup": {
+			//           "description": "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
+			//           "enum": [
+			//             "R_STUDIO_ADMIN",
+			//             "R_STUDIO_USER"
+			//           ],
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
 			//     "SecurityGroups": {
 			//       "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 			//       "items": {
@@ -457,6 +480,27 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						),
 						Computed: true,
 					},
+					"r_studio_server_pro_app_settings": {
+						// Property: RStudioServerProAppSettings
+						Description: "A collection of settings that configure user interaction with the RStudioServerPro app.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"access_status": {
+									// Property: AccessStatus
+									Description: "Indicates whether the current user has access to the RStudioServerPro app.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"user_group": {
+									// Property: UserGroup
+									Description: "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
 					"security_groups": {
 						// Property: SecurityGroups
 						Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
@@ -513,31 +557,34 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::UserProfile").WithTerraformTypeName("awscc_sagemaker_user_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"app_image_config_name":          "AppImageConfigName",
-		"custom_images":                  "CustomImages",
-		"default_resource_spec":          "DefaultResourceSpec",
-		"domain_id":                      "DomainId",
-		"execution_role":                 "ExecutionRole",
-		"image_name":                     "ImageName",
-		"image_version_number":           "ImageVersionNumber",
-		"instance_type":                  "InstanceType",
-		"jupyter_server_app_settings":    "JupyterServerAppSettings",
-		"kernel_gateway_app_settings":    "KernelGatewayAppSettings",
-		"key":                            "Key",
-		"notebook_output_option":         "NotebookOutputOption",
-		"s3_kms_key_id":                  "S3KmsKeyId",
-		"s3_output_path":                 "S3OutputPath",
-		"sage_maker_image_arn":           "SageMakerImageArn",
-		"sage_maker_image_version_arn":   "SageMakerImageVersionArn",
-		"security_groups":                "SecurityGroups",
-		"sharing_settings":               "SharingSettings",
-		"single_sign_on_user_identifier": "SingleSignOnUserIdentifier",
-		"single_sign_on_user_value":      "SingleSignOnUserValue",
-		"tags":                           "Tags",
-		"user_profile_arn":               "UserProfileArn",
-		"user_profile_name":              "UserProfileName",
-		"user_settings":                  "UserSettings",
-		"value":                          "Value",
+		"access_status":                    "AccessStatus",
+		"app_image_config_name":            "AppImageConfigName",
+		"custom_images":                    "CustomImages",
+		"default_resource_spec":            "DefaultResourceSpec",
+		"domain_id":                        "DomainId",
+		"execution_role":                   "ExecutionRole",
+		"image_name":                       "ImageName",
+		"image_version_number":             "ImageVersionNumber",
+		"instance_type":                    "InstanceType",
+		"jupyter_server_app_settings":      "JupyterServerAppSettings",
+		"kernel_gateway_app_settings":      "KernelGatewayAppSettings",
+		"key":                              "Key",
+		"notebook_output_option":           "NotebookOutputOption",
+		"r_studio_server_pro_app_settings": "RStudioServerProAppSettings",
+		"s3_kms_key_id":                    "S3KmsKeyId",
+		"s3_output_path":                   "S3OutputPath",
+		"sage_maker_image_arn":             "SageMakerImageArn",
+		"sage_maker_image_version_arn":     "SageMakerImageVersionArn",
+		"security_groups":                  "SecurityGroups",
+		"sharing_settings":                 "SharingSettings",
+		"single_sign_on_user_identifier":   "SingleSignOnUserIdentifier",
+		"single_sign_on_user_value":        "SingleSignOnUserValue",
+		"tags":                             "Tags",
+		"user_group":                       "UserGroup",
+		"user_profile_arn":                 "UserProfileArn",
+		"user_profile_name":                "UserProfileName",
+		"user_settings":                    "UserSettings",
+		"value":                            "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

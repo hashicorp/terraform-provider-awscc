@@ -705,9 +705,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"/properties/OperationPreferences",
 		"/properties/CallAs",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(720).WithDeleteTimeoutInMinutes(720)
+	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)
 
-	opts = opts.WithUpdateTimeoutInMinutes(720)
+	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
 	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
 		validate.Required(
