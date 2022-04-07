@@ -1,4 +1,16 @@
 ## 0.17.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_datasync_location_fsx_open_zfs`
+* **New Data Source:** `awscc_datasync_location_fsx_open_zfs_plural`
+* **New Data Source:** `awscc_events_endpoint`
+* **New Data Source:** `awscc_events_endpoints`
+* **New Data Source:** `awscc_lambda_url`
+* **New Resource:** `awscc_datasync_location_fsx_open_zfs`
+* **New Resource:** `awscc_events_endpoint`
+* **New Resource:** `awscc_lambda_url`
+
 ## [0.16.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.16.0) (March 24, 2022)
 
 FEATURES:
