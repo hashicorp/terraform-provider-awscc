@@ -23,10 +23,12 @@ Resource Type definition for AWS::Batch::ComputeEnvironment
 
 - `compute_environment_name` (String)
 - `compute_resources` (Attributes) (see [below for nested schema](#nestedatt--compute_resources))
+- `replace_compute_environment` (Boolean)
 - `service_role` (String)
 - `state` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
 - `unmanagedv_cpus` (Number)
+- `update_policy` (Attributes) (see [below for nested schema](#nestedatt--update_policy))
 
 ### Read-Only
 
@@ -55,6 +57,7 @@ Optional:
 - `subnets` (List of String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
 - `type` (String)
+- `update_to_latest_image_version` (Boolean)
 
 <a id="nestedatt--compute_resources--ec_2_configuration"></a>
 ### Nested Schema for `compute_resources.ec_2_configuration`
@@ -73,6 +76,16 @@ Optional:
 - `launch_template_id` (String)
 - `launch_template_name` (String)
 - `version` (String)
+
+
+
+<a id="nestedatt--update_policy"></a>
+### Nested Schema for `update_policy`
+
+Optional:
+
+- `job_execution_timeout_minutes` (Number)
+- `terminate_jobs_on_update` (Boolean)
 
 ## Import
 

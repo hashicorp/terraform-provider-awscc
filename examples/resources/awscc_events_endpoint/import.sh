@@ -1,0 +1,1 @@
+$ terraform import awscc_events_endpoint.example <resource ID>
