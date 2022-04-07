@@ -28,7 +28,8 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "CSV",
 			//     "JSON",
 			//     "PARQUET",
-			//     "EXCEL"
+			//     "EXCEL",
+			//     "ORC"
 			//   ],
 			//   "type": "string"
 			// }

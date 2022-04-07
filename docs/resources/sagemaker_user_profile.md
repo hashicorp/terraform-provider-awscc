@@ -49,6 +49,7 @@ Optional:
 - `execution_role` (String) The user profile Amazon Resource Name (ARN).
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--user_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings))
+- `r_studio_server_pro_app_settings` (Attributes) A collection of settings that configure user interaction with the RStudioServerPro app. (see [below for nested schema](#nestedatt--user_settings--r_studio_server_pro_app_settings))
 - `security_groups` (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
 - `sharing_settings` (Attributes) The sharing settings. (see [below for nested schema](#nestedatt--user_settings--sharing_settings))
 
@@ -97,6 +98,15 @@ Optional:
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
+
+
+<a id="nestedatt--user_settings--r_studio_server_pro_app_settings"></a>
+### Nested Schema for `user_settings.r_studio_server_pro_app_settings`
+
+Optional:
+
+- `access_status` (String) Indicates whether the current user has access to the RStudioServerPro app.
+- `user_group` (String) The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.
 
 
 <a id="nestedatt--user_settings--sharing_settings"></a>

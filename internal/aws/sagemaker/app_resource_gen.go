@@ -66,7 +66,10 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The type of app.",
 			//   "enum": [
 			//     "JupyterServer",
-			//     "KernelGateway"
+			//     "KernelGateway",
+			//     "RStudioServerPro",
+			//     "RSessionGateway",
+			//     "Canvas"
 			//   ],
 			//   "type": "string"
 			// }
@@ -77,6 +80,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringInSlice([]string{
 					"JupyterServer",
 					"KernelGateway",
+					"RStudioServerPro",
+					"RSessionGateway",
+					"Canvas",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{

@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 511 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 515 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -567,6 +567,10 @@ resource_schema "aws_datasync_location_fsx_lustre" {
   cloudformation_type_name = "AWS::DataSync::LocationFSxLustre"
 }
 
+resource_schema "aws_datasync_location_fsx_open_zfs" {
+  cloudformation_type_name = "AWS::DataSync::LocationFSxOpenZFS"
+}
+
 resource_schema "aws_datasync_location_fsx_windows" {
   cloudformation_type_name = "AWS::DataSync::LocationFSxWindows"
 }
@@ -932,6 +936,10 @@ resource_schema "aws_events_connection" {
   # error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+}
+
+resource_schema "aws_events_endpoint" {
+  cloudformation_type_name = "AWS::Events::Endpoint"
 }
 
 resource_schema "aws_evidently_experiment" {
@@ -1403,6 +1411,11 @@ resource_schema "aws_lambda_function" {
   cloudformation_type_name = "AWS::Lambda::Function"
 }
 
+resource_schema "aws_lambda_url" {
+  cloudformation_type_name               = "AWS::Lambda::Url"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_lex_bot" {
   cloudformation_type_name = "AWS::Lex::Bot"
 }
@@ -1604,6 +1617,15 @@ resource_schema "aws_mediapackage_packaging_configuration" {
 
 resource_schema "aws_mediapackage_packaging_group" {
   cloudformation_type_name = "AWS::MediaPackage::PackagingGroup"
+}
+
+resource_schema "aws_mediatailor_playback_configuration" {
+  cloudformation_type_name = "AWS::MediaTailor::PlaybackConfiguration"
+
+  # "ConfigurationAliases is of unsupported type: ".
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_memorydb_acl" {

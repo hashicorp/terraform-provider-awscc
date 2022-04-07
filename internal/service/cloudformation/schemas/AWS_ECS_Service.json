@@ -338,8 +338,6 @@
         "/properties/Cluster",
         "/properties/DeploymentController",
         "/properties/LaunchType",
-        "/properties/PlacementConstraints",
-        "/properties/PlacementStrategies",
         "/properties/Role",
         "/properties/SchedulingStrategy",
         "/properties/ServiceName"

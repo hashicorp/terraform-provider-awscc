@@ -22,7 +22,10 @@
             "description": "The type of app.",
             "enum": [
                 "JupyterServer",
-                "KernelGateway"
+                "KernelGateway",
+                "RStudioServerPro",
+                "RSessionGateway",
+                "Canvas"
             ]
         },
         "DomainId": {

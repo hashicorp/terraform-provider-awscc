@@ -12,6 +12,10 @@
     "ComputeResources" : {
       "$ref" : "#/definitions/ComputeResources"
     },
+    "ReplaceComputeEnvironment" : {
+      "type" : "boolean",
+      "default" : true
+    },
     "ServiceRole" : {
       "type" : "string"
     },
@@ -30,6 +34,9 @@
     },
     "Type" : {
       "type" : "string"
+    },
+    "UpdatePolicy" : {
+      "$ref" : "#/definitions/UpdatePolicy"
     },
     "UnmanagedvCpus" : {
       "type" : "integer"
@@ -117,6 +124,10 @@
         },
         "Type" : {
           "type" : "string"
+        },
+        "UpdateToLatestImageVersion" : {
+          "type" : "boolean",
+          "default" : false
         }
       },
       "required" : [ "Subnets", "Type", "MaxvCpus" ]
@@ -148,6 +159,20 @@
           "type" : "string"
         }
       }
+    },
+    "UpdatePolicy": {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "TerminateJobsOnUpdate" : {
+          "type" : "boolean",
+          "default": false
+        },
+        "JobExecutionTimeoutMinutes" : {
+          "type" : "integer",
+          "default" : 30
+        }
+      }
     }
   },
   "tagging": {
@@ -159,6 +184,12 @@
   },
   "required" : [ "Type" ],
   "createOnlyProperties" : [
+    "/properties/ComputeResources/SpotIamFleetRole",
+    "/properties/ComputeEnvironmentName",
+    "/properties/Tags",
+    "/properties/Type"
+  ],
+  "conditionalCreateOnlyProperties": [
     "/properties/ComputeResources/AllocationStrategy",
     "/properties/ComputeResources/BidPercentage",
     "/properties/ComputeResources/Ec2Configuration",
@@ -168,12 +199,14 @@
     "/properties/ComputeResources/InstanceTypes",
     "/properties/ComputeResources/LaunchTemplate",
     "/properties/ComputeResources/PlacementGroup",
-    "/properties/ComputeResources/SpotIamFleetRole",
+    "/properties/ComputeResources/SecurityGroupIds",
+    "/properties/ComputeResources/Subnets",
     "/properties/ComputeResources/Tags",
-    "/properties/ComputeResources/Type",
-    "/properties/ComputeEnvironmentName",
-    "/properties/Tags",
-    "/properties/Type"
+    "/properties/ComputeResources/Type"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ComputeResources/UpdateToLatestImageVersion",
+    "/properties/ReplaceComputeEnvironment"
   ],
   "primaryIdentifier" : [ "/properties/ComputeEnvironmentArn" ],
   "readOnlyProperties" : [ "/properties/ComputeEnvironmentArn" ],

@@ -54,7 +54,10 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The type of app.",
 			//   "enum": [
 			//     "JupyterServer",
-			//     "KernelGateway"
+			//     "KernelGateway",
+			//     "RStudioServerPro",
+			//     "RSessionGateway",
+			//     "Canvas"
 			//   ],
 			//   "type": "string"
 			// }

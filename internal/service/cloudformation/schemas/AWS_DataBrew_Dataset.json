@@ -12,7 +12,7 @@
     },
     "Format": {
       "description": "Dataset format",
-      "enum": ["CSV", "JSON", "PARQUET", "EXCEL"],
+      "enum": ["CSV", "JSON", "PARQUET", "EXCEL", "ORC"],
       "type": "string"
     },
     "FormatOptions": {
