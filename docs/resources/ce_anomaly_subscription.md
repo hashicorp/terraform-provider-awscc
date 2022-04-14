@@ -23,6 +23,10 @@ AWS Cost Anomaly Detection leverages advanced Machine Learning technologies to i
 - `subscription_name` (String) The name of the subscription.
 - `threshold` (Number) The dollar value that triggers a notification if the threshold is exceeded.
 
+### Optional
+
+- `resource_tags` (Attributes List) Tags to assign to subscription. (see [below for nested schema](#nestedatt--resource_tags))
+
 ### Read-Only
 
 - `account_id` (String) The accountId
@@ -37,6 +41,15 @@ Required:
 - `address` (String)
 - `status` (String)
 - `type` (String)
+
+
+<a id="nestedatt--resource_tags"></a>
+### Nested Schema for `resource_tags`
+
+Optional:
+
+- `key` (String) The key name for the tag.
+- `value` (String) The value for the tag.
 
 ## Import
 

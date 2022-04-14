@@ -29,6 +29,7 @@ Data Source schema for AWS::SSM::Document
 - `requires` (Attributes List) A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document. (see [below for nested schema](#nestedatt--requires))
 - `tags` (Attributes List) Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. (see [below for nested schema](#nestedatt--tags))
 - `target_type` (String) Specify a target type to define the kinds of resources the document can run on.
+- `update_method` (String) Update method - when set to 'Replace', the update will replace the existing document; when set to 'NewVersion', the update will create a new version.
 - `version_name` (String) An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.
 
 <a id="nestedatt--attachments"></a>

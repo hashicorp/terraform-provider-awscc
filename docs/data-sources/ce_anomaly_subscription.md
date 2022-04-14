@@ -24,10 +24,20 @@ Data Source schema for AWS::CE::AnomalySubscription
 - `account_id` (String) The accountId
 - `frequency` (String) The frequency at which anomaly reports are sent over email.
 - `monitor_arn_list` (List of String) A list of cost anomaly monitors.
+- `resource_tags` (Attributes List) Tags to assign to subscription. (see [below for nested schema](#nestedatt--resource_tags))
 - `subscribers` (Attributes List) A list of subscriber (see [below for nested schema](#nestedatt--subscribers))
 - `subscription_arn` (String) Subscription ARN
 - `subscription_name` (String) The name of the subscription.
 - `threshold` (Number) The dollar value that triggers a notification if the threshold is exceeded.
+
+<a id="nestedatt--resource_tags"></a>
+### Nested Schema for `resource_tags`
+
+Read-Only:
+
+- `key` (String) The key name for the tag.
+- `value` (String) The value for the tag.
+
 
 <a id="nestedatt--subscribers"></a>
 ### Nested Schema for `subscribers`

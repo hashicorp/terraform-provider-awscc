@@ -23,7 +23,7 @@ Data Source schema for AWS::Lambda::Url
 
 - `auth_type` (String) Can be either AWS_IAM if the requests are authorized via IAM, or NONE if no authorization is configured on the Function URL.
 - `cors` (Attributes) (see [below for nested schema](#nestedatt--cors))
-- `function_arn` (String) The fully qualified Amazon Resource Name (ARN) of the function associated with the Function URL.
+- `function_arn` (String) The full Amazon Resource Name (ARN) of the function associated with the Function URL.
 - `function_url` (String) The generated url for this resource.
 - `qualifier` (String) The alias qualifier for the target function. If TargetFunctionArn is unqualified then Qualifier must be passed.
 - `target_function_arn` (String) The Amazon Resource Name (ARN) of the function associated with the Function URL.
