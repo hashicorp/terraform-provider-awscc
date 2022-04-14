@@ -44,97 +44,10 @@
                     "type": "string"
                 },
                 "AmiDistributionConfiguration": {
-                    "description": "The specific AMI settings (for example, launch permissions, AMI tags).",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "properties": {
-                        "Name": {
-                            "description": "The name of the AMI distribution configuration.",
-                            "type": "string"
-                        },
-                        "KmsKeyId": {
-                            "description": "The KMS key identifier used to encrypt the distributed image.",
-                            "type": "string"
-                        },
-                        "Description": {
-                            "description": "The description of the AMI distribution configuration.",
-                            "type": "string"
-                        },
-                        "AmiTags": {
-                            "description": "The tags to apply to AMIs distributed to this Region.",
-                            "type": "object",
-                            "additionalProperties": false,
-                            "patternProperties": {
-                                "": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "TargetAccountIds":{
-                            "description": "The ID of accounts to which you want to distribute an image.",
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "LaunchPermissionConfiguration": {
-                            "description": "Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.",
-                            "type": "object",
-                            "additionalProperties": false,
-                            "properties": {
-                                "UserIds": {
-                                    "description": "The AWS account ID.",
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "UserGroups": {
-                                    "description": "The name of the group.",
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "OrganizationArns": {
-                                    "description": "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "OrganizationalUnitArns": {
-                                    "description": "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    "$ref": "#/definitions/AmiDistributionConfiguration"
                 },
                 "ContainerDistributionConfiguration": {
-                    "description": "Container distribution settings for encryption, licensing, and sharing in a specific Region.",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "properties": {
-                        "Description": {
-                            "description": "The description of the container distribution configuration.",
-                            "type": "string"
-                        },
-                        "ContainerTags": {
-                            "description": "Tags that are attached to the container distribution configuration.",
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "TargetRepository": {
-                            "description": "The destination repository for the container distribution configuration.",
-                            "$ref": "#/definitions/TargetContainerRepository"
-                        }
-                    }
+                    "$ref": "#/definitions/ContainerDistributionConfiguration"
                 },
                 "LicenseConfigurationArns": {
                     "description": "The License Manager Configuration to associate with the AMI in the specified Region.",
@@ -153,6 +66,67 @@
             },
             "required": ["Region"]
         },
+        "AmiDistributionConfiguration": {
+            "description": "The specific AMI settings (for example, launch permissions, AMI tags).",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Name": {
+                    "description": "The name of the AMI distribution configuration.",
+                    "type": "string"
+                },
+                "KmsKeyId": {
+                    "description": "The KMS key identifier used to encrypt the distributed image.",
+                    "type": "string"
+                },
+                "Description": {
+                    "description": "The description of the AMI distribution configuration.",
+                    "type": "string"
+                },
+                "AmiTags": {
+                    "description": "The tags to apply to AMIs distributed to this Region.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "patternProperties": {
+                        "": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "TargetAccountIds":{
+                    "description": "The ID of accounts to which you want to distribute an image.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "LaunchPermissionConfiguration": {
+                    "$ref": "#/definitions/LaunchPermissionConfiguration"
+                }
+            }
+        },
+        "ContainerDistributionConfiguration": {
+            "description": "Container distribution settings for encryption, licensing, and sharing in a specific Region.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Description": {
+                    "description": "The description of the container distribution configuration.",
+                    "type": "string"
+                },
+                "ContainerTags": {
+                    "description": "Tags that are attached to the container distribution configuration.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TargetRepository": {
+                    "description": "The destination repository for the container distribution configuration.",
+                    "$ref": "#/definitions/TargetContainerRepository"
+                }
+            }
+        },
         "LaunchTemplateConfiguration": {
             "description": "launchTemplateConfiguration settings that apply to image distribution.",
             "type": "object",
@@ -169,6 +143,41 @@
                 "SetDefaultVersion": {
                     "description": "Set the specified EC2 launch template as the default launch template for the specified account.",
                     "type": "boolean"
+                }
+            }
+        },
+        "LaunchPermissionConfiguration": {
+            "description": "Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "UserIds": {
+                    "description": "The AWS account ID.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "UserGroups": {
+                    "description": "The name of the group.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "OrganizationArns": {
+                    "description": "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "OrganizationalUnitArns": {
+                    "description": "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             }
         },
@@ -205,6 +214,7 @@
     ],
     "readOnlyProperties": [
         "/properties/Arn"
+
     ],
     "createOnlyProperties": [
         "/properties/Name"

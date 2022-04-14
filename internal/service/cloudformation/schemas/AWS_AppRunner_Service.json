@@ -321,6 +321,27 @@
             ],
             "additionalProperties": false
         },
+        "ServiceObservabilityConfiguration": {
+            "description": "Service observability configuration",
+            "type": "object",
+            "properties": {
+                "ObservabilityEnabled": {
+                    "description": "Observability enabled",
+                    "type": "boolean"
+                },
+                "ObservabilityConfigurationArn": {
+                    "description": "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1011,
+                    "pattern": ""
+                }
+            },
+            "required": [
+                "ObservabilityEnabled"
+            ],
+            "additionalProperties": false
+        },
         "Tag": {
             "type": "object",
             "properties": {
@@ -392,6 +413,9 @@
         },
         "HealthCheckConfiguration": {
             "$ref": "#/definitions/HealthCheckConfiguration"
+        },
+        "ObservabilityConfiguration": {
+            "$ref": "#/definitions/ServiceObservabilityConfiguration"
         },
         "AutoScalingConfigurationArn": {
             "description": "Autoscaling configuration ARN",

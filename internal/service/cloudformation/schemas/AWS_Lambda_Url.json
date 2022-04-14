@@ -27,7 +27,7 @@
             ]
         },
         "FunctionArn": {
-            "description": "The fully qualified Amazon Resource Name (ARN) of the function associated with the Function URL.",
+            "description": "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
             "type": "string",
             "pattern": ""
         },
