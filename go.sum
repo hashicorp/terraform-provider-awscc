@@ -145,8 +145,8 @@ github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+
 github.com/grpc-ecosystem/grpc-gateway v1.16.0/go.mod h1:BDjrQk3hbvj6Nolgz8mAMFbcEtjT1g+wF4CSlocrBnw=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.16.0 h1:r2RUzeK2gAitl0HY9SLH1axAEu+6aPBY20g1jOoBepM=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.16.0/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
-github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.13 h1:FIIkxL5+CHVt4TqwqY1pxG8k35ac8+vi3wGKpsRSTcI=
-github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.13/go.mod h1:QP/Uy/4K9XLzpwDSKX7fLGFuQfQq2Nz+OacCTbuaKKQ=
+github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.15 h1:Ur5UY6c5YiYUAp5lwXljCi+G7EvZ+GlyjfubYPshhBc=
+github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.15/go.mod h1:QP/Uy/4K9XLzpwDSKX7fLGFuQfQq2Nz+OacCTbuaKKQ=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/go-checkpoint v0.5.0 h1:MFYpPZCnQqQTE18jFwSII6eUQrD/oxMFp3mlgcqk5mU=
