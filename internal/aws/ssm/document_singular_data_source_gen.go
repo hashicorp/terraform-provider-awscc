@@ -263,6 +263,22 @@ func documentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"update_method": {
+			// Property: UpdateMethod
+			// CloudFormation resource type schema:
+			// {
+			//   "default": "Replace",
+			//   "description": "Update method - when set to 'Replace', the update will replace the existing document; when set to 'NewVersion', the update will create a new version.",
+			//   "enum": [
+			//     "Replace",
+			//     "NewVersion"
+			//   ],
+			//   "type": "string"
+			// }
+			Description: "Update method - when set to 'Replace', the update will replace the existing document; when set to 'NewVersion', the update will create a new version.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"version_name": {
 			// Property: VersionName
 			// CloudFormation resource type schema:
@@ -303,6 +319,7 @@ func documentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"requires":        "Requires",
 		"tags":            "Tags",
 		"target_type":     "TargetType",
+		"update_method":   "UpdateMethod",
 		"value":           "Value",
 		"values":          "Values",
 		"version":         "Version",

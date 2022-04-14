@@ -65,6 +65,60 @@ func anomalySubscriptionDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
 		},
+		"resource_tags": {
+			// Property: ResourceTags
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Tags to assign to subscription.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name for the tag.",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag.",
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 200,
+			//   "minItems": 0,
+			//   "type": "array"
+			// }
+			Description: "Tags to assign to subscription.",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Description: "The key name for the tag.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"value": {
+						// Property: Value
+						Description: "The value for the tag.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 		"subscribers": {
 			// Property: Subscribers
 			// CloudFormation resource type schema:
@@ -75,7 +129,7 @@ func anomalySubscriptionDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Address": {
-			//         "pattern": "(^[a-zA-Z0-9.!#$%\u0026'*+=?^_‘{|}~-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+$)",
+			//         "pattern": "(^[a-zA-Z0-9.!#$%\u0026'*+=?^_‘{|}~-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+(\\.fifo)?$)",
 			//         "type": "string"
 			//       },
 			//       "Status": {
@@ -184,13 +238,16 @@ func anomalySubscriptionDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 		"account_id":        "AccountId",
 		"address":           "Address",
 		"frequency":         "Frequency",
+		"key":               "Key",
 		"monitor_arn_list":  "MonitorArnList",
+		"resource_tags":     "ResourceTags",
 		"status":            "Status",
 		"subscribers":       "Subscribers",
 		"subscription_arn":  "SubscriptionArn",
 		"subscription_name": "SubscriptionName",
 		"threshold":         "Threshold",
 		"type":              "Type",
+		"value":             "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

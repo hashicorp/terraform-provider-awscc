@@ -27,7 +27,7 @@ Resource Type definition for AWS::Lambda::Url
 
 ### Read-Only
 
-- `function_arn` (String) The fully qualified Amazon Resource Name (ARN) of the function associated with the Function URL.
+- `function_arn` (String) The full Amazon Resource Name (ARN) of the function associated with the Function URL.
 - `function_url` (String) The generated url for this resource.
 - `id` (String) Uniquely identifies the resource.
 

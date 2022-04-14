@@ -326,6 +326,52 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 		},
+		"observability_configuration": {
+			// Property: ObservabilityConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Service observability configuration",
+			//   "properties": {
+			//     "ObservabilityConfigurationArn": {
+			//       "description": "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
+			//       "maxLength": 1011,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "ObservabilityEnabled": {
+			//       "description": "Observability enabled",
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "required": [
+			//     "ObservabilityEnabled"
+			//   ],
+			//   "type": "object"
+			// }
+			Description: "Service observability configuration",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"observability_configuration_arn": {
+						// Property: ObservabilityConfigurationArn
+						Description: "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1011),
+						},
+					},
+					"observability_enabled": {
+						// Property: ObservabilityEnabled
+						Description: "Observability enabled",
+						Type:        types.BoolType,
+						Required:    true,
+					},
+				},
+			),
+			Optional: true,
+		},
 		"service_arn": {
 			// Property: ServiceArn
 			// CloudFormation resource type schema:
@@ -903,54 +949,57 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_role_arn":                "AccessRoleArn",
-		"authentication_configuration":   "AuthenticationConfiguration",
-		"auto_deployments_enabled":       "AutoDeploymentsEnabled",
-		"auto_scaling_configuration_arn": "AutoScalingConfigurationArn",
-		"build_command":                  "BuildCommand",
-		"code_configuration":             "CodeConfiguration",
-		"code_configuration_values":      "CodeConfigurationValues",
-		"code_repository":                "CodeRepository",
-		"configuration_source":           "ConfigurationSource",
-		"connection_arn":                 "ConnectionArn",
-		"cpu":                            "Cpu",
-		"egress_configuration":           "EgressConfiguration",
-		"egress_type":                    "EgressType",
-		"encryption_configuration":       "EncryptionConfiguration",
-		"health_check_configuration":     "HealthCheckConfiguration",
-		"healthy_threshold":              "HealthyThreshold",
-		"image_configuration":            "ImageConfiguration",
-		"image_identifier":               "ImageIdentifier",
-		"image_repository":               "ImageRepository",
-		"image_repository_type":          "ImageRepositoryType",
-		"instance_configuration":         "InstanceConfiguration",
-		"instance_role_arn":              "InstanceRoleArn",
-		"interval":                       "Interval",
-		"key":                            "Key",
-		"kms_key":                        "KmsKey",
-		"memory":                         "Memory",
-		"name":                           "Name",
-		"network_configuration":          "NetworkConfiguration",
-		"path":                           "Path",
-		"port":                           "Port",
-		"protocol":                       "Protocol",
-		"repository_url":                 "RepositoryUrl",
-		"runtime":                        "Runtime",
-		"runtime_environment_variables":  "RuntimeEnvironmentVariables",
-		"service_arn":                    "ServiceArn",
-		"service_id":                     "ServiceId",
-		"service_name":                   "ServiceName",
-		"service_url":                    "ServiceUrl",
-		"source_code_version":            "SourceCodeVersion",
-		"source_configuration":           "SourceConfiguration",
-		"start_command":                  "StartCommand",
-		"status":                         "Status",
-		"tags":                           "Tags",
-		"timeout":                        "Timeout",
-		"type":                           "Type",
-		"unhealthy_threshold":            "UnhealthyThreshold",
-		"value":                          "Value",
-		"vpc_connector_arn":              "VpcConnectorArn",
+		"access_role_arn":                 "AccessRoleArn",
+		"authentication_configuration":    "AuthenticationConfiguration",
+		"auto_deployments_enabled":        "AutoDeploymentsEnabled",
+		"auto_scaling_configuration_arn":  "AutoScalingConfigurationArn",
+		"build_command":                   "BuildCommand",
+		"code_configuration":              "CodeConfiguration",
+		"code_configuration_values":       "CodeConfigurationValues",
+		"code_repository":                 "CodeRepository",
+		"configuration_source":            "ConfigurationSource",
+		"connection_arn":                  "ConnectionArn",
+		"cpu":                             "Cpu",
+		"egress_configuration":            "EgressConfiguration",
+		"egress_type":                     "EgressType",
+		"encryption_configuration":        "EncryptionConfiguration",
+		"health_check_configuration":      "HealthCheckConfiguration",
+		"healthy_threshold":               "HealthyThreshold",
+		"image_configuration":             "ImageConfiguration",
+		"image_identifier":                "ImageIdentifier",
+		"image_repository":                "ImageRepository",
+		"image_repository_type":           "ImageRepositoryType",
+		"instance_configuration":          "InstanceConfiguration",
+		"instance_role_arn":               "InstanceRoleArn",
+		"interval":                        "Interval",
+		"key":                             "Key",
+		"kms_key":                         "KmsKey",
+		"memory":                          "Memory",
+		"name":                            "Name",
+		"network_configuration":           "NetworkConfiguration",
+		"observability_configuration":     "ObservabilityConfiguration",
+		"observability_configuration_arn": "ObservabilityConfigurationArn",
+		"observability_enabled":           "ObservabilityEnabled",
+		"path":                            "Path",
+		"port":                            "Port",
+		"protocol":                        "Protocol",
+		"repository_url":                  "RepositoryUrl",
+		"runtime":                         "Runtime",
+		"runtime_environment_variables":   "RuntimeEnvironmentVariables",
+		"service_arn":                     "ServiceArn",
+		"service_id":                      "ServiceId",
+		"service_name":                    "ServiceName",
+		"service_url":                     "ServiceUrl",
+		"source_code_version":             "SourceCodeVersion",
+		"source_configuration":            "SourceConfiguration",
+		"start_command":                   "StartCommand",
+		"status":                          "Status",
+		"tags":                            "Tags",
+		"timeout":                         "Timeout",
+		"type":                            "Type",
+		"unhealthy_threshold":             "UnhealthyThreshold",
+		"value":                           "Value",
+		"vpc_connector_arn":               "VpcConnectorArn",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

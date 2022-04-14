@@ -152,11 +152,11 @@ func urlDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: FunctionArn
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The fully qualified Amazon Resource Name (ARN) of the function associated with the Function URL.",
+			//   "description": "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Description: "The fully qualified Amazon Resource Name (ARN) of the function associated with the Function URL.",
+			Description: "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
 			Type:        types.StringType,
 			Computed:    true,
 		},

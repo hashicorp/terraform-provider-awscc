@@ -152,10 +152,6 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//     },
 			//     "Type": {
 			//       "type": "string"
-			//     },
-			//     "UpdateToLatestImageVersion": {
-			//       "default": false,
-			//       "type": "boolean"
 			//     }
 			//   },
 			//   "required": [
@@ -171,11 +167,21 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: AllocationStrategy
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
+						},
 					},
 					"bid_percentage": {
 						// Property: BidPercentage
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
+						},
 					},
 					"desiredv_cpus": {
 						// Property: DesiredvCpus
@@ -200,31 +206,52 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"ec_2_key_pair": {
 						// Property: Ec2KeyPair
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
+						},
 					},
 					"image_id": {
 						// Property: ImageId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
+						},
 					},
 					"instance_role": {
 						// Property: InstanceRole
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
+						},
 					},
 					"instance_types": {
 						// Property: InstanceTypes
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"launch_template": {
@@ -249,6 +276,11 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
+						},
 					},
 					"maxv_cpus": {
 						// Property: MaxvCpus
@@ -264,6 +296,11 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: PlacementGroup
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
+						},
 					},
 					"security_group_ids": {
 						// Property: SecurityGroupIds
@@ -297,42 +334,23 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
+						},
 					},
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
 						Required: true,
-					},
-					"update_to_latest_image_version": {
-						// Property: UpdateToLatestImageVersion
-						Type:     types.BoolType,
-						Optional: true,
-						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Bool{Value: false}),
-							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
 						},
-						// UpdateToLatestImageVersion is a write-only property.
 					},
 				},
 			),
 			Optional: true,
-		},
-		"replace_compute_environment": {
-			// Property: ReplaceComputeEnvironment
-			// CloudFormation resource type schema:
-			// {
-			//   "default": true,
-			//   "type": "boolean"
-			// }
-			Type:     types.BoolType,
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Bool{Value: true}),
-				tfsdk.UseStateForUnknown(),
-			},
-			// ReplaceComputeEnvironment is a write-only property.
 		},
 		"service_role": {
 			// Property: ServiceRole
@@ -396,49 +414,6 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:     types.Int64Type,
 			Optional: true,
 		},
-		"update_policy": {
-			// Property: UpdatePolicy
-			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "JobExecutionTimeoutMinutes": {
-			//       "default": 30,
-			//       "type": "integer"
-			//     },
-			//     "TerminateJobsOnUpdate": {
-			//       "default": false,
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"job_execution_timeout_minutes": {
-						// Property: JobExecutionTimeoutMinutes
-						Type:     types.Int64Type,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Int64{Value: 30}),
-							tfsdk.UseStateForUnknown(),
-						},
-					},
-					"terminate_jobs_on_update": {
-						// Property: TerminateJobsOnUpdate
-						Type:     types.BoolType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Bool{Value: false}),
-							tfsdk.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -462,45 +437,36 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allocation_strategy":            "AllocationStrategy",
-		"bid_percentage":                 "BidPercentage",
-		"compute_environment_arn":        "ComputeEnvironmentArn",
-		"compute_environment_name":       "ComputeEnvironmentName",
-		"compute_resources":              "ComputeResources",
-		"desiredv_cpus":                  "DesiredvCpus",
-		"ec_2_configuration":             "Ec2Configuration",
-		"ec_2_key_pair":                  "Ec2KeyPair",
-		"image_id":                       "ImageId",
-		"image_id_override":              "ImageIdOverride",
-		"image_type":                     "ImageType",
-		"instance_role":                  "InstanceRole",
-		"instance_types":                 "InstanceTypes",
-		"job_execution_timeout_minutes":  "JobExecutionTimeoutMinutes",
-		"launch_template":                "LaunchTemplate",
-		"launch_template_id":             "LaunchTemplateId",
-		"launch_template_name":           "LaunchTemplateName",
-		"maxv_cpus":                      "MaxvCpus",
-		"minv_cpus":                      "MinvCpus",
-		"placement_group":                "PlacementGroup",
-		"replace_compute_environment":    "ReplaceComputeEnvironment",
-		"security_group_ids":             "SecurityGroupIds",
-		"service_role":                   "ServiceRole",
-		"spot_iam_fleet_role":            "SpotIamFleetRole",
-		"state":                          "State",
-		"subnets":                        "Subnets",
-		"tags":                           "Tags",
-		"terminate_jobs_on_update":       "TerminateJobsOnUpdate",
-		"type":                           "Type",
-		"unmanagedv_cpus":                "UnmanagedvCpus",
-		"update_policy":                  "UpdatePolicy",
-		"update_to_latest_image_version": "UpdateToLatestImageVersion",
-		"version":                        "Version",
+		"allocation_strategy":      "AllocationStrategy",
+		"bid_percentage":           "BidPercentage",
+		"compute_environment_arn":  "ComputeEnvironmentArn",
+		"compute_environment_name": "ComputeEnvironmentName",
+		"compute_resources":        "ComputeResources",
+		"desiredv_cpus":            "DesiredvCpus",
+		"ec_2_configuration":       "Ec2Configuration",
+		"ec_2_key_pair":            "Ec2KeyPair",
+		"image_id":                 "ImageId",
+		"image_id_override":        "ImageIdOverride",
+		"image_type":               "ImageType",
+		"instance_role":            "InstanceRole",
+		"instance_types":           "InstanceTypes",
+		"launch_template":          "LaunchTemplate",
+		"launch_template_id":       "LaunchTemplateId",
+		"launch_template_name":     "LaunchTemplateName",
+		"maxv_cpus":                "MaxvCpus",
+		"minv_cpus":                "MinvCpus",
+		"placement_group":          "PlacementGroup",
+		"security_group_ids":       "SecurityGroupIds",
+		"service_role":             "ServiceRole",
+		"spot_iam_fleet_role":      "SpotIamFleetRole",
+		"state":                    "State",
+		"subnets":                  "Subnets",
+		"tags":                     "Tags",
+		"type":                     "Type",
+		"unmanagedv_cpus":          "UnmanagedvCpus",
+		"version":                  "Version",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/ComputeResources/UpdateToLatestImageVersion",
-		"/properties/ReplaceComputeEnvironment",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

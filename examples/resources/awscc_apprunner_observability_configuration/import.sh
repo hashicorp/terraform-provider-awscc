@@ -1,0 +1,1 @@
+$ terraform import awscc_apprunner_observability_configuration.example <resource ID>

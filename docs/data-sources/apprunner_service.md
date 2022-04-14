@@ -26,6 +26,7 @@ Data Source schema for AWS::AppRunner::Service
 - `health_check_configuration` (Attributes) Health check configuration (see [below for nested schema](#nestedatt--health_check_configuration))
 - `instance_configuration` (Attributes) Instance Configuration (see [below for nested schema](#nestedatt--instance_configuration))
 - `network_configuration` (Attributes) Network configuration (see [below for nested schema](#nestedatt--network_configuration))
+- `observability_configuration` (Attributes) Service observability configuration (see [below for nested schema](#nestedatt--observability_configuration))
 - `service_arn` (String) The Amazon Resource Name (ARN) of the AppRunner Service.
 - `service_id` (String) The AppRunner Service Id
 - `service_name` (String) The AppRunner Service Name.
@@ -80,6 +81,15 @@ Read-Only:
 - `egress_type` (String) Network egress type.
 - `vpc_connector_arn` (String) The Amazon Resource Name (ARN) of the App Runner VpcConnector.
 
+
+
+<a id="nestedatt--observability_configuration"></a>
+### Nested Schema for `observability_configuration`
+
+Read-Only:
+
+- `observability_configuration_arn` (String) The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.
+- `observability_enabled` (Boolean) Observability enabled
 
 
 <a id="nestedatt--source_configuration"></a>

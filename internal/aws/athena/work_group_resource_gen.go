@@ -537,6 +537,7 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			// WorkGroupConfigurationUpdates is a write-only property.
 		},
 	}
 
@@ -589,6 +590,9 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"work_group_configuration_updates":      "WorkGroupConfigurationUpdates",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/WorkGroupConfigurationUpdates",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

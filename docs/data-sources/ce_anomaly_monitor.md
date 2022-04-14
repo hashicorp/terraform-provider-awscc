@@ -30,5 +30,14 @@ Data Source schema for AWS::CE::AnomalyMonitor
 - `monitor_name` (String) The name of the monitor.
 - `monitor_specification` (String)
 - `monitor_type` (String)
+- `resource_tags` (Attributes List) Tags to assign to monitor. (see [below for nested schema](#nestedatt--resource_tags))
+
+<a id="nestedatt--resource_tags"></a>
+### Nested Schema for `resource_tags`
+
+Read-Only:
+
+- `key` (String) The key name for the tag.
+- `value` (String) The value for the tag.
 
 
