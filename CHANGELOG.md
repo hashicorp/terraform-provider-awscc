@@ -1,4 +1,12 @@
 ## 0.18.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apprunner_observability_configuration`
+* **New Data Source:** `awscc_apprunner_observability_configurations`
+* **New Data Source:** `awscc_ssm_documents`
+* **New Resource:** `awscc_apprunner_observability_configuration`
+
 ## [0.17.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.17.0) (April  7, 2022)
 
 FEATURES:
