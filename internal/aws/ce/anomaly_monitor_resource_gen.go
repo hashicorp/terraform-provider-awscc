@@ -180,6 +180,75 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"resource_tags": {
+			// Property: ResourceTags
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Tags to assign to monitor.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name for the tag.",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag.",
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 200,
+			//   "minItems": 0,
+			//   "type": "array"
+			// }
+			Description: "Tags to assign to monitor.",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Description: "The key name for the tag.",
+						Type:        types.StringType,
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+					},
+					"value": {
+						// Property: Value
+						Description: "The value for the tag.",
+						Type:        types.StringType,
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -205,6 +274,7 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"creation_date":           "CreationDate",
 		"dimensional_value_count": "DimensionalValueCount",
+		"key":                     "Key",
 		"last_evaluated_date":     "LastEvaluatedDate",
 		"last_updated_date":       "LastUpdatedDate",
 		"monitor_arn":             "MonitorArn",
@@ -212,6 +282,8 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"monitor_name":            "MonitorName",
 		"monitor_specification":   "MonitorSpecification",
 		"monitor_type":            "MonitorType",
+		"resource_tags":           "ResourceTags",
+		"value":                   "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

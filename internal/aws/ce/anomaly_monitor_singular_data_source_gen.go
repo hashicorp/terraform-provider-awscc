@@ -135,6 +135,60 @@ func anomalyMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"resource_tags": {
+			// Property: ResourceTags
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Tags to assign to monitor.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name for the tag.",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag.",
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 200,
+			//   "minItems": 0,
+			//   "type": "array"
+			// }
+			Description: "Tags to assign to monitor.",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Description: "The key name for the tag.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"value": {
+						// Property: Value
+						Description: "The value for the tag.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -156,6 +210,7 @@ func anomalyMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"creation_date":           "CreationDate",
 		"dimensional_value_count": "DimensionalValueCount",
+		"key":                     "Key",
 		"last_evaluated_date":     "LastEvaluatedDate",
 		"last_updated_date":       "LastUpdatedDate",
 		"monitor_arn":             "MonitorArn",
@@ -163,6 +218,8 @@ func anomalyMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 		"monitor_name":            "MonitorName",
 		"monitor_specification":   "MonitorSpecification",
 		"monitor_type":            "MonitorType",
+		"resource_tags":           "ResourceTags",
+		"value":                   "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

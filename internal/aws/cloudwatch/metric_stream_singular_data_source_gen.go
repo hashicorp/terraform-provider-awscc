@@ -199,6 +199,100 @@ func metricStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"statistics_configurations": {
+			// Property: StatisticsConfigurations
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "This structure specifies a list of additional statistics to stream, and the metrics to stream those additional statistics for. All metrics that match the combination of metric name and namespace will be streamed with the extended statistics, no matter their dimensions.",
+			//     "properties": {
+			//       "AdditionalStatistics": {
+			//         "description": "The additional statistics to stream for the metrics listed in IncludeMetrics.",
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "maxItems": 20,
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
+			//       "IncludeMetrics": {
+			//         "description": "An array that defines the metrics that are to have additional statistics streamed.",
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "description": "A structure that specifies the metric name and namespace for one metric that is going to have additional statistics included in the stream.",
+			//           "properties": {
+			//             "MetricName": {
+			//               "description": "The name of the metric.",
+			//               "maxLength": 255,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             },
+			//             "Namespace": {
+			//               "description": "The namespace of the metric.",
+			//               "maxLength": 255,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "MetricName",
+			//             "Namespace"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "maxItems": 100,
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       }
+			//     },
+			//     "required": [
+			//       "AdditionalStatistics",
+			//       "IncludeMetrics"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 100,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Description: "By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members.",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"additional_statistics": {
+						// Property: AdditionalStatistics
+						Description: "The additional statistics to stream for the metrics listed in IncludeMetrics.",
+						Type:        types.ListType{ElemType: types.StringType},
+						Computed:    true,
+					},
+					"include_metrics": {
+						// Property: IncludeMetrics
+						Description: "An array that defines the metrics that are to have additional statistics streamed.",
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"metric_name": {
+									// Property: MetricName
+									Description: "The name of the metric.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"namespace": {
+									// Property: Namespace
+									Description: "The namespace of the metric.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+							},
+							tfsdk.ListNestedAttributesOptions{},
+						),
+						Computed: true,
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -269,20 +363,24 @@ func metricStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("awscc_cloudwatch_metric_stream")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":              "Arn",
-		"creation_date":    "CreationDate",
-		"exclude_filters":  "ExcludeFilters",
-		"firehose_arn":     "FirehoseArn",
-		"include_filters":  "IncludeFilters",
-		"key":              "Key",
-		"last_update_date": "LastUpdateDate",
-		"name":             "Name",
-		"namespace":        "Namespace",
-		"output_format":    "OutputFormat",
-		"role_arn":         "RoleArn",
-		"state":            "State",
-		"tags":             "Tags",
-		"value":            "Value",
+		"additional_statistics":     "AdditionalStatistics",
+		"arn":                       "Arn",
+		"creation_date":             "CreationDate",
+		"exclude_filters":           "ExcludeFilters",
+		"firehose_arn":              "FirehoseArn",
+		"include_filters":           "IncludeFilters",
+		"include_metrics":           "IncludeMetrics",
+		"key":                       "Key",
+		"last_update_date":          "LastUpdateDate",
+		"metric_name":               "MetricName",
+		"name":                      "Name",
+		"namespace":                 "Namespace",
+		"output_format":             "OutputFormat",
+		"role_arn":                  "RoleArn",
+		"state":                     "State",
+		"statistics_configurations": "StatisticsConfigurations",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
