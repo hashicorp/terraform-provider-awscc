@@ -222,6 +222,57 @@ func billingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.UseStateForUnknown(),
 			},
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Attributes: tfsdk.SetNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+					},
+				},
+				tfsdk.SetNestedAttributesOptions{},
+			),
+			Optional: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -250,6 +301,7 @@ func billingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"computation_preference": "ComputationPreference",
 		"creation_time":          "CreationTime",
 		"description":            "Description",
+		"key":                    "Key",
 		"last_modified_time":     "LastModifiedTime",
 		"linked_account_ids":     "LinkedAccountIds",
 		"name":                   "Name",
@@ -258,6 +310,8 @@ func billingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"size":                   "Size",
 		"status":                 "Status",
 		"status_reason":          "StatusReason",
+		"tags":                   "Tags",
+		"value":                  "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

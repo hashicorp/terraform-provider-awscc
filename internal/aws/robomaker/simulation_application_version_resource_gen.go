@@ -97,7 +97,7 @@ func simulationApplicationVersionResourceType(ctx context.Context) (tfsdk.Resour
 	}
 
 	schema := tfsdk.Schema{
-		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
+		Description: "AWS::RoboMaker::SimulationApplicationVersion resource creates an AWS RoboMaker SimulationApplicationVersion. This helps you control which code your simulation uses.",
 		Version:     1,
 		Attributes:  attributes,
 	}

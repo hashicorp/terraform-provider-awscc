@@ -134,6 +134,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//   "description": "The id of the Slack workspace",
 			//   "maxLength": 256,
 			//   "minLength": 1,
+			//   "pattern": "^[0-9A-Z]{1,255}$",
 			//   "type": "string"
 			// }
 			Description: "The id of the Slack workspace",
@@ -141,6 +142,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("^[0-9A-Z]{1,255}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

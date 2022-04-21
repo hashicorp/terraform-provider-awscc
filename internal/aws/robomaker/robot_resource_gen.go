@@ -153,7 +153,7 @@ func robotResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	schema := tfsdk.Schema{
-		Description: "AWS::RoboMaker::Robot resource creates an AWS RoboMaker fleet.",
+		Description: "AWS::RoboMaker::Robot resource creates an AWS RoboMaker Robot.",
 		Version:     1,
 		Attributes:  attributes,
 	}
