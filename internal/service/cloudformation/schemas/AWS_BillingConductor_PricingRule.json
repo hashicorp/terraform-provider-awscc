@@ -2,6 +2,28 @@
     "typeName": "AWS::BillingConductor::PricingRule",
     "description": "A markup/discount that is defined for a specific set of services that can later be associated with a pricing plan.",
     "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-billing-conductor.git",
+    "definitions": {
+        "Tag": {
+            "type": "object",
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                },
+                "Value": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "Key",
+                "Value"
+            ]
+        }
+    },
     "properties": {
         "Arn": {
             "description": "Pricing rule ARN",
@@ -60,9 +82,24 @@
         "LastModifiedTime": {
             "description": "Latest modified timestamp in UNIX epoch time format",
             "type": "integer"
+        },
+        "Tags": {
+            "type": "array",
+            "uniqueItems": true,
+            "insertionOrder": false,
+            "items": {
+                "$ref": "#/definitions/Tag"
+            }
         }
     },
     "additionalProperties": false,
+    "tagging": {
+        "taggable": true,
+        "tagOnCreate": true,
+        "tagUpdatable": true,
+        "cloudFormationSystemTags": true,
+        "tagProperty": "/properties/Tags"
+    },
     "required": [
         "Name",
         "Scope",
@@ -91,12 +128,16 @@
         },
         "read": {
             "permissions": [
-                "billingconductor:ListPricingRules"
+                "billingconductor:ListPricingRules",
+                "billingconductor:ListTagsForResource"
             ]
         },
         "update": {
             "permissions": [
-                "billingconductor:UpdatePricingRule"
+                "billingconductor:UpdatePricingRule",
+                "billingconductor:ListPricingRules",
+                "billingconductor:TagResource",
+                "billingconductor:UntagResource"
             ]
         },
         "delete": {
@@ -106,7 +147,8 @@
         },
         "list": {
             "permissions": [
-                "billingconductor:ListPricingRules"
+                "billingconductor:ListPricingRules",
+                "billingconductor:ListTagsForResource"
             ]
         }
     }

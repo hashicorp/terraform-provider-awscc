@@ -24,6 +24,10 @@
       "minLength": 0,
       "maxLength": 160
     },
+    "RunningStatus": {
+      "description": "Start Experiment. Default is False",
+      "$ref": "#/definitions/RunningStatusObject"
+    },
     "RandomizationSalt": {
       "type": "string",
       "minLength": 0,
@@ -69,6 +73,44 @@
     }
   },
   "definitions": {
+    "RunningStatusObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Status": {
+          "description": "Provide START or STOP action to apply on an experiment",
+          "type": "string"
+        },
+        "AnalysisCompleteTime": {
+          "description": "Provide the analysis Completion time for an experiment",
+          "type": "string"
+        },
+        "Reason": {
+          "description": "Reason is a required input for stopping the experiment",
+          "type": "string"
+        },
+        "DesiredState": {
+          "description": "Provide CANCELLED or COMPLETED desired state when stopping an experiment",
+          "type": "string",
+          "pattern": "^(CANCELLED|COMPLETED)"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "Status",
+            "AnalysisCompleteTime"
+          ]
+        },
+        {
+          "required": [
+            "Status",
+            "Reason",
+            "DesiredState"
+          ]
+        }
+      ]
+    },
     "TreatmentObject": {
       "type": "object",
       "properties": {
@@ -232,7 +274,8 @@
       "permissions": [
         "evidently:CreateExperiment",
         "evidently:TagResource",
-        "evidently:GetExperiment"
+        "evidently:GetExperiment",
+        "evidently:StartExperiment"
       ]
     },
     "read": {
@@ -246,7 +289,9 @@
         "evidently:UpdateExperiment",
         "evidently:TagResource",
         "evidently:UntagResource",
-        "evidently:GetExperiment"
+        "evidently:GetExperiment",
+        "evidently:StartExperiment",
+        "evidently:StopExperiment"
       ]
     },
     "delete": {
