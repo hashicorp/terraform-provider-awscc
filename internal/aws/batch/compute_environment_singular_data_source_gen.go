@@ -144,6 +144,10 @@ func computeEnvironmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//     },
 			//     "Type": {
 			//       "type": "string"
+			//     },
+			//     "UpdateToLatestImageVersion": {
+			//       "default": false,
+			//       "type": "boolean"
 			//     }
 			//   },
 			//   "required": [
@@ -274,8 +278,23 @@ func computeEnvironmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 						Type:     types.StringType,
 						Computed: true,
 					},
+					"update_to_latest_image_version": {
+						// Property: UpdateToLatestImageVersion
+						Type:     types.BoolType,
+						Computed: true,
+					},
 				},
 			),
+			Computed: true,
+		},
+		"replace_compute_environment": {
+			// Property: ReplaceComputeEnvironment
+			// CloudFormation resource type schema:
+			// {
+			//   "default": true,
+			//   "type": "boolean"
+			// }
+			Type:     types.BoolType,
 			Computed: true,
 		},
 		"service_role": {
@@ -332,6 +351,39 @@ func computeEnvironmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			Type:     types.Int64Type,
 			Computed: true,
 		},
+		"update_policy": {
+			// Property: UpdatePolicy
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "JobExecutionTimeoutMinutes": {
+			//       "default": 30,
+			//       "type": "integer"
+			//     },
+			//     "TerminateJobsOnUpdate": {
+			//       "default": false,
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"job_execution_timeout_minutes": {
+						// Property: JobExecutionTimeoutMinutes
+						Type:     types.Int64Type,
+						Computed: true,
+					},
+					"terminate_jobs_on_update": {
+						// Property: TerminateJobsOnUpdate
+						Type:     types.BoolType,
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -351,34 +403,39 @@ func computeEnvironmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::ComputeEnvironment").WithTerraformTypeName("awscc_batch_compute_environment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allocation_strategy":      "AllocationStrategy",
-		"bid_percentage":           "BidPercentage",
-		"compute_environment_arn":  "ComputeEnvironmentArn",
-		"compute_environment_name": "ComputeEnvironmentName",
-		"compute_resources":        "ComputeResources",
-		"desiredv_cpus":            "DesiredvCpus",
-		"ec_2_configuration":       "Ec2Configuration",
-		"ec_2_key_pair":            "Ec2KeyPair",
-		"image_id":                 "ImageId",
-		"image_id_override":        "ImageIdOverride",
-		"image_type":               "ImageType",
-		"instance_role":            "InstanceRole",
-		"instance_types":           "InstanceTypes",
-		"launch_template":          "LaunchTemplate",
-		"launch_template_id":       "LaunchTemplateId",
-		"launch_template_name":     "LaunchTemplateName",
-		"maxv_cpus":                "MaxvCpus",
-		"minv_cpus":                "MinvCpus",
-		"placement_group":          "PlacementGroup",
-		"security_group_ids":       "SecurityGroupIds",
-		"service_role":             "ServiceRole",
-		"spot_iam_fleet_role":      "SpotIamFleetRole",
-		"state":                    "State",
-		"subnets":                  "Subnets",
-		"tags":                     "Tags",
-		"type":                     "Type",
-		"unmanagedv_cpus":          "UnmanagedvCpus",
-		"version":                  "Version",
+		"allocation_strategy":            "AllocationStrategy",
+		"bid_percentage":                 "BidPercentage",
+		"compute_environment_arn":        "ComputeEnvironmentArn",
+		"compute_environment_name":       "ComputeEnvironmentName",
+		"compute_resources":              "ComputeResources",
+		"desiredv_cpus":                  "DesiredvCpus",
+		"ec_2_configuration":             "Ec2Configuration",
+		"ec_2_key_pair":                  "Ec2KeyPair",
+		"image_id":                       "ImageId",
+		"image_id_override":              "ImageIdOverride",
+		"image_type":                     "ImageType",
+		"instance_role":                  "InstanceRole",
+		"instance_types":                 "InstanceTypes",
+		"job_execution_timeout_minutes":  "JobExecutionTimeoutMinutes",
+		"launch_template":                "LaunchTemplate",
+		"launch_template_id":             "LaunchTemplateId",
+		"launch_template_name":           "LaunchTemplateName",
+		"maxv_cpus":                      "MaxvCpus",
+		"minv_cpus":                      "MinvCpus",
+		"placement_group":                "PlacementGroup",
+		"replace_compute_environment":    "ReplaceComputeEnvironment",
+		"security_group_ids":             "SecurityGroupIds",
+		"service_role":                   "ServiceRole",
+		"spot_iam_fleet_role":            "SpotIamFleetRole",
+		"state":                          "State",
+		"subnets":                        "Subnets",
+		"tags":                           "Tags",
+		"terminate_jobs_on_update":       "TerminateJobsOnUpdate",
+		"type":                           "Type",
+		"unmanagedv_cpus":                "UnmanagedvCpus",
+		"update_policy":                  "UpdatePolicy",
+		"update_to_latest_image_version": "UpdateToLatestImageVersion",
+		"version":                        "Version",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

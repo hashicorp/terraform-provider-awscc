@@ -32,12 +32,12 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Description
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.",
+			//   "description": "A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use.",
 			//   "maxLength": 8192,
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Description: "A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.",
+			Description: "A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -45,10 +45,10 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: EnableKeyRotation
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Enables automatic rotation of the key material for the specified customer master key (CMK). By default, automation key rotation is not enabled.",
+			//   "description": "Enables automatic rotation of the key material for the specified AWS KMS key. By default, automation key rotation is not enabled.",
 			//   "type": "boolean"
 			// }
-			Description: "Enables automatic rotation of the key material for the specified customer master key (CMK). By default, automation key rotation is not enabled.",
+			Description: "Enables automatic rotation of the key material for the specified AWS KMS key. By default, automation key rotation is not enabled.",
 			Type:        types.BoolType,
 			Computed:    true,
 		},
@@ -56,10 +56,10 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Enabled
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Specifies whether the customer master key (CMK) is enabled. Disabled CMKs cannot be used in cryptographic operations.",
+			//   "description": "Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations.",
 			//   "type": "boolean"
 			// }
-			Description: "Specifies whether the customer master key (CMK) is enabled. Disabled CMKs cannot be used in cryptographic operations.",
+			Description: "Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations.",
 			Type:        types.BoolType,
 			Computed:    true,
 		},
@@ -76,10 +76,10 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: KeyPolicy
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The key policy that authorizes use of the CMK. The key policy must observe the following rules.",
+			//   "description": "The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.",
 			//   "type": "string"
 			// }
-			Description: "The key policy that authorizes use of the CMK. The key policy must observe the following rules.",
+			Description: "The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -88,7 +88,7 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "default": "SYMMETRIC_DEFAULT",
-			//   "description": "Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.",
+			//   "description": "Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created.",
 			//   "enum": [
 			//     "SYMMETRIC_DEFAULT",
 			//     "RSA_2048",
@@ -97,11 +97,15 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "ECC_NIST_P256",
 			//     "ECC_NIST_P384",
 			//     "ECC_NIST_P521",
-			//     "ECC_SECG_P256K1"
+			//     "ECC_SECG_P256K1",
+			//     "HMAC_224",
+			//     "HMAC_256",
+			//     "HMAC_384",
+			//     "HMAC_512"
 			//   ],
 			//   "type": "string"
 			// }
-			Description: "Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.",
+			Description: "Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -110,14 +114,15 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "default": "ENCRYPT_DECRYPT",
-			//   "description": "Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.",
+			//   "description": "Determines the cryptographic operations for which you can use the AWS KMS key. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric AWS KMS keys. You can't change the KeyUsage value after the AWS KMS key is created.",
 			//   "enum": [
 			//     "ENCRYPT_DECRYPT",
-			//     "SIGN_VERIFY"
+			//     "SIGN_VERIFY",
+			//     "GENERATE_VERIFY_MAC"
 			//   ],
 			//   "type": "string"
 			// }
-			Description: "Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.",
+			Description: "Determines the cryptographic operations for which you can use the AWS KMS key. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric AWS KMS keys. You can't change the KeyUsage value after the AWS KMS key is created.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -126,10 +131,10 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "default": false,
-			//   "description": "Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.",
+			//   "description": "Specifies whether the AWS KMS key should be Multi-Region. You can't change the MultiRegion value after the AWS KMS key is created.",
 			//   "type": "boolean"
 			// }
-			Description: "Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.",
+			Description: "Specifies whether the AWS KMS key should be Multi-Region. You can't change the MultiRegion value after the AWS KMS key is created.",
 			Type:        types.BoolType,
 			Computed:    true,
 		},
@@ -137,12 +142,12 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: PendingWindowInDays
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
+			//   "description": "Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
 			//   "maximum": 30,
 			//   "minimum": 7,
 			//   "type": "integer"
 			// }
-			Description: "Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
+			Description: "Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
 			Type:        types.Int64Type,
 			Computed:    true,
 		},

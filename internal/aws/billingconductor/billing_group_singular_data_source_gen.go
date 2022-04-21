@@ -182,6 +182,51 @@ func billingGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Attributes: tfsdk.SetNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+				tfsdk.SetNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -206,6 +251,7 @@ func billingGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 		"computation_preference": "ComputationPreference",
 		"creation_time":          "CreationTime",
 		"description":            "Description",
+		"key":                    "Key",
 		"last_modified_time":     "LastModifiedTime",
 		"linked_account_ids":     "LinkedAccountIds",
 		"name":                   "Name",
@@ -214,6 +260,8 @@ func billingGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 		"size":                   "Size",
 		"status":                 "Status",
 		"status_reason":          "StatusReason",
+		"tags":                   "Tags",
+		"value":                  "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

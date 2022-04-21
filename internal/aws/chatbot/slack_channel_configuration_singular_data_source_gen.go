@@ -107,6 +107,7 @@ func slackChannelConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSou
 			//   "description": "The id of the Slack workspace",
 			//   "maxLength": 256,
 			//   "minLength": 1,
+			//   "pattern": "^[0-9A-Z]{1,255}$",
 			//   "type": "string"
 			// }
 			Description: "The id of the Slack workspace",

@@ -132,6 +132,51 @@ func pricingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Attributes: tfsdk.SetNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+				tfsdk.SetNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
@@ -170,12 +215,15 @@ func pricingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"associated_pricing_plan_count": "AssociatedPricingPlanCount",
 		"creation_time":                 "CreationTime",
 		"description":                   "Description",
+		"key":                           "Key",
 		"last_modified_time":            "LastModifiedTime",
 		"modifier_percentage":           "ModifierPercentage",
 		"name":                          "Name",
 		"scope":                         "Scope",
 		"service":                       "Service",
+		"tags":                          "Tags",
 		"type":                          "Type",
+		"value":                         "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

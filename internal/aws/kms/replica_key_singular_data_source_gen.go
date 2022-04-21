@@ -32,12 +32,12 @@ func replicaKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// Property: Description
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.",
+			//   "description": "A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use.",
 			//   "maxLength": 8192,
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Description: "A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.",
+			Description: "A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -45,10 +45,10 @@ func replicaKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// Property: Enabled
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Specifies whether the customer master key (CMK) is enabled. Disabled CMKs cannot be used in cryptographic operations.",
+			//   "description": "Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations.",
 			//   "type": "boolean"
 			// }
-			Description: "Specifies whether the customer master key (CMK) is enabled. Disabled CMKs cannot be used in cryptographic operations.",
+			Description: "Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations.",
 			Type:        types.BoolType,
 			Computed:    true,
 		},
@@ -65,10 +65,10 @@ func replicaKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// Property: KeyPolicy
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The key policy that authorizes use of the CMK. The key policy must observe the following rules.",
+			//   "description": "The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.",
 			//   "type": "string"
 			// }
-			Description: "The key policy that authorizes use of the CMK. The key policy must observe the following rules.",
+			Description: "The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -76,12 +76,12 @@ func replicaKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// Property: PendingWindowInDays
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
+			//   "description": "Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
 			//   "maximum": 30,
 			//   "minimum": 7,
 			//   "type": "integer"
 			// }
-			Description: "Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
+			Description: "Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
 			Type:        types.Int64Type,
 			Computed:    true,
 		},
@@ -89,12 +89,12 @@ func replicaKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// Property: PrimaryKeyArn
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Identifies the primary CMK to create a replica of. Specify the Amazon Resource Name (ARN) of the CMK. You cannot specify an alias or key ID. For help finding the ARN, see Finding the Key ID and ARN in the AWS Key Management Service Developer Guide.",
+			//   "description": "Identifies the primary AWS KMS key to create a replica of. Specify the Amazon Resource Name (ARN) of the AWS KMS key. You cannot specify an alias or key ID. For help finding the ARN, see Finding the Key ID and ARN in the AWS Key Management Service Developer Guide.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Description: "Identifies the primary CMK to create a replica of. Specify the Amazon Resource Name (ARN) of the CMK. You cannot specify an alias or key ID. For help finding the ARN, see Finding the Key ID and ARN in the AWS Key Management Service Developer Guide.",
+			Description: "Identifies the primary AWS KMS key to create a replica of. Specify the Amazon Resource Name (ARN) of the AWS KMS key. You cannot specify an alias or key ID. For help finding the ARN, see Finding the Key ID and ARN in the AWS Key Management Service Developer Guide.",
 			Type:        types.StringType,
 			Computed:    true,
 		},

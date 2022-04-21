@@ -241,6 +241,79 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"running_status": {
+			// Property: RunningStatus
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Start Experiment. Default is False",
+			//   "oneOf": [
+			//     {
+			//       "required": [
+			//         "Status",
+			//         "AnalysisCompleteTime"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "Status",
+			//         "Reason",
+			//         "DesiredState"
+			//       ]
+			//     }
+			//   ],
+			//   "properties": {
+			//     "AnalysisCompleteTime": {
+			//       "description": "Provide the analysis Completion time for an experiment",
+			//       "type": "string"
+			//     },
+			//     "DesiredState": {
+			//       "description": "Provide CANCELLED or COMPLETED desired state when stopping an experiment",
+			//       "pattern": "^(CANCELLED|COMPLETED)",
+			//       "type": "string"
+			//     },
+			//     "Reason": {
+			//       "description": "Reason is a required input for stopping the experiment",
+			//       "type": "string"
+			//     },
+			//     "Status": {
+			//       "description": "Provide START or STOP action to apply on an experiment",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "Start Experiment. Default is False",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"analysis_complete_time": {
+						// Property: AnalysisCompleteTime
+						Description: "Provide the analysis Completion time for an experiment",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"desired_state": {
+						// Property: DesiredState
+						Description: "Provide CANCELLED or COMPLETED desired state when stopping an experiment",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"reason": {
+						// Property: Reason
+						Description: "Reason is a required input for stopping the experiment",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"status": {
+						// Property: Status
+						Description: "Provide START or STOP action to apply on an experiment",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"sampling_rate": {
 			// Property: SamplingRate
 			// CloudFormation resource type schema:
@@ -391,10 +464,12 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Evidently::Experiment").WithTerraformTypeName("awscc_evidently_experiment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"analysis_complete_time": "AnalysisCompleteTime",
 		"arn":                    "Arn",
 		"control_treatment_name": "ControlTreatmentName",
 		"description":            "Description",
 		"desired_change":         "DesiredChange",
+		"desired_state":          "DesiredState",
 		"entity_id_key":          "EntityIdKey",
 		"event_pattern":          "EventPattern",
 		"feature":                "Feature",
@@ -405,8 +480,11 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"online_ab_config":       "OnlineAbConfig",
 		"project":                "Project",
 		"randomization_salt":     "RandomizationSalt",
+		"reason":                 "Reason",
+		"running_status":         "RunningStatus",
 		"sampling_rate":          "SamplingRate",
 		"split_weight":           "SplitWeight",
+		"status":                 "Status",
 		"tags":                   "Tags",
 		"treatment":              "Treatment",
 		"treatment_name":         "TreatmentName",
