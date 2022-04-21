@@ -32,6 +32,7 @@ Data Source schema for AWS::BillingConductor::CustomLineItem
 - `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
 - `name` (String)
 - `product_code` (String)
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--billing_period_range"></a>
 ### Nested Schema for `billing_period_range`
@@ -66,5 +67,15 @@ Read-Only:
 
 - `child_associated_resources` (Set of String)
 - `percentage_value` (Number)
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 

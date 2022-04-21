@@ -23,6 +23,7 @@ Pricing Plan enables you to customize your billing details consistent with the u
 
 - `description` (String)
 - `pricing_rule_arns` (List of String)
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -31,6 +32,14 @@ Pricing Plan enables you to customize your billing details consistent with the u
 - `id` (String) Uniquely identifies the resource.
 - `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
 - `size` (Number) Number of associated pricing rules
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

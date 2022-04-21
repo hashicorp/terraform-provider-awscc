@@ -26,6 +26,7 @@ A markup/discount that is defined for a specific set of services that can later 
 
 - `description` (String) Pricing rule description
 - `service` (String) The service which a pricing rule is applied on
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -34,6 +35,14 @@ A markup/discount that is defined for a specific set of services that can later 
 - `creation_time` (Number) Creation timestamp in UNIX epoch time format
 - `id` (String) Uniquely identifies the resource.
 - `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

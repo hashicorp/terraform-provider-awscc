@@ -3,12 +3,12 @@
 page_title: "awscc_robomaker_robot_application Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  An example resource schema demonstrating some basic constructs and validation rules.
+  AWS::RoboMaker::RobotApplication resource creates an AWS RoboMaker RobotApplication. Robot application can be used in AWS RoboMaker Simulation Jobs.
 ---
 
 # awscc_robomaker_robot_application (Resource)
 
-An example resource schema demonstrating some basic constructs and validation rules.
+AWS::RoboMaker::RobotApplication resource creates an AWS RoboMaker RobotApplication. Robot application can be used in AWS RoboMaker Simulation Jobs.
 
 
 

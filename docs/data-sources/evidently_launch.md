@@ -23,6 +23,7 @@ Data Source schema for AWS::Evidently::Launch
 
 - `arn` (String)
 - `description` (String)
+- `execution_status` (Attributes) Start or Stop Launch Launch. Default is not started. (see [below for nested schema](#nestedatt--execution_status))
 - `groups` (Attributes List) (see [below for nested schema](#nestedatt--groups))
 - `metric_monitors` (Attributes List) (see [below for nested schema](#nestedatt--metric_monitors))
 - `name` (String)
@@ -30,6 +31,16 @@ Data Source schema for AWS::Evidently::Launch
 - `randomization_salt` (String)
 - `scheduled_splits_config` (Attributes List) (see [below for nested schema](#nestedatt--scheduled_splits_config))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--execution_status"></a>
+### Nested Schema for `execution_status`
+
+Read-Only:
+
+- `desired_state` (String) Provide CANCELLED or COMPLETED as the launch desired state. Defaults to Completed if not provided.
+- `reason` (String) Provide a reason for stopping the launch. Defaults to empty if not provided.
+- `status` (String) Provide START or STOP action to apply on a launch
+
 
 <a id="nestedatt--groups"></a>
 ### Nested Schema for `groups`

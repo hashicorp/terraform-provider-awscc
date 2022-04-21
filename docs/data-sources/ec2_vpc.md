@@ -34,6 +34,8 @@ Data Source schema for AWS::EC2::VPC
 "dedicated": An instance launched into the VPC is a Dedicated Instance by default, unless you explicitly specify a tenancy of host during instance launch. You cannot specify a tenancy of default during instance launch.
 
 Updating InstanceTenancy requires no replacement only if you are updating its value from "dedicated" to "default". Updating InstanceTenancy from "default" to "dedicated" requires replacement.
+- `ipv_4_ipam_pool_id` (String) The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR
+- `ipv_4_netmask_length` (Number) The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool
 - `ipv_6_cidr_blocks` (List of String) A list of IPv6 CIDR blocks that are associated with the VPC.
 - `tags` (Attributes List) The tags for the VPC. (see [below for nested schema](#nestedatt--tags))
 - `vpc_id` (String) The Id for the model.

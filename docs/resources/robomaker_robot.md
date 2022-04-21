@@ -3,12 +3,12 @@
 page_title: "awscc_robomaker_robot Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  AWS::RoboMaker::Robot resource creates an AWS RoboMaker fleet.
+  AWS::RoboMaker::Robot resource creates an AWS RoboMaker Robot.
 ---
 
 # awscc_robomaker_robot (Resource)
 
-AWS::RoboMaker::Robot resource creates an AWS RoboMaker fleet.
+AWS::RoboMaker::Robot resource creates an AWS RoboMaker Robot.
 
 
 

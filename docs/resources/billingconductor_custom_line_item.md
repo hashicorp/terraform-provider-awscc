@@ -25,6 +25,7 @@ A custom line item is an one time charge that is applied to a specific billing g
 - `billing_period_range` (Attributes) (see [below for nested schema](#nestedatt--billing_period_range))
 - `custom_line_item_charge_details` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details))
 - `description` (String)
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -69,6 +70,16 @@ Optional:
 
 - `child_associated_resources` (Set of String)
 - `percentage_value` (Number)
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

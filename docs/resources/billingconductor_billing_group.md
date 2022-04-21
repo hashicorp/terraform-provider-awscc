@@ -25,6 +25,7 @@ A billing group is a set of linked account which belong to the same end customer
 ### Optional
 
 - `description` (String)
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -50,6 +51,15 @@ Required:
 Required:
 
 - `pricing_plan_arn` (String) ARN of the attached pricing plan
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 
