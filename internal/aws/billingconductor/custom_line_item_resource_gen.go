@@ -320,6 +320,57 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				tfsdk.UseStateForUnknown(),
 			},
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Attributes: tfsdk.SetNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+					},
+				},
+				tfsdk.SetNestedAttributesOptions{},
+			),
+			Optional: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -356,12 +407,15 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"exclusive_end_billing_period":    "ExclusiveEndBillingPeriod",
 		"flat":                            "Flat",
 		"inclusive_start_billing_period":  "InclusiveStartBillingPeriod",
+		"key":                             "Key",
 		"last_modified_time":              "LastModifiedTime",
 		"name":                            "Name",
 		"percentage":                      "Percentage",
 		"percentage_value":                "PercentageValue",
 		"product_code":                    "ProductCode",
+		"tags":                            "Tags",
 		"type":                            "Type",
+		"value":                           "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

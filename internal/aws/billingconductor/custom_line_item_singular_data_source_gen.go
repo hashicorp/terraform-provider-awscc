@@ -253,6 +253,51 @@ func customLineItemDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Attributes: tfsdk.SetNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+				tfsdk.SetNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -285,12 +330,15 @@ func customLineItemDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 		"exclusive_end_billing_period":    "ExclusiveEndBillingPeriod",
 		"flat":                            "Flat",
 		"inclusive_start_billing_period":  "InclusiveStartBillingPeriod",
+		"key":                             "Key",
 		"last_modified_time":              "LastModifiedTime",
 		"name":                            "Name",
 		"percentage":                      "Percentage",
 		"percentage_value":                "PercentageValue",
 		"product_code":                    "ProductCode",
+		"tags":                            "Tags",
 		"type":                            "Type",
+		"value":                           "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

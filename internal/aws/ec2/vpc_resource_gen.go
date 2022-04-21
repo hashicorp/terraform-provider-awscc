@@ -28,8 +28,10 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The primary IPv4 CIDR block for the VPC.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -115,6 +117,40 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The allowed tenancy of instances launched into the VPC.\n\n\"default\": An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.\n\n\"dedicated\": An instance launched into the VPC is a Dedicated Instance by default, unless you explicitly specify a tenancy of host during instance launch. You cannot specify a tenancy of default during instance launch.\n\nUpdating InstanceTenancy requires no replacement only if you are updating its value from \"dedicated\" to \"default\". Updating InstanceTenancy from \"default\" to \"dedicated\" requires replacement.",
 			Type:        types.StringType,
 			Optional:    true,
+		},
+		"ipv_4_ipam_pool_id": {
+			// Property: Ipv4IpamPoolId
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR",
+			//   "type": "string"
+			// }
+			Description: "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
+			// Ipv4IpamPoolId is a write-only property.
+		},
+		"ipv_4_netmask_length": {
+			// Property: Ipv4NetmaskLength
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool",
+			//   "type": "integer"
+			// }
+			Description: "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool",
+			Type:        types.Int64Type,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
+			// Ipv4NetmaskLength is a write-only property.
 		},
 		"ipv_6_cidr_blocks": {
 			// Property: Ipv6CidrBlocks
@@ -226,6 +262,8 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"enable_dns_hostnames":    "EnableDnsHostnames",
 		"enable_dns_support":      "EnableDnsSupport",
 		"instance_tenancy":        "InstanceTenancy",
+		"ipv_4_ipam_pool_id":      "Ipv4IpamPoolId",
+		"ipv_4_netmask_length":    "Ipv4NetmaskLength",
 		"ipv_6_cidr_blocks":       "Ipv6CidrBlocks",
 		"key":                     "Key",
 		"tags":                    "Tags",
@@ -233,6 +271,10 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"vpc_id":                  "VpcId",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Ipv4IpamPoolId",
+		"/properties/Ipv4NetmaskLength",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

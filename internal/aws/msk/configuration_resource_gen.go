@@ -64,10 +64,8 @@ func configurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

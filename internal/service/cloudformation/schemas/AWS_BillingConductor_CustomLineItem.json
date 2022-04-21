@@ -3,6 +3,26 @@
     "description": "A custom line item is an one time charge that is applied to a specific billing group's bill.",
     "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-billing-conductor.git",
     "definitions": {
+        "Tag": {
+            "type": "object",
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                },
+                "Value": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "Key",
+                "Value"
+            ]
+        },
         "Type": {
             "type": "string",
             "enum": [
@@ -136,9 +156,24 @@
                 "USD",
                 "CNY"
             ]
+        },
+        "Tags": {
+            "type": "array",
+            "uniqueItems": true,
+            "insertionOrder": false,
+            "items": {
+                "$ref": "#/definitions/Tag"
+            }
         }
     },
     "additionalProperties": false,
+    "tagging": {
+        "taggable": true,
+        "tagOnCreate": true,
+        "tagUpdatable": true,
+        "cloudFormationSystemTags": true,
+        "tagProperty": "/properties/Tags"
+    },
     "required": [
         "Name",
         "BillingGroupArn"
@@ -172,13 +207,15 @@
         "read": {
             "permissions": [
                 "billingconductor:ListCustomLineItems",
-                "billingconductor:ListResourcesAssociatedToCustomLineItem"
+                "billingconductor:ListResourcesAssociatedToCustomLineItem",
+                "billingconductor:ListTagsForResource"
             ]
         },
         "list": {
             "permissions": [
                 "billingconductor:ListCustomLineItems",
-                "billingconductor:ListResourcesAssociatedToCustomLineItem"
+                "billingconductor:ListResourcesAssociatedToCustomLineItem",
+                "billingconductor:ListTagsForResource"
             ]
         },
         "update": {
@@ -187,7 +224,9 @@
                 "billingconductor:ListCustomLineItems",
                 "billingconductor:ListResourcesAssociatedToCustomLineItem",
                 "billingconductor:BatchAssociateResourcesToCustomLineItem",
-                "billingconductor:BatchDisassociateResourcesFromCustomLineItem"
+                "billingconductor:BatchDisassociateResourcesFromCustomLineItem",
+                "billingconductor:TagResource",
+                "billingconductor:UntagResource"
             ]
         },
         "delete": {

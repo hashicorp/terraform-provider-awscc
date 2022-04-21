@@ -103,6 +103,28 @@ func vPCDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"ipv_4_ipam_pool_id": {
+			// Property: Ipv4IpamPoolId
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR",
+			//   "type": "string"
+			// }
+			Description: "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR",
+			Type:        types.StringType,
+			Computed:    true,
+		},
+		"ipv_4_netmask_length": {
+			// Property: Ipv4NetmaskLength
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool",
+			//   "type": "integer"
+			// }
+			Description: "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool",
+			Type:        types.Int64Type,
+			Computed:    true,
+		},
 		"ipv_6_cidr_blocks": {
 			// Property: Ipv6CidrBlocks
 			// CloudFormation resource type schema:
@@ -199,6 +221,8 @@ func vPCDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"enable_dns_hostnames":    "EnableDnsHostnames",
 		"enable_dns_support":      "EnableDnsSupport",
 		"instance_tenancy":        "InstanceTenancy",
+		"ipv_4_ipam_pool_id":      "Ipv4IpamPoolId",
+		"ipv_4_netmask_length":    "Ipv4NetmaskLength",
 		"ipv_6_cidr_blocks":       "Ipv6CidrBlocks",
 		"key":                     "Key",
 		"tags":                    "Tags",

@@ -25,6 +25,7 @@ Resource Type definition for AWS::Evidently::Launch.
 ### Optional
 
 - `description` (String)
+- `execution_status` (Attributes) Start or Stop Launch Launch. Default is not started. (see [below for nested schema](#nestedatt--execution_status))
 - `metric_monitors` (Attributes List) (see [below for nested schema](#nestedatt--metric_monitors))
 - `randomization_salt` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
@@ -61,6 +62,16 @@ Required:
 - `group_name` (String)
 - `split_weight` (Number)
 
+
+
+<a id="nestedatt--execution_status"></a>
+### Nested Schema for `execution_status`
+
+Optional:
+
+- `desired_state` (String) Provide CANCELLED or COMPLETED as the launch desired state. Defaults to Completed if not provided.
+- `reason` (String) Provide a reason for stopping the launch. Defaults to empty if not provided.
+- `status` (String) Provide START or STOP action to apply on a launch
 
 
 <a id="nestedatt--metric_monitors"></a>

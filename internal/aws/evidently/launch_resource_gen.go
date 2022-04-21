@@ -48,6 +48,56 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 160),
 			},
 		},
+		"execution_status": {
+			// Property: ExecutionStatus
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Start or Stop Launch Launch. Default is not started.",
+			//   "properties": {
+			//     "DesiredState": {
+			//       "description": "Provide CANCELLED or COMPLETED as the launch desired state. Defaults to Completed if not provided.",
+			//       "type": "string"
+			//     },
+			//     "Reason": {
+			//       "description": "Provide a reason for stopping the launch. Defaults to empty if not provided.",
+			//       "type": "string"
+			//     },
+			//     "Status": {
+			//       "description": "Provide START or STOP action to apply on a launch",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "Status"
+			//   ],
+			//   "type": "object"
+			// }
+			Description: "Start or Stop Launch Launch. Default is not started.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"desired_state": {
+						// Property: DesiredState
+						Description: "Provide CANCELLED or COMPLETED as the launch desired state. Defaults to Completed if not provided.",
+						Type:        types.StringType,
+						Optional:    true,
+					},
+					"reason": {
+						// Property: Reason
+						Description: "Provide a reason for stopping the launch. Defaults to empty if not provided.",
+						Type:        types.StringType,
+						Optional:    true,
+					},
+					"status": {
+						// Property: Status
+						Description: "Provide START or STOP action to apply on a launch",
+						Type:        types.StringType,
+						Required:    true,
+					},
+				},
+			),
+			Optional: true,
+		},
 		"groups": {
 			// Property: Groups
 			// CloudFormation resource type schema:
@@ -441,8 +491,10 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                     "Arn",
 		"description":             "Description",
+		"desired_state":           "DesiredState",
 		"entity_id_key":           "EntityIdKey",
 		"event_pattern":           "EventPattern",
+		"execution_status":        "ExecutionStatus",
 		"feature":                 "Feature",
 		"group_name":              "GroupName",
 		"group_weights":           "GroupWeights",
@@ -453,9 +505,11 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name":                    "Name",
 		"project":                 "Project",
 		"randomization_salt":      "RandomizationSalt",
+		"reason":                  "Reason",
 		"scheduled_splits_config": "ScheduledSplitsConfig",
 		"split_weight":            "SplitWeight",
 		"start_time":              "StartTime",
+		"status":                  "Status",
 		"tags":                    "Tags",
 		"unit_label":              "UnitLabel",
 		"value":                   "Value",

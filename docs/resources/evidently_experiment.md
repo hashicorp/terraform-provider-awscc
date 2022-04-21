@@ -27,6 +27,7 @@ Resource Type definition for AWS::Evidently::Experiment.
 
 - `description` (String)
 - `randomization_salt` (String)
+- `running_status` (Attributes) Start Experiment. Default is False (see [below for nested schema](#nestedatt--running_status))
 - `sampling_rate` (Number)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -75,6 +76,17 @@ Required:
 - `feature` (String)
 - `treatment_name` (String)
 - `variation` (String)
+
+
+<a id="nestedatt--running_status"></a>
+### Nested Schema for `running_status`
+
+Optional:
+
+- `analysis_complete_time` (String) Provide the analysis Completion time for an experiment
+- `desired_state` (String) Provide CANCELLED or COMPLETED desired state when stopping an experiment
+- `reason` (String) Reason is a required input for stopping the experiment
+- `status` (String) Provide START or STOP action to apply on an experiment
 
 
 <a id="nestedatt--tags"></a>

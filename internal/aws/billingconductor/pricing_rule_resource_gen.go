@@ -174,6 +174,57 @@ func pricingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Attributes: tfsdk.SetNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+					},
+				},
+				tfsdk.SetNestedAttributesOptions{},
+			),
+			Optional: true,
+		},
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
@@ -222,12 +273,15 @@ func pricingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"associated_pricing_plan_count": "AssociatedPricingPlanCount",
 		"creation_time":                 "CreationTime",
 		"description":                   "Description",
+		"key":                           "Key",
 		"last_modified_time":            "LastModifiedTime",
 		"modifier_percentage":           "ModifierPercentage",
 		"name":                          "Name",
 		"scope":                         "Scope",
 		"service":                       "Service",
+		"tags":                          "Tags",
 		"type":                          "Type",
+		"value":                         "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -3,12 +3,12 @@
 page_title: "awscc_robomaker_simulation_application_version Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  An example resource schema demonstrating some basic constructs and validation rules.
+  AWS::RoboMaker::SimulationApplicationVersion resource creates an AWS RoboMaker SimulationApplicationVersion. This helps you control which code your simulation uses.
 ---
 
 # awscc_robomaker_simulation_application_version (Resource)
 
-An example resource schema demonstrating some basic constructs and validation rules.
+AWS::RoboMaker::SimulationApplicationVersion resource creates an AWS RoboMaker SimulationApplicationVersion. This helps you control which code your simulation uses.
 
 
 

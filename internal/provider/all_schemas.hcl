@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 516 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 521 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -495,6 +495,11 @@ resource_schema "aws_connect_contact_flow_module" {
 
 resource_schema "aws_connect_hours_of_operation" {
   cloudformation_type_name               = "AWS::Connect::HoursOfOperation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_phone_number" {
+  cloudformation_type_name               = "AWS::Connect::PhoneNumber"
   suppress_plural_data_source_generation = true
 }
 
@@ -1316,6 +1321,33 @@ resource_schema "aws_iotsitewise_portal" {
 resource_schema "aws_iotsitewise_project" {
   cloudformation_type_name               = "AWS::IoTSiteWise::Project"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_iottwinmaker_component_type" {
+  cloudformation_type_name               = "AWS::IoTTwinMaker::ComponentType"
+  suppress_plural_data_source_generation = true
+
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+}
+
+resource_schema "aws_iottwinmaker_entity" {
+  cloudformation_type_name               = "AWS::IoTTwinMaker::Entity"
+  suppress_plural_data_source_generation = true
+
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+}
+
+resource_schema "aws_iottwinmaker_scene" {
+  cloudformation_type_name               = "AWS::IoTTwinMaker::Scene"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_iottwinmaker_workspace" {
+  cloudformation_type_name = "AWS::IoTTwinMaker::Workspace"
 }
 
 resource_schema "aws_iotwireless_destination" {

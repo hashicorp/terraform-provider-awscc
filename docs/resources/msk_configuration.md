@@ -17,13 +17,13 @@ Resource Type definition for AWS::MSK::Configuration
 
 ### Required
 
+- `name` (String)
 - `server_properties` (String)
 
 ### Optional
 
 - `description` (String)
 - `kafka_versions_list` (List of String)
-- `name` (String)
 
 ### Read-Only
 

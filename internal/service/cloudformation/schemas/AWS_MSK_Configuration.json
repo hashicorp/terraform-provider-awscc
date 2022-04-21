@@ -28,7 +28,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "ServerProperties"
+    "ServerProperties",
+    "Name"
   ],
   "createOnlyProperties": [
     "/properties/KafkaVersionsList",

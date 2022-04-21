@@ -30,6 +30,15 @@ Data Source schema for AWS::BillingConductor::PricingRule
 - `name` (String) Pricing rule name
 - `scope` (String) A term used to categorize the granularity of a Pricing Rule.
 - `service` (String) The service which a pricing rule is applied on
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `type` (String) One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 

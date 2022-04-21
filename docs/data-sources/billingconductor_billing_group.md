@@ -32,6 +32,7 @@ Data Source schema for AWS::BillingConductor::BillingGroup
 - `size` (Number) Number of accounts in the billing group
 - `status` (String)
 - `status_reason` (String)
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--account_grouping"></a>
 ### Nested Schema for `account_grouping`
@@ -47,5 +48,14 @@ Read-Only:
 Read-Only:
 
 - `pricing_plan_arn` (String) ARN of the attached pricing plan
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 

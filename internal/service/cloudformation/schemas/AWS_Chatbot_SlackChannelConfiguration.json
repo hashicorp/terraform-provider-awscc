@@ -6,6 +6,7 @@
         "SlackWorkspaceId": {
             "description": "The id of the Slack workspace",
             "type": "string",
+            "pattern": "^[0-9A-Z]{1,255}$",
             "minLength": 1,
             "maxLength": 256
         },

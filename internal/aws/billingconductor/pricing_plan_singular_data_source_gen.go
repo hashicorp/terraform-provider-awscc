@@ -101,6 +101,51 @@ func pricingPlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			Type:        types.Int64Type,
 			Computed:    true,
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Attributes: tfsdk.SetNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+				tfsdk.SetNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -123,10 +168,13 @@ func pricingPlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"arn":                "Arn",
 		"creation_time":      "CreationTime",
 		"description":        "Description",
+		"key":                "Key",
 		"last_modified_time": "LastModifiedTime",
 		"name":               "Name",
 		"pricing_rule_arns":  "PricingRuleArns",
 		"size":               "Size",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

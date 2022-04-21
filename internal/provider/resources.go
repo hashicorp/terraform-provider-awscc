@@ -103,6 +103,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_connect_contact_flow -cfschema ../service/cloudformation/schemas/AWS_Connect_ContactFlow.json -package connect -- ../aws/connect/contact_flow_resource_gen.go ../aws/connect/contact_flow_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_contact_flow_module -cfschema ../service/cloudformation/schemas/AWS_Connect_ContactFlowModule.json -package connect -- ../aws/connect/contact_flow_module_resource_gen.go ../aws/connect/contact_flow_module_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_hours_of_operation -cfschema ../service/cloudformation/schemas/AWS_Connect_HoursOfOperation.json -package connect -- ../aws/connect/hours_of_operation_resource_gen.go ../aws/connect/hours_of_operation_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_connect_phone_number -cfschema ../service/cloudformation/schemas/AWS_Connect_PhoneNumber.json -package connect -- ../aws/connect/phone_number_resource_gen.go ../aws/connect/phone_number_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_quick_connect -cfschema ../service/cloudformation/schemas/AWS_Connect_QuickConnect.json -package connect -- ../aws/connect/quick_connect_resource_gen.go ../aws/connect/quick_connect_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_user -cfschema ../service/cloudformation/schemas/AWS_Connect_User.json -package connect -- ../aws/connect/user_resource_gen.go ../aws/connect/user_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_user_hierarchy_group -cfschema ../service/cloudformation/schemas/AWS_Connect_UserHierarchyGroup.json -package connect -- ../aws/connect/user_hierarchy_group_resource_gen.go ../aws/connect/user_hierarchy_group_resource_gen_test.go
@@ -277,6 +278,8 @@
 //go:generate go run generators/resource/main.go -resource awscc_iotsitewise_gateway -cfschema ../service/cloudformation/schemas/AWS_IoTSiteWise_Gateway.json -package iotsitewise -- ../aws/iotsitewise/gateway_resource_gen.go ../aws/iotsitewise/gateway_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iotsitewise_portal -cfschema ../service/cloudformation/schemas/AWS_IoTSiteWise_Portal.json -package iotsitewise -- ../aws/iotsitewise/portal_resource_gen.go ../aws/iotsitewise/portal_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iotsitewise_project -cfschema ../service/cloudformation/schemas/AWS_IoTSiteWise_Project.json -package iotsitewise -- ../aws/iotsitewise/project_resource_gen.go ../aws/iotsitewise/project_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_iottwinmaker_scene -cfschema ../service/cloudformation/schemas/AWS_IoTTwinMaker_Scene.json -package iottwinmaker -- ../aws/iottwinmaker/scene_resource_gen.go ../aws/iottwinmaker/scene_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_iottwinmaker_workspace -cfschema ../service/cloudformation/schemas/AWS_IoTTwinMaker_Workspace.json -package iottwinmaker -- ../aws/iottwinmaker/workspace_resource_gen.go ../aws/iottwinmaker/workspace_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iotwireless_destination -cfschema ../service/cloudformation/schemas/AWS_IoTWireless_Destination.json -package iotwireless -- ../aws/iotwireless/destination_resource_gen.go ../aws/iotwireless/destination_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iotwireless_device_profile -cfschema ../service/cloudformation/schemas/AWS_IoTWireless_DeviceProfile.json -package iotwireless -- ../aws/iotwireless/device_profile_resource_gen.go ../aws/iotwireless/device_profile_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iotwireless_fuota_task -cfschema ../service/cloudformation/schemas/AWS_IoTWireless_FuotaTask.json -package iotwireless -- ../aws/iotwireless/fuota_task_resource_gen.go ../aws/iotwireless/fuota_task_resource_gen_test.go
@@ -568,6 +571,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotevents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotfleethub"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotsitewise"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iottwinmaker"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotwireless"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ivs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kafkaconnect"

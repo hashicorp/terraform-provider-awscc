@@ -1,4 +1,15 @@
 ## 0.19.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_connect_phone_number`
+* **New Data Source:** `awscc_iottwinmaker_scene`
+* **New Data Source:** `awscc_iottwinmaker_workspace`
+* **New Data Source:** `awscc_iottwinmaker_workspaces`
+* **New Resource:** `awscc_connect_phone_number`
+* **New Resource:** `awscc_iottwinmaker_scene`
+* **New Resource:** `awscc_iottwinmaker_workspace`
+
 ## [0.18.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.18.0) (April 14, 2022)
 
 FEATURES:

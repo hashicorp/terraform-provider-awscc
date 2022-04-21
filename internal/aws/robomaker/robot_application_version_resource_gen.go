@@ -97,7 +97,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 	}
 
 	schema := tfsdk.Schema{
-		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
+		Description: "AWS::RoboMaker::RobotApplicationVersion resource creates an AWS RoboMaker RobotApplicationVersion. This helps you control which code your robot uses.",
 		Version:     1,
 		Attributes:  attributes,
 	}

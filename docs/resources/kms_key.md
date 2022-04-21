@@ -3,12 +3,12 @@
 page_title: "awscc_kms_key Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::KMS::Key resource specifies a customer master key (CMK) in AWS Key Management Service (AWS KMS). Authorized users can use the CMK to encrypt and decrypt small amounts of data (up to 4096 bytes), but they are more commonly used to generate data keys. You can also use CMKs to encrypt data stored in AWS services that are integrated with AWS KMS or within their applications.
+  The AWS::KMS::Key resource specifies an AWS KMS key in AWS Key Management Service (AWS KMS). Authorized users can use the AWS KMS key to encrypt and decrypt small amounts of data (up to 4096 bytes), but they are more commonly used to generate data keys. You can also use AWS KMS keys to encrypt data stored in AWS services that are integrated with AWS KMS or within their applications.
 ---
 
 # awscc_kms_key (Resource)
 
-The AWS::KMS::Key resource specifies a customer master key (CMK) in AWS Key Management Service (AWS KMS). Authorized users can use the CMK to encrypt and decrypt small amounts of data (up to 4096 bytes), but they are more commonly used to generate data keys. You can also use CMKs to encrypt data stored in AWS services that are integrated with AWS KMS or within their applications.
+The AWS::KMS::Key resource specifies an AWS KMS key in AWS Key Management Service (AWS KMS). Authorized users can use the AWS KMS key to encrypt and decrypt small amounts of data (up to 4096 bytes), but they are more commonly used to generate data keys. You can also use AWS KMS keys to encrypt data stored in AWS services that are integrated with AWS KMS or within their applications.
 
 
 
@@ -17,17 +17,17 @@ The AWS::KMS::Key resource specifies a customer master key (CMK) in AWS Key Mana
 
 ### Required
 
-- `key_policy` (String) The key policy that authorizes use of the CMK. The key policy must observe the following rules.
+- `key_policy` (String) The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.
 
 ### Optional
 
-- `description` (String) A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.
-- `enable_key_rotation` (Boolean) Enables automatic rotation of the key material for the specified customer master key (CMK). By default, automation key rotation is not enabled.
-- `enabled` (Boolean) Specifies whether the customer master key (CMK) is enabled. Disabled CMKs cannot be used in cryptographic operations.
-- `key_spec` (String) Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.
-- `key_usage` (String) Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.
-- `multi_region` (Boolean) Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.
-- `pending_window_in_days` (Number) Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.
+- `description` (String) A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use.
+- `enable_key_rotation` (Boolean) Enables automatic rotation of the key material for the specified AWS KMS key. By default, automation key rotation is not enabled.
+- `enabled` (Boolean) Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations.
+- `key_spec` (String) Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created.
+- `key_usage` (String) Determines the cryptographic operations for which you can use the AWS KMS key. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric AWS KMS keys. You can't change the KeyUsage value after the AWS KMS key is created.
+- `multi_region` (Boolean) Specifies whether the AWS KMS key should be Multi-Region. You can't change the MultiRegion value after the AWS KMS key is created.
+- `pending_window_in_days` (Number) Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

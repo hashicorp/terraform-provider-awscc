@@ -28,5 +28,14 @@ Data Source schema for AWS::BillingConductor::PricingPlan
 - `name` (String)
 - `pricing_rule_arns` (List of String)
 - `size` (Number) Number of associated pricing rules
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 

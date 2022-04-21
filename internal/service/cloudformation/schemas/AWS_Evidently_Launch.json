@@ -68,9 +68,34 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "ExecutionStatus": {
+      "description": "Start or Stop Launch Launch. Default is not started.",
+      "$ref": "#/definitions/ExecutionStatusObject"
     }
   },
   "definitions": {
+    "ExecutionStatusObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Status": {
+          "description": "Provide START or STOP action to apply on a launch",
+          "type": "string"
+        },
+        "DesiredState": {
+          "description": "Provide CANCELLED or COMPLETED as the launch desired state. Defaults to Completed if not provided.",
+          "type": "string"
+        },
+        "Reason": {
+          "description": "Provide a reason for stopping the launch. Defaults to empty if not provided.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Status"
+      ]
+    },
     "LaunchGroupObject": {
       "type": "object",
       "properties": {
@@ -222,7 +247,8 @@
       "permissions": [
         "evidently:CreateLaunch",
         "evidently:TagResource",
-        "evidently:GetLaunch"
+        "evidently:GetLaunch",
+        "evidently:StartLaunch"
       ]
     },
     "read": {
@@ -237,7 +263,9 @@
         "evidently:ListTagsForResource",
         "evidently:TagResource",
         "evidently:UntagResource",
-        "evidently:GetLaunch"
+        "evidently:GetLaunch",
+        "evidently:StartLaunch",
+        "evidently:StopLaunch"
       ]
     },
     "delete": {

@@ -1,6 +1,6 @@
 {
     "typeName": "AWS::RoboMaker::SimulationApplication",
-    "description": "An example resource schema demonstrating some basic constructs and validation rules.",
+    "description": "AWS::RoboMaker::SimulationApplication resource creates an AWS RoboMaker SimulationApplication. Simulation application can be used in AWS RoboMaker Simulation Jobs.",
     "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
     "definitions": {
         "Arn": {
