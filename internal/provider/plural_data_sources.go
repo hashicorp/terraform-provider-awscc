@@ -197,6 +197,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotsitewise_asset_models -cftype AWS::IoTSiteWise::AssetModel -package iotsitewise ../aws/iotsitewise/asset_model_plural_data_source_gen.go ../aws/iotsitewise/asset_model_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotsitewise_gateways -cftype AWS::IoTSiteWise::Gateway -package iotsitewise ../aws/iotsitewise/gateway_plural_data_source_gen.go ../aws/iotsitewise/gateway_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotsitewise_portals -cftype AWS::IoTSiteWise::Portal -package iotsitewise ../aws/iotsitewise/portal_plural_data_source_gen.go ../aws/iotsitewise/portal_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_iottwinmaker_workspaces -cftype AWS::IoTTwinMaker::Workspace -package iottwinmaker ../aws/iottwinmaker/workspace_plural_data_source_gen.go ../aws/iottwinmaker/workspace_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_destinations -cftype AWS::IoTWireless::Destination -package iotwireless ../aws/iotwireless/destination_plural_data_source_gen.go ../aws/iotwireless/destination_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_device_profiles -cftype AWS::IoTWireless::DeviceProfile -package iotwireless ../aws/iotwireless/device_profile_plural_data_source_gen.go ../aws/iotwireless/device_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_fuota_tasks -cftype AWS::IoTWireless::FuotaTask -package iotwireless ../aws/iotwireless/fuota_task_plural_data_source_gen.go ../aws/iotwireless/fuota_task_plural_data_source_gen_test.go
@@ -397,6 +398,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotevents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotfleethub"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotsitewise"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iottwinmaker"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotwireless"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ivs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kafkaconnect"
