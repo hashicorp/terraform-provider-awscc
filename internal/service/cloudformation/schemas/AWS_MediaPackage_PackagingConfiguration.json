@@ -165,6 +165,14 @@
             "HBBTV_1_5"
           ]
         },
+        "ScteMarkersSource": {
+          "description": "The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content.",
+          "type": "string",
+          "enum": [
+            "SEGMENTS",
+            "MANIFEST"
+          ]
+        },
         "StreamSelection": {
           "$ref": "#/definitions/StreamSelection"
         }
