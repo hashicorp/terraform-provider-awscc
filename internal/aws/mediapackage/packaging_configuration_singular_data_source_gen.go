@@ -307,6 +307,14 @@ func packagingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//             ],
 			//             "type": "string"
 			//           },
+			//           "ScteMarkersSource": {
+			//             "description": "The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content.",
+			//             "enum": [
+			//               "SEGMENTS",
+			//               "MANIFEST"
+			//             ],
+			//             "type": "string"
+			//           },
 			//           "StreamSelection": {
 			//             "additionalProperties": false,
 			//             "description": "A StreamSelection configuration.",
@@ -435,6 +443,12 @@ func packagingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSource
 								"profile": {
 									// Property: Profile
 									Description: "The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"scte_markers_source": {
+									// Property: ScteMarkersSource
+									Description: "The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content.",
 									Type:        types.StringType,
 									Computed:    true,
 								},
@@ -1093,6 +1107,7 @@ func packagingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSource
 		"program_date_time_interval_seconds":        "ProgramDateTimeIntervalSeconds",
 		"repeat_ext_x_key":                          "RepeatExtXKey",
 		"role_arn":                                  "RoleArn",
+		"scte_markers_source":                       "ScteMarkersSource",
 		"segment_duration_seconds":                  "SegmentDurationSeconds",
 		"segment_template_format":                   "SegmentTemplateFormat",
 		"speke_key_provider":                        "SpekeKeyProvider",
