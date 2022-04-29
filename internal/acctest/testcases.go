@@ -3,7 +3,7 @@ package acctest
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
@@ -32,10 +32,7 @@ func (td TestData) runAcceptanceTest(t *testing.T, testCase resource.TestCase) {
 
 func (td TestData) providerFactories() map[string]func() (tfprotov6.ProviderServer, error) {
 	return map[string]func() (tfprotov6.ProviderServer, error){
-		// nolint: unparam
-		"awscc": func() (tfprotov6.ProviderServer, error) {
-			return tfsdk.NewProtocol6Server(td.provider), nil
-		},
+		"awscc": providerserver.NewProtocol6WithError(td.provider),
 	}
 }
 
