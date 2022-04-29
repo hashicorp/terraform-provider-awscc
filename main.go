@@ -9,6 +9,6 @@ import (
 
 func main() {
 	providerserver.Serve(context.Background(), provider.New, providerserver.ServeOpts{
-		Address: "hashicorp/awscc",
+		Address: "registry.terraform.io/hashicorp/awscc",
 	})
 }
