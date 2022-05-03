@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
@@ -370,16 +371,15 @@ func (p *AwsCloudControlApiProvider) RoleARN(_ context.Context) string {
 // newCloudControlClient configures and returns a fully initialized AWS Cloud Control API client with the configured region.
 func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol.Client, string, error) {
 	config := awsbase.Config{
-		AccessKey:               pd.AccessKey.Value,
-		CallerDocumentationURL:  "https://registry.terraform.io/providers/hashicorp/awscc",
-		CallerName:              "Terraform AWS Cloud Control Provider",
-		HTTPProxy:               pd.HTTPProxy.Value,
-		Insecure:                pd.Insecure.Value,
-		Profile:                 pd.Profile.Value,
-		Region:                  pd.Region.Value,
-		SecretKey:               pd.SecretKey.Value,
-		SkipEC2MetadataApiCheck: pd.SkipMetadataApiCheck.Value,
-		Token:                   pd.Token.Value,
+		AccessKey:              pd.AccessKey.Value,
+		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
+		CallerName:             "Terraform AWS Cloud Control Provider",
+		HTTPProxy:              pd.HTTPProxy.Value,
+		Insecure:               pd.Insecure.Value,
+		Profile:                pd.Profile.Value,
+		Region:                 pd.Region.Value,
+		SecretKey:              pd.SecretKey.Value,
+		Token:                  pd.Token.Value,
 		APNInfo: &awsbase.APNInfo{
 			PartnerName: "HashiCorp",
 			Products: []awsbase.UserAgentProduct{
@@ -410,6 +410,14 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 	}
 	if pd.AssumeRole != nil {
 		config.AssumeRole = pd.AssumeRole.Config()
+	}
+
+	if pd.SkipMetadataApiCheck.Null {
+		config.EC2MetadataServiceEnableState = imds.ClientDefaultEnableState
+	} else if pd.SkipMetadataApiCheck.Value {
+		config.EC2MetadataServiceEnableState = imds.ClientDisabled
+	} else {
+		config.EC2MetadataServiceEnableState = imds.ClientEnabled
 	}
 
 	cfg, err := awsbase.GetAwsConfig(ctx, &config)

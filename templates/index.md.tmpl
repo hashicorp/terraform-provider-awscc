@@ -151,10 +151,8 @@ $ export TF_APPEND_USER_AGENT="JenkinsAgent/i-12345678 BuildID/1234 (Optional Ex
 
 ### EC2 Instance Metadata Service
 
-If you're running Terraform from an EC2 instance with IAM Instance Profile
-using IAM Role, Terraform will just ask
-[the metadata API](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#instance-metadata-security-credentials)
-endpoint for credentials.
+If you're running Terraform from an EC2 instance with IAM Instance Profile using IAM Role,
+Terraform will query [the metadata API](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#instance-metadata-security-credentials) endpoint for credentials and region.
 
 This is a preferred approach over any other when running in EC2 as you can avoid
 hard coding credentials. Instead these are leased on-the-fly by Terraform
