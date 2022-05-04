@@ -207,26 +207,102 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 				Optional:    true,
 				Description: "An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration.",
 			},
+
+			"assume_role_with_web_identity": {
+				Attributes: tfsdk.SingleNestedAttributes(
+					map[string]tfsdk.Attribute{
+						"role_arn": {
+							Type:        types.StringType,
+							Description: "Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.",
+							Required:    true,
+							Validators: []tfsdk.AttributeValidator{
+								validate.ARN(),
+							},
+						},
+
+						"duration": {
+							Type: cctypes.DurationType,
+							Description: "Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. " +
+								cctypes.DurationType.Description() +
+								fmt.Sprintf(" Default value is %s", defaultAssumeRoleDuration),
+							Optional: true,
+						},
+
+						"policy": {
+							Type:        types.StringType,
+							Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
+							Optional:    true,
+							Validators: []tfsdk.AttributeValidator{
+								validate.StringLenAtMost(2048),
+								validate.StringIsJsonObject(),
+							},
+						},
+
+						"policy_arns": {
+							Type:        types.ListType{ElemType: types.StringType},
+							Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
+							Optional:    true,
+							Validators: []tfsdk.AttributeValidator{
+								validate.ArrayForEach(
+									validate.IAMPolicyARN(),
+								),
+							},
+						},
+
+						"session_name": {
+							Type:        types.StringType,
+							Description: "Session name to use when assuming the role. Can also be set with the environment variable `AWS_ROLE_SESSION_NAME`.",
+							Optional:    true,
+						},
+
+						"web_identity_token": {
+							Type:        types.StringType,
+							Description: "The value of a web identity token from an OpenID Connect (OIDC) or OAuth provider. One of `web_identity_token` or `web_identity_token_file` is required.",
+							Optional:    true,
+							Validators: []tfsdk.AttributeValidator{
+								validate.StringLenBetween(4, 20000),
+							},
+						},
+
+						"web_identity_token_file": {
+							Type:        types.StringType,
+							Description: "File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. Can also be set with the  environment variable`AWS_WEB_IDENTITY_TOKEN_FILE`. One of `web_identity_token_file` or `web_identity_token` is required.",
+							Optional:    true,
+						},
+					},
+				),
+				Optional:    true,
+				Description: "An `assume_role_with_web_identity` block (documented below). Only one `assume_role_with_web_identity` block may be in the configuration.",
+				Validators: []tfsdk.AttributeValidator{
+					validate.RequiredAttributes(
+						validate.OneOfRequired(
+							validate.Required("web_identity_token"),
+							validate.Required("web_identity_token_file"),
+						),
+					),
+				},
+			},
 		},
 	}, nil
 }
 
 type providerData struct {
-	AccessKey              types.String       `tfsdk:"access_key"`
-	HTTPProxy              types.String       `tfsdk:"http_proxy"`
-	Insecure               types.Bool         `tfsdk:"insecure"`
-	MaxRetries             types.Int64        `tfsdk:"max_retries"`
-	Profile                types.String       `tfsdk:"profile"`
-	Region                 types.String       `tfsdk:"region"`
-	RoleARN                types.String       `tfsdk:"role_arn"`
-	SecretKey              types.String       `tfsdk:"secret_key"`
-	SharedConfigFiles      types.List         `tfsdk:"shared_config_files"`
-	SharedCredentialsFiles types.List         `tfsdk:"shared_credentials_files"`
-	SkipMetadataApiCheck   types.Bool         `tfsdk:"skip_medatadata_api_check"`
-	Token                  types.String       `tfsdk:"token"`
-	AssumeRole             *assumeRoleData    `tfsdk:"assume_role"`
-	UserAgent              []userAgentProduct `tfsdk:"user_agent"`
-	terraformVersion       string
+	AccessKey                 types.String                   `tfsdk:"access_key"`
+	HTTPProxy                 types.String                   `tfsdk:"http_proxy"`
+	Insecure                  types.Bool                     `tfsdk:"insecure"`
+	MaxRetries                types.Int64                    `tfsdk:"max_retries"`
+	Profile                   types.String                   `tfsdk:"profile"`
+	Region                    types.String                   `tfsdk:"region"`
+	RoleARN                   types.String                   `tfsdk:"role_arn"`
+	SecretKey                 types.String                   `tfsdk:"secret_key"`
+	SharedConfigFiles         types.List                     `tfsdk:"shared_config_files"`
+	SharedCredentialsFiles    types.List                     `tfsdk:"shared_credentials_files"`
+	SkipMetadataApiCheck      types.Bool                     `tfsdk:"skip_medatadata_api_check"`
+	Token                     types.String                   `tfsdk:"token"`
+	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
+	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
+	UserAgent                 []userAgentProduct             `tfsdk:"user_agent"`
+	terraformVersion          string
 }
 
 type userAgentProduct struct {
@@ -274,6 +350,36 @@ func (a assumeRoleData) Config() *awsbase.AssumeRole {
 			tagKeys[i] = v.(types.String).Value
 		}
 		assumeRole.TransitiveTagKeys = tagKeys
+	}
+
+	return assumeRole
+}
+
+type assumeRoleWithWebIdentityData struct {
+	RoleARN              types.String     `tfsdk:"role_arn"`
+	Duration             cctypes.Duration `tfsdk:"duration"`
+	Policy               types.String     `tfsdk:"policy"`
+	PolicyARNs           types.List       `tfsdk:"policy_arns"`
+	SessionName          types.String     `tfsdk:"session_name"`
+	WebIdentityToken     types.String     `tfsdk:"web_identity_token"`
+	WebIdentityTokenFile types.String     `tfsdk:"web_identity_token_file"`
+}
+
+func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdentity {
+	assumeRole := &awsbase.AssumeRoleWithWebIdentity{
+		RoleARN:              a.RoleARN.Value,
+		Duration:             a.Duration.Value,
+		Policy:               a.Policy.Value,
+		SessionName:          a.SessionName.Value,
+		WebIdentityToken:     a.WebIdentityToken.Value,
+		WebIdentityTokenFile: a.WebIdentityTokenFile.Value,
+	}
+	if !a.PolicyARNs.Null {
+		arns := make([]string, len(a.PolicyARNs.Elems))
+		for i, v := range a.PolicyARNs.Elems {
+			arns[i] = v.(types.String).Value
+		}
+		assumeRole.PolicyARNs = arns
 	}
 
 	return assumeRole
@@ -410,6 +516,9 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 	}
 	if pd.AssumeRole != nil {
 		config.AssumeRole = pd.AssumeRole.Config()
+	}
+	if pd.AssumeRoleWithWebIdentity != nil {
+		config.AssumeRoleWithWebIdentity = pd.AssumeRoleWithWebIdentity.Config()
 	}
 
 	if pd.SkipMetadataApiCheck.Null {
