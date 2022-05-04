@@ -197,4 +197,23 @@ provider "aws" {
 }
 ```
 
+### Using an External Credentials Process
+
+To use an [external process to source credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sourcing-external.html),
+the process must be configured in a named profile, including the `default` profile.
+The profile is configured in a shared configuration file.
+
+For example:
+
+```terraform
+provider "aws" {
+  profile = "customprofile"
+}
+```
+
+```ini
+[profile customprofile]
+credential_process = custom-process --username jdoe
+```
+
 {{ .SchemaMarkdown | trimspace }}
