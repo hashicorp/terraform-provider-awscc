@@ -110,7 +110,7 @@ Read-Only:
 - `control_set_id` (String) The identifier for the specified control set.
 - `created_by` (String) The IAM user or role that performed the action.
 - `creation_time` (Number) The sequence of characters that identifies when the event occurred.
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `last_updated` (Number) The sequence of characters that identifies when the event occurred.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM user or role.
 - `role_type` (String) The IAM role type.

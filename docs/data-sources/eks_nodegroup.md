@@ -46,7 +46,7 @@ Data Source schema for AWS::EKS::Nodegroup
 
 Read-Only:
 
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `name` (String)
 - `version` (String)
 

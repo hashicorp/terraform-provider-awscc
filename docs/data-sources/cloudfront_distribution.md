@@ -228,7 +228,7 @@ Read-Only:
 Read-Only:
 
 - `failover_criteria` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--origin_groups--items--failover_criteria))
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `members` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--origin_groups--items--members))
 
 <a id="nestedatt--distribution_config--origin_groups--items--failover_criteria"></a>
@@ -276,7 +276,7 @@ Read-Only:
 - `connection_timeout` (Number)
 - `custom_origin_config` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--origins--custom_origin_config))
 - `domain_name` (String)
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `origin_custom_headers` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--origins--origin_custom_headers))
 - `origin_path` (String)
 - `origin_shield` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--origins--origin_shield))
