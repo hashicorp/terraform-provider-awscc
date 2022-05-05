@@ -325,6 +325,20 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 256),
 			},
 		},
+		"schedule_offset": {
+			// Property: ScheduleOffset
+			// CloudFormation resource type schema:
+			// {
+			//   "maximum": 6,
+			//   "minimum": 1,
+			//   "type": "integer"
+			// }
+			Type:     types.Int64Type,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(1, 6),
+			},
+		},
 		"sync_compliance": {
 			// Property: SyncCompliance
 			// CloudFormation resource type schema:
@@ -458,6 +472,7 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"parameters":                       "Parameters",
 		"s3_location":                      "S3Location",
 		"schedule_expression":              "ScheduleExpression",
+		"schedule_offset":                  "ScheduleOffset",
 		"sync_compliance":                  "SyncCompliance",
 		"targets":                          "Targets",
 		"values":                           "Values",

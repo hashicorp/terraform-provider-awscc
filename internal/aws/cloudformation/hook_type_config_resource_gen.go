@@ -69,7 +69,7 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
-			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type-configuration/hook/.+$",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type(-configuration)?/hook/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
@@ -83,20 +83,15 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: TypeArn
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The Amazon Resource Name (ARN) of the type version.",
+			//   "description": "The Amazon Resource Name (ARN) of the type without version number.",
 			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
 			//   "type": "string"
 			// }
-			Description: "The Amazon Resource Name (ARN) of the type version.",
+			Description: "The Amazon Resource Name (ARN) of the type without version number.",
 			Type:        types.StringType,
 			Optional:    true,
-			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
 			},
 		},
 		"type_name": {

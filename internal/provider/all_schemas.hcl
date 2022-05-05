@@ -1894,7 +1894,7 @@ resource_schema "aws_redshift_scheduled_action" {
   cloudformation_type_name = "AWS::Redshift::ScheduledAction"
 }
 
-# Validation  error: "minLength cannot be greater than maxLength"
+# Validation error: "minLength cannot be greater than maxLength"
 # resource_schema "aws_refactorspaces_application" {
 #   cloudformation_type_name               = "AWS::RefactorSpaces::Application"
 #   suppress_plural_data_source_generation = true
@@ -1924,6 +1924,11 @@ resource_schema "aws_rekognition_project" {
 
 resource_schema "aws_rekognition_stream_processor" {
   cloudformation_type_name = "AWS::Rekognition::StreamProcessor"
+
+  # PolygonRegionsOfInterest is of unsupported type: set of array.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_resiliencehub_app" {
