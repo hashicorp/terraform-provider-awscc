@@ -221,7 +221,7 @@ Read-Only:
 - `expiration_date` (String) The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)
 - `expiration_in_days` (Number)
 - `expired_object_delete_marker` (Boolean)
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `noncurrent_version_expiration` (Attributes) Container for the expiration rule that describes when noncurrent objects are expired. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 expire noncurrent object versions at a specific period in the object's lifetime (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--noncurrent_version_expiration))
 - `noncurrent_version_expiration_in_days` (Number)
 - `noncurrent_version_transition` (Attributes) Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--noncurrent_version_transition))
@@ -317,7 +317,7 @@ Read-Only:
 Read-Only:
 
 - `access_point_arn` (String)
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `prefix` (String)
 - `tag_filters` (Attributes List) (see [below for nested schema](#nestedatt--metrics_configurations--tag_filters))
 
