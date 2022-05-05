@@ -8,6 +8,11 @@ FEATURES:
 * **New Data Source:** `awscc_voiceid_domains`
 * **New Resource:** `awscc_ec2_transit_gateway_attachment`
 * **New Resource:** `awscc_voiceid_domain`
+* Adds support for assuming IAM role with web identity.
+
+BUG FIXES:
+
+* Provider parameter `skip_medatadata_api_check = false` now correctly overrides environment variable `AWS_EC2_METADATA_DISABLED`
 
 ## [0.19.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.19.0) (April 21, 2022)
 
