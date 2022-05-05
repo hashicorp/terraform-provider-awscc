@@ -30,6 +30,7 @@ Resource Type definition for AWS::SQS::Queue
 - `receive_message_wait_time_seconds` (Number) Specifies the duration, in seconds, that the ReceiveMessage action call waits until a message is in the queue in order to include it in the response, rather than returning an empty response if a message isn't yet available. You can specify an integer from 1 to 20. Short polling is used as the default or when you specify 0 for this property.
 - `redrive_allow_policy` (String) The string that includes the parameters for the permissions for the dead-letter queue redrive permission and which source queues can specify dead-letter queues as a JSON object.
 - `redrive_policy` (String) A string that includes the parameters for the dead-letter queue functionality (redrive policy) of the source queue.
+- `sqs_managed_sse_enabled` (Boolean) Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (e.g. SSE-KMS or SSE-SQS ).
 - `tags` (Attributes List) The tags that you attach to this queue. (see [below for nested schema](#nestedatt--tags))
 - `visibility_timeout` (Number) The length of time during which a message will be unavailable after a message is delivered from the queue. This blocks other components from receiving the same message and gives the initial component time to process and delete the message from the queue. Values must be from 0 to 43,200 seconds (12 hours). If you don't specify a value, AWS CloudFormation uses the default value of 30 seconds.
 
