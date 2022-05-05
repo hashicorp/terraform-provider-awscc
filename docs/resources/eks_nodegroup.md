@@ -49,7 +49,7 @@ Resource schema for AWS::EKS::Nodegroup
 
 Optional:
 
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `name` (String)
 - `version` (String)
 

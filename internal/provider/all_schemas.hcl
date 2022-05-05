@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 521 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 526 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -747,6 +747,10 @@ resource_schema "aws_ec2_subnet_route_table_association" {
 
 resource_schema "aws_ec2_transit_gateway" {
   cloudformation_type_name = "AWS::EC2::TransitGateway"
+}
+
+resource_schema "aws_ec2_transit_gateway_attachment" {
+  cloudformation_type_name = "AWS::EC2::TransitGatewayAttachment"
 }
 
 resource_schema "aws_ec2_transit_gateway_connect" {
@@ -1890,7 +1894,7 @@ resource_schema "aws_redshift_scheduled_action" {
   cloudformation_type_name = "AWS::Redshift::ScheduledAction"
 }
 
-# Validation  error: "minLength cannot be greater than maxLength"
+# Validation error: "minLength cannot be greater than maxLength"
 # resource_schema "aws_refactorspaces_application" {
 #   cloudformation_type_name               = "AWS::RefactorSpaces::Application"
 #   suppress_plural_data_source_generation = true
@@ -1916,6 +1920,15 @@ resource_schema "aws_rekognition_collection" {
 
 resource_schema "aws_rekognition_project" {
   cloudformation_type_name = "AWS::Rekognition::Project"
+}
+
+resource_schema "aws_rekognition_stream_processor" {
+  cloudformation_type_name = "AWS::Rekognition::StreamProcessor"
+
+  # PolygonRegionsOfInterest is of unsupported type: set of array.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_resiliencehub_app" {
@@ -2315,6 +2328,10 @@ resource_schema "aws_timestream_table" {
 
 resource_schema "aws_transfer_workflow" {
   cloudformation_type_name = "AWS::Transfer::Workflow"
+}
+
+resource_schema "aws_voiceid_domain" {
+  cloudformation_type_name = "AWS::VoiceID::Domain"
 }
 
 resource_schema "aws_wafv2_ip_set" {

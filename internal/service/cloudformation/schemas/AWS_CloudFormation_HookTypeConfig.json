@@ -4,7 +4,7 @@
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-cloudformation",
   "properties": {
     "TypeArn": {
-      "description": "The Amazon Resource Name (ARN) of the type version.",
+      "description": "The Amazon Resource Name (ARN) of the type without version number.",
       "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
       "type": "string"
     },
@@ -15,7 +15,7 @@
     },
     "ConfigurationArn": {
       "description": "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
-      "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type-configuration/hook/.+$",
+      "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type(-configuration)?/hook/.+$",
       "type": "string"
     },
     "Configuration": {
@@ -51,11 +51,10 @@
     "/properties/ConfigurationArn"
   ],
   "createOnlyProperties": [
-    "/properties/ConfigurationAlias",
-    "/properties/TypeArn"
+    "/properties/ConfigurationAlias"
   ],
   "primaryIdentifier": [
-    "/properties/TypeArn"
+    "/properties/ConfigurationArn"
   ],
   "handlers": {
     "create": {

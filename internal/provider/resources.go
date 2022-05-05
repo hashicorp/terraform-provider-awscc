@@ -161,6 +161,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_ec2_subnet_network_acl_association -cfschema ../service/cloudformation/schemas/AWS_EC2_SubnetNetworkAclAssociation.json -package ec2 -- ../aws/ec2/subnet_network_acl_association_resource_gen.go ../aws/ec2/subnet_network_acl_association_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_subnet_route_table_association -cfschema ../service/cloudformation/schemas/AWS_EC2_SubnetRouteTableAssociation.json -package ec2 -- ../aws/ec2/subnet_route_table_association_resource_gen.go ../aws/ec2/subnet_route_table_association_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_transit_gateway -cfschema ../service/cloudformation/schemas/AWS_EC2_TransitGateway.json -package ec2 -- ../aws/ec2/transit_gateway_resource_gen.go ../aws/ec2/transit_gateway_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_ec2_transit_gateway_attachment -cfschema ../service/cloudformation/schemas/AWS_EC2_TransitGatewayAttachment.json -package ec2 -- ../aws/ec2/transit_gateway_attachment_resource_gen.go ../aws/ec2/transit_gateway_attachment_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_transit_gateway_connect -cfschema ../service/cloudformation/schemas/AWS_EC2_TransitGatewayConnect.json -package ec2 -- ../aws/ec2/transit_gateway_connect_resource_gen.go ../aws/ec2/transit_gateway_connect_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_transit_gateway_multicast_domain -cfschema ../service/cloudformation/schemas/AWS_EC2_TransitGatewayMulticastDomain.json -package ec2 -- ../aws/ec2/transit_gateway_multicast_domain_resource_gen.go ../aws/ec2/transit_gateway_multicast_domain_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_transit_gateway_multicast_domain_association -cfschema ../service/cloudformation/schemas/AWS_EC2_TransitGatewayMulticastDomainAssociation.json -package ec2 -- ../aws/ec2/transit_gateway_multicast_domain_association_resource_gen.go ../aws/ec2/transit_gateway_multicast_domain_association_resource_gen_test.go
@@ -486,6 +487,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_timestream_scheduled_query -cfschema ../service/cloudformation/schemas/AWS_Timestream_ScheduledQuery.json -package timestream -- ../aws/timestream/scheduled_query_resource_gen.go ../aws/timestream/scheduled_query_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_table -cfschema ../service/cloudformation/schemas/AWS_Timestream_Table.json -package timestream -- ../aws/timestream/table_resource_gen.go ../aws/timestream/table_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_transfer_workflow -cfschema ../service/cloudformation/schemas/AWS_Transfer_Workflow.json -package transfer -- ../aws/transfer/workflow_resource_gen.go ../aws/transfer/workflow_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_voiceid_domain -cfschema ../service/cloudformation/schemas/AWS_VoiceID_Domain.json -package voiceid -- ../aws/voiceid/domain_resource_gen.go ../aws/voiceid/domain_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_wafv2_ip_set -cfschema ../service/cloudformation/schemas/AWS_WAFv2_IPSet.json -package wafv2 -- ../aws/wafv2/ip_set_resource_gen.go ../aws/wafv2/ip_set_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_wafv2_logging_configuration -cfschema ../service/cloudformation/schemas/AWS_WAFv2_LoggingConfiguration.json -package wafv2 -- ../aws/wafv2/logging_configuration_resource_gen.go ../aws/wafv2/logging_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_wafv2_regex_pattern_set -cfschema ../service/cloudformation/schemas/AWS_WAFv2_RegexPatternSet.json -package wafv2 -- ../aws/wafv2/regex_pattern_set_resource_gen.go ../aws/wafv2/regex_pattern_set_resource_gen_test.go
@@ -631,6 +633,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/transfer"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/voiceid"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wafv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wisdom"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/workspaces"

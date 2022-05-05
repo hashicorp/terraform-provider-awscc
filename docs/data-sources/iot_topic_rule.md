@@ -146,7 +146,7 @@ Read-Only:
 Read-Only:
 
 - `endpoint` (String)
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `index` (String)
 - `role_arn` (String)
 - `type` (String)
@@ -309,7 +309,7 @@ Read-Only:
 Read-Only:
 
 - `endpoint` (String)
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `index` (String)
 - `role_arn` (String)
 - `type` (String)
@@ -497,7 +497,7 @@ Read-Only:
 Read-Only:
 
 - `endpoint` (String)
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `index` (String)
 - `role_arn` (String)
 - `type` (String)
@@ -660,7 +660,7 @@ Read-Only:
 Read-Only:
 
 - `endpoint` (String)
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `index` (String)
 - `role_arn` (String)
 - `type` (String)

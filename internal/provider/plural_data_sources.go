@@ -105,6 +105,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_subnet_network_acl_associations -cftype AWS::EC2::SubnetNetworkAclAssociation -package ec2 ../aws/ec2/subnet_network_acl_association_plural_data_source_gen.go ../aws/ec2/subnet_network_acl_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_subnet_route_table_associations -cftype AWS::EC2::SubnetRouteTableAssociation -package ec2 ../aws/ec2/subnet_route_table_association_plural_data_source_gen.go ../aws/ec2/subnet_route_table_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_transit_gateways -cftype AWS::EC2::TransitGateway -package ec2 ../aws/ec2/transit_gateway_plural_data_source_gen.go ../aws/ec2/transit_gateway_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_transit_gateway_attachments -cftype AWS::EC2::TransitGatewayAttachment -package ec2 ../aws/ec2/transit_gateway_attachment_plural_data_source_gen.go ../aws/ec2/transit_gateway_attachment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_transit_gateway_connects -cftype AWS::EC2::TransitGatewayConnect -package ec2 ../aws/ec2/transit_gateway_connect_plural_data_source_gen.go ../aws/ec2/transit_gateway_connect_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_transit_gateway_multicast_domains -cftype AWS::EC2::TransitGatewayMulticastDomain -package ec2 ../aws/ec2/transit_gateway_multicast_domain_plural_data_source_gen.go ../aws/ec2/transit_gateway_multicast_domain_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_transit_gateway_peering_attachments -cftype AWS::EC2::TransitGatewayPeeringAttachment -package ec2 ../aws/ec2/transit_gateway_peering_attachment_plural_data_source_gen.go ../aws/ec2/transit_gateway_peering_attachment_plural_data_source_gen_test.go
@@ -330,6 +331,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_scheduled_queries -cftype AWS::Timestream::ScheduledQuery -package timestream ../aws/timestream/scheduled_query_plural_data_source_gen.go ../aws/timestream/scheduled_query_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_tables -cftype AWS::Timestream::Table -package timestream ../aws/timestream/table_plural_data_source_gen.go ../aws/timestream/table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_transfer_workflows -cftype AWS::Transfer::Workflow -package transfer ../aws/transfer/workflow_plural_data_source_gen.go ../aws/transfer/workflow_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_voiceid_domains -cftype AWS::VoiceID::Domain -package voiceid ../aws/voiceid/domain_plural_data_source_gen.go ../aws/voiceid/domain_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wafv2_logging_configurations -cftype AWS::WAFv2::LoggingConfiguration -package wafv2 ../aws/wafv2/logging_configuration_plural_data_source_gen.go ../aws/wafv2/logging_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wisdom_assistants -cftype AWS::Wisdom::Assistant -package wisdom ../aws/wisdom/assistant_plural_data_source_gen.go ../aws/wisdom/assistant_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wisdom_knowledge_bases -cftype AWS::Wisdom::KnowledgeBase -package wisdom ../aws/wisdom/knowledge_base_plural_data_source_gen.go ../aws/wisdom/knowledge_base_plural_data_source_gen_test.go
@@ -450,6 +452,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/transfer"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/voiceid"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wafv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wisdom"
 )

@@ -278,6 +278,17 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"schedule_offset": {
+			// Property: ScheduleOffset
+			// CloudFormation resource type schema:
+			// {
+			//   "maximum": 6,
+			//   "minimum": 1,
+			//   "type": "integer"
+			// }
+			Type:     types.Int64Type,
+			Computed: true,
+		},
 		"sync_compliance": {
 			// Property: SyncCompliance
 			// CloudFormation resource type schema:
@@ -389,6 +400,7 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"parameters":                       "Parameters",
 		"s3_location":                      "S3Location",
 		"schedule_expression":              "ScheduleExpression",
+		"schedule_offset":                  "ScheduleOffset",
 		"sync_compliance":                  "SyncCompliance",
 		"targets":                          "Targets",
 		"values":                           "Values",

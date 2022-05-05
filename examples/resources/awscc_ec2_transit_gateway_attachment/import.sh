@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_transit_gateway_attachment.example <resource ID>

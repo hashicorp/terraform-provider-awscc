@@ -52,7 +52,7 @@ func hookTypeConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
-			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type-configuration/hook/.+$",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type(-configuration)?/hook/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
@@ -63,11 +63,11 @@ func hookTypeConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: TypeArn
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The Amazon Resource Name (ARN) of the type version.",
+			//   "description": "The Amazon Resource Name (ARN) of the type without version number.",
 			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
 			//   "type": "string"
 			// }
-			Description: "The Amazon Resource Name (ARN) of the type version.",
+			Description: "The Amazon Resource Name (ARN) of the type without version number.",
 			Type:        types.StringType,
 			Computed:    true,
 		},

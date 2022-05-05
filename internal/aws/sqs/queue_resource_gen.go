@@ -200,6 +200,17 @@ func queueResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 		},
+		"sqs_managed_sse_enabled": {
+			// Property: SqsManagedSseEnabled
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (e.g. SSE-KMS or SSE-SQS ).",
+			//   "type": "boolean"
+			// }
+			Description: "Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (e.g. SSE-KMS or SSE-SQS ).",
+			Type:        types.BoolType,
+			Optional:    true,
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -300,6 +311,7 @@ func queueResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"receive_message_wait_time_seconds": "ReceiveMessageWaitTimeSeconds",
 		"redrive_allow_policy":              "RedriveAllowPolicy",
 		"redrive_policy":                    "RedrivePolicy",
+		"sqs_managed_sse_enabled":           "SqsManagedSseEnabled",
 		"tags":                              "Tags",
 		"value":                             "Value",
 		"visibility_timeout":                "VisibilityTimeout",

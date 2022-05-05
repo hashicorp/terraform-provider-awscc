@@ -58,7 +58,7 @@ Required:
 
 Read-Only:
 
-- `id` (String) The ID of this resource.
+- `id` (String)
 - `name` (String)
 
 ## Import
