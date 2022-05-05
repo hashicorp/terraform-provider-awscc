@@ -59,6 +59,10 @@
       "type": "string",
       "description": "The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom CMK. To use the AWS managed CMK for Amazon SQS, specify the (default) alias alias/aws/sqs."
     },
+    "SqsManagedSseEnabled": {
+      "type": "boolean",
+      "description": "Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (e.g. SSE-KMS or SSE-SQS )."
+    },
     "MaximumMessageSize": {
       "type": "integer",
       "description": "The limit of how many bytes that a message can contain before Amazon SQS rejects it. You can specify an integer value from 1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). The default value is 262,144 (256 KiB)."
