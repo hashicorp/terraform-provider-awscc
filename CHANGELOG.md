@@ -1,4 +1,14 @@
 ## 0.20.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_transit_gateway_attachment`
+* **New Data Source:** `awscc_ec2_transit_gateway_attachments`
+* **New Data Source:** `awscc_voiceid_domain`
+* **New Data Source:** `awscc_voiceid_domains`
+* **New Resource:** `awscc_ec2_transit_gateway_attachment`
+* **New Resource:** `awscc_voiceid_domain`
+
 ## [0.19.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.19.0) (April 21, 2022)
 
 FEATURES:
