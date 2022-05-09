@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.3
 	github.com/aws/aws-sdk-go-v2/config v1.15.4
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.4
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.9.1
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.20.4
 	github.com/aws/smithy-go v1.11.2
@@ -14,7 +15,7 @@ require (
 	github.com/hashicorp/go-hclog v1.2.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hashicorp/hcl/v2 v2.12.0
-	github.com/hashicorp/terraform-plugin-framework v0.7.0
+	github.com/hashicorp/terraform-plugin-framework v0.8.0
 	github.com/hashicorp/terraform-plugin-go v0.9.0
 	github.com/hashicorp/terraform-plugin-log v0.4.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.15.0
@@ -32,7 +33,6 @@ require (
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
 	github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.12.0 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.4 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.10 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.4 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.3.11 // indirect
