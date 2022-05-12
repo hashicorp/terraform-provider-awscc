@@ -55,7 +55,7 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   "description": "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
 			//   "maxLength": 140,
 			//   "minLength": 13,
-			//   "pattern": "[a-zA-Z0-9:_-]+",
+			//   "pattern": "[a-zA-Z0-9.:_-]+",
 			//   "type": "string"
 			// }
 			Description: "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
@@ -72,7 +72,7 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   "description": "The target name.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9:_-]+",
+			//   "pattern": "[a-zA-Z0-9.:_-]+",
 			//   "type": "string"
 			// }
 			Description: "The target name.",
@@ -80,7 +80,7 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
-				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.:_-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -90,18 +90,24 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			// Property: TargetType
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The target type. Value must be THING_GROUP.",
+			//   "description": "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
 			//   "enum": [
-			//     "THING_GROUP"
+			//     "THING_GROUP",
+			//     "CLIENT_ID",
+			//     "SOURCE_IP",
+			//     "PRINCIPAL_ID"
 			//   ],
 			//   "type": "string"
 			// }
-			Description: "The target type. Value must be THING_GROUP.",
+			Description: "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"THING_GROUP",
+					"CLIENT_ID",
+					"SOURCE_IP",
+					"PRINCIPAL_ID",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
