@@ -1,61 +1,16 @@
 name: Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      release-version:
-        description: '(Optional) Release Version e.g. 1.x.x'
-        required: false
-        type: string
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
 
 permissions:
   contents: write
 
 jobs:
-  release-tag:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          ref: main
-      - if: ${{ !github.event.inputs.release-version }}
-        name: Get next tag
-        id: tag
-        run: |
-          PREVIOUS_RELEASE_TAG=$(git describe --abbrev=0 --match='v*.*.*' --tags)
-          NEW_RELEASE_TAG=v$(echo $PREVIOUS_RELEASE_TAG | awk -F. '{
-                        $1 = substr($1,2)
-                        $2 += 1
-                        printf("%s.%01d.0\n\n", $1, $2);
-                    }')
-          echo ::set-output name=new_release_tag::$NEW_RELEASE_TAG
-      - if: github.event.inputs.release-version
-        name: Create tag from input
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "refs/tags/v${{ github.event.inputs.release-version }}",
-              sha: context.sha
-            })
-      - if: steps.tag.outputs.new_release_tag
-        name: Create computed tag
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "refs/tags/${{ steps.tag.outputs.new_release_tag }}",
-              sha: context.sha
-            })
   go-version:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     outputs:
       version: ${{ steps.go-version.outputs.version }}
     steps:
@@ -63,7 +18,7 @@ jobs:
       - id: go-version
         run: echo "::set-output name=version::$(cat ./.go-version)"
   release-notes:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
         with:
@@ -77,7 +32,7 @@ jobs:
           retention-days: 1
   terraform-provider-release:
     name: 'Terraform Provider Release'
-    needs: [release-tag, go-version, release-notes]
+    needs: [go-version, release-notes]
     uses: hashicorp/ghaction-terraform-provider-release/.github/workflows/hashicorp.yml@v2
     secrets:
       hc-releases-github-token: '${{ secrets.HASHI_RELEASES_GITHUB_TOKEN }}'
@@ -94,16 +49,35 @@ jobs:
       setup-go-version: '${{ needs.go-version.outputs.version }}'
       # Product Version (e.g. v1.2.3 or github.ref_name)
       product-version: '${{ github.ref_name }}'
-  changelog:
-    needs: [terraform-provider-release]
-    runs-on: ubuntu-latest
+  highest-version-tag:
+    needs: [ terraform-provider-release ]
+    runs-on: macos-latest
+    outputs:
+      tag: ${{ steps.highest-version-tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # Allow tag to be fetched when ref is a commit
+          fetch-depth: 0
+      - name: Output highest version tag
+        id: highest-version-tag
+        run: |
+          HIGHEST=$(git tag | sort -V | tail -1)
+          echo ::set-output name=tag::$HIGHEST
+  changelog-newversion:
+    needs: [terraform-provider-release, highest-version-tag]
+    # write new changelog header only if release tag is the $HIGHEST i.e. exists on main
+    # and not a backport release branch (e.g. release/3.x). This results in
+    # manually updating the CHANGELOG header if releasing from the non-default branch.
+    # TODO: find a more deterministic way to determine release branch from tag commit
+    if: github.ref_name == needs.highest-version-tag.outputs.tag
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: main
       - name: Update Changelog Header
-        id: changelog
         run: |
           CHANGELOG_FILE_NAME="CHANGELOG.md"
           CURR_RELEASE_TAG=$(git describe --abbrev=0 --match='v*.*.*' --tags)
@@ -125,11 +99,9 @@ jobs:
           echo New minor version is: v$NEXT_RELEASE_LINE
 
           echo -e "## $NEXT_RELEASE_LINE (Unreleased)\n$(cat $CHANGELOG_FILE_NAME)" > $CHANGELOG_FILE_NAME
-
-          echo ::set-output name=curr_release_tag::$CURR_RELEASE_TAG
       - run: |
           git config --local user.email changelogbot@hashicorp.com
           git config --local user.name changelogbot
           git add CHANGELOG.md
-          git commit -m "Update CHANGELOG.md after ${{ steps.changelog.outputs.curr_release_tag }}"
+          git commit -m "Update CHANGELOG.md after ${{ github.ref_name }}"
           git push
