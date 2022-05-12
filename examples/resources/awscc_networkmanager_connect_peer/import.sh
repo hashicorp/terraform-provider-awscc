@@ -1,0 +1,1 @@
+$ terraform import awscc_networkmanager_connect_peer.example <resource ID>

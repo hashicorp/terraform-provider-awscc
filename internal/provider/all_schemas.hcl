@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 526 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 532 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1224,6 +1224,10 @@ resource_schema "aws_iot_resource_specific_logging" {
   cloudformation_type_name = "AWS::IoT::ResourceSpecificLogging"
 }
 
+resource_schema "aws_iot_role_alias" {
+  cloudformation_type_name = "AWS::IoT::RoleAlias"
+}
+
 resource_schema "aws_iot_scheduled_audit" {
   cloudformation_type_name = "AWS::IoT::ScheduledAudit"
 }
@@ -1609,8 +1613,7 @@ resource_schema "aws_macie_findings_filter" {
 }
 
 resource_schema "aws_macie_session" {
-  cloudformation_type_name               = "AWS::Macie::Session"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Macie::Session"
 }
 
 resource_schema "aws_mediaconnect_flow" {
@@ -1705,6 +1708,18 @@ resource_schema "aws_networkfirewall_rule_group" {
   cloudformation_type_name = "AWS::NetworkFirewall::RuleGroup"
 }
 
+resource_schema "aws_networkmanager_connect_attachment" {
+  cloudformation_type_name = "AWS::NetworkManager::ConnectAttachment"
+}
+
+resource_schema "aws_networkmanager_connect_peer" {
+  cloudformation_type_name = "AWS::NetworkManager::ConnectPeer"
+}
+
+resource_schema "aws_networkmanager_core_network" {
+  cloudformation_type_name = "AWS::NetworkManager::CoreNetwork"
+}
+
 resource_schema "aws_networkmanager_customer_gateway_association" {
   cloudformation_type_name               = "AWS::NetworkManager::CustomerGatewayAssociation"
   suppress_plural_data_source_generation = true
@@ -1738,9 +1753,17 @@ resource_schema "aws_networkmanager_site" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_networkmanager_site_to_site_vpn_attachment" {
+  cloudformation_type_name = "AWS::NetworkManager::SiteToSiteVpnAttachment"
+}
+
 resource_schema "aws_networkmanager_transit_gateway_registration" {
   cloudformation_type_name               = "AWS::NetworkManager::TransitGatewayRegistration"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_networkmanager_vpc_attachment" {
+  cloudformation_type_name = "AWS::NetworkManager::VpcAttachment"
 }
 
 resource_schema "aws_nimblestudio_launch_profile" {

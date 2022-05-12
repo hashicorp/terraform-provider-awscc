@@ -1,4 +1,27 @@
 ## 0.21.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_iot_role_alias`
+* **New Data Source:** `awscc_iot_role_aliases`
+* **New Data Source:** `awscc_macie_sessions`
+* **New Data Source:** `awscc_networkmanager_connect_attachment`
+* **New Data Source:** `awscc_networkmanager_connect_attachments`
+* **New Data Source:** `awscc_networkmanager_connect_peer`
+* **New Data Source:** `awscc_networkmanager_connect_peers`
+* **New Data Source:** `awscc_networkmanager_core_network`
+* **New Data Source:** `awscc_networkmanager_core_networks`
+* **New Data Source:** `awscc_networkmanager_site_to_site_vpn_attachment`
+* **New Data Source:** `awscc_networkmanager_site_to_site_vpn_attachments`
+* **New Data Source:** `awscc_networkmanager_vpc_attachment`
+* **New Data Source:** `awscc_networkmanager_vpc_attachments`
+* **New Resource:** `awscc_iot_role_alias`
+* **New Resource:** `awscc_networkmanager_connect_attachment`
+* **New Resource:** `awscc_networkmanager_connect_peer`
+* **New Resource:** `awscc_networkmanager_core_network`
+* **New Resource:** `awscc_networkmanager_site_to_site_vpn_attachment`
+* **New Resource:** `awscc_networkmanager_vpc_attachment`
+
 ## [0.20.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.20.0) (May  5, 2022)
 
 FEATURES:
