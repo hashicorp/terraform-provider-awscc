@@ -32,6 +32,6 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 			}
 		}
 
-		return true, nil
+		return true, err
 	}
 }
