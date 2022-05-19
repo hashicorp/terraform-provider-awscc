@@ -6,6 +6,10 @@ FEATURES:
 * **New Data Source:** `awscc_sagemaker_model_packages`
 * **New Resource:** `awscc_sagemaker_model_package`
 
+BUG FIXES:
+
+* Prevent infinite loop if waiting for any asynchronous operation to complete returns an AWS API error ([#510](https://github.com/hashicorp/terraform-provider-awscc/issues/510))
+
 ## [0.21.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.21.0) (May 12, 2022)
 
 FEATURES:
