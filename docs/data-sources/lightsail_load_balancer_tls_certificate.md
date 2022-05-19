@@ -24,6 +24,7 @@ Data Source schema for AWS::Lightsail::LoadBalancerTlsCertificate
 - `certificate_alternative_names` (Set of String) An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.
 - `certificate_domain_name` (String) The domain name (e.g., example.com ) for your SSL/TLS certificate.
 - `certificate_name` (String) The SSL/TLS certificate name.
+- `https_redirection_enabled` (Boolean) A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.
 - `is_attached` (Boolean) When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
 - `load_balancer_name` (String) The name of your load balancer.
 - `load_balancer_tls_certificate_arn` (String)

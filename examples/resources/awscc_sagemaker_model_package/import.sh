@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_model_package.example <resource ID>

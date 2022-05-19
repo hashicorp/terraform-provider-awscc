@@ -67,9 +67,27 @@ Optional:
 
 - `document_name` (String) The document name to use when starting the SSM automation document.
 - `document_version` (String) The version of the document to use when starting the SSM automation document.
+- `dynamic_parameters` (Attributes Set) The parameters with dynamic values to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--dynamic_parameters))
 - `parameters` (Attributes Set) The parameters to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--parameters))
 - `role_arn` (String) The role ARN to use when starting the SSM automation document.
 - `target_account` (String) The account type to use when starting the SSM automation document.
+
+<a id="nestedatt--actions--ssm_automation--dynamic_parameters"></a>
+### Nested Schema for `actions.ssm_automation.dynamic_parameters`
+
+Optional:
+
+- `key` (String)
+- `value` (Attributes) Value of the dynamic parameter to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--dynamic_parameters--value))
+
+<a id="nestedatt--actions--ssm_automation--dynamic_parameters--value"></a>
+### Nested Schema for `actions.ssm_automation.dynamic_parameters.value`
+
+Optional:
+
+- `variable` (String) The variable types used as dynamic parameter value when starting the SSM automation document.
+
+
 
 <a id="nestedatt--actions--ssm_automation--parameters"></a>
 ### Nested Schema for `actions.ssm_automation.parameters`
