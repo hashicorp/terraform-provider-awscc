@@ -65,6 +65,7 @@ Read-Only:
 - `gid` (String) The group ID (GID) of the file's owners.
 - `log_level` (String) A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.
 - `mtime` (String) A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.
+- `object_tags` (String) A value that determines whether object tags should be read from the source object store and written to the destination object store.
 - `overwrite_mode` (String) A value that determines whether files at the destination should be overwritten or preserved when copying files.
 - `posix_permissions` (String) A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.
 - `preserve_deleted_files` (String) A value that specifies whether files in the destination that don't exist in the source file system should be preserved.

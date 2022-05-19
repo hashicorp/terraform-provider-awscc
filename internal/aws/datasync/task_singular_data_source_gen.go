@@ -246,6 +246,14 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       ],
 			//       "type": "string"
 			//     },
+			//     "ObjectTags": {
+			//       "description": "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
+			//       "enum": [
+			//         "PRESERVE",
+			//         "NONE"
+			//       ],
+			//       "type": "string"
+			//     },
 			//     "OverwriteMode": {
 			//       "description": "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
 			//       "enum": [
@@ -355,6 +363,12 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"mtime": {
 						// Property: Mtime
 						Description: "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"object_tags": {
+						// Property: ObjectTags
+						Description: "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
 						Type:        types.StringType,
 						Computed:    true,
 					},
@@ -598,6 +612,7 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"log_level":                          "LogLevel",
 		"mtime":                              "Mtime",
 		"name":                               "Name",
+		"object_tags":                        "ObjectTags",
 		"options":                            "Options",
 		"overwrite_mode":                     "OverwriteMode",
 		"posix_permissions":                  "PosixPermissions",

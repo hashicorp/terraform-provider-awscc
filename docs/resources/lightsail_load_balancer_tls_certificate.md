@@ -24,6 +24,7 @@ Resource Type definition for AWS::Lightsail::LoadBalancerTlsCertificate
 ### Optional
 
 - `certificate_alternative_names` (Set of String) An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.
+- `https_redirection_enabled` (Boolean) A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.
 - `is_attached` (Boolean) When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
 
 ### Read-Only

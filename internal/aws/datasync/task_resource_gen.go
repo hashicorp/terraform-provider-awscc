@@ -307,6 +307,14 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       ],
 			//       "type": "string"
 			//     },
+			//     "ObjectTags": {
+			//       "description": "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
+			//       "enum": [
+			//         "PRESERVE",
+			//         "NONE"
+			//       ],
+			//       "type": "string"
+			//     },
 			//     "OverwriteMode": {
 			//       "description": "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
 			//       "enum": [
@@ -446,6 +454,18 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.StringInSlice([]string{
 								"NONE",
 								"PRESERVE",
+							}),
+						},
+					},
+					"object_tags": {
+						// Property: ObjectTags
+						Description: "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PRESERVE",
+								"NONE",
 							}),
 						},
 					},
@@ -783,6 +803,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"log_level":                          "LogLevel",
 		"mtime":                              "Mtime",
 		"name":                               "Name",
+		"object_tags":                        "ObjectTags",
 		"options":                            "Options",
 		"overwrite_mode":                     "OverwriteMode",
 		"posix_permissions":                  "PosixPermissions",

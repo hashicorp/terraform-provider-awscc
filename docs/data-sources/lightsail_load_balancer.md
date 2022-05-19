@@ -30,6 +30,7 @@ Data Source schema for AWS::Lightsail::LoadBalancer
 - `session_stickiness_enabled` (Boolean) Configuration option to enable session stickiness.
 - `session_stickiness_lb_cookie_duration_seconds` (String) Configuration option to adjust session stickiness cookie duration parameter.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `tls_policy_name` (String) The name of the TLS policy to apply to the load balancer.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

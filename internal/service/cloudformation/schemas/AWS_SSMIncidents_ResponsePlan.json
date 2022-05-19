@@ -77,6 +77,16 @@
             "$ref": "#/definitions/SsmParameter"
           },
           "maxItems": 200
+        },
+        "DynamicParameters": {
+          "description": "The parameters with dynamic values to set when starting the SSM automation document.",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/DynamicSsmParameter"
+          },
+          "maxItems": 200
         }
       }
     },
@@ -110,6 +120,43 @@
       "description": "A value of the parameter to set when starting the SSM automation document.",
       "type": "string",
       "maxLength": 10000
+    },
+    "DynamicSsmParameter": {
+      "description": "A parameter with a dynamic value to set when starting the SSM automation document.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "Value": {
+          "$ref": "#/definitions/DynamicSsmParameterValue"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ],
+      "additionalProperties": false
+    },
+    "DynamicSsmParameterValue": {
+      "description": "Value of the dynamic parameter to set when starting the SSM automation document.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Variable": {
+          "$ref": "#/definitions/VariableType"
+        }
+      }
+    },
+    "VariableType": {
+      "description": "The variable types used as dynamic parameter value when starting the SSM automation document.",
+      "type": "string",
+      "enum": [
+        "INCIDENT_RECORD_ARN",
+        "INVOLVED_RESOURCES"
+      ]
     },
     "Tag": {
       "description": "A key-value pair to tag a resource.",
