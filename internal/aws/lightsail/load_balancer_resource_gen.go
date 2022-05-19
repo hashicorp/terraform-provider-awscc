@@ -187,6 +187,17 @@ func loadBalancerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 		},
+		"tls_policy_name": {
+			// Property: TlsPolicyName
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The name of the TLS policy to apply to the load balancer.",
+			//   "type": "string"
+			// }
+			Description: "The name of the TLS policy to apply to the load balancer.",
+			Type:        types.StringType,
+			Optional:    true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -219,8 +230,9 @@ func loadBalancerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"load_balancer_name":         "LoadBalancerName",
 		"session_stickiness_enabled": "SessionStickinessEnabled",
 		"session_stickiness_lb_cookie_duration_seconds": "SessionStickinessLBCookieDurationSeconds",
-		"tags":  "Tags",
-		"value": "Value",
+		"tags":            "Tags",
+		"tls_policy_name": "TlsPolicyName",
+		"value":           "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

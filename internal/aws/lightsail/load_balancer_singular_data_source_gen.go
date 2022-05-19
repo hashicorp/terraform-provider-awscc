@@ -162,6 +162,17 @@ func loadBalancerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			),
 			Computed: true,
 		},
+		"tls_policy_name": {
+			// Property: TlsPolicyName
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The name of the TLS policy to apply to the load balancer.",
+			//   "type": "string"
+			// }
+			Description: "The name of the TLS policy to apply to the load balancer.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -190,8 +201,9 @@ func loadBalancerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 		"load_balancer_name":         "LoadBalancerName",
 		"session_stickiness_enabled": "SessionStickinessEnabled",
 		"session_stickiness_lb_cookie_duration_seconds": "SessionStickinessLBCookieDurationSeconds",
-		"tags":  "Tags",
-		"value": "Value",
+		"tags":            "Tags",
+		"tls_policy_name": "TlsPolicyName",
+		"value":           "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

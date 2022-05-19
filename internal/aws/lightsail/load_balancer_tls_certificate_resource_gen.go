@@ -70,6 +70,17 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.Resource
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"https_redirection_enabled": {
+			// Property: HttpsRedirectionEnabled
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
+			//   "type": "boolean"
+			// }
+			Description: "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
+			Type:        types.BoolType,
+			Optional:    true,
+		},
 		"is_attached": {
 			// Property: IsAttached
 			// CloudFormation resource type schema:
@@ -151,6 +162,7 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.Resource
 		"certificate_alternative_names":     "CertificateAlternativeNames",
 		"certificate_domain_name":           "CertificateDomainName",
 		"certificate_name":                  "CertificateName",
+		"https_redirection_enabled":         "HttpsRedirectionEnabled",
 		"is_attached":                       "IsAttached",
 		"load_balancer_name":                "LoadBalancerName",
 		"load_balancer_tls_certificate_arn": "LoadBalancerTlsCertificateArn",

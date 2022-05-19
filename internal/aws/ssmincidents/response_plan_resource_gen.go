@@ -47,6 +47,44 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "maxLength": 128,
 			//             "type": "string"
 			//           },
+			//           "DynamicParameters": {
+			//             "description": "The parameters with dynamic values to set when starting the SSM automation document.",
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "description": "A parameter with a dynamic value to set when starting the SSM automation document.",
+			//               "properties": {
+			//                 "Key": {
+			//                   "maxLength": 50,
+			//                   "minLength": 1,
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "additionalProperties": false,
+			//                   "description": "Value of the dynamic parameter to set when starting the SSM automation document.",
+			//                   "properties": {
+			//                     "Variable": {
+			//                       "description": "The variable types used as dynamic parameter value when starting the SSM automation document.",
+			//                       "enum": [
+			//                         "INCIDENT_RECORD_ARN",
+			//                         "INVOLVED_RESOURCES"
+			//                       ],
+			//                       "type": "string"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Value",
+			//                 "Key"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "maxItems": 200,
+			//             "type": "array",
+			//             "uniqueItems": true
+			//           },
 			//           "Parameters": {
 			//             "description": "The parameters to set when starting the SSM automation document.",
 			//             "insertionOrder": false,
@@ -134,6 +172,48 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(128),
+									},
+								},
+								"dynamic_parameters": {
+									// Property: DynamicParameters
+									Description: "The parameters with dynamic values to set when starting the SSM automation document.",
+									Attributes: tfsdk.SetNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"key": {
+												// Property: Key
+												Type:     types.StringType,
+												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 50),
+												},
+											},
+											"value": {
+												// Property: Value
+												Description: "Value of the dynamic parameter to set when starting the SSM automation document.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"variable": {
+															// Property: Variable
+															Description: "The variable types used as dynamic parameter value when starting the SSM automation document.",
+															Type:        types.StringType,
+															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"INCIDENT_RECORD_ARN",
+																	"INVOLVED_RESOURCES",
+																}),
+															},
+														},
+													},
+												),
+												Required: true,
+											},
+										},
+										tfsdk.SetNestedAttributesOptions{},
+									),
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtMost(200),
 									},
 								},
 								"parameters": {
@@ -552,6 +632,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"display_name":         "DisplayName",
 		"document_name":        "DocumentName",
 		"document_version":     "DocumentVersion",
+		"dynamic_parameters":   "DynamicParameters",
 		"engagements":          "Engagements",
 		"impact":               "Impact",
 		"incident_template":    "IncidentTemplate",
@@ -568,6 +649,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"title":                "Title",
 		"value":                "Value",
 		"values":               "Values",
+		"variable":             "Variable",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
