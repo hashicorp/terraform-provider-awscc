@@ -187,6 +187,14 @@
             "ONLY_FILES_TRANSFERRED",
             "NONE"
           ]
+        },
+        "ObjectTags": {
+          "description": "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
+          "type": "string",
+          "enum": [
+            "PRESERVE",
+            "NONE"
+          ]
         }
       }
     },
