@@ -48,6 +48,12 @@ func TestDefaultValue(t *testing.T) {
 			defaultValue:  types.String{Value: "alpha"},
 			expectedValue: types.String{Value: "alpha"},
 		},
+		"default string on create": {
+			plannedValue:  types.String{Null: true},
+			currentValue:  types.String{Null: true},
+			defaultValue:  types.String{Value: "alpha"},
+			expectedValue: types.String{Null: true},
+		},
 		"non-default non-Null number": {
 			plannedValue:  types.Number{Value: big.NewFloat(30)},
 			currentValue:  types.Number{Value: big.NewFloat(10)},
