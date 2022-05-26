@@ -34,6 +34,17 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.UseStateForUnknown(),
 			},
 		},
+		"asset_description": {
+			// Property: AssetDescription
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "A description for the asset",
+			//   "type": "string"
+			// }
+			Description: "A description for the asset",
+			Type:        types.StringType,
+			Optional:    true,
+		},
 		"asset_hierarchies": {
 			// Property: AssetHierarchies
 			// CloudFormation resource type schema:
@@ -268,6 +279,7 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alias":              "Alias",
 		"asset_arn":          "AssetArn",
+		"asset_description":  "AssetDescription",
 		"asset_hierarchies":  "AssetHierarchies",
 		"asset_id":           "AssetId",
 		"asset_model_id":     "AssetModelId",
