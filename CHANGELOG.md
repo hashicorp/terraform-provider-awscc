@@ -1,4 +1,19 @@
 ## 0.23.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_placement_group`
+* **New Data Source:** `awscc_ec2_placement_groups`
+* **New Data Source:** `awscc_ec2_vpc_peering_connection`
+* **New Data Source:** `awscc_ec2_vpc_peering_connections`
+* **New Data Source:** `awscc_emrserverless_application`
+* **New Data Source:** `awscc_iotwireless_network_analyzer_configuration`
+* **New Data Source:** `awscc_iotwireless_network_analyzer_configurations`
+* **New Resource:** `awscc_ec2_placement_group`
+* **New Resource:** `awscc_ec2_vpc_peering_connection`
+* **New Resource:** `awscc_emrserverless_application`
+* **New Resource:** `awscc_iotwireless_network_analyzer_configuration`
+
 ## [0.22.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.22.0) (May 20, 2022)
 
 FEATURES:
