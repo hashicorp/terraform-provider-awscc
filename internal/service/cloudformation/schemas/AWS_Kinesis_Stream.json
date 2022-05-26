@@ -149,7 +149,8 @@
                 "kinesis:AddTagsToStream",
                 "kinesis:RemoveTagsFromStream",
                 "kinesis:ListTagsForStream"
-            ]
+            ],
+            "timeoutInMinutes": 240
         },
         "delete": {
             "permissions": [

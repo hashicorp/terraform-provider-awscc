@@ -22,6 +22,7 @@ Resource schema for AWS::IoTSiteWise::Asset
 
 ### Optional
 
+- `asset_description` (String) A description for the asset
 - `asset_hierarchies` (Attributes List) (see [below for nested schema](#nestedatt--asset_hierarchies))
 - `asset_properties` (Attributes List) (see [below for nested schema](#nestedatt--asset_properties))
 - `tags` (Attributes List) A list of key-value pairs that contain metadata for the asset. (see [below for nested schema](#nestedatt--tags))

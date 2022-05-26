@@ -299,7 +299,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(240)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

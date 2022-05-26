@@ -30,6 +30,17 @@ func assetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"asset_description": {
+			// Property: AssetDescription
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "A description for the asset",
+			//   "type": "string"
+			// }
+			Description: "A description for the asset",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"asset_hierarchies": {
 			// Property: AssetHierarchies
 			// CloudFormation resource type schema:
@@ -236,6 +247,7 @@ func assetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alias":              "Alias",
 		"asset_arn":          "AssetArn",
+		"asset_description":  "AssetDescription",
 		"asset_hierarchies":  "AssetHierarchies",
 		"asset_id":           "AssetId",
 		"asset_model_id":     "AssetModelId",

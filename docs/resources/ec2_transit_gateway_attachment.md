@@ -23,11 +23,22 @@ Resource Type definition for AWS::EC2::TransitGatewayAttachment
 
 ### Optional
 
+- `options` (Attributes) The options for the transit gateway vpc attachment. (see [below for nested schema](#nestedatt--options))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) The ID of this resource.
+
+<a id="nestedatt--options"></a>
+### Nested Schema for `options`
+
+Optional:
+
+- `appliance_mode_support` (String) Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable
+- `dns_support` (String) Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable
+- `ipv_6_support` (String) Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

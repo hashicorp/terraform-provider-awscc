@@ -31,6 +31,53 @@ func transitGatewayAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTy
 				tfsdk.UseStateForUnknown(),
 			},
 		},
+		"options": {
+			// Property: Options
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The options for the transit gateway vpc attachment.",
+			//   "properties": {
+			//     "ApplianceModeSupport": {
+			//       "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+			//       "type": "string"
+			//     },
+			//     "DnsSupport": {
+			//       "description": "Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable",
+			//       "type": "string"
+			//     },
+			//     "Ipv6Support": {
+			//       "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "The options for the transit gateway vpc attachment.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"appliance_mode_support": {
+						// Property: ApplianceModeSupport
+						Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+						Type:        types.StringType,
+						Optional:    true,
+					},
+					"dns_support": {
+						// Property: DnsSupport
+						Description: "Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable",
+						Type:        types.StringType,
+						Optional:    true,
+					},
+					"ipv_6_support": {
+						// Property: Ipv6Support
+						Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+						Type:        types.StringType,
+						Optional:    true,
+					},
+				},
+			),
+			Optional: true,
+		},
 		"subnet_ids": {
 			// Property: SubnetIds
 			// CloudFormation resource type schema:
@@ -46,7 +93,6 @@ func transitGatewayAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -89,11 +135,8 @@ func transitGatewayAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTy
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
-			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
 			},
 		},
 		"transit_gateway_id": {
@@ -134,13 +177,17 @@ func transitGatewayAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTy
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":                 "Id",
-		"key":                "Key",
-		"subnet_ids":         "SubnetIds",
-		"tags":               "Tags",
-		"transit_gateway_id": "TransitGatewayId",
-		"value":              "Value",
-		"vpc_id":             "VpcId",
+		"appliance_mode_support": "ApplianceModeSupport",
+		"dns_support":            "DnsSupport",
+		"id":                     "Id",
+		"ipv_6_support":          "Ipv6Support",
+		"key":                    "Key",
+		"options":                "Options",
+		"subnet_ids":             "SubnetIds",
+		"tags":                   "Tags",
+		"transit_gateway_id":     "TransitGatewayId",
+		"value":                  "Value",
+		"vpc_id":                 "VpcId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

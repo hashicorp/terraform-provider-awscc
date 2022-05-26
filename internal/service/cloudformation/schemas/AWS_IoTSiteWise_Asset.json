@@ -88,6 +88,10 @@
             "description": "A unique, friendly name for the asset.",
             "type": "string"
         },
+        "AssetDescription": {
+            "description": "A description for the asset",
+            "type": "string"
+        },
         "AssetProperties": {
             "type": "array",
             "insertionOrder": false,

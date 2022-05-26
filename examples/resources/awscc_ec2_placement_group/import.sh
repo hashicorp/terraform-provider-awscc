@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_placement_group.example <resource ID>

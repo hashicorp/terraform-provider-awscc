@@ -28,6 +28,53 @@ func transitGatewayAttachmentDataSourceType(ctx context.Context) (tfsdk.DataSour
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"options": {
+			// Property: Options
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The options for the transit gateway vpc attachment.",
+			//   "properties": {
+			//     "ApplianceModeSupport": {
+			//       "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+			//       "type": "string"
+			//     },
+			//     "DnsSupport": {
+			//       "description": "Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable",
+			//       "type": "string"
+			//     },
+			//     "Ipv6Support": {
+			//       "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "The options for the transit gateway vpc attachment.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"appliance_mode_support": {
+						// Property: ApplianceModeSupport
+						Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"dns_support": {
+						// Property: DnsSupport
+						Description: "Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"ipv_6_support": {
+						// Property: Ipv6Support
+						Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"subnet_ids": {
 			// Property: SubnetIds
 			// CloudFormation resource type schema:
@@ -120,13 +167,17 @@ func transitGatewayAttachmentDataSourceType(ctx context.Context) (tfsdk.DataSour
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_attachment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":                 "Id",
-		"key":                "Key",
-		"subnet_ids":         "SubnetIds",
-		"tags":               "Tags",
-		"transit_gateway_id": "TransitGatewayId",
-		"value":              "Value",
-		"vpc_id":             "VpcId",
+		"appliance_mode_support": "ApplianceModeSupport",
+		"dns_support":            "DnsSupport",
+		"id":                     "Id",
+		"ipv_6_support":          "Ipv6Support",
+		"key":                    "Key",
+		"options":                "Options",
+		"subnet_ids":             "SubnetIds",
+		"tags":                   "Tags",
+		"transit_gateway_id":     "TransitGatewayId",
+		"value":                  "Value",
+		"vpc_id":                 "VpcId",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
