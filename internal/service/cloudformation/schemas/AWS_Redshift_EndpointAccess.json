@@ -118,7 +118,9 @@
             "additionalProperties": false
         }
     },
-    "taggable": false,
+    "tagging": {
+        "taggable": false
+    },
     "additionalProperties": false,
     "required": [
         "EndpointName",
