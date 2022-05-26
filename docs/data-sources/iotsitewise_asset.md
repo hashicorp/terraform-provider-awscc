@@ -22,6 +22,7 @@ Data Source schema for AWS::IoTSiteWise::Asset
 ### Read-Only
 
 - `asset_arn` (String) The ARN of the asset
+- `asset_description` (String) A description for the asset
 - `asset_hierarchies` (Attributes List) (see [below for nested schema](#nestedatt--asset_hierarchies))
 - `asset_id` (String) The ID of the asset
 - `asset_model_id` (String) The ID of the asset model from which to create the asset.
