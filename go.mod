@@ -21,7 +21,7 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.17.0
 	github.com/jinzhu/inflection v1.0.0
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
-	github.com/mitchellh/cli v1.1.3
+	github.com/mitchellh/cli v1.1.4
 )
 
 require (
