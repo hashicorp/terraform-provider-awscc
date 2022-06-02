@@ -303,6 +303,7 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_kendra_faq -cfschema ../service/cloudformation/schemas/AWS_Kendra_Faq.json -package kendra ../aws/kendra/faq_singular_data_source_gen.go ../aws/kendra/faq_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_kendra_index -cfschema ../service/cloudformation/schemas/AWS_Kendra_Index.json -package kendra ../aws/kendra/index_singular_data_source_gen.go ../aws/kendra/index_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_kinesis_stream -cfschema ../service/cloudformation/schemas/AWS_Kinesis_Stream.json -package kinesis ../aws/kinesis/stream_singular_data_source_gen.go ../aws/kinesis/stream_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_kinesisanalyticsv2_application -cfschema ../service/cloudformation/schemas/AWS_KinesisAnalyticsV2_Application.json -package kinesisanalyticsv2 ../aws/kinesisanalyticsv2/application_singular_data_source_gen.go ../aws/kinesisanalyticsv2/application_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_kinesisfirehose_delivery_stream -cfschema ../service/cloudformation/schemas/AWS_KinesisFirehose_DeliveryStream.json -package kinesisfirehose ../aws/kinesisfirehose/delivery_stream_singular_data_source_gen.go ../aws/kinesisfirehose/delivery_stream_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_kinesisvideo_signaling_channel -cfschema ../service/cloudformation/schemas/AWS_KinesisVideo_SignalingChannel.json -package kinesisvideo ../aws/kinesisvideo/signaling_channel_singular_data_source_gen.go ../aws/kinesisvideo/signaling_channel_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_kinesisvideo_stream -cfschema ../service/cloudformation/schemas/AWS_KinesisVideo_Stream.json -package kinesisvideo ../aws/kinesisvideo/stream_singular_data_source_gen.go ../aws/kinesisvideo/stream_singular_data_source_gen_test.go
@@ -591,6 +592,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kafkaconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kendra"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesis"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesisanalyticsv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesisfirehose"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesisvideo"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kms"
