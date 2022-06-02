@@ -36,6 +36,7 @@ func oIDCProviderDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// Property: ClientIdList
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 255,
 			//     "minLength": 1,
@@ -50,6 +51,7 @@ func oIDCProviderDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "A key-value pair to associate with a resource.",
@@ -99,6 +101,7 @@ func oIDCProviderDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// Property: ThumbprintList
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 40,
 			//     "minLength": 40,

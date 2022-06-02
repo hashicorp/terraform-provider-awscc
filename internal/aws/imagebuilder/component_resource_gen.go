@@ -162,6 +162,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The operating system (OS) version supported by the component.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -172,6 +173,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},

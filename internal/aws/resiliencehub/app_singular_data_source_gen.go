@@ -31,6 +31,21 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"app_assessment_schedule": {
+			// Property: AppAssessmentSchedule
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Assessment execution schedule.",
+			//   "enum": [
+			//     "Disabled",
+			//     "Daily"
+			//   ],
+			//   "type": "string"
+			// }
+			Description: "Assessment execution schedule.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"app_template_body": {
 			// Property: AppTemplateBody
 			// CloudFormation resource type schema:
@@ -96,7 +111,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "type": "string"
 			//       },
 			//       "MappingType": {
-			//         "pattern": "CfnStack|Resource",
+			//         "pattern": "CfnStack|Resource|Terraform",
 			//         "type": "string"
 			//       },
 			//       "PhysicalResourceId": {
@@ -128,6 +143,9 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       },
 			//       "ResourceName": {
 			//         "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
+			//         "type": "string"
+			//       },
+			//       "TerraformSourceName": {
 			//         "type": "string"
 			//       }
 			//     },
@@ -186,6 +204,11 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 						Type:     types.StringType,
 						Computed: true,
 					},
+					"terraform_source_name": {
+						// Property: TerraformSourceName
+						Type:     types.StringType,
+						Computed: true,
+					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
@@ -227,21 +250,23 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ResilienceHub::App").WithTerraformTypeName("awscc_resiliencehub_app")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"app_arn":               "AppArn",
-		"app_template_body":     "AppTemplateBody",
-		"aws_account_id":        "AwsAccountId",
-		"aws_region":            "AwsRegion",
-		"description":           "Description",
-		"identifier":            "Identifier",
-		"logical_stack_name":    "LogicalStackName",
-		"mapping_type":          "MappingType",
-		"name":                  "Name",
-		"physical_resource_id":  "PhysicalResourceId",
-		"resiliency_policy_arn": "ResiliencyPolicyArn",
-		"resource_mappings":     "ResourceMappings",
-		"resource_name":         "ResourceName",
-		"tags":                  "Tags",
-		"type":                  "Type",
+		"app_arn":                 "AppArn",
+		"app_assessment_schedule": "AppAssessmentSchedule",
+		"app_template_body":       "AppTemplateBody",
+		"aws_account_id":          "AwsAccountId",
+		"aws_region":              "AwsRegion",
+		"description":             "Description",
+		"identifier":              "Identifier",
+		"logical_stack_name":      "LogicalStackName",
+		"mapping_type":            "MappingType",
+		"name":                    "Name",
+		"physical_resource_id":    "PhysicalResourceId",
+		"resiliency_policy_arn":   "ResiliencyPolicyArn",
+		"resource_mappings":       "ResourceMappings",
+		"resource_name":           "ResourceName",
+		"tags":                    "Tags",
+		"terraform_source_name":   "TerraformSourceName",
+		"type":                    "Type",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

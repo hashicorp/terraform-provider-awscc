@@ -88,6 +88,7 @@ func imageRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The block device mappings to apply when creating images from this recipe.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "Defines block device mappings for the instance used to configure your image. ",
@@ -121,7 +122,7 @@ func imageRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//             "type": "string"
 			//           },
 			//           "Throughput": {
-			//             "description": "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
+			//             "description": "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
 			//             "type": "integer"
 			//           },
 			//           "VolumeSize": {
@@ -203,7 +204,7 @@ func imageRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 								},
 								"throughput": {
 									// Property: Throughput
-									Description: "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
+									Description: "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
 									Type:        types.Int64Type,
 									Computed:    true,
 								},
@@ -245,6 +246,7 @@ func imageRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The components of the image recipe.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "Configuration details of the component.",
@@ -255,6 +257,7 @@ func imageRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       },
 			//       "Parameters": {
 			//         "description": "A group of parameter settings that are used to configure the component for a specific recipe.",
+			//         "insertionOrder": false,
 			//         "items": {
 			//           "additionalProperties": false,
 			//           "description": "Contains a key/value pair that sets the named component parameter.",
@@ -265,6 +268,7 @@ func imageRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//             },
 			//             "Value": {
 			//               "description": "Sets the value for the named component parameter.",
+			//               "insertionOrder": true,
 			//               "items": {
 			//                 "type": "string"
 			//               },

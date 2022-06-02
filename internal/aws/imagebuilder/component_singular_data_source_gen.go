@@ -118,6 +118,7 @@ func componentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The operating system (OS) version supported by the component.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },

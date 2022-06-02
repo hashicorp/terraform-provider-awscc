@@ -76,6 +76,7 @@ func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "A key-value pair to associate with a resource.",
@@ -126,6 +127,9 @@ func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 

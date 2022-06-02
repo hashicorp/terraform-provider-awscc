@@ -39,6 +39,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Components for build and test that are included in the container recipe.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "Configuration details of the component.",
@@ -170,6 +171,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "properties": {
 			//     "BlockDeviceMappings": {
 			//       "description": "Defines the block devices to attach for building an instance from this Image Builder AMI.",
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "description": "Defines block device mappings for the instance used to configure your image. ",
@@ -203,7 +205,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//                 "type": "string"
 			//               },
 			//               "Throughput": {
-			//                 "description": "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
+			//                 "description": "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
 			//                 "type": "integer"
 			//               },
 			//               "VolumeSize": {
@@ -297,7 +299,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											},
 											"throughput": {
 												// Property: Throughput
-												Description: "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
+												Description: "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
 												Type:        types.Int64Type,
 												Optional:    true,
 											},
@@ -344,6 +346,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"image": {
 						// Property: Image

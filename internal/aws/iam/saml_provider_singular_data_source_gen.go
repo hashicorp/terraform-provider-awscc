@@ -59,6 +59,7 @@ func sAMLProviderDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "A key-value pair to associate with a resource.",
