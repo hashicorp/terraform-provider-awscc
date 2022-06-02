@@ -98,6 +98,7 @@ func infrastructureConfigurationDataSourceType(ctx context.Context) (tfsdk.DataS
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The instance types of the infrastructure configuration.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -205,6 +206,7 @@ func infrastructureConfigurationDataSourceType(ctx context.Context) (tfsdk.DataS
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The security group IDs of the infrastructure configuration.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },

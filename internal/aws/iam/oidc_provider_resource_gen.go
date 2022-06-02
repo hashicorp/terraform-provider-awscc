@@ -41,6 +41,7 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: ClientIdList
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 255,
 			//     "minLength": 1,
@@ -53,11 +54,15 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenBetween(1, 255)),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "A key-value pair to associate with a resource.",
@@ -108,11 +113,15 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"thumbprint_list": {
 			// Property: ThumbprintList
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 40,
 			//     "minLength": 40,
@@ -128,6 +137,9 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtMost(5),
 				validate.ArrayForEach(validate.StringLenBetween(40, 40)),
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[0-9A-Fa-f]{40}"), "")),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 			},
 		},
 		"url": {

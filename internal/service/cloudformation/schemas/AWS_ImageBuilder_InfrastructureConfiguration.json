@@ -18,14 +18,16 @@
         "InstanceTypes": {
             "description": "The instance types of the infrastructure configuration.",
             "type": "array",
-            "items":{
+            "insertionOrder": true,
+            "items": {
                 "type": "string"
             }
         },
         "SecurityGroupIds": {
             "description": "The security group IDs of the infrastructure configuration.",
             "type": "array",
-            "items":{
+            "insertionOrder": false,
+            "items": {
                 "type": "string"
             }
         },

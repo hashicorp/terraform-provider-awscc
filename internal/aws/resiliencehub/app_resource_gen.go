@@ -36,6 +36,27 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.UseStateForUnknown(),
 			},
 		},
+		"app_assessment_schedule": {
+			// Property: AppAssessmentSchedule
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Assessment execution schedule.",
+			//   "enum": [
+			//     "Disabled",
+			//     "Daily"
+			//   ],
+			//   "type": "string"
+			// }
+			Description: "Assessment execution schedule.",
+			Type:        types.StringType,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Disabled",
+					"Daily",
+				}),
+			},
+		},
 		"app_template_body": {
 			// Property: AppTemplateBody
 			// CloudFormation resource type schema:
@@ -114,7 +135,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "string"
 			//       },
 			//       "MappingType": {
-			//         "pattern": "CfnStack|Resource",
+			//         "pattern": "CfnStack|Resource|Terraform",
 			//         "type": "string"
 			//       },
 			//       "PhysicalResourceId": {
@@ -147,6 +168,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "ResourceName": {
 			//         "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 			//         "type": "string"
+			//       },
+			//       "TerraformSourceName": {
+			//         "type": "string"
 			//       }
 			//     },
 			//     "required": [
@@ -171,7 +195,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringMatch(regexp.MustCompile("CfnStack|Resource"), ""),
+							validate.StringMatch(regexp.MustCompile("CfnStack|Resource|Terraform"), ""),
 						},
 					},
 					"physical_resource_id": {
@@ -222,6 +246,11 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"), ""),
 						},
 					},
+					"terraform_source_name": {
+						// Property: TerraformSourceName
+						Type:     types.StringType,
+						Optional: true,
+					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
@@ -270,21 +299,23 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"app_arn":               "AppArn",
-		"app_template_body":     "AppTemplateBody",
-		"aws_account_id":        "AwsAccountId",
-		"aws_region":            "AwsRegion",
-		"description":           "Description",
-		"identifier":            "Identifier",
-		"logical_stack_name":    "LogicalStackName",
-		"mapping_type":          "MappingType",
-		"name":                  "Name",
-		"physical_resource_id":  "PhysicalResourceId",
-		"resiliency_policy_arn": "ResiliencyPolicyArn",
-		"resource_mappings":     "ResourceMappings",
-		"resource_name":         "ResourceName",
-		"tags":                  "Tags",
-		"type":                  "Type",
+		"app_arn":                 "AppArn",
+		"app_assessment_schedule": "AppAssessmentSchedule",
+		"app_template_body":       "AppTemplateBody",
+		"aws_account_id":          "AwsAccountId",
+		"aws_region":              "AwsRegion",
+		"description":             "Description",
+		"identifier":              "Identifier",
+		"logical_stack_name":      "LogicalStackName",
+		"mapping_type":            "MappingType",
+		"name":                    "Name",
+		"physical_resource_id":    "PhysicalResourceId",
+		"resiliency_policy_arn":   "ResiliencyPolicyArn",
+		"resource_mappings":       "ResourceMappings",
+		"resource_name":           "ResourceName",
+		"tags":                    "Tags",
+		"terraform_source_name":   "TerraformSourceName",
+		"type":                    "Type",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

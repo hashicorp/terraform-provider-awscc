@@ -50,6 +50,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The distributions of the distribution configuration.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "The distributions of the distribution configuration.",
@@ -82,6 +83,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//             "properties": {
 			//               "OrganizationArns": {
 			//                 "description": "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
+			//                 "insertionOrder": false,
 			//                 "items": {
 			//                   "type": "string"
 			//                 },
@@ -89,6 +91,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//               },
 			//               "OrganizationalUnitArns": {
 			//                 "description": "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
+			//                 "insertionOrder": false,
 			//                 "items": {
 			//                   "type": "string"
 			//                 },
@@ -96,6 +99,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//               },
 			//               "UserGroups": {
 			//                 "description": "The name of the group.",
+			//                 "insertionOrder": false,
 			//                 "items": {
 			//                   "type": "string"
 			//                 },
@@ -103,6 +107,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//               },
 			//               "UserIds": {
 			//                 "description": "The AWS account ID.",
+			//                 "insertionOrder": false,
 			//                 "items": {
 			//                   "type": "string"
 			//                 },
@@ -117,6 +122,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//           },
 			//           "TargetAccountIds": {
 			//             "description": "The ID of accounts to which you want to distribute an image.",
+			//             "insertionOrder": true,
 			//             "items": {
 			//               "type": "string"
 			//             },
@@ -131,6 +137,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//         "properties": {
 			//           "ContainerTags": {
 			//             "description": "Tags that are attached to the container distribution configuration.",
+			//             "insertionOrder": true,
 			//             "items": {
 			//               "type": "string"
 			//             },
@@ -161,8 +168,63 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//         },
 			//         "type": "object"
 			//       },
+			//       "FastLaunchConfigurations": {
+			//         "description": "The Windows faster-launching configurations to use for AMI distribution.",
+			//         "insertionOrder": true,
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "description": "The Windows faster-launching configuration to use for AMI distribution.",
+			//           "properties": {
+			//             "AccountId": {
+			//               "description": "The owner account ID for the fast-launch enabled Windows AMI.",
+			//               "type": "string"
+			//             },
+			//             "Enabled": {
+			//               "description": "A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.",
+			//               "type": "boolean"
+			//             },
+			//             "LaunchTemplate": {
+			//               "additionalProperties": false,
+			//               "description": "The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.",
+			//               "properties": {
+			//                 "LaunchTemplateId": {
+			//                   "description": "The ID of the launch template to use for faster launching for a Windows AMI.",
+			//                   "type": "string"
+			//                 },
+			//                 "LaunchTemplateName": {
+			//                   "description": "The name of the launch template to use for faster launching for a Windows AMI.",
+			//                   "type": "string"
+			//                 },
+			//                 "LaunchTemplateVersion": {
+			//                   "description": "The version of the launch template to use for faster launching for a Windows AMI.",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "MaxParallelLaunches": {
+			//               "description": "The maximum number of parallel instances that are launched for creating resources.",
+			//               "type": "integer"
+			//             },
+			//             "SnapshotConfiguration": {
+			//               "additionalProperties": false,
+			//               "description": "Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.",
+			//               "properties": {
+			//                 "TargetResourceCount": {
+			//                   "description": "The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.",
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
 			//       "LaunchTemplateConfigurations": {
 			//         "description": "A group of launchTemplateConfiguration settings that apply to image distribution.",
+			//         "insertionOrder": true,
 			//         "items": {
 			//           "additionalProperties": false,
 			//           "description": "launchTemplateConfiguration settings that apply to image distribution.",
@@ -186,6 +248,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//       },
 			//       "LicenseConfigurationArns": {
 			//         "description": "The License Manager Configuration to associate with the AMI in the specified Region.",
+			//         "insertionOrder": true,
 			//         "items": {
 			//           "description": "The Amazon Resource Name (ARN) of the License Manager configuration.",
 			//           "type": "string"
@@ -241,24 +304,36 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 												Description: "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													Multiset(),
+												},
 											},
 											"organizational_unit_arns": {
 												// Property: OrganizationalUnitArns
 												Description: "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													Multiset(),
+												},
 											},
 											"user_groups": {
 												// Property: UserGroups
 												Description: "The name of the group.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													Multiset(),
+												},
 											},
 											"user_ids": {
 												// Property: UserIds
 												Description: "The AWS account ID.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													Multiset(),
+												},
 											},
 										},
 									),
@@ -324,6 +399,76 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 									Optional: true,
 								},
 							},
+						),
+						Optional: true,
+					},
+					"fast_launch_configurations": {
+						// Property: FastLaunchConfigurations
+						Description: "The Windows faster-launching configurations to use for AMI distribution.",
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"account_id": {
+									// Property: AccountId
+									Description: "The owner account ID for the fast-launch enabled Windows AMI.",
+									Type:        types.StringType,
+									Optional:    true,
+								},
+								"enabled": {
+									// Property: Enabled
+									Description: "A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.",
+									Type:        types.BoolType,
+									Optional:    true,
+								},
+								"launch_template": {
+									// Property: LaunchTemplate
+									Description: "The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"launch_template_id": {
+												// Property: LaunchTemplateId
+												Description: "The ID of the launch template to use for faster launching for a Windows AMI.",
+												Type:        types.StringType,
+												Optional:    true,
+											},
+											"launch_template_name": {
+												// Property: LaunchTemplateName
+												Description: "The name of the launch template to use for faster launching for a Windows AMI.",
+												Type:        types.StringType,
+												Optional:    true,
+											},
+											"launch_template_version": {
+												// Property: LaunchTemplateVersion
+												Description: "The version of the launch template to use for faster launching for a Windows AMI.",
+												Type:        types.StringType,
+												Optional:    true,
+											},
+										},
+									),
+									Optional: true,
+								},
+								"max_parallel_launches": {
+									// Property: MaxParallelLaunches
+									Description: "The maximum number of parallel instances that are launched for creating resources.",
+									Type:        types.Int64Type,
+									Optional:    true,
+								},
+								"snapshot_configuration": {
+									// Property: SnapshotConfiguration
+									Description: "Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"target_resource_count": {
+												// Property: TargetResourceCount
+												Description: "The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.",
+												Type:        types.Int64Type,
+												Optional:    true,
+											},
+										},
+									),
+									Optional: true,
+								},
+							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -435,11 +580,17 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		"container_tags":                       "ContainerTags",
 		"description":                          "Description",
 		"distributions":                        "Distributions",
+		"enabled":                              "Enabled",
+		"fast_launch_configurations":           "FastLaunchConfigurations",
 		"kms_key_id":                           "KmsKeyId",
 		"launch_permission_configuration":      "LaunchPermissionConfiguration",
+		"launch_template":                      "LaunchTemplate",
 		"launch_template_configurations":       "LaunchTemplateConfigurations",
 		"launch_template_id":                   "LaunchTemplateId",
+		"launch_template_name":                 "LaunchTemplateName",
+		"launch_template_version":              "LaunchTemplateVersion",
 		"license_configuration_arns":           "LicenseConfigurationArns",
+		"max_parallel_launches":                "MaxParallelLaunches",
 		"name":                                 "Name",
 		"organization_arns":                    "OrganizationArns",
 		"organizational_unit_arns":             "OrganizationalUnitArns",
@@ -447,9 +598,11 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		"repository_name":                      "RepositoryName",
 		"service":                              "Service",
 		"set_default_version":                  "SetDefaultVersion",
+		"snapshot_configuration":               "SnapshotConfiguration",
 		"tags":                                 "Tags",
 		"target_account_ids":                   "TargetAccountIds",
 		"target_repository":                    "TargetRepository",
+		"target_resource_count":                "TargetResourceCount",
 		"user_groups":                          "UserGroups",
 		"user_ids":                             "UserIds",
 	})

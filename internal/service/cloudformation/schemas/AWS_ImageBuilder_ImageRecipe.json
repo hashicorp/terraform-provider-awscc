@@ -22,6 +22,7 @@
         "Components": {
             "description": "The components of the image recipe.",
             "type": "array",
+            "insertionOrder": true,
             "items": {
                 "$ref": "#/definitions/ComponentConfiguration"
             }
@@ -29,6 +30,7 @@
         "BlockDeviceMappings": {
             "description": "The block device mappings to apply when creating images from this recipe.",
             "type": "array",
+            "insertionOrder": false,
             "items": {
                 "$ref": "#/definitions/InstanceBlockDeviceMapping"
             }
@@ -69,6 +71,7 @@
                 "Parameters": {
                     "description": "A group of parameter settings that are used to configure the component for a specific recipe.",
                     "type": "array",
+                    "insertionOrder": false,
                     "items": {
                         "$ref": "#/definitions/ComponentParameter"
                     }
@@ -124,7 +127,7 @@
                     "type": "string"
                 },
                 "Throughput": {
-                    "description": "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
+                    "description": "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
                     "type": "integer"
                 },
                 "VolumeSize": {
@@ -184,6 +187,7 @@
                 "Value": {
                     "description": "Sets the value for the named component parameter.",
                     "type": "array",
+                    "insertionOrder": true,
                     "items": {
                         "type": "string"
                     }

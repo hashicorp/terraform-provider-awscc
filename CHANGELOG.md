@@ -1,4 +1,12 @@
 ## 0.24.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_emrserverless_applications`
+* **New Data Source:** `awscc_kinesisanalyticsv2_application`
+* **New Data Source:** `awscc_kinesisanalyticsv2_applications`
+* **New Resource:** `awscc_kinesisanalyticsv2_application`
+
 ## [0.23.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.23.0) (May 26, 2022)
 
 FEATURES:

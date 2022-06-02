@@ -2200,9 +2200,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"windows_events":                            "WindowsEvents",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(600).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(600)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

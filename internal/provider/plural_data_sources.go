@@ -133,6 +133,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticache_global_replication_groups -cftype AWS::ElastiCache::GlobalReplicationGroup -package elasticache ../aws/elasticache/global_replication_group_plural_data_source_gen.go ../aws/elasticache/global_replication_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticache_users -cftype AWS::ElastiCache::User -package elasticache ../aws/elasticache/user_plural_data_source_gen.go ../aws/elasticache/user_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticache_user_groups -cftype AWS::ElastiCache::UserGroup -package elasticache ../aws/elasticache/user_group_plural_data_source_gen.go ../aws/elasticache/user_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_emrserverless_applications -cftype AWS::EMRServerless::Application -package emrserverless ../aws/emrserverless/application_plural_data_source_gen.go ../aws/emrserverless/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_events_api_destinations -cftype AWS::Events::ApiDestination -package events ../aws/events/api_destination_plural_data_source_gen.go ../aws/events/api_destination_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_events_archives -cftype AWS::Events::Archive -package events ../aws/events/archive_plural_data_source_gen.go ../aws/events/archive_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_events_connections -cftype AWS::Events::Connection -package events ../aws/events/connection_plural_data_source_gen.go ../aws/events/connection_plural_data_source_gen_test.go
@@ -217,6 +218,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kafkaconnect_connectors -cftype AWS::KafkaConnect::Connector -package kafkaconnect ../aws/kafkaconnect/connector_plural_data_source_gen.go ../aws/kafkaconnect/connector_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kendra_indices -cftype AWS::Kendra::Index -package kendra ../aws/kendra/index_plural_data_source_gen.go ../aws/kendra/index_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kinesis_streams -cftype AWS::Kinesis::Stream -package kinesis ../aws/kinesis/stream_plural_data_source_gen.go ../aws/kinesis/stream_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_kinesisanalyticsv2_applications -cftype AWS::KinesisAnalyticsV2::Application -package kinesisanalyticsv2 ../aws/kinesisanalyticsv2/application_plural_data_source_gen.go ../aws/kinesisanalyticsv2/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kinesisfirehose_delivery_streams -cftype AWS::KinesisFirehose::DeliveryStream -package kinesisfirehose ../aws/kinesisfirehose/delivery_stream_plural_data_source_gen.go ../aws/kinesisfirehose/delivery_stream_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lambda_code_signing_configs -cftype AWS::Lambda::CodeSigningConfig -package lambda ../aws/lambda/code_signing_config_plural_data_source_gen.go ../aws/lambda/code_signing_config_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lambda_event_source_mappings -cftype AWS::Lambda::EventSourceMapping -package lambda ../aws/lambda/event_source_mapping_plural_data_source_gen.go ../aws/lambda/event_source_mapping_plural_data_source_gen_test.go
@@ -391,6 +393,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticache"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emr"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrcontainers"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrserverless"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/events"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/finspace"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/fis"
@@ -417,6 +420,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kafkaconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kendra"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesis"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesisanalyticsv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesisfirehose"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kms"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lambda"

@@ -108,6 +108,7 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The instance types of the infrastructure configuration.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -218,6 +219,7 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The security group IDs of the infrastructure configuration.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -226,6 +228,9 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 			Description: "The security group IDs of the infrastructure configuration.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"sns_topic_arn": {
 			// Property: SnsTopicArn

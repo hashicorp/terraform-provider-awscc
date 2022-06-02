@@ -5,6 +5,7 @@
     "RouteActivationState": {
       "type": "string",
       "enum": [
+        "INACTIVE",
         "ACTIVE"
       ]
     },
@@ -26,6 +27,18 @@
         "DEFAULT",
         "URI_PATH"
       ]
+    },
+    "DefaultRouteInput": {
+      "type": "object",
+      "properties": {
+        "ActivationState": {
+          "$ref": "#/definitions/RouteActivationState"
+        }
+      },
+      "required": [
+        "ActivationState"
+      ],
+      "additionalProperties": false
     },
     "UriPathRouteInput": {
       "type": "object",
@@ -117,6 +130,9 @@
       "minLength": 14,
       "pattern": "^svc-([0-9A-Za-z]{10}$)"
     },
+    "DefaultRoute": {
+      "$ref": "#/definitions/DefaultRouteInput"
+    },
     "UriPathRoute": {
       "$ref": "#/definitions/UriPathRouteInput"
     },
@@ -142,6 +158,7 @@
   "writeOnlyProperties": [
     "/properties/RouteType",
     "/properties/ServiceIdentifier",
+    "/properties/DefaultRoute",
     "/properties/UriPathRoute"
   ],
   "createOnlyProperties": [
@@ -149,6 +166,7 @@
     "/properties/EnvironmentIdentifier",
     "/properties/RouteType",
     "/properties/ServiceIdentifier",
+    "/properties/DefaultRoute",
     "/properties/UriPathRoute"
   ],
   "primaryIdentifier": [

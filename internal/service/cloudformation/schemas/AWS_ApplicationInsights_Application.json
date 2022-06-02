@@ -590,7 +590,8 @@
                 "applicationinsights:DescribeComponentConfigurationRecommendation",
                 "applicationinsights:UpdateComponentConfiguration",
                 "applicationinsights:ListComponents"
-            ]
+            ],
+	    "timeoutInMinutes": 600
         },
         "read": {
             "permissions": [
@@ -624,7 +625,8 @@
                 "applicationinsights:DescribeComponentConfiguration",
                 "applicationinsights:DescribeComponentConfigurationRecommendation",
                 "applicationinsights:UpdateComponentConfiguration"
-            ]
+            ],
+	    "timeoutInMinutes": 600
         },
         "delete": {
             "permissions": [
