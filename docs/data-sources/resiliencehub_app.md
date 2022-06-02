@@ -22,6 +22,7 @@ Data Source schema for AWS::ResilienceHub::App
 ### Read-Only
 
 - `app_arn` (String) Amazon Resource Name (ARN) of the App.
+- `app_assessment_schedule` (String) Assessment execution schedule.
 - `app_template_body` (String) A string containing full ResilienceHub app template body.
 - `description` (String) App description.
 - `name` (String) Name of the app.
@@ -38,6 +39,7 @@ Read-Only:
 - `mapping_type` (String)
 - `physical_resource_id` (Attributes) (see [below for nested schema](#nestedatt--resource_mappings--physical_resource_id))
 - `resource_name` (String)
+- `terraform_source_name` (String)
 
 <a id="nestedatt--resource_mappings--physical_resource_id"></a>
 ### Nested Schema for `resource_mappings.physical_resource_id`

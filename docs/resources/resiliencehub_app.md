@@ -23,6 +23,7 @@ Resource Type Definition for AWS::ResilienceHub::App.
 
 ### Optional
 
+- `app_assessment_schedule` (String) Assessment execution schedule.
 - `description` (String) App description.
 - `resiliency_policy_arn` (String) Amazon Resource Name (ARN) of the Resiliency Policy.
 - `tags` (Map of String)
@@ -41,6 +42,7 @@ Required:
 - `mapping_type` (String)
 - `physical_resource_id` (Attributes) (see [below for nested schema](#nestedatt--resource_mappings--physical_resource_id))
 - `resource_name` (String)
+- `terraform_source_name` (String)
 
 <a id="nestedatt--resource_mappings--physical_resource_id"></a>
 ### Nested Schema for `resource_mappings.physical_resource_id`

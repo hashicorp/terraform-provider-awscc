@@ -34,6 +34,7 @@ Read-Only:
 
 - `ami_distribution_configuration` (Attributes) The specific AMI settings (for example, launch permissions, AMI tags). (see [below for nested schema](#nestedatt--distributions--ami_distribution_configuration))
 - `container_distribution_configuration` (Attributes) Container distribution settings for encryption, licensing, and sharing in a specific Region. (see [below for nested schema](#nestedatt--distributions--container_distribution_configuration))
+- `fast_launch_configurations` (Attributes List) The Windows faster-launching configurations to use for AMI distribution. (see [below for nested schema](#nestedatt--distributions--fast_launch_configurations))
 - `launch_template_configurations` (Attributes List) A group of launchTemplateConfiguration settings that apply to image distribution. (see [below for nested schema](#nestedatt--distributions--launch_template_configurations))
 - `license_configuration_arns` (List of String) The License Manager Configuration to associate with the AMI in the specified Region.
 - `region` (String) region
@@ -78,6 +79,36 @@ Read-Only:
 
 - `repository_name` (String) The repository name of target container repository.
 - `service` (String) The service of target container repository.
+
+
+
+<a id="nestedatt--distributions--fast_launch_configurations"></a>
+### Nested Schema for `distributions.fast_launch_configurations`
+
+Read-Only:
+
+- `account_id` (String) The owner account ID for the fast-launch enabled Windows AMI.
+- `enabled` (Boolean) A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.
+- `launch_template` (Attributes) The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots. (see [below for nested schema](#nestedatt--distributions--fast_launch_configurations--launch_template))
+- `max_parallel_launches` (Number) The maximum number of parallel instances that are launched for creating resources.
+- `snapshot_configuration` (Attributes) Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled. (see [below for nested schema](#nestedatt--distributions--fast_launch_configurations--snapshot_configuration))
+
+<a id="nestedatt--distributions--fast_launch_configurations--launch_template"></a>
+### Nested Schema for `distributions.fast_launch_configurations.launch_template`
+
+Read-Only:
+
+- `launch_template_id` (String) The ID of the launch template to use for faster launching for a Windows AMI.
+- `launch_template_name` (String) The name of the launch template to use for faster launching for a Windows AMI.
+- `launch_template_version` (String) The version of the launch template to use for faster launching for a Windows AMI.
+
+
+<a id="nestedatt--distributions--fast_launch_configurations--snapshot_configuration"></a>
+### Nested Schema for `distributions.fast_launch_configurations.snapshot_configuration`
+
+Read-Only:
+
+- `target_resource_count` (Number) The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
 
 
 
