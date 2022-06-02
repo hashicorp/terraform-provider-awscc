@@ -17,8 +17,8 @@ func TestIntBetweenValidator(t *testing.T) {
 	type testCase struct {
 		val         tftypes.Value
 		f           func(context.Context, tftypes.Value) (attr.Value, error)
-		min         int
-		max         int
+		min         int64
+		max         int64
 		expectError bool
 	}
 	tests := map[string]testCase{
@@ -146,7 +146,7 @@ func TestIntAtLeastValidator(t *testing.T) {
 	type testCase struct {
 		val         tftypes.Value
 		f           func(context.Context, tftypes.Value) (attr.Value, error)
-		min         int
+		min         int64
 		expectError bool
 	}
 	tests := map[string]testCase{
@@ -233,7 +233,7 @@ func TestIntAtMostValidator(t *testing.T) {
 	type testCase struct {
 		val         tftypes.Value
 		f           func(context.Context, tftypes.Value) (attr.Value, error)
-		max         int
+		max         int64
 		expectError bool
 	}
 	tests := map[string]testCase{
