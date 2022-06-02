@@ -15,7 +15,7 @@ import (
 type intBetweenValidator struct {
 	tfsdk.AttributeValidator
 
-	min, max int
+	min, max int64
 }
 
 // Description describes the validation in plain text formatting.
@@ -35,7 +35,7 @@ func (validator intBetweenValidator) Validate(ctx context.Context, request tfsdk
 		return
 	}
 
-	if i < int64(validator.min) || i > int64(validator.max) {
+	if i < validator.min || i > validator.max {
 		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be in the range [%d, %d], got %d", validator.min, validator.max, i),
@@ -46,7 +46,7 @@ func (validator intBetweenValidator) Validate(ctx context.Context, request tfsdk
 }
 
 // IntBetween returns a new integer value between validator.
-func IntBetween(min, max int) tfsdk.AttributeValidator {
+func IntBetween(min, max int64) tfsdk.AttributeValidator {
 	if min > max {
 		return nil
 	}
@@ -61,7 +61,7 @@ func IntBetween(min, max int) tfsdk.AttributeValidator {
 type intAtLeastValidator struct {
 	tfsdk.AttributeValidator
 
-	min int
+	min int64
 }
 
 // Description describes the validation in plain text formatting.
@@ -81,7 +81,7 @@ func (validator intAtLeastValidator) Validate(ctx context.Context, request tfsdk
 		return
 	}
 
-	if i < int64(validator.min) {
+	if i < validator.min {
 		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be at least %d, got %d", validator.min, i),
@@ -92,7 +92,7 @@ func (validator intAtLeastValidator) Validate(ctx context.Context, request tfsdk
 }
 
 // IntAtLeast returns a new integer value at least validator.
-func IntAtLeast(min int) tfsdk.AttributeValidator {
+func IntAtLeast(min int64) tfsdk.AttributeValidator {
 	return intAtLeastValidator{
 		min: min,
 	}
@@ -102,7 +102,7 @@ func IntAtLeast(min int) tfsdk.AttributeValidator {
 type intAtMostValidator struct {
 	tfsdk.AttributeValidator
 
-	max int
+	max int64
 }
 
 // Description describes the validation in plain text formatting.
@@ -122,7 +122,7 @@ func (validator intAtMostValidator) Validate(ctx context.Context, request tfsdk.
 		return
 	}
 
-	if i > int64(validator.max) {
+	if i > validator.max {
 		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be at most %d, got %d", validator.max, i),
@@ -133,7 +133,7 @@ func (validator intAtMostValidator) Validate(ctx context.Context, request tfsdk.
 }
 
 // IntAtMost returns a new integer value at most validator.
-func IntAtMost(max int) tfsdk.AttributeValidator {
+func IntAtMost(max int64) tfsdk.AttributeValidator {
 	return intAtMostValidator{
 		max: max,
 	}
