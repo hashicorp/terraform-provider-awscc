@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
-func TestJSONString(t *testing.T) {
+func TestJSONStringAttributePlanModifier(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
@@ -64,7 +64,7 @@ func TestJSONString(t *testing.T) {
 				AttributeState: test.currentValue,
 			}
 			response := tfsdk.ModifyAttributePlanResponse{}
-			JSONString().Modify(ctx, request, &response)
+			JSONStringType.AttributePlanModifier().Modify(ctx, request, &response)
 
 			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
