@@ -179,12 +179,6 @@ type jsonStringAttributePlanModifier struct {
 	tfsdk.AttributePlanModifier
 }
 
-// A JSONString is a string containing a valid JSON document.
-// This plan modifier suppresses semantically insignificant differences.
-// func JSONString() tfsdk.AttributePlanModifier {
-// 	return jsonStringAttributePlanModifier{}
-// }
-
 func (attributePlanModifier jsonStringAttributePlanModifier) Description(_ context.Context) string {
 	return "Suppresses semantically insignificant differences."
 }
