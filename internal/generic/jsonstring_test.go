@@ -12,7 +12,106 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
-func TestJSONStringAttributePlanModifier(t *testing.T) {
+func TestJSONStringTypeValueFromTerraform(t *testing.T) {
+	t.Parallel()
+
+	tests := map[string]struct {
+		val         tftypes.Value
+		expected    attr.Value
+		expectError bool
+	}{
+		"null value": {
+			val:      tftypes.NewValue(tftypes.String, nil),
+			expected: JSONString{Null: true},
+		},
+		"unknown value": {
+			val:      tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+			expected: JSONString{Unknown: true},
+		},
+		"empty string": {
+			val:      tftypes.NewValue(tftypes.String, ""),
+			expected: JSONString{Value: ""},
+		},
+		"valid string": {
+			val:      tftypes.NewValue(tftypes.String, `{"k1": 42}`),
+			expected: JSONString{Value: `{"k1":42}`},
+		},
+		"invalid string": {
+			val:         tftypes.NewValue(tftypes.String, "not ok"),
+			expectError: true,
+		},
+	}
+
+	for name, test := range tests {
+		name, test := name, test
+		t.Run(name, func(t *testing.T) {
+			ctx := context.TODO()
+			val, err := JSONStringType.ValueFromTerraform(ctx, test.val)
+
+			if err == nil && test.expectError {
+				t.Fatal("expected error, got no error")
+			}
+			if err != nil && !test.expectError {
+				t.Fatalf("got unexpected error: %s", err)
+			}
+
+			if diff := cmp.Diff(val, test.expected); diff != "" {
+				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			}
+		})
+	}
+}
+
+func TestJSONStringTypeValidate(t *testing.T) {
+	t.Parallel()
+
+	type testCase struct {
+		val         tftypes.Value
+		expectError bool
+	}
+	tests := map[string]testCase{
+		"not a string": {
+			val:         tftypes.NewValue(tftypes.Bool, true),
+			expectError: true,
+		},
+		"unknown string": {
+			val: tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		},
+		"null string": {
+			val: tftypes.NewValue(tftypes.String, nil),
+		},
+		"empty string": {
+			val: tftypes.NewValue(tftypes.String, ""),
+		},
+		"valid string": {
+			val: tftypes.NewValue(tftypes.String, `{"k1": 42, "k2": ["v2", {"k3": true}]}`),
+		},
+		"invalid string": {
+			val:         tftypes.NewValue(tftypes.String, "not ok"),
+			expectError: true,
+		},
+	}
+
+	for name, test := range tests {
+		name, test := name, test
+		t.Run(name, func(t *testing.T) {
+			ctx := context.TODO()
+
+			attributePath := tftypes.NewAttributePath().WithAttributeName("test")
+			diags := JSONStringType.Validate(ctx, test.val, attributePath)
+
+			if !diags.HasError() && test.expectError {
+				t.Fatal("expected error, got no error")
+			}
+
+			if diags.HasError() && !test.expectError {
+				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(diags))
+			}
+		})
+	}
+}
+
+func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
