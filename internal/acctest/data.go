@@ -46,11 +46,46 @@ terraform {
 			name    = "my-test-module"
 			version = "0.0.1"
 			comment = "testing user-agent comment"
-		  }]
+		  },
+		  {
+			name    = "2nd-user-agent"
+			version = "0.0.1"
+			comment = "2nd user agent"
+		  }
+		]
 	}
 }
 `, role) + config
 	}
+	return config
+}
+
+func (td *TestData) MetadataConfig() string {
+	config := fmt.Sprintf(`
+resource %[1]q %[2]q {}
+`, td.TerraformResourceType, td.ResourceLabel)
+
+	config = fmt.Sprintf(`
+resource awscc_ec2_vpc drew {
+	cidr_block = "10.0.0.0/16"
+}
+
+terraform {
+	provider_meta "awscc" {
+		user_agent = [{
+			product_name    = "my-test-module"
+			product_version = "0.0.1"
+			comment = "testing user-agent comment"
+		  },
+		  {
+			product_name    = "2nd-user-agent"
+			product_version = "0.0.1"
+			comment = "2nd user agent"
+		  }
+		]
+	}
+}
+` + config)
 	return config
 }
 

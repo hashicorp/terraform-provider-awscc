@@ -304,6 +304,9 @@ type providerData struct {
 	UserAgent                 []userAgentProduct             `tfsdk:"user_agent"`
 	terraformVersion          string
 }
+type providerMeta struct {
+	UserAgent []userAgentProduct `tfsdk:"user_agent"`
+}
 
 type userAgentProduct struct {
 	ProductName    types.String `tfsdk:"product_name"`
@@ -508,6 +511,8 @@ func (p *AwsCloudControlApiProvider) RoleARN(_ context.Context) string {
 
 // newCloudControlClient configures and returns a fully initialized AWS Cloud Control API client with the configured region.
 func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol.Client, string, error) {
+	// m, _ := ctx.Value("meta").(*tfsdk.Config) // _ was ok
+
 	config := awsbase.Config{
 		AccessKey:              pd.AccessKey.Value,
 		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
@@ -527,6 +532,7 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 		},
 	}
 	config.UserAgent = userAgentProducts(pd.UserAgent)
+	// config.UserAgent = userAgentProducts(m.Schema.)
 	if pd.MaxRetries.Null {
 		config.MaxRetries = defaultMaxRetries
 	} else {

@@ -13,6 +13,7 @@ import (
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
@@ -394,11 +395,33 @@ var (
 	idAttributePath = tftypes.NewAttributePath().WithAttributeName("id")
 )
 
+type meta struct {
+	UserAgents []userAgentProduct `tfsdk:"user_agent"`
+}
+
+type userAgentProduct struct {
+	ProductName    types.String `tfsdk:"product_name"`
+	ProductVersion types.String `tfsdk:"product_version"`
+	Comment        types.String `tfsdk:"comment"`
+}
+
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
 	ctx = r.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "Resource.Create")
 
+	var m []meta
+	providerMeta := request.ProviderMeta
+
+	diags := providerMeta.Get(ctx, &m)
+
+	// userAgentProducts
+
+	//(*(*r).resourceType).cfTypeName == "AWS::EC2::VPC"
+	//providerMeta.Raw.value != nil
+	// newCtx := context.WithValue(ctx, "meta", m)
+
+	// conn := r.provider.CloudControlApiClient(newCtx)
 	conn := r.provider.CloudControlApiClient(ctx)
 
 	tflog.Debug(ctx, "Request.Plan.Raw", map[string]interface{}{
@@ -480,7 +503,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		}
 	}
 
-	diags := r.populateUnknownValues(ctx, id, &response.State)
+	diags = r.populateUnknownValues(ctx, id, &response.State)
 
 	if diags.HasError() {
 		response.Diagnostics.Append(diags...)

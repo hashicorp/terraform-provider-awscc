@@ -23,6 +23,7 @@ website/node_modules
 .idea
 *.iml
 *.test
+*__debug_bin
 
 website/vendor
 
