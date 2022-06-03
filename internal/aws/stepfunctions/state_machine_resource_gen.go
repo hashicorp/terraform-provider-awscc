@@ -40,8 +40,11 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "type": "object"
 			// }
-			Type:     types.MapType{ElemType: types.StringType},
+			Type:     JSONStringType,
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				JSONStringType.AttributePlanModifier(),
+			},
 			// Definition is a write-only property.
 		},
 		"definition_s3_location": {

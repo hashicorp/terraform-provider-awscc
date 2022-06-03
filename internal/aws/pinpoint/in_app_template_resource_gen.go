@@ -602,8 +602,11 @@ func inAppTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// {
 			//   "type": "object"
 			// }
-			Type:     types.MapType{ElemType: types.StringType},
+			Type:     JSONStringType,
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				JSONStringType.AttributePlanModifier(),
+			},
 		},
 		"layout": {
 			// Property: Layout
@@ -638,8 +641,11 @@ func inAppTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// {
 			//   "type": "object"
 			// }
-			Type:     types.MapType{ElemType: types.StringType},
+			Type:     JSONStringType,
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				JSONStringType.AttributePlanModifier(),
+			},
 		},
 		"template_description": {
 			// Property: TemplateDescription

@@ -86,8 +86,11 @@ func parameterGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "object"
 			// }
 			Description: "An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.",
-			Type:        types.MapType{ElemType: types.StringType},
+			Type:        JSONStringType,
 			Optional:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				JSONStringType.AttributePlanModifier(),
+			},
 			// Parameters is a write-only property.
 		},
 		"tags": {

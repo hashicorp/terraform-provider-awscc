@@ -42,8 +42,11 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "object"
 			// }
 			Description: "A resource policy to add to the resource. The policy is a JSON structure following the IAM syntax that contains one or more statements that define the policy.",
-			Type:        types.MapType{ElemType: types.StringType},
+			Type:        JSONStringType,
 			Required:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				JSONStringType.AttributePlanModifier(),
+			},
 		},
 		"resource_arn": {
 			// Property: ResourceArn

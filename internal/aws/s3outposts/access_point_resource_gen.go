@@ -88,8 +88,11 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The access point policy associated with this access point.",
-			Type:        types.MapType{ElemType: types.StringType},
+			Type:        JSONStringType,
 			Optional:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				JSONStringType.AttributePlanModifier(),
+			},
 		},
 		"vpc_configuration": {
 			// Property: VpcConfiguration

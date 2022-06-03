@@ -115,8 +115,11 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The access control resource policy on the provided domain.",
-			Type:        types.MapType{ElemType: types.StringType},
+			Type:        JSONStringType,
 			Optional:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				JSONStringType.AttributePlanModifier(),
+			},
 		},
 		"tags": {
 			// Property: Tags
