@@ -17,7 +17,7 @@
         },
         "PolicyDocument": {
             "description": "Live policy document for the core network",
-            "type": "string"
+            "type": "object"
         },
         "Description": {
             "description": "The description of core network",

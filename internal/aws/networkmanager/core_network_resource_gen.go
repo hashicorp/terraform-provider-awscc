@@ -167,11 +167,14 @@ func coreNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Live policy document for the core network",
-			//   "type": "string"
+			//   "type": "object"
 			// }
 			Description: "Live policy document for the core network",
-			Type:        types.StringType,
+			Type:        JSONStringType,
 			Optional:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				JSONStringType.AttributePlanModifier(),
+			},
 		},
 		"segments": {
 			// Property: Segments
