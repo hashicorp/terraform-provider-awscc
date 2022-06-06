@@ -23,7 +23,7 @@ Resource Type Definition for AWS::S3Outposts::AccessPoint
 
 ### Optional
 
-- `policy` (Map of String) The access point policy associated with this access point.
+- `policy` (String) The access point policy associated with this access point.
 
 ### Read-Only
 

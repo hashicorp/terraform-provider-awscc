@@ -45,7 +45,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 Optional:
 
 - `application_call_back_url` (String) SAML metadata URL to link with the Environment
-- `attribute_map` (Map of String) Attribute map for SAML configuration
+- `attribute_map` (String) Attribute map for SAML configuration
 - `federation_provider_name` (String) Federation provider name to link with the Environment
 - `federation_urn` (String) SAML metadata URL to link with the Environment
 - `saml_metadata_document` (String) SAML metadata document to link the federation provider to the Environment

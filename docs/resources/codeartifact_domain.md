@@ -21,7 +21,7 @@ The resource schema to create a CodeArtifact domain.
 
 ### Optional
 
-- `permissions_policy_document` (Map of String) The access control resource policy on the provided domain.
+- `permissions_policy_document` (String) The access control resource policy on the provided domain.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

@@ -22,7 +22,7 @@ Resource Type definition for AWS::EC2::VPCEndpoint
 
 ### Optional
 
-- `policy_document` (Map of String)
+- `policy_document` (String)
 - `private_dns_enabled` (Boolean)
 - `route_table_ids` (List of String)
 - `security_group_ids` (List of String)

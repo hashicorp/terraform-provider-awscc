@@ -28,7 +28,7 @@ Resource Type definition for AWS::CodeStarNotifications::NotificationRule
 - `created_by` (String)
 - `event_type_id` (String)
 - `status` (String)
-- `tags` (Map of String)
+- `tags` (String)
 - `target_address` (String)
 
 ### Read-Only
