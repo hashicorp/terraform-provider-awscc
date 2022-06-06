@@ -43,7 +43,8 @@ func (t jsonStringType) ValueFromTerraform(_ context.Context, v tftypes.Value) (
 		return nil, err
 	}
 
-	s, err = normalizeJSONString(s)
+	// Don't return the normalized string here, else Plan != Config.
+	_, err = normalizeJSONString(s)
 
 	if err != nil {
 		return nil, err

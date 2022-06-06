@@ -34,7 +34,7 @@ func TestJSONStringTypeValueFromTerraform(t *testing.T) {
 		},
 		"valid string": {
 			val:      tftypes.NewValue(tftypes.String, `{"k1": 42}`),
-			expected: JSONString{Value: `{"k1":42}`},
+			expected: JSONString{Value: `{"k1": 42}`},
 		},
 		"invalid string": {
 			val:         tftypes.NewValue(tftypes.String, "not ok"),
