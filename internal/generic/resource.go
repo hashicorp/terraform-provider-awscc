@@ -413,16 +413,19 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	var m []meta
 	providerMeta := request.ProviderMeta
 
+	// diags := providerMeta.GetAttribute(ctx, idAttributePath, &m)
+
 	diags := providerMeta.Get(ctx, &m)
+	
 
 	// userAgentProducts
 
 	//(*(*r).resourceType).cfTypeName == "AWS::EC2::VPC"
 	//providerMeta.Raw.value != nil
-	// newCtx := context.WithValue(ctx, "meta", m)
+	newCtx := context.WithValue(ctx, "meta", m)
 
-	// conn := r.provider.CloudControlApiClient(newCtx)
-	conn := r.provider.CloudControlApiClient(ctx)
+	conn := r.provider.CloudControlApiClient(newCtx)
+	// conn := r.provider.CloudControlApiClient(ctx)
 
 	tflog.Debug(ctx, "Request.Plan.Raw", map[string]interface{}{
 		"value": hclog.Fmt("%v", request.Plan.Raw),
