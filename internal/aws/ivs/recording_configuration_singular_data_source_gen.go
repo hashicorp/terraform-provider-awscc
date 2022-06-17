@@ -157,7 +157,6 @@ func recordingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSource
 						Computed: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

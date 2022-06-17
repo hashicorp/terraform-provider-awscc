@@ -121,7 +121,6 @@ func assessmentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,

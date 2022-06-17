@@ -106,7 +106,6 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -193,7 +192,6 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

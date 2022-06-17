@@ -185,7 +185,6 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -335,7 +334,6 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

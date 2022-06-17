@@ -146,7 +146,6 @@ func multiRegionAccessPointDataSourceType(ctx context.Context) (tfsdk.DataSource
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

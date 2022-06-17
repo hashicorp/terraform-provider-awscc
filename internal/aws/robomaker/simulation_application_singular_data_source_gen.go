@@ -277,7 +277,6 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 						Computed:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

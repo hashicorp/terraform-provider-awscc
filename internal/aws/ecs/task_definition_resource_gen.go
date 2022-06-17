@@ -557,7 +557,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -620,7 +619,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -643,7 +641,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -667,7 +664,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -801,7 +797,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -851,7 +846,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -892,7 +886,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -934,7 +927,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -968,7 +960,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -1015,7 +1006,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1037,7 +1027,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1069,7 +1058,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1096,7 +1084,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1123,7 +1110,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -1133,7 +1119,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -1245,7 +1230,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -1346,7 +1330,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -1412,7 +1395,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -1517,7 +1499,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1766,7 +1747,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,

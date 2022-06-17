@@ -82,7 +82,6 @@ func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

@@ -146,7 +146,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -199,7 +198,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -295,7 +293,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.MapNestedAttributesOptions{},
 			),
 			Optional: true,
 			// FieldFolders is a write-only property.
@@ -772,7 +769,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
@@ -901,7 +897,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
@@ -913,7 +908,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -1017,7 +1011,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.MapNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -1106,7 +1099,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1169,7 +1161,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -1445,7 +1436,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -1531,7 +1521,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -1602,7 +1591,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -1673,7 +1661,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.MapNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -1813,7 +1800,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

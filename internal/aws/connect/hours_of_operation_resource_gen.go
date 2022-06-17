@@ -177,7 +177,6 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -301,7 +300,6 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

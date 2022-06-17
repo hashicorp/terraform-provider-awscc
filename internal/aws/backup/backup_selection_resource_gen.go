@@ -186,7 +186,6 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -208,7 +207,6 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -230,7 +228,6 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -252,7 +249,6 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -288,7 +284,6 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{

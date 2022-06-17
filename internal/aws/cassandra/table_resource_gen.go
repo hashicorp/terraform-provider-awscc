@@ -193,7 +193,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -338,7 +337,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -403,7 +401,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -478,7 +475,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

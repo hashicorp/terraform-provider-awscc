@@ -231,7 +231,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -361,7 +360,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -788,7 +786,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -1020,7 +1017,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -1061,7 +1057,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
@@ -1073,7 +1068,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -1114,7 +1108,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -1182,7 +1175,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -1306,7 +1298,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -1405,7 +1396,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

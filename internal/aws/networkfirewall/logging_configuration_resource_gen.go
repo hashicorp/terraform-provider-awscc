@@ -155,7 +155,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{

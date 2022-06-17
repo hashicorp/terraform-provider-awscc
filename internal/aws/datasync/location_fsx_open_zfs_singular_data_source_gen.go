@@ -210,7 +210,6 @@ func locationFSxOpenZFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 						Computed:    true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

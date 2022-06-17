@@ -3986,7 +3986,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.SetNestedAttributesOptions{},
 									),
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -4132,7 +4131,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -4265,7 +4263,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -4343,7 +4340,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								Optional: true,
 																							},
 																						},
-																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																					Validators: []tfsdk.AttributeValidator{
@@ -4354,7 +4350,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					},
 																				},
 																			},
-																			tfsdk.ListNestedAttributesOptions{},
 																		),
 																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
@@ -4454,7 +4449,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -4587,7 +4581,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -4665,7 +4658,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								Optional: true,
 																							},
 																						},
-																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																					Validators: []tfsdk.AttributeValidator{
@@ -4676,7 +4668,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					},
 																				},
 																			},
-																			tfsdk.ListNestedAttributesOptions{},
 																		),
 																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
@@ -4767,7 +4758,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -4900,7 +4890,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -4978,7 +4967,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								Optional: true,
 																							},
 																						},
-																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																					Validators: []tfsdk.AttributeValidator{
@@ -4989,7 +4977,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					},
 																				},
 																			},
-																			tfsdk.ListNestedAttributesOptions{},
 																		),
 																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
@@ -5071,7 +5058,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -5204,7 +5190,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -5282,7 +5267,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								Optional: true,
 																							},
 																						},
-																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																					Validators: []tfsdk.AttributeValidator{
@@ -5293,7 +5277,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					},
 																				},
 																			},
-																			tfsdk.ListNestedAttributesOptions{},
 																		),
 																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
@@ -5375,7 +5358,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -5508,7 +5490,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -5586,7 +5567,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								Optional: true,
 																							},
 																						},
-																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																					Validators: []tfsdk.AttributeValidator{
@@ -5597,7 +5577,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					},
 																				},
 																			},
-																			tfsdk.ListNestedAttributesOptions{},
 																		),
 																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
@@ -5635,7 +5614,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -5718,7 +5696,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																											},
 																										},
 																									},
-																									tfsdk.ListNestedAttributesOptions{},
 																								),
 																								Optional: true,
 																								Validators: []tfsdk.AttributeValidator{
@@ -5851,7 +5828,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																											},
 																										},
 																									},
-																									tfsdk.ListNestedAttributesOptions{},
 																								),
 																								Optional: true,
 																								Validators: []tfsdk.AttributeValidator{
@@ -5929,7 +5905,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					Optional: true,
 																				},
 																			},
-																			tfsdk.ListNestedAttributesOptions{},
 																		),
 																		Optional: true,
 																		Validators: []tfsdk.AttributeValidator{
@@ -5940,7 +5915,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		},
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
@@ -6036,7 +6010,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																											},
 																										},
 																									},
-																									tfsdk.ListNestedAttributesOptions{},
 																								),
 																								Optional: true,
 																								Validators: []tfsdk.AttributeValidator{
@@ -6169,7 +6142,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																											},
 																										},
 																									},
-																									tfsdk.ListNestedAttributesOptions{},
 																								),
 																								Optional: true,
 																								Validators: []tfsdk.AttributeValidator{
@@ -6247,7 +6219,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					Optional: true,
 																				},
 																			},
-																			tfsdk.ListNestedAttributesOptions{},
 																		),
 																		Optional: true,
 																		Validators: []tfsdk.AttributeValidator{
@@ -6258,7 +6229,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		},
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
@@ -6354,7 +6324,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																											},
 																										},
 																									},
-																									tfsdk.ListNestedAttributesOptions{},
 																								),
 																								Optional: true,
 																								Validators: []tfsdk.AttributeValidator{
@@ -6487,7 +6456,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																											},
 																										},
 																									},
-																									tfsdk.ListNestedAttributesOptions{},
 																								),
 																								Optional: true,
 																								Validators: []tfsdk.AttributeValidator{
@@ -6565,7 +6533,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					Optional: true,
 																				},
 																			},
-																			tfsdk.ListNestedAttributesOptions{},
 																		),
 																		Optional: true,
 																		Validators: []tfsdk.AttributeValidator{
@@ -6576,7 +6543,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		},
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
@@ -6672,7 +6638,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -6700,7 +6665,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -6732,7 +6696,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -6829,7 +6792,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					},
 																				},
 																			},
-																			tfsdk.ListNestedAttributesOptions{},
 																		),
 																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
@@ -6920,7 +6882,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -7053,7 +7014,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																														},
 																													},
 																												},
-																												tfsdk.ListNestedAttributesOptions{},
 																											),
 																											Optional: true,
 																											Validators: []tfsdk.AttributeValidator{
@@ -7131,7 +7091,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								Optional: true,
 																							},
 																						},
-																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																					Validators: []tfsdk.AttributeValidator{
@@ -7142,7 +7101,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					},
 																				},
 																			},
-																			tfsdk.ListNestedAttributesOptions{},
 																		),
 																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
@@ -7168,7 +7126,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -7260,7 +7217,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																																	},
 																																},
 																															},
-																															tfsdk.ListNestedAttributesOptions{},
 																														),
 																														Optional: true,
 																														Validators: []tfsdk.AttributeValidator{
@@ -7393,7 +7349,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																																	},
 																																},
 																															},
-																															tfsdk.ListNestedAttributesOptions{},
 																														),
 																														Optional: true,
 																														Validators: []tfsdk.AttributeValidator{
@@ -7471,7 +7426,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																											Optional: true,
 																										},
 																									},
-																									tfsdk.ListNestedAttributesOptions{},
 																								),
 																								Optional: true,
 																								Validators: []tfsdk.AttributeValidator{
@@ -7482,7 +7436,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								},
 																							},
 																						},
-																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Required: true,
 																					Validators: []tfsdk.AttributeValidator{
@@ -7579,7 +7532,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																																	},
 																																},
 																															},
-																															tfsdk.ListNestedAttributesOptions{},
 																														),
 																														Optional: true,
 																														Validators: []tfsdk.AttributeValidator{
@@ -7712,7 +7664,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																																	},
 																																},
 																															},
-																															tfsdk.ListNestedAttributesOptions{},
 																														),
 																														Optional: true,
 																														Validators: []tfsdk.AttributeValidator{
@@ -7790,7 +7741,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																											Optional: true,
 																										},
 																									},
-																									tfsdk.ListNestedAttributesOptions{},
 																								),
 																								Optional: true,
 																								Validators: []tfsdk.AttributeValidator{
@@ -7801,7 +7751,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								},
 																							},
 																						},
-																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Required: true,
 																					Validators: []tfsdk.AttributeValidator{
@@ -7892,7 +7841,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																																	},
 																																},
 																															},
-																															tfsdk.ListNestedAttributesOptions{},
 																														),
 																														Optional: true,
 																														Validators: []tfsdk.AttributeValidator{
@@ -8025,7 +7973,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																																	},
 																																},
 																															},
-																															tfsdk.ListNestedAttributesOptions{},
 																														),
 																														Optional: true,
 																														Validators: []tfsdk.AttributeValidator{
@@ -8103,7 +8050,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																											Optional: true,
 																										},
 																									},
-																									tfsdk.ListNestedAttributesOptions{},
 																								),
 																								Optional: true,
 																								Validators: []tfsdk.AttributeValidator{
@@ -8114,7 +8060,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								},
 																							},
 																						},
-																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Required: true,
 																					Validators: []tfsdk.AttributeValidator{
@@ -8137,7 +8082,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										tfsdk.SetNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -8145,7 +8089,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -8292,7 +8235,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
@@ -8303,7 +8245,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -8372,7 +8313,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -8395,7 +8335,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			// BotLocales is a write-only property.
@@ -8455,7 +8394,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -8870,7 +8808,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -8941,7 +8878,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										tfsdk.SetNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -8995,7 +8931,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										tfsdk.SetNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -9089,7 +9024,6 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

@@ -130,7 +130,6 @@ func signalingChannelResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

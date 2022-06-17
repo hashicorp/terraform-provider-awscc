@@ -95,7 +95,6 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{

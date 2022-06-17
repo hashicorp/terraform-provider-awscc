@@ -132,7 +132,6 @@ func datasetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 						Computed:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

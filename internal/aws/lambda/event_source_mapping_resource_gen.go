@@ -182,7 +182,6 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -479,7 +478,6 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

@@ -123,7 +123,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -295,7 +294,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -513,7 +511,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

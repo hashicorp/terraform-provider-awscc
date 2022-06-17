@@ -168,7 +168,6 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 												Required:    true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{

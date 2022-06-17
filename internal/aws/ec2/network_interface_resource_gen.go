@@ -120,7 +120,6 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -193,7 +192,6 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -295,7 +293,6 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

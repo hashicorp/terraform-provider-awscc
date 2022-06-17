@@ -307,7 +307,6 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

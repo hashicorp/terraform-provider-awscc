@@ -231,7 +231,6 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -299,7 +298,6 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

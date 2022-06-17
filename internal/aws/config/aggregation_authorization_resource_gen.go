@@ -126,7 +126,6 @@ func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceTy
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

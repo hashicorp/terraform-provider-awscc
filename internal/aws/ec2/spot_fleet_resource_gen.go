@@ -1165,7 +1165,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -1569,7 +1568,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
@@ -1596,7 +1594,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
@@ -1614,7 +1611,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -1666,7 +1662,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -1758,12 +1753,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -1781,7 +1774,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Computed: true,
@@ -2148,7 +2140,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -2156,7 +2147,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Computed: true,
@@ -2186,7 +2176,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
@@ -2211,7 +2200,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{

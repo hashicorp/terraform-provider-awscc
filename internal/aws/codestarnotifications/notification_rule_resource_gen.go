@@ -215,7 +215,6 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{

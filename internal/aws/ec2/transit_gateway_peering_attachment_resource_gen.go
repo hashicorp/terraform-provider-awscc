@@ -167,7 +167,6 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 						Optional:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

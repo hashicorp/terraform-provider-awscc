@@ -259,7 +259,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -309,7 +308,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -477,7 +475,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -681,7 +678,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

@@ -153,7 +153,6 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -183,7 +182,6 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -231,7 +229,6 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -374,7 +371,6 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

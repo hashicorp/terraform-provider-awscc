@@ -488,7 +488,6 @@ func deploymentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -516,7 +515,6 @@ func deploymentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{

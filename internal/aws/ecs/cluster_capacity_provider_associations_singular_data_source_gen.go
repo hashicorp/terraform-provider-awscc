@@ -106,7 +106,6 @@ func clusterCapacityProviderAssociationsDataSourceType(ctx context.Context) (tfs
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

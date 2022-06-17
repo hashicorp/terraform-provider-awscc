@@ -126,7 +126,6 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},

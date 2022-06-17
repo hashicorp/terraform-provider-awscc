@@ -112,7 +112,6 @@ func provisioningTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

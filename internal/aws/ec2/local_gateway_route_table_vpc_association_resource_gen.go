@@ -123,7 +123,6 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

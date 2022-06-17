@@ -264,7 +264,6 @@ func locationFSxOpenZFSResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

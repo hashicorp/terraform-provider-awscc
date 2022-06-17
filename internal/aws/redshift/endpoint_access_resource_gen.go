@@ -224,7 +224,6 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -307,7 +306,6 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

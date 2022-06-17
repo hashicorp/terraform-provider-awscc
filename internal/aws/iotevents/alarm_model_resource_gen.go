@@ -1028,7 +1028,6 @@ func alarmModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1272,7 +1271,6 @@ func alarmModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
