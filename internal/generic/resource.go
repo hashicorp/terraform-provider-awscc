@@ -400,16 +400,6 @@ type ProviderMetaData struct {
 	UserAgent types.List `tfsdk:"user_agent"`
 }
 
-// type meta struct {
-// 	UserAgents []userAgentProduct `tfsdk:"user_agent"`
-// }
-
-// type userAgentProduct struct {
-// 	Name    types.String `tfsdk:"product_name"`
-// 	Version types.String `tfsdk:"product_version"`
-// 	Comment types.String `tfsdk:"comment"`
-// }
-
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
 	ctx = r.cfnTypeContext(ctx)
 
@@ -432,17 +422,6 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		}
 	}
 
-	// var m []meta
-	// providerMeta := request.ProviderMeta
-
-	// // diags := providerMeta.GetAttribute(ctx, idAttributePath, &m)
-
-	// diags := providerMeta.Get(ctx, &m)
-
-	// // userAgentProducts
-
-	// //(*(*r).resourceType).cfTypeName == "AWS::EC2::VPC"
-	// //providerMeta.Raw.value != nil
 	newCtx := context.WithValue(ctx, "awsbase.ContextScopedUserAgent", userAgentProducts)
 
 	conn := r.provider.CloudControlApiClient(newCtx)

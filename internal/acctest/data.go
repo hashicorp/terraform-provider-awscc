@@ -39,22 +39,6 @@ provider "awscc" {
     role_arn = %[1]q
   }
 }
-
-terraform {
-	provider_meta "awscc" {
-		user_agent = [{
-			name    = "my-test-module"
-			version = "0.0.1"
-			comment = "testing user-agent comment"
-		  },
-		  {
-			name    = "2nd-user-agent"
-			version = "0.0.1"
-			comment = "2nd user agent"
-		  }
-		]
-	}
-}
 `, role) + config
 	}
 	return config

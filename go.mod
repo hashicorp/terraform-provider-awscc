@@ -92,8 +92,7 @@ require (
 	google.golang.org/protobuf v1.28.0 // indirect
 )
 
-// replace github.com/hashicorp/aws-sdk-go-base => ../aws-sdk-go-base
-
+// grahams fork
+// https://github.com/hashicorp/aws-sdk-go-base/tree/user-agent-from-context
 replace github.com/hashicorp/aws-sdk-go-base => ../aws-sdk-go-base
 
-// replace github.com/hashicorp/aws-sdk-go-base/v2 => ../aws-sdk-go-base/v2
