@@ -125,7 +125,6 @@ func networkAnalyzerConfigurationResourceType(ctx context.Context) (tfsdk.Resour
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,

@@ -242,7 +242,6 @@ func connectAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, err
 									Required:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -341,7 +340,6 @@ func connectAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

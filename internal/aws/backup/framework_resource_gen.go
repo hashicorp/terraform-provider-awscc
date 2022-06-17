@@ -177,7 +177,6 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -234,7 +233,6 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -246,7 +244,6 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Required: true,
 		},
@@ -356,7 +353,6 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

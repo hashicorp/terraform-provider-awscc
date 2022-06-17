@@ -92,7 +92,6 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

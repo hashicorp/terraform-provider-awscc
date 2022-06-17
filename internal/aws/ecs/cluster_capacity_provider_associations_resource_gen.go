@@ -122,7 +122,6 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 		},

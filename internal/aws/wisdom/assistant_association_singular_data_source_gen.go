@@ -140,7 +140,6 @@ func assistantAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 						Computed: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

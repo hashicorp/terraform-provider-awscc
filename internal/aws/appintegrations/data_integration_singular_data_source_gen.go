@@ -212,7 +212,6 @@ func dataIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 						Computed:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

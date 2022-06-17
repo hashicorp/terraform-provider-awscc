@@ -274,7 +274,6 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

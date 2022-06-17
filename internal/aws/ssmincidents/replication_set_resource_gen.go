@@ -125,7 +125,6 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{

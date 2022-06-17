@@ -126,7 +126,6 @@ func coreNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -233,7 +232,6 @@ func coreNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -298,7 +296,6 @@ func coreNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

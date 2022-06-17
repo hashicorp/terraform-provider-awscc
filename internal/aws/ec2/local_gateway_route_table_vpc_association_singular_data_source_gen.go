@@ -104,7 +104,6 @@ func localGatewayRouteTableVPCAssociationDataSourceType(ctx context.Context) (tf
 						Computed: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

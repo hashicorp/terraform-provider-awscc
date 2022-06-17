@@ -440,7 +440,6 @@ func solutionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
@@ -480,7 +479,6 @@ func solutionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
@@ -520,7 +518,6 @@ func solutionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{

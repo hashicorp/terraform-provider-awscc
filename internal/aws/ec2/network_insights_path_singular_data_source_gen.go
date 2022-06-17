@@ -139,7 +139,6 @@ func networkInsightsPathDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

@@ -154,7 +154,6 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.MapNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -195,7 +194,6 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

@@ -232,7 +232,6 @@ func firewallDomainListDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 						Computed:    true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

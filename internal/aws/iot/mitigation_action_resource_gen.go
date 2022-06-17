@@ -399,7 +399,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

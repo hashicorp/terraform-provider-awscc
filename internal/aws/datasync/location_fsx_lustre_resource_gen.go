@@ -185,7 +185,6 @@ func locationFSxLustreResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

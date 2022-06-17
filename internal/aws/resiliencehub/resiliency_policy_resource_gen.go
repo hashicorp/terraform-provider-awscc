@@ -88,7 +88,6 @@ func resiliencyPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Optional:    true,
 					},
 				},
-				tfsdk.MapNestedAttributesOptions{},
 			),
 			Required: true,
 		},

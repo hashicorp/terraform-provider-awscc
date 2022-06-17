@@ -104,7 +104,6 @@ func assessmentTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

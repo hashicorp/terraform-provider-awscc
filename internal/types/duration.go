@@ -156,3 +156,32 @@ func (d Duration) Equal(other attr.Value) bool {
 	}
 	return d.Value == o.Value
 }
+
+// IsNull returns true if the Value is not set, or is explicitly set to null.
+func (d Duration) IsNull() bool {
+	return d.Null
+}
+
+// IsNull returns true if the Value is not set, or is explicitly set to null.
+func (d Duration) IsUnknown() bool {
+	return d.Unknown
+}
+
+// String returns a summary representation of either the underlying Value,
+// or UnknownValueString (`<unknown>`) when IsUnknown() returns true,
+// or NullValueString (`<null>`) when IsNull() return true.
+//
+// This is an intentionally lossy representation, that are best suited for
+// logging and error reporting, as they are not protected by
+// compatibility guarantees within the framework.
+func (d Duration) String() string {
+	if d.IsUnknown() {
+		return attr.UnknownValueString
+	}
+
+	if d.IsNull() {
+		return attr.NullValueString
+	}
+
+	return d.Value.String()
+}

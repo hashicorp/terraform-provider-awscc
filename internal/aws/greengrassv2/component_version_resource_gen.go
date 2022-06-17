@@ -300,7 +300,6 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Optional: true,
 								},
 							},
-							tfsdk.MapNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -335,7 +334,6 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -392,7 +390,6 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 																		},
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -440,7 +437,6 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 																		Optional: true,
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -521,7 +517,6 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{

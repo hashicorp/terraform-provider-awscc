@@ -162,7 +162,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -400,7 +399,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -472,7 +470,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

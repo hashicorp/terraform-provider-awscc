@@ -2814,7 +2814,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		Optional: true,
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2840,7 +2839,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -3454,7 +3452,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		Optional: true,
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -3480,7 +3477,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -4094,7 +4090,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		Optional: true,
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -4120,7 +4115,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -4725,7 +4719,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		Optional: true,
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -4760,7 +4753,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -4778,7 +4770,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -4934,7 +4925,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

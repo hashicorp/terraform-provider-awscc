@@ -167,7 +167,6 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

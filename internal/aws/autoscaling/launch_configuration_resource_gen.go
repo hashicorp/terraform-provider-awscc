@@ -175,7 +175,6 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Optional:    true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,

@@ -154,7 +154,6 @@ func channelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 						Computed: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

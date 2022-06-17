@@ -172,7 +172,6 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

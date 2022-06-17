@@ -111,7 +111,6 @@ func schedulingPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{

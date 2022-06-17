@@ -236,7 +236,6 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,

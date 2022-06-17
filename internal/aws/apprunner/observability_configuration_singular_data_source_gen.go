@@ -102,7 +102,6 @@ func observabilityConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSo
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

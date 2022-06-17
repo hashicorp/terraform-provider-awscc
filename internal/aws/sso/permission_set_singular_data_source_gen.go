@@ -175,7 +175,6 @@ func permissionSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

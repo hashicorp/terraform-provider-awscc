@@ -497,7 +497,6 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -736,7 +735,6 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required:    true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -807,7 +805,6 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Optional:    true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
@@ -830,7 +827,6 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Optional:    true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -877,7 +873,6 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Optional:    true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{

@@ -133,7 +133,6 @@ func controlPanelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

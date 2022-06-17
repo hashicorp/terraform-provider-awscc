@@ -181,7 +181,6 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

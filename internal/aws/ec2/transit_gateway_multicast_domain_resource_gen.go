@@ -132,7 +132,6 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 						Optional:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

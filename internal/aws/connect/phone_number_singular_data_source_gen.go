@@ -129,7 +129,6 @@ func phoneNumberDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						Computed:    true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

@@ -394,7 +394,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required: true,
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -482,7 +481,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required: true,
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -517,7 +515,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -543,7 +540,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -621,7 +617,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -980,7 +975,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1068,7 +1062,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1103,7 +1096,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1148,7 +1140,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

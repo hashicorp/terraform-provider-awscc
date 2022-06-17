@@ -155,7 +155,6 @@ func configurationSetEventDestinationDataSourceType(ctx context.Context) (tfsdk.
 												Computed:    true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Computed: true,
 								},

@@ -139,7 +139,6 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -222,7 +221,6 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

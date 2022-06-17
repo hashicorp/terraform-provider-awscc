@@ -492,7 +492,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -1794,7 +1793,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

@@ -126,7 +126,6 @@ func transitGatewayMulticastDomainDataSourceType(ctx context.Context) (tfsdk.Dat
 						Computed:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
