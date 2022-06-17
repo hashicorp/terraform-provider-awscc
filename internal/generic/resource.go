@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -395,36 +396,57 @@ var (
 	idAttributePath = tftypes.NewAttributePath().WithAttributeName("id")
 )
 
-type meta struct {
-	UserAgents []userAgentProduct `tfsdk:"user_agent"`
+type ProviderMetaData struct {
+	UserAgent types.List `tfsdk:"user_agent"`
 }
 
-type userAgentProduct struct {
-	ProductName    types.String `tfsdk:"product_name"`
-	ProductVersion types.String `tfsdk:"product_version"`
-	Comment        types.String `tfsdk:"comment"`
-}
+// type meta struct {
+// 	UserAgents []userAgentProduct `tfsdk:"user_agent"`
+// }
+
+// type userAgentProduct struct {
+// 	Name    types.String `tfsdk:"product_name"`
+// 	Version types.String `tfsdk:"product_version"`
+// 	Comment types.String `tfsdk:"comment"`
+// }
 
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
 	ctx = r.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "Resource.Create")
 
-	var m []meta
-	providerMeta := request.ProviderMeta
+	var providerMetaData ProviderMetaData
+	var userAgentProducts []awsbase.UserAgentProduct
 
-	// diags := providerMeta.GetAttribute(ctx, idAttributePath, &m)
+	response.Diagnostics.Append(request.ProviderMeta.Get(ctx, &providerMetaData)...)
 
-	diags := providerMeta.Get(ctx, &m)
-	
+	if response.Diagnostics.HasError() {
+		return
+	}
 
-	// userAgentProducts
+	if !providerMetaData.UserAgent.Null && !providerMetaData.UserAgent.Unknown {
+		response.Diagnostics.Append(providerMetaData.UserAgent.ElementsAs(ctx, &userAgentProducts, false)...)
 
-	//(*(*r).resourceType).cfTypeName == "AWS::EC2::VPC"
-	//providerMeta.Raw.value != nil
-	newCtx := context.WithValue(ctx, "meta", m)
+		if response.Diagnostics.HasError() {
+			return
+		}
+	}
+
+	// var m []meta
+	// providerMeta := request.ProviderMeta
+
+	// // diags := providerMeta.GetAttribute(ctx, idAttributePath, &m)
+
+	// diags := providerMeta.Get(ctx, &m)
+
+	// // userAgentProducts
+
+	// //(*(*r).resourceType).cfTypeName == "AWS::EC2::VPC"
+	// //providerMeta.Raw.value != nil
+	newCtx := context.WithValue(ctx, "awsbase.ContextScopedUserAgent", userAgentProducts)
 
 	conn := r.provider.CloudControlApiClient(newCtx)
+
 	// conn := r.provider.CloudControlApiClient(ctx)
 
 	tflog.Debug(ctx, "Request.Plan.Raw", map[string]interface{}{
@@ -506,7 +528,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		}
 	}
 
-	diags = r.populateUnknownValues(ctx, id, &response.State)
+	diags := r.populateUnknownValues(ctx, id, &response.State)
 
 	if diags.HasError() {
 		response.Diagnostics.Append(diags...)
