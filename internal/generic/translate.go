@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -17,8 +18,8 @@ type toCloudControl struct {
 }
 
 // AsRaw returns the raw map[string]interface{} representing Cloud Control DesiredState from a Terraform Value.
-func (t toCloudControl) AsRaw(ctx context.Context, val tftypes.Value) (map[string]interface{}, error) {
-	v, err := t.rawFromValue(ctx, val)
+func (t toCloudControl) AsRaw(ctx context.Context, schema *tfsdk.Schema, val tftypes.Value) (map[string]interface{}, error) {
+	v, err := t.rawFromValue(ctx, schema, nil, val)
 
 	if err != nil {
 		return nil, err
@@ -36,8 +37,8 @@ func (t toCloudControl) AsRaw(ctx context.Context, val tftypes.Value) (map[strin
 }
 
 // AsString returns the string representing Cloud Control DesiredState from a Terraform Value.
-func (t toCloudControl) AsString(ctx context.Context, val tftypes.Value) (string, error) {
-	v, err := t.AsRaw(ctx, val)
+func (t toCloudControl) AsString(ctx context.Context, schema *tfsdk.Schema, val tftypes.Value) (string, error) {
+	v, err := t.AsRaw(ctx, schema, val)
 
 	if err != nil {
 		return "", err
@@ -54,9 +55,23 @@ func (t toCloudControl) AsString(ctx context.Context, val tftypes.Value) (string
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Terraform attribute names are mapped to Cloud Control property names.
-func (t toCloudControl) rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) { //nolint:unparam
+func (t toCloudControl) rawFromValue(ctx context.Context, schema *tfsdk.Schema, path *tftypes.AttributePath, val tftypes.Value) (interface{}, error) { //nolint:unparam
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
+	}
+
+	var attributeType attr.Type
+
+	if len(path.Steps()) == 0 {
+		attributeType = schema.AttributeType()
+	} else {
+		v, err := schema.AttributeTypeAtPath(path)
+
+		if err != nil {
+			return nil, fmt.Errorf("getting attribute type at %s: %w", path, err)
+		}
+
+		attributeType = v
 	}
 
 	typ := val.Type()
@@ -84,6 +99,9 @@ func (t toCloudControl) rawFromValue(ctx context.Context, val tftypes.Value) (in
 		if err := val.As(&s); err != nil {
 			return nil, err
 		}
+		if JSONStringType.Equal(attributeType) {
+			return expandJSONFromString(s)
+		}
 		return s, nil
 
 	//
@@ -95,11 +113,18 @@ func (t toCloudControl) rawFromValue(ctx context.Context, val tftypes.Value) (in
 			return nil, err
 		}
 		vs := make([]interface{}, 0)
-		for _, val := range vals {
-			v, err := t.rawFromValue(ctx, val)
+		for idx, val := range vals {
+			if typ.Is(tftypes.Set{}) {
+				// No need to worry about a specific value here.
+				path = path.WithElementKeyValue(tftypes.NewValue(typ.(tftypes.Set).ElementType, nil))
+			} else {
+				path = path.WithElementKeyInt(idx)
+			}
+			v, err := t.rawFromValue(ctx, schema, path, val)
 			if err != nil {
 				return nil, err
 			}
+			path = path.WithoutLastStep()
 			if v == nil {
 				continue
 			}
@@ -117,10 +142,16 @@ func (t toCloudControl) rawFromValue(ctx context.Context, val tftypes.Value) (in
 		}
 		vs := make(map[string]interface{})
 		for name, val := range vals {
-			v, err := t.rawFromValue(ctx, val)
+			if typ.Is(tftypes.Object{}) {
+				path = path.WithAttributeName(name)
+			} else {
+				path = path.WithElementKeyString(name)
+			}
+			v, err := t.rawFromValue(ctx, schema, path, val)
 			if err != nil {
 				return nil, err
 			}
+			path = path.WithoutLastStep()
 			if v == nil {
 				continue
 			}

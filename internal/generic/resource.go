@@ -406,7 +406,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	})
 
 	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
-	desiredState, err := translator.AsString(ctx, request.Plan.Raw)
+	desiredState, err := translator.AsString(ctx, &request.Plan.Schema, request.Plan.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
@@ -598,7 +598,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	}
 
 	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
-	currentDesiredState, err := translator.AsString(ctx, currentState.Raw)
+	currentDesiredState, err := translator.AsString(ctx, &currentState.Schema, currentState.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Prior State", err))
@@ -606,7 +606,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	plannedDesiredState, err := translator.AsString(ctx, request.Plan.Raw)
+	plannedDesiredState, err := translator.AsString(ctx, &request.Plan.Schema, request.Plan.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))

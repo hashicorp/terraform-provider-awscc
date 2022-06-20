@@ -618,6 +618,10 @@ var testMapsSchema = tfsdk.Schema{
 			}),
 			Optional: true,
 		},
+		"json_string": {
+			Type:     JSONStringType,
+			Optional: true,
+		},
 	},
 }
 
@@ -627,6 +631,7 @@ var mapsCfToTfNameMap = map[string]string{
 	"Name":       "name",
 	"SimpleMap":  "simple_map",
 	"ComplexMap": "complex_map",
+	"JsonString": "json_string",
 }
 
 func makeMapsTestPlan() tfsdk.Plan {
@@ -638,6 +643,7 @@ func makeMapsTestPlan() tfsdk.Plan {
 				"complex_map": tftypes.Map{
 					ElementType: videoPortElementType,
 				},
+				"json_string": tftypes.String,
 			},
 		}, map[string]tftypes.Value{
 			"name": tftypes.NewValue(tftypes.String, "testing"),
@@ -670,6 +676,7 @@ func makeMapsTestPlan() tfsdk.Plan {
 					}),
 				}),
 			}),
+			"json_string": tftypes.NewValue(tftypes.String, `{"Key1":42}`),
 		}),
 		Schema: testMapsSchema,
 	}
@@ -681,4 +688,5 @@ var mapsTfToCfNameMap = map[string]string{
 	"name":        "Name",
 	"simple_map":  "SimpleMap",
 	"complex_map": "ComplexMap",
+	"json_string": "JsonString",
 }

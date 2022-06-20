@@ -6,18 +6,206 @@ import (
 	"fmt"
 	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
-type jsonStringAttributePlanModifier struct {
-	tfsdk.AttributePlanModifier
+type jsonStringType uint8
+
+const (
+	JSONStringType jsonStringType = iota
+)
+
+var (
+	_ attr.TypeWithValidate = JSONStringType
+)
+
+func (t jsonStringType) TerraformType(_ context.Context) tftypes.Type {
+	return tftypes.String
+}
+
+func (t jsonStringType) ValueFromTerraform(_ context.Context, v tftypes.Value) (attr.Value, error) {
+	if !v.IsKnown() {
+		return JSONString{Unknown: true}, nil
+	}
+
+	if v.IsNull() {
+		return JSONString{Null: true}, nil
+	}
+
+	var s string
+	err := v.As(&s)
+
+	if err != nil {
+		return nil, err
+	}
+
+	// Don't return the normalized string here, else Plan != Config.
+	_, err = normalizeJSONString(s)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return JSONString{Value: s}, nil
+}
+
+func (t jsonStringType) Equal(o attr.Type) bool {
+	_, ok := o.(jsonStringType)
+
+	return ok
+}
+
+func (t jsonStringType) ApplyTerraform5AttributePathStep(step tftypes.AttributePathStep) (interface{}, error) {
+	return nil, fmt.Errorf("cannot apply AttributePathStep %v to %s", step, t.String())
+}
+
+func (t jsonStringType) String() string {
+	return "JSONStringType"
+}
+
+func (t jsonStringType) Validate(ctx context.Context, v tftypes.Value, path *tftypes.AttributePath) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	if !v.Type().Is(tftypes.String) {
+		diags.AddAttributeError(
+			path,
+			"Duration Type Validation Error",
+			"An unexpected error was encountered trying to validate an attribute value. This is always an error in the provider. Please report the following to the provider developer:\n\n"+
+				fmt.Sprintf("Expected String value, received %T with value: %v", v, v),
+		)
+
+		return diags
+	}
+
+	if !v.IsKnown() || v.IsNull() {
+		return diags
+	}
+
+	var s string
+	err := v.As(&s)
+
+	if err != nil {
+		diags.AddAttributeError(
+			path,
+			"Duration Type Validation Error",
+			"An unexpected error was encountered trying to validate an attribute value. This is always an error in the provider. Please report the following to the provider developer:\n\n"+
+				fmt.Sprintf("Cannot convert value to String: %s", err),
+		)
+
+		return diags
+	}
+
+	if s == "" {
+		return diags
+	}
+
+	_, err = expandJSONFromString(s)
+
+	if err != nil {
+		diags.AddAttributeError(
+			path,
+			"JSONString Type Validation Error",
+			fmt.Sprintf("Value %q cannot be parsed as a JSON string.", v),
+		)
+
+		return diags
+	}
+
+	return diags
+}
+
+func (t jsonStringType) AttributePlanModifier() tfsdk.AttributePlanModifier {
+	return jsonStringAttributePlanModifier{}
 }
 
 // A JSONString is a string containing a valid JSON document.
-// This plan modifier suppresses semantically insignificant differences.
-func JSONString() tfsdk.AttributePlanModifier {
-	return jsonStringAttributePlanModifier{}
+type JSONString struct {
+	// Unknown will be true if the value is not yet known.
+	Unknown bool
+
+	// Null will be true if the value was not set, or was explicitly set to
+	// null.
+	Null bool
+
+	// Value contains the set value, as long as Unknown and Null are both
+	// false.
+	Value string
+}
+
+func (s JSONString) Type(_ context.Context) attr.Type {
+	return JSONStringType
+}
+
+func (s JSONString) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
+	t := JSONStringType.TerraformType(ctx)
+
+	if s.Null {
+		return tftypes.NewValue(t, nil), nil
+	}
+
+	if s.Unknown {
+		return tftypes.NewValue(t, tftypes.UnknownValue), nil
+	}
+
+	if err := tftypes.ValidateValue(tftypes.String, s.Value); err != nil {
+		return tftypes.NewValue(t, tftypes.UnknownValue), err
+	}
+
+	return tftypes.NewValue(t, s.Value), nil
+}
+
+func (s JSONString) Equal(other attr.Value) bool {
+	o, ok := other.(JSONString)
+
+	if !ok {
+		return false
+	}
+
+	if s.Unknown != o.Unknown {
+		return false
+	}
+
+	if s.Null != o.Null {
+		return false
+	}
+
+	return s.Value == o.Value
+}
+
+// IsNull returns true if the Value is not set, or is explicitly set to null.
+func (s JSONString) IsNull() bool {
+	return s.Null
+}
+
+// IsNull returns true if the Value is not set, or is explicitly set to null.
+func (s JSONString) IsUnknown() bool {
+	return s.Unknown
+}
+
+// String returns a summary representation of either the underlying Value,
+// or UnknownValueString (`<unknown>`) when IsUnknown() returns true,
+// or NullValueString (`<null>`) when IsNull() return true.
+//
+// This is an intentionally lossy representation, that are best suited for
+// logging and error reporting, as they are not protected by
+// compatibility guarantees within the framework.
+func (s JSONString) String() string {
+	if s.IsUnknown() {
+		return attr.UnknownValueString
+	}
+
+	if s.IsNull() {
+		return attr.NullValueString
+	}
+
+	return s.Value
+}
+
+type jsonStringAttributePlanModifier struct {
+	tfsdk.AttributePlanModifier
 }
 
 func (attributePlanModifier jsonStringAttributePlanModifier) Description(_ context.Context) string {
@@ -38,7 +226,7 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 	// If the current value is semantically equivalent to the planned value
 	// then return the current value, else return the planned value.
 
-	var planned types.String
+	var planned JSONString
 	diags := tfsdk.ValueAs(ctx, request.AttributePlan, &planned)
 
 	if diags.HasError() {
@@ -58,7 +246,7 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 		return
 	}
 
-	var current types.String
+	var current JSONString
 	diags = tfsdk.ValueAs(ctx, request.AttributeState, &current)
 
 	if diags.HasError() {
@@ -91,4 +279,24 @@ func expandJSONFromString(s string) (map[string]interface{}, error) {
 	err := json.Unmarshal([]byte(s), &v)
 
 	return v, err
+}
+
+func normalizeJSONString(s string) (string, error) {
+	if s == "" {
+		return "", nil
+	}
+
+	v, err := expandJSONFromString(s)
+
+	if err != nil {
+		return "", err
+	}
+
+	bytes, err := json.Marshal(v)
+
+	if err != nil {
+		return "", err
+	}
+
+	return string(bytes), nil
 }

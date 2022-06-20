@@ -169,8 +169,11 @@ func coreNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Live policy document for the core network, you must provide PolicyDocument in Json Format",
-			Type:        types.MapType{ElemType: types.StringType},
+			Type:        JSONStringType,
 			Optional:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				JSONStringType.AttributePlanModifier(),
+			},
 		},
 		"segments": {
 			// Property: Segments
