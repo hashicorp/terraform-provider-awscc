@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
@@ -227,7 +226,7 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 	// If the current value is semantically equivalent to the planned value
 	// then return the current value, else return the planned value.
 
-	var planned types.String
+	var planned JSONString
 	diags := tfsdk.ValueAs(ctx, request.AttributePlan, &planned)
 
 	if diags.HasError() {
@@ -247,7 +246,7 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 		return
 	}
 
-	var current types.String
+	var current JSONString
 	diags = tfsdk.ValueAs(ctx, request.AttributeState, &current)
 
 	if diags.HasError() {

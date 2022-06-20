@@ -121,35 +121,35 @@ func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 		expectError   bool
 	}
 	tests := map[string]testCase{
-		"planned not string": {
+		"planned not JSONString": {
 			plannedValue: types.Int64{Value: 1},
-			currentValue: types.String{Value: `{}`},
+			currentValue: JSONString{Value: `{}`},
 			expectError:  true,
 		},
-		"current not string": {
-			plannedValue: types.String{Value: `{}`},
+		"current not JSONString": {
+			plannedValue: JSONString{Value: `{}`},
 			currentValue: types.Int64{Value: 1},
 			expectError:  true,
 		},
 		"exactly equal": {
-			plannedValue:  types.String{Value: `{}`},
-			currentValue:  types.String{Value: `{}`},
-			expectedValue: types.String{Value: `{}`},
+			plannedValue:  JSONString{Value: `{}`},
+			currentValue:  JSONString{Value: `{}`},
+			expectedValue: JSONString{Value: `{}`},
 		},
 		"leading and trailing whitespace": {
-			plannedValue:  types.String{Value: ` {}`},
-			currentValue:  types.String{Value: `{}  `},
-			expectedValue: types.String{Value: `{}  `},
+			plannedValue:  JSONString{Value: ` {}`},
+			currentValue:  JSONString{Value: `{}  `},
+			expectedValue: JSONString{Value: `{}  `},
 		},
 		"not equal": {
-			plannedValue:  types.String{Value: `{"k1": 42}`},
-			currentValue:  types.String{Value: `{"k1": -1}`},
-			expectedValue: types.String{Value: `{"k1": 42}`},
+			plannedValue:  JSONString{Value: `{"k1": 42}`},
+			currentValue:  JSONString{Value: `{"k1": -1}`},
+			expectedValue: JSONString{Value: `{"k1": 42}`},
 		},
 		"fields reordered": {
-			plannedValue:  types.String{Value: `{"k2": ["v2",  {"k3": true}],  "k1": 42 }`},
-			currentValue:  types.String{Value: `{"k1": 42, "k2": ["v2", {"k3": true}]}`},
-			expectedValue: types.String{Value: `{"k1": 42, "k2": ["v2", {"k3": true}]}`},
+			plannedValue:  JSONString{Value: `{"k2": ["v2",  {"k3": true}],  "k1": 42 }`},
+			currentValue:  JSONString{Value: `{"k1": 42, "k2": ["v2", {"k3": true}]}`},
+			expectedValue: JSONString{Value: `{"k1": 42, "k2": ["v2", {"k3": true}]}`},
 		},
 	}
 
