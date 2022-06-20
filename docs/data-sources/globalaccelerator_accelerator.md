@@ -26,6 +26,7 @@ Data Source schema for AWS::GlobalAccelerator::Accelerator
 - `enabled` (Boolean) Indicates whether an accelerator is enabled. The value is true or false.
 - `ip_address_type` (String) IP Address type.
 - `ip_addresses` (List of String) The IP addresses from BYOIP Prefix pool.
+- `ipv_4_addresses` (List of String) The IPv4 addresses assigned to the accelerator.
 - `name` (String) Name of accelerator.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

@@ -25,6 +25,7 @@ Resource schema for AWS::ApplicationInsights::Application
 - `component_monitoring_settings` (Attributes List) The monitoring settings of the components. (see [below for nested schema](#nestedatt--component_monitoring_settings))
 - `custom_components` (Attributes List) The custom grouped components. (see [below for nested schema](#nestedatt--custom_components))
 - `cwe_monitor_enabled` (Boolean) Indicates whether Application Insights can listen to CloudWatch events for the application resources.
+- `grouping_type` (String) The grouping type of the application
 - `log_pattern_sets` (Attributes List) The log pattern sets. (see [below for nested schema](#nestedatt--log_pattern_sets))
 - `ops_center_enabled` (Boolean) When set to true, creates opsItems for any problems detected on an application.
 - `ops_item_sns_topic_arn` (String) The SNS topic provided to Application Insights that is associated to the created opsItem.

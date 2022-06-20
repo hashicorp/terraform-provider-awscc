@@ -34,6 +34,7 @@ Read-Only:
 - `kinesis_firehose_destination` (Attributes) An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination. (see [below for nested schema](#nestedatt--event_destination--kinesis_firehose_destination))
 - `matching_event_types` (List of String) The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure.
 - `name` (String) The name of the event destination set.
+- `sns_destination` (Attributes) An object that contains SNS topic ARN associated event destination. (see [below for nested schema](#nestedatt--event_destination--sns_destination))
 
 <a id="nestedatt--event_destination--cloudwatch_destination"></a>
 ### Nested Schema for `event_destination.cloudwatch_destination`
@@ -60,5 +61,13 @@ Read-Only:
 
 - `delivery_stream_arn` (String) The ARN of the Amazon Kinesis Firehose stream that email sending events should be published to.
 - `iam_role_arn` (String) The ARN of the IAM role under which Amazon SES publishes email sending events to the Amazon Kinesis Firehose stream.
+
+
+<a id="nestedatt--event_destination--sns_destination"></a>
+### Nested Schema for `event_destination.sns_destination`
+
+Read-Only:
+
+- `topic_arn` (String)
 
 
