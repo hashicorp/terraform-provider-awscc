@@ -361,9 +361,6 @@ func alarmModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//                 "type": "object"
 			//               }
 			//             },
-			//             "required": [
-			//               "PropertyValue"
-			//             ],
 			//             "type": "object"
 			//           },
 			//           "IotTopicPublish": {
@@ -976,7 +973,6 @@ func alarmModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 									Computed: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Computed: true,
 					},
@@ -1174,7 +1170,6 @@ func alarmModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 						Computed:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

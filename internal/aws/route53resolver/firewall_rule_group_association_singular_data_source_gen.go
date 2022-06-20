@@ -226,7 +226,6 @@ func firewallRuleGroupAssociationDataSourceType(ctx context.Context) (tfsdk.Data
 						Computed:    true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

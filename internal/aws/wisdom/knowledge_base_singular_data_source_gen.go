@@ -233,7 +233,6 @@ func knowledgeBaseDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 						Computed: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

@@ -17,11 +17,56 @@ Resource schema for AWS::SES::ConfigurationSet.
 
 ### Optional
 
+- `delivery_options` (Attributes) An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set. (see [below for nested schema](#nestedatt--delivery_options))
 - `name` (String) The name of the configuration set.
+- `reputation_options` (Attributes) An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set. (see [below for nested schema](#nestedatt--reputation_options))
+- `sending_options` (Attributes) An object that defines whether or not Amazon SES can send email that you send using the configuration set. (see [below for nested schema](#nestedatt--sending_options))
+- `suppression_options` (Attributes) An object that contains information about the suppression list preferences for your account. (see [below for nested schema](#nestedatt--suppression_options))
+- `tracking_options` (Attributes) An object that defines the open and click tracking options for emails that you send using the configuration set. (see [below for nested schema](#nestedatt--tracking_options))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--delivery_options"></a>
+### Nested Schema for `delivery_options`
+
+Optional:
+
+- `sending_pool_name` (String) The name of the dedicated IP pool to associate with the configuration set.
+- `tls_policy` (String) Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require , messages are only delivered if a TLS connection can be established. If the value is Optional , messages can be delivered in plain text if a TLS connection can't be established.
+
+
+<a id="nestedatt--reputation_options"></a>
+### Nested Schema for `reputation_options`
+
+Optional:
+
+- `reputation_metrics_enabled` (Boolean) If true , tracking of reputation metrics is enabled for the configuration set. If false , tracking of reputation metrics is disabled for the configuration set.
+
+
+<a id="nestedatt--sending_options"></a>
+### Nested Schema for `sending_options`
+
+Optional:
+
+- `sending_enabled` (Boolean)
+
+
+<a id="nestedatt--suppression_options"></a>
+### Nested Schema for `suppression_options`
+
+Optional:
+
+- `suppressed_reasons` (List of String) A list that contains the reasons that email addresses are automatically added to the suppression list for your account.
+
+
+<a id="nestedatt--tracking_options"></a>
+### Nested Schema for `tracking_options`
+
+Optional:
+
+- `custom_redirect_domain` (String) The domain to use for tracking open and click events.
 
 ## Import
 

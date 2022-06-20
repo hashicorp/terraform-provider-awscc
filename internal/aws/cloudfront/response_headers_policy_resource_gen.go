@@ -413,7 +413,6 @@ func responseHeadersPolicyResourceType(ctx context.Context) (tfsdk.ResourceType,
 												Required: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{

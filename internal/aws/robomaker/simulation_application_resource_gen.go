@@ -345,7 +345,6 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

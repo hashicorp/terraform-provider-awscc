@@ -154,7 +154,6 @@ func transitGatewayVpcAttachmentDataSourceType(ctx context.Context) (tfsdk.DataS
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

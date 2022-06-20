@@ -158,7 +158,6 @@ func loadBalancerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 						Computed:    true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

@@ -213,7 +213,6 @@ func robotApplicationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

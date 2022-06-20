@@ -139,7 +139,6 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

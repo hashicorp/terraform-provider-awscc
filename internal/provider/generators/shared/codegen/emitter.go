@@ -217,8 +217,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				features |= f
 
 				e.printf(",\n")
-				e.printf("tfsdk.SetNestedAttributesOptions{},\n")
-
 				e.printf("),\n")
 
 				if v, err := arrayLengthValidator(path, property); err != nil {
@@ -307,8 +305,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				features |= f
 
 				e.printf(",\n")
-				e.printf("tfsdk.ListNestedAttributesOptions{},\n")
-
 				e.printf("),\n")
 
 				if v, err := arrayLengthValidator(path, property); err != nil {
@@ -475,9 +471,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				features |= f
 
-				e.printf(",\n")
-				e.printf("tfsdk.MapNestedAttributesOptions{},\n")
-
 				if !computedOnly {
 					if patternProperty.MinItems != nil {
 						return 0, fmt.Errorf("%s has unsupported MinItems", strings.Join(path, "/"))
@@ -487,6 +480,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					}
 				}
 
+				e.printf(",\n")
 				e.printf("),\n")
 
 			default:

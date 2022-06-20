@@ -252,7 +252,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

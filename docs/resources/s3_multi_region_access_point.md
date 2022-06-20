@@ -35,6 +35,7 @@ AWS::S3::MultiRegionAccessPoint is an Amazon S3 resource type that dynamically r
 
 Required:
 
+- `account_id` (String)
 - `bucket` (String)
 
 

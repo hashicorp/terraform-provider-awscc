@@ -201,7 +201,6 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

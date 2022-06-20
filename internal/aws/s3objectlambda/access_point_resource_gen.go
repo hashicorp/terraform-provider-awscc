@@ -207,7 +207,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Required: true,
 					},

@@ -145,7 +145,6 @@ func networkInsightsAccessScopeAnalysisDataSourceType(ctx context.Context) (tfsd
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

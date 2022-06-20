@@ -135,7 +135,6 @@ func vPCPeeringConnectionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

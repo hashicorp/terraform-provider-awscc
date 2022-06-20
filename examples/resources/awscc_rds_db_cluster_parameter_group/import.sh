@@ -1,0 +1,1 @@
+$ terraform import awscc_rds_db_cluster_parameter_group.example <resource ID>

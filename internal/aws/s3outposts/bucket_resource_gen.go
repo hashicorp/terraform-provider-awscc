@@ -316,7 +316,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		},
 																	},
 																},
-																tfsdk.SetNestedAttributesOptions{},
 															),
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
@@ -400,7 +399,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
 						),
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -496,7 +494,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

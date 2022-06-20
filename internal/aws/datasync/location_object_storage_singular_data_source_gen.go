@@ -211,7 +211,6 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 						Computed:    true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

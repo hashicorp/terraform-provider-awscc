@@ -156,14 +156,20 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               ],
 			//               "type": "string"
 			//             },
+			//             "LifecycleConfigArn": {
+			//               "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+			//               "maxLength": 256,
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+			//               "type": "string"
+			//             },
 			//             "SageMakerImageArn": {
-			//               "description": "The ARN of the SageMaker image that the image version belongs to.",
+			//               "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
 			//               "maxLength": 256,
 			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
 			//               "type": "string"
 			//             },
 			//             "SageMakerImageVersionArn": {
-			//               "description": "The ARN of the image version created on the instance.",
+			//               "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
 			//               "maxLength": 256,
 			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 			//               "type": "string"
@@ -180,6 +186,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "properties": {
 			//         "CustomImages": {
 			//           "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+			//           "insertionOrder": false,
 			//           "items": {
 			//             "additionalProperties": false,
 			//             "description": "A custom SageMaker image.",
@@ -255,14 +262,125 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               ],
 			//               "type": "string"
 			//             },
+			//             "LifecycleConfigArn": {
+			//               "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+			//               "maxLength": 256,
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+			//               "type": "string"
+			//             },
 			//             "SageMakerImageArn": {
-			//               "description": "The ARN of the SageMaker image that the image version belongs to.",
+			//               "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
 			//               "maxLength": 256,
 			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
 			//               "type": "string"
 			//             },
 			//             "SageMakerImageVersionArn": {
-			//               "description": "The ARN of the image version created on the instance.",
+			//               "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+			//               "maxLength": 256,
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "RSessionAppSettings": {
+			//       "additionalProperties": false,
+			//       "description": "A collection of settings that apply to an RSessionGateway app.",
+			//       "properties": {
+			//         "CustomImages": {
+			//           "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "description": "A custom SageMaker image.",
+			//             "properties": {
+			//               "AppImageConfigName": {
+			//                 "description": "The Name of the AppImageConfig.",
+			//                 "maxLength": 63,
+			//                 "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+			//                 "type": "string"
+			//               },
+			//               "ImageName": {
+			//                 "description": "The name of the CustomImage. Must be unique to your account.",
+			//                 "maxLength": 63,
+			//                 "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
+			//                 "type": "string"
+			//               },
+			//               "ImageVersionNumber": {
+			//                 "description": "The version number of the CustomImage.",
+			//                 "minimum": 0,
+			//                 "type": "integer"
+			//               }
+			//             },
+			//             "required": [
+			//               "AppImageConfigName",
+			//               "ImageName"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "maxItems": 30,
+			//           "minItems": 0,
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "DefaultResourceSpec": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "InstanceType": {
+			//               "description": "The instance type that the image version runs on.",
+			//               "enum": [
+			//                 "system",
+			//                 "ml.t3.micro",
+			//                 "ml.t3.small",
+			//                 "ml.t3.medium",
+			//                 "ml.t3.large",
+			//                 "ml.t3.xlarge",
+			//                 "ml.t3.2xlarge",
+			//                 "ml.m5.large",
+			//                 "ml.m5.xlarge",
+			//                 "ml.m5.2xlarge",
+			//                 "ml.m5.4xlarge",
+			//                 "ml.m5.8xlarge",
+			//                 "ml.m5.12xlarge",
+			//                 "ml.m5.16xlarge",
+			//                 "ml.m5.24xlarge",
+			//                 "ml.c5.large",
+			//                 "ml.c5.xlarge",
+			//                 "ml.c5.2xlarge",
+			//                 "ml.c5.4xlarge",
+			//                 "ml.c5.9xlarge",
+			//                 "ml.c5.12xlarge",
+			//                 "ml.c5.18xlarge",
+			//                 "ml.c5.24xlarge",
+			//                 "ml.p3.2xlarge",
+			//                 "ml.p3.8xlarge",
+			//                 "ml.p3.16xlarge",
+			//                 "ml.g4dn.xlarge",
+			//                 "ml.g4dn.2xlarge",
+			//                 "ml.g4dn.4xlarge",
+			//                 "ml.g4dn.8xlarge",
+			//                 "ml.g4dn.12xlarge",
+			//                 "ml.g4dn.16xlarge"
+			//               ],
+			//               "type": "string"
+			//             },
+			//             "LifecycleConfigArn": {
+			//               "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+			//               "maxLength": 256,
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+			//               "type": "string"
+			//             },
+			//             "SageMakerImageArn": {
+			//               "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+			//               "maxLength": 256,
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+			//               "type": "string"
+			//             },
+			//             "SageMakerImageVersionArn": {
+			//               "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
 			//               "maxLength": 256,
 			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 			//               "type": "string"
@@ -298,6 +416,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "SecurityGroups": {
 			//       "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "maxLength": 32,
 			//         "pattern": "[-0-9a-zA-Z]+",
@@ -402,9 +521,19 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													}),
 												},
 											},
+											"lifecycle_config_arn": {
+												// Property: LifecycleConfigArn
+												Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+												Type:        types.StringType,
+												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+												},
+											},
 											"sage_maker_image_arn": {
 												// Property: SageMakerImageArn
-												Description: "The ARN of the SageMaker image that the image version belongs to.",
+												Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
@@ -414,7 +543,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
-												Description: "The ARN of the image version created on the instance.",
+												Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
@@ -470,11 +599,13 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 30),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
 									},
 								},
 								"default_resource_spec": {
@@ -524,9 +655,19 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													}),
 												},
 											},
+											"lifecycle_config_arn": {
+												// Property: LifecycleConfigArn
+												Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+												Type:        types.StringType,
+												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+												},
+											},
 											"sage_maker_image_arn": {
 												// Property: SageMakerImageArn
-												Description: "The ARN of the SageMaker image that the image version belongs to.",
+												Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
@@ -536,7 +677,140 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
-												Description: "The ARN of the image version created on the instance.",
+												Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
+												Type:        types.StringType,
+												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+												},
+											},
+										},
+									),
+									Optional: true,
+								},
+							},
+						),
+						Optional: true,
+					},
+					"r_session_app_settings": {
+						// Property: RSessionAppSettings
+						Description: "A collection of settings that apply to an RSessionGateway app.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"custom_images": {
+									// Property: CustomImages
+									Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"app_image_config_name": {
+												// Property: AppImageConfigName
+												Description: "The Name of the AppImageConfig.",
+												Type:        types.StringType,
+												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(63),
+													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+												},
+											},
+											"image_name": {
+												// Property: ImageName
+												Description: "The name of the CustomImage. Must be unique to your account.",
+												Type:        types.StringType,
+												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(63),
+													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
+												},
+											},
+											"image_version_number": {
+												// Property: ImageVersionNumber
+												Description: "The version number of the CustomImage.",
+												Type:        types.Int64Type,
+												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(0),
+												},
+											},
+										},
+									),
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 30),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
+								},
+								"default_resource_spec": {
+									// Property: DefaultResourceSpec
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"instance_type": {
+												// Property: InstanceType
+												Description: "The instance type that the image version runs on.",
+												Type:        types.StringType,
+												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"system",
+														"ml.t3.micro",
+														"ml.t3.small",
+														"ml.t3.medium",
+														"ml.t3.large",
+														"ml.t3.xlarge",
+														"ml.t3.2xlarge",
+														"ml.m5.large",
+														"ml.m5.xlarge",
+														"ml.m5.2xlarge",
+														"ml.m5.4xlarge",
+														"ml.m5.8xlarge",
+														"ml.m5.12xlarge",
+														"ml.m5.16xlarge",
+														"ml.m5.24xlarge",
+														"ml.c5.large",
+														"ml.c5.xlarge",
+														"ml.c5.2xlarge",
+														"ml.c5.4xlarge",
+														"ml.c5.9xlarge",
+														"ml.c5.12xlarge",
+														"ml.c5.18xlarge",
+														"ml.c5.24xlarge",
+														"ml.p3.2xlarge",
+														"ml.p3.8xlarge",
+														"ml.p3.16xlarge",
+														"ml.g4dn.xlarge",
+														"ml.g4dn.2xlarge",
+														"ml.g4dn.4xlarge",
+														"ml.g4dn.8xlarge",
+														"ml.g4dn.12xlarge",
+														"ml.g4dn.16xlarge",
+													}),
+												},
+											},
+											"lifecycle_config_arn": {
+												// Property: LifecycleConfigArn
+												Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+												Type:        types.StringType,
+												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+												},
+											},
+											"sage_maker_image_arn": {
+												// Property: SageMakerImageArn
+												Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+												Type:        types.StringType,
+												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
+												},
+											},
+											"sage_maker_image_version_arn": {
+												// Property: SageMakerImageVersionArn
+												Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
@@ -594,6 +868,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.ArrayLenBetween(0, 5),
 							validate.ArrayForEach(validate.StringLenAtMost(32)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
 						},
 					},
 					"sharing_settings": {
@@ -745,14 +1022,20 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               ],
 			//               "type": "string"
 			//             },
+			//             "LifecycleConfigArn": {
+			//               "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+			//               "maxLength": 256,
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+			//               "type": "string"
+			//             },
 			//             "SageMakerImageArn": {
-			//               "description": "The ARN of the SageMaker image that the image version belongs to.",
+			//               "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
 			//               "maxLength": 256,
 			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
 			//               "type": "string"
 			//             },
 			//             "SageMakerImageVersionArn": {
-			//               "description": "The ARN of the image version created on the instance.",
+			//               "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
 			//               "maxLength": 256,
 			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 			//               "type": "string"
@@ -785,6 +1068,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "SecurityGroupIds": {
 			//       "description": "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "maxLength": 32,
 			//         "pattern": "[-0-9a-zA-Z]+",
@@ -852,9 +1136,19 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													}),
 												},
 											},
+											"lifecycle_config_arn": {
+												// Property: LifecycleConfigArn
+												Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+												Type:        types.StringType,
+												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+												},
+											},
 											"sage_maker_image_arn": {
 												// Property: SageMakerImageArn
-												Description: "The ARN of the SageMaker image that the image version belongs to.",
+												Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
@@ -864,7 +1158,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
-												Description: "The ARN of the image version created on the instance.",
+												Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
@@ -928,6 +1222,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
 							tfsdk.UseStateForUnknown(),
 							tfsdk.RequiresReplace(),
 						},
@@ -1009,6 +1304,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The VPC subnets that Studio uses for communication.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 32,
 			//     "pattern": "[-0-9a-zA-Z]+",
@@ -1028,6 +1324,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -1036,6 +1333,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A list of tags to apply to the user profile.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -1081,7 +1379,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -1089,6 +1386,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenBetween(0, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
@@ -1174,7 +1472,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"kernel_gateway_app_settings":                    "KernelGatewayAppSettings",
 		"key":                                            "Key",
 		"kms_key_id":                                     "KmsKeyId",
+		"lifecycle_config_arn":                           "LifecycleConfigArn",
 		"notebook_output_option":                         "NotebookOutputOption",
+		"r_session_app_settings":                         "RSessionAppSettings",
 		"r_studio_connect_url":                           "RStudioConnectUrl",
 		"r_studio_package_manager_url":                   "RStudioPackageManagerUrl",
 		"r_studio_server_pro_app_settings":               "RStudioServerProAppSettings",

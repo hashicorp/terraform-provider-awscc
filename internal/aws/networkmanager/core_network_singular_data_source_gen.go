@@ -114,7 +114,6 @@ func coreNetworkDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -144,11 +143,11 @@ func coreNetworkDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: PolicyDocument
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Live policy document for the core network",
-			//   "type": "string"
+			//   "description": "Live policy document for the core network, you must provide PolicyDocument in Json Format",
+			//   "type": "object"
 			// }
-			Description: "Live policy document for the core network",
-			Type:        types.StringType,
+			Description: "Live policy document for the core network, you must provide PolicyDocument in Json Format",
+			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
 		},
 		"segments": {
@@ -205,7 +204,6 @@ func coreNetworkDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -263,7 +261,6 @@ func coreNetworkDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						Computed:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

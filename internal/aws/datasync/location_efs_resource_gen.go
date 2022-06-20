@@ -21,6 +21,23 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationEFS resource type.
 func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"access_point_arn": {
+			// Property: AccessPointArn
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Amazon Resource Name (ARN) for the Amazon EFS Access point that DataSync uses when accessing the EFS file system.",
+			//   "maxLength": 128,
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$",
+			//   "type": "string"
+			// }
+			Description: "The Amazon Resource Name (ARN) for the Amazon EFS Access point that DataSync uses when accessing the EFS file system.",
+			Type:        types.StringType,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtMost(128),
+				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$"), ""),
+			},
+		},
 		"ec_2_config": {
 			// Property: Ec2Config
 			// CloudFormation resource type schema:
@@ -107,6 +124,44 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 			// EfsFilesystemArn is a write-only property.
+		},
+		"file_system_access_role_arn": {
+			// Property: FileSystemAccessRoleArn
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the AWS IAM role that the DataSync will assume when mounting the EFS file system.",
+			//   "maxLength": 128,
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+			//   "type": "string"
+			// }
+			Description: "The Amazon Resource Name (ARN) of the AWS IAM role that the DataSync will assume when mounting the EFS file system.",
+			Type:        types.StringType,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtMost(128),
+				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"), ""),
+			},
+		},
+		"in_transit_encryption": {
+			// Property: InTransitEncryption
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Protocol that is used for encrypting the traffic exchanged between the DataSync Agent and the EFS file system.",
+			//   "enum": [
+			//     "NONE",
+			//     "TLS1_2"
+			//   ],
+			//   "type": "string"
+			// }
+			Description: "Protocol that is used for encrypting the traffic exchanged between the DataSync Agent and the EFS file system.",
+			Type:        types.StringType,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"NONE",
+					"TLS1_2",
+				}),
+			},
 		},
 		"location_arn": {
 			// Property: LocationArn
@@ -222,7 +277,6 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -252,16 +306,19 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ec_2_config":         "Ec2Config",
-		"efs_filesystem_arn":  "EfsFilesystemArn",
-		"key":                 "Key",
-		"location_arn":        "LocationArn",
-		"location_uri":        "LocationUri",
-		"security_group_arns": "SecurityGroupArns",
-		"subdirectory":        "Subdirectory",
-		"subnet_arn":          "SubnetArn",
-		"tags":                "Tags",
-		"value":               "Value",
+		"access_point_arn":            "AccessPointArn",
+		"ec_2_config":                 "Ec2Config",
+		"efs_filesystem_arn":          "EfsFilesystemArn",
+		"file_system_access_role_arn": "FileSystemAccessRoleArn",
+		"in_transit_encryption":       "InTransitEncryption",
+		"key":                         "Key",
+		"location_arn":                "LocationArn",
+		"location_uri":                "LocationUri",
+		"security_group_arns":         "SecurityGroupArns",
+		"subdirectory":                "Subdirectory",
+		"subnet_arn":                  "SubnetArn",
+		"tags":                        "Tags",
+		"value":                       "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

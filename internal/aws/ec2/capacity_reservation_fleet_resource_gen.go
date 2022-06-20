@@ -161,7 +161,6 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Optional: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -251,7 +250,6 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -259,7 +257,6 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,

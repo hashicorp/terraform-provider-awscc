@@ -143,6 +143,12 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			//     "additionalProperties": false,
 			//     "description": "The name of the bucket that represents of the region belonging to this Multi Region Access Point.",
 			//     "properties": {
+			//       "AccountId": {
+			//         "maxLength": 12,
+			//         "minLength": 12,
+			//         "pattern": "^[0-9]{12}$",
+			//         "type": "string"
+			//       },
 			//       "Bucket": {
 			//         "maxLength": 63,
 			//         "minLength": 3,
@@ -162,6 +168,15 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The list of buckets that you want to associate this Multi Region Access Point with.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"account_id": {
+						// Property: AccountId
+						Type:     types.StringType,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(12, 12),
+							validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
+						},
+					},
 					"bucket": {
 						// Property: Bucket
 						Type:     types.StringType,
@@ -172,7 +187,6 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -206,6 +220,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":                        "AccountId",
 		"alias":                             "Alias",
 		"block_public_acls":                 "BlockPublicAcls",
 		"block_public_policy":               "BlockPublicPolicy",

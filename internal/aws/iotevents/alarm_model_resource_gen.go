@@ -373,9 +373,6 @@ func alarmModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "type": "object"
 			//               }
 			//             },
-			//             "required": [
-			//               "PropertyValue"
-			//             ],
 			//             "type": "object"
 			//           },
 			//           "IotTopicPublish": {
@@ -852,7 +849,7 @@ func alarmModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 													},
 												),
-												Required: true,
+												Optional: true,
 											},
 										},
 									),
@@ -1028,7 +1025,6 @@ func alarmModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1272,7 +1268,6 @@ func alarmModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

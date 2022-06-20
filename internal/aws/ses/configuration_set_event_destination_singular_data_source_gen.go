@@ -116,6 +116,22 @@ func configurationSetEventDestinationDataSourceType(ctx context.Context) (tfsdk.
 			//       "description": "The name of the event destination set.",
 			//       "pattern": "^[a-zA-Z0-9_-]{0,64}$",
 			//       "type": "string"
+			//     },
+			//     "SnsDestination": {
+			//       "additionalProperties": false,
+			//       "description": "An object that contains SNS topic ARN associated event destination.",
+			//       "properties": {
+			//         "TopicARN": {
+			//           "maxLength": 1024,
+			//           "minLength": 36,
+			//           "pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "TopicARN"
+			//       ],
+			//       "type": "object"
 			//     }
 			//   },
 			//   "required": [
@@ -155,7 +171,6 @@ func configurationSetEventDestinationDataSourceType(ctx context.Context) (tfsdk.
 												Computed:    true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Computed: true,
 								},
@@ -201,6 +216,20 @@ func configurationSetEventDestinationDataSourceType(ctx context.Context) (tfsdk.
 						Description: "The name of the event destination set.",
 						Type:        types.StringType,
 						Computed:    true,
+					},
+					"sns_destination": {
+						// Property: SnsDestination
+						Description: "An object that contains SNS topic ARN associated event destination.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"topic_arn": {
+									// Property: TopicARN
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
 					},
 				},
 			),
@@ -248,6 +277,8 @@ func configurationSetEventDestinationDataSourceType(ctx context.Context) (tfsdk.
 		"kinesis_firehose_destination": "KinesisFirehoseDestination",
 		"matching_event_types":         "MatchingEventTypes",
 		"name":                         "Name",
+		"sns_destination":              "SnsDestination",
+		"topic_arn":                    "TopicARN",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

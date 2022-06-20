@@ -176,7 +176,6 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -262,7 +261,6 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 									Optional:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -270,7 +268,6 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

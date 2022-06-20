@@ -169,7 +169,6 @@ func launchConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 						Computed:    true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

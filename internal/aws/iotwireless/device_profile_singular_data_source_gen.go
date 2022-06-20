@@ -240,7 +240,6 @@ func deviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 						Computed: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

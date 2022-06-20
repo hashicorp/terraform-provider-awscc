@@ -209,7 +209,6 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									Required:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -309,7 +308,6 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

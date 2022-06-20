@@ -95,7 +95,6 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -194,7 +193,6 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{

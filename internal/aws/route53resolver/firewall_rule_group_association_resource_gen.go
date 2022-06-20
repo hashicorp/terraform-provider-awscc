@@ -272,7 +272,6 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

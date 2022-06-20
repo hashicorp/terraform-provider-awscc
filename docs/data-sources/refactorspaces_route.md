@@ -23,7 +23,6 @@ Data Source schema for AWS::RefactorSpaces::Route
 
 - `application_identifier` (String)
 - `arn` (String)
-- `default_route` (Attributes) (see [below for nested schema](#nestedatt--default_route))
 - `environment_identifier` (String)
 - `path_resource_to_id` (String)
 - `route_identifier` (String)
@@ -31,14 +30,6 @@ Data Source schema for AWS::RefactorSpaces::Route
 - `service_identifier` (String)
 - `tags` (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
 - `uri_path_route` (Attributes) (see [below for nested schema](#nestedatt--uri_path_route))
-
-<a id="nestedatt--default_route"></a>
-### Nested Schema for `default_route`
-
-Read-Only:
-
-- `activation_state` (String)
-
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

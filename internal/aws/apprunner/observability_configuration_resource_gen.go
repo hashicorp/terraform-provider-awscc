@@ -122,7 +122,6 @@ func observabilityConfigurationResourceType(ctx context.Context) (tfsdk.Resource
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,

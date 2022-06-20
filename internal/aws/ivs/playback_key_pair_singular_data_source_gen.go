@@ -113,7 +113,6 @@ func playbackKeyPairDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 						Computed: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

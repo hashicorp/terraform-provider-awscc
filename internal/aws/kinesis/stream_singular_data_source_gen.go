@@ -199,7 +199,6 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 						Computed:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

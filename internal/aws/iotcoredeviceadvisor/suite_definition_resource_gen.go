@@ -126,7 +126,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
@@ -247,7 +246,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

@@ -132,7 +132,6 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 							Optional:    true,
 						},
 					},
-					tfsdk.ListNestedAttributesOptions{},
 				),
 				Description: "Product details to append to User-Agent string in all AWS API calls.",
 				Optional:    true,

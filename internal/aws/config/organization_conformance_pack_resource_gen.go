@@ -70,7 +70,6 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

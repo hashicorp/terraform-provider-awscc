@@ -813,7 +813,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Required: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
@@ -882,7 +881,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Required: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 											},
@@ -1168,7 +1166,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

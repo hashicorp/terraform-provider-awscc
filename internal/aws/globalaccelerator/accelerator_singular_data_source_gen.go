@@ -85,6 +85,20 @@ func acceleratorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
 		},
+		"ipv_4_addresses": {
+			// Property: Ipv4Addresses
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The IPv4 addresses assigned to the accelerator.",
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
+			Description: "The IPv4 addresses assigned to the accelerator.",
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
+		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -143,7 +157,6 @@ func acceleratorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						Computed:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -171,6 +184,7 @@ func acceleratorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"enabled":         "Enabled",
 		"ip_address_type": "IpAddressType",
 		"ip_addresses":    "IpAddresses",
+		"ipv_4_addresses": "Ipv4Addresses",
 		"key":             "Key",
 		"name":            "Name",
 		"tags":            "Tags",

@@ -72,7 +72,6 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -213,7 +212,6 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{

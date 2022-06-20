@@ -63,7 +63,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -343,7 +342,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Optional:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{

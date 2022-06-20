@@ -32,10 +32,30 @@
                 "KinesisFirehoseDestination" : {
                     "description" : "An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.",
                     "$ref" : "#/definitions/KinesisFirehoseDestination"
+                },
+                "SnsDestination": {
+                    "description" : "An object that contains SNS topic ARN associated event destination.",
+                    "$ref" : "#/definitions/SnsDestination"
                 }
             },
             "required" : [
                 "MatchingEventTypes"
+            ]
+        },
+        "SnsDestination" : {
+            "type" : "object",
+            "additionalProperties" : false,
+            "description" : "An object that contains SNS topic ARN associated event destination.",
+            "properties": {
+                "TopicARN" : {
+                    "type": "string",
+                    "minLength": 36,
+                    "maxLength": 1024,
+                    "pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$"
+                }
+            },
+            "required" : [
+                "TopicARN"
             ]
         },
         "KinesisFirehoseDestination" : {

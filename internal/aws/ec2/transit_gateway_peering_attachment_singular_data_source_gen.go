@@ -149,7 +149,6 @@ func transitGatewayPeeringAttachmentDataSourceType(ctx context.Context) (tfsdk.D
 						Computed:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

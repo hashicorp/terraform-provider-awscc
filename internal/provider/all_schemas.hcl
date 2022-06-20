@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 538 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 548 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -508,6 +508,11 @@ resource_schema "aws_connect_quick_connect" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_task_template" {
+  cloudformation_type_name               = "AWS::Connect::TaskTemplate"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_user" {
   cloudformation_type_name               = "AWS::Connect::User"
   suppress_plural_data_source_generation = true
@@ -516,6 +521,10 @@ resource_schema "aws_connect_user" {
 resource_schema "aws_connect_user_hierarchy_group" {
   cloudformation_type_name               = "AWS::Connect::UserHierarchyGroup"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connectcampaigns_campaign" {
+  cloudformation_type_name = "AWS::ConnectCampaigns::Campaign"
 }
 
 resource_schema "aws_cur_report_definition" {
@@ -696,6 +705,10 @@ resource_schema "aws_ec2_local_gateway_route_table_vpc_association" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTableVPCAssociation"
 }
 
+resource_schema "aws_ec2_nat_gateway" {
+  cloudformation_type_name = "AWS::EC2::NatGateway"
+}
+
 resource_schema "aws_ec2_network_acl" {
   cloudformation_type_name = "AWS::EC2::NetworkAcl"
 }
@@ -807,6 +820,10 @@ resource_schema "aws_ec2_vpc_endpoint" {
 
 resource_schema "aws_ec2_vpc_peering_connection" {
   cloudformation_type_name = "AWS::EC2::VPCPeeringConnection"
+}
+
+resource_schema "aws_ec2_vpn_gateway" {
+  cloudformation_type_name = "AWS::EC2::VPNGateway"
 }
 
 resource_schema "aws_ecr_pull_through_cache_rule" {
@@ -1891,6 +1908,14 @@ resource_schema "aws_quicksight_theme" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_rds_db_cluster_parameter_group" {
+  cloudformation_type_name = "AWS::RDS::DBClusterParameterGroup"
+}
+
+resource_schema "aws_rds_db_parameter_group" {
+  cloudformation_type_name = "AWS::RDS::DBParameterGroup"
+}
+
 resource_schema "aws_rds_db_proxy" {
   cloudformation_type_name = "AWS::RDS::DBProxy"
 }
@@ -1902,6 +1927,14 @@ resource_schema "aws_rds_db_proxy_endpoint" {
 resource_schema "aws_rds_db_proxy_target_group" {
   cloudformation_type_name               = "AWS::RDS::DBProxyTargetGroup"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_rds_db_subnet_group" {
+  cloudformation_type_name = "AWS::RDS::DBSubnetGroup"
+}
+
+resource_schema "aws_rds_event_subscription" {
+  cloudformation_type_name = "AWS::RDS::EventSubscription"
 }
 
 resource_schema "aws_rds_global_cluster" {
@@ -1935,6 +1968,11 @@ resource_schema "aws_redshift_event_subscription" {
 
 resource_schema "aws_redshift_scheduled_action" {
   cloudformation_type_name = "AWS::Redshift::ScheduledAction"
+}
+
+resource_schema "aws_redshiftserverless_namespace" {
+  cloudformation_type_name               = "AWS::RedshiftServerless::Namespace"
+  suppress_plural_data_source_generation = true
 }
 
 # Validation error: "minLength cannot be greater than maxLength"
@@ -2010,6 +2048,10 @@ resource_schema "aws_robomaker_simulation_application" {
 resource_schema "aws_robomaker_simulation_application_version" {
   cloudformation_type_name               = "AWS::RoboMaker::SimulationApplicationVersion"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_route53_cidr_collection" {
+  cloudformation_type_name = "AWS::Route53::CidrCollection"
 }
 
 resource_schema "aws_route53_dnssec" {
