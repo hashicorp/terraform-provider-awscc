@@ -31,6 +31,7 @@ Resource Type definition for AWS::GlobalAccelerator::Accelerator
 - `accelerator_arn` (String) The Amazon Resource Name (ARN) of the accelerator.
 - `dns_name` (String) The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.
 - `id` (String) Uniquely identifies the resource.
+- `ipv_4_addresses` (List of String) The IPv4 addresses assigned to the accelerator.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

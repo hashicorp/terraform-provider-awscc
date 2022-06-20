@@ -19,6 +19,19 @@ func init() {
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationEFS resource type.
 func locationEFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"access_point_arn": {
+			// Property: AccessPointArn
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Amazon Resource Name (ARN) for the Amazon EFS Access point that DataSync uses when accessing the EFS file system.",
+			//   "maxLength": 128,
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$",
+			//   "type": "string"
+			// }
+			Description: "The Amazon Resource Name (ARN) for the Amazon EFS Access point that DataSync uses when accessing the EFS file system.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"ec_2_config": {
 			// Property: Ec2Config
 			// CloudFormation resource type schema:
@@ -80,6 +93,34 @@ func locationEFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
+		"file_system_access_role_arn": {
+			// Property: FileSystemAccessRoleArn
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the AWS IAM role that the DataSync will assume when mounting the EFS file system.",
+			//   "maxLength": 128,
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+			//   "type": "string"
+			// }
+			Description: "The Amazon Resource Name (ARN) of the AWS IAM role that the DataSync will assume when mounting the EFS file system.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
+		"in_transit_encryption": {
+			// Property: InTransitEncryption
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Protocol that is used for encrypting the traffic exchanged between the DataSync Agent and the EFS file system.",
+			//   "enum": [
+			//     "NONE",
+			//     "TLS1_2"
+			//   ],
+			//   "type": "string"
+			// }
+			Description: "Protocol that is used for encrypting the traffic exchanged between the DataSync Agent and the EFS file system.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -195,16 +236,19 @@ func locationEFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationEFS").WithTerraformTypeName("awscc_datasync_location_efs")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ec_2_config":         "Ec2Config",
-		"efs_filesystem_arn":  "EfsFilesystemArn",
-		"key":                 "Key",
-		"location_arn":        "LocationArn",
-		"location_uri":        "LocationUri",
-		"security_group_arns": "SecurityGroupArns",
-		"subdirectory":        "Subdirectory",
-		"subnet_arn":          "SubnetArn",
-		"tags":                "Tags",
-		"value":               "Value",
+		"access_point_arn":            "AccessPointArn",
+		"ec_2_config":                 "Ec2Config",
+		"efs_filesystem_arn":          "EfsFilesystemArn",
+		"file_system_access_role_arn": "FileSystemAccessRoleArn",
+		"in_transit_encryption":       "InTransitEncryption",
+		"key":                         "Key",
+		"location_arn":                "LocationArn",
+		"location_uri":                "LocationUri",
+		"security_group_arns":         "SecurityGroupArns",
+		"subdirectory":                "Subdirectory",
+		"subnet_arn":                  "SubnetArn",
+		"tags":                        "Tags",
+		"value":                       "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

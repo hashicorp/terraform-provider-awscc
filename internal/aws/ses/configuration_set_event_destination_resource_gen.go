@@ -121,6 +121,22 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 			//       "description": "The name of the event destination set.",
 			//       "pattern": "^[a-zA-Z0-9_-]{0,64}$",
 			//       "type": "string"
+			//     },
+			//     "SnsDestination": {
+			//       "additionalProperties": false,
+			//       "description": "An object that contains SNS topic ARN associated event destination.",
+			//       "properties": {
+			//         "TopicARN": {
+			//           "maxLength": 1024,
+			//           "minLength": 36,
+			//           "pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "TopicARN"
+			//       ],
+			//       "type": "object"
 			//     }
 			//   },
 			//   "required": [
@@ -223,6 +239,24 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{0,64}$"), ""),
 						},
 					},
+					"sns_destination": {
+						// Property: SnsDestination
+						Description: "An object that contains SNS topic ARN associated event destination.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"topic_arn": {
+									// Property: TopicARN
+									Type:     types.StringType,
+									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(36, 1024),
+										validate.StringMatch(regexp.MustCompile("^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$"), ""),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
 				},
 			),
 			Required: true,
@@ -267,6 +301,8 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 		"kinesis_firehose_destination": "KinesisFirehoseDestination",
 		"matching_event_types":         "MatchingEventTypes",
 		"name":                         "Name",
+		"sns_destination":              "SnsDestination",
+		"topic_arn":                    "TopicARN",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

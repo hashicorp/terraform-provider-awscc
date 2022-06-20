@@ -1,4 +1,36 @@
 ## 0.25.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_connect_task_template`
+* **New Data Source:** `awscc_connectcampaigns_campaign`
+* **New Data Source:** `awscc_connectcampaigns_campaigns`
+* **New Data Source:** `awscc_ec2_nat_gateway`
+* **New Data Source:** `awscc_ec2_nat_gateways`
+* **New Data Source:** `awscc_ec2_vpn_gateway`
+* **New Data Source:** `awscc_ec2_vpn_gateways`
+* **New Data Source:** `awscc_rds_db_cluster_parameter_group`
+* **New Data Source:** `awscc_rds_db_cluster_parameter_groups`
+* **New Data Source:** `awscc_rds_db_parameter_group`
+* **New Data Source:** `awscc_rds_db_parameter_groups`
+* **New Data Source:** `awscc_rds_db_subnet_group`
+* **New Data Source:** `awscc_rds_db_subnet_groups`
+* **New Data Source:** `awscc_rds_event_subscription`
+* **New Data Source:** `awscc_rds_event_subscriptions`
+* **New Data Source:** `awscc_redshiftserverless_namespace`
+* **New Data Source:** `awscc_route53_cidr_collection`
+* **New Data Source:** `awscc_route53_cidr_collections`
+* **New Resource:** `awscc_connect_task_template`
+* **New Resource:** `awscc_connectcampaigns_campaign`
+* **New Resource:** `awscc_ec2_nat_gateway`
+* **New Resource:** `awscc_ec2_vpn_gateway`
+* **New Resource:** `awscc_rds_db_cluster_parameter_group`
+* **New Resource:** `awscc_rds_db_parameter_group`
+* **New Resource:** `awscc_rds_db_subnet_group`
+* **New Resource:** `awscc_rds_event_subscription`
+* **New Resource:** `awscc_redshiftserverless_namespace`
+* **New Resource:** `awscc_route53_cidr_collection`
+
 ## [0.24.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.24.0) (June  2, 2022)
 
 FEATURES:

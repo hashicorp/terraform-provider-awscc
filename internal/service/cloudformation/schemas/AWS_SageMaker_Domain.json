@@ -50,6 +50,7 @@
             "type": "array",
             "description": "The VPC subnets that Studio uses for communication.",
             "uniqueItems": false,
+            "insertionOrder": false,
             "minItems": 1,
             "maxItems": 16,
             "items": {
@@ -62,6 +63,7 @@
             "type": "array",
             "description": "A list of tags to apply to the user profile.",
             "uniqueItems": false,
+            "insertionOrder": false,
             "minItems": 0,
             "maxItems": 50,
             "items": {
@@ -132,10 +134,14 @@
                 "RStudioServerProAppSettings": {
                     "$ref": "#/definitions/RStudioServerProAppSettings"
                 },
+                "RSessionAppSettings": {
+                    "$ref": "#/definitions/RSessionAppSettings"
+                },
                 "SecurityGroups": {
                     "type": "array",
                     "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
                     "uniqueItems": false,
+                    "insertionOrder": false,
                     "minItems": 0,
                     "maxItems": 5,
                     "items": {
@@ -204,13 +210,19 @@
                 },
                 "SageMakerImageArn": {
                     "type": "string",
-                    "description": "The ARN of the SageMaker image that the image version belongs to.",
+                    "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
                     "maxLength": 256,
                     "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"
                 },
                 "SageMakerImageVersionArn": {
                     "type": "string",
-                    "description": "The ARN of the image version created on the instance.",
+                    "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+                    "maxLength": 256,
+                    "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"
+                },
+                "LifecycleConfigArn": {
+                    "type": "string",
+                    "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
                     "maxLength": 256,
                     "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"
                 }
@@ -225,6 +237,7 @@
                     "type": "array",
                     "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
                     "uniqueItems": false,
+                    "insertionOrder": false,
                     "minItems": 0,
                     "maxItems": 30,
                     "items": {
@@ -321,6 +334,7 @@
                     "type": "array",
                     "description": "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
                     "uniqueItems": false,
+                    "insertionOrder": false,
                     "minItems": 1,
                     "maxItems": 3,
                     "items": {
@@ -361,6 +375,27 @@
                 }
             },
             "required":["DomainExecutionRoleArn"]
+        },
+        "RSessionAppSettings": {
+            "type": "object",
+            "description": "A collection of settings that apply to an RSessionGateway app.",
+            "additionalProperties": false,
+            "properties": {
+                "CustomImages": {
+                    "type": "array",
+                    "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+                    "insertionOrder": false,
+                    "uniqueItems": false,
+                    "minItems": 0,
+                    "maxItems": 30,
+                    "items": {
+                        "$ref": "#/definitions/CustomImage"
+                    }
+                },
+                "DefaultResourceSpec": {
+                    "$ref": "#/definitions/ResourceSpec"
+                }
+            }
         },
         "RStudioServerProAppSettings": {
             "type": "object",

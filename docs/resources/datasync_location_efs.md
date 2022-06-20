@@ -22,6 +22,9 @@ Resource schema for AWS::DataSync::LocationEFS.
 
 ### Optional
 
+- `access_point_arn` (String) The Amazon Resource Name (ARN) for the Amazon EFS Access point that DataSync uses when accessing the EFS file system.
+- `file_system_access_role_arn` (String) The Amazon Resource Name (ARN) of the AWS IAM role that the DataSync will assume when mounting the EFS file system.
+- `in_transit_encryption` (String) Protocol that is used for encrypting the traffic exchanged between the DataSync Agent and the EFS file system.
 - `subdirectory` (String) A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 

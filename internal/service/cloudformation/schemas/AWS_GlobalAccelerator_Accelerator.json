@@ -66,6 +66,13 @@
       "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.",
       "type": "string"
     },
+    "Ipv4Addresses": {
+      "description": "The IPv4 addresses assigned to the accelerator.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "AcceleratorArn": {
       "description": "The Amazon Resource Name (ARN) of the accelerator.",
       "type": "string"
@@ -114,7 +121,8 @@
   },
   "readOnlyProperties": [
     "/properties/AcceleratorArn",
-    "/properties/DnsName"
+    "/properties/DnsName",
+    "/properties/Ipv4Addresses"
   ],
   "primaryIdentifier": [
     "/properties/AcceleratorArn"

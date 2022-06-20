@@ -249,10 +249,7 @@
                 "PropertyValue": {
                     "$ref": "#/definitions/AssetPropertyValue"
                 }
-            },
-            "required": [
-                "PropertyValue"
-            ]
+            }
         },
         "IotTopicPublish": {
             "type": "object",

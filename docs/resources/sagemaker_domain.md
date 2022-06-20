@@ -49,6 +49,7 @@ Required:
 - `execution_role` (String) The user profile Amazon Resource Name (ARN).
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings))
+- `r_session_app_settings` (Attributes) A collection of settings that apply to an RSessionGateway app. (see [below for nested schema](#nestedatt--default_user_settings--r_session_app_settings))
 - `r_studio_server_pro_app_settings` (Attributes) A collection of settings that configure user interaction with the RStudioServerPro app. (see [below for nested schema](#nestedatt--default_user_settings--r_studio_server_pro_app_settings))
 - `security_groups` (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
 - `sharing_settings` (Attributes) The sharing settings. (see [below for nested schema](#nestedatt--default_user_settings--sharing_settings))
@@ -66,8 +67,9 @@ Required:
 Required:
 
 - `instance_type` (String) The instance type that the image version runs on.
-- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
-- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
+- `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
 
 
 
@@ -95,8 +97,39 @@ Required:
 Required:
 
 - `instance_type` (String) The instance type that the image version runs on.
-- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
-- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
+- `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+
+
+
+<a id="nestedatt--default_user_settings--r_session_app_settings"></a>
+### Nested Schema for `default_user_settings.r_session_app_settings`
+
+Required:
+
+- `custom_images` (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--r_session_app_settings--custom_images))
+- `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--r_session_app_settings--default_resource_spec))
+
+<a id="nestedatt--default_user_settings--r_session_app_settings--custom_images"></a>
+### Nested Schema for `default_user_settings.r_session_app_settings.custom_images`
+
+Required:
+
+- `app_image_config_name` (String) The Name of the AppImageConfig.
+- `image_name` (String) The name of the CustomImage. Must be unique to your account.
+- `image_version_number` (Number) The version number of the CustomImage.
+
+
+<a id="nestedatt--default_user_settings--r_session_app_settings--default_resource_spec"></a>
+### Nested Schema for `default_user_settings.r_session_app_settings.default_resource_spec`
+
+Required:
+
+- `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
+- `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
 
 
 
@@ -144,8 +177,9 @@ Optional:
 Optional:
 
 - `instance_type` (String) The instance type that the image version runs on.
-- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
-- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
+- `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
 
 
 

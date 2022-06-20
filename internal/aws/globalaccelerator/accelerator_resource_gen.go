@@ -112,6 +112,23 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$"), "")),
 			},
 		},
+		"ipv_4_addresses": {
+			// Property: Ipv4Addresses
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The IPv4 addresses assigned to the accelerator.",
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
+			Description: "The IPv4 addresses assigned to the accelerator.",
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
+		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -211,6 +228,7 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"enabled":         "Enabled",
 		"ip_address_type": "IpAddressType",
 		"ip_addresses":    "IpAddresses",
+		"ipv_4_addresses": "Ipv4Addresses",
 		"key":             "Key",
 		"name":            "Name",
 		"tags":            "Tags",

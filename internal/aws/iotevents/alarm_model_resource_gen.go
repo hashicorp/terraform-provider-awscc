@@ -373,9 +373,6 @@ func alarmModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "type": "object"
 			//               }
 			//             },
-			//             "required": [
-			//               "PropertyValue"
-			//             ],
 			//             "type": "object"
 			//           },
 			//           "IotTopicPublish": {
@@ -852,7 +849,7 @@ func alarmModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 													},
 												),
-												Required: true,
+												Optional: true,
 											},
 										},
 									),

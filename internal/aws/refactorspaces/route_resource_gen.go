@@ -55,48 +55,6 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.UseStateForUnknown(),
 			},
 		},
-		"default_route": {
-			// Property: DefaultRoute
-			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ActivationState": {
-			//       "enum": [
-			//         "INACTIVE",
-			//         "ACTIVE"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ActivationState"
-			//   ],
-			//   "type": "object"
-			// }
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"activation_state": {
-						// Property: ActivationState
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"INACTIVE",
-								"ACTIVE",
-							}),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
-			},
-			// DefaultRoute is a write-only property.
-		},
 		"environment_identifier": {
 			// Property: EnvironmentIdentifier
 			// CloudFormation resource type schema:
@@ -256,7 +214,6 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "ActivationState": {
 			//       "enum": [
-			//         "INACTIVE",
 			//         "ACTIVE"
 			//       ],
 			//       "type": "string"
@@ -300,7 +257,6 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
-								"INACTIVE",
 								"ACTIVE",
 							}),
 						},
@@ -374,7 +330,6 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"activation_state":       "ActivationState",
 		"application_identifier": "ApplicationIdentifier",
 		"arn":                    "Arn",
-		"default_route":          "DefaultRoute",
 		"environment_identifier": "EnvironmentIdentifier",
 		"include_child_paths":    "IncludeChildPaths",
 		"key":                    "Key",
@@ -392,7 +347,6 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/RouteType",
 		"/properties/ServiceIdentifier",
-		"/properties/DefaultRoute",
 		"/properties/UriPathRoute",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

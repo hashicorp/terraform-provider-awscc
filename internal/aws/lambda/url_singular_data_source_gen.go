@@ -171,6 +171,21 @@ func urlDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"invoke_mode": {
+			// Property: InvokeMode
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The invocation mode for the function?s URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
+			//   "enum": [
+			//     "BUFFERED",
+			//     "RESPONSE_STREAM"
+			//   ],
+			//   "type": "string"
+			// }
+			Description: "The invocation mode for the function?s URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"qualifier": {
 			// Property: Qualifier
 			// CloudFormation resource type schema:
@@ -225,6 +240,7 @@ func urlDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"expose_headers":      "ExposeHeaders",
 		"function_arn":        "FunctionArn",
 		"function_url":        "FunctionUrl",
+		"invoke_mode":         "InvokeMode",
 		"max_age":             "MaxAge",
 		"qualifier":           "Qualifier",
 		"target_function_arn": "TargetFunctionArn",
