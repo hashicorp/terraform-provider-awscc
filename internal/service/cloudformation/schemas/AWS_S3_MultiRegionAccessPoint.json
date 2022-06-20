@@ -32,6 +32,12 @@
                     "minLength": 3,
                     "maxLength": 63,
                     "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"
+                },
+                "AccountId": {
+                    "type": "string",
+                    "minLength": 12,
+                    "maxLength": 12,
+                    "pattern": "^[0-9]{12}$"
                 }
             },
             "required": [

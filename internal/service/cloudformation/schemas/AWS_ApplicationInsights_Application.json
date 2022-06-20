@@ -68,6 +68,13 @@
             },
             "minItems": 1,
             "insertionOrder":  true
+        },
+        "GroupingType": {
+           "description": "The grouping type of the application",
+           "type": "string",
+           "enum": [
+                   "ACCOUNT_BASED"
+                   ]
         }
     },
     "definitions": {
@@ -591,7 +598,7 @@
                 "applicationinsights:UpdateComponentConfiguration",
                 "applicationinsights:ListComponents"
             ],
-	    "timeoutInMinutes": 600
+            "timeoutInMinutes": 600
         },
         "read": {
             "permissions": [
