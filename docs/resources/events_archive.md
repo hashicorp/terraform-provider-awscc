@@ -22,7 +22,7 @@ Resource Type definition for AWS::Events::Archive
 ### Optional
 
 - `description` (String)
-- `event_pattern` (String)
+- `event_pattern` (Map of String)
 - `retention_days` (Number)
 
 ### Read-Only

@@ -21,7 +21,7 @@ Resource schema for AWS::MWAA::Environment
 
 ### Optional
 
-- `airflow_configuration_options` (String) Key/value pairs representing Airflow configuration variables.
+- `airflow_configuration_options` (Map of String) Key/value pairs representing Airflow configuration variables.
     Keys are prefixed by their section:
 
     [core]
@@ -57,7 +57,7 @@ Resource schema for AWS::MWAA::Environment
 - `requirements_s3_path` (String) Represents an S3 prefix relative to the root of an S3 bucket.
 - `schedulers` (Number) Scheduler compute units.
 - `source_bucket_arn` (String) ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.
-- `tags` (String) A map of tags for the environment.
+- `tags` (Map of String) A map of tags for the environment.
 - `webserver_access_mode` (String) Choice for mode of webserver access including over public internet or via private VPC endpoint.
 - `weekly_maintenance_window_start` (String) Start time for the weekly maintenance window.
 

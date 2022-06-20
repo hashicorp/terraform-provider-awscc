@@ -44,7 +44,7 @@ Required:
 
 Required:
 
-- `backup_options` (String)
+- `backup_options` (Map of String)
 - `resource_type` (String)
 
 

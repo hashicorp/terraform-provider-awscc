@@ -28,13 +28,13 @@ Resource schema for AWS::EKS::Nodegroup
 - `disk_size` (Number) The root device disk size (in GiB) for your node group instances.
 - `force_update_enabled` (Boolean) Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.
 - `instance_types` (List of String) Specify the instance types for a node group.
-- `labels` (String) The Kubernetes labels to be applied to the nodes in the node group when they are created.
+- `labels` (Map of String) The Kubernetes labels to be applied to the nodes in the node group when they are created.
 - `launch_template` (Attributes) An object representing a node group's launch template specification. (see [below for nested schema](#nestedatt--launch_template))
 - `nodegroup_name` (String) The unique name to give your node group.
 - `release_version` (String) The AMI version of the Amazon EKS-optimized AMI to use with your node group.
 - `remote_access` (Attributes) The remote access (SSH) configuration to use with your node group. (see [below for nested schema](#nestedatt--remote_access))
 - `scaling_config` (Attributes) The scaling configuration details for the Auto Scaling group that is created for your node group. (see [below for nested schema](#nestedatt--scaling_config))
-- `tags` (String) The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.
+- `tags` (Map of String) The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.
 - `taints` (Attributes List) The Kubernetes taints to be applied to the nodes in the node group when they are created. (see [below for nested schema](#nestedatt--taints))
 - `update_config` (Attributes) The node group update configuration. (see [below for nested schema](#nestedatt--update_config))
 - `version` (String) The Kubernetes version to use for your managed nodes.
