@@ -43,36 +43,6 @@ func routeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 		},
-		"default_route": {
-			// Property: DefaultRoute
-			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ActivationState": {
-			//       "enum": [
-			//         "INACTIVE",
-			//         "ACTIVE"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ActivationState"
-			//   ],
-			//   "type": "object"
-			// }
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"activation_state": {
-						// Property: ActivationState
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
 		"environment_identifier": {
 			// Property: EnvironmentIdentifier
 			// CloudFormation resource type schema:
@@ -190,7 +160,6 @@ func routeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "properties": {
 			//     "ActivationState": {
 			//       "enum": [
-			//         "INACTIVE",
 			//         "ACTIVE"
 			//       ],
 			//       "type": "string"
@@ -274,7 +243,6 @@ func routeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"activation_state":       "ActivationState",
 		"application_identifier": "ApplicationIdentifier",
 		"arn":                    "Arn",
-		"default_route":          "DefaultRoute",
 		"environment_identifier": "EnvironmentIdentifier",
 		"include_child_paths":    "IncludeChildPaths",
 		"key":                    "Key",

@@ -361,9 +361,6 @@ func alarmModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//                 "type": "object"
 			//               }
 			//             },
-			//             "required": [
-			//               "PropertyValue"
-			//             ],
 			//             "type": "object"
 			//           },
 			//           "IotTopicPublish": {

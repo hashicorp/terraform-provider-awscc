@@ -1611,6 +1611,20 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			),
 			Computed: true,
 		},
+		"grouping_type": {
+			// Property: GroupingType
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The grouping type of the application",
+			//   "enum": [
+			//     "ACCOUNT_BASED"
+			//   ],
+			//   "type": "string"
+			// }
+			Description: "The grouping type of the application",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"log_pattern_sets": {
 			// Property: LogPatternSets
 			// CloudFormation resource type schema:
@@ -1841,6 +1855,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"encoding":                                  "Encoding",
 		"event_levels":                              "EventLevels",
 		"event_name":                                "EventName",
+		"grouping_type":                             "GroupingType",
 		"ha_cluster_prometheus_exporter":            "HAClusterPrometheusExporter",
 		"hana_port":                                 "HANAPort",
 		"hana_prometheus_exporter":                  "HANAPrometheusExporter",

@@ -1873,6 +1873,25 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtLeast(1),
 			},
 		},
+		"grouping_type": {
+			// Property: GroupingType
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The grouping type of the application",
+			//   "enum": [
+			//     "ACCOUNT_BASED"
+			//   ],
+			//   "type": "string"
+			// }
+			Description: "The grouping type of the application",
+			Type:        types.StringType,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ACCOUNT_BASED",
+				}),
+			},
+		},
 		"log_pattern_sets": {
 			// Property: LogPatternSets
 			// CloudFormation resource type schema:
@@ -2144,6 +2163,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"encoding":                                  "Encoding",
 		"event_levels":                              "EventLevels",
 		"event_name":                                "EventName",
+		"grouping_type":                             "GroupingType",
 		"ha_cluster_prometheus_exporter":            "HAClusterPrometheusExporter",
 		"hana_port":                                 "HANAPort",
 		"hana_prometheus_exporter":                  "HANAPrometheusExporter",
