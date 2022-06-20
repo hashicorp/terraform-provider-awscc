@@ -176,6 +176,35 @@ func (s JSONString) Equal(other attr.Value) bool {
 	return s.Value == o.Value
 }
 
+// IsNull returns true if the Value is not set, or is explicitly set to null.
+func (s JSONString) IsNull() bool {
+	return s.Null
+}
+
+// IsNull returns true if the Value is not set, or is explicitly set to null.
+func (s JSONString) IsUnknown() bool {
+	return s.Unknown
+}
+
+// String returns a summary representation of either the underlying Value,
+// or UnknownValueString (`<unknown>`) when IsUnknown() returns true,
+// or NullValueString (`<null>`) when IsNull() return true.
+//
+// This is an intentionally lossy representation, that are best suited for
+// logging and error reporting, as they are not protected by
+// compatibility guarantees within the framework.
+func (s JSONString) String() string {
+	if s.IsUnknown() {
+		return attr.UnknownValueString
+	}
+
+	if s.IsNull() {
+		return attr.NullValueString
+	}
+
+	return s.Value
+}
+
 type jsonStringAttributePlanModifier struct {
 	tfsdk.AttributePlanModifier
 }
