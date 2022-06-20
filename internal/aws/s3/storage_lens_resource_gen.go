@@ -455,11 +455,8 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"sses3": {
 															// Property: SSES3
 															Description: "S3 default server-side encryption.",
-															Type:        JSONStringType,
+															Type:        types.MapType{ElemType: types.StringType},
 															Optional:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																JSONStringType.AttributePlanModifier(),
-															},
 														},
 													},
 												),

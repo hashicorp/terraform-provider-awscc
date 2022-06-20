@@ -37,11 +37,8 @@ func registryPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// {
 			//   "type": "object"
 			// }
-			Type:     JSONStringType,
+			Type:     types.MapType{ElemType: types.StringType},
 			Required: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"registry_name": {
 			// Property: RegistryName

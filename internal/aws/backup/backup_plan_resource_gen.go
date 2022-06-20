@@ -144,11 +144,8 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"backup_options": {
 									// Property: BackupOptions
-									Type:     JSONStringType,
+									Type:     types.MapType{ElemType: types.StringType},
 									Required: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										JSONStringType.AttributePlanModifier(),
-									},
 								},
 								"resource_type": {
 									// Property: ResourceType

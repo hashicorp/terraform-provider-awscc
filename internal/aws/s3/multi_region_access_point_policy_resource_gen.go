@@ -50,11 +50,8 @@ func multiRegionAccessPointPolicyResourceType(ctx context.Context) (tfsdk.Resour
 			//   "type": "object"
 			// }
 			Description: "Policy document to apply to a Multi Region Access Point",
-			Type:        JSONStringType,
+			Type:        types.MapType{ElemType: types.StringType},
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"policy_status": {
 			// Property: PolicyStatus

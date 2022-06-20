@@ -156,11 +156,10 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// {
 			//   "type": "object"
 			// }
-			Type:     JSONStringType,
+			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},

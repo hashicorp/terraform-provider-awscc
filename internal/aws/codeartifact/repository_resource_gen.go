@@ -130,11 +130,8 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The access control resource policy on the provided repository.",
-			Type:        JSONStringType,
+			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"repository_name": {
 			// Property: RepositoryName

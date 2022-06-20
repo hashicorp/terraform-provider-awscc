@@ -61,11 +61,8 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "type": "object"
 			// }
-			Type:     JSONStringType,
+			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"retention_days": {
 			// Property: RetentionDays

@@ -82,11 +82,8 @@ func vPCEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "type": "object"
 			// }
-			Type:     JSONStringType,
+			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"private_dns_enabled": {
 			// Property: PrivateDnsEnabled

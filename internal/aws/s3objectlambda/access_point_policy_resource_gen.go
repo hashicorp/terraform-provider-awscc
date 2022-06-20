@@ -50,11 +50,8 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "type": "object"
 			// }
 			Description: "A policy document containing permissions to add to the specified ObjectLambdaAccessPoint. For more information, see Access Policy Language Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the Amazon Simple Storage Service Developer Guide. ",
-			Type:        JSONStringType,
+			Type:        types.MapType{ElemType: types.StringType},
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 	}
 

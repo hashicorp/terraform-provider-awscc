@@ -27,11 +27,8 @@ func registryPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "object"
 			// }
 			Description: "The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.",
-			Type:        JSONStringType,
+			Type:        types.MapType{ElemType: types.StringType},
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"registry_id": {
 			// Property: RegistryId

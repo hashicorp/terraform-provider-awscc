@@ -29,11 +29,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
-			Type:        JSONStringType,
+			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"airflow_version": {
 			// Property: AirflowVersion
@@ -720,11 +717,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "A map of tags for the environment.",
-			Type:        JSONStringType,
+			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"webserver_access_mode": {
 			// Property: WebserverAccessMode

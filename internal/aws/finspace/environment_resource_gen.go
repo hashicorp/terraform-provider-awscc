@@ -213,11 +213,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"attribute_map": {
 						// Property: AttributeMap
 						Description: "Attribute map for SAML configuration",
-						Type:        JSONStringType,
+						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							JSONStringType.AttributePlanModifier(),
-						},
 					},
 					"federation_provider_name": {
 						// Property: FederationProviderName

@@ -158,11 +158,8 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
-			Type:        JSONStringType,
+			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"launch_template": {
 			// Property: LaunchTemplate
@@ -392,11 +389,8 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
-			Type:        JSONStringType,
+			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"taints": {
 			// Property: Taints

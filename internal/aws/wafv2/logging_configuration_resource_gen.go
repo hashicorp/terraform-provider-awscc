@@ -375,11 +375,8 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 											"all": {
 												// Property: All
 												Description: "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
-												Type:        JSONStringType,
+												Type:        types.MapType{ElemType: types.StringType},
 												Optional:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													JSONStringType.AttributePlanModifier(),
-												},
 											},
 											"included_paths": {
 												// Property: IncludedPaths
@@ -414,20 +411,14 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					"method": {
 						// Property: Method
 						Description: "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
-						Type:        JSONStringType,
+						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							JSONStringType.AttributePlanModifier(),
-						},
 					},
 					"query_string": {
 						// Property: QueryString
 						Description: "Inspect the query string. This is the part of a URL that appears after a ? character, if any. ",
-						Type:        JSONStringType,
+						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							JSONStringType.AttributePlanModifier(),
-						},
 					},
 					"single_header": {
 						// Property: SingleHeader
@@ -447,11 +438,8 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					"uri_path": {
 						// Property: UriPath
 						Description: "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
-						Type:        JSONStringType,
+						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							JSONStringType.AttributePlanModifier(),
-						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

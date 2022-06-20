@@ -116,11 +116,8 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "type": "object"
 			// }
-			Type:     JSONStringType,
+			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 		"file_system_tags": {
 			// Property: FileSystemTags

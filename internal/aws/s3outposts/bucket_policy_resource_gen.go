@@ -50,11 +50,8 @@ func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "A policy document containing permissions to add to the specified bucket.",
-			Type:        JSONStringType,
+			Type:        types.MapType{ElemType: types.StringType},
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				JSONStringType.AttributePlanModifier(),
-			},
 		},
 	}
 
