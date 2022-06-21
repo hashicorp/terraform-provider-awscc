@@ -31,6 +31,10 @@ FEATURES:
 * **New Resource:** `awscc_redshiftserverless_namespace`
 * **New Resource:** `awscc_route53_cidr_collection`
 
+BUG FIXES:
+
+* resource/awscc_networkmanager_core_network: Fix `Model validation failed` error ([#537](https://github.com/hashicorp/terraform-provider-awscc/issues/537))
+
 ## [0.24.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.24.0) (June  2, 2022)
 
 FEATURES:
