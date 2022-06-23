@@ -83,10 +83,10 @@
     ],
     "additionalProperties": false,
     "primaryIdentifier": [
-        "/properties/DeviceFleetName"
+        "/properties/Device/DeviceName"
     ],
     "createOnlyProperties": [
-        "/properties/DeviceFleetName"
+        "/properties/Device/DeviceName"
     ],
     "handlers": {
         "create": {
