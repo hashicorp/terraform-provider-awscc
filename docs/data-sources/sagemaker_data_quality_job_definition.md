@@ -26,6 +26,7 @@ Data Source schema for AWS::SageMaker::DataQualityJobDefinition
 - `data_quality_baseline_config` (Attributes) Baseline configuration used to validate that the data conforms to the specified constraints and statistics. (see [below for nested schema](#nestedatt--data_quality_baseline_config))
 - `data_quality_job_input` (Attributes) The inputs for a monitoring job. (see [below for nested schema](#nestedatt--data_quality_job_input))
 - `data_quality_job_output_config` (Attributes) The output configuration for monitoring jobs. (see [below for nested schema](#nestedatt--data_quality_job_output_config))
+- `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
 - `job_definition_arn` (String) The Amazon Resource Name (ARN) of job definition.
 - `job_definition_name` (String) The name of the job definition.
 - `job_resources` (Attributes) Identifies the resources to deploy for a monitoring job. (see [below for nested schema](#nestedatt--job_resources))

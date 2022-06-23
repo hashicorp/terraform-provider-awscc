@@ -22,6 +22,7 @@ Data Source schema for AWS::SageMaker::ModelBiasJobDefinition
 ### Read-Only
 
 - `creation_time` (String) The time at which the job definition was created.
+- `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
 - `job_definition_arn` (String) The Amazon Resource Name (ARN) of job definition.
 - `job_definition_name` (String) The name of the job definition.
 - `job_resources` (Attributes) Identifies the resources to deploy for a monitoring job. (see [below for nested schema](#nestedatt--job_resources))

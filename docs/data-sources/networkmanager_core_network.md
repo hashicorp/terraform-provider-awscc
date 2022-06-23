@@ -28,7 +28,7 @@ Data Source schema for AWS::NetworkManager::CoreNetwork
 - `edges` (Attributes List) The edges within a core network. (see [below for nested schema](#nestedatt--edges))
 - `global_network_id` (String) The ID of the global network that your core network is a part of.
 - `owner_account` (String) Owner of the core network
-- `policy_document` (Map of String) Live policy document for the core network, you must provide PolicyDocument in Json Format
+- `policy_document` (String) Live policy document for the core network, you must provide PolicyDocument in Json Format
 - `segments` (Attributes List) The segments within a core network. (see [below for nested schema](#nestedatt--segments))
 - `state` (String) The state of core network
 - `tags` (Attributes List) The tags for the global network. (see [below for nested schema](#nestedatt--tags))

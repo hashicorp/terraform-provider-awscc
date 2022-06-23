@@ -36,6 +36,7 @@ Data Source schema for AWS::AppFlow::Flow
 
 Read-Only:
 
+- `api_version` (String) The API version that the destination connector uses.
 - `connector_profile_name` (String) Name of destination connector profile
 - `connector_type` (String) Destination connector type
 - `destination_connector_properties` (Attributes) Destination connector details (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties))
@@ -45,6 +46,7 @@ Read-Only:
 
 Read-Only:
 
+- `custom_connector` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector))
 - `event_bridge` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge))
 - `lookout_metrics` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--lookout_metrics))
 - `marketo` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--marketo))
@@ -55,6 +57,28 @@ Read-Only:
 - `snowflake` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--snowflake))
 - `upsolver` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver))
 - `zendesk` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--zendesk))
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.custom_connector`
+
+Read-Only:
+
+- `custom_properties` (Map of String) A map for properties for custom connector.
+- `entity_name` (String)
+- `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector--error_handling_config))
+- `id_field_names` (List of String) List of fields used as ID when performing a write operation.
+- `write_operation_type` (String)
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector--error_handling_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.custom_connector.write_operation_type`
+
+Read-Only:
+
+- `bucket_name` (String)
+- `bucket_prefix` (String)
+- `fail_on_first_error` (Boolean)
+
+
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.event_bridge`
@@ -140,6 +164,7 @@ Read-Only:
 - `aggregation_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--aggregation_config))
 - `file_type` (String)
 - `prefix_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--prefix_config))
+- `preserve_source_data_typing` (Boolean)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--aggregation_config"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.s3.s3_output_format_config.aggregation_config`
@@ -298,6 +323,7 @@ Read-Only:
 
 Read-Only:
 
+- `api_version` (String) The API version that the destination connector uses.
 - `connector_profile_name` (String) Name of source connector profile
 - `connector_type` (String) Type of source connector
 - `incremental_pull_config` (Attributes) Configuration for scheduled incremental data pull (see [below for nested schema](#nestedatt--source_flow_config--incremental_pull_config))
@@ -317,6 +343,7 @@ Read-Only:
 Read-Only:
 
 - `amplitude` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--amplitude))
+- `custom_connector` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--custom_connector))
 - `datadog` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--datadog))
 - `dynatrace` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--dynatrace))
 - `google_analytics` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--google_analytics))
@@ -338,6 +365,15 @@ Read-Only:
 Read-Only:
 
 - `object` (String)
+
+
+<a id="nestedatt--source_flow_config--source_connector_properties--custom_connector"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.custom_connector`
+
+Read-Only:
+
+- `custom_properties` (Map of String) A map for properties for custom connector.
+- `entity_name` (String)
 
 
 <a id="nestedatt--source_flow_config--source_connector_properties--datadog"></a>
@@ -496,6 +532,7 @@ Read-Only:
 Read-Only:
 
 - `amplitude` (String)
+- `custom_connector` (String)
 - `datadog` (String)
 - `dynatrace` (String)
 - `google_analytics` (String)
@@ -536,6 +573,7 @@ Read-Only:
 Read-Only:
 
 - `data_pull_mode` (String)
+- `flow_error_deactivation_threshold` (Number)
 - `schedule_end_time` (Number)
 - `schedule_expression` (String)
 - `schedule_offset` (Number)

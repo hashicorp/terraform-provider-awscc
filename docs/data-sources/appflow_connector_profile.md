@@ -22,6 +22,7 @@ Data Source schema for AWS::AppFlow::ConnectorProfile
 ### Read-Only
 
 - `connection_mode` (String) Mode in which data transfer should be enabled. Private connection mode is currently enabled for Salesforce, Snowflake, Trendmicro and Singular
+- `connector_label` (String) The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.
 - `connector_profile_arn` (String) Unique identifier for connector profile resources
 - `connector_profile_config` (Attributes) Connector specific configurations needed to create connector profile (see [below for nested schema](#nestedatt--connector_profile_config))
 - `connector_profile_name` (String) The maximum number of items to retrieve in a single batch.
@@ -43,6 +44,7 @@ Read-Only:
 Read-Only:
 
 - `amplitude` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--amplitude))
+- `custom_connector` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector))
 - `datadog` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--datadog))
 - `dynatrace` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--dynatrace))
 - `google_analytics` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--google_analytics))
@@ -66,6 +68,67 @@ Read-Only:
 
 - `api_key` (String) A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.
 - `secret_key` (String)
+
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector`
+
+Read-Only:
+
+- `api_key` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--api_key))
+- `authentication_type` (String)
+- `basic` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--basic))
+- `custom` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--custom))
+- `oauth_2` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--oauth_2))
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--api_key"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2`
+
+Read-Only:
+
+- `api_key` (String)
+- `api_secret_key` (String)
+
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--basic"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2`
+
+Read-Only:
+
+- `password` (String)
+- `username` (String)
+
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--custom"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2`
+
+Read-Only:
+
+- `credentials_map` (Map of String) A map for properties for custom authentication.
+- `custom_authentication_type` (String)
+
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--oauth_2"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2`
+
+Read-Only:
+
+- `access_token` (String)
+- `client_id` (String)
+- `client_secret` (String)
+- `o_auth_request` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--oauth_2--o_auth_request))
+- `refresh_token` (String)
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--oauth_2--o_auth_request"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2.o_auth_request`
+
+Read-Only:
+
+- `auth_code` (String) The code provided by the connector when it has been authenticated via the connected app.
+- `redirect_uri` (String) The URL to which the authentication server redirects the browser after authorization has been
+granted.
+
+
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--datadog"></a>
@@ -182,8 +245,8 @@ Read-Only:
 
 Read-Only:
 
-- `password` (String) The password that corresponds to the username.
-- `username` (String) The name of the user.
+- `password` (String)
+- `username` (String)
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--sapo_data--o_auth_credentials"></a>
@@ -300,6 +363,7 @@ granted.
 
 Read-Only:
 
+- `custom_connector` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--custom_connector))
 - `datadog` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--datadog))
 - `dynatrace` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--dynatrace))
 - `infor_nexus` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--infor_nexus))
@@ -312,6 +376,25 @@ Read-Only:
 - `snowflake` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--snowflake))
 - `veeva` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--veeva))
 - `zendesk` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--zendesk))
+
+<a id="nestedatt--connector_profile_config--connector_profile_properties--custom_connector"></a>
+### Nested Schema for `connector_profile_config.connector_profile_properties.custom_connector`
+
+Read-Only:
+
+- `o_auth_2_properties` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--custom_connector--o_auth_2_properties))
+- `profile_properties` (Map of String) A map for properties for custom connector.
+
+<a id="nestedatt--connector_profile_config--connector_profile_properties--custom_connector--o_auth_2_properties"></a>
+### Nested Schema for `connector_profile_config.connector_profile_properties.custom_connector.profile_properties`
+
+Read-Only:
+
+- `o_auth_2_grant_type` (String)
+- `token_url` (String)
+- `token_url_custom_properties` (Map of String) A map for properties for custom connector Token Url.
+
+
 
 <a id="nestedatt--connector_profile_config--connector_profile_properties--datadog"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.datadog`

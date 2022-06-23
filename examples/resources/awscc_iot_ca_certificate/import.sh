@@ -1,0 +1,1 @@
+$ terraform import awscc_iot_ca_certificate.example <resource ID>

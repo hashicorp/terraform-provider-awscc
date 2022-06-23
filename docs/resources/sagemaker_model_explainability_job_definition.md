@@ -25,6 +25,7 @@ Resource Type definition for AWS::SageMaker::ModelExplainabilityJobDefinition
 
 ### Optional
 
+- `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
 - `job_definition_name` (String) The name of the job definition.
 - `model_explainability_baseline_config` (Attributes) Baseline configuration used to validate that the data conforms to the specified constraints and statistics. (see [below for nested schema](#nestedatt--model_explainability_baseline_config))
 - `network_config` (Attributes) Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs. (see [below for nested schema](#nestedatt--network_config))
