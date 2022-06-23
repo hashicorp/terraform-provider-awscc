@@ -30,6 +30,9 @@
     "NetworkConfig": {
       "$ref": "#/definitions/NetworkConfig"
     },
+    "EndpointName": {
+      "$ref": "#/definitions/EndpointName"
+    },
     "RoleArn": {
       "description": "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
       "type" : "string",
@@ -424,6 +427,11 @@
     "read": {
       "permissions": [
         "sagemaker:DescribeDataQualityJobDefinition"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sagemaker:ListDataQualityJobDefinitions"
       ]
     }
   },

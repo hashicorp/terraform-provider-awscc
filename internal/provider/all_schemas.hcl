@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 548 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 551 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -137,6 +137,10 @@ resource_schema "aws_apigateway_resource" {
 resource_schema "aws_apigateway_stage" {
   cloudformation_type_name               = "AWS::ApiGateway::Stage"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_apigatewayv2_vpc_link" {
+  cloudformation_type_name = "AWS::ApiGatewayV2::VpcLink"
 }
 
 resource_schema "aws_apigateway_usage_plan" {
@@ -644,6 +648,10 @@ resource_schema "aws_ec2_capacity_reservation_fleet" {
 
 resource_schema "aws_ec2_carrier_gateway" {
   cloudformation_type_name = "AWS::EC2::CarrierGateway"
+}
+
+resource_schema "aws_ec2_customer_gateway" {
+  cloudformation_type_name = "AWS::EC2::CustomerGateway"
 }
 
 resource_schema "aws_ec2_dhcp_options" {
@@ -1211,6 +1219,10 @@ resource_schema "aws_iot_account_audit_configuration" {
 
 resource_schema "aws_iot_authorizer" {
   cloudformation_type_name = "AWS::IoT::Authorizer"
+}
+
+resource_schema "aws_iot_ca_certificate" {
+  cloudformation_type_name = "AWS::IoT::CACertificate"
 }
 
 resource_schema "aws_iot_certificate" {

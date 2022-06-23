@@ -42,6 +42,23 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				}),
 			},
 		},
+		"connector_label": {
+			// Property: ConnectorLabel
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
+			//   "maxLength": 256,
+			//   "pattern": "[\\w!@#.-]+",
+			//   "type": "string"
+			// }
+			Description: "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
+			Type:        types.StringType,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtMost(256),
+				validate.StringMatch(regexp.MustCompile("[\\w!@#.-]+"), ""),
+			},
+		},
 		"connector_profile_arn": {
 			// Property: ConnectorProfileArn
 			// CloudFormation resource type schema:
@@ -84,6 +101,130 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//           "required": [
 			//             "ApiKey",
 			//             "SecretKey"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "CustomConnector": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ApiKey": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "ApiKey": {
+			//                   "maxLength": 256,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 },
+			//                 "ApiSecretKey": {
+			//                   "maxLength": 256,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "ApiKey"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "AuthenticationType": {
+			//               "enum": [
+			//                 "OAUTH2",
+			//                 "APIKEY",
+			//                 "BASIC",
+			//                 "CUSTOM"
+			//               ],
+			//               "type": "string"
+			//             },
+			//             "Basic": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Password": {
+			//                   "maxLength": 512,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 },
+			//                 "Username": {
+			//                   "maxLength": 512,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Username",
+			//                 "Password"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "Custom": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "CredentialsMap": {
+			//                   "additionalProperties": false,
+			//                   "description": "A map for properties for custom authentication.",
+			//                   "patternProperties": {
+			//                     "": {
+			//                       "description": "A string containing the value for the property",
+			//                       "maxLength": 2048,
+			//                       "minLength": 1,
+			//                       "pattern": "\\S+",
+			//                       "type": "string"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "CustomAuthenticationType": {
+			//                   "maxLength": 256,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "CustomAuthenticationType"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "Oauth2": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "AccessToken": {
+			//                   "maxLength": 512,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 },
+			//                 "ClientId": {
+			//                   "maxLength": 512,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 },
+			//                 "ClientSecret": {
+			//                   "maxLength": 512,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 },
+			//                 "OAuthRequest": {
+			//                   "properties": {
+			//                     "AuthCode": {
+			//                       "description": "The code provided by the connector when it has been authenticated via the connected app.",
+			//                       "type": "string"
+			//                     },
+			//                     "RedirectUri": {
+			//                       "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+			//                       "type": "string"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "RefreshToken": {
+			//                   "maxLength": 512,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             }
+			//           },
+			//           "required": [
+			//             "AuthenticationType"
 			//           ],
 			//           "type": "object"
 			//         },
@@ -269,20 +410,23 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "SAPOData": {
 			//           "properties": {
 			//             "BasicAuthCredentials": {
+			//               "additionalProperties": false,
 			//               "properties": {
 			//                 "Password": {
-			//                   "description": "The password that corresponds to the username.",
 			//                   "maxLength": 512,
 			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 },
 			//                 "Username": {
-			//                   "description": "The name of the user.",
 			//                   "maxLength": 512,
 			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 }
 			//               },
+			//               "required": [
+			//                 "Username",
+			//                 "Password"
+			//               ],
 			//               "type": "object"
 			//             },
 			//             "OAuthCredentials": {
@@ -542,6 +686,59 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//     "ConnectorProfileProperties": {
 			//       "description": "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
 			//       "properties": {
+			//         "CustomConnector": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "OAuth2Properties": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "OAuth2GrantType": {
+			//                   "enum": [
+			//                     "CLIENT_CREDENTIALS",
+			//                     "AUTHORIZATION_CODE"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "TokenUrl": {
+			//                   "maxLength": 256,
+			//                   "minLength": 0,
+			//                   "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
+			//                   "type": "string"
+			//                 },
+			//                 "TokenUrlCustomProperties": {
+			//                   "additionalProperties": false,
+			//                   "description": "A map for properties for custom connector Token Url.",
+			//                   "patternProperties": {
+			//                     "": {
+			//                       "description": "A string containing the value for the property",
+			//                       "maxLength": 2048,
+			//                       "minLength": 1,
+			//                       "pattern": "\\S+",
+			//                       "type": "string"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "ProfileProperties": {
+			//               "additionalProperties": false,
+			//               "description": "A map for properties for custom connector.",
+			//               "patternProperties": {
+			//                 "": {
+			//                   "description": "A string containing the value for the property",
+			//                   "maxLength": 2048,
+			//                   "minLength": 1,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
 			//         "Datadog": {
 			//           "properties": {
 			//             "InstanceUrl": {
@@ -858,6 +1055,167 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									),
 									Optional: true,
 								},
+								"custom_connector": {
+									// Property: CustomConnector
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"api_key": {
+												// Property: ApiKey
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"api_key": {
+															// Property: ApiKey
+															Type:     types.StringType,
+															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(256),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+														"api_secret_key": {
+															// Property: ApiSecretKey
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(256),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+													},
+												),
+												Optional: true,
+											},
+											"authentication_type": {
+												// Property: AuthenticationType
+												Type:     types.StringType,
+												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"OAUTH2",
+														"APIKEY",
+														"BASIC",
+														"CUSTOM",
+													}),
+												},
+											},
+											"basic": {
+												// Property: Basic
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"password": {
+															// Property: Password
+															Type:     types.StringType,
+															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+														"username": {
+															// Property: Username
+															Type:     types.StringType,
+															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+													},
+												),
+												Optional: true,
+											},
+											"custom": {
+												// Property: Custom
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"credentials_map": {
+															// Property: CredentialsMap
+															Description: "A map for properties for custom authentication.",
+															// Pattern: ""
+															Type:     types.MapType{ElemType: types.StringType},
+															Optional: true,
+														},
+														"custom_authentication_type": {
+															// Property: CustomAuthenticationType
+															Type:     types.StringType,
+															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(256),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+													},
+												),
+												Optional: true,
+											},
+											"oauth_2": {
+												// Property: Oauth2
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"access_token": {
+															// Property: AccessToken
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+														"client_id": {
+															// Property: ClientId
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+														"client_secret": {
+															// Property: ClientSecret
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+														"o_auth_request": {
+															// Property: OAuthRequest
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"auth_code": {
+																		// Property: AuthCode
+																		Description: "The code provided by the connector when it has been authenticated via the connected app.",
+																		Type:        types.StringType,
+																		Optional:    true,
+																	},
+																	"redirect_uri": {
+																		// Property: RedirectUri
+																		Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+																		Type:        types.StringType,
+																		Optional:    true,
+																	},
+																},
+															),
+															Optional: true,
+														},
+														"refresh_token": {
+															// Property: RefreshToken
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+													},
+												),
+												Optional: true,
+											},
+										},
+									),
+									Optional: true,
+								},
 								"datadog": {
 									// Property: Datadog
 									Attributes: tfsdk.SingleNestedAttributes(
@@ -1118,9 +1476,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 													map[string]tfsdk.Attribute{
 														"password": {
 															// Property: Password
-															Description: "The password that corresponds to the username.",
-															Type:        types.StringType,
-															Optional:    true,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
@@ -1128,9 +1485,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 														},
 														"username": {
 															// Property: Username
-															Description: "The name of the user.",
-															Type:        types.StringType,
-															Optional:    true,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
@@ -1514,6 +1870,56 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Description: "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"custom_connector": {
+									// Property: CustomConnector
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"o_auth_2_properties": {
+												// Property: OAuth2Properties
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"o_auth_2_grant_type": {
+															// Property: OAuth2GrantType
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"CLIENT_CREDENTIALS",
+																	"AUTHORIZATION_CODE",
+																}),
+															},
+														},
+														"token_url": {
+															// Property: TokenUrl
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 256),
+																validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
+															},
+														},
+														"token_url_custom_properties": {
+															// Property: TokenUrlCustomProperties
+															Description: "A map for properties for custom connector Token Url.",
+															// Pattern: ""
+															Type:     types.MapType{ElemType: types.StringType},
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"profile_properties": {
+												// Property: ProfileProperties
+												Description: "A map for properties for custom connector.",
+												// Pattern: ""
+												Type:     types.MapType{ElemType: types.StringType},
+												Optional: true,
+											},
+										},
+									),
+									Optional: true,
+								},
 								"datadog": {
 									// Property: Datadog
 									Attributes: tfsdk.SingleNestedAttributes(
@@ -1952,7 +2358,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//     "Dynatrace",
 			//     "Infornexus",
 			//     "Amplitude",
-			//     "Veeva"
+			//     "Veeva",
+			//     "CustomConnector"
 			//   ],
 			//   "type": "string"
 			// }
@@ -1977,6 +2384,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"Infornexus",
 					"Amplitude",
 					"Veeva",
+					"CustomConnector",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2057,6 +2465,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"application_service_path":      "ApplicationServicePath",
 		"auth_code":                     "AuthCode",
 		"auth_code_url":                 "AuthCodeUrl",
+		"authentication_type":           "AuthenticationType",
+		"basic":                         "Basic",
 		"basic_auth_credentials":        "BasicAuthCredentials",
 		"bucket_name":                   "BucketName",
 		"bucket_prefix":                 "BucketPrefix",
@@ -2065,6 +2475,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"client_number":                 "ClientNumber",
 		"client_secret":                 "ClientSecret",
 		"connection_mode":               "ConnectionMode",
+		"connector_label":               "ConnectorLabel",
 		"connector_o_auth_request":      "ConnectorOAuthRequest",
 		"connector_profile_arn":         "ConnectorProfileArn",
 		"connector_profile_config":      "ConnectorProfileConfig",
@@ -2073,6 +2484,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"connector_profile_properties":  "ConnectorProfileProperties",
 		"connector_type":                "ConnectorType",
 		"credentials_arn":               "CredentialsArn",
+		"credentials_map":               "CredentialsMap",
+		"custom":                        "Custom",
+		"custom_authentication_type":    "CustomAuthenticationType",
+		"custom_connector":              "CustomConnector",
 		"database_url":                  "DatabaseUrl",
 		"datadog":                       "Datadog",
 		"datakey":                       "Datakey",
@@ -2084,12 +2499,17 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"kms_arn":                       "KMSArn",
 		"logon_language":                "LogonLanguage",
 		"marketo":                       "Marketo",
+		"o_auth_2_grant_type":           "OAuth2GrantType",
+		"o_auth_2_properties":           "OAuth2Properties",
 		"o_auth_credentials":            "OAuthCredentials",
 		"o_auth_properties":             "OAuthProperties",
+		"o_auth_request":                "OAuthRequest",
 		"o_auth_scopes":                 "OAuthScopes",
+		"oauth_2":                       "Oauth2",
 		"password":                      "Password",
 		"port_number":                   "PortNumber",
 		"private_link_service_name":     "PrivateLinkServiceName",
+		"profile_properties":            "ProfileProperties",
 		"redirect_uri":                  "RedirectUri",
 		"redshift":                      "Redshift",
 		"refresh_token":                 "RefreshToken",
@@ -2105,6 +2525,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"snowflake":                     "Snowflake",
 		"stage":                         "Stage",
 		"token_url":                     "TokenUrl",
+		"token_url_custom_properties":   "TokenUrlCustomProperties",
 		"trendmicro":                    "Trendmicro",
 		"user_id":                       "UserId",
 		"username":                      "Username",

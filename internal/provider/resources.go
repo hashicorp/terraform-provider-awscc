@@ -21,6 +21,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_request_validator -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_RequestValidator.json -package apigateway -- ../aws/apigateway/request_validator_resource_gen.go ../aws/apigateway/request_validator_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_resource -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_Resource.json -package apigateway -- ../aws/apigateway/resource_resource_gen.go ../aws/apigateway/resource_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_stage -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_Stage.json -package apigateway -- ../aws/apigateway/stage_resource_gen.go ../aws/apigateway/stage_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_apigatewayv2_vpc_link -cfschema ../service/cloudformation/schemas/AWS_ApiGatewayV2_VpcLink.json -package apigatewayv2 -- ../aws/apigatewayv2/vpc_link_resource_gen.go ../aws/apigatewayv2/vpc_link_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_usage_plan -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_UsagePlan.json -package apigateway -- ../aws/apigateway/usage_plan_resource_gen.go ../aws/apigateway/usage_plan_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_usage_plan_key -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_UsagePlanKey.json -package apigateway -- ../aws/apigateway/usage_plan_key_resource_gen.go ../aws/apigateway/usage_plan_key_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_appflow_connector_profile -cfschema ../service/cloudformation/schemas/AWS_AppFlow_ConnectorProfile.json -package appflow -- ../aws/appflow/connector_profile_resource_gen.go ../aws/appflow/connector_profile_resource_gen_test.go
@@ -136,6 +137,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_dynamodb_global_table -cfschema ../service/cloudformation/schemas/AWS_DynamoDB_GlobalTable.json -package dynamodb -- ../aws/dynamodb/global_table_resource_gen.go ../aws/dynamodb/global_table_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_capacity_reservation_fleet -cfschema ../service/cloudformation/schemas/AWS_EC2_CapacityReservationFleet.json -package ec2 -- ../aws/ec2/capacity_reservation_fleet_resource_gen.go ../aws/ec2/capacity_reservation_fleet_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_carrier_gateway -cfschema ../service/cloudformation/schemas/AWS_EC2_CarrierGateway.json -package ec2 -- ../aws/ec2/carrier_gateway_resource_gen.go ../aws/ec2/carrier_gateway_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_ec2_customer_gateway -cfschema ../service/cloudformation/schemas/AWS_EC2_CustomerGateway.json -package ec2 -- ../aws/ec2/customer_gateway_resource_gen.go ../aws/ec2/customer_gateway_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_dhcp_options -cfschema ../service/cloudformation/schemas/AWS_EC2_DHCPOptions.json -package ec2 -- ../aws/ec2/dhcp_options_resource_gen.go ../aws/ec2/dhcp_options_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_ec2_fleet -cfschema ../service/cloudformation/schemas/AWS_EC2_EC2Fleet.json -package ec2 -- ../aws/ec2/ec2_fleet_resource_gen.go ../aws/ec2/ec2_fleet_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_egress_only_internet_gateway -cfschema ../service/cloudformation/schemas/AWS_EC2_EgressOnlyInternetGateway.json -package ec2 -- ../aws/ec2/egress_only_internet_gateway_resource_gen.go ../aws/ec2/egress_only_internet_gateway_resource_gen_test.go
@@ -260,6 +262,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_inspectorv2_filter -cfschema ../service/cloudformation/schemas/AWS_InspectorV2_Filter.json -package inspectorv2 -- ../aws/inspectorv2/filter_resource_gen.go ../aws/inspectorv2/filter_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iot_account_audit_configuration -cfschema ../service/cloudformation/schemas/AWS_IoT_AccountAuditConfiguration.json -package iot -- ../aws/iot/account_audit_configuration_resource_gen.go ../aws/iot/account_audit_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iot_authorizer -cfschema ../service/cloudformation/schemas/AWS_IoT_Authorizer.json -package iot -- ../aws/iot/authorizer_resource_gen.go ../aws/iot/authorizer_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_iot_ca_certificate -cfschema ../service/cloudformation/schemas/AWS_IoT_CACertificate.json -package iot -- ../aws/iot/ca_certificate_resource_gen.go ../aws/iot/ca_certificate_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iot_certificate -cfschema ../service/cloudformation/schemas/AWS_IoT_Certificate.json -package iot -- ../aws/iot/certificate_resource_gen.go ../aws/iot/certificate_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iot_custom_metric -cfschema ../service/cloudformation/schemas/AWS_IoT_CustomMetric.json -package iot -- ../aws/iot/custom_metric_resource_gen.go ../aws/iot/custom_metric_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iot_dimension -cfschema ../service/cloudformation/schemas/AWS_IoT_Dimension.json -package iot -- ../aws/iot/dimension_resource_gen.go ../aws/iot/dimension_resource_gen_test.go
@@ -528,6 +531,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/acmpca"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/amplify"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigateway"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigatewayv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appflow"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appintegrations"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/applicationinsights"

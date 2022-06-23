@@ -6,6 +6,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apigateway_api_keys -cftype AWS::ApiGateway::ApiKey -package apigateway ../aws/apigateway/api_key_plural_data_source_gen.go ../aws/apigateway/api_key_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apigateway_client_certificates -cftype AWS::ApiGateway::ClientCertificate -package apigateway ../aws/apigateway/client_certificate_plural_data_source_gen.go ../aws/apigateway/client_certificate_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apigateway_domain_names -cftype AWS::ApiGateway::DomainName -package apigateway ../aws/apigateway/domain_name_plural_data_source_gen.go ../aws/apigateway/domain_name_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_apigatewayv2_vpc_links -cftype AWS::ApiGatewayV2::VpcLink -package apigatewayv2 ../aws/apigatewayv2/vpc_link_plural_data_source_gen.go ../aws/apigatewayv2/vpc_link_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apigateway_usage_plans -cftype AWS::ApiGateway::UsagePlan -package apigateway ../aws/apigateway/usage_plan_plural_data_source_gen.go ../aws/apigateway/usage_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appflow_connector_profiles -cftype AWS::AppFlow::ConnectorProfile -package appflow ../aws/appflow/connector_profile_plural_data_source_gen.go ../aws/appflow/connector_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appflow_flows -cftype AWS::AppFlow::Flow -package appflow ../aws/appflow/flow_plural_data_source_gen.go ../aws/appflow/flow_plural_data_source_gen_test.go
@@ -83,6 +84,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dynamodb_global_tables -cftype AWS::DynamoDB::GlobalTable -package dynamodb ../aws/dynamodb/global_table_plural_data_source_gen.go ../aws/dynamodb/global_table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_capacity_reservation_fleets -cftype AWS::EC2::CapacityReservationFleet -package ec2 ../aws/ec2/capacity_reservation_fleet_plural_data_source_gen.go ../aws/ec2/capacity_reservation_fleet_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_carrier_gateways -cftype AWS::EC2::CarrierGateway -package ec2 ../aws/ec2/carrier_gateway_plural_data_source_gen.go ../aws/ec2/carrier_gateway_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_customer_gateways -cftype AWS::EC2::CustomerGateway -package ec2 ../aws/ec2/customer_gateway_plural_data_source_gen.go ../aws/ec2/customer_gateway_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_dhcp_options_plural -cftype AWS::EC2::DHCPOptions -package ec2 ../aws/ec2/dhcp_options_plural_data_source_gen.go ../aws/ec2/dhcp_options_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_ec2_fleets -cftype AWS::EC2::EC2Fleet -package ec2 ../aws/ec2/ec2_fleet_plural_data_source_gen.go ../aws/ec2/ec2_fleet_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_egress_only_internet_gateways -cftype AWS::EC2::EgressOnlyInternetGateway -package ec2 ../aws/ec2/egress_only_internet_gateway_plural_data_source_gen.go ../aws/ec2/egress_only_internet_gateway_plural_data_source_gen_test.go
@@ -181,6 +183,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_inspectorv2_filters -cftype AWS::InspectorV2::Filter -package inspectorv2 ../aws/inspectorv2/filter_plural_data_source_gen.go ../aws/inspectorv2/filter_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_account_audit_configurations -cftype AWS::IoT::AccountAuditConfiguration -package iot ../aws/iot/account_audit_configuration_plural_data_source_gen.go ../aws/iot/account_audit_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_authorizers -cftype AWS::IoT::Authorizer -package iot ../aws/iot/authorizer_plural_data_source_gen.go ../aws/iot/authorizer_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_ca_certificates -cftype AWS::IoT::CACertificate -package iot ../aws/iot/ca_certificate_plural_data_source_gen.go ../aws/iot/ca_certificate_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_certificates -cftype AWS::IoT::Certificate -package iot ../aws/iot/certificate_plural_data_source_gen.go ../aws/iot/certificate_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_custom_metrics -cftype AWS::IoT::CustomMetric -package iot ../aws/iot/custom_metric_plural_data_source_gen.go ../aws/iot/custom_metric_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_dimensions -cftype AWS::IoT::Dimension -package iot ../aws/iot/dimension_plural_data_source_gen.go ../aws/iot/dimension_plural_data_source_gen_test.go
@@ -364,6 +367,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/acmpca"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/amplify"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigateway"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigatewayv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appflow"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appintegrations"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/applicationinsights"

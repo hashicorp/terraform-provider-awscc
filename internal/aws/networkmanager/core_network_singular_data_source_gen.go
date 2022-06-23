@@ -147,7 +147,7 @@ func coreNetworkDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "object"
 			// }
 			Description: "Live policy document for the core network, you must provide PolicyDocument in Json Format",
-			Type:        types.MapType{ElemType: types.StringType},
+			Type:        JSONStringType,
 			Computed:    true,
 		},
 		"segments": {

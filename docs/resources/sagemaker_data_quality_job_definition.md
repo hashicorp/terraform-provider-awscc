@@ -26,6 +26,7 @@ Resource Type definition for AWS::SageMaker::DataQualityJobDefinition
 ### Optional
 
 - `data_quality_baseline_config` (Attributes) Baseline configuration used to validate that the data conforms to the specified constraints and statistics. (see [below for nested schema](#nestedatt--data_quality_baseline_config))
+- `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
 - `job_definition_name` (String) The name of the job definition.
 - `network_config` (Attributes) Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs. (see [below for nested schema](#nestedatt--network_config))
 - `stopping_condition` (Attributes) Specifies a time limit for how long the monitoring job is allowed to run. (see [below for nested schema](#nestedatt--stopping_condition))
