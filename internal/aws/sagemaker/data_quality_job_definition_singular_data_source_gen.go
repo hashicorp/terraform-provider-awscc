@@ -435,6 +435,19 @@ func dataQualityJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSour
 			),
 			Computed: true,
 		},
+		"endpoint_name": {
+			// Property: EndpointName
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The name of the endpoint used to run the monitoring job.",
+			//   "maxLength": 63,
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
+			//   "type": "string"
+			// }
+			Description: "The name of the endpoint used to run the monitoring job.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"job_definition_arn": {
 			// Property: JobDefinitionArn
 			// CloudFormation resource type schema:

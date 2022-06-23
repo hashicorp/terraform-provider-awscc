@@ -524,6 +524,23 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"endpoint_name": {
+			// Property: EndpointName
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The name of the endpoint used to run the monitoring job.",
+			//   "maxLength": 63,
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
+			//   "type": "string"
+			// }
+			Description: "The name of the endpoint used to run the monitoring job.",
+			Type:        types.StringType,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtMost(63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
+			},
+		},
 		"job_definition_arn": {
 			// Property: JobDefinitionArn
 			// CloudFormation resource type schema:

@@ -47,6 +47,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "additionalProperties": false,
 			//     "description": "Configurations of destination connector.",
 			//     "properties": {
+			//       "ApiVersion": {
+			//         "description": "The API version that the destination connector uses.",
+			//         "maxLength": 256,
+			//         "pattern": "\\S+",
+			//         "type": "string"
+			//       },
 			//       "ConnectorProfileName": {
 			//         "description": "Name of destination connector profile",
 			//         "maxLength": 256,
@@ -73,6 +79,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "Infornexus",
 			//           "Amplitude",
 			//           "Veeva",
+			//           "CustomConnector",
 			//           "EventBridge",
 			//           "Upsolver",
 			//           "LookoutMetrics"
@@ -82,6 +89,68 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "DestinationConnectorProperties": {
 			//         "description": "Destination connector details",
 			//         "properties": {
+			//           "CustomConnector": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "CustomProperties": {
+			//                 "additionalProperties": false,
+			//                 "description": "A map for properties for custom connector.",
+			//                 "patternProperties": {
+			//                   "": {
+			//                     "description": "A string containing the value for the property",
+			//                     "maxLength": 2048,
+			//                     "minLength": 1,
+			//                     "pattern": "\\S+",
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "EntityName": {
+			//                 "maxLength": 1024,
+			//                 "pattern": "\\S+",
+			//                 "type": "string"
+			//               },
+			//               "ErrorHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "\\S+",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   },
+			//                   "FailOnFirstError": {
+			//                     "type": "boolean"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "IdFieldNames": {
+			//                 "description": "List of fields used as ID when performing a write operation.",
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array"
+			//               },
+			//               "WriteOperationType": {
+			//                 "enum": [
+			//                   "INSERT",
+			//                   "UPSERT",
+			//                   "UPDATE"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "EntityName"
+			//             ],
+			//             "type": "object"
+			//           },
 			//           "EventBridge": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -262,6 +331,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                       }
 			//                     },
 			//                     "type": "object"
+			//                   },
+			//                   "PreserveSourceDataTyping": {
+			//                     "type": "boolean"
 			//                   }
 			//                 },
 			//                 "type": "object"
@@ -564,6 +636,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "List of Destination connectors of the flow.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"api_version": {
+						// Property: ApiVersion
+						Description: "The API version that the destination connector uses.",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenAtMost(256),
+							validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+						},
+					},
 					"connector_profile_name": {
 						// Property: ConnectorProfileName
 						Description: "Name of destination connector profile",
@@ -598,6 +680,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"Infornexus",
 								"Amplitude",
 								"Veeva",
+								"CustomConnector",
 								"EventBridge",
 								"Upsolver",
 								"LookoutMetrics",
@@ -609,6 +692,78 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Destination connector details",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"custom_connector": {
+									// Property: CustomConnector
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"custom_properties": {
+												// Property: CustomProperties
+												Description: "A map for properties for custom connector.",
+												// Pattern: ""
+												Type:     types.MapType{ElemType: types.StringType},
+												Optional: true,
+											},
+											"entity_name": {
+												// Property: EntityName
+												Type:     types.StringType,
+												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(1024),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+											},
+											"error_handling_config": {
+												// Property: ErrorHandlingConfig
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"bucket_name": {
+															// Property: BucketName
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(3, 63),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+														"bucket_prefix": {
+															// Property: BucketPrefix
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+															},
+														},
+														"fail_on_first_error": {
+															// Property: FailOnFirstError
+															Type:     types.BoolType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"id_field_names": {
+												// Property: IdFieldNames
+												Description: "List of fields used as ID when performing a write operation.",
+												Type:        types.ListType{ElemType: types.StringType},
+												Optional:    true,
+											},
+											"write_operation_type": {
+												// Property: WriteOperationType
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"INSERT",
+														"UPSERT",
+														"UPDATE",
+													}),
+												},
+											},
+										},
+									),
+									Optional: true,
+								},
 								"event_bridge": {
 									// Property: EventBridge
 									Attributes: tfsdk.SingleNestedAttributes(
@@ -872,6 +1027,11 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	},
 																},
 															),
+															Optional: true,
+														},
+														"preserve_source_data_typing": {
+															// Property: PreserveSourceDataTyping
+															Type:     types.BoolType,
 															Optional: true,
 														},
 													},
@@ -1339,6 +1499,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "additionalProperties": false,
 			//   "description": "Configurations of Source connector of the flow.",
 			//   "properties": {
+			//     "ApiVersion": {
+			//       "description": "The API version that the destination connector uses.",
+			//       "maxLength": 256,
+			//       "pattern": "\\S+",
+			//       "type": "string"
+			//     },
 			//     "ConnectorProfileName": {
 			//       "description": "Name of source connector profile",
 			//       "maxLength": 256,
@@ -1365,6 +1531,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "Infornexus",
 			//         "Amplitude",
 			//         "Veeva",
+			//         "CustomConnector",
 			//         "EventBridge",
 			//         "Upsolver",
 			//         "LookoutMetrics"
@@ -1396,6 +1563,34 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           },
 			//           "required": [
 			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "CustomConnector": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "CustomProperties": {
+			//               "additionalProperties": false,
+			//               "description": "A map for properties for custom connector.",
+			//               "patternProperties": {
+			//                 "": {
+			//                   "description": "A string containing the value for the property",
+			//                   "maxLength": 2048,
+			//                   "minLength": 1,
+			//                   "pattern": "\\S+",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "EntityName": {
+			//               "maxLength": 1024,
+			//               "pattern": "\\S+",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "EntityName"
 			//           ],
 			//           "type": "object"
 			//         },
@@ -1646,6 +1841,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Configurations of Source connector of the flow.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"api_version": {
+						// Property: ApiVersion
+						Description: "The API version that the destination connector uses.",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenAtMost(256),
+							validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+						},
+					},
 					"connector_profile_name": {
 						// Property: ConnectorProfileName
 						Description: "Name of source connector profile",
@@ -1680,6 +1885,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"Infornexus",
 								"Amplitude",
 								"Veeva",
+								"CustomConnector",
 								"EventBridge",
 								"Upsolver",
 								"LookoutMetrics",
@@ -1719,6 +1925,30 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+											},
+										},
+									),
+									Optional: true,
+								},
+								"custom_connector": {
+									// Property: CustomConnector
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"custom_properties": {
+												// Property: CustomProperties
+												Description: "A map for properties for custom connector.",
+												// Pattern: ""
+												Type:     types.MapType{ElemType: types.StringType},
+												Optional: true,
+											},
+											"entity_name": {
+												// Property: EntityName
+												Type:     types.StringType,
+												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(1024),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
@@ -2102,6 +2332,32 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "Amplitude": {
 			//             "enum": [
 			//               "BETWEEN"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "CustomConnector": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "LESS_THAN",
+			//               "GREATER_THAN",
+			//               "CONTAINS",
+			//               "BETWEEN",
+			//               "LESS_THAN_OR_EQUAL_TO",
+			//               "GREATER_THAN_OR_EQUAL_TO",
+			//               "EQUAL_TO",
+			//               "NOT_EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
 			//             ],
 			//             "type": "string"
 			//           },
@@ -2493,6 +2749,36 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"BETWEEN",
+										}),
+									},
+								},
+								"custom_connector": {
+									// Property: CustomConnector
+									Type:     types.StringType,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"LESS_THAN",
+											"GREATER_THAN",
+											"CONTAINS",
+											"BETWEEN",
+											"LESS_THAN_OR_EQUAL_TO",
+											"GREATER_THAN_OR_EQUAL_TO",
+											"EQUAL_TO",
+											"NOT_EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
 										}),
 									},
 								},
@@ -2947,6 +3233,11 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           ],
 			//           "type": "string"
 			//         },
+			//         "FlowErrorDeactivationThreshold": {
+			//           "maximum": 100,
+			//           "minimum": 1,
+			//           "type": "integer"
+			//         },
 			//         "ScheduleEndTime": {
 			//           "type": "number"
 			//         },
@@ -3005,6 +3296,14 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"Incremental",
 											"Complete",
 										}),
+									},
+								},
+								"flow_error_deactivation_threshold": {
+									// Property: FlowErrorDeactivationThreshold
+									Type:     types.Int64Type,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(1, 100),
 									},
 								},
 								"schedule_end_time": {
@@ -3085,81 +3384,87 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"aggregation_config":               "AggregationConfig",
-		"aggregation_type":                 "AggregationType",
-		"amplitude":                        "Amplitude",
-		"bucket_name":                      "BucketName",
-		"bucket_prefix":                    "BucketPrefix",
-		"connector_operator":               "ConnectorOperator",
-		"connector_profile_name":           "ConnectorProfileName",
-		"connector_type":                   "ConnectorType",
-		"data_pull_mode":                   "DataPullMode",
-		"datadog":                          "Datadog",
-		"datetime_type_field_name":         "DatetimeTypeFieldName",
-		"description":                      "Description",
-		"destination_connector_properties": "DestinationConnectorProperties",
-		"destination_field":                "DestinationField",
-		"destination_flow_config_list":     "DestinationFlowConfigList",
-		"document_type":                    "DocumentType",
-		"dynatrace":                        "Dynatrace",
-		"enable_dynamic_field_update":      "EnableDynamicFieldUpdate",
-		"error_handling_config":            "ErrorHandlingConfig",
-		"event_bridge":                     "EventBridge",
-		"fail_on_first_error":              "FailOnFirstError",
-		"file_type":                        "FileType",
-		"flow_arn":                         "FlowArn",
-		"flow_name":                        "FlowName",
-		"google_analytics":                 "GoogleAnalytics",
-		"id_field_names":                   "IdFieldNames",
-		"include_all_versions":             "IncludeAllVersions",
-		"include_deleted_records":          "IncludeDeletedRecords",
-		"include_renditions":               "IncludeRenditions",
-		"include_source_files":             "IncludeSourceFiles",
-		"incremental_pull_config":          "IncrementalPullConfig",
-		"infor_nexus":                      "InforNexus",
-		"intermediate_bucket_name":         "IntermediateBucketName",
-		"key":                              "Key",
-		"kms_arn":                          "KMSArn",
-		"lookout_metrics":                  "LookoutMetrics",
-		"marketo":                          "Marketo",
-		"object":                           "Object",
-		"object_path":                      "ObjectPath",
-		"prefix_config":                    "PrefixConfig",
-		"prefix_format":                    "PrefixFormat",
-		"prefix_type":                      "PrefixType",
-		"redshift":                         "Redshift",
-		"s3":                               "S3",
-		"s3_input_file_type":               "S3InputFileType",
-		"s3_input_format_config":           "S3InputFormatConfig",
-		"s3_output_format_config":          "S3OutputFormatConfig",
-		"salesforce":                       "Salesforce",
-		"sapo_data":                        "SAPOData",
-		"schedule_end_time":                "ScheduleEndTime",
-		"schedule_expression":              "ScheduleExpression",
-		"schedule_offset":                  "ScheduleOffset",
-		"schedule_start_time":              "ScheduleStartTime",
-		"service_now":                      "ServiceNow",
-		"singular":                         "Singular",
-		"slack":                            "Slack",
-		"snowflake":                        "Snowflake",
-		"source_connector_properties":      "SourceConnectorProperties",
-		"source_fields":                    "SourceFields",
-		"source_flow_config":               "SourceFlowConfig",
-		"success_response_handling_config": "SuccessResponseHandlingConfig",
-		"tags":                             "Tags",
-		"task_properties":                  "TaskProperties",
-		"task_type":                        "TaskType",
-		"tasks":                            "Tasks",
-		"time_zone":                        "TimeZone",
-		"trendmicro":                       "Trendmicro",
-		"trigger_config":                   "TriggerConfig",
-		"trigger_properties":               "TriggerProperties",
-		"trigger_type":                     "TriggerType",
-		"upsolver":                         "Upsolver",
-		"value":                            "Value",
-		"veeva":                            "Veeva",
-		"write_operation_type":             "WriteOperationType",
-		"zendesk":                          "Zendesk",
+		"aggregation_config":                "AggregationConfig",
+		"aggregation_type":                  "AggregationType",
+		"amplitude":                         "Amplitude",
+		"api_version":                       "ApiVersion",
+		"bucket_name":                       "BucketName",
+		"bucket_prefix":                     "BucketPrefix",
+		"connector_operator":                "ConnectorOperator",
+		"connector_profile_name":            "ConnectorProfileName",
+		"connector_type":                    "ConnectorType",
+		"custom_connector":                  "CustomConnector",
+		"custom_properties":                 "CustomProperties",
+		"data_pull_mode":                    "DataPullMode",
+		"datadog":                           "Datadog",
+		"datetime_type_field_name":          "DatetimeTypeFieldName",
+		"description":                       "Description",
+		"destination_connector_properties":  "DestinationConnectorProperties",
+		"destination_field":                 "DestinationField",
+		"destination_flow_config_list":      "DestinationFlowConfigList",
+		"document_type":                     "DocumentType",
+		"dynatrace":                         "Dynatrace",
+		"enable_dynamic_field_update":       "EnableDynamicFieldUpdate",
+		"entity_name":                       "EntityName",
+		"error_handling_config":             "ErrorHandlingConfig",
+		"event_bridge":                      "EventBridge",
+		"fail_on_first_error":               "FailOnFirstError",
+		"file_type":                         "FileType",
+		"flow_arn":                          "FlowArn",
+		"flow_error_deactivation_threshold": "FlowErrorDeactivationThreshold",
+		"flow_name":                         "FlowName",
+		"google_analytics":                  "GoogleAnalytics",
+		"id_field_names":                    "IdFieldNames",
+		"include_all_versions":              "IncludeAllVersions",
+		"include_deleted_records":           "IncludeDeletedRecords",
+		"include_renditions":                "IncludeRenditions",
+		"include_source_files":              "IncludeSourceFiles",
+		"incremental_pull_config":           "IncrementalPullConfig",
+		"infor_nexus":                       "InforNexus",
+		"intermediate_bucket_name":          "IntermediateBucketName",
+		"key":                               "Key",
+		"kms_arn":                           "KMSArn",
+		"lookout_metrics":                   "LookoutMetrics",
+		"marketo":                           "Marketo",
+		"object":                            "Object",
+		"object_path":                       "ObjectPath",
+		"prefix_config":                     "PrefixConfig",
+		"prefix_format":                     "PrefixFormat",
+		"prefix_type":                       "PrefixType",
+		"preserve_source_data_typing":       "PreserveSourceDataTyping",
+		"redshift":                          "Redshift",
+		"s3":                                "S3",
+		"s3_input_file_type":                "S3InputFileType",
+		"s3_input_format_config":            "S3InputFormatConfig",
+		"s3_output_format_config":           "S3OutputFormatConfig",
+		"salesforce":                        "Salesforce",
+		"sapo_data":                         "SAPOData",
+		"schedule_end_time":                 "ScheduleEndTime",
+		"schedule_expression":               "ScheduleExpression",
+		"schedule_offset":                   "ScheduleOffset",
+		"schedule_start_time":               "ScheduleStartTime",
+		"service_now":                       "ServiceNow",
+		"singular":                          "Singular",
+		"slack":                             "Slack",
+		"snowflake":                         "Snowflake",
+		"source_connector_properties":       "SourceConnectorProperties",
+		"source_fields":                     "SourceFields",
+		"source_flow_config":                "SourceFlowConfig",
+		"success_response_handling_config":  "SuccessResponseHandlingConfig",
+		"tags":                              "Tags",
+		"task_properties":                   "TaskProperties",
+		"task_type":                         "TaskType",
+		"tasks":                             "Tasks",
+		"time_zone":                         "TimeZone",
+		"trendmicro":                        "Trendmicro",
+		"trigger_config":                    "TriggerConfig",
+		"trigger_properties":                "TriggerProperties",
+		"trigger_type":                      "TriggerType",
+		"upsolver":                          "Upsolver",
+		"value":                             "Value",
+		"veeva":                             "Veeva",
+		"write_operation_type":              "WriteOperationType",
+		"zendesk":                           "Zendesk",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -25,13 +25,13 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: AliasName
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Specifies the alias name. This value must begin with alias/ followed by a name, such as alias/ExampleAlias. The alias name cannot begin with alias/aws/. The alias/aws/ prefix is reserved for AWS managed CMKs.",
+			//   "description": "Specifies the alias name. This value must begin with alias/ followed by a name, such as alias/ExampleAlias. The alias name cannot begin with alias/aws/. The alias/aws/ prefix is reserved for AWS managed keys.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
 			//   "pattern": "^(alias/)[a-zA-Z0-9:/_-]+$",
 			//   "type": "string"
 			// }
-			Description: "Specifies the alias name. This value must begin with alias/ followed by a name, such as alias/ExampleAlias. The alias name cannot begin with alias/aws/. The alias/aws/ prefix is reserved for AWS managed CMKs.",
+			Description: "Specifies the alias name. This value must begin with alias/ followed by a name, such as alias/ExampleAlias. The alias name cannot begin with alias/aws/. The alias/aws/ prefix is reserved for AWS managed keys.",
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
@@ -46,12 +46,12 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: TargetKeyId
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Identifies the CMK to which the alias refers. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. You cannot specify another alias. For help finding the key ID and ARN, see Finding the Key ID and ARN in the AWS Key Management Service Developer Guide.",
+			//   "description": "Identifies the AWS KMS key to which the alias refers. Specify the key ID or the Amazon Resource Name (ARN) of the AWS KMS key. You cannot specify another alias. For help finding the key ID and ARN, see Finding the Key ID and ARN in the AWS Key Management Service Developer Guide.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Description: "Identifies the CMK to which the alias refers. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. You cannot specify another alias. For help finding the key ID and ARN, see Finding the Key ID and ARN in the AWS Key Management Service Developer Guide.",
+			Description: "Identifies the AWS KMS key to which the alias refers. Specify the key ID or the Amazon Resource Name (ARN) of the AWS KMS key. You cannot specify another alias. For help finding the key ID and ARN, see Finding the Key ID and ARN in the AWS Key Management Service Developer Guide.",
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
@@ -70,7 +70,7 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	schema := tfsdk.Schema{
-		Description: "The AWS::KMS::Alias resource specifies a display name for a customer master key (CMK) in AWS Key Management Service (AWS KMS). You can use an alias to identify a CMK in cryptographic operations.",
+		Description: "The AWS::KMS::Alias resource specifies a display name for an AWS KMS key in AWS Key Management Service (AWS KMS). You can use an alias to identify an AWS KMS key in cryptographic operations.",
 		Version:     1,
 		Attributes:  attributes,
 	}
