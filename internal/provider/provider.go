@@ -301,17 +301,8 @@ type providerData struct {
 	Token                     types.String                   `tfsdk:"token"`
 	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
 	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
-	UserAgent                 []userAgentProduct             `tfsdk:"user_agent"`
+	UserAgent                 cctypes.UserAgentProducts      `tfsdk:"user_agent"`
 	terraformVersion          string
-}
-type providerMeta struct {
-	UserAgent []userAgentProduct `tfsdk:"user_agent"`
-}
-
-type userAgentProduct struct {
-	ProductName    types.String `tfsdk:"product_name"`
-	ProductVersion types.String `tfsdk:"product_version"`
-	Comment        types.String `tfsdk:"comment"`
 }
 
 type assumeRoleData struct {
@@ -529,7 +520,7 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 			},
 		},
 	}
-	config.UserAgent = userAgentProducts(pd.UserAgent)
+	config.UserAgent = pd.UserAgent.UserAgentProducts()
 	if pd.MaxRetries.Null {
 		config.MaxRetries = defaultMaxRetries
 	} else {
@@ -602,16 +593,4 @@ func (l awsSdkContextLogger) Logf(classification logging.Classification, format 
 			"message": hclog.Fmt(format, v...),
 		})
 	}
-}
-
-func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {
-	results := make([]awsbase.UserAgentProduct, len(products))
-	for i, p := range products {
-		results[i] = awsbase.UserAgentProduct{
-			Name:    p.ProductName.Value,
-			Version: p.ProductVersion.Value,
-			Comment: p.Comment.Value,
-		}
-	}
-	return results
 }

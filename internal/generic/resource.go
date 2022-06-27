@@ -10,15 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
-	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	"github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"github.com/mattbaird/jsonpatch"
 )
@@ -396,8 +395,8 @@ var (
 	idAttributePath = tftypes.NewAttributePath().WithAttributeName("id")
 )
 
-type ProviderMetaData struct {
-	UserAgent types.List `tfsdk:"user_agent"`
+type providerMetaData struct {
+	UserAgent types.UserAgentProducts `tfsdk:"user_agent"`
 }
 
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
@@ -405,26 +404,17 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	traceEntry(ctx, "Resource.Create")
 
-	var providerMetaData ProviderMetaData
-	var userAgentProducts []awsbase.UserAgentProduct
+	var metadata providerMetaData
 
-	response.Diagnostics.Append(request.ProviderMeta.Get(ctx, &providerMetaData)...)
+	response.Diagnostics.Append(request.ProviderMeta.Get(ctx, &metadata)...)
 
 	if response.Diagnostics.HasError() {
 		return
 	}
 
-	if !providerMetaData.UserAgent.Null && !providerMetaData.UserAgent.Unknown {
-		response.Diagnostics.Append(providerMetaData.UserAgent.ElementsAs(ctx, &userAgentProducts, false)...)
+	ctx = context.WithValue(ctx, "awsbase.ContextScopedUserAgent", metadata.UserAgent.UserAgentProducts())
 
-		if response.Diagnostics.HasError() {
-			return
-		}
-	}
-
-	newCtx := context.WithValue(ctx, "awsbase.ContextScopedUserAgent", userAgentProducts)
-
-	conn := r.provider.CloudControlApiClient(newCtx)
+	conn := r.provider.CloudControlApiClient(ctx)
 
 	// conn := r.provider.CloudControlApiClient(ctx)
 
