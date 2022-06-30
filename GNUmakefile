@@ -53,4 +53,6 @@ tools:
 
 docs:
 	go run internal/provider/generators/import-examples/main.go
+	rm -f docs/data-sources/*.md
+	rm -f docs/resources/*.md
 	@tfplugindocs generate
