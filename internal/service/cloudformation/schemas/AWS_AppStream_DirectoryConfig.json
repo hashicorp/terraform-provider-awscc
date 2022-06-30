@@ -1,0 +1,67 @@
+{
+    "typeName" : "AWS::AppStream::DirectoryConfig",
+    "description" : "Resource Type definition for AWS::AppStream::DirectoryConfig",
+    "additionalProperties" : false,
+    "properties" : {
+        "OrganizationalUnitDistinguishedNames" : {
+            "type" : "array",
+            "uniqueItems" : false,
+            "items" : {
+                "type" : "string"
+            }
+        },
+        "ServiceAccountCredentials" : {
+            "$ref" : "#/definitions/ServiceAccountCredentials"
+        },
+        "DirectoryName" : {
+            "type" : "string"
+        }
+    },
+    "definitions" : {
+        "ServiceAccountCredentials" : {
+            "type" : "object",
+            "additionalProperties" : false,
+            "properties" : {
+                "AccountName" : {
+                    "type" : "string"
+                },
+                "AccountPassword" : {
+                    "type" : "string"
+                }
+            },
+            "required" : [ "AccountName", "AccountPassword" ]
+        }
+    },
+    "required" : [ "DirectoryName", "OrganizationalUnitDistinguishedNames", "ServiceAccountCredentials" ],
+    "writeOnlyProperties": ["/properties/ServiceAccountCredentials/AccountPassword"],
+    "createOnlyProperties" : [ "/properties/DirectoryName" ],
+    "primaryIdentifier" : [ "/properties/DirectoryName" ],
+    "taggable": false,
+    "handlers": {
+        "create": {
+            "permissions": [
+                "appstream:*"
+            ]
+        },
+        "update": {
+            "permissions": [
+                "appstream:*"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "appstream:*"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "appstream:*"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "appstream:*"
+            ]
+        }
+    }
+}
