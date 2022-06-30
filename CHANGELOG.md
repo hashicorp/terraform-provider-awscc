@@ -1,5 +1,11 @@
 ## 0.26.0 (Unreleased)
 
+BREAKING CHANGES:
+
+* data-source/awscc_rds_db_cluster_parameter_group: Temporarily removed
+* data-source/awscc_rds_db_cluster_parameter_groups: Temporarily removed
+* resource/awscc_rds_db_cluster_parameter_group: Temporarily removed
+
 FEATURES:
 
 * **New Data Source:** `awscc_appstream_directory_config`

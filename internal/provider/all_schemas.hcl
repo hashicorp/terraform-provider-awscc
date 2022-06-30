@@ -1950,10 +1950,6 @@ resource_schema "aws_quicksight_theme" {
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_rds_db_cluster_parameter_group" {
-  cloudformation_type_name = "AWS::RDS::DBClusterParameterGroup"
-}
-
 resource_schema "aws_rds_db_parameter_group" {
   cloudformation_type_name = "AWS::RDS::DBParameterGroup"
 }
