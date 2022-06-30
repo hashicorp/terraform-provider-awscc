@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 551 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 559 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -198,6 +198,10 @@ resource_schema "aws_appstream_application_entitlement_association" {
 resource_schema "aws_appstream_application_fleet_association" {
   cloudformation_type_name               = "AWS::AppStream::ApplicationFleetAssociation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_appstream_directory_config" {
+  cloudformation_type_name = "AWS::AppStream::DirectoryConfig"
 }
 
 resource_schema "aws_appstream_entitlement" {
@@ -430,6 +434,10 @@ resource_schema "aws_cloudfront_response_headers_policy" {
   cloudformation_type_name = "AWS::CloudFront::ResponseHeadersPolicy"
 }
 
+resource_schema "aws_cloudtrail_event_data_store" {
+  cloudformation_type_name = "AWS::CloudTrail::EventDataStore"
+}
+
 resource_schema "aws_cloudtrail_trail" {
   cloudformation_type_name = "AWS::CloudTrail::Trail"
 }
@@ -640,6 +648,10 @@ resource_schema "aws_devopsguru_resource_collection" {
 
 resource_schema "aws_dynamodb_global_table" {
   cloudformation_type_name = "AWS::DynamoDB::GlobalTable"
+}
+
+resource_schema "aws_ec2_capacity_reservation" {
+  cloudformation_type_name = "AWS::EC2::CapacityReservation"
 }
 
 resource_schema "aws_ec2_capacity_reservation_fleet" {
@@ -1492,6 +1504,24 @@ resource_schema "aws_kinesisvideo_stream" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_lakeformation_data_cells_filter" {
+  cloudformation_type_name = "AWS::LakeFormation::DataCellsFilter"
+}
+
+resource_schema "aws_lakeformation_principal_permissions" {
+  cloudformation_type_name               = "AWS::LakeFormation::PrincipalPermissions"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_lakeformation_tag" {
+  cloudformation_type_name = "AWS::LakeFormation::Tag"
+}
+
+resource_schema "aws_lakeformation_tag_association" {
+  cloudformation_type_name               = "AWS::LakeFormation::TagAssociation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_lambda_code_signing_config" {
   cloudformation_type_name = "AWS::Lambda::CodeSigningConfig"
 }
@@ -1983,8 +2013,7 @@ resource_schema "aws_redshift_scheduled_action" {
 }
 
 resource_schema "aws_redshiftserverless_namespace" {
-  cloudformation_type_name               = "AWS::RedshiftServerless::Namespace"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::RedshiftServerless::Namespace"
 }
 
 # Validation error: "minLength cannot be greater than maxLength"
@@ -2220,6 +2249,14 @@ resource_schema "aws_ses_configuration_set_event_destination" {
 
 resource_schema "aws_ses_contact_list" {
   cloudformation_type_name = "AWS::SES::ContactList"
+}
+
+resource_schema "aws_ses_dedicated_ip_pool" {
+  cloudformation_type_name = "AWS::SES::DedicatedIpPool"
+}
+
+resource_schema "aws_ses_email_identity" {
+  cloudformation_type_name = "AWS::SES::EmailIdentity"
 }
 
 resource_schema "aws_ses_template" {

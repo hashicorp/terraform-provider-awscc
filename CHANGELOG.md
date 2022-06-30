@@ -1,4 +1,34 @@
 ## 0.26.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appstream_directory_config`
+* **New Data Source:** `awscc_appstream_directory_configs`
+* **New Data Source:** `awscc_cloudtrail_event_data_store`
+* **New Data Source:** `awscc_cloudtrail_event_data_stores`
+* **New Data Source:** `awscc_ec2_capacity_reservation`
+* **New Data Source:** `awscc_ec2_capacity_reservations`
+* **New Data Source:** `awscc_lakeformation_data_cells_filter`
+* **New Data Source:** `awscc_lakeformation_data_cells_filters`
+* **New Data Source:** `awscc_lakeformation_principal_permissions`
+* **New Data Source:** `awscc_lakeformation_tag`
+* **New Data Source:** `awscc_lakeformation_tag_association`
+* **New Data Source:** `awscc_lakeformation_tags`
+* **New Data Source:** `awscc_redshiftserverless_namespaces`
+* **New Data Source:** `awscc_ses_dedicated_ip_pool`
+* **New Data Source:** `awscc_ses_dedicated_ip_pools`
+* **New Data Source:** `awscc_ses_email_identities`
+* **New Data Source:** `awscc_ses_email_identity`
+* **New Resource:** `awscc_appstream_directory_config`
+* **New Resource:** `awscc_cloudtrail_event_data_store`
+* **New Resource:** `awscc_ec2_capacity_reservation`
+* **New Resource:** `awscc_lakeformation_data_cells_filter`
+* **New Resource:** `awscc_lakeformation_principal_permissions`
+* **New Resource:** `awscc_lakeformation_tag`
+* **New Resource:** `awscc_lakeformation_tag_association`
+* **New Resource:** `awscc_ses_dedicated_ip_pool`
+* **New Resource:** `awscc_ses_email_identity`
+
 ## [0.25.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.25.0) (June 23, 2022)
 
 FEATURES:

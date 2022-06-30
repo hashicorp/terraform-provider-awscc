@@ -24,8 +24,10 @@ Creates an Amazon Kinesis Data Analytics application. For information about crea
 
 - `application_configuration` (Attributes) Use this parameter to configure the application. (see [below for nested schema](#nestedatt--application_configuration))
 - `application_description` (String) The description of the application.
+- `application_maintenance_configuration` (Attributes) Used to configure start of maintenance window. (see [below for nested schema](#nestedatt--application_maintenance_configuration))
 - `application_mode` (String) To create a Kinesis Data Analytics Studio notebook, you must set the mode to `INTERACTIVE`. However, for a Kinesis Data Analytics for Apache Flink application, the mode is optional.
 - `application_name` (String) The name of the application.
+- `run_configuration` (Attributes) Specifies run configuration (start parameters) of a Kinesis Data Analytics application. Evaluated on update for RUNNING applications an only. (see [below for nested schema](#nestedatt--run_configuration))
 - `tags` (Attributes List) A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -42,6 +44,7 @@ Optional:
 - `environment_properties` (Attributes) Describes execution properties for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--environment_properties))
 - `flink_application_configuration` (Attributes) The creation and update parameters for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--flink_application_configuration))
 - `sql_application_configuration` (Attributes) The creation and update parameters for a SQL-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration))
+- `vpc_configurations` (Attributes List) The array of descriptions of VPC configurations available to the application. (see [below for nested schema](#nestedatt--application_configuration--vpc_configurations))
 - `zeppelin_application_configuration` (Attributes) The configuration parameters for a Kinesis Data Analytics Studio notebook. (see [below for nested schema](#nestedatt--application_configuration--zeppelin_application_configuration))
 
 <a id="nestedatt--application_configuration--application_code_configuration"></a>
@@ -256,6 +259,15 @@ Optional:
 
 
 
+<a id="nestedatt--application_configuration--vpc_configurations"></a>
+### Nested Schema for `application_configuration.vpc_configurations`
+
+Optional:
+
+- `security_group_ids` (List of String) The array of SecurityGroup IDs used by the VPC configuration.
+- `subnet_ids` (List of String) The array of Subnet IDs used by the VPC configuration.
+
+
 <a id="nestedatt--application_configuration--zeppelin_application_configuration"></a>
 ### Nested Schema for `application_configuration.zeppelin_application_configuration`
 
@@ -336,6 +348,40 @@ Optional:
 
 - `log_level` (String) The verbosity of the CloudWatch Logs for an application. You can set it to `INFO`, `WARN`, `ERROR`, or `DEBUG`.
 
+
+
+
+<a id="nestedatt--application_maintenance_configuration"></a>
+### Nested Schema for `application_maintenance_configuration`
+
+Optional:
+
+- `application_maintenance_window_start_time` (String) The start time for the maintenance window.
+
+
+<a id="nestedatt--run_configuration"></a>
+### Nested Schema for `run_configuration`
+
+Optional:
+
+- `application_restore_configuration` (Attributes) Describes the restore behavior of a restarting application. (see [below for nested schema](#nestedatt--run_configuration--application_restore_configuration))
+- `flink_run_configuration` (Attributes) Describes the starting parameters for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--run_configuration--flink_run_configuration))
+
+<a id="nestedatt--run_configuration--application_restore_configuration"></a>
+### Nested Schema for `run_configuration.application_restore_configuration`
+
+Optional:
+
+- `application_restore_type` (String) Specifies how the application should be restored.
+- `snapshot_name` (String) The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.
+
+
+<a id="nestedatt--run_configuration--flink_run_configuration"></a>
+### Nested Schema for `run_configuration.flink_run_configuration`
+
+Optional:
+
+- `allow_non_restored_state` (Boolean) When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. Defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true.
 
 
 

@@ -9,7 +9,7 @@
         },
         "VpcId": {
             "type": "string",
-            "pattern": "^vpc-\\d{1,17}$"
+            "pattern": "^vpc-[A-Za-z0-9]{1,17}$"
         }
     },
     "properties": {

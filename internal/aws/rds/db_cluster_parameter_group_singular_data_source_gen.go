@@ -23,7 +23,6 @@ func dBClusterParameterGroupDataSourceType(ctx context.Context) (tfsdk.DataSourc
 			// Property: DBClusterParameterGroupName
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -33,55 +32,49 @@ func dBClusterParameterGroupDataSourceType(ctx context.Context) (tfsdk.DataSourc
 			// Property: Description
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "A friendly description for this DB cluster parameter group.",
 			//   "type": "string"
 			// }
-			Description: "A friendly description for this DB cluster parameter group.",
-			Type:        types.StringType,
-			Computed:    true,
+			Type:     types.StringType,
+			Computed: true,
 		},
 		"family": {
 			// Property: Family
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a DB engine and engine version compatible with that DB cluster parameter group family.",
 			//   "type": "string"
 			// }
-			Description: "The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a DB engine and engine version compatible with that DB cluster parameter group family.",
-			Type:        types.StringType,
-			Computed:    true,
+			Type:     types.StringType,
+			Computed: true,
+		},
+		"id": {
+			// Property: Id
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
 		},
 		"parameters": {
 			// Property: Parameters
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.",
 			//   "type": "object"
 			// }
-			Description: "An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.",
-			Type:        types.MapType{ElemType: types.StringType},
-			Computed:    true,
+			Type:     types.MapType{ElemType: types.StringType},
+			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The list of tags for the cluster parameter group.",
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
 			//     "properties": {
 			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
 			//         "type": "string"
 			//       },
 			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
 			//         "type": "string"
 			//       }
 			//     },
@@ -91,23 +84,20 @@ func dBClusterParameterGroupDataSourceType(ctx context.Context) (tfsdk.DataSourc
 			//     ],
 			//     "type": "object"
 			//   },
-			//   "maxItems": 50,
-			//   "type": "array"
+			//   "type": "array",
+			//   "uniqueItems": false
 			// }
-			Description: "The list of tags for the cluster parameter group.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Computed:    true,
+						Type:     types.StringType,
+						Computed: true,
 					},
 					"value": {
 						// Property: Value
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Computed:    true,
+						Type:     types.StringType,
+						Computed: true,
 					},
 				},
 			),
@@ -135,6 +125,7 @@ func dBClusterParameterGroupDataSourceType(ctx context.Context) (tfsdk.DataSourc
 		"db_cluster_parameter_group_name": "DBClusterParameterGroupName",
 		"description":                     "Description",
 		"family":                          "Family",
+		"id":                              "Id",
 		"key":                             "Key",
 		"parameters":                      "Parameters",
 		"tags":                            "Tags",

@@ -49,7 +49,7 @@ func endpointAuthorizationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "The VPCs allowed access to the cluster.",
 			//   "insertionOrder": false,
 			//   "items": {
-			//     "pattern": "^vpc-\\d{1,17}$",
+			//     "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -156,7 +156,7 @@ func endpointAuthorizationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
 			//   "insertionOrder": false,
 			//   "items": {
-			//     "pattern": "^vpc-\\d{1,17}$",
+			//     "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"

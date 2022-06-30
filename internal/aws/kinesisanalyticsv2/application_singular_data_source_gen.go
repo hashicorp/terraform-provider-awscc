@@ -482,6 +482,46 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       },
 			//       "type": "object"
 			//     },
+			//     "VpcConfigurations": {
+			//       "description": "The array of descriptions of VPC configurations available to the application.",
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "Describes the parameters of a VPC used by the application.",
+			//         "properties": {
+			//           "SecurityGroupIds": {
+			//             "description": "The array of SecurityGroup IDs used by the VPC configuration.",
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "maxItems": 5,
+			//             "minItems": 1,
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           },
+			//           "SubnetIds": {
+			//             "description": "The array of Subnet IDs used by the VPC configuration.",
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "maxItems": 16,
+			//             "minItems": 1,
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           }
+			//         },
+			//         "required": [
+			//           "SecurityGroupIds",
+			//           "SubnetIds"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "maxItems": 1,
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
 			//     "ZeppelinApplicationConfiguration": {
 			//       "additionalProperties": false,
 			//       "description": "The configuration parameters for a Kinesis Data Analytics Studio notebook.",
@@ -1061,6 +1101,27 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						),
 						Computed: true,
 					},
+					"vpc_configurations": {
+						// Property: VpcConfigurations
+						Description: "The array of descriptions of VPC configurations available to the application.",
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"security_group_ids": {
+									// Property: SecurityGroupIds
+									Description: "The array of SecurityGroup IDs used by the VPC configuration.",
+									Type:        types.ListType{ElemType: types.StringType},
+									Computed:    true,
+								},
+								"subnet_ids": {
+									// Property: SubnetIds
+									Description: "The array of Subnet IDs used by the VPC configuration.",
+									Type:        types.ListType{ElemType: types.StringType},
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
 					"zeppelin_application_configuration": {
 						// Property: ZeppelinApplicationConfiguration
 						Description: "The configuration parameters for a Kinesis Data Analytics Studio notebook.",
@@ -1226,6 +1287,37 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"application_maintenance_configuration": {
+			// Property: ApplicationMaintenanceConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Used to configure start of maintenance window.",
+			//   "properties": {
+			//     "ApplicationMaintenanceWindowStartTime": {
+			//       "description": "The start time for the maintenance window.",
+			//       "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "ApplicationMaintenanceWindowStartTime"
+			//   ],
+			//   "type": "object"
+			// }
+			Description: "Used to configure start of maintenance window.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"application_maintenance_window_start_time": {
+						// Property: ApplicationMaintenanceWindowStartTime
+						Description: "The start time for the maintenance window.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"application_mode": {
 			// Property: ApplicationMode
 			// CloudFormation resource type schema:
@@ -1254,6 +1346,96 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			Description: "The name of the application.",
 			Type:        types.StringType,
 			Computed:    true,
+		},
+		"run_configuration": {
+			// Property: RunConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Specifies run configuration (start parameters) of a Kinesis Data Analytics application. Evaluated on update for RUNNING applications an only.",
+			//   "properties": {
+			//     "ApplicationRestoreConfiguration": {
+			//       "additionalProperties": false,
+			//       "description": "Describes the restore behavior of a restarting application.",
+			//       "properties": {
+			//         "ApplicationRestoreType": {
+			//           "description": "Specifies how the application should be restored.",
+			//           "enum": [
+			//             "SKIP_RESTORE_FROM_SNAPSHOT",
+			//             "RESTORE_FROM_LATEST_SNAPSHOT",
+			//             "RESTORE_FROM_CUSTOM_SNAPSHOT"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "SnapshotName": {
+			//           "description": "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "pattern": "^[a-zA-Z0-9_.-]+$",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "ApplicationRestoreType"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "FlinkRunConfiguration": {
+			//       "additionalProperties": false,
+			//       "description": "Describes the starting parameters for a Flink-based Kinesis Data Analytics application.",
+			//       "properties": {
+			//         "AllowNonRestoredState": {
+			//           "description": "When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. Defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true.",
+			//           "type": "boolean"
+			//         }
+			//       },
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "Specifies run configuration (start parameters) of a Kinesis Data Analytics application. Evaluated on update for RUNNING applications an only.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"application_restore_configuration": {
+						// Property: ApplicationRestoreConfiguration
+						Description: "Describes the restore behavior of a restarting application.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"application_restore_type": {
+									// Property: ApplicationRestoreType
+									Description: "Specifies how the application should be restored.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"snapshot_name": {
+									// Property: SnapshotName
+									Description: "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"flink_run_configuration": {
+						// Property: FlinkRunConfiguration
+						Description: "Describes the starting parameters for a Flink-based Kinesis Data Analytics application.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"allow_non_restored_state": {
+									// Property: AllowNonRestoredState
+									Description: "When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. Defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true.",
+									Type:        types.BoolType,
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
 		},
 		"runtime_environment": {
 			// Property: RuntimeEnvironment
@@ -1352,79 +1534,90 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 	opts = opts.WithCloudFormationTypeName("AWS::KinesisAnalyticsV2::Application").WithTerraformTypeName("awscc_kinesisanalyticsv2_application")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_code_configuration":      "ApplicationCodeConfiguration",
-		"application_configuration":           "ApplicationConfiguration",
-		"application_description":             "ApplicationDescription",
-		"application_mode":                    "ApplicationMode",
-		"application_name":                    "ApplicationName",
-		"application_snapshot_configuration":  "ApplicationSnapshotConfiguration",
-		"artifact_id":                         "ArtifactId",
-		"artifact_type":                       "ArtifactType",
-		"auto_scaling_enabled":                "AutoScalingEnabled",
-		"base_path":                           "BasePath",
-		"bucket_arn":                          "BucketARN",
-		"catalog_configuration":               "CatalogConfiguration",
-		"checkpoint_configuration":            "CheckpointConfiguration",
-		"checkpoint_interval":                 "CheckpointInterval",
-		"checkpointing_enabled":               "CheckpointingEnabled",
-		"code_content":                        "CodeContent",
-		"code_content_type":                   "CodeContentType",
-		"configuration_type":                  "ConfigurationType",
-		"count":                               "Count",
-		"csv_mapping_parameters":              "CSVMappingParameters",
-		"custom_artifacts_configuration":      "CustomArtifactsConfiguration",
-		"database_arn":                        "DatabaseARN",
-		"deploy_as_application_configuration": "DeployAsApplicationConfiguration",
-		"environment_properties":              "EnvironmentProperties",
-		"file_key":                            "FileKey",
-		"flink_application_configuration":     "FlinkApplicationConfiguration",
-		"glue_data_catalog_configuration":     "GlueDataCatalogConfiguration",
-		"group_id":                            "GroupId",
-		"input_lambda_processor":              "InputLambdaProcessor",
-		"input_parallelism":                   "InputParallelism",
-		"input_processing_configuration":      "InputProcessingConfiguration",
-		"input_schema":                        "InputSchema",
-		"inputs":                              "Inputs",
-		"json_mapping_parameters":             "JSONMappingParameters",
-		"key":                                 "Key",
-		"kinesis_firehose_input":              "KinesisFirehoseInput",
-		"kinesis_streams_input":               "KinesisStreamsInput",
-		"log_level":                           "LogLevel",
-		"mapping":                             "Mapping",
-		"mapping_parameters":                  "MappingParameters",
-		"maven_reference":                     "MavenReference",
-		"metrics_level":                       "MetricsLevel",
-		"min_pause_between_checkpoints":       "MinPauseBetweenCheckpoints",
-		"monitoring_configuration":            "MonitoringConfiguration",
-		"name":                                "Name",
-		"name_prefix":                         "NamePrefix",
-		"object_version":                      "ObjectVersion",
-		"parallelism":                         "Parallelism",
-		"parallelism_configuration":           "ParallelismConfiguration",
-		"parallelism_per_kpu":                 "ParallelismPerKPU",
-		"property_group_id":                   "PropertyGroupId",
-		"property_groups":                     "PropertyGroups",
-		"property_map":                        "PropertyMap",
-		"record_column_delimiter":             "RecordColumnDelimiter",
-		"record_columns":                      "RecordColumns",
-		"record_encoding":                     "RecordEncoding",
-		"record_format":                       "RecordFormat",
-		"record_format_type":                  "RecordFormatType",
-		"record_row_delimiter":                "RecordRowDelimiter",
-		"record_row_path":                     "RecordRowPath",
-		"resource_arn":                        "ResourceARN",
-		"runtime_environment":                 "RuntimeEnvironment",
-		"s3_content_location":                 "S3ContentLocation",
-		"service_execution_role":              "ServiceExecutionRole",
-		"snapshots_enabled":                   "SnapshotsEnabled",
-		"sql_application_configuration":       "SqlApplicationConfiguration",
-		"sql_type":                            "SqlType",
-		"tags":                                "Tags",
-		"text_content":                        "TextContent",
-		"value":                               "Value",
-		"version":                             "Version",
-		"zeppelin_application_configuration":  "ZeppelinApplicationConfiguration",
-		"zip_file_content":                    "ZipFileContent",
+		"allow_non_restored_state":                  "AllowNonRestoredState",
+		"application_code_configuration":            "ApplicationCodeConfiguration",
+		"application_configuration":                 "ApplicationConfiguration",
+		"application_description":                   "ApplicationDescription",
+		"application_maintenance_configuration":     "ApplicationMaintenanceConfiguration",
+		"application_maintenance_window_start_time": "ApplicationMaintenanceWindowStartTime",
+		"application_mode":                          "ApplicationMode",
+		"application_name":                          "ApplicationName",
+		"application_restore_configuration":         "ApplicationRestoreConfiguration",
+		"application_restore_type":                  "ApplicationRestoreType",
+		"application_snapshot_configuration":        "ApplicationSnapshotConfiguration",
+		"artifact_id":                               "ArtifactId",
+		"artifact_type":                             "ArtifactType",
+		"auto_scaling_enabled":                      "AutoScalingEnabled",
+		"base_path":                                 "BasePath",
+		"bucket_arn":                                "BucketARN",
+		"catalog_configuration":                     "CatalogConfiguration",
+		"checkpoint_configuration":                  "CheckpointConfiguration",
+		"checkpoint_interval":                       "CheckpointInterval",
+		"checkpointing_enabled":                     "CheckpointingEnabled",
+		"code_content":                              "CodeContent",
+		"code_content_type":                         "CodeContentType",
+		"configuration_type":                        "ConfigurationType",
+		"count":                                     "Count",
+		"csv_mapping_parameters":                    "CSVMappingParameters",
+		"custom_artifacts_configuration":            "CustomArtifactsConfiguration",
+		"database_arn":                              "DatabaseARN",
+		"deploy_as_application_configuration":       "DeployAsApplicationConfiguration",
+		"environment_properties":                    "EnvironmentProperties",
+		"file_key":                                  "FileKey",
+		"flink_application_configuration":           "FlinkApplicationConfiguration",
+		"flink_run_configuration":                   "FlinkRunConfiguration",
+		"glue_data_catalog_configuration":           "GlueDataCatalogConfiguration",
+		"group_id":                                  "GroupId",
+		"input_lambda_processor":                    "InputLambdaProcessor",
+		"input_parallelism":                         "InputParallelism",
+		"input_processing_configuration":            "InputProcessingConfiguration",
+		"input_schema":                              "InputSchema",
+		"inputs":                                    "Inputs",
+		"json_mapping_parameters":                   "JSONMappingParameters",
+		"key":                                       "Key",
+		"kinesis_firehose_input":                    "KinesisFirehoseInput",
+		"kinesis_streams_input":                     "KinesisStreamsInput",
+		"log_level":                                 "LogLevel",
+		"mapping":                                   "Mapping",
+		"mapping_parameters":                        "MappingParameters",
+		"maven_reference":                           "MavenReference",
+		"metrics_level":                             "MetricsLevel",
+		"min_pause_between_checkpoints":             "MinPauseBetweenCheckpoints",
+		"monitoring_configuration":                  "MonitoringConfiguration",
+		"name":                                      "Name",
+		"name_prefix":                               "NamePrefix",
+		"object_version":                            "ObjectVersion",
+		"parallelism":                               "Parallelism",
+		"parallelism_configuration":                 "ParallelismConfiguration",
+		"parallelism_per_kpu":                       "ParallelismPerKPU",
+		"property_group_id":                         "PropertyGroupId",
+		"property_groups":                           "PropertyGroups",
+		"property_map":                              "PropertyMap",
+		"record_column_delimiter":                   "RecordColumnDelimiter",
+		"record_columns":                            "RecordColumns",
+		"record_encoding":                           "RecordEncoding",
+		"record_format":                             "RecordFormat",
+		"record_format_type":                        "RecordFormatType",
+		"record_row_delimiter":                      "RecordRowDelimiter",
+		"record_row_path":                           "RecordRowPath",
+		"resource_arn":                              "ResourceARN",
+		"run_configuration":                         "RunConfiguration",
+		"runtime_environment":                       "RuntimeEnvironment",
+		"s3_content_location":                       "S3ContentLocation",
+		"security_group_ids":                        "SecurityGroupIds",
+		"service_execution_role":                    "ServiceExecutionRole",
+		"snapshot_name":                             "SnapshotName",
+		"snapshots_enabled":                         "SnapshotsEnabled",
+		"sql_application_configuration":             "SqlApplicationConfiguration",
+		"sql_type":                                  "SqlType",
+		"subnet_ids":                                "SubnetIds",
+		"tags":                                      "Tags",
+		"text_content":                              "TextContent",
+		"value":                                     "Value",
+		"version":                                   "Version",
+		"vpc_configurations":                        "VpcConfigurations",
+		"zeppelin_application_configuration":        "ZeppelinApplicationConfiguration",
+		"zip_file_content":                          "ZipFileContent",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

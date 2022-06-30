@@ -60,7 +60,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "The VPCs allowed access to the cluster.",
 			//   "insertionOrder": false,
 			//   "items": {
-			//     "pattern": "^vpc-\\d{1,17}$",
+			//     "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -193,7 +193,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
 			//   "insertionOrder": false,
 			//   "items": {
-			//     "pattern": "^vpc-\\d{1,17}$",
+			//     "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -202,7 +202,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^vpc-\\d{1,17}$"), "")),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^vpc-[A-Za-z0-9]{1,17}$"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
