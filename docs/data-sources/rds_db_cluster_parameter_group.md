@@ -22,17 +22,17 @@ Data Source schema for AWS::RDS::DBClusterParameterGroup
 ### Read-Only
 
 - `db_cluster_parameter_group_name` (String)
-- `description` (String) A friendly description for this DB cluster parameter group.
-- `family` (String) The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a DB engine and engine version compatible with that DB cluster parameter group family.
-- `parameters` (Map of String) An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.
-- `tags` (Attributes List) The list of tags for the cluster parameter group. (see [below for nested schema](#nestedatt--tags))
+- `description` (String)
+- `family` (String)
+- `parameters` (Map of String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String)
+- `value` (String)
 
 

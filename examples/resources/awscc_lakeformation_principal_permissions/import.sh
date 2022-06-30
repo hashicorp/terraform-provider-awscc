@@ -1,0 +1,1 @@
+$ terraform import awscc_lakeformation_principal_permissions.example <resource ID>

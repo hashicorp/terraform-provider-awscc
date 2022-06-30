@@ -3,12 +3,12 @@
 page_title: "awscc_rds_db_cluster_parameter_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::RDS::DBClusterParameterGroup resource creates a new Amazon RDS DB cluster parameter group. For more information, see Managing an Amazon Aurora DB Cluster in the Amazon Aurora User Guide.
+  Resource Type definition for AWS::RDS::DBClusterParameterGroup
 ---
 
 # awscc_rds_db_cluster_parameter_group (Resource)
 
-The AWS::RDS::DBClusterParameterGroup resource creates a new Amazon RDS DB cluster parameter group. For more information, see Managing an Amazon Aurora DB Cluster in the Amazon Aurora User Guide.
+Resource Type definition for AWS::RDS::DBClusterParameterGroup
 
 
 
@@ -17,26 +17,26 @@ The AWS::RDS::DBClusterParameterGroup resource creates a new Amazon RDS DB clust
 
 ### Required
 
-- `description` (String) A friendly description for this DB cluster parameter group.
-- `family` (String) The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a DB engine and engine version compatible with that DB cluster parameter group family.
-- `parameters` (Map of String) An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.
+- `description` (String)
+- `family` (String)
+- `parameters` (Map of String)
 
 ### Optional
 
-- `tags` (Attributes List) The list of tags for the cluster parameter group. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `db_cluster_parameter_group_name` (String)
-- `id` (String) Uniquely identifies the resource.
+- `id` (String) The ID of this resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String)
+- `value` (String)
 
 ## Import
 
