@@ -3,7 +3,7 @@ module github.com/hashicorp/terraform-provider-awscc
 go 1.17
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.16.6
+	github.com/aws/aws-sdk-go-v2 v1.16.7
 	github.com/aws/aws-sdk-go-v2/config v1.15.12
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.7
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.10.3
