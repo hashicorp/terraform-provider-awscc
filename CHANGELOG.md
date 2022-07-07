@@ -1,4 +1,16 @@
 ## 0.27.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_datasync_location_fsx_ontap`
+* **New Data Source:** `awscc_datasync_location_fsx_ontaps`
+* **New Data Source:** `awscc_rolesanywhere_profile`
+* **New Data Source:** `awscc_rolesanywhere_profiles`
+* **New Data Source:** `awscc_rolesanywhere_trust_anchor`
+* **New Resource:** `awscc_datasync_location_fsx_ontap`
+* **New Resource:** `awscc_rolesanywhere_profile`
+* **New Resource:** `awscc_rolesanywhere_trust_anchor`
+
 ## [0.26.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.26.0) (June 30, 2022)
 
 BREAKING CHANGES:
