@@ -53,6 +53,19 @@ func cACertificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"certificate_mode": {
+			// Property: CertificateMode
+			// CloudFormation resource type schema:
+			// {
+			//   "enum": [
+			//     "DEFAULT",
+			//     "SNI_ONLY"
+			//   ],
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
@@ -201,6 +214,7 @@ func cACertificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 		"arn":                          "Arn",
 		"auto_registration_status":     "AutoRegistrationStatus",
 		"ca_certificate_pem":           "CACertificatePem",
+		"certificate_mode":             "CertificateMode",
 		"id":                           "Id",
 		"key":                          "Key",
 		"registration_config":          "RegistrationConfig",

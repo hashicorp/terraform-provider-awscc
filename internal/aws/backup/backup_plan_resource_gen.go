@@ -26,6 +26,7 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "AdvancedBackupSettings": {
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -49,6 +50,7 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "string"
 			//     },
 			//     "BackupPlanRule": {
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -56,6 +58,7 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "type": "number"
 			//           },
 			//           "CopyActions": {
+			//             "insertionOrder": true,
 			//             "items": {
 			//               "additionalProperties": false,
 			//               "properties": {

@@ -370,6 +370,16 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "additionalProperties": false,
 			//         "description": " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
 			//         "properties": {
+			//           "AccountFilterType": {
+			//             "description": "The filter type you want to apply on organizational units and accounts.",
+			//             "enum": [
+			//               "NONE",
+			//               "UNION",
+			//               "INTERSECTION",
+			//               "DIFFERENCE"
+			//             ],
+			//             "type": "string"
+			//           },
 			//           "Accounts": {
 			//             "description": "AWS accounts that you want to create stack instances in the specified Region(s) for.",
 			//             "insertionOrder": false,
@@ -449,6 +459,20 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"account_filter_type": {
+									// Property: AccountFilterType
+									Description: "The filter type you want to apply on organizational units and accounts.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NONE",
+											"UNION",
+											"INTERSECTION",
+											"DIFFERENCE",
+										}),
+									},
+								},
 								"accounts": {
 									// Property: Accounts
 									Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
@@ -625,7 +649,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.",
-			//   "maxLength": 1024,
+			//   "maxLength": 5120,
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
@@ -633,7 +657,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1024),
+				validate.StringLenBetween(1, 5120),
 			},
 			// TemplateURL is a write-only property.
 		},
@@ -660,6 +684,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_filter_type":              "AccountFilterType",
 		"accounts":                         "Accounts",
 		"active":                           "Active",
 		"administration_role_arn":          "AdministrationRoleARN",

@@ -333,6 +333,36 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
+			//     "IncidentTags": {
+			//       "default": [],
+			//       "description": "Tags that get applied to incidents created by the StartIncident API action.",
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "A key-value pair to tag a resource.",
+			//         "properties": {
+			//           "Key": {
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "pattern": "",
+			//             "type": "string"
+			//           },
+			//           "Value": {
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "Value",
+			//           "Key"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "maxItems": 50,
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
 			//     "NotificationTargets": {
 			//       "description": "The list of notification targets.",
 			//       "insertionOrder": false,
@@ -384,6 +414,25 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 						Description: "The impact value.",
 						Type:        types.Int64Type,
 						Computed:    true,
+					},
+					"incident_tags": {
+						// Property: IncidentTags
+						Description: "Tags that get applied to incidents created by the StartIncident API action.",
+						Attributes: tfsdk.SetNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"key": {
+									// Property: Key
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"value": {
+									// Property: Value
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
 					},
 					"notification_targets": {
 						// Property: NotificationTargets
@@ -511,6 +560,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 		"dynamic_parameters":   "DynamicParameters",
 		"engagements":          "Engagements",
 		"impact":               "Impact",
+		"incident_tags":        "IncidentTags",
 		"incident_template":    "IncidentTemplate",
 		"key":                  "Key",
 		"name":                 "Name",

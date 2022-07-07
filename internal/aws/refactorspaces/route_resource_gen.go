@@ -55,6 +55,43 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.UseStateForUnknown(),
 			},
 		},
+		"default_route": {
+			// Property: DefaultRoute
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "ActivationState": {
+			//       "enum": [
+			//         "INACTIVE",
+			//         "ACTIVE"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "ActivationState"
+			//   ],
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"activation_state": {
+						// Property: ActivationState
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"INACTIVE",
+								"ACTIVE",
+							}),
+						},
+					},
+				},
+			),
+			Optional: true,
+			// DefaultRoute is a write-only property.
+		},
 		"environment_identifier": {
 			// Property: EnvironmentIdentifier
 			// CloudFormation resource type schema:
@@ -214,6 +251,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "ActivationState": {
 			//       "enum": [
+			//         "INACTIVE",
 			//         "ACTIVE"
 			//       ],
 			//       "type": "string"
@@ -257,6 +295,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
+								"INACTIVE",
 								"ACTIVE",
 							}),
 						},
@@ -265,11 +304,17 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: IncludeChildPaths
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
+						},
 					},
 					"methods": {
 						// Property: Methods
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringInSlice([]string{
 								"DELETE",
@@ -283,25 +328,27 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"source_path": {
 						// Property: SourcePath
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
 							validate.StringMatch(regexp.MustCompile("^(/[a-zA-Z0-9._-]+)+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
 			),
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
-			},
 			// UriPathRoute is a write-only property.
 		},
 	}
@@ -330,6 +377,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"activation_state":       "ActivationState",
 		"application_identifier": "ApplicationIdentifier",
 		"arn":                    "Arn",
+		"default_route":          "DefaultRoute",
 		"environment_identifier": "EnvironmentIdentifier",
 		"include_child_paths":    "IncludeChildPaths",
 		"key":                    "Key",
@@ -347,6 +395,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/RouteType",
 		"/properties/ServiceIdentifier",
+		"/properties/DefaultRoute",
 		"/properties/UriPathRoute",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -62,11 +62,33 @@ func cACertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 65536),
 				validate.StringMatch(regexp.MustCompile("[\\s\\S]*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(),
+			},
+		},
+		"certificate_mode": {
+			// Property: CertificateMode
+			// CloudFormation resource type schema:
+			// {
+			//   "enum": [
+			//     "DEFAULT",
+			//     "SNI_ONLY"
+			//   ],
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DEFAULT",
+					"SNI_ONLY",
+				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -251,6 +273,7 @@ func cACertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"arn":                          "Arn",
 		"auto_registration_status":     "AutoRegistrationStatus",
 		"ca_certificate_pem":           "CACertificatePem",
+		"certificate_mode":             "CertificateMode",
 		"id":                           "Id",
 		"key":                          "Key",
 		"registration_config":          "RegistrationConfig",
