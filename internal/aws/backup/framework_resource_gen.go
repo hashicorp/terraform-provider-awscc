@@ -138,10 +138,6 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "type": "string"
 			//                 }
 			//               },
-			//               "required": [
-			//                 "Key",
-			//                 "Value"
-			//               ],
 			//               "type": "object"
 			//             },
 			//             "type": "array"
@@ -218,7 +214,7 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Key
 												Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 												Type:        types.StringType,
-												Required:    true,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 128),
 												},
@@ -227,7 +223,7 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Value
 												Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 												Type:        types.StringType,
-												Required:    true,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(0, 256),
 												},
@@ -323,10 +319,6 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "string"
 			//       }
 			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
 			//     "type": "object"
 			//   },
 			//   "type": "array"
@@ -338,7 +330,7 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
@@ -347,7 +339,7 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},

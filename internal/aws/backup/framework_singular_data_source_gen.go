@@ -127,10 +127,6 @@ func frameworkDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                   "type": "string"
 			//                 }
 			//               },
-			//               "required": [
-			//                 "Key",
-			//                 "Value"
-			//               ],
 			//               "type": "object"
 			//             },
 			//             "type": "array"
@@ -282,10 +278,6 @@ func frameworkDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//         "type": "string"
 			//       }
 			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
 			//     "type": "object"
 			//   },
 			//   "type": "array"

@@ -405,6 +405,36 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
+			//     "IncidentTags": {
+			//       "default": [],
+			//       "description": "Tags that get applied to incidents created by the StartIncident API action.",
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "A key-value pair to tag a resource.",
+			//         "properties": {
+			//           "Key": {
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "pattern": "",
+			//             "type": "string"
+			//           },
+			//           "Value": {
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "Value",
+			//           "Key"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "maxItems": 50,
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
 			//     "NotificationTargets": {
 			//       "description": "The list of notification targets.",
 			//       "insertionOrder": false,
@@ -461,6 +491,39 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 5),
+						},
+					},
+					"incident_tags": {
+						// Property: IncidentTags
+						Description: "Tags that get applied to incidents created by the StartIncident API action.",
+						Attributes: tfsdk.SetNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"key": {
+									// Property: Key
+									Type:     types.StringType,
+									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 128),
+									},
+								},
+								"value": {
+									// Property: Value
+									Type:     types.StringType,
+									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 256),
+									},
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtMost(50),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 					"notification_targets": {
@@ -630,6 +693,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dynamic_parameters":   "DynamicParameters",
 		"engagements":          "Engagements",
 		"impact":               "Impact",
+		"incident_tags":        "IncidentTags",
 		"incident_template":    "IncidentTemplate",
 		"key":                  "Key",
 		"name":                 "Name",

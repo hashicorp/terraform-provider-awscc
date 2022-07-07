@@ -314,6 +314,16 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "additionalProperties": false,
 			//         "description": " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
 			//         "properties": {
+			//           "AccountFilterType": {
+			//             "description": "The filter type you want to apply on organizational units and accounts.",
+			//             "enum": [
+			//               "NONE",
+			//               "UNION",
+			//               "INTERSECTION",
+			//               "DIFFERENCE"
+			//             ],
+			//             "type": "string"
+			//           },
 			//           "Accounts": {
 			//             "description": "AWS accounts that you want to create stack instances in the specified Region(s) for.",
 			//             "insertionOrder": false,
@@ -393,6 +403,12 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 						Description: " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"account_filter_type": {
+									// Property: AccountFilterType
+									Description: "The filter type you want to apply on organizational units and accounts.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
 								"accounts": {
 									// Property: Accounts
 									Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
@@ -535,7 +551,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.",
-			//   "maxLength": 1024,
+			//   "maxLength": 5120,
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
@@ -562,6 +578,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::StackSet").WithTerraformTypeName("awscc_cloudformation_stack_set")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_filter_type":              "AccountFilterType",
 		"accounts":                         "Accounts",
 		"active":                           "Active",
 		"administration_role_arn":          "AdministrationRoleARN",

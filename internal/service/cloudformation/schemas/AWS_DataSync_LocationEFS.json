@@ -139,7 +139,10 @@
   "createOnlyProperties": [
     "/properties/Ec2Config",
     "/properties/EfsFilesystemArn",
-    "/properties/Subdirectory"
+    "/properties/Subdirectory",
+    "/properties/FileSystemAccessRoleArn",
+    "/properties/InTransitEncryption",
+    "/properties/AccessPointArn"
   ],
   "writeOnlyProperties": [
     "/properties/EfsFilesystemArn",

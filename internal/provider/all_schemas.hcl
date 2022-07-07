@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 559 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 562 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -595,6 +595,10 @@ resource_schema "aws_datasync_location_efs" {
 
 resource_schema "aws_datasync_location_fsx_lustre" {
   cloudformation_type_name = "AWS::DataSync::LocationFSxLustre"
+}
+
+resource_schema "aws_datasync_location_fsx_ontap" {
+  cloudformation_type_name = "AWS::DataSync::LocationFSxONTAP"
 }
 
 resource_schema "aws_datasync_location_fsx_open_zfs" {
@@ -2084,6 +2088,15 @@ resource_schema "aws_robomaker_simulation_application" {
 
 resource_schema "aws_robomaker_simulation_application_version" {
   cloudformation_type_name               = "AWS::RoboMaker::SimulationApplicationVersion"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_rolesanywhere_profile" {
+  cloudformation_type_name = "AWS::RolesAnywhere::Profile"
+}
+
+resource_schema "aws_rolesanywhere_trust_anchor" {
+  cloudformation_type_name               = "AWS::RolesAnywhere::TrustAnchor"
   suppress_plural_data_source_generation = true
 }
 
