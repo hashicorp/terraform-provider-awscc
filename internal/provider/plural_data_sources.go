@@ -72,6 +72,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_agents -cftype AWS::DataSync::Agent -package datasync ../aws/datasync/agent_plural_data_source_gen.go ../aws/datasync/agent_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_efs_plural -cftype AWS::DataSync::LocationEFS -package datasync ../aws/datasync/location_efs_plural_data_source_gen.go ../aws/datasync/location_efs_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_fsx_lustres -cftype AWS::DataSync::LocationFSxLustre -package datasync ../aws/datasync/location_fsx_lustre_plural_data_source_gen.go ../aws/datasync/location_fsx_lustre_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_fsx_ontaps -cftype AWS::DataSync::LocationFSxONTAP -package datasync ../aws/datasync/location_fsx_ontap_plural_data_source_gen.go ../aws/datasync/location_fsx_ontap_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_fsx_open_zfs_plural -cftype AWS::DataSync::LocationFSxOpenZFS -package datasync ../aws/datasync/location_fsx_open_zfs_plural_data_source_gen.go ../aws/datasync/location_fsx_open_zfs_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_fsx_windows_plural -cftype AWS::DataSync::LocationFSxWindows -package datasync ../aws/datasync/location_fsx_windows_plural_data_source_gen.go ../aws/datasync/location_fsx_windows_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_hdfs_plural -cftype AWS::DataSync::LocationHDFS -package datasync ../aws/datasync/location_hdfs_plural_data_source_gen.go ../aws/datasync/location_hdfs_plural_data_source_gen_test.go
@@ -311,6 +312,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_robomaker_robots -cftype AWS::RoboMaker::Robot -package robomaker ../aws/robomaker/robot_plural_data_source_gen.go ../aws/robomaker/robot_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_robomaker_robot_applications -cftype AWS::RoboMaker::RobotApplication -package robomaker ../aws/robomaker/robot_application_plural_data_source_gen.go ../aws/robomaker/robot_application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_robomaker_simulation_applications -cftype AWS::RoboMaker::SimulationApplication -package robomaker ../aws/robomaker/simulation_application_plural_data_source_gen.go ../aws/robomaker/simulation_application_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_rolesanywhere_profiles -cftype AWS::RolesAnywhere::Profile -package rolesanywhere ../aws/rolesanywhere/profile_plural_data_source_gen.go ../aws/rolesanywhere/profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_route53_cidr_collections -cftype AWS::Route53::CidrCollection -package route53 ../aws/route53/cidr_collection_plural_data_source_gen.go ../aws/route53/cidr_collection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_route53_dnssecs -cftype AWS::Route53::DNSSEC -package route53 ../aws/route53/dnssec_plural_data_source_gen.go ../aws/route53/dnssec_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_route53_health_checks -cftype AWS::Route53::HealthCheck -package route53 ../aws/route53/health_check_plural_data_source_gen.go ../aws/route53/health_check_plural_data_source_gen_test.go
@@ -474,6 +476,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resiliencehub"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resourcegroups"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/robomaker"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rolesanywhere"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoverycontrol"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoveryreadiness"
