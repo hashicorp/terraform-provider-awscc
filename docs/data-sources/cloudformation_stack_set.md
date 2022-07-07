@@ -91,6 +91,7 @@ Read-Only:
 
 Read-Only:
 
+- `account_filter_type` (String) The filter type you want to apply on organizational units and accounts.
 - `accounts` (Set of String) AWS accounts that you want to create stack instances in the specified Region(s) for.
 - `organizational_unit_ids` (Set of String) The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
 

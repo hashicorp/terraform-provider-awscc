@@ -17,12 +17,13 @@ Registers a CA Certificate in IoT.
 
 ### Required
 
+- `ca_certificate_pem` (String)
 - `status` (String)
 
 ### Optional
 
 - `auto_registration_status` (String)
-- `ca_certificate_pem` (String)
+- `certificate_mode` (String)
 - `registration_config` (Attributes) (see [below for nested schema](#nestedatt--registration_config))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `verification_certificate_pem` (String) The private key verification certificate.

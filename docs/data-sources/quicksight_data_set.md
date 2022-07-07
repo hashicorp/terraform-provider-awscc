@@ -29,6 +29,7 @@ Data Source schema for AWS::QuickSight::DataSet
             imported into SPICE.</p>
 - `created_time` (String) <p>The time that this dataset was created.</p>
 - `data_set_id` (String)
+- `data_set_usage_configuration` (Attributes) <p>The dataset usage configuration for the dataset.</p> (see [below for nested schema](#nestedatt--data_set_usage_configuration))
 - `field_folders` (Attributes Map) (see [below for nested schema](#nestedatt--field_folders))
 - `import_mode` (String)
 - `ingestion_wait_policy` (Attributes) <p>Wait policy to use when creating/updating dataset. Default is to wait for SPICE ingestion to finish with timeout of 36 hours.</p> (see [below for nested schema](#nestedatt--ingestion_wait_policy))
@@ -67,6 +68,15 @@ Read-Only:
 
 - `column_names` (List of String)
 - `principals` (List of String)
+
+
+<a id="nestedatt--data_set_usage_configuration"></a>
+### Nested Schema for `data_set_usage_configuration`
+
+Read-Only:
+
+- `disable_use_as_direct_query_source` (Boolean)
+- `disable_use_as_imported_source` (Boolean)
 
 
 <a id="nestedatt--field_folders"></a>
@@ -205,6 +215,7 @@ Read-Only:
 
 Read-Only:
 
+- `data_set_arn` (String) <p>The Amazon Resource Name (ARN) for the dataset.</p>
 - `join_instruction` (Attributes) <p>Join instruction.</p> (see [below for nested schema](#nestedatt--logical_table_map--source--join_instruction))
 - `physical_table_id` (String) <p>Physical table ID.</p>
 

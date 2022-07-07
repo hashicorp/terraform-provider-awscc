@@ -92,9 +92,19 @@ Read-Only:
 
 - `dedupe_string` (String) The deduplication string.
 - `impact` (Number) The impact value.
+- `incident_tags` (Attributes Set) Tags that get applied to incidents created by the StartIncident API action. (see [below for nested schema](#nestedatt--incident_template--incident_tags))
 - `notification_targets` (Attributes List) The list of notification targets. (see [below for nested schema](#nestedatt--incident_template--notification_targets))
 - `summary` (String) The summary string.
 - `title` (String) The title string.
+
+<a id="nestedatt--incident_template--incident_tags"></a>
+### Nested Schema for `incident_template.incident_tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
 
 <a id="nestedatt--incident_template--notification_targets"></a>
 ### Nested Schema for `incident_template.notification_targets`
