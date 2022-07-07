@@ -102,17 +102,7 @@
       "additionalProperties": false,
       "patternProperties": {
         "": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
+          "type": "string"
         }
       },
       "minProperties": 1
