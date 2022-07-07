@@ -50,6 +50,13 @@
                 "INACTIVE"
             ]
         },
+        "CertificateMode": {
+            "type": "string",
+            "enum": [
+                "DEFAULT",
+                "SNI_ONLY"
+            ]
+        },
         "AutoRegistrationStatus": {
             "type": "string",
             "enum": [
@@ -99,6 +106,7 @@
     },
     "additionalProperties": false,
     "required": [
+        "CACertificatePem",
         "Status"
     ],
     "readOnlyProperties": [
@@ -107,6 +115,7 @@
     ],
     "createOnlyProperties": [
         "/properties/VerificationCertificatePem",
+        "/properties/CertificateMode",
         "/properties/CACertificatePem"
     ],
     "writeOnlyProperties": [

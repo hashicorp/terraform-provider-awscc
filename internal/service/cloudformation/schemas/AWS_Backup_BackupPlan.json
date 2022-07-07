@@ -45,15 +45,17 @@
         "BackupPlanName": {
           "type": "string"
         },
-        "AdvancedBackupSettings" : {
-          "type" : "array",
-          "uniqueItems" : false,
-          "items" : {
-            "$ref" : "#/definitions/AdvancedBackupSettingResourceType"
+        "AdvancedBackupSettings": {
+          "type": "array",
+          "insertionOrder": true,
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/AdvancedBackupSettingResourceType"
           }
         },
         "BackupPlanRule": {
           "type": "array",
+          "insertionOrder": true,
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/BackupRuleResourceType"
@@ -95,6 +97,7 @@
         },
         "CopyActions": {
           "type": "array",
+          "insertionOrder": true,
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/CopyActionResourceType"
@@ -112,18 +115,21 @@
         "RuleName"
       ]
     },
-    "AdvancedBackupSettingResourceType" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "BackupOptions" : {
-          "type" : "object"
+    "AdvancedBackupSettingResourceType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BackupOptions": {
+          "type": "object"
         },
-        "ResourceType" : {
-          "type" : "string"
+        "ResourceType": {
+          "type": "string"
         }
       },
-      "required" : [ "BackupOptions", "ResourceType" ]
+      "required": [
+        "BackupOptions",
+        "ResourceType"
+      ]
     },
     "CopyActionResourceType": {
       "type": "object",
@@ -177,6 +183,11 @@
         "backup:ListTags",
         "backup:TagResource",
         "backup:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "backup:ListBackupPlans"
       ]
     }
   }

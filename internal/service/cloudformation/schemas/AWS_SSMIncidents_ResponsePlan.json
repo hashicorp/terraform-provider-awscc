@@ -220,6 +220,17 @@
           "description": "The title string.",
           "type": "string",
           "maxLength": 200
+        },
+        "IncidentTags": {
+          "description": "Tags that get applied to incidents created by the StartIncident API action.",
+          "type": "array",
+          "default": [],
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
         }
       }
     },
