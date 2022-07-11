@@ -32,7 +32,7 @@ Configures the Device Defender audit settings for this account. Settings include
 <a id="nestedatt--audit_check_configurations"></a>
 ### Nested Schema for `audit_check_configurations`
 
-Required:
+Optional:
 
 - `authenticated_cognito_role_overly_permissive_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--authenticated_cognito_role_overly_permissive_check))
 - `ca_certificate_expiring_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--ca_certificate_expiring_check))
@@ -52,7 +52,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--authenticated_cognito_role_overly_permissive_check"></a>
 ### Nested Schema for `audit_check_configurations.authenticated_cognito_role_overly_permissive_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -60,7 +60,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--ca_certificate_expiring_check"></a>
 ### Nested Schema for `audit_check_configurations.ca_certificate_expiring_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -68,7 +68,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--ca_certificate_key_quality_check"></a>
 ### Nested Schema for `audit_check_configurations.ca_certificate_key_quality_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -76,7 +76,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--conflicting_client_ids_check"></a>
 ### Nested Schema for `audit_check_configurations.conflicting_client_ids_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -84,7 +84,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--device_certificate_expiring_check"></a>
 ### Nested Schema for `audit_check_configurations.device_certificate_expiring_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -92,7 +92,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--device_certificate_key_quality_check"></a>
 ### Nested Schema for `audit_check_configurations.device_certificate_key_quality_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -100,7 +100,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--device_certificate_shared_check"></a>
 ### Nested Schema for `audit_check_configurations.device_certificate_shared_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -108,7 +108,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--iot_policy_overly_permissive_check"></a>
 ### Nested Schema for `audit_check_configurations.iot_policy_overly_permissive_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -116,7 +116,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--iot_role_alias_allows_access_to_unused_services_check"></a>
 ### Nested Schema for `audit_check_configurations.iot_role_alias_allows_access_to_unused_services_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -124,7 +124,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--iot_role_alias_overly_permissive_check"></a>
 ### Nested Schema for `audit_check_configurations.iot_role_alias_overly_permissive_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -132,7 +132,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--logging_disabled_check"></a>
 ### Nested Schema for `audit_check_configurations.logging_disabled_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -140,7 +140,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--revoked_ca_certificate_still_active_check"></a>
 ### Nested Schema for `audit_check_configurations.revoked_ca_certificate_still_active_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -148,7 +148,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--revoked_device_certificate_still_active_check"></a>
 ### Nested Schema for `audit_check_configurations.revoked_device_certificate_still_active_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 
@@ -156,7 +156,7 @@ Required:
 <a id="nestedatt--audit_check_configurations--unauthenticated_cognito_role_overly_permissive_check"></a>
 ### Nested Schema for `audit_check_configurations.unauthenticated_cognito_role_overly_permissive_check`
 
-Required:
+Optional:
 
 - `enabled` (Boolean) True if the check is enabled.
 

@@ -177,27 +177,33 @@ Optional:
 <a id="nestedatt--container_definitions--linux_parameters--tmpfs"></a>
 ### Nested Schema for `container_definitions.linux_parameters.tmpfs`
 
+Required:
+
+- `size` (Number)
+
 Optional:
 
 - `container_path` (String)
 - `mount_options` (List of String)
-- `size` (Number)
 
 
 
 <a id="nestedatt--container_definitions--log_configuration"></a>
 ### Nested Schema for `container_definitions.log_configuration`
 
-Optional:
+Required:
 
 - `log_driver` (String)
+
+Optional:
+
 - `options` (Map of String)
 - `secret_options` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--log_configuration--secret_options))
 
 <a id="nestedatt--container_definitions--log_configuration--secret_options"></a>
 ### Nested Schema for `container_definitions.log_configuration.secret_options`
 
-Optional:
+Required:
 
 - `name` (String)
 - `value_from` (String)
@@ -235,7 +241,7 @@ Optional:
 <a id="nestedatt--container_definitions--resource_requirements"></a>
 ### Nested Schema for `container_definitions.resource_requirements`
 
-Optional:
+Required:
 
 - `type` (String)
 - `value` (String)
@@ -244,7 +250,7 @@ Optional:
 <a id="nestedatt--container_definitions--secrets"></a>
 ### Nested Schema for `container_definitions.secrets`
 
-Optional:
+Required:
 
 - `name` (String)
 - `value_from` (String)
@@ -262,7 +268,7 @@ Optional:
 <a id="nestedatt--container_definitions--ulimits"></a>
 ### Nested Schema for `container_definitions.ulimits`
 
-Optional:
+Required:
 
 - `hard_limit` (Number)
 - `name` (String)
@@ -299,18 +305,24 @@ Optional:
 <a id="nestedatt--placement_constraints"></a>
 ### Nested Schema for `placement_constraints`
 
+Required:
+
+- `type` (String)
+
 Optional:
 
 - `expression` (String)
-- `type` (String)
 
 
 <a id="nestedatt--proxy_configuration"></a>
 ### Nested Schema for `proxy_configuration`
 
-Optional:
+Required:
 
 - `container_name` (String)
+
+Optional:
+
 - `proxy_configuration_properties` (Attributes Set) (see [below for nested schema](#nestedatt--proxy_configuration--proxy_configuration_properties))
 - `type` (String)
 
@@ -367,10 +379,13 @@ Optional:
 <a id="nestedatt--volumes--efs_volume_configuration"></a>
 ### Nested Schema for `volumes.efs_volume_configuration`
 
+Required:
+
+- `filesystem_id` (String)
+
 Optional:
 
 - `authorization_config` (Attributes) (see [below for nested schema](#nestedatt--volumes--efs_volume_configuration--authorization_config))
-- `filesystem_id` (String)
 - `root_directory` (String)
 - `transit_encryption` (String)
 - `transit_encryption_port` (Number)

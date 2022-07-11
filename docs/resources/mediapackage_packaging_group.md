@@ -33,7 +33,7 @@ Resource schema for AWS::MediaPackage::PackagingGroup
 <a id="nestedatt--authorization"></a>
 ### Nested Schema for `authorization`
 
-Optional:
+Required:
 
 - `cdn_identifier_secret` (String) The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
 - `secrets_role_arn` (String) The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
@@ -50,7 +50,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

@@ -29,10 +29,13 @@ Resource Type definition for AWS::CloudFront::ResponseHeadersPolicy
 
 Required:
 
+- `name` (String)
+
+Optional:
+
 - `comment` (String)
 - `cors_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config))
 - `custom_headers_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--custom_headers_config))
-- `name` (String)
 - `security_headers_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config))
 
 <a id="nestedatt--response_headers_policy_config--cors_config"></a>
@@ -44,9 +47,12 @@ Required:
 - `access_control_allow_headers` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_headers))
 - `access_control_allow_methods` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_methods))
 - `access_control_allow_origins` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_origins))
+- `origin_override` (Boolean)
+
+Optional:
+
 - `access_control_expose_headers` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_expose_headers))
 - `access_control_max_age_sec` (Number)
-- `origin_override` (Boolean)
 
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_allow_headers"></a>
 ### Nested Schema for `response_headers_policy_config.cors_config.access_control_allow_headers`
@@ -102,7 +108,7 @@ Required:
 <a id="nestedatt--response_headers_policy_config--security_headers_config"></a>
 ### Nested Schema for `response_headers_policy_config.security_headers_config`
 
-Required:
+Optional:
 
 - `content_security_policy` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--content_security_policy))
 - `content_type_options` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--content_type_options))
@@ -152,8 +158,11 @@ Required:
 Required:
 
 - `access_control_max_age_sec` (Number)
-- `include_subdomains` (Boolean)
 - `override` (Boolean)
+
+Optional:
+
+- `include_subdomains` (Boolean)
 - `preload` (Boolean)
 
 
@@ -162,9 +171,12 @@ Required:
 
 Required:
 
-- `mode_block` (Boolean)
 - `override` (Boolean)
 - `protection` (Boolean)
+
+Optional:
+
+- `mode_block` (Boolean)
 - `report_uri` (String)
 
 ## Import

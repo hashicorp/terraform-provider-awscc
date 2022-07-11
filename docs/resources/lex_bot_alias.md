@@ -39,7 +39,7 @@ A Bot Alias enables you to change the version of a bot without updating applicat
 <a id="nestedatt--bot_alias_locale_settings"></a>
 ### Nested Schema for `bot_alias_locale_settings`
 
-Optional:
+Required:
 
 - `bot_alias_locale_setting` (Attributes) You can use this parameter to specify a specific Lambda function to run different functions in different locales. (see [below for nested schema](#nestedatt--bot_alias_locale_settings--bot_alias_locale_setting))
 - `locale_id` (String) A string used to identify the locale
@@ -47,22 +47,25 @@ Optional:
 <a id="nestedatt--bot_alias_locale_settings--bot_alias_locale_setting"></a>
 ### Nested Schema for `bot_alias_locale_settings.bot_alias_locale_setting`
 
+Required:
+
+- `enabled` (Boolean) Whether the Lambda code hook is enabled
+
 Optional:
 
 - `code_hook_specification` (Attributes) Contains information about code hooks that Amazon Lex calls during a conversation. (see [below for nested schema](#nestedatt--bot_alias_locale_settings--bot_alias_locale_setting--code_hook_specification))
-- `enabled` (Boolean) Whether the Lambda code hook is enabled
 
 <a id="nestedatt--bot_alias_locale_settings--bot_alias_locale_setting--code_hook_specification"></a>
 ### Nested Schema for `bot_alias_locale_settings.bot_alias_locale_setting.code_hook_specification`
 
-Optional:
+Required:
 
 - `lambda_code_hook` (Attributes) Contains information about code hooks that Amazon Lex calls during a conversation. (see [below for nested schema](#nestedatt--bot_alias_locale_settings--bot_alias_locale_setting--code_hook_specification--lambda_code_hook))
 
 <a id="nestedatt--bot_alias_locale_settings--bot_alias_locale_setting--code_hook_specification--lambda_code_hook"></a>
 ### Nested Schema for `bot_alias_locale_settings.bot_alias_locale_setting.code_hook_specification.lambda_code_hook`
 
-Optional:
+Required:
 
 - `code_hook_interface_version` (String) The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.
 - `lambda_arn` (String) The Amazon Resource Name (ARN) of the Lambda function.
@@ -74,7 +77,7 @@ Optional:
 <a id="nestedatt--bot_alias_tags"></a>
 ### Nested Schema for `bot_alias_tags`
 
-Optional:
+Required:
 
 - `key` (String) A string used to identify this tag
 - `value` (String) A string containing the value for the tag
@@ -91,7 +94,7 @@ Optional:
 <a id="nestedatt--conversation_log_settings--audio_log_settings"></a>
 ### Nested Schema for `conversation_log_settings.audio_log_settings`
 
-Optional:
+Required:
 
 - `destination` (Attributes) The location of audio log files collected when conversation logging is enabled for a bot. (see [below for nested schema](#nestedatt--conversation_log_settings--audio_log_settings--destination))
 - `enabled` (Boolean)
@@ -99,18 +102,21 @@ Optional:
 <a id="nestedatt--conversation_log_settings--audio_log_settings--destination"></a>
 ### Nested Schema for `conversation_log_settings.audio_log_settings.destination`
 
-Optional:
+Required:
 
 - `s3_bucket` (Attributes) Specifies an Amazon S3 bucket for logging audio conversations (see [below for nested schema](#nestedatt--conversation_log_settings--audio_log_settings--destination--s3_bucket))
 
 <a id="nestedatt--conversation_log_settings--audio_log_settings--destination--s3_bucket"></a>
 ### Nested Schema for `conversation_log_settings.audio_log_settings.destination.s3_bucket`
 
+Required:
+
+- `log_prefix` (String) The Amazon S3 key of the deployment package.
+- `s3_bucket_arn` (String) The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.
+
 Optional:
 
 - `kms_key_arn` (String) The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.
-- `log_prefix` (String) The Amazon S3 key of the deployment package.
-- `s3_bucket_arn` (String) The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.
 
 
 
@@ -118,7 +124,7 @@ Optional:
 <a id="nestedatt--conversation_log_settings--text_log_settings"></a>
 ### Nested Schema for `conversation_log_settings.text_log_settings`
 
-Optional:
+Required:
 
 - `destination` (Attributes) Defines the Amazon CloudWatch Logs destination log group for conversation text logs. (see [below for nested schema](#nestedatt--conversation_log_settings--text_log_settings--destination))
 - `enabled` (Boolean)
@@ -126,14 +132,14 @@ Optional:
 <a id="nestedatt--conversation_log_settings--text_log_settings--destination"></a>
 ### Nested Schema for `conversation_log_settings.text_log_settings.destination`
 
-Optional:
+Required:
 
 - `cloudwatch` (Attributes) (see [below for nested schema](#nestedatt--conversation_log_settings--text_log_settings--destination--cloudwatch))
 
 <a id="nestedatt--conversation_log_settings--text_log_settings--destination--cloudwatch"></a>
 ### Nested Schema for `conversation_log_settings.text_log_settings.destination.cloudwatch`
 
-Optional:
+Required:
 
 - `cloudwatch_log_group_arn` (String) A string used to identify the groupArn for the Cloudwatch Log Group
 - `log_prefix` (String) A string containing the value for the Log Prefix
@@ -145,7 +151,7 @@ Optional:
 <a id="nestedatt--sentiment_analysis_settings"></a>
 ### Nested Schema for `sentiment_analysis_settings`
 
-Optional:
+Required:
 
 - `detect_sentiment` (Boolean) Enable to call Amazon Comprehend for Sentiment natively within Lex
 

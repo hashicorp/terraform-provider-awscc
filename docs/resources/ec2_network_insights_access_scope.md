@@ -214,9 +214,12 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
+
+Optional:
+
 - `value` (String)
 
 ## Import

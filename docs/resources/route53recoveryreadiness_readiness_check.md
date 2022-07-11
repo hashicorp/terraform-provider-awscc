@@ -32,7 +32,7 @@ Aws Route53 Recovery Readiness Check Schema and API specification.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (List of String)

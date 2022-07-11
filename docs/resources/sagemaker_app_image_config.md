@@ -32,10 +32,25 @@ Resource Type definition for AWS::SageMaker::AppImageConfig
 <a id="nestedatt--kernel_gateway_image_config"></a>
 ### Nested Schema for `kernel_gateway_image_config`
 
+Required:
+
+- `kernel_specs` (Attributes List) The specification of the Jupyter kernels in the image. (see [below for nested schema](#nestedatt--kernel_gateway_image_config--kernel_specs))
+
 Optional:
 
 - `file_system_config` (Attributes) The Amazon Elastic File System (EFS) storage configuration for a SageMaker image. (see [below for nested schema](#nestedatt--kernel_gateway_image_config--file_system_config))
-- `kernel_specs` (Attributes List) The specification of the Jupyter kernels in the image. (see [below for nested schema](#nestedatt--kernel_gateway_image_config--kernel_specs))
+
+<a id="nestedatt--kernel_gateway_image_config--kernel_specs"></a>
+### Nested Schema for `kernel_gateway_image_config.kernel_specs`
+
+Required:
+
+- `name` (String) The name of the kernel.
+
+Optional:
+
+- `display_name` (String) The display name of the kernel.
+
 
 <a id="nestedatt--kernel_gateway_image_config--file_system_config"></a>
 ### Nested Schema for `kernel_gateway_image_config.file_system_config`
@@ -47,20 +62,11 @@ Optional:
 - `mount_path` (String) The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.
 
 
-<a id="nestedatt--kernel_gateway_image_config--kernel_specs"></a>
-### Nested Schema for `kernel_gateway_image_config.kernel_specs`
-
-Optional:
-
-- `display_name` (String) The display name of the kernel.
-- `name` (String) The name of the kernel.
-
-
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

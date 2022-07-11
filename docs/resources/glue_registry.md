@@ -32,7 +32,7 @@ This resource creates a Registry for authoring schemas as part of Glue Schema Re
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) A key to identify the tag.
 - `value` (String) Corresponding tag value for the key.

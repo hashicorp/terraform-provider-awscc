@@ -39,14 +39,17 @@ AWS Cost Anomaly Detection leverages advanced Machine Learning technologies to i
 Required:
 
 - `address` (String)
-- `status` (String)
 - `type` (String)
+
+Optional:
+
+- `status` (String)
 
 
 <a id="nestedatt--resource_tags"></a>
 ### Nested Schema for `resource_tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name for the tag.
 - `value` (String) The value for the tag.

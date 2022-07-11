@@ -34,7 +34,7 @@ An outcome for rule evaluation.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

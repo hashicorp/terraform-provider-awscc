@@ -40,6 +40,9 @@ AWS::RoboMaker::SimulationApplication resource creates an AWS RoboMaker Simulati
 Required:
 
 - `name` (String) The name of the robot software suite.
+
+Optional:
+
 - `version` (String) The version of the robot software suite.
 
 
@@ -49,13 +52,16 @@ Required:
 Required:
 
 - `name` (String) The name of the simulation software suite.
+
+Optional:
+
 - `version` (String) The version of the simulation software suite.
 
 
 <a id="nestedatt--rendering_engine"></a>
 ### Nested Schema for `rendering_engine`
 
-Optional:
+Required:
 
 - `name` (String) The name of the rendering engine.
 - `version` (String) The version of the rendering engine.
@@ -64,7 +70,7 @@ Optional:
 <a id="nestedatt--sources"></a>
 ### Nested Schema for `sources`
 
-Optional:
+Required:
 
 - `architecture` (String) The target processor architecture for the application.
 - `s3_bucket` (String) The Amazon S3 bucket name.

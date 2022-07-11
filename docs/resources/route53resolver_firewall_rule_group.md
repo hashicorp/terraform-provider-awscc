@@ -37,21 +37,24 @@ Resource schema for AWS::Route53Resolver::FirewallRuleGroup.
 <a id="nestedatt--firewall_rules"></a>
 ### Nested Schema for `firewall_rules`
 
-Optional:
+Required:
 
 - `action` (String) Rule Action
+- `firewall_domain_list_id` (String) ResourceId
+- `priority` (Number) Rule Priority
+
+Optional:
+
 - `block_override_dns_type` (String) BlockOverrideDnsType
 - `block_override_domain` (String) BlockOverrideDomain
 - `block_override_ttl` (Number) BlockOverrideTtl
 - `block_response` (String) BlockResponse
-- `firewall_domain_list_id` (String) ResourceId
-- `priority` (Number) Rule Priority
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

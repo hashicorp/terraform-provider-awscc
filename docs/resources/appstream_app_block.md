@@ -38,10 +38,13 @@ Resource Type definition for AWS::AppStream::AppBlock
 
 Required:
 
-- `executable_parameters` (String)
 - `executable_path` (String)
 - `script_s3_location` (Attributes) (see [below for nested schema](#nestedatt--setup_script_details--script_s3_location))
 - `timeout_in_seconds` (Number)
+
+Optional:
+
+- `executable_parameters` (String)
 
 <a id="nestedatt--setup_script_details--script_s3_location"></a>
 ### Nested Schema for `setup_script_details.script_s3_location`
@@ -65,7 +68,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `tag_key` (String)
 - `tag_value` (String)

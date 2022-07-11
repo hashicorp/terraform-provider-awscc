@@ -36,18 +36,21 @@ Resource type definition for AWS::NetworkFirewall::FirewallPolicy
 
 Required:
 
+- `stateless_default_actions` (List of String)
+- `stateless_fragment_default_actions` (List of String)
+
+Optional:
+
 - `stateful_default_actions` (List of String)
 - `stateful_engine_options` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options))
 - `stateful_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references))
 - `stateless_custom_actions` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions))
-- `stateless_default_actions` (List of String)
-- `stateless_fragment_default_actions` (List of String)
 - `stateless_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_rule_group_references))
 
 <a id="nestedatt--firewall_policy--stateful_engine_options"></a>
 ### Nested Schema for `firewall_policy.stateful_engine_options`
 
-Required:
+Optional:
 
 - `rule_order` (String)
 
@@ -57,8 +60,11 @@ Required:
 
 Required:
 
-- `priority` (Number)
 - `resource_arn` (String) A resource ARN.
+
+Optional:
+
+- `priority` (Number)
 
 
 <a id="nestedatt--firewall_policy--stateless_custom_actions"></a>
@@ -72,7 +78,7 @@ Required:
 <a id="nestedatt--firewall_policy--stateless_custom_actions--action_definition"></a>
 ### Nested Schema for `firewall_policy.stateless_custom_actions.action_definition`
 
-Required:
+Optional:
 
 - `publish_metric_action` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action))
 
@@ -107,7 +113,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

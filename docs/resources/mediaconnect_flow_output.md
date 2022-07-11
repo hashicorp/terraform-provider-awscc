@@ -43,12 +43,15 @@ Resource schema for AWS::MediaConnect::FlowOutput
 <a id="nestedatt--encryption"></a>
 ### Nested Schema for `encryption`
 
+Required:
+
+- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
+- `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
+
 Optional:
 
 - `algorithm` (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
 - `key_type` (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
-- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
-- `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 
 
 <a id="nestedatt--vpc_interface_attachment"></a>

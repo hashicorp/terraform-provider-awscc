@@ -35,33 +35,30 @@ Resource Type definition for AWS::Backup::BackupPlan
 
 Required:
 
-- `advanced_backup_settings` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--advanced_backup_settings))
 - `backup_plan_name` (String)
 - `backup_plan_rule` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule))
 
-<a id="nestedatt--backup_plan--advanced_backup_settings"></a>
-### Nested Schema for `backup_plan.advanced_backup_settings`
+Optional:
 
-Required:
-
-- `backup_options` (Map of String)
-- `resource_type` (String)
-
+- `advanced_backup_settings` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--advanced_backup_settings))
 
 <a id="nestedatt--backup_plan--backup_plan_rule"></a>
 ### Nested Schema for `backup_plan.backup_plan_rule`
 
 Required:
 
+- `rule_name` (String)
+- `target_backup_vault` (String)
+
+Optional:
+
 - `completion_window_minutes` (Number)
 - `copy_actions` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--copy_actions))
 - `enable_continuous_backup` (Boolean)
 - `lifecycle` (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--lifecycle))
 - `recovery_point_tags` (Map of String)
-- `rule_name` (String)
 - `schedule_expression` (String)
 - `start_window_minutes` (Number)
-- `target_backup_vault` (String)
 
 <a id="nestedatt--backup_plan--backup_plan_rule--copy_actions"></a>
 ### Nested Schema for `backup_plan.backup_plan_rule.copy_actions`
@@ -69,12 +66,15 @@ Required:
 Required:
 
 - `destination_backup_vault_arn` (String)
+
+Optional:
+
 - `lifecycle` (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--copy_actions--lifecycle))
 
 <a id="nestedatt--backup_plan--backup_plan_rule--copy_actions--lifecycle"></a>
 ### Nested Schema for `backup_plan.backup_plan_rule.copy_actions.lifecycle`
 
-Required:
+Optional:
 
 - `delete_after_days` (Number)
 - `move_to_cold_storage_after_days` (Number)
@@ -84,10 +84,20 @@ Required:
 <a id="nestedatt--backup_plan--backup_plan_rule--lifecycle"></a>
 ### Nested Schema for `backup_plan.backup_plan_rule.lifecycle`
 
-Required:
+Optional:
 
 - `delete_after_days` (Number)
 - `move_to_cold_storage_after_days` (Number)
+
+
+
+<a id="nestedatt--backup_plan--advanced_backup_settings"></a>
+### Nested Schema for `backup_plan.advanced_backup_settings`
+
+Required:
+
+- `backup_options` (Map of String)
+- `resource_type` (String)
 
 ## Import
 

@@ -38,13 +38,16 @@ AWS::RoboMaker::RobotApplication resource creates an AWS RoboMaker RobotApplicat
 Required:
 
 - `name` (String) The name of robot software suite.
+
+Optional:
+
 - `version` (String) The version of robot software suite.
 
 
 <a id="nestedatt--sources"></a>
 ### Nested Schema for `sources`
 
-Optional:
+Required:
 
 - `architecture` (String) The architecture of robot application.
 - `s3_bucket` (String) The Arn of the S3Bucket that stores the robot application source.

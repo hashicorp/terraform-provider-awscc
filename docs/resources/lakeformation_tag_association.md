@@ -39,7 +39,7 @@ Required:
 <a id="nestedatt--resource"></a>
 ### Nested Schema for `resource`
 
-Required:
+Optional:
 
 - `catalog` (Map of String)
 - `database` (Attributes) (see [below for nested schema](#nestedatt--resource--database))
@@ -62,6 +62,9 @@ Required:
 
 - `catalog_id` (String)
 - `database_name` (String)
+
+Optional:
+
 - `name` (String)
 - `table_wildcard` (Map of String)
 

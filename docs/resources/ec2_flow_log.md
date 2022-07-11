@@ -39,7 +39,7 @@ Specifies a VPC flow log, which enables you to capture IP traffic for a specific
 <a id="nestedatt--destination_options"></a>
 ### Nested Schema for `destination_options`
 
-Optional:
+Required:
 
 - `file_format` (String)
 - `hive_compatible_partitions` (Boolean)
@@ -49,7 +49,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

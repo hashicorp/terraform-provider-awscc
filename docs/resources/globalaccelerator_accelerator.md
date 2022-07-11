@@ -36,7 +36,7 @@ Resource Type definition for AWS::GlobalAccelerator::Accelerator
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) Key of the tag. Value can be 1 to 127 characters.
 - `value` (String) Value for the tag. Value can be 1 to 255 characters.

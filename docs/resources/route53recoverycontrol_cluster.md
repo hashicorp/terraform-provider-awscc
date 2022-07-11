@@ -30,7 +30,7 @@ AWS Route53 Recovery Control Cluster resource schema
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -39,7 +39,7 @@ Optional:
 <a id="nestedatt--cluster_endpoints"></a>
 ### Nested Schema for `cluster_endpoints`
 
-Read-Only:
+Optional:
 
 - `endpoint` (String)
 - `region` (String)

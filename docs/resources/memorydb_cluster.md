@@ -59,7 +59,7 @@ You cannot modify the value of TransitEncryptionEnabled after the cluster is cre
 <a id="nestedatt--cluster_endpoint"></a>
 ### Nested Schema for `cluster_endpoint`
 
-Optional:
+Read-Only:
 
 - `address` (String) The DNS address of the primary read-write node.
 - `port` (Number) The port number that the engine is listening on.
@@ -68,7 +68,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key for the tag. May not be null.
 - `value` (String) The tag's value. May be null.

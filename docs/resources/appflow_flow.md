@@ -39,15 +39,18 @@ Resource schema for AWS::AppFlow::Flow.
 
 Required:
 
-- `api_version` (String) The API version that the destination connector uses.
-- `connector_profile_name` (String) Name of destination connector profile
 - `connector_type` (String) Destination connector type
 - `destination_connector_properties` (Attributes) Destination connector details (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties))
+
+Optional:
+
+- `api_version` (String) The API version that the destination connector uses.
+- `connector_profile_name` (String) Name of destination connector profile
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties`
 
-Required:
+Optional:
 
 - `custom_connector` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector))
 - `event_bridge` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge))
@@ -66,8 +69,11 @@ Required:
 
 Required:
 
-- `custom_properties` (Map of String) A map for properties for custom connector.
 - `entity_name` (String)
+
+Optional:
+
+- `custom_properties` (Map of String) A map for properties for custom connector.
 - `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector--error_handling_config))
 - `id_field_names` (List of String) List of fields used as ID when performing a write operation.
 - `write_operation_type` (String)
@@ -75,7 +81,7 @@ Required:
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector--error_handling_config"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.custom_connector.write_operation_type`
 
-Required:
+Optional:
 
 - `bucket_name` (String)
 - `bucket_prefix` (String)
@@ -88,13 +94,16 @@ Required:
 
 Required:
 
-- `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge--error_handling_config))
 - `object` (String)
 
-<a id="nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.event_bridge.object`
+Optional:
 
-Required:
+- `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge--error_handling_config))
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge--error_handling_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.event_bridge.error_handling_config`
+
+Optional:
 
 - `bucket_name` (String)
 - `bucket_prefix` (String)
@@ -105,7 +114,7 @@ Required:
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--lookout_metrics"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.lookout_metrics`
 
-Required:
+Optional:
 
 - `object` (String)
 
@@ -115,13 +124,16 @@ Required:
 
 Required:
 
-- `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--marketo--error_handling_config))
 - `object` (String)
 
-<a id="nestedatt--destination_flow_config_list--destination_connector_properties--marketo--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.marketo.object`
+Optional:
 
-Required:
+- `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--marketo--error_handling_config))
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--marketo--error_handling_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.marketo.error_handling_config`
+
+Optional:
 
 - `bucket_name` (String)
 - `bucket_prefix` (String)
@@ -134,15 +146,18 @@ Required:
 
 Required:
 
-- `bucket_prefix` (String)
-- `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--redshift--error_handling_config))
 - `intermediate_bucket_name` (String)
 - `object` (String)
 
-<a id="nestedatt--destination_flow_config_list--destination_connector_properties--redshift--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.redshift.object`
+Optional:
 
-Required:
+- `bucket_prefix` (String)
+- `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--redshift--error_handling_config))
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--redshift--error_handling_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.redshift.error_handling_config`
+
+Optional:
 
 - `bucket_name` (String)
 - `bucket_prefix` (String)
@@ -156,13 +171,16 @@ Required:
 Required:
 
 - `bucket_name` (String)
+
+Optional:
+
 - `bucket_prefix` (String)
 - `s3_output_format_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config))
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.s3.s3_output_format_config`
 
-Required:
+Optional:
 
 - `aggregation_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--aggregation_config))
 - `file_type` (String)
@@ -172,7 +190,7 @@ Required:
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--aggregation_config"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.s3.s3_output_format_config.aggregation_config`
 
-Required:
+Optional:
 
 - `aggregation_type` (String)
 
@@ -180,7 +198,7 @@ Required:
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--prefix_config"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.s3.s3_output_format_config.prefix_config`
 
-Required:
+Optional:
 
 - `prefix_format` (String)
 - `prefix_type` (String)
@@ -193,15 +211,18 @@ Required:
 
 Required:
 
+- `object` (String)
+
+Optional:
+
 - `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--salesforce--error_handling_config))
 - `id_field_names` (List of String) List of fields used as ID when performing a write operation.
-- `object` (String)
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--salesforce--error_handling_config"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.salesforce.write_operation_type`
 
-Required:
+Optional:
 
 - `bucket_name` (String)
 - `bucket_prefix` (String)
@@ -214,16 +235,19 @@ Required:
 
 Required:
 
+- `object_path` (String)
+
+Optional:
+
 - `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--error_handling_config))
 - `id_field_names` (List of String) List of fields used as ID when performing a write operation.
-- `object_path` (String)
 - `success_response_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--success_response_handling_config))
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--error_handling_config"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.write_operation_type`
 
-Required:
+Optional:
 
 - `bucket_name` (String)
 - `bucket_prefix` (String)
@@ -233,7 +257,7 @@ Required:
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--success_response_handling_config"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.write_operation_type`
 
-Required:
+Optional:
 
 - `bucket_name` (String)
 - `bucket_prefix` (String)
@@ -245,15 +269,18 @@ Required:
 
 Required:
 
-- `bucket_prefix` (String)
-- `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--snowflake--error_handling_config))
 - `intermediate_bucket_name` (String)
 - `object` (String)
 
-<a id="nestedatt--destination_flow_config_list--destination_connector_properties--snowflake--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.snowflake.object`
+Optional:
 
-Required:
+- `bucket_prefix` (String)
+- `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--snowflake--error_handling_config))
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--snowflake--error_handling_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.snowflake.error_handling_config`
+
+Optional:
 
 - `bucket_name` (String)
 - `bucket_prefix` (String)
@@ -267,33 +294,39 @@ Required:
 Required:
 
 - `bucket_name` (String)
-- `bucket_prefix` (String)
 - `s3_output_format_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config))
 
+Optional:
+
+- `bucket_prefix` (String)
+
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.s3_output_format_config`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.bucket_prefix`
 
 Required:
 
-- `aggregation_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config--aggregation_config))
+- `prefix_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--bucket_prefix--prefix_config))
+
+Optional:
+
+- `aggregation_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--bucket_prefix--aggregation_config))
 - `file_type` (String)
-- `prefix_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config--prefix_config))
 
-<a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config--aggregation_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.s3_output_format_config.aggregation_config`
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--bucket_prefix--prefix_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.bucket_prefix.prefix_config`
 
-Required:
-
-- `aggregation_type` (String)
-
-
-<a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config--prefix_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.s3_output_format_config.prefix_config`
-
-Required:
+Optional:
 
 - `prefix_format` (String)
 - `prefix_type` (String)
+
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--bucket_prefix--aggregation_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.bucket_prefix.aggregation_config`
+
+Optional:
+
+- `aggregation_type` (String)
 
 
 
@@ -303,15 +336,18 @@ Required:
 
 Required:
 
+- `object` (String)
+
+Optional:
+
 - `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--zendesk--error_handling_config))
 - `id_field_names` (List of String) List of fields used as ID when performing a write operation.
-- `object` (String)
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--zendesk--error_handling_config"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.zendesk.write_operation_type`
 
-Required:
+Optional:
 
 - `bucket_name` (String)
 - `bucket_prefix` (String)
@@ -326,24 +362,19 @@ Required:
 
 Required:
 
-- `api_version` (String) The API version that the destination connector uses.
-- `connector_profile_name` (String) Name of source connector profile
 - `connector_type` (String) Type of source connector
-- `incremental_pull_config` (Attributes) Configuration for scheduled incremental data pull (see [below for nested schema](#nestedatt--source_flow_config--incremental_pull_config))
 - `source_connector_properties` (Attributes) Source connector details required to query a connector (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties))
 
-<a id="nestedatt--source_flow_config--incremental_pull_config"></a>
-### Nested Schema for `source_flow_config.incremental_pull_config`
+Optional:
 
-Required:
-
-- `datetime_type_field_name` (String) Name of the datetime/timestamp data type field to be used for importing incremental records from the source
-
+- `api_version` (String) The API version that the destination connector uses.
+- `connector_profile_name` (String) Name of source connector profile
+- `incremental_pull_config` (Attributes) Configuration for scheduled incremental data pull (see [below for nested schema](#nestedatt--source_flow_config--incremental_pull_config))
 
 <a id="nestedatt--source_flow_config--source_connector_properties"></a>
 ### Nested Schema for `source_flow_config.source_connector_properties`
 
-Required:
+Optional:
 
 - `amplitude` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--amplitude))
 - `custom_connector` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--custom_connector))
@@ -375,8 +406,11 @@ Required:
 
 Required:
 
-- `custom_properties` (Map of String) A map for properties for custom connector.
 - `entity_name` (String)
+
+Optional:
+
+- `custom_properties` (Map of String) A map for properties for custom connector.
 
 
 <a id="nestedatt--source_flow_config--source_connector_properties--datadog"></a>
@@ -426,12 +460,15 @@ Required:
 
 - `bucket_name` (String)
 - `bucket_prefix` (String)
+
+Optional:
+
 - `s3_input_format_config` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--s3--s3_input_format_config))
 
 <a id="nestedatt--source_flow_config--source_connector_properties--s3--s3_input_format_config"></a>
 ### Nested Schema for `source_flow_config.source_connector_properties.s3.s3_input_format_config`
 
-Required:
+Optional:
 
 - `s3_input_file_type` (String)
 
@@ -442,9 +479,12 @@ Required:
 
 Required:
 
+- `object` (String)
+
+Optional:
+
 - `enable_dynamic_field_update` (Boolean)
 - `include_deleted_records` (Boolean)
-- `object` (String)
 
 
 <a id="nestedatt--source_flow_config--source_connector_properties--sapo_data"></a>
@@ -492,11 +532,14 @@ Required:
 
 Required:
 
+- `object` (String)
+
+Optional:
+
 - `document_type` (String)
 - `include_all_versions` (Boolean)
 - `include_renditions` (Boolean)
 - `include_source_files` (Boolean)
-- `object` (String)
 
 
 <a id="nestedatt--source_flow_config--source_connector_properties--zendesk"></a>
@@ -508,22 +551,33 @@ Required:
 
 
 
+<a id="nestedatt--source_flow_config--incremental_pull_config"></a>
+### Nested Schema for `source_flow_config.incremental_pull_config`
+
+Optional:
+
+- `datetime_type_field_name` (String) Name of the datetime/timestamp data type field to be used for importing incremental records from the source
+
+
 
 <a id="nestedatt--tasks"></a>
 ### Nested Schema for `tasks`
 
 Required:
 
+- `source_fields` (List of String) Source fields on which particular task will be applied
+- `task_type` (String) Type of task
+
+Optional:
+
 - `connector_operator` (Attributes) Operation to be performed on provided source fields (see [below for nested schema](#nestedatt--tasks--connector_operator))
 - `destination_field` (String) A field value on which source field should be validated
-- `source_fields` (List of String) Source fields on which particular task will be applied
 - `task_properties` (Attributes List) A Map used to store task related info (see [below for nested schema](#nestedatt--tasks--task_properties))
-- `task_type` (String) Type of task
 
 <a id="nestedatt--tasks--connector_operator"></a>
 ### Nested Schema for `tasks.connector_operator`
 
-Required:
+Optional:
 
 - `amplitude` (String)
 - `custom_connector` (String)
@@ -558,18 +612,24 @@ Required:
 
 Required:
 
-- `trigger_properties` (Attributes) Details required based on the type of trigger (see [below for nested schema](#nestedatt--trigger_config--trigger_properties))
 - `trigger_type` (String) Trigger type of the flow
+
+Optional:
+
+- `trigger_properties` (Attributes) Details required based on the type of trigger (see [below for nested schema](#nestedatt--trigger_config--trigger_properties))
 
 <a id="nestedatt--trigger_config--trigger_properties"></a>
 ### Nested Schema for `trigger_config.trigger_properties`
 
 Required:
 
+- `schedule_expression` (String)
+
+Optional:
+
 - `data_pull_mode` (String)
 - `flow_error_deactivation_threshold` (Number)
 - `schedule_end_time` (Number)
-- `schedule_expression` (String)
 - `schedule_offset` (Number)
 - `schedule_start_time` (Number)
 - `time_zone` (String)
@@ -579,7 +639,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) A string used to identify this tag
 - `value` (String) A string containing the value for the tag

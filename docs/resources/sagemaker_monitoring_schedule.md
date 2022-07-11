@@ -38,7 +38,7 @@ Resource Type definition for AWS::SageMaker::MonitoringSchedule
 <a id="nestedatt--monitoring_schedule_config"></a>
 ### Nested Schema for `monitoring_schedule_config`
 
-Required:
+Optional:
 
 - `monitoring_job_definition` (Attributes) Defines the monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition))
 - `monitoring_job_definition_name` (String) Name of the job definition
@@ -50,49 +50,30 @@ Required:
 
 Required:
 
-- `baseline_config` (Attributes) Baseline configuration used to validate that the data conforms to the specified constraints and statistics. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config))
-- `environment` (Map of String) Sets the environment variables in the Docker container
 - `monitoring_app_specification` (Attributes) Container image configuration object for the monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_app_specification))
 - `monitoring_inputs` (Attributes List) The array of inputs for the monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs))
 - `monitoring_output_config` (Attributes) The output configuration for monitoring jobs. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config))
 - `monitoring_resources` (Attributes) Identifies the resources to deploy for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_resources))
-- `network_config` (Attributes) Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--network_config))
 - `role_arn` (String) The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+
+Optional:
+
+- `baseline_config` (Attributes) Baseline configuration used to validate that the data conforms to the specified constraints and statistics. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config))
+- `environment` (Map of String) Sets the environment variables in the Docker container
+- `network_config` (Attributes) Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--network_config))
 - `stopping_condition` (Attributes) Specifies a time limit for how long the monitoring job is allowed to run. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--stopping_condition))
-
-<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.baseline_config`
-
-Required:
-
-- `constraints_resource` (Attributes) The baseline constraints resource for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--constraints_resource))
-- `statistics_resource` (Attributes) The baseline statistics resource for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--statistics_resource))
-
-<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--constraints_resource"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.baseline_config.statistics_resource`
-
-Required:
-
-- `s3_uri` (String) The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.
-
-
-<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--statistics_resource"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.baseline_config.statistics_resource`
-
-Required:
-
-- `s3_uri` (String) The Amazon S3 URI for the baseline statistics file in Amazon S3 that the current monitoring job should be validated against.
-
-
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_app_specification"></a>
 ### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_app_specification`
 
 Required:
 
+- `image_uri` (String) The container image to be run by the monitoring job.
+
+Optional:
+
 - `container_arguments` (List of String) An array of arguments for the container used to run the monitoring job.
 - `container_entrypoint` (List of String) Specifies the entrypoint for a container used to run the monitoring job.
-- `image_uri` (String) The container image to be run by the monitoring job.
 - `post_analytics_processor_source_uri` (String) An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
 - `record_preprocessor_source_uri` (String) An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers
 
@@ -111,6 +92,9 @@ Required:
 
 - `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
 - `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
+
+Optional:
+
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
 
@@ -121,24 +105,30 @@ Required:
 
 Required:
 
-- `kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 - `monitoring_outputs` (Attributes List) Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--monitoring_outputs))
 
+Optional:
+
+- `kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--monitoring_outputs"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs`
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.kms_key_id`
 
 Required:
 
-- `s3_output` (Attributes) Information about where and how to store the results of a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--monitoring_outputs--s3_output))
+- `s3_output` (Attributes) Information about where and how to store the results of a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--kms_key_id--s3_output))
 
-<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--monitoring_outputs--s3_output"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs.s3_output`
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--kms_key_id--s3_output"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.kms_key_id.s3_output`
 
 Required:
 
 - `local_path` (String) The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.
-- `s3_upload_mode` (String) Whether to upload the results of the monitoring job continuously or after the job completes.
 - `s3_uri` (String) A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.
+
+Optional:
+
+- `s3_upload_mode` (String) Whether to upload the results of the monitoring job continuously or after the job completes.
 
 
 
@@ -157,15 +147,43 @@ Required:
 
 - `instance_count` (Number) The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.
 - `instance_type` (String) The ML compute instance type for the processing job.
-- `volume_kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.
 - `volume_size_in_gb` (Number) The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.
+
+Optional:
+
+- `volume_kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.
+
+
+
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.baseline_config`
+
+Optional:
+
+- `constraints_resource` (Attributes) The baseline constraints resource for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--constraints_resource))
+- `statistics_resource` (Attributes) The baseline statistics resource for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--statistics_resource))
+
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--constraints_resource"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.baseline_config.statistics_resource`
+
+Optional:
+
+- `s3_uri` (String) The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.
+
+
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--statistics_resource"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.baseline_config.statistics_resource`
+
+Optional:
+
+- `s3_uri` (String) The Amazon S3 URI for the baseline statistics file in Amazon S3 that the current monitoring job should be validated against.
 
 
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--network_config"></a>
 ### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.network_config`
 
-Required:
+Optional:
 
 - `enable_inter_container_traffic_encryption` (Boolean) Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.
 - `enable_network_isolation` (Boolean) Whether to allow inbound and outbound network calls to and from the containers used for the processing job.
@@ -202,22 +220,25 @@ Required:
 <a id="nestedatt--last_monitoring_execution_summary"></a>
 ### Nested Schema for `last_monitoring_execution_summary`
 
-Optional:
+Required:
 
 - `creation_time` (String) The time at which the monitoring job was created.
-- `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
-- `failure_reason` (String) Contains the reason a monitoring job failed, if it failed.
 - `last_modified_time` (String) A timestamp that indicates the last time the monitoring job was modified.
 - `monitoring_execution_status` (String) The status of the monitoring job.
 - `monitoring_schedule_name` (String) The name of the monitoring schedule.
-- `processing_job_arn` (String) The Amazon Resource Name (ARN) of the monitoring job.
 - `scheduled_time` (String) The time the monitoring job was scheduled.
+
+Optional:
+
+- `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
+- `failure_reason` (String) Contains the reason a monitoring job failed, if it failed.
+- `processing_job_arn` (String) The Amazon Resource Name (ARN) of the monitoring job.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

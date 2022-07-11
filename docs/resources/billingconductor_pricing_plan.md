@@ -36,7 +36,7 @@ Pricing Plan enables you to customize your billing details consistent with the u
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

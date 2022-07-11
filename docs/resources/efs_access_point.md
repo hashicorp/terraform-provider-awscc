@@ -44,11 +44,14 @@ Optional:
 <a id="nestedatt--posix_user"></a>
 ### Nested Schema for `posix_user`
 
-Optional:
+Required:
 
 - `gid` (String) The POSIX group ID used for all file system operations using this access point.
-- `secondary_gids` (List of String) Secondary POSIX group IDs used for all file system operations using this access point.
 - `uid` (String) The POSIX user ID used for all file system operations using this access point.
+
+Optional:
+
+- `secondary_gids` (List of String) Secondary POSIX group IDs used for all file system operations using this access point.
 
 
 <a id="nestedatt--root_directory"></a>
@@ -62,7 +65,7 @@ Optional:
 <a id="nestedatt--root_directory--creation_info"></a>
 ### Nested Schema for `root_directory.creation_info`
 
-Optional:
+Required:
 
 - `owner_gid` (String) Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).
 - `owner_uid` (String) Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).

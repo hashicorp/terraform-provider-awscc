@@ -34,7 +34,7 @@ Resource Type definition for AWS::IVS::Channel
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

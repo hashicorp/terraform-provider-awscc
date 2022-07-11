@@ -35,7 +35,7 @@ Resource schema for AWS::DataSync::LocationFSxOpenZFS.
 <a id="nestedatt--protocol"></a>
 ### Nested Schema for `protocol`
 
-Required:
+Optional:
 
 - `nfs` (Attributes) FSx OpenZFS file system NFS protocol information (see [below for nested schema](#nestedatt--protocol--nfs))
 
@@ -49,7 +49,7 @@ Required:
 <a id="nestedatt--protocol--nfs--mount_options"></a>
 ### Nested Schema for `protocol.nfs.mount_options`
 
-Required:
+Optional:
 
 - `version` (String) The specific NFS version that you want DataSync to use to mount your NFS share.
 
@@ -59,7 +59,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.

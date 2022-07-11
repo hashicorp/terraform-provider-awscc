@@ -33,7 +33,7 @@ A custom metric published by your devices to Device Defender.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The tag's key.
 - `value` (String) The tag's value.

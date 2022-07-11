@@ -38,12 +38,15 @@ Resource type definition for AWS::SSMIncidents::ResponsePlan
 
 Required:
 
-- `dedupe_string` (String) The deduplication string.
 - `impact` (Number) The impact value.
+- `title` (String) The title string.
+
+Optional:
+
+- `dedupe_string` (String) The deduplication string.
 - `incident_tags` (Attributes Set) Tags that get applied to incidents created by the StartIncident API action. (see [below for nested schema](#nestedatt--incident_template--incident_tags))
 - `notification_targets` (Attributes List) The list of notification targets. (see [below for nested schema](#nestedatt--incident_template--notification_targets))
 - `summary` (String) The summary string.
-- `title` (String) The title string.
 
 <a id="nestedatt--incident_template--incident_tags"></a>
 ### Nested Schema for `incident_template.incident_tags`
@@ -57,7 +60,7 @@ Required:
 <a id="nestedatt--incident_template--notification_targets"></a>
 ### Nested Schema for `incident_template.notification_targets`
 
-Required:
+Optional:
 
 - `sns_topic_arn` (String) The ARN of the Chatbot SNS topic.
 
@@ -73,19 +76,22 @@ Optional:
 <a id="nestedatt--actions--ssm_automation"></a>
 ### Nested Schema for `actions.ssm_automation`
 
-Optional:
+Required:
 
 - `document_name` (String) The document name to use when starting the SSM automation document.
+- `role_arn` (String) The role ARN to use when starting the SSM automation document.
+
+Optional:
+
 - `document_version` (String) The version of the document to use when starting the SSM automation document.
 - `dynamic_parameters` (Attributes Set) The parameters with dynamic values to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--dynamic_parameters))
 - `parameters` (Attributes Set) The parameters to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--parameters))
-- `role_arn` (String) The role ARN to use when starting the SSM automation document.
 - `target_account` (String) The account type to use when starting the SSM automation document.
 
 <a id="nestedatt--actions--ssm_automation--dynamic_parameters"></a>
 ### Nested Schema for `actions.ssm_automation.dynamic_parameters`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (Attributes) Value of the dynamic parameter to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--dynamic_parameters--value))
@@ -102,7 +108,7 @@ Optional:
 <a id="nestedatt--actions--ssm_automation--parameters"></a>
 ### Nested Schema for `actions.ssm_automation.parameters`
 
-Optional:
+Required:
 
 - `key` (String)
 - `values` (List of String)
@@ -121,7 +127,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

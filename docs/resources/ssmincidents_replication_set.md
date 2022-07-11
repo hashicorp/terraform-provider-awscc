@@ -31,7 +31,7 @@ Resource type definition for AWS::SSMIncidents::ReplicationSet
 <a id="nestedatt--regions"></a>
 ### Nested Schema for `regions`
 
-Required:
+Optional:
 
 - `region_configuration` (Attributes) The ReplicationSet regional configuration. (see [below for nested schema](#nestedatt--regions--region_configuration))
 - `region_name` (String) The AWS region name.

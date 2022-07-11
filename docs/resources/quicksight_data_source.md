@@ -78,7 +78,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.amazon_elasticsearch_parameters`
 
-Optional:
+Required:
 
 - `domain` (String) <p>The Amazon Elasticsearch Service domain.</p>
 
@@ -86,7 +86,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--amazon_open_search_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.amazon_open_search_parameters`
 
-Optional:
+Required:
 
 - `domain` (String) <p>The Amazon OpenSearch Service domain.</p>
 
@@ -102,7 +102,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--aurora_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.aurora_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -112,7 +112,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--aurora_postgre_sql_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.aurora_postgre_sql_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -122,7 +122,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--maria_db_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.maria_db_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -132,7 +132,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--my_sql_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.my_sql_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -142,7 +142,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--oracle_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.oracle_parameters`
 
-Optional:
+Required:
 
 - `database` (String)
 - `host` (String)
@@ -152,7 +152,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--postgre_sql_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.postgre_sql_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -162,7 +162,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--presto_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.presto_parameters`
 
-Optional:
+Required:
 
 - `catalog` (String) <p>Catalog.</p>
 - `host` (String) <p>Host.</p>
@@ -172,7 +172,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--rds_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.rds_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `instance_id` (String) <p>Instance ID.</p>
@@ -181,11 +181,14 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--redshift_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.redshift_parameters`
 
+Required:
+
+- `database` (String) <p>Database.</p>
+
 Optional:
 
 - `cluster_id` (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
             provided.</p>
-- `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
 - `port` (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
 
@@ -193,14 +196,14 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--s3_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.s3_parameters`
 
-Optional:
+Required:
 
 - `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters--manifest_file_location))
 
 <a id="nestedatt--alternate_data_source_parameters--s3_parameters--manifest_file_location"></a>
 ### Nested Schema for `alternate_data_source_parameters.s3_parameters.manifest_file_location`
 
-Optional:
+Required:
 
 - `bucket` (String) <p>Amazon S3 bucket.</p>
 - `key` (String) <p>Amazon S3 key that identifies an object.</p>
@@ -210,7 +213,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--snowflake_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.snowflake_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -220,7 +223,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--spark_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.spark_parameters`
 
-Optional:
+Required:
 
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
@@ -229,7 +232,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--sql_server_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.sql_server_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -239,7 +242,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--teradata_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -261,6 +264,11 @@ Optional:
 <a id="nestedatt--credentials--credential_pair"></a>
 ### Nested Schema for `credentials.credential_pair`
 
+Required:
+
+- `password` (String) <p>Password.</p>
+- `username` (String) <p>User name.</p>
+
 Optional:
 
 - `alternate_data_source_parameters` (Attributes List) <p>A set of alternate data source parameters that you want to share for these
@@ -272,8 +280,6 @@ Optional:
             the existing credentials. If the <code>AlternateDataSourceParameters</code> list is
             null, the <code>DataSourceParameters</code> originally used with these
                 <code>Credentials</code> is automatically allowed.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters))
-- `password` (String) <p>Password.</p>
-- `username` (String) <p>User name.</p>
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters`
@@ -303,7 +309,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `domain` (String) <p>The Amazon Elasticsearch Service domain.</p>
 
@@ -311,7 +317,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `domain` (String) <p>The Amazon OpenSearch Service domain.</p>
 
@@ -327,7 +333,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -337,7 +343,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -347,7 +353,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -357,7 +363,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -367,7 +373,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String)
 - `host` (String)
@@ -377,7 +383,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -387,7 +393,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--presto_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `catalog` (String) <p>Catalog.</p>
 - `host` (String) <p>Host.</p>
@@ -397,7 +403,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--rds_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `instance_id` (String) <p>Instance ID.</p>
@@ -406,11 +412,14 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
+Required:
+
+- `database` (String) <p>Database.</p>
+
 Optional:
 
 - `cluster_id` (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
             provided.</p>
-- `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
 - `port` (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
 
@@ -418,14 +427,14 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters--manifest_file_location))
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters--manifest_file_location"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters.manifest_file_location`
 
-Optional:
+Required:
 
 - `bucket` (String) <p>Amazon S3 bucket.</p>
 - `key` (String) <p>Amazon S3 key that identifies an object.</p>
@@ -435,7 +444,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -445,7 +454,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
@@ -454,7 +463,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -464,7 +473,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -502,7 +511,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `data_source_parameters.amazon_elasticsearch_parameters`
 
-Optional:
+Required:
 
 - `domain` (String) <p>The Amazon Elasticsearch Service domain.</p>
 
@@ -510,7 +519,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--amazon_open_search_parameters"></a>
 ### Nested Schema for `data_source_parameters.amazon_open_search_parameters`
 
-Optional:
+Required:
 
 - `domain` (String) <p>The Amazon OpenSearch Service domain.</p>
 
@@ -526,7 +535,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--aurora_parameters"></a>
 ### Nested Schema for `data_source_parameters.aurora_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -536,7 +545,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--aurora_postgre_sql_parameters"></a>
 ### Nested Schema for `data_source_parameters.aurora_postgre_sql_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -546,7 +555,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--maria_db_parameters"></a>
 ### Nested Schema for `data_source_parameters.maria_db_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -556,7 +565,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--my_sql_parameters"></a>
 ### Nested Schema for `data_source_parameters.my_sql_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -566,7 +575,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--oracle_parameters"></a>
 ### Nested Schema for `data_source_parameters.oracle_parameters`
 
-Optional:
+Required:
 
 - `database` (String)
 - `host` (String)
@@ -576,7 +585,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--postgre_sql_parameters"></a>
 ### Nested Schema for `data_source_parameters.postgre_sql_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -586,7 +595,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--presto_parameters"></a>
 ### Nested Schema for `data_source_parameters.presto_parameters`
 
-Optional:
+Required:
 
 - `catalog` (String) <p>Catalog.</p>
 - `host` (String) <p>Host.</p>
@@ -596,7 +605,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--rds_parameters"></a>
 ### Nested Schema for `data_source_parameters.rds_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `instance_id` (String) <p>Instance ID.</p>
@@ -605,11 +614,14 @@ Optional:
 <a id="nestedatt--data_source_parameters--redshift_parameters"></a>
 ### Nested Schema for `data_source_parameters.redshift_parameters`
 
+Required:
+
+- `database` (String) <p>Database.</p>
+
 Optional:
 
 - `cluster_id` (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
             provided.</p>
-- `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
 - `port` (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
 
@@ -617,14 +629,14 @@ Optional:
 <a id="nestedatt--data_source_parameters--s3_parameters"></a>
 ### Nested Schema for `data_source_parameters.s3_parameters`
 
-Optional:
+Required:
 
 - `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters--manifest_file_location))
 
 <a id="nestedatt--data_source_parameters--s3_parameters--manifest_file_location"></a>
 ### Nested Schema for `data_source_parameters.s3_parameters.manifest_file_location`
 
-Optional:
+Required:
 
 - `bucket` (String) <p>Amazon S3 bucket.</p>
 - `key` (String) <p>Amazon S3 key that identifies an object.</p>
@@ -634,7 +646,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--snowflake_parameters"></a>
 ### Nested Schema for `data_source_parameters.snowflake_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -644,7 +656,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--spark_parameters"></a>
 ### Nested Schema for `data_source_parameters.spark_parameters`
 
-Optional:
+Required:
 
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
@@ -653,7 +665,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--sql_server_parameters"></a>
 ### Nested Schema for `data_source_parameters.sql_server_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -663,7 +675,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--teradata_parameters"></a>
 ### Nested Schema for `data_source_parameters.teradata_parameters`
 
-Optional:
+Required:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -683,7 +695,7 @@ Optional:
 <a id="nestedatt--permissions"></a>
 ### Nested Schema for `permissions`
 
-Optional:
+Required:
 
 - `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
 - `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
@@ -714,7 +726,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) <p>Tag key.</p>
 - `value` (String) <p>Tag value.</p>
@@ -723,7 +735,7 @@ Optional:
 <a id="nestedatt--vpc_connection_properties"></a>
 ### Nested Schema for `vpc_connection_properties`
 
-Optional:
+Required:
 
 - `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
 

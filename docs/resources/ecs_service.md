@@ -67,7 +67,7 @@ Optional:
 <a id="nestedatt--deployment_configuration--deployment_circuit_breaker"></a>
 ### Nested Schema for `deployment_configuration.deployment_circuit_breaker`
 
-Optional:
+Required:
 
 - `enable` (Boolean)
 - `rollback` (Boolean)
@@ -114,19 +114,25 @@ Optional:
 <a id="nestedatt--placement_constraints"></a>
 ### Nested Schema for `placement_constraints`
 
+Required:
+
+- `type` (String)
+
 Optional:
 
 - `expression` (String)
-- `type` (String)
 
 
 <a id="nestedatt--placement_strategies"></a>
 ### Nested Schema for `placement_strategies`
 
+Required:
+
+- `type` (String)
+
 Optional:
 
 - `field` (String)
-- `type` (String)
 
 
 <a id="nestedatt--service_registries"></a>

@@ -57,11 +57,14 @@ Resource Type definition for AWS::SageMaker::ModelPackage
 <a id="nestedatt--additional_inference_specification_definition"></a>
 ### Nested Schema for `additional_inference_specification_definition`
 
-Optional:
+Required:
 
 - `containers` (Attributes List) The Amazon ECR registry path of the Docker image that contains the inference code. (see [below for nested schema](#nestedatt--additional_inference_specification_definition--containers))
-- `description` (String) A description of the additional Inference specification.
 - `name` (String) A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.
+
+Optional:
+
+- `description` (String) A description of the additional Inference specification.
 - `supported_content_types` (List of String) The supported MIME types for the input data.
 - `supported_realtime_inference_instance_types` (List of String) A list of the instance types that are used to generate inferences in real-time
 - `supported_response_mime_types` (List of String) The supported MIME types for the output data.
@@ -70,13 +73,16 @@ Optional:
 <a id="nestedatt--additional_inference_specification_definition--containers"></a>
 ### Nested Schema for `additional_inference_specification_definition.containers`
 
+Required:
+
+- `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
+
 Optional:
 
 - `container_hostname` (String) The DNS host name for the Docker container.
 - `environment` (Map of String) Sets the environment variables in the Docker container
 - `framework` (String) The machine learning framework of the model package container image.
 - `framework_version` (String) The framework version of the Model Package Container Image.
-- `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
 - `image_digest` (String) An MD5 hash of the training algorithm that identifies the Docker image used for training.
 - `model_data_url` (String) A structure with Model Input details.
 - `model_input` (Attributes) (see [below for nested schema](#nestedatt--additional_inference_specification_definition--containers--model_input))
@@ -86,7 +92,7 @@ Optional:
 <a id="nestedatt--additional_inference_specification_definition--containers--model_input"></a>
 ### Nested Schema for `additional_inference_specification_definition.containers.model_input`
 
-Optional:
+Required:
 
 - `data_input_config` (String) The input configuration object for the model.
 
@@ -96,11 +102,14 @@ Optional:
 <a id="nestedatt--additional_inference_specifications"></a>
 ### Nested Schema for `additional_inference_specifications`
 
-Optional:
+Required:
 
 - `containers` (Attributes List) The Amazon ECR registry path of the Docker image that contains the inference code. (see [below for nested schema](#nestedatt--additional_inference_specifications--containers))
-- `description` (String) A description of the additional Inference specification.
 - `name` (String) A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.
+
+Optional:
+
+- `description` (String) A description of the additional Inference specification.
 - `supported_content_types` (List of String) The supported MIME types for the input data.
 - `supported_realtime_inference_instance_types` (List of String) A list of the instance types that are used to generate inferences in real-time
 - `supported_response_mime_types` (List of String) The supported MIME types for the output data.
@@ -109,13 +118,16 @@ Optional:
 <a id="nestedatt--additional_inference_specifications--containers"></a>
 ### Nested Schema for `additional_inference_specifications.containers`
 
+Required:
+
+- `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
+
 Optional:
 
 - `container_hostname` (String) The DNS host name for the Docker container.
 - `environment` (Map of String) Sets the environment variables in the Docker container
 - `framework` (String) The machine learning framework of the model package container image.
 - `framework_version` (String) The framework version of the Model Package Container Image.
-- `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
 - `image_digest` (String) An MD5 hash of the training algorithm that identifies the Docker image used for training.
 - `model_data_url` (String) A structure with Model Input details.
 - `model_input` (Attributes) (see [below for nested schema](#nestedatt--additional_inference_specifications--containers--model_input))
@@ -125,7 +137,7 @@ Optional:
 <a id="nestedatt--additional_inference_specifications--containers--model_input"></a>
 ### Nested Schema for `additional_inference_specifications.containers.model_input`
 
-Optional:
+Required:
 
 - `data_input_config` (String) The input configuration object for the model.
 
@@ -135,11 +147,14 @@ Optional:
 <a id="nestedatt--additional_inference_specifications_to_add"></a>
 ### Nested Schema for `additional_inference_specifications_to_add`
 
-Optional:
+Required:
 
 - `containers` (Attributes List) The Amazon ECR registry path of the Docker image that contains the inference code. (see [below for nested schema](#nestedatt--additional_inference_specifications_to_add--containers))
-- `description` (String) A description of the additional Inference specification.
 - `name` (String) A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.
+
+Optional:
+
+- `description` (String) A description of the additional Inference specification.
 - `supported_content_types` (List of String) The supported MIME types for the input data.
 - `supported_realtime_inference_instance_types` (List of String) A list of the instance types that are used to generate inferences in real-time
 - `supported_response_mime_types` (List of String) The supported MIME types for the output data.
@@ -148,13 +163,16 @@ Optional:
 <a id="nestedatt--additional_inference_specifications_to_add--containers"></a>
 ### Nested Schema for `additional_inference_specifications_to_add.containers`
 
+Required:
+
+- `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
+
 Optional:
 
 - `container_hostname` (String) The DNS host name for the Docker container.
 - `environment` (Map of String) Sets the environment variables in the Docker container
 - `framework` (String) The machine learning framework of the model package container image.
 - `framework_version` (String) The framework version of the Model Package Container Image.
-- `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
 - `image_digest` (String) An MD5 hash of the training algorithm that identifies the Docker image used for training.
 - `model_data_url` (String) A structure with Model Input details.
 - `model_input` (Attributes) (see [below for nested schema](#nestedatt--additional_inference_specifications_to_add--containers--model_input))
@@ -164,7 +182,7 @@ Optional:
 <a id="nestedatt--additional_inference_specifications_to_add--containers--model_input"></a>
 ### Nested Schema for `additional_inference_specifications_to_add.containers.model_input`
 
-Optional:
+Required:
 
 - `data_input_config` (String) The input configuration object for the model.
 
@@ -203,31 +221,40 @@ Optional:
 <a id="nestedatt--drift_check_baselines--bias--config_file"></a>
 ### Nested Schema for `drift_check_baselines.bias.config_file`
 
+Required:
+
+- `s3_uri` (String) The Amazon S3 URI for the file source.
+
 Optional:
 
 - `content_digest` (String) The digest of the file source.
 - `content_type` (String) The type of content stored in the file source.
-- `s3_uri` (String) The Amazon S3 URI for the file source.
 
 
 <a id="nestedatt--drift_check_baselines--bias--post_training_constraints"></a>
 ### Nested Schema for `drift_check_baselines.bias.post_training_constraints`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 <a id="nestedatt--drift_check_baselines--bias--pre_training_constraints"></a>
 ### Nested Schema for `drift_check_baselines.bias.pre_training_constraints`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 
@@ -242,21 +269,27 @@ Optional:
 <a id="nestedatt--drift_check_baselines--explainability--config_file"></a>
 ### Nested Schema for `drift_check_baselines.explainability.config_file`
 
+Required:
+
+- `s3_uri` (String) The Amazon S3 URI for the file source.
+
 Optional:
 
 - `content_digest` (String) The digest of the file source.
 - `content_type` (String) The type of content stored in the file source.
-- `s3_uri` (String) The Amazon S3 URI for the file source.
 
 
 <a id="nestedatt--drift_check_baselines--explainability--constraints"></a>
 ### Nested Schema for `drift_check_baselines.explainability.constraints`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 
@@ -271,21 +304,27 @@ Optional:
 <a id="nestedatt--drift_check_baselines--model_data_quality--constraints"></a>
 ### Nested Schema for `drift_check_baselines.model_data_quality.constraints`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 <a id="nestedatt--drift_check_baselines--model_data_quality--statistics"></a>
 ### Nested Schema for `drift_check_baselines.model_data_quality.statistics`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 
@@ -300,21 +339,27 @@ Optional:
 <a id="nestedatt--drift_check_baselines--model_quality--constraints"></a>
 ### Nested Schema for `drift_check_baselines.model_quality.constraints`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 <a id="nestedatt--drift_check_baselines--model_quality--statistics"></a>
 ### Nested Schema for `drift_check_baselines.model_quality.statistics`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 
@@ -322,16 +367,23 @@ Optional:
 <a id="nestedatt--inference_specification"></a>
 ### Nested Schema for `inference_specification`
 
-Optional:
+Required:
 
 - `containers` (Attributes List) The Amazon ECR registry path of the Docker image that contains the inference code. (see [below for nested schema](#nestedatt--inference_specification--containers))
 - `supported_content_types` (List of String) The supported MIME types for the input data.
-- `supported_realtime_inference_instance_types` (List of String) A list of the instance types that are used to generate inferences in real-time
 - `supported_response_mime_types` (List of String) The supported MIME types for the output data.
+
+Optional:
+
+- `supported_realtime_inference_instance_types` (List of String) A list of the instance types that are used to generate inferences in real-time
 - `supported_transform_instance_types` (List of String) A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.
 
 <a id="nestedatt--inference_specification--containers"></a>
 ### Nested Schema for `inference_specification.containers`
+
+Required:
+
+- `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
 
 Optional:
 
@@ -339,7 +391,6 @@ Optional:
 - `environment` (Map of String) Sets the environment variables in the Docker container
 - `framework` (String) The machine learning framework of the model package container image.
 - `framework_version` (String) The framework version of the Model Package Container Image.
-- `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
 - `image_digest` (String) An MD5 hash of the training algorithm that identifies the Docker image used for training.
 - `model_data_url` (String) A structure with Model Input details.
 - `model_input` (Attributes) (see [below for nested schema](#nestedatt--inference_specification--containers--model_input))
@@ -349,7 +400,7 @@ Optional:
 <a id="nestedatt--inference_specification--containers--model_input"></a>
 ### Nested Schema for `inference_specification.containers.model_input`
 
-Optional:
+Required:
 
 - `data_input_config` (String) The input configuration object for the model.
 
@@ -399,31 +450,40 @@ Optional:
 <a id="nestedatt--model_metrics--bias--post_training_report"></a>
 ### Nested Schema for `model_metrics.bias.post_training_report`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 <a id="nestedatt--model_metrics--bias--pre_training_report"></a>
 ### Nested Schema for `model_metrics.bias.pre_training_report`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 <a id="nestedatt--model_metrics--bias--report"></a>
 ### Nested Schema for `model_metrics.bias.report`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 
@@ -437,11 +497,14 @@ Optional:
 <a id="nestedatt--model_metrics--explainability--report"></a>
 ### Nested Schema for `model_metrics.explainability.report`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 
@@ -456,21 +519,27 @@ Optional:
 <a id="nestedatt--model_metrics--model_data_quality--constraints"></a>
 ### Nested Schema for `model_metrics.model_data_quality.constraints`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 <a id="nestedatt--model_metrics--model_data_quality--statistics"></a>
 ### Nested Schema for `model_metrics.model_data_quality.statistics`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 
@@ -485,21 +554,27 @@ Optional:
 <a id="nestedatt--model_metrics--model_quality--constraints"></a>
 ### Nested Schema for `model_metrics.model_quality.constraints`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 <a id="nestedatt--model_metrics--model_quality--statistics"></a>
 ### Nested Schema for `model_metrics.model_quality.statistics`
 
+Required:
+
+- `content_type` (String) The type of content stored in the metric source.
+- `s3_uri` (String) The Amazon S3 URI for the metric source.
+
 Optional:
 
 - `content_digest` (String) The digest of the metric source.
-- `content_type` (String) The type of content stored in the metric source.
-- `s3_uri` (String) The Amazon S3 URI for the metric source.
 
 
 
@@ -507,55 +582,70 @@ Optional:
 <a id="nestedatt--model_package_status_details"></a>
 ### Nested Schema for `model_package_status_details`
 
+Required:
+
+- `validation_statuses` (Attributes List) (see [below for nested schema](#nestedatt--model_package_status_details--validation_statuses))
+
 Optional:
 
 - `image_scan_statuses` (Attributes List) (see [below for nested schema](#nestedatt--model_package_status_details--image_scan_statuses))
-- `validation_statuses` (Attributes List) (see [below for nested schema](#nestedatt--model_package_status_details--validation_statuses))
-
-<a id="nestedatt--model_package_status_details--image_scan_statuses"></a>
-### Nested Schema for `model_package_status_details.image_scan_statuses`
-
-Optional:
-
-- `failure_reason` (String) If the overall status is Failed, the reason for the failure.
-- `name` (String) The name of the model package for which the overall status is being reported.
-- `status` (String) The current status.
-
 
 <a id="nestedatt--model_package_status_details--validation_statuses"></a>
 ### Nested Schema for `model_package_status_details.validation_statuses`
 
+Required:
+
+- `name` (String) The name of the model package for which the overall status is being reported.
+- `status` (String) The current status.
+
 Optional:
 
 - `failure_reason` (String) If the overall status is Failed, the reason for the failure.
+
+
+<a id="nestedatt--model_package_status_details--image_scan_statuses"></a>
+### Nested Schema for `model_package_status_details.image_scan_statuses`
+
+Required:
+
 - `name` (String) The name of the model package for which the overall status is being reported.
 - `status` (String) The current status.
+
+Optional:
+
+- `failure_reason` (String) If the overall status is Failed, the reason for the failure.
 
 
 
 <a id="nestedatt--model_package_status_item"></a>
 ### Nested Schema for `model_package_status_item`
 
+Required:
+
+- `name` (String) The name of the model package for which the overall status is being reported.
+- `status` (String) The current status.
+
 Optional:
 
 - `failure_reason` (String) If the overall status is Failed, the reason for the failure.
-- `name` (String) The name of the model package for which the overall status is being reported.
-- `status` (String) The current status.
 
 
 <a id="nestedatt--source_algorithm_specification"></a>
 ### Nested Schema for `source_algorithm_specification`
 
-Optional:
+Required:
 
 - `source_algorithms` (Attributes List) A list of algorithms that were used to create a model package. (see [below for nested schema](#nestedatt--source_algorithm_specification--source_algorithms))
 
 <a id="nestedatt--source_algorithm_specification--source_algorithms"></a>
 ### Nested Schema for `source_algorithm_specification.source_algorithms`
 
-Optional:
+Required:
 
 - `algorithm_name` (String) The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.
+
+Optional:
+
 - `model_data_url` (String) The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
 
 
@@ -563,7 +653,7 @@ Optional:
 <a id="nestedatt--tag"></a>
 ### Nested Schema for `tag`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -572,7 +662,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -581,7 +671,7 @@ Optional:
 <a id="nestedatt--validation_specification"></a>
 ### Nested Schema for `validation_specification`
 
-Optional:
+Required:
 
 - `validation_profiles` (Attributes List) (see [below for nested schema](#nestedatt--validation_specification--validation_profiles))
 - `validation_role` (String) The IAM roles to be used for the validation of the model package.
@@ -589,7 +679,7 @@ Optional:
 <a id="nestedatt--validation_specification--validation_profiles"></a>
 ### Nested Schema for `validation_specification.validation_profiles`
 
-Optional:
+Required:
 
 - `profile_name` (String) The name of the profile for the model package.
 - `transform_job_definition` (Attributes) Defines the input needed to run a transform job using the inference specification specified in the algorithm. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition))
@@ -597,37 +687,43 @@ Optional:
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition"></a>
 ### Nested Schema for `validation_specification.validation_profiles.transform_job_definition`
 
+Required:
+
+- `transform_input` (Attributes) Describes the input source of a transform job and the way the transform job consumes it. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input))
+- `transform_output` (Attributes) Describes the results of a transform job. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_output))
+- `transform_resources` (Attributes) Describes the resources, including ML instance types and ML instance count, to use for transform job. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources))
+
 Optional:
 
 - `batch_strategy` (String) A string that determines the number of records included in a single mini-batch.
 - `environment` (Map of String) Sets the environment variables in the Docker container
 - `max_concurrent_transforms` (Number) The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.
 - `max_payload_in_mb` (Number) The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).
-- `transform_input` (Attributes) Describes the input source of a transform job and the way the transform job consumes it. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input))
-- `transform_output` (Attributes) Describes the results of a transform job. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_output))
-- `transform_resources` (Attributes) Describes the resources, including ML instance types and ML instance count, to use for transform job. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources))
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb`
+
+Required:
+
+- `data_source` (Attributes) Describes the input source of a transform job and the way the transform job consumes it. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--max_payload_in_mb--data_source))
 
 Optional:
 
 - `compression_type` (String) If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.
 - `content_type` (String) The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.
-- `data_source` (Attributes) Describes the input source of a transform job and the way the transform job consumes it. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources--data_source))
 - `split_type` (String) The method to use to split the transform job's data files into smaller batches.
 
-<a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources--data_source"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources.data_source`
+<a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--max_payload_in_mb--data_source"></a>
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb.data_source`
 
-Optional:
+Required:
 
-- `s3_data_source` (Attributes) Describes the S3 data source. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources--data_source--s3_data_source))
+- `s3_data_source` (Attributes) Describes the S3 data source. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--max_payload_in_mb--data_source--s3_data_source))
 
-<a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources--data_source--s3_data_source"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources.data_source.s3_data_source`
+<a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--max_payload_in_mb--data_source--s3_data_source"></a>
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb.data_source.s3_data_source`
 
-Optional:
+Required:
 
 - `s3_data_type` (String) The S3 Data Source Type
 - `s3_uri` (String) Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.
@@ -636,23 +732,29 @@ Optional:
 
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_output"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb`
+
+Required:
+
+- `s3_output_path` (String) The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.
 
 Optional:
 
 - `accept` (String) The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.
 - `assemble_with` (String) Defines how to assemble the results of the transform job as a single S3 object.
 - `kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
-- `s3_output_path` (String) The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.
 
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb`
 
-Optional:
+Required:
 
 - `instance_count` (Number) The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.
 - `instance_type` (String) The ML compute instance type for the transform job.
+
+Optional:
+
 - `volume_kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.
 
 ## Import

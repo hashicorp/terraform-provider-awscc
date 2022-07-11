@@ -83,7 +83,7 @@ Optional:
 <a id="nestedatt--schedule"></a>
 ### Nested Schema for `schedule`
 
-Optional:
+Required:
 
 - `schedule_expression` (String) A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location
 
@@ -91,7 +91,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.

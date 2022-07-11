@@ -33,17 +33,23 @@ A security profile defines a set of expected behaviors for devices in your accou
 <a id="nestedatt--additional_metrics_to_retain_v2"></a>
 ### Nested Schema for `additional_metrics_to_retain_v2`
 
-Optional:
+Required:
 
 - `metric` (String) What is measured by the behavior.
+
+Optional:
+
 - `metric_dimension` (Attributes) The dimension of a metric. (see [below for nested schema](#nestedatt--additional_metrics_to_retain_v2--metric_dimension))
 
 <a id="nestedatt--additional_metrics_to_retain_v2--metric_dimension"></a>
 ### Nested Schema for `additional_metrics_to_retain_v2.metric_dimension`
 
-Optional:
+Required:
 
 - `dimension_name` (String) A unique identifier for the dimension.
+
+Optional:
+
 - `operator` (String) Defines how the dimensionValues of a dimension are interpreted.
 
 
@@ -60,12 +66,15 @@ Optional:
 <a id="nestedatt--behaviors"></a>
 ### Nested Schema for `behaviors`
 
+Required:
+
+- `name` (String) The name for the behavior.
+
 Optional:
 
 - `criteria` (Attributes) The criteria by which the behavior is determined to be normal. (see [below for nested schema](#nestedatt--behaviors--criteria))
 - `metric` (String) What is measured by the behavior.
 - `metric_dimension` (Attributes) The dimension of a metric. (see [below for nested schema](#nestedatt--behaviors--metric_dimension))
-- `name` (String) The name for the behavior.
 - `suppress_alerts` (Boolean) Manage Detect alarm SNS notifications by setting behavior notification to on or suppressed. Detect will continue to performing device behavior evaluations. However, suppressed alarms wouldn't be forwarded for SNS notification.
 
 <a id="nestedatt--behaviors--criteria"></a>
@@ -114,9 +123,12 @@ Optional:
 <a id="nestedatt--behaviors--metric_dimension"></a>
 ### Nested Schema for `behaviors.metric_dimension`
 
-Optional:
+Required:
 
 - `dimension_name` (String) A unique identifier for the dimension.
+
+Optional:
+
 - `operator` (String) Defines how the dimensionValues of a dimension are interpreted.
 
 
@@ -124,7 +136,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The tag's key.
 - `value` (String) The tag's value.

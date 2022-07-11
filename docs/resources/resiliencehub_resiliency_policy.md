@@ -35,7 +35,7 @@ Resource Type Definition for Resiliency Policy.
 <a id="nestedatt--policy"></a>
 ### Nested Schema for `policy`
 
-Required:
+Optional:
 
 - `rpo_in_secs` (Number) RPO in seconds.
 - `rto_in_secs` (Number) RTO in seconds.

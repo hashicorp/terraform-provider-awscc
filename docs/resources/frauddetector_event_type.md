@@ -37,7 +37,7 @@ A resource schema for an EventType in Amazon Fraud Detector.
 <a id="nestedatt--entity_types"></a>
 ### Nested Schema for `entity_types`
 
-Required:
+Optional:
 
 - `arn` (String)
 - `created_time` (String) The time when the event type was created.
@@ -60,7 +60,7 @@ Required:
 <a id="nestedatt--event_variables"></a>
 ### Nested Schema for `event_variables`
 
-Required:
+Optional:
 
 - `arn` (String)
 - `created_time` (String) The time when the event type was created.
@@ -87,7 +87,7 @@ Required:
 <a id="nestedatt--labels"></a>
 ### Nested Schema for `labels`
 
-Required:
+Optional:
 
 - `arn` (String)
 - `created_time` (String) The time when the event type was created.
@@ -110,7 +110,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

@@ -45,13 +45,16 @@ The AWS::GameLift::GameServerGroup resource creates an Amazon GameLift (GameLift
 Required:
 
 - `instance_type` (String) An EC2 instance type designation.
+
+Optional:
+
 - `weighted_capacity` (String) Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.
 
 
 <a id="nestedatt--launch_template"></a>
 ### Nested Schema for `launch_template`
 
-Required:
+Optional:
 
 - `launch_template_id` (String) A unique identifier for an existing EC2 launch template.
 - `launch_template_name` (String) A readable identifier for an existing EC2 launch template.
@@ -61,15 +64,18 @@ Required:
 <a id="nestedatt--auto_scaling_policy"></a>
 ### Nested Schema for `auto_scaling_policy`
 
+Required:
+
+- `target_tracking_configuration` (Attributes) Settings for a target-based scaling policy applied to Auto Scaling group. (see [below for nested schema](#nestedatt--auto_scaling_policy--target_tracking_configuration))
+
 Optional:
 
 - `estimated_instance_warmup` (Number) Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.
-- `target_tracking_configuration` (Attributes) Settings for a target-based scaling policy applied to Auto Scaling group. (see [below for nested schema](#nestedatt--auto_scaling_policy--target_tracking_configuration))
 
 <a id="nestedatt--auto_scaling_policy--target_tracking_configuration"></a>
 ### Nested Schema for `auto_scaling_policy.target_tracking_configuration`
 
-Optional:
+Required:
 
 - `target_value` (Number) Desired value to use with a game server group target-based scaling policy.
 

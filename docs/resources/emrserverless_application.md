@@ -56,7 +56,7 @@ Optional:
 <a id="nestedatt--initial_capacity"></a>
 ### Nested Schema for `initial_capacity`
 
-Optional:
+Required:
 
 - `key` (String) Worker type for an analytics framework.
 - `value` (Attributes) (see [below for nested schema](#nestedatt--initial_capacity--value))
@@ -64,7 +64,7 @@ Optional:
 <a id="nestedatt--initial_capacity--value"></a>
 ### Nested Schema for `initial_capacity.value`
 
-Optional:
+Required:
 
 - `worker_configuration` (Attributes) (see [below for nested schema](#nestedatt--initial_capacity--value--worker_configuration))
 - `worker_count` (Number) Initial count of workers to be initialized when an Application is started. This count will be continued to be maintained until the Application is stopped
@@ -72,11 +72,14 @@ Optional:
 <a id="nestedatt--initial_capacity--value--worker_configuration"></a>
 ### Nested Schema for `initial_capacity.value.worker_configuration`
 
-Optional:
+Required:
 
 - `cpu` (String) Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.
-- `disk` (String) Per worker Disk resource. GB is the only supported unit and specifying GB is optional
 - `memory` (String) Per worker memory resource. GB is the only supported unit and specifying GB is optional.
+
+Optional:
+
+- `disk` (String) Per worker Disk resource. GB is the only supported unit and specifying GB is optional
 
 
 
@@ -84,11 +87,14 @@ Optional:
 <a id="nestedatt--maximum_capacity"></a>
 ### Nested Schema for `maximum_capacity`
 
-Optional:
+Required:
 
 - `cpu` (String) Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.
-- `disk` (String) Per worker Disk resource. GB is the only supported unit and specifying GB is optional
 - `memory` (String) Per worker memory resource. GB is the only supported unit and specifying GB is optional.
+
+Optional:
+
+- `disk` (String) Per worker Disk resource. GB is the only supported unit and specifying GB is optional
 
 
 <a id="nestedatt--network_configuration"></a>
@@ -103,7 +109,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The value for the tag. You can specify a value that is 1 to 128 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

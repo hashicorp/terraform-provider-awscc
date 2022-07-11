@@ -29,11 +29,14 @@ Resource Type definition for AWS::CloudFront::OriginRequestPolicy
 
 Required:
 
-- `comment` (String)
 - `cookies_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--cookies_config))
 - `headers_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--headers_config))
 - `name` (String)
 - `query_strings_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--query_strings_config))
+
+Optional:
+
+- `comment` (String)
 
 <a id="nestedatt--origin_request_policy_config--cookies_config"></a>
 ### Nested Schema for `origin_request_policy_config.cookies_config`
@@ -41,6 +44,9 @@ Required:
 Required:
 
 - `cookie_behavior` (String)
+
+Optional:
+
 - `cookies` (List of String)
 
 
@@ -50,6 +56,9 @@ Required:
 Required:
 
 - `header_behavior` (String)
+
+Optional:
+
 - `headers` (List of String)
 
 
@@ -59,6 +68,9 @@ Required:
 Required:
 
 - `query_string_behavior` (String)
+
+Optional:
+
 - `query_strings` (List of String)
 
 ## Import

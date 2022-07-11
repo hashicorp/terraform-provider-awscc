@@ -39,9 +39,12 @@ Create and manage Multicast groups.
 Required:
 
 - `dl_class` (String) Multicast group LoRaWAN DL Class
+- `rf_region` (String) Multicast group LoRaWAN RF region
+
+Read-Only:
+
 - `number_of_devices_in_group` (Number) Multicast group number of devices in group. Returned after successful read.
 - `number_of_devices_requested` (Number) Multicast group number of devices requested. Returned after successful read.
-- `rf_region` (String) Multicast group LoRaWAN RF region
 
 
 <a id="nestedatt--tags"></a>

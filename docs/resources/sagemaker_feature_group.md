@@ -46,29 +46,35 @@ Required:
 <a id="nestedatt--offline_store_config"></a>
 ### Nested Schema for `offline_store_config`
 
+Required:
+
+- `s3_storage_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--s3_storage_config))
+
 Optional:
 
 - `data_catalog_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--data_catalog_config))
 - `disable_glue_table_creation` (Boolean)
-- `s3_storage_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--s3_storage_config))
-
-<a id="nestedatt--offline_store_config--data_catalog_config"></a>
-### Nested Schema for `offline_store_config.data_catalog_config`
-
-Optional:
-
-- `catalog` (String)
-- `database` (String)
-- `table_name` (String)
-
 
 <a id="nestedatt--offline_store_config--s3_storage_config"></a>
 ### Nested Schema for `offline_store_config.s3_storage_config`
 
+Required:
+
+- `s3_uri` (String)
+
 Optional:
 
 - `kms_key_id` (String)
-- `s3_uri` (String)
+
+
+<a id="nestedatt--offline_store_config--data_catalog_config"></a>
+### Nested Schema for `offline_store_config.data_catalog_config`
+
+Required:
+
+- `catalog` (String)
+- `database` (String)
+- `table_name` (String)
 
 
 
@@ -92,7 +98,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

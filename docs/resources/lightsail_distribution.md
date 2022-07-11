@@ -41,7 +41,7 @@ Resource Type definition for AWS::Lightsail::Distribution
 <a id="nestedatt--default_cache_behavior"></a>
 ### Nested Schema for `default_cache_behavior`
 
-Required:
+Optional:
 
 - `behavior` (String) The cache behavior of the distribution.
 
@@ -49,7 +49,7 @@ Required:
 <a id="nestedatt--origin"></a>
 ### Nested Schema for `origin`
 
-Required:
+Optional:
 
 - `name` (String) The name of the origin resource.
 - `protocol_policy` (String) The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
@@ -110,9 +110,12 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+Optional:
+
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import

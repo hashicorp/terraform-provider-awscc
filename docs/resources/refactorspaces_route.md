@@ -38,7 +38,7 @@ Definition of AWS::RefactorSpaces::Route Resource Type
 <a id="nestedatt--default_route"></a>
 ### Nested Schema for `default_route`
 
-Optional:
+Required:
 
 - `activation_state` (String)
 
@@ -46,7 +46,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) A string used to identify this tag
 - `value` (String) A string containing the value for the tag
@@ -55,9 +55,12 @@ Optional:
 <a id="nestedatt--uri_path_route"></a>
 ### Nested Schema for `uri_path_route`
 
-Optional:
+Required:
 
 - `activation_state` (String)
+
+Optional:
+
 - `include_child_paths` (Boolean)
 - `methods` (List of String)
 - `source_path` (String)

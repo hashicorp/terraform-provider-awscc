@@ -33,12 +33,15 @@ Resource Type definition for AWS::SSMContacts::Contact
 Required:
 
 - `duration_in_minutes` (Number) The time to wait until beginning the next stage.
+
+Optional:
+
 - `targets` (Attributes List) The contacts or contact methods that the escalation plan or engagement plan is engaging. (see [below for nested schema](#nestedatt--plan--targets))
 
 <a id="nestedatt--plan--targets"></a>
 ### Nested Schema for `plan.targets`
 
-Required:
+Optional:
 
 - `channel_target_info` (Attributes) Information about the contact channel that SSM Incident Manager uses to engage the contact. (see [below for nested schema](#nestedatt--plan--targets--channel_target_info))
 - `contact_target_info` (Attributes) The contact that SSM Incident Manager is engaging during an incident. (see [below for nested schema](#nestedatt--plan--targets--contact_target_info))

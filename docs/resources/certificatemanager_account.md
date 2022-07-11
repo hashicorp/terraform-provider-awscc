@@ -27,7 +27,7 @@ Resource schema for AWS::CertificateManager::Account.
 <a id="nestedatt--expiry_events_configuration"></a>
 ### Nested Schema for `expiry_events_configuration`
 
-Required:
+Optional:
 
 - `days_before_expiry` (Number)
 

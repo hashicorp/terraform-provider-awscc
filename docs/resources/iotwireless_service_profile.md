@@ -32,6 +32,9 @@ An example resource schema demonstrating some basic constructs and validation ru
 Optional:
 
 - `add_gw_metadata` (Boolean)
+
+Read-Only:
+
 - `channel_mask` (String)
 - `dev_status_req_freq` (Number)
 - `dl_bucket_size` (Number)

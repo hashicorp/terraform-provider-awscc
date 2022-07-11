@@ -52,7 +52,7 @@ Note: It is not currently possible to use the !Ref command to reference a script
 <a id="nestedatt--certificate_configuration"></a>
 ### Nested Schema for `certificate_configuration`
 
-Optional:
+Required:
 
 - `certificate_type` (String)
 
@@ -60,7 +60,7 @@ Optional:
 <a id="nestedatt--ec2_inbound_permissions"></a>
 ### Nested Schema for `ec2_inbound_permissions`
 
-Optional:
+Required:
 
 - `from_port` (Number) A starting value for a range of allowed port numbers.
 - `ip_range` (String) A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: "000.000.000.000/[subnet mask]" or optionally the shortened version "0.0.0.0/[subnet mask]".
@@ -71,15 +71,18 @@ Optional:
 <a id="nestedatt--locations"></a>
 ### Nested Schema for `locations`
 
-Optional:
+Required:
 
 - `location` (String)
+
+Optional:
+
 - `location_capacity` (Attributes) Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region. (see [below for nested schema](#nestedatt--locations--location_capacity))
 
 <a id="nestedatt--locations--location_capacity"></a>
 ### Nested Schema for `locations.location_capacity`
 
-Optional:
+Required:
 
 - `desired_ec2_instances` (Number) The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.
 - `max_size` (Number) The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to "1". Once the fleet is active, you can change this value.
@@ -108,7 +111,7 @@ Optional:
 <a id="nestedatt--runtime_configuration--server_processes"></a>
 ### Nested Schema for `runtime_configuration.server_processes`
 
-Optional:
+Required:
 
 - `concurrent_executions` (Number) The number of server processes that use this configuration to run concurrently on an instance.
 - `launch_path` (String) The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:
@@ -116,6 +119,9 @@ Optional:
 Windows (for custom game builds only): C:\game. Example: "C:\game\MyGame\server.exe"
 
 Linux: /local/game. Examples: "/local/game/MyGame/server.exe" or "/local/game/MyRealtimeScript.js"
+
+Optional:
+
 - `parameters` (String) An optional list of parameters to pass to the server executable or Realtime script on launch.
 
 ## Import

@@ -83,9 +83,12 @@ Optional:
 
 Optional:
 
-- `cloudwatch_log_group_arn` (String)
 - `enabled` (Boolean)
 - `log_level` (String)
+
+Read-Only:
+
+- `cloudwatch_log_group_arn` (String)
 
 
 <a id="nestedatt--logging_configuration--scheduler_logs"></a>
@@ -93,9 +96,12 @@ Optional:
 
 Optional:
 
-- `cloudwatch_log_group_arn` (String)
 - `enabled` (Boolean)
 - `log_level` (String)
+
+Read-Only:
+
+- `cloudwatch_log_group_arn` (String)
 
 
 <a id="nestedatt--logging_configuration--task_logs"></a>
@@ -103,9 +109,12 @@ Optional:
 
 Optional:
 
-- `cloudwatch_log_group_arn` (String)
 - `enabled` (Boolean)
 - `log_level` (String)
+
+Read-Only:
+
+- `cloudwatch_log_group_arn` (String)
 
 
 <a id="nestedatt--logging_configuration--webserver_logs"></a>
@@ -113,9 +122,12 @@ Optional:
 
 Optional:
 
-- `cloudwatch_log_group_arn` (String)
 - `enabled` (Boolean)
 - `log_level` (String)
+
+Read-Only:
+
+- `cloudwatch_log_group_arn` (String)
 
 
 <a id="nestedatt--logging_configuration--worker_logs"></a>
@@ -123,9 +135,12 @@ Optional:
 
 Optional:
 
-- `cloudwatch_log_group_arn` (String)
 - `enabled` (Boolean)
 - `log_level` (String)
+
+Read-Only:
+
+- `cloudwatch_log_group_arn` (String)
 
 
 

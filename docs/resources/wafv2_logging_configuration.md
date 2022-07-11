@@ -33,7 +33,7 @@ A WAFv2 Logging Configuration Resource Provider
 <a id="nestedatt--logging_filter"></a>
 ### Nested Schema for `logging_filter`
 
-Optional:
+Required:
 
 - `default_behavior` (String) Default handling for logs that don't match any of the specified filtering conditions.
 - `filters` (Attributes List) The filters that you want to apply to the logs. (see [below for nested schema](#nestedatt--logging_filter--filters))
@@ -41,7 +41,7 @@ Optional:
 <a id="nestedatt--logging_filter--filters"></a>
 ### Nested Schema for `logging_filter.filters`
 
-Optional:
+Required:
 
 - `behavior` (String) How to handle logs that satisfy the filter's conditions and requirement.
 - `conditions` (Attributes List) Match conditions for the filter. (see [below for nested schema](#nestedatt--logging_filter--filters--conditions))
@@ -58,7 +58,7 @@ Optional:
 <a id="nestedatt--logging_filter--filters--conditions--action_condition"></a>
 ### Nested Schema for `logging_filter.filters.conditions.label_name_condition`
 
-Optional:
+Required:
 
 - `action` (String) Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.
 
@@ -66,7 +66,7 @@ Optional:
 <a id="nestedatt--logging_filter--filters--conditions--label_name_condition"></a>
 ### Nested Schema for `logging_filter.filters.conditions.label_name_condition`
 
-Optional:
+Required:
 
 - `label_name` (String) The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label.
 
@@ -88,11 +88,14 @@ Optional:
 <a id="nestedatt--redacted_fields--json_body"></a>
 ### Nested Schema for `redacted_fields.json_body`
 
+Required:
+
+- `match_pattern` (Attributes) The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. (see [below for nested schema](#nestedatt--redacted_fields--json_body--match_pattern))
+- `match_scope` (String) The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values.
+
 Optional:
 
 - `invalid_fallback_behavior` (String) What AWS WAF should do if it fails to completely parse the JSON body.
-- `match_pattern` (Attributes) The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. (see [below for nested schema](#nestedatt--redacted_fields--json_body--match_pattern))
-- `match_scope` (String) The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values.
 
 <a id="nestedatt--redacted_fields--json_body--match_pattern"></a>
 ### Nested Schema for `redacted_fields.json_body.match_pattern`
@@ -107,7 +110,7 @@ Optional:
 <a id="nestedatt--redacted_fields--single_header"></a>
 ### Nested Schema for `redacted_fields.single_header`
 
-Optional:
+Required:
 
 - `name` (String) The name of the query header to inspect.
 

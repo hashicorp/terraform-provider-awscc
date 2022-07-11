@@ -43,8 +43,11 @@ Creates an AWS Firewall Manager policy.
 
 Required:
 
-- `managed_service_data` (String)
 - `type` (String)
+
+Optional:
+
+- `managed_service_data` (String)
 
 
 <a id="nestedatt--exclude_map"></a>
@@ -68,16 +71,19 @@ Optional:
 <a id="nestedatt--resource_tags"></a>
 ### Nested Schema for `resource_tags`
 
-Optional:
+Required:
 
 - `key` (String)
+
+Optional:
+
 - `value` (String)
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

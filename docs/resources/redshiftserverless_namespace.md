@@ -40,7 +40,7 @@ Definition of AWS::RedshiftServerless::Namespace Resource Type
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -49,7 +49,7 @@ Optional:
 <a id="nestedatt--namespace"></a>
 ### Nested Schema for `namespace`
 
-Read-Only:
+Optional:
 
 - `admin_username` (String)
 - `creation_date` (String)

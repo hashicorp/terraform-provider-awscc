@@ -40,23 +40,26 @@ A resource schema for a Detector in Amazon Fraud Detector.
 <a id="nestedatt--event_type"></a>
 ### Nested Schema for `event_type`
 
-Required:
+Optional:
 
-- `arn` (String) The ARN of the event type.
-- `created_time` (String) The time when the event type was created.
 - `description` (String) The description of the event type.
 - `entity_types` (Attributes List) (see [below for nested schema](#nestedatt--event_type--entity_types))
 - `event_variables` (Attributes List) (see [below for nested schema](#nestedatt--event_type--event_variables))
 - `inline` (Boolean)
 - `labels` (Attributes List) (see [below for nested schema](#nestedatt--event_type--labels))
-- `last_updated_time` (String) The time when the event type was last updated.
 - `name` (String) The name for the event type
 - `tags` (Attributes List) Tags associated with this event type. (see [below for nested schema](#nestedatt--event_type--tags))
+
+Read-Only:
+
+- `arn` (String) The ARN of the event type.
+- `created_time` (String) The time when the event type was created.
+- `last_updated_time` (String) The time when the event type was last updated.
 
 <a id="nestedatt--event_type--entity_types"></a>
 ### Nested Schema for `event_type.entity_types`
 
-Required:
+Optional:
 
 - `arn` (String)
 - `created_time` (String) The time when the entity type was created.
@@ -79,7 +82,7 @@ Required:
 <a id="nestedatt--event_type--event_variables"></a>
 ### Nested Schema for `event_type.event_variables`
 
-Required:
+Optional:
 
 - `arn` (String)
 - `created_time` (String) The time when the event variable was created.
@@ -106,7 +109,7 @@ Required:
 <a id="nestedatt--event_type--labels"></a>
 ### Nested Schema for `event_type.labels`
 
-Required:
+Optional:
 
 - `arn` (String)
 - `created_time` (String) The time when the label was created.
@@ -139,7 +142,7 @@ Required:
 <a id="nestedatt--rules"></a>
 ### Nested Schema for `rules`
 
-Required:
+Optional:
 
 - `arn` (String)
 - `created_time` (String) The time when the event type was created.
@@ -156,7 +159,7 @@ Required:
 <a id="nestedatt--rules--outcomes"></a>
 ### Nested Schema for `rules.outcomes`
 
-Required:
+Optional:
 
 - `arn` (String)
 - `created_time` (String) The time when the outcome was created.
@@ -197,7 +200,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

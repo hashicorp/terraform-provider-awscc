@@ -41,6 +41,10 @@ Resource Type definition for AWS::ApiGateway::Method
 <a id="nestedatt--integration"></a>
 ### Nested Schema for `integration`
 
+Required:
+
+- `type` (String) The type of backend that your method is running.
+
 Optional:
 
 - `cache_key_parameters` (List of String) A list of request parameters whose values API Gateway caches.
@@ -55,11 +59,14 @@ Optional:
 - `request_parameters` (Map of String) The request parameters that API Gateway sends with the backend request.
 - `request_templates` (Map of String) A map of Apache Velocity templates that are applied on the request payload.
 - `timeout_in_millis` (Number) Custom timeout between 50 and 29,000 milliseconds.
-- `type` (String) The type of backend that your method is running.
 - `uri` (String) The Uniform Resource Identifier (URI) for the integration.
 
 <a id="nestedatt--integration--integration_responses"></a>
 ### Nested Schema for `integration.integration_responses`
+
+Required:
+
+- `status_code` (String) The status code that API Gateway uses to map the integration response to a MethodResponse status code.
 
 Optional:
 
@@ -67,18 +74,20 @@ Optional:
 - `response_parameters` (Map of String) The response parameters from the backend response that API Gateway sends to the method response.
 - `response_templates` (Map of String) The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.
 - `selection_pattern` (String) A regular expression that specifies which error strings or status codes from the backend map to the integration response.
-- `status_code` (String) The status code that API Gateway uses to map the integration response to a MethodResponse status code.
 
 
 
 <a id="nestedatt--method_responses"></a>
 ### Nested Schema for `method_responses`
 
+Required:
+
+- `status_code` (String) The method response's status code, which you map to an IntegrationResponse.
+
 Optional:
 
 - `response_models` (Map of String) The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.
 - `response_parameters` (Map of Boolean) Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value.
-- `status_code` (String) The method response's status code, which you map to an IntegrationResponse.
 
 ## Import
 

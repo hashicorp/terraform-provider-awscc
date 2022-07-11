@@ -43,7 +43,7 @@ Updating InstanceTenancy requires no replacement only if you are updating its va
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

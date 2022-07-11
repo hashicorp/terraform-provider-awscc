@@ -39,8 +39,11 @@ Resource Type definition for AWS::SageMaker::Project
 
 Required:
 
-- `path_id` (String) The path identifier of the product.
 - `product_id` (String) Service Catalog product identifier.
+
+Optional:
+
+- `path_id` (String) The path identifier of the product.
 - `provisioning_artifact_id` (String) The identifier of the provisioning artifact (also known as a version).
 - `provisioning_parameters` (Attributes List) Parameters specified by the administrator that are required for provisioning the product. (see [below for nested schema](#nestedatt--service_catalog_provisioning_details--provisioning_parameters))
 
@@ -57,7 +60,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -66,7 +69,7 @@ Optional:
 <a id="nestedatt--service_catalog_provisioned_product_details"></a>
 ### Nested Schema for `service_catalog_provisioned_product_details`
 
-Read-Only:
+Optional:
 
 - `provisioned_product_id` (String) The identifier of the provisioning artifact (also known as a version).
 - `provisioned_product_status_message` (String) Provisioned Product Status Message

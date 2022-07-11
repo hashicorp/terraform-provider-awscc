@@ -35,7 +35,7 @@ Definition of AWS::RolesAnywhere::Profile Resource Type
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

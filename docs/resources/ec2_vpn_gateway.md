@@ -32,7 +32,7 @@ Schema for EC2 VPN Gateway
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

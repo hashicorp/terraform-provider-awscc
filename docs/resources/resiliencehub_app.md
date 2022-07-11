@@ -38,9 +38,12 @@ Resource Type Definition for AWS::ResilienceHub::App.
 
 Required:
 
-- `logical_stack_name` (String)
 - `mapping_type` (String)
 - `physical_resource_id` (Attributes) (see [below for nested schema](#nestedatt--resource_mappings--physical_resource_id))
+
+Optional:
+
+- `logical_stack_name` (String)
 - `resource_name` (String)
 - `terraform_source_name` (String)
 
@@ -49,10 +52,13 @@ Required:
 
 Required:
 
-- `aws_account_id` (String)
-- `aws_region` (String)
 - `identifier` (String)
 - `type` (String)
+
+Optional:
+
+- `aws_account_id` (String)
+- `aws_region` (String)
 
 ## Import
 

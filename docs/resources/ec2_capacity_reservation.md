@@ -51,7 +51,7 @@ Optional:
 <a id="nestedatt--tag_specifications--tags"></a>
 ### Nested Schema for `tag_specifications.tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

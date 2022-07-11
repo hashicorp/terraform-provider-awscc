@@ -35,7 +35,7 @@ Resource Type definition for AWS::CloudFront::Function
 <a id="nestedatt--function_config"></a>
 ### Nested Schema for `function_config`
 
-Optional:
+Required:
 
 - `comment` (String)
 - `runtime` (String)
@@ -44,7 +44,7 @@ Optional:
 <a id="nestedatt--function_metadata"></a>
 ### Nested Schema for `function_metadata`
 
-Optional:
+Read-Only:
 
 - `function_arn` (String)
 

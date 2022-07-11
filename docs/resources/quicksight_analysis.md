@@ -49,7 +49,7 @@ Definition of the AWS::QuickSight::Analysis Resource Type.
 <a id="nestedatt--source_entity"></a>
 ### Nested Schema for `source_entity`
 
-Required:
+Optional:
 
 - `source_template` (Attributes) <p>The source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
 
@@ -94,7 +94,7 @@ Optional:
 <a id="nestedatt--parameters--date_time_parameters"></a>
 ### Nested Schema for `parameters.date_time_parameters`
 
-Optional:
+Required:
 
 - `name` (String) <p>A display name for the date-time parameter.</p>
 - `values` (List of String) <p>The values for the date-time parameter.</p>
@@ -103,7 +103,7 @@ Optional:
 <a id="nestedatt--parameters--decimal_parameters"></a>
 ### Nested Schema for `parameters.decimal_parameters`
 
-Optional:
+Required:
 
 - `name` (String) <p>A display name for the decimal parameter.</p>
 - `values` (List of Number) <p>The values for the decimal parameter.</p>
@@ -112,7 +112,7 @@ Optional:
 <a id="nestedatt--parameters--integer_parameters"></a>
 ### Nested Schema for `parameters.integer_parameters`
 
-Optional:
+Required:
 
 - `name` (String) <p>The name of the integer parameter.</p>
 - `values` (List of Number) <p>The values for the integer parameter.</p>
@@ -121,7 +121,7 @@ Optional:
 <a id="nestedatt--parameters--string_parameters"></a>
 ### Nested Schema for `parameters.string_parameters`
 
-Optional:
+Required:
 
 - `name` (String) <p>A display name for a string parameter.</p>
 - `values` (List of String) <p>The values of a string parameter.</p>
@@ -131,7 +131,7 @@ Optional:
 <a id="nestedatt--permissions"></a>
 ### Nested Schema for `permissions`
 
-Optional:
+Required:
 
 - `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
 - `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
@@ -154,7 +154,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) <p>Tag key.</p>
 - `value` (String) <p>Tag value.</p>
@@ -163,7 +163,7 @@ Optional:
 <a id="nestedatt--sheets"></a>
 ### Nested Schema for `sheets`
 
-Read-Only:
+Optional:
 
 - `name` (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
             console.</p>

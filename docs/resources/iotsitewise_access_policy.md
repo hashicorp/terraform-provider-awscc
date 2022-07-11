@@ -30,7 +30,7 @@ Resource schema for AWS::IoTSiteWise::AccessPolicy
 <a id="nestedatt--access_policy_identity"></a>
 ### Nested Schema for `access_policy_identity`
 
-Required:
+Optional:
 
 - `iam_role` (Attributes) Contains information for an IAM role identity in an access policy. (see [below for nested schema](#nestedatt--access_policy_identity--iam_role))
 - `iam_user` (Attributes) Contains information for an IAM user identity in an access policy. (see [below for nested schema](#nestedatt--access_policy_identity--iam_user))
@@ -39,7 +39,7 @@ Required:
 <a id="nestedatt--access_policy_identity--iam_role"></a>
 ### Nested Schema for `access_policy_identity.iam_role`
 
-Required:
+Optional:
 
 - `arn` (String) The ARN of the IAM role.
 
@@ -47,7 +47,7 @@ Required:
 <a id="nestedatt--access_policy_identity--iam_user"></a>
 ### Nested Schema for `access_policy_identity.iam_user`
 
-Required:
+Optional:
 
 - `arn` (String) The ARN of the IAM user.
 
@@ -55,7 +55,7 @@ Required:
 <a id="nestedatt--access_policy_identity--user"></a>
 ### Nested Schema for `access_policy_identity.user`
 
-Required:
+Optional:
 
 - `id` (String) The AWS SSO ID of the user.
 
@@ -64,7 +64,7 @@ Required:
 <a id="nestedatt--access_policy_resource"></a>
 ### Nested Schema for `access_policy_resource`
 
-Required:
+Optional:
 
 - `portal` (Attributes) A portal resource. (see [below for nested schema](#nestedatt--access_policy_resource--portal))
 - `project` (Attributes) A project resource. (see [below for nested schema](#nestedatt--access_policy_resource--project))
@@ -72,7 +72,7 @@ Required:
 <a id="nestedatt--access_policy_resource--portal"></a>
 ### Nested Schema for `access_policy_resource.portal`
 
-Required:
+Optional:
 
 - `id` (String) The ID of the portal.
 
@@ -80,7 +80,7 @@ Required:
 <a id="nestedatt--access_policy_resource--project"></a>
 ### Nested Schema for `access_policy_resource.project`
 
-Required:
+Optional:
 
 - `id` (String) The ID of the project.
 

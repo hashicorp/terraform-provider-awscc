@@ -55,9 +55,12 @@ Optional:
 <a id="nestedatt--event_selectors--data_resources"></a>
 ### Nested Schema for `event_selectors.data_resources`
 
-Optional:
+Required:
 
 - `type` (String) The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.
+
+Optional:
+
 - `values` (Set of String) An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.
 
 
@@ -73,7 +76,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

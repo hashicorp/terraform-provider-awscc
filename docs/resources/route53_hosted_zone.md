@@ -45,7 +45,7 @@ Optional:
 <a id="nestedatt--hosted_zone_tags"></a>
 ### Nested Schema for `hosted_zone_tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag.
 - `value` (String) The value for the tag.
@@ -54,7 +54,7 @@ Optional:
 <a id="nestedatt--query_logging_config"></a>
 ### Nested Schema for `query_logging_config`
 
-Optional:
+Required:
 
 - `cloudwatch_logs_log_group_arn` (String) The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.
 
@@ -62,7 +62,7 @@ Optional:
 <a id="nestedatt--vp_cs"></a>
 ### Nested Schema for `vp_cs`
 
-Optional:
+Required:
 
 - `vpc_id` (String) The ID of an Amazon VPC.
 - `vpc_region` (String) The region that an Amazon VPC was created in. See https://docs.aws.amazon.com/general/latest/gr/rande.html for a list of up to date regions.

@@ -35,7 +35,7 @@ The AWS::EC2::TransitGatewayConnect type
 <a id="nestedatt--options"></a>
 ### Nested Schema for `options`
 
-Required:
+Optional:
 
 - `protocol` (String) The tunnel protocol.
 

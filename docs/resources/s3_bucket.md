@@ -50,7 +50,7 @@ Resource Type definition for AWS::S3::Bucket
 <a id="nestedatt--accelerate_configuration"></a>
 ### Nested Schema for `accelerate_configuration`
 
-Optional:
+Required:
 
 - `acceleration_status` (String) Configures the transfer acceleration state for an Amazon S3 bucket.
 
@@ -58,11 +58,14 @@ Optional:
 <a id="nestedatt--analytics_configurations"></a>
 ### Nested Schema for `analytics_configurations`
 
-Optional:
+Required:
 
 - `id` (String) The ID that identifies the analytics configuration.
-- `prefix` (String) The prefix that an object must have to be included in the analytics results.
 - `storage_class_analysis` (Attributes) Specifies data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes for an Amazon S3 bucket. (see [below for nested schema](#nestedatt--analytics_configurations--storage_class_analysis))
+
+Optional:
+
+- `prefix` (String) The prefix that an object must have to be included in the analytics results.
 - `tag_filters` (Attributes List) (see [below for nested schema](#nestedatt--analytics_configurations--tag_filters))
 
 <a id="nestedatt--analytics_configurations--storage_class_analysis"></a>
@@ -75,7 +78,7 @@ Optional:
 <a id="nestedatt--analytics_configurations--storage_class_analysis--data_export"></a>
 ### Nested Schema for `analytics_configurations.storage_class_analysis.data_export`
 
-Optional:
+Required:
 
 - `destination` (Attributes) Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC). (see [below for nested schema](#nestedatt--analytics_configurations--storage_class_analysis--data_export--destination))
 - `output_schema_version` (String) The version of the output schema to use when exporting data.
@@ -83,11 +86,14 @@ Optional:
 <a id="nestedatt--analytics_configurations--storage_class_analysis--data_export--destination"></a>
 ### Nested Schema for `analytics_configurations.storage_class_analysis.data_export.output_schema_version`
 
+Required:
+
+- `bucket_arn` (String) The Amazon Resource Name (ARN) of the bucket to which data is exported.
+- `format` (String) Specifies the file format used when exporting data to Amazon S3.
+
 Optional:
 
 - `bucket_account_id` (String) The account ID that owns the destination S3 bucket.
-- `bucket_arn` (String) The Amazon Resource Name (ARN) of the bucket to which data is exported.
-- `format` (String) Specifies the file format used when exporting data to Amazon S3.
 - `prefix` (String) The prefix to use when exporting data. The prefix is prepended to all results.
 
 
@@ -96,7 +102,7 @@ Optional:
 <a id="nestedatt--analytics_configurations--tag_filters"></a>
 ### Nested Schema for `analytics_configurations.tag_filters`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -106,7 +112,7 @@ Optional:
 <a id="nestedatt--bucket_encryption"></a>
 ### Nested Schema for `bucket_encryption`
 
-Optional:
+Required:
 
 - `server_side_encryption_configuration` (Attributes List) Specifies the default server-side-encryption configuration. (see [below for nested schema](#nestedatt--bucket_encryption--server_side_encryption_configuration))
 
@@ -121,10 +127,13 @@ Optional:
 <a id="nestedatt--bucket_encryption--server_side_encryption_configuration--server_side_encryption_by_default"></a>
 ### Nested Schema for `bucket_encryption.server_side_encryption_configuration.server_side_encryption_by_default`
 
+Required:
+
+- `sse_algorithm` (String)
+
 Optional:
 
 - `kms_master_key_id` (String) "KMSMasterKeyID" can only be used when you set the value of SSEAlgorithm as aws:kms.
-- `sse_algorithm` (String)
 
 
 
@@ -132,18 +141,21 @@ Optional:
 <a id="nestedatt--cors_configuration"></a>
 ### Nested Schema for `cors_configuration`
 
-Optional:
+Required:
 
 - `cors_rules` (Attributes List) (see [below for nested schema](#nestedatt--cors_configuration--cors_rules))
 
 <a id="nestedatt--cors_configuration--cors_rules"></a>
 ### Nested Schema for `cors_configuration.cors_rules`
 
+Required:
+
+- `allowed_methods` (List of String) An HTTP method that you allow the origin to execute.
+- `allowed_origins` (List of String) One or more origins you want customers to be able to access the bucket from.
+
 Optional:
 
 - `allowed_headers` (List of String) Headers that are specified in the Access-Control-Request-Headers header.
-- `allowed_methods` (List of String) An HTTP method that you allow the origin to execute.
-- `allowed_origins` (List of String) One or more origins you want customers to be able to access the bucket from.
 - `exposed_headers` (List of String) One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).
 - `id` (String) A unique identifier for this rule.
 - `max_age` (Number) The time in seconds that your browser is to cache the preflight response for the specified resource.
@@ -153,54 +165,63 @@ Optional:
 <a id="nestedatt--intelligent_tiering_configurations"></a>
 ### Nested Schema for `intelligent_tiering_configurations`
 
-Optional:
+Required:
 
 - `id` (String) The ID used to identify the S3 Intelligent-Tiering configuration.
-- `prefix` (String) An object key name prefix that identifies the subset of objects to which the rule applies.
 - `status` (String) Specifies the status of the configuration.
-- `tag_filters` (Attributes List) A container for a key-value pair. (see [below for nested schema](#nestedatt--intelligent_tiering_configurations--tag_filters))
 - `tierings` (Attributes List) Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ARCHIVE_ACCESS and DEEP_ARCHIVE_ACCESS. (see [below for nested schema](#nestedatt--intelligent_tiering_configurations--tierings))
-
-<a id="nestedatt--intelligent_tiering_configurations--tag_filters"></a>
-### Nested Schema for `intelligent_tiering_configurations.tag_filters`
 
 Optional:
 
-- `key` (String)
-- `value` (String)
-
+- `prefix` (String) An object key name prefix that identifies the subset of objects to which the rule applies.
+- `tag_filters` (Attributes List) A container for a key-value pair. (see [below for nested schema](#nestedatt--intelligent_tiering_configurations--tag_filters))
 
 <a id="nestedatt--intelligent_tiering_configurations--tierings"></a>
 ### Nested Schema for `intelligent_tiering_configurations.tierings`
 
-Optional:
+Required:
 
 - `access_tier` (String) S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.
 - `days` (Number) The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).
+
+
+<a id="nestedatt--intelligent_tiering_configurations--tag_filters"></a>
+### Nested Schema for `intelligent_tiering_configurations.tag_filters`
+
+Required:
+
+- `key` (String)
+- `value` (String)
 
 
 
 <a id="nestedatt--inventory_configurations"></a>
 ### Nested Schema for `inventory_configurations`
 
-Optional:
+Required:
 
 - `destination` (Attributes) Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC). (see [below for nested schema](#nestedatt--inventory_configurations--destination))
 - `enabled` (Boolean) Specifies whether the inventory is enabled or disabled.
 - `id` (String) The ID used to identify the inventory configuration.
 - `included_object_versions` (String) Object versions to include in the inventory list.
+- `schedule_frequency` (String) Specifies the schedule for generating inventory results.
+
+Optional:
+
 - `optional_fields` (List of String) Contains the optional fields that are included in the inventory results.
 - `prefix` (String) The prefix that is prepended to all inventory results.
-- `schedule_frequency` (String) Specifies the schedule for generating inventory results.
 
 <a id="nestedatt--inventory_configurations--destination"></a>
 ### Nested Schema for `inventory_configurations.destination`
 
+Required:
+
+- `bucket_arn` (String) The Amazon Resource Name (ARN) of the bucket to which data is exported.
+- `format` (String) Specifies the file format used when exporting data to Amazon S3.
+
 Optional:
 
 - `bucket_account_id` (String) The account ID that owns the destination S3 bucket.
-- `bucket_arn` (String) The Amazon Resource Name (ARN) of the bucket to which data is exported.
-- `format` (String) Specifies the file format used when exporting data to Amazon S3.
 - `prefix` (String) The prefix to use when exporting data. The prefix is prepended to all results.
 
 
@@ -208,12 +229,16 @@ Optional:
 <a id="nestedatt--lifecycle_configuration"></a>
 ### Nested Schema for `lifecycle_configuration`
 
-Optional:
+Required:
 
 - `rules` (Attributes List) A lifecycle rule for individual objects in an Amazon S3 bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules))
 
 <a id="nestedatt--lifecycle_configuration--rules"></a>
 ### Nested Schema for `lifecycle_configuration.rules`
+
+Required:
+
+- `status` (String)
 
 Optional:
 
@@ -229,7 +254,6 @@ Optional:
 - `object_size_greater_than` (String)
 - `object_size_less_than` (String)
 - `prefix` (String)
-- `status` (String)
 - `tag_filters` (Attributes List) (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--tag_filters))
 - `transition` (Attributes) You must specify at least one of "TransitionDate" and "TransitionInDays" (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--transition))
 - `transitions` (Attributes List) (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--transitions))
@@ -237,7 +261,7 @@ Optional:
 <a id="nestedatt--lifecycle_configuration--rules--abort_incomplete_multipart_upload"></a>
 ### Nested Schema for `lifecycle_configuration.rules.abort_incomplete_multipart_upload`
 
-Optional:
+Required:
 
 - `days_after_initiation` (Number) Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.
 
@@ -245,36 +269,45 @@ Optional:
 <a id="nestedatt--lifecycle_configuration--rules--noncurrent_version_expiration"></a>
 ### Nested Schema for `lifecycle_configuration.rules.noncurrent_version_expiration`
 
+Required:
+
+- `noncurrent_days` (Number) Specified the number of days an object is noncurrent before Amazon S3 can perform the associated action
+
 Optional:
 
 - `newer_noncurrent_versions` (Number) Specified the number of newer noncurrent and current versions that must exists before performing the associated action
-- `noncurrent_days` (Number) Specified the number of days an object is noncurrent before Amazon S3 can perform the associated action
 
 
 <a id="nestedatt--lifecycle_configuration--rules--noncurrent_version_transition"></a>
 ### Nested Schema for `lifecycle_configuration.rules.noncurrent_version_transition`
 
+Required:
+
+- `storage_class` (String) The class of storage used to store the object.
+- `transition_in_days` (Number) Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.
+
 Optional:
 
 - `newer_noncurrent_versions` (Number) Specified the number of newer noncurrent and current versions that must exists before performing the associated action
-- `storage_class` (String) The class of storage used to store the object.
-- `transition_in_days` (Number) Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.
 
 
 <a id="nestedatt--lifecycle_configuration--rules--noncurrent_version_transitions"></a>
 ### Nested Schema for `lifecycle_configuration.rules.noncurrent_version_transitions`
 
+Required:
+
+- `storage_class` (String) The class of storage used to store the object.
+- `transition_in_days` (Number) Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.
+
 Optional:
 
 - `newer_noncurrent_versions` (Number) Specified the number of newer noncurrent and current versions that must exists before performing the associated action
-- `storage_class` (String) The class of storage used to store the object.
-- `transition_in_days` (Number) Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.
 
 
 <a id="nestedatt--lifecycle_configuration--rules--tag_filters"></a>
 ### Nested Schema for `lifecycle_configuration.rules.tag_filters`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -283,9 +316,12 @@ Optional:
 <a id="nestedatt--lifecycle_configuration--rules--transition"></a>
 ### Nested Schema for `lifecycle_configuration.rules.transition`
 
-Optional:
+Required:
 
 - `storage_class` (String)
+
+Optional:
+
 - `transition_date` (String) The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)
 - `transition_in_days` (Number)
 
@@ -293,9 +329,12 @@ Optional:
 <a id="nestedatt--lifecycle_configuration--rules--transitions"></a>
 ### Nested Schema for `lifecycle_configuration.rules.transitions`
 
-Optional:
+Required:
 
 - `storage_class` (String)
+
+Optional:
+
 - `transition_date` (String) The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)
 - `transition_in_days` (Number)
 
@@ -314,17 +353,20 @@ Optional:
 <a id="nestedatt--metrics_configurations"></a>
 ### Nested Schema for `metrics_configurations`
 
+Required:
+
+- `id` (String)
+
 Optional:
 
 - `access_point_arn` (String)
-- `id` (String)
 - `prefix` (String)
 - `tag_filters` (Attributes List) (see [below for nested schema](#nestedatt--metrics_configurations--tag_filters))
 
 <a id="nestedatt--metrics_configurations--tag_filters"></a>
 ### Nested Schema for `metrics_configurations.tag_filters`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -352,30 +394,33 @@ Optional:
 <a id="nestedatt--notification_configuration--lambda_configurations"></a>
 ### Nested Schema for `notification_configuration.lambda_configurations`
 
-Optional:
+Required:
 
 - `event` (String) The Amazon S3 bucket event for which to invoke the AWS Lambda function.
-- `filter` (Attributes) The filtering rules that determine which objects invoke the AWS Lambda function. (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations--filter))
 - `function` (String) The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the specified event type occurs.
+
+Optional:
+
+- `filter` (Attributes) The filtering rules that determine which objects invoke the AWS Lambda function. (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations--filter))
 
 <a id="nestedatt--notification_configuration--lambda_configurations--filter"></a>
 ### Nested Schema for `notification_configuration.lambda_configurations.filter`
 
-Optional:
+Required:
 
 - `s3_key` (Attributes) A container for object key name prefix and suffix filtering rules. (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations--filter--s3_key))
 
 <a id="nestedatt--notification_configuration--lambda_configurations--filter--s3_key"></a>
 ### Nested Schema for `notification_configuration.lambda_configurations.filter.s3_key`
 
-Optional:
+Required:
 
 - `rules` (Attributes List) (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations--filter--s3_key--rules))
 
 <a id="nestedatt--notification_configuration--lambda_configurations--filter--s3_key--rules"></a>
 ### Nested Schema for `notification_configuration.lambda_configurations.filter.s3_key.rules`
 
-Optional:
+Required:
 
 - `name` (String)
 - `value` (String)
@@ -387,30 +432,33 @@ Optional:
 <a id="nestedatt--notification_configuration--queue_configurations"></a>
 ### Nested Schema for `notification_configuration.queue_configurations`
 
-Optional:
+Required:
 
 - `event` (String) The Amazon S3 bucket event about which you want to publish messages to Amazon SQS.
-- `filter` (Attributes) The filtering rules that determine which objects trigger notifications. (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations--filter))
 - `queue` (String) The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type.
+
+Optional:
+
+- `filter` (Attributes) The filtering rules that determine which objects trigger notifications. (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations--filter))
 
 <a id="nestedatt--notification_configuration--queue_configurations--filter"></a>
 ### Nested Schema for `notification_configuration.queue_configurations.filter`
 
-Optional:
+Required:
 
 - `s3_key` (Attributes) A container for object key name prefix and suffix filtering rules. (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations--filter--s3_key))
 
 <a id="nestedatt--notification_configuration--queue_configurations--filter--s3_key"></a>
 ### Nested Schema for `notification_configuration.queue_configurations.filter.s3_key`
 
-Optional:
+Required:
 
 - `rules` (Attributes List) (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations--filter--s3_key--rules))
 
 <a id="nestedatt--notification_configuration--queue_configurations--filter--s3_key--rules"></a>
 ### Nested Schema for `notification_configuration.queue_configurations.filter.s3_key.rules`
 
-Optional:
+Required:
 
 - `name` (String)
 - `value` (String)
@@ -422,30 +470,33 @@ Optional:
 <a id="nestedatt--notification_configuration--topic_configurations"></a>
 ### Nested Schema for `notification_configuration.topic_configurations`
 
-Optional:
+Required:
 
 - `event` (String) The Amazon S3 bucket event about which to send notifications.
-- `filter` (Attributes) The filtering rules that determine for which objects to send notifications. (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations--filter))
 - `topic` (String) The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type.
+
+Optional:
+
+- `filter` (Attributes) The filtering rules that determine for which objects to send notifications. (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations--filter))
 
 <a id="nestedatt--notification_configuration--topic_configurations--filter"></a>
 ### Nested Schema for `notification_configuration.topic_configurations.filter`
 
-Optional:
+Required:
 
 - `s3_key` (Attributes) A container for object key name prefix and suffix filtering rules. (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations--filter--s3_key))
 
 <a id="nestedatt--notification_configuration--topic_configurations--filter--s3_key"></a>
 ### Nested Schema for `notification_configuration.topic_configurations.filter.s3_key`
 
-Optional:
+Required:
 
 - `rules` (Attributes List) (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations--filter--s3_key--rules))
 
 <a id="nestedatt--notification_configuration--topic_configurations--filter--s3_key--rules"></a>
 ### Nested Schema for `notification_configuration.topic_configurations.filter.s3_key.rules`
 
-Optional:
+Required:
 
 - `name` (String)
 - `value` (String)
@@ -485,7 +536,7 @@ Optional:
 <a id="nestedatt--ownership_controls"></a>
 ### Nested Schema for `ownership_controls`
 
-Optional:
+Required:
 
 - `rules` (Attributes List) (see [below for nested schema](#nestedatt--ownership_controls--rules))
 
@@ -518,7 +569,7 @@ Enabling this setting doesn't affect previously stored bucket policies, except t
 <a id="nestedatt--replication_configuration"></a>
 ### Nested Schema for `replication_configuration`
 
-Optional:
+Required:
 
 - `role` (String) The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects.
 - `rules` (Attributes List) A container for one or more replication rules. (see [below for nested schema](#nestedatt--replication_configuration--rules))
@@ -526,33 +577,31 @@ Optional:
 <a id="nestedatt--replication_configuration--rules"></a>
 ### Nested Schema for `replication_configuration.rules`
 
+Required:
+
+- `destination` (Attributes) Specifies which Amazon S3 bucket to store replicated objects in and their storage class. (see [below for nested schema](#nestedatt--replication_configuration--rules--destination))
+- `status` (String) Specifies whether the rule is enabled.
+
 Optional:
 
 - `delete_marker_replication` (Attributes) (see [below for nested schema](#nestedatt--replication_configuration--rules--delete_marker_replication))
-- `destination` (Attributes) Specifies which Amazon S3 bucket to store replicated objects in and their storage class. (see [below for nested schema](#nestedatt--replication_configuration--rules--destination))
 - `filter` (Attributes) (see [below for nested schema](#nestedatt--replication_configuration--rules--filter))
 - `id` (String) A unique identifier for the rule.
 - `prefix` (String) An object key name prefix that identifies the object or objects to which the rule applies.
 - `priority` (Number)
 - `source_selection_criteria` (Attributes) A container that describes additional filters for identifying the source objects that you want to replicate. (see [below for nested schema](#nestedatt--replication_configuration--rules--source_selection_criteria))
-- `status` (String) Specifies whether the rule is enabled.
-
-<a id="nestedatt--replication_configuration--rules--delete_marker_replication"></a>
-### Nested Schema for `replication_configuration.rules.delete_marker_replication`
-
-Optional:
-
-- `status` (String)
-
 
 <a id="nestedatt--replication_configuration--rules--destination"></a>
 ### Nested Schema for `replication_configuration.rules.destination`
+
+Required:
+
+- `bucket` (String)
 
 Optional:
 
 - `access_control_translation` (Attributes) Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object. (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--access_control_translation))
 - `account` (String)
-- `bucket` (String)
 - `encryption_configuration` (Attributes) Specifies encryption-related information for an Amazon S3 bucket that is a destination for replicated objects. (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--encryption_configuration))
 - `metrics` (Attributes) (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--metrics))
 - `replication_time` (Attributes) (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--replication_time))
@@ -561,7 +610,7 @@ Optional:
 <a id="nestedatt--replication_configuration--rules--destination--access_control_translation"></a>
 ### Nested Schema for `replication_configuration.rules.destination.storage_class`
 
-Optional:
+Required:
 
 - `owner` (String)
 
@@ -569,7 +618,7 @@ Optional:
 <a id="nestedatt--replication_configuration--rules--destination--encryption_configuration"></a>
 ### Nested Schema for `replication_configuration.rules.destination.storage_class`
 
-Optional:
+Required:
 
 - `replica_kms_key_id` (String) Specifies the ID (Key ARN or Alias ARN) of the customer managed customer master key (CMK) stored in AWS Key Management Service (KMS) for the destination bucket.
 
@@ -577,15 +626,18 @@ Optional:
 <a id="nestedatt--replication_configuration--rules--destination--metrics"></a>
 ### Nested Schema for `replication_configuration.rules.destination.storage_class`
 
+Required:
+
+- `status` (String)
+
 Optional:
 
 - `event_threshold` (Attributes) (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--storage_class--event_threshold))
-- `status` (String)
 
 <a id="nestedatt--replication_configuration--rules--destination--storage_class--event_threshold"></a>
 ### Nested Schema for `replication_configuration.rules.destination.storage_class.event_threshold`
 
-Optional:
+Required:
 
 - `minutes` (Number)
 
@@ -594,7 +646,7 @@ Optional:
 <a id="nestedatt--replication_configuration--rules--destination--replication_time"></a>
 ### Nested Schema for `replication_configuration.rules.destination.storage_class`
 
-Optional:
+Required:
 
 - `status` (String)
 - `time` (Attributes) (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--storage_class--time))
@@ -602,11 +654,19 @@ Optional:
 <a id="nestedatt--replication_configuration--rules--destination--storage_class--time"></a>
 ### Nested Schema for `replication_configuration.rules.destination.storage_class.time`
 
-Optional:
+Required:
 
 - `minutes` (Number)
 
 
+
+
+<a id="nestedatt--replication_configuration--rules--delete_marker_replication"></a>
+### Nested Schema for `replication_configuration.rules.delete_marker_replication`
+
+Optional:
+
+- `status` (String)
 
 
 <a id="nestedatt--replication_configuration--rules--filter"></a>
@@ -629,7 +689,7 @@ Optional:
 <a id="nestedatt--replication_configuration--rules--filter--tag_filter--tag_filters"></a>
 ### Nested Schema for `replication_configuration.rules.filter.tag_filter.tag_filters`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -639,7 +699,7 @@ Optional:
 <a id="nestedatt--replication_configuration--rules--filter--tag_filter"></a>
 ### Nested Schema for `replication_configuration.rules.filter.tag_filter`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -657,7 +717,7 @@ Optional:
 <a id="nestedatt--replication_configuration--rules--source_selection_criteria--replica_modifications"></a>
 ### Nested Schema for `replication_configuration.rules.source_selection_criteria.sse_kms_encrypted_objects`
 
-Optional:
+Required:
 
 - `status` (String) Specifies whether Amazon S3 replicates modifications on replicas.
 
@@ -665,7 +725,7 @@ Optional:
 <a id="nestedatt--replication_configuration--rules--source_selection_criteria--sse_kms_encrypted_objects"></a>
 ### Nested Schema for `replication_configuration.rules.source_selection_criteria.sse_kms_encrypted_objects`
 
-Optional:
+Required:
 
 - `status` (String) Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service.
 
@@ -676,7 +736,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -703,18 +763,24 @@ Optional:
 <a id="nestedatt--website_configuration--redirect_all_requests_to"></a>
 ### Nested Schema for `website_configuration.redirect_all_requests_to`
 
-Optional:
+Required:
 
 - `host_name` (String) Name of the host where requests are redirected.
+
+Optional:
+
 - `protocol` (String) Protocol to use when redirecting requests. The default is the protocol that is used in the original request.
 
 
 <a id="nestedatt--website_configuration--routing_rules"></a>
 ### Nested Schema for `website_configuration.routing_rules`
 
-Optional:
+Required:
 
 - `redirect_rule` (Attributes) Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return. (see [below for nested schema](#nestedatt--website_configuration--routing_rules--redirect_rule))
+
+Optional:
+
 - `routing_rule_condition` (Attributes) A container for describing a condition that must be met for the specified redirect to apply.You must specify at least one of HttpErrorCodeReturnedEquals and KeyPrefixEquals (see [below for nested schema](#nestedatt--website_configuration--routing_rules--routing_rule_condition))
 
 <a id="nestedatt--website_configuration--routing_rules--redirect_rule"></a>

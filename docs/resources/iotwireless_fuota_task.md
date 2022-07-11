@@ -43,6 +43,9 @@ Create and manage FUOTA tasks.
 Required:
 
 - `rf_region` (String) FUOTA task LoRaWAN RF region
+
+Read-Only:
+
 - `start_time` (String) FUOTA task LoRaWAN start time
 
 

@@ -38,7 +38,7 @@ Resource schema for AWS::ImageBuilder::ImageRecipe
 <a id="nestedatt--components"></a>
 ### Nested Schema for `components`
 
-Required:
+Optional:
 
 - `component_arn` (String) The Amazon Resource Name (ARN) of the component.
 - `parameters` (Attributes List) A group of parameter settings that are used to configure the component for a specific recipe. (see [below for nested schema](#nestedatt--components--parameters))

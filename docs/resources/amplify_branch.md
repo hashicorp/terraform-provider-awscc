@@ -41,17 +41,20 @@ The AWS::Amplify::Branch resource creates a new branch within an app.
 <a id="nestedatt--basic_auth_config"></a>
 ### Nested Schema for `basic_auth_config`
 
+Required:
+
+- `password` (String)
+- `username` (String)
+
 Optional:
 
 - `enable_basic_auth` (Boolean)
-- `password` (String)
-- `username` (String)
 
 
 <a id="nestedatt--environment_variables"></a>
 ### Nested Schema for `environment_variables`
 
-Optional:
+Required:
 
 - `name` (String)
 - `value` (String)
@@ -60,7 +63,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

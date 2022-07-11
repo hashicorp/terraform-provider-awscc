@@ -28,7 +28,7 @@ The policy to be attached to a Multi Region Access Point
 <a id="nestedatt--policy_status"></a>
 ### Nested Schema for `policy_status`
 
-Read-Only:
+Required:
 
 - `is_public` (String) Specifies whether the policy is public or not.
 

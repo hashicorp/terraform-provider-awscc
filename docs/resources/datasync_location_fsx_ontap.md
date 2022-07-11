@@ -36,7 +36,7 @@ Resource schema for AWS::DataSync::LocationFSxONTAP.
 <a id="nestedatt--protocol"></a>
 ### Nested Schema for `protocol`
 
-Required:
+Optional:
 
 - `nfs` (Attributes) NFS protocol configuration for FSx ONTAP file system. (see [below for nested schema](#nestedatt--protocol--nfs))
 - `smb` (Attributes) SMB protocol configuration for FSx ONTAP file system. (see [below for nested schema](#nestedatt--protocol--smb))
@@ -51,7 +51,7 @@ Required:
 <a id="nestedatt--protocol--nfs--mount_options"></a>
 ### Nested Schema for `protocol.nfs.mount_options`
 
-Required:
+Optional:
 
 - `version` (String) The specific NFS version that you want DataSync to use to mount your NFS share.
 
@@ -62,15 +62,18 @@ Required:
 
 Required:
 
-- `domain` (String) The name of the Windows domain that the SMB server belongs to.
 - `mount_options` (Attributes) The mount options used by DataSync to access the SMB server. (see [below for nested schema](#nestedatt--protocol--smb--mount_options))
 - `password` (String) The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.
 - `user` (String) The user who can mount the share, has the permissions to access files and folders in the SMB share.
 
+Optional:
+
+- `domain` (String) The name of the Windows domain that the SMB server belongs to.
+
 <a id="nestedatt--protocol--smb--mount_options"></a>
 ### Nested Schema for `protocol.smb.mount_options`
 
-Required:
+Optional:
 
 - `version` (String) The specific SMB version that you want DataSync to use to mount your SMB share.
 
@@ -80,7 +83,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.

@@ -33,7 +33,7 @@ Resource Type definition for AWS::EC2::NatGateway
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

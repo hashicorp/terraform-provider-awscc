@@ -36,8 +36,11 @@ Contains detailed information about a report plan in AWS Backup Audit Manager.
 
 Required:
 
-- `formats` (Set of String) A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.
 - `s3_bucket_name` (String) The unique name of the S3 bucket that receives your reports.
+
+Optional:
+
+- `formats` (Set of String) A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.
 - `s3_key_prefix` (String) The prefix for where AWS Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.
 
 
@@ -46,8 +49,11 @@ Required:
 
 Required:
 
-- `framework_arns` (Set of String) The Amazon Resource Names (ARNs) of the frameworks a report covers.
 - `report_template` (String) Identifies the report template for the report. Reports are built using a report template. The report templates are: `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+
+Optional:
+
+- `framework_arns` (Set of String) The Amazon Resource Names (ARNs) of the frameworks a report covers.
 
 
 <a id="nestedatt--report_plan_tags"></a>

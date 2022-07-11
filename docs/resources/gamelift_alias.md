@@ -34,9 +34,12 @@ The AWS::GameLift::Alias resource creates an alias for an Amazon GameLift (GameL
 
 Required:
 
+- `type` (String) Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.
+
+Optional:
+
 - `fleet_id` (String) A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.
 - `message` (String) The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.
-- `type` (String) Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.
 
 ## Import
 

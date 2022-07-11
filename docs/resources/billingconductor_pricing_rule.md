@@ -39,7 +39,7 @@ A markup/discount that is defined for a specific set of services that can later 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

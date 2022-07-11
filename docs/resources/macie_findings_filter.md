@@ -35,14 +35,14 @@ Macie FindingsFilter resource schema.
 <a id="nestedatt--finding_criteria"></a>
 ### Nested Schema for `finding_criteria`
 
-Required:
+Optional:
 
 - `criterion` (Attributes Map) Map of filter criteria. (see [below for nested schema](#nestedatt--finding_criteria--criterion))
 
 <a id="nestedatt--finding_criteria--criterion"></a>
 ### Nested Schema for `finding_criteria.criterion`
 
-Required:
+Optional:
 
 - `eq` (List of String)
 - `gt` (Number)
@@ -56,7 +56,7 @@ Required:
 <a id="nestedatt--findings_filter_list_items"></a>
 ### Nested Schema for `findings_filter_list_items`
 
-Read-Only:
+Optional:
 
 - `id` (String)
 - `name` (String)

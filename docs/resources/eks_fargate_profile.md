@@ -37,8 +37,11 @@ Resource Schema for AWS::EKS::FargateProfile
 
 Required:
 
-- `labels` (Attributes List) (see [below for nested schema](#nestedatt--selectors--labels))
 - `namespace` (String)
+
+Optional:
+
+- `labels` (Attributes List) (see [below for nested schema](#nestedatt--selectors--labels))
 
 <a id="nestedatt--selectors--labels"></a>
 ### Nested Schema for `selectors.labels`
@@ -53,7 +56,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

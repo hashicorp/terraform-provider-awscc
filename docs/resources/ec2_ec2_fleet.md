@@ -41,7 +41,7 @@ Resource Type definition for AWS::EC2::EC2Fleet
 <a id="nestedatt--launch_template_configs"></a>
 ### Nested Schema for `launch_template_configs`
 
-Required:
+Optional:
 
 - `launch_template_specification` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--launch_template_specification))
 - `overrides` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides))
@@ -49,7 +49,7 @@ Required:
 <a id="nestedatt--launch_template_configs--launch_template_specification"></a>
 ### Nested Schema for `launch_template_configs.launch_template_specification`
 
-Required:
+Optional:
 
 - `launch_template_id` (String)
 - `launch_template_name` (String)
@@ -59,7 +59,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides"></a>
 ### Nested Schema for `launch_template_configs.overrides`
 
-Required:
+Optional:
 
 - `availability_zone` (String)
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements))
@@ -73,7 +73,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements`
 
-Required:
+Optional:
 
 - `accelerator_count` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_count))
 - `accelerator_manufacturers` (List of String)
@@ -100,7 +100,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_count"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -109,7 +109,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_total_memory_mi_b"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -118,7 +118,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--baseline_ebs_bandwidth_mbps"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -127,7 +127,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--memory_gi_b_per_v_cpu"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -136,7 +136,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--memory_mi_b"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -145,7 +145,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--network_interface_count"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -154,7 +154,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--total_local_storage_gb"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -163,7 +163,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--v_cpu_count"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -173,7 +173,7 @@ Required:
 <a id="nestedatt--launch_template_configs--overrides--placement"></a>
 ### Nested Schema for `launch_template_configs.overrides.placement`
 
-Required:
+Optional:
 
 - `affinity` (String)
 - `availability_zone` (String)
@@ -192,11 +192,14 @@ Required:
 
 Required:
 
+- `total_target_capacity` (Number)
+
+Optional:
+
 - `default_target_capacity_type` (String)
 - `on_demand_target_capacity` (Number)
 - `spot_target_capacity` (Number)
 - `target_capacity_unit_type` (String)
-- `total_target_capacity` (Number)
 
 
 <a id="nestedatt--on_demand_options"></a>
@@ -263,7 +266,7 @@ Optional:
 <a id="nestedatt--tag_specifications--tags"></a>
 ### Nested Schema for `tag_specifications.tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

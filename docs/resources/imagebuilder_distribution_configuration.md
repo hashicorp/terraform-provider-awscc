@@ -35,17 +35,20 @@ Resource schema for AWS::ImageBuilder::DistributionConfiguration
 
 Required:
 
+- `region` (String) region
+
+Optional:
+
 - `ami_distribution_configuration` (Attributes) The specific AMI settings (for example, launch permissions, AMI tags). (see [below for nested schema](#nestedatt--distributions--ami_distribution_configuration))
 - `container_distribution_configuration` (Attributes) Container distribution settings for encryption, licensing, and sharing in a specific Region. (see [below for nested schema](#nestedatt--distributions--container_distribution_configuration))
 - `fast_launch_configurations` (Attributes List) The Windows faster-launching configurations to use for AMI distribution. (see [below for nested schema](#nestedatt--distributions--fast_launch_configurations))
 - `launch_template_configurations` (Attributes List) A group of launchTemplateConfiguration settings that apply to image distribution. (see [below for nested schema](#nestedatt--distributions--launch_template_configurations))
 - `license_configuration_arns` (List of String) The License Manager Configuration to associate with the AMI in the specified Region.
-- `region` (String) region
 
 <a id="nestedatt--distributions--ami_distribution_configuration"></a>
 ### Nested Schema for `distributions.ami_distribution_configuration`
 
-Required:
+Optional:
 
 - `ami_tags` (Map of String) The tags to apply to AMIs distributed to this Region.
 - `description` (String) The description of the AMI distribution configuration.
@@ -57,7 +60,7 @@ Required:
 <a id="nestedatt--distributions--ami_distribution_configuration--launch_permission_configuration"></a>
 ### Nested Schema for `distributions.ami_distribution_configuration.launch_permission_configuration`
 
-Required:
+Optional:
 
 - `organization_arns` (List of String) The ARN for an Amazon Web Services Organization that you want to share your AMI with.
 - `organizational_unit_arns` (List of String) The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.
@@ -69,7 +72,7 @@ Required:
 <a id="nestedatt--distributions--container_distribution_configuration"></a>
 ### Nested Schema for `distributions.container_distribution_configuration`
 
-Required:
+Optional:
 
 - `container_tags` (List of String) Tags that are attached to the container distribution configuration.
 - `description` (String) The description of the container distribution configuration.
@@ -78,7 +81,7 @@ Required:
 <a id="nestedatt--distributions--container_distribution_configuration--target_repository"></a>
 ### Nested Schema for `distributions.container_distribution_configuration.target_repository`
 
-Required:
+Optional:
 
 - `repository_name` (String) The repository name of target container repository.
 - `service` (String) The service of target container repository.
@@ -88,7 +91,7 @@ Required:
 <a id="nestedatt--distributions--fast_launch_configurations"></a>
 ### Nested Schema for `distributions.fast_launch_configurations`
 
-Required:
+Optional:
 
 - `account_id` (String) The owner account ID for the fast-launch enabled Windows AMI.
 - `enabled` (Boolean) A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.
@@ -99,7 +102,7 @@ Required:
 <a id="nestedatt--distributions--fast_launch_configurations--launch_template"></a>
 ### Nested Schema for `distributions.fast_launch_configurations.launch_template`
 
-Required:
+Optional:
 
 - `launch_template_id` (String) The ID of the launch template to use for faster launching for a Windows AMI.
 - `launch_template_name` (String) The name of the launch template to use for faster launching for a Windows AMI.
@@ -109,7 +112,7 @@ Required:
 <a id="nestedatt--distributions--fast_launch_configurations--snapshot_configuration"></a>
 ### Nested Schema for `distributions.fast_launch_configurations.snapshot_configuration`
 
-Required:
+Optional:
 
 - `target_resource_count` (Number) The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
 
@@ -118,7 +121,7 @@ Required:
 <a id="nestedatt--distributions--launch_template_configurations"></a>
 ### Nested Schema for `distributions.launch_template_configurations`
 
-Required:
+Optional:
 
 - `account_id` (String) The account ID that this configuration applies to.
 - `launch_template_id` (String) Identifies the EC2 launch template to use.

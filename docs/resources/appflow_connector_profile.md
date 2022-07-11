@@ -36,9 +36,12 @@ Resource Type definition for AWS::AppFlow::ConnectorProfile
 <a id="nestedatt--connector_profile_config"></a>
 ### Nested Schema for `connector_profile_config`
 
-Optional:
+Required:
 
 - `connector_profile_credentials` (Attributes) Connector specific configuration needed to create connector profile based on Authentication mechanism (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials))
+
+Optional:
+
 - `connector_profile_properties` (Attributes) Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties))
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials"></a>
@@ -67,7 +70,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--amplitude"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.amplitude`
 
-Optional:
+Required:
 
 - `api_key` (String) A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.
 - `secret_key` (String)
@@ -76,10 +79,13 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector`
 
+Required:
+
+- `authentication_type` (String)
+
 Optional:
 
 - `api_key` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--api_key))
-- `authentication_type` (String)
 - `basic` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--basic))
 - `custom` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--custom))
 - `oauth_2` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--oauth_2))
@@ -87,16 +93,19 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--api_key"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2`
 
-Optional:
+Required:
 
 - `api_key` (String)
+
+Optional:
+
 - `api_secret_key` (String)
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--basic"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2`
 
-Optional:
+Required:
 
 - `password` (String)
 - `username` (String)
@@ -105,10 +114,13 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--custom"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2`
 
+Required:
+
+- `custom_authentication_type` (String)
+
 Optional:
 
 - `credentials_map` (Map of String) A map for properties for custom authentication.
-- `custom_authentication_type` (String)
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--oauth_2"></a>
@@ -137,7 +149,7 @@ granted.
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--datadog"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.datadog`
 
-Optional:
+Required:
 
 - `api_key` (String) A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.
 - `application_key` (String) Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.
@@ -146,7 +158,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--dynatrace"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.dynatrace`
 
-Optional:
+Required:
 
 - `api_token` (String) The API tokens used by Dynatrace API to authenticate various API calls.
 
@@ -154,11 +166,14 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--google_analytics"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.google_analytics`
 
+Required:
+
+- `client_id` (String) The identi?er for the desired client.
+- `client_secret` (String) The client secret used by the oauth client to authenticate to the authorization server.
+
 Optional:
 
 - `access_token` (String) The credentials used to access protected resources.
-- `client_id` (String) The identi?er for the desired client.
-- `client_secret` (String) The client secret used by the oauth client to authenticate to the authorization server.
 - `connector_o_auth_request` (Attributes) The oauth needed to request security tokens from the connector endpoint. (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--google_analytics--connector_o_auth_request))
 - `refresh_token` (String) The credentials used to acquire new access tokens.
 
@@ -176,7 +191,7 @@ granted.
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--infor_nexus"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.infor_nexus`
 
-Optional:
+Required:
 
 - `access_key_id` (String) The Access Key portion of the credentials.
 - `datakey` (String) The encryption keys used to encrypt data.
@@ -187,11 +202,14 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--marketo"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.marketo`
 
+Required:
+
+- `client_id` (String) The identi?er for the desired client.
+- `client_secret` (String) The client secret used by the oauth client to authenticate to the authorization server.
+
 Optional:
 
 - `access_token` (String) The credentials used to access protected resources.
-- `client_id` (String) The identi?er for the desired client.
-- `client_secret` (String) The client secret used by the oauth client to authenticate to the authorization server.
 - `connector_o_auth_request` (Attributes) The oauth needed to request security tokens from the connector endpoint. (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--marketo--connector_o_auth_request))
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--marketo--connector_o_auth_request"></a>
@@ -208,7 +226,7 @@ granted.
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--redshift"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.redshift`
 
-Optional:
+Required:
 
 - `password` (String) The password that corresponds to the username.
 - `username` (String) The name of the user.
@@ -246,7 +264,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--sapo_data--basic_auth_credentials"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.sapo_data.o_auth_credentials`
 
-Optional:
+Required:
 
 - `password` (String)
 - `username` (String)
@@ -278,7 +296,7 @@ granted.
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--service_now"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.service_now`
 
-Optional:
+Required:
 
 - `password` (String) The password that corresponds to the username.
 - `username` (String) The name of the user.
@@ -287,7 +305,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--singular"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.singular`
 
-Optional:
+Required:
 
 - `api_key` (String) A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.
 
@@ -295,11 +313,14 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--slack"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.slack`
 
+Required:
+
+- `client_id` (String) The identi?er for the desired client.
+- `client_secret` (String) The client secret used by the oauth client to authenticate to the authorization server.
+
 Optional:
 
 - `access_token` (String) The credentials used to access protected resources.
-- `client_id` (String) The identi?er for the desired client.
-- `client_secret` (String) The client secret used by the oauth client to authenticate to the authorization server.
 - `connector_o_auth_request` (Attributes) The oauth needed to request security tokens from the connector endpoint. (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--slack--connector_o_auth_request))
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--slack--connector_o_auth_request"></a>
@@ -316,7 +337,7 @@ granted.
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--snowflake"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.snowflake`
 
-Optional:
+Required:
 
 - `password` (String) The password that corresponds to the username.
 - `username` (String) The name of the user.
@@ -325,7 +346,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--trendmicro"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.trendmicro`
 
-Optional:
+Required:
 
 - `api_secret_key` (String) The Secret Access Key portion of the credentials.
 
@@ -333,7 +354,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--veeva"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.veeva`
 
-Optional:
+Required:
 
 - `password` (String) The password that corresponds to the username.
 - `username` (String) The name of the user.
@@ -342,11 +363,14 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--zendesk"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.zendesk`
 
+Required:
+
+- `client_id` (String) The identi?er for the desired client.
+- `client_secret` (String) The client secret used by the oauth client to authenticate to the authorization server.
+
 Optional:
 
 - `access_token` (String) The credentials used to access protected resources.
-- `client_id` (String) The identi?er for the desired client.
-- `client_secret` (String) The client secret used by the oauth client to authenticate to the authorization server.
 - `connector_o_auth_request` (Attributes) The oauth needed to request security tokens from the connector endpoint. (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--zendesk--connector_o_auth_request))
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--zendesk--connector_o_auth_request"></a>
@@ -402,7 +426,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_properties--datadog"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.datadog`
 
-Optional:
+Required:
 
 - `instance_url` (String) The location of the Datadog resource
 
@@ -410,7 +434,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_properties--dynatrace"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.dynatrace`
 
-Optional:
+Required:
 
 - `instance_url` (String) The location of the Dynatrace resource
 
@@ -418,7 +442,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_properties--infor_nexus"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.infor_nexus`
 
-Optional:
+Required:
 
 - `instance_url` (String) The location of the InforNexus resource
 
@@ -426,7 +450,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_properties--marketo"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.marketo`
 
-Optional:
+Required:
 
 - `instance_url` (String) The location of the Marketo resource
 
@@ -434,12 +458,15 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_properties--redshift"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.redshift`
 
-Optional:
+Required:
 
 - `bucket_name` (String) The name of the Amazon S3 bucket associated with Redshift.
-- `bucket_prefix` (String) The object key for the destination bucket in which Amazon AppFlow will place the ?les.
 - `database_url` (String) The JDBC URL of the Amazon Redshift cluster.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role.
+
+Optional:
+
+- `bucket_prefix` (String) The object key for the destination bucket in which Amazon AppFlow will place the ?les.
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_properties--salesforce"></a>
@@ -478,7 +505,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_properties--service_now"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.service_now`
 
-Optional:
+Required:
 
 - `instance_url` (String) The location of the ServiceNow resource
 
@@ -486,7 +513,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_properties--slack"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.slack`
 
-Optional:
+Required:
 
 - `instance_url` (String) The location of the Slack resource
 
@@ -494,22 +521,25 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_properties--snowflake"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.snowflake`
 
-Optional:
+Required:
 
-- `account_name` (String) The name of the account.
 - `bucket_name` (String) The name of the Amazon S3 bucket associated with Snow?ake.
-- `bucket_prefix` (String) The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.
-- `private_link_service_name` (String) The Snow?ake Private Link service name to be used for private data transfers.
-- `region` (String) The region of the Snow?ake account.
 - `stage` (String) The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the
 Snow?ake account. This is written in the following format: < Database>< Schema><Stage Name>.
 - `warehouse` (String) The name of the Snow?ake warehouse.
+
+Optional:
+
+- `account_name` (String) The name of the account.
+- `bucket_prefix` (String) The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.
+- `private_link_service_name` (String) The Snow?ake Private Link service name to be used for private data transfers.
+- `region` (String) The region of the Snow?ake account.
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_properties--veeva"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.veeva`
 
-Optional:
+Required:
 
 - `instance_url` (String) The location of the Veeva resource
 
@@ -517,7 +547,7 @@ Optional:
 <a id="nestedatt--connector_profile_config--connector_profile_properties--zendesk"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.zendesk`
 
-Optional:
+Required:
 
 - `instance_url` (String) The location of the Zendesk resource
 

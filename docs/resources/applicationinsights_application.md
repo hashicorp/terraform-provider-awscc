@@ -39,14 +39,17 @@ Resource schema for AWS::ApplicationInsights::Application
 <a id="nestedatt--component_monitoring_settings"></a>
 ### Nested Schema for `component_monitoring_settings`
 
+Required:
+
+- `component_configuration_mode` (String) The component monitoring configuration mode.
+- `tier` (String) The tier of the application component.
+
 Optional:
 
 - `component_arn` (String) The ARN of the compnonent.
-- `component_configuration_mode` (String) The component monitoring configuration mode.
 - `component_name` (String) The name of the component.
 - `custom_component_configuration` (Attributes) The monitoring configuration of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration))
 - `default_overwrite_component_configuration` (Attributes) The overwritten settings on default component monitoring configuration. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration))
-- `tier` (String) The tier of the application component.
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration`
@@ -72,7 +75,7 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarm_metrics"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
 
-Optional:
+Required:
 
 - `alarm_metric_name` (String) The name of the metric to be monitored for the component.
 
@@ -80,9 +83,12 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarms"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
 
-Optional:
+Required:
 
 - `alarm_name` (String) The name of the CloudWatch alarm to be monitored for the component.
+
+Optional:
+
 - `severity` (String) Indicates the degree of outage when the alarm goes off.
 
 
@@ -97,7 +103,7 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--hana_prometheus_exporter"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
 
-Optional:
+Required:
 
 - `agree_to_install_hanadb_client` (Boolean) A flag which indicates agreeing to install SAP HANA DB client.
 - `hana_port` (String) The HANA DB port.
@@ -106,6 +112,9 @@ Optional:
   "password": "<>"
 }.
 - `hanasid` (String) HANA DB SID.
+
+Optional:
+
 - `prometheus_port` (String) Prometheus exporter port.
 
 
@@ -122,23 +131,29 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--logs"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
 
+Required:
+
+- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
+
 Optional:
 
 - `encoding` (String) The type of encoding of the logs to be monitored.
 - `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
 - `log_path` (String) The path of the logs to be monitored.
-- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
 - `pattern_set` (String) The name of the log pattern set.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
 
-Optional:
+Required:
 
 - `event_levels` (List of String) The levels of event to log.
 - `event_name` (String) The type of Windows Events to log.
 - `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+
+Optional:
+
 - `pattern_set` (String) The name of the log pattern set.
 
 
@@ -146,7 +161,7 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations`
 
-Optional:
+Required:
 
 - `sub_component_configuration_details` (Attributes) The configuration settings of sub components. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details))
 - `sub_component_type` (String) The sub component type.
@@ -163,7 +178,7 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.alarm_metrics`
 
-Optional:
+Required:
 
 - `alarm_metric_name` (String) The name of the metric to be monitored for the component.
 
@@ -171,23 +186,29 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--logs"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.logs`
 
+Required:
+
+- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
+
 Optional:
 
 - `encoding` (String) The type of encoding of the logs to be monitored.
 - `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
 - `log_path` (String) The path of the logs to be monitored.
-- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
 - `pattern_set` (String) The name of the log pattern set.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--windows_events"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.windows_events`
 
-Optional:
+Required:
 
 - `event_levels` (List of String) The levels of event to log.
 - `event_name` (String) The type of Windows Events to log.
 - `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+
+Optional:
+
 - `pattern_set` (String) The name of the log pattern set.
 
 
@@ -218,7 +239,7 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarm_metrics"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
 
-Optional:
+Required:
 
 - `alarm_metric_name` (String) The name of the metric to be monitored for the component.
 
@@ -226,9 +247,12 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarms"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
 
-Optional:
+Required:
 
 - `alarm_name` (String) The name of the CloudWatch alarm to be monitored for the component.
+
+Optional:
+
 - `severity` (String) Indicates the degree of outage when the alarm goes off.
 
 
@@ -243,7 +267,7 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--hana_prometheus_exporter"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
 
-Optional:
+Required:
 
 - `agree_to_install_hanadb_client` (Boolean) A flag which indicates agreeing to install SAP HANA DB client.
 - `hana_port` (String) The HANA DB port.
@@ -252,6 +276,9 @@ Optional:
   "password": "<>"
 }.
 - `hanasid` (String) HANA DB SID.
+
+Optional:
+
 - `prometheus_port` (String) Prometheus exporter port.
 
 
@@ -268,23 +295,29 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--logs"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
 
+Required:
+
+- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
+
 Optional:
 
 - `encoding` (String) The type of encoding of the logs to be monitored.
 - `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
 - `log_path` (String) The path of the logs to be monitored.
-- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
 - `pattern_set` (String) The name of the log pattern set.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
 
-Optional:
+Required:
 
 - `event_levels` (List of String) The levels of event to log.
 - `event_name` (String) The type of Windows Events to log.
 - `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+
+Optional:
+
 - `pattern_set` (String) The name of the log pattern set.
 
 
@@ -292,7 +325,7 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations`
 
-Optional:
+Required:
 
 - `sub_component_configuration_details` (Attributes) The configuration settings of sub components. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details))
 - `sub_component_type` (String) The sub component type.
@@ -309,7 +342,7 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.alarm_metrics`
 
-Optional:
+Required:
 
 - `alarm_metric_name` (String) The name of the metric to be monitored for the component.
 
@@ -317,23 +350,29 @@ Optional:
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--logs"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.logs`
 
+Required:
+
+- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
+
 Optional:
 
 - `encoding` (String) The type of encoding of the logs to be monitored.
 - `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
 - `log_path` (String) The path of the logs to be monitored.
-- `log_type` (String) The log type decides the log patterns against which Application Insights analyzes the log.
 - `pattern_set` (String) The name of the log pattern set.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--windows_events"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.windows_events`
 
-Optional:
+Required:
 
 - `event_levels` (List of String) The levels of event to log.
 - `event_name` (String) The type of Windows Events to log.
 - `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
+
+Optional:
+
 - `pattern_set` (String) The name of the log pattern set.
 
 
@@ -344,7 +383,7 @@ Optional:
 <a id="nestedatt--custom_components"></a>
 ### Nested Schema for `custom_components`
 
-Optional:
+Required:
 
 - `component_name` (String) The name of the component.
 - `resource_list` (List of String) The list of resource ARNs that belong to the component.
@@ -353,7 +392,7 @@ Optional:
 <a id="nestedatt--log_pattern_sets"></a>
 ### Nested Schema for `log_pattern_sets`
 
-Optional:
+Required:
 
 - `log_patterns` (Attributes List) The log patterns of a set. (see [below for nested schema](#nestedatt--log_pattern_sets--log_patterns))
 - `pattern_set_name` (String) The name of the log pattern set.
@@ -361,7 +400,7 @@ Optional:
 <a id="nestedatt--log_pattern_sets--log_patterns"></a>
 ### Nested Schema for `log_pattern_sets.log_patterns`
 
-Optional:
+Required:
 
 - `pattern` (String) The log pattern.
 - `pattern_name` (String) The name of the log pattern.
@@ -372,7 +411,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

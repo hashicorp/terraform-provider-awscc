@@ -40,18 +40,12 @@ Resource schema for LookoutEquipment InferenceScheduler.
 
 Required:
 
-- `inference_input_name_configuration` (Attributes) Specifies configuration information for the input data for the inference, including timestamp format and delimiter. (see [below for nested schema](#nestedatt--data_input_configuration--inference_input_name_configuration))
-- `input_time_zone_offset` (String) Indicates the difference between your time zone and Greenwich Mean Time (GMT).
 - `s3_input_configuration` (Attributes) Specifies configuration information for the input data for the inference, including input data S3 location. (see [below for nested schema](#nestedatt--data_input_configuration--s3_input_configuration))
 
-<a id="nestedatt--data_input_configuration--inference_input_name_configuration"></a>
-### Nested Schema for `data_input_configuration.inference_input_name_configuration`
+Optional:
 
-Required:
-
-- `component_timestamp_delimiter` (String) Indicates the delimiter character used between items in the data.
-- `timestamp_format` (String) The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).
-
+- `inference_input_name_configuration` (Attributes) Specifies configuration information for the input data for the inference, including timestamp format and delimiter. (see [below for nested schema](#nestedatt--data_input_configuration--inference_input_name_configuration))
+- `input_time_zone_offset` (String) Indicates the difference between your time zone and Greenwich Mean Time (GMT).
 
 <a id="nestedatt--data_input_configuration--s3_input_configuration"></a>
 ### Nested Schema for `data_input_configuration.s3_input_configuration`
@@ -59,7 +53,19 @@ Required:
 Required:
 
 - `bucket` (String)
+
+Optional:
+
 - `prefix` (String)
+
+
+<a id="nestedatt--data_input_configuration--inference_input_name_configuration"></a>
+### Nested Schema for `data_input_configuration.inference_input_name_configuration`
+
+Optional:
+
+- `component_timestamp_delimiter` (String) Indicates the delimiter character used between items in the data.
+- `timestamp_format` (String) The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).
 
 
 
@@ -68,8 +74,11 @@ Required:
 
 Required:
 
-- `kms_key_id` (String) The ID number for the AWS KMS key used to encrypt the inference output.
 - `s3_output_configuration` (Attributes) Specifies configuration information for the output results from the inference, including output S3 location. (see [below for nested schema](#nestedatt--data_output_configuration--s3_output_configuration))
+
+Optional:
+
+- `kms_key_id` (String) The ID number for the AWS KMS key used to encrypt the inference output.
 
 <a id="nestedatt--data_output_configuration--s3_output_configuration"></a>
 ### Nested Schema for `data_output_configuration.s3_output_configuration`
@@ -77,6 +86,9 @@ Required:
 Required:
 
 - `bucket` (String)
+
+Optional:
+
 - `prefix` (String)
 
 
@@ -84,7 +96,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key for the specified tag.
 - `value` (String) The value for the specified tag.

@@ -64,7 +64,7 @@ Optional:
 <a id="nestedatt--targets"></a>
 ### Nested Schema for `targets`
 
-Optional:
+Required:
 
 - `key` (String)
 - `values` (List of String)

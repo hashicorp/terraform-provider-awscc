@@ -33,6 +33,10 @@ Resource Type definition for AWS::CloudFront::Distribution
 
 Required:
 
+- `enabled` (Boolean)
+
+Optional:
+
 - `aliases` (List of String)
 - `cache_behaviors` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--cache_behaviors))
 - `cnames` (List of String)
@@ -41,7 +45,6 @@ Required:
 - `custom_origin` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--custom_origin))
 - `default_cache_behavior` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior))
 - `default_root_object` (String)
-- `enabled` (Boolean)
 - `http_version` (String)
 - `ipv6_enabled` (Boolean)
 - `logging` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--logging))
@@ -58,6 +61,12 @@ Required:
 
 Required:
 
+- `path_pattern` (String)
+- `target_origin_id` (String)
+- `viewer_protocol_policy` (String)
+
+Optional:
+
 - `allowed_methods` (List of String)
 - `cache_policy_id` (String)
 - `cached_methods` (List of String)
@@ -70,23 +79,23 @@ Required:
 - `max_ttl` (Number)
 - `min_ttl` (Number)
 - `origin_request_policy_id` (String)
-- `path_pattern` (String)
 - `realtime_log_config_arn` (String)
 - `response_headers_policy_id` (String)
 - `smooth_streaming` (Boolean)
-- `target_origin_id` (String)
 - `trusted_key_groups` (List of String)
 - `trusted_signers` (List of String)
-- `viewer_protocol_policy` (String)
 
 <a id="nestedatt--distribution_config--cache_behaviors--forwarded_values"></a>
 ### Nested Schema for `distribution_config.cache_behaviors.forwarded_values`
 
 Required:
 
+- `query_string` (Boolean)
+
+Optional:
+
 - `cookies` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--cache_behaviors--forwarded_values--cookies))
 - `headers` (List of String)
-- `query_string` (Boolean)
 - `query_string_cache_keys` (List of String)
 
 <a id="nestedatt--distribution_config--cache_behaviors--forwarded_values--cookies"></a>
@@ -95,6 +104,9 @@ Required:
 Required:
 
 - `forward` (String)
+
+Optional:
+
 - `whitelisted_names` (List of String)
 
 
@@ -102,7 +114,7 @@ Required:
 <a id="nestedatt--distribution_config--cache_behaviors--function_associations"></a>
 ### Nested Schema for `distribution_config.cache_behaviors.function_associations`
 
-Required:
+Optional:
 
 - `event_type` (String)
 - `function_arn` (String)
@@ -111,7 +123,7 @@ Required:
 <a id="nestedatt--distribution_config--cache_behaviors--lambda_function_associations"></a>
 ### Nested Schema for `distribution_config.cache_behaviors.lambda_function_associations`
 
-Required:
+Optional:
 
 - `event_type` (String)
 - `include_body` (Boolean)
@@ -124,8 +136,11 @@ Required:
 
 Required:
 
-- `error_caching_min_ttl` (Number)
 - `error_code` (Number)
+
+Optional:
+
+- `error_caching_min_ttl` (Number)
 - `response_code` (Number)
 - `response_page_path` (String)
 
@@ -136,16 +151,24 @@ Required:
 Required:
 
 - `dns_name` (String)
-- `http_port` (Number)
-- `https_port` (Number)
 - `origin_protocol_policy` (String)
 - `origin_ssl_protocols` (List of String)
+
+Optional:
+
+- `http_port` (Number)
+- `https_port` (Number)
 
 
 <a id="nestedatt--distribution_config--default_cache_behavior"></a>
 ### Nested Schema for `distribution_config.default_cache_behavior`
 
 Required:
+
+- `target_origin_id` (String)
+- `viewer_protocol_policy` (String)
+
+Optional:
 
 - `allowed_methods` (List of String)
 - `cache_policy_id` (String)
@@ -162,19 +185,20 @@ Required:
 - `realtime_log_config_arn` (String)
 - `response_headers_policy_id` (String)
 - `smooth_streaming` (Boolean)
-- `target_origin_id` (String)
 - `trusted_key_groups` (List of String)
 - `trusted_signers` (List of String)
-- `viewer_protocol_policy` (String)
 
 <a id="nestedatt--distribution_config--default_cache_behavior--forwarded_values"></a>
 ### Nested Schema for `distribution_config.default_cache_behavior.forwarded_values`
 
 Required:
 
+- `query_string` (Boolean)
+
+Optional:
+
 - `cookies` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior--forwarded_values--cookies))
 - `headers` (List of String)
-- `query_string` (Boolean)
 - `query_string_cache_keys` (List of String)
 
 <a id="nestedatt--distribution_config--default_cache_behavior--forwarded_values--cookies"></a>
@@ -183,6 +207,9 @@ Required:
 Required:
 
 - `forward` (String)
+
+Optional:
+
 - `whitelisted_names` (List of String)
 
 
@@ -190,7 +217,7 @@ Required:
 <a id="nestedatt--distribution_config--default_cache_behavior--function_associations"></a>
 ### Nested Schema for `distribution_config.default_cache_behavior.function_associations`
 
-Required:
+Optional:
 
 - `event_type` (String)
 - `function_arn` (String)
@@ -199,7 +226,7 @@ Required:
 <a id="nestedatt--distribution_config--default_cache_behavior--lambda_function_associations"></a>
 ### Nested Schema for `distribution_config.default_cache_behavior.lambda_function_associations`
 
-Required:
+Optional:
 
 - `event_type` (String)
 - `include_body` (Boolean)
@@ -213,6 +240,9 @@ Required:
 Required:
 
 - `bucket` (String)
+
+Optional:
+
 - `include_cookies` (Boolean)
 - `prefix` (String)
 
@@ -222,8 +252,11 @@ Required:
 
 Required:
 
-- `items` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--origin_groups--items))
 - `quantity` (Number)
+
+Optional:
+
+- `items` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--origin_groups--items))
 
 <a id="nestedatt--distribution_config--origin_groups--items"></a>
 ### Nested Schema for `distribution_config.origin_groups.items`
@@ -275,11 +308,14 @@ Required:
 
 Required:
 
+- `domain_name` (String)
+- `id` (String)
+
+Optional:
+
 - `connection_attempts` (Number)
 - `connection_timeout` (Number)
 - `custom_origin_config` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--origins--custom_origin_config))
-- `domain_name` (String)
-- `id` (String)
 - `origin_custom_headers` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--origins--origin_custom_headers))
 - `origin_path` (String)
 - `origin_shield` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--origins--origin_shield))
@@ -290,10 +326,13 @@ Required:
 
 Required:
 
+- `origin_protocol_policy` (String)
+
+Optional:
+
 - `http_port` (Number)
 - `https_port` (Number)
 - `origin_keepalive_timeout` (Number)
-- `origin_protocol_policy` (String)
 - `origin_read_timeout` (Number)
 - `origin_ssl_protocols` (List of String)
 
@@ -310,7 +349,7 @@ Required:
 <a id="nestedatt--distribution_config--origins--origin_shield"></a>
 ### Nested Schema for `distribution_config.origins.origin_shield`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 - `origin_shield_region` (String)
@@ -319,7 +358,7 @@ Required:
 <a id="nestedatt--distribution_config--origins--s3_origin_config"></a>
 ### Nested Schema for `distribution_config.origins.s3_origin_config`
 
-Required:
+Optional:
 
 - `origin_access_identity` (String)
 
@@ -337,8 +376,11 @@ Required:
 
 Required:
 
-- `locations` (List of String)
 - `restriction_type` (String)
+
+Optional:
+
+- `locations` (List of String)
 
 
 
@@ -348,13 +390,16 @@ Required:
 Required:
 
 - `dns_name` (String)
+
+Optional:
+
 - `origin_access_identity` (String)
 
 
 <a id="nestedatt--distribution_config--viewer_certificate"></a>
 ### Nested Schema for `distribution_config.viewer_certificate`
 
-Required:
+Optional:
 
 - `acm_certificate_arn` (String)
 - `cloudfront_default_certificate` (Boolean)
@@ -367,7 +412,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

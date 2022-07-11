@@ -34,7 +34,7 @@ Mitigation actions can be used to take actions to mitigate issues that were foun
 <a id="nestedatt--action_params"></a>
 ### Nested Schema for `action_params`
 
-Required:
+Optional:
 
 - `add_things_to_thing_group_params` (Attributes) Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine. (see [below for nested schema](#nestedatt--action_params--add_things_to_thing_group_params))
 - `enable_io_t_logging_params` (Attributes) Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail. (see [below for nested schema](#nestedatt--action_params--enable_io_t_logging_params))
@@ -48,8 +48,11 @@ Required:
 
 Required:
 
-- `override_dynamic_groups` (Boolean) Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.
 - `thing_group_names` (Set of String) The list of groups to which you want to add the things that triggered the mitigation action.
+
+Optional:
+
+- `override_dynamic_groups` (Boolean) Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.
 
 
 <a id="nestedatt--action_params--enable_io_t_logging_params"></a>
@@ -97,7 +100,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The tag's key.
 - `value` (String) The tag's value.
