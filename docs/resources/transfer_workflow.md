@@ -34,7 +34,7 @@ Resource Type definition for AWS::Transfer::Workflow
 <a id="nestedatt--steps"></a>
 ### Nested Schema for `steps`
 
-Required:
+Optional:
 
 - `copy_step_details` (Attributes) Details for a step that performs a file copy. (see [below for nested schema](#nestedatt--steps--copy_step_details))
 - `custom_step_details` (Attributes) Details for a step that invokes a lambda function. (see [below for nested schema](#nestedatt--steps--custom_step_details))
@@ -45,7 +45,7 @@ Required:
 <a id="nestedatt--steps--copy_step_details"></a>
 ### Nested Schema for `steps.copy_step_details`
 
-Required:
+Optional:
 
 - `destination_file_location` (Attributes) Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps. (see [below for nested schema](#nestedatt--steps--copy_step_details--destination_file_location))
 - `name` (String) The name of the step, used as an identifier.
@@ -55,14 +55,14 @@ Required:
 <a id="nestedatt--steps--copy_step_details--destination_file_location"></a>
 ### Nested Schema for `steps.copy_step_details.destination_file_location`
 
-Required:
+Optional:
 
 - `s3_file_location` (Attributes) Specifies the details for the S3 file being copied. (see [below for nested schema](#nestedatt--steps--copy_step_details--destination_file_location--s3_file_location))
 
 <a id="nestedatt--steps--copy_step_details--destination_file_location--s3_file_location"></a>
 ### Nested Schema for `steps.copy_step_details.destination_file_location.s3_file_location`
 
-Required:
+Optional:
 
 - `bucket` (String) Specifies the S3 bucket that contains the file being copied.
 - `key` (String) The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
@@ -73,7 +73,7 @@ Required:
 <a id="nestedatt--steps--custom_step_details"></a>
 ### Nested Schema for `steps.custom_step_details`
 
-Required:
+Optional:
 
 - `name` (String) The name of the step, used as an identifier.
 - `source_file_location` (String) Specifies which file to use as input to the workflow step.
@@ -84,7 +84,7 @@ Required:
 <a id="nestedatt--steps--delete_step_details"></a>
 ### Nested Schema for `steps.delete_step_details`
 
-Required:
+Optional:
 
 - `name` (String) The name of the step, used as an identifier.
 - `source_file_location` (String) Specifies which file to use as input to the workflow step.
@@ -93,7 +93,7 @@ Required:
 <a id="nestedatt--steps--tag_step_details"></a>
 ### Nested Schema for `steps.tag_step_details`
 
-Required:
+Optional:
 
 - `name` (String) The name of the step, used as an identifier.
 - `source_file_location` (String) Specifies which file to use as input to the workflow step.
@@ -181,7 +181,7 @@ Optional:
 <a id="nestedatt--on_exception_steps--tag_step_details--tags"></a>
 ### Nested Schema for `on_exception_steps.tag_step_details.tags`
 
-Optional:
+Required:
 
 - `key` (String) The name assigned to the tag that you create.
 - `value` (String) The value that corresponds to the key.
@@ -192,7 +192,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The name assigned to the tag that you create.
 - `value` (String) Contains one or more values that you assigned to the key name you create.

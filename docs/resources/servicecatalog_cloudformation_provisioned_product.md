@@ -41,7 +41,7 @@ Resource Schema for AWS::ServiceCatalog::CloudFormationProvisionedProduct
 <a id="nestedatt--provisioning_parameters"></a>
 ### Nested Schema for `provisioning_parameters`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -64,7 +64,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

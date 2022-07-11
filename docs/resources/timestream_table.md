@@ -35,9 +35,12 @@ The AWS::Timestream::Table resource creates a Timestream Table.
 <a id="nestedatt--magnetic_store_write_properties"></a>
 ### Nested Schema for `magnetic_store_write_properties`
 
-Optional:
+Required:
 
 - `enable_magnetic_store_writes` (Boolean) Boolean flag indicating whether magnetic store writes are enabled.
+
+Optional:
+
 - `magnetic_store_rejected_data_location` (Attributes) Location to store information about records that were asynchronously rejected during magnetic store writes. (see [below for nested schema](#nestedatt--magnetic_store_write_properties--magnetic_store_rejected_data_location))
 
 <a id="nestedatt--magnetic_store_write_properties--magnetic_store_rejected_data_location"></a>
@@ -50,10 +53,13 @@ Optional:
 <a id="nestedatt--magnetic_store_write_properties--magnetic_store_rejected_data_location--s3_configuration"></a>
 ### Nested Schema for `magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration`
 
-Optional:
+Required:
 
 - `bucket_name` (String) The bucket name used to store the data.
 - `encryption_option` (String) Either SSE_KMS or SSE_S3.
+
+Optional:
+
 - `kms_key_id` (String) Must be provided if SSE_KMS is specified as the encryption option
 - `object_key_prefix` (String) String used to prefix all data in the bucket.
 

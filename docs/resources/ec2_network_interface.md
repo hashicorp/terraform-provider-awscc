@@ -41,7 +41,7 @@ The AWS::EC2::NetworkInterface resource creates network interface
 <a id="nestedatt--ipv_6_addresses"></a>
 ### Nested Schema for `ipv_6_addresses`
 
-Optional:
+Required:
 
 - `ipv_6_address` (String)
 
@@ -49,7 +49,7 @@ Optional:
 <a id="nestedatt--private_ip_addresses"></a>
 ### Nested Schema for `private_ip_addresses`
 
-Optional:
+Required:
 
 - `primary` (Boolean)
 - `private_ip_address` (String)
@@ -58,7 +58,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

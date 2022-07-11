@@ -39,7 +39,7 @@ Definition of AWS::RefactorSpaces::Service Resource Type
 <a id="nestedatt--lambda_endpoint"></a>
 ### Nested Schema for `lambda_endpoint`
 
-Optional:
+Required:
 
 - `arn` (String)
 
@@ -47,7 +47,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) A string used to identify this tag
 - `value` (String) A string containing the value for the tag
@@ -56,10 +56,13 @@ Optional:
 <a id="nestedatt--url_endpoint"></a>
 ### Nested Schema for `url_endpoint`
 
+Required:
+
+- `url` (String)
+
 Optional:
 
 - `health_url` (String)
-- `url` (String)
 
 ## Import
 

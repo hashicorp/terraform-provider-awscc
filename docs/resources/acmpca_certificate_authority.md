@@ -38,7 +38,7 @@ Private certificate authority.
 <a id="nestedatt--subject"></a>
 ### Nested Schema for `subject`
 
-Required:
+Optional:
 
 - `common_name` (String)
 - `country` (String)
@@ -93,7 +93,7 @@ Optional:
 <a id="nestedatt--csr_extensions--subject_information_access"></a>
 ### Nested Schema for `csr_extensions.subject_information_access`
 
-Optional:
+Required:
 
 - `access_location` (Attributes) Structure that contains X.509 GeneralName information. Assign one and ONLY one field. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location))
 - `access_method` (Attributes) Structure that contains X.509 AccessMethod information. Assign one and ONLY one field. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_method))
@@ -136,7 +136,7 @@ Optional:
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--uniform_resource_identifier--custom_attributes"></a>
 ### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier.custom_attributes`
 
-Optional:
+Required:
 
 - `object_identifier` (String) String that contains X.509 ObjectIdentifier information.
 - `value` (String)
@@ -146,7 +146,7 @@ Optional:
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--edi_party_name"></a>
 ### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
 
-Optional:
+Required:
 
 - `name_assigner` (String)
 - `party_name` (String)
@@ -155,7 +155,7 @@ Optional:
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--other_name"></a>
 ### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
 
-Optional:
+Required:
 
 - `type_id` (String) String that contains X.509 ObjectIdentifier information.
 - `value` (String)

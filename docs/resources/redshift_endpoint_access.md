@@ -39,7 +39,7 @@ Resource schema for a Redshift-managed VPC endpoint.
 <a id="nestedatt--vpc_endpoint"></a>
 ### Nested Schema for `vpc_endpoint`
 
-Read-Only:
+Optional:
 
 - `network_interfaces` (Attributes List) One or more network interfaces of the endpoint. Also known as an interface endpoint. (see [below for nested schema](#nestedatt--vpc_endpoint--network_interfaces))
 - `vpc_endpoint_id` (String) The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
@@ -48,7 +48,7 @@ Read-Only:
 <a id="nestedatt--vpc_endpoint--network_interfaces"></a>
 ### Nested Schema for `vpc_endpoint.network_interfaces`
 
-Read-Only:
+Optional:
 
 - `availability_zone` (String) The Availability Zone.
 - `network_interface_id` (String) The network interface identifier.
@@ -60,7 +60,7 @@ Read-Only:
 <a id="nestedatt--vpc_security_groups"></a>
 ### Nested Schema for `vpc_security_groups`
 
-Read-Only:
+Optional:
 
 - `status` (String) The status of the VPC security group.
 - `vpc_security_group_id` (String) The identifier of the VPC security group.

@@ -43,24 +43,27 @@ Resource Type definition for AWS::MSK::Cluster
 
 Required:
 
-- `broker_az_distribution` (String)
 - `client_subnets` (List of String)
-- `connectivity_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info))
 - `instance_type` (String)
+
+Optional:
+
+- `broker_az_distribution` (String)
+- `connectivity_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info))
 - `security_groups` (List of String)
 - `storage_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info))
 
 <a id="nestedatt--broker_node_group_info--connectivity_info"></a>
 ### Nested Schema for `broker_node_group_info.connectivity_info`
 
-Required:
+Optional:
 
 - `public_access` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--public_access))
 
 <a id="nestedatt--broker_node_group_info--connectivity_info--public_access"></a>
 ### Nested Schema for `broker_node_group_info.connectivity_info.public_access`
 
-Required:
+Optional:
 
 - `type` (String)
 
@@ -69,14 +72,14 @@ Required:
 <a id="nestedatt--broker_node_group_info--storage_info"></a>
 ### Nested Schema for `broker_node_group_info.storage_info`
 
-Required:
+Optional:
 
 - `ebs_storage_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info--ebs_storage_info))
 
 <a id="nestedatt--broker_node_group_info--storage_info--ebs_storage_info"></a>
 ### Nested Schema for `broker_node_group_info.storage_info.ebs_storage_info`
 
-Required:
+Optional:
 
 - `provisioned_throughput` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info--ebs_storage_info--provisioned_throughput))
 - `volume_size` (Number)
@@ -84,7 +87,7 @@ Required:
 <a id="nestedatt--broker_node_group_info--storage_info--ebs_storage_info--provisioned_throughput"></a>
 ### Nested Schema for `broker_node_group_info.storage_info.ebs_storage_info.volume_size`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 - `volume_throughput` (Number)
@@ -113,7 +116,7 @@ Optional:
 <a id="nestedatt--client_authentication--sasl--iam"></a>
 ### Nested Schema for `client_authentication.sasl.iam`
 
-Optional:
+Required:
 
 - `enabled` (Boolean)
 
@@ -121,7 +124,7 @@ Optional:
 <a id="nestedatt--client_authentication--sasl--scram"></a>
 ### Nested Schema for `client_authentication.sasl.scram`
 
-Optional:
+Required:
 
 - `enabled` (Boolean)
 
@@ -139,7 +142,7 @@ Optional:
 <a id="nestedatt--client_authentication--unauthenticated"></a>
 ### Nested Schema for `client_authentication.unauthenticated`
 
-Optional:
+Required:
 
 - `enabled` (Boolean)
 
@@ -148,7 +151,7 @@ Optional:
 <a id="nestedatt--configuration_info"></a>
 ### Nested Schema for `configuration_info`
 
-Optional:
+Required:
 
 - `arn` (String)
 - `revision` (Number)
@@ -165,7 +168,7 @@ Optional:
 <a id="nestedatt--encryption_info--encryption_at_rest"></a>
 ### Nested Schema for `encryption_info.encryption_at_rest`
 
-Optional:
+Required:
 
 - `data_volume_kms_key_id` (String)
 
@@ -183,7 +186,7 @@ Optional:
 <a id="nestedatt--logging_info"></a>
 ### Nested Schema for `logging_info`
 
-Optional:
+Required:
 
 - `broker_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs))
 
@@ -199,28 +202,37 @@ Optional:
 <a id="nestedatt--logging_info--broker_logs--cloudwatch_logs"></a>
 ### Nested Schema for `logging_info.broker_logs.cloudwatch_logs`
 
-Optional:
+Required:
 
 - `enabled` (Boolean)
+
+Optional:
+
 - `log_group` (String)
 
 
 <a id="nestedatt--logging_info--broker_logs--firehose"></a>
 ### Nested Schema for `logging_info.broker_logs.firehose`
 
+Required:
+
+- `enabled` (Boolean)
+
 Optional:
 
 - `delivery_stream` (String)
-- `enabled` (Boolean)
 
 
 <a id="nestedatt--logging_info--broker_logs--s3"></a>
 ### Nested Schema for `logging_info.broker_logs.s3`
 
+Required:
+
+- `enabled` (Boolean)
+
 Optional:
 
 - `bucket` (String)
-- `enabled` (Boolean)
 - `prefix` (String)
 
 
@@ -229,7 +241,7 @@ Optional:
 <a id="nestedatt--open_monitoring"></a>
 ### Nested Schema for `open_monitoring`
 
-Optional:
+Required:
 
 - `prometheus` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring--prometheus))
 
@@ -244,7 +256,7 @@ Optional:
 <a id="nestedatt--open_monitoring--prometheus--jmx_exporter"></a>
 ### Nested Schema for `open_monitoring.prometheus.jmx_exporter`
 
-Optional:
+Required:
 
 - `enabled_in_broker` (Boolean)
 
@@ -252,7 +264,7 @@ Optional:
 <a id="nestedatt--open_monitoring--prometheus--node_exporter"></a>
 ### Nested Schema for `open_monitoring.prometheus.node_exporter`
 
-Optional:
+Required:
 
 - `enabled_in_broker` (Boolean)
 

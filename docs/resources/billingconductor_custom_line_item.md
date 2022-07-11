@@ -49,16 +49,19 @@ Optional:
 <a id="nestedatt--custom_line_item_charge_details"></a>
 ### Nested Schema for `custom_line_item_charge_details`
 
+Required:
+
+- `type` (String)
+
 Optional:
 
 - `flat` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--flat))
 - `percentage` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--percentage))
-- `type` (String)
 
 <a id="nestedatt--custom_line_item_charge_details--flat"></a>
 ### Nested Schema for `custom_line_item_charge_details.flat`
 
-Optional:
+Required:
 
 - `charge_value` (Number)
 
@@ -66,17 +69,20 @@ Optional:
 <a id="nestedatt--custom_line_item_charge_details--percentage"></a>
 ### Nested Schema for `custom_line_item_charge_details.percentage`
 
+Required:
+
+- `percentage_value` (Number)
+
 Optional:
 
 - `child_associated_resources` (Set of String)
-- `percentage_value` (Number)
 
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

@@ -74,7 +74,7 @@ Optional:
 <a id="nestedatt--parameters"></a>
 ### Nested Schema for `parameters`
 
-Optional:
+Required:
 
 - `parameter_key` (String) The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.
 - `parameter_value` (String) The input value associated with the parameter.
@@ -83,11 +83,14 @@ Optional:
 <a id="nestedatt--stack_instances_group"></a>
 ### Nested Schema for `stack_instances_group`
 
-Optional:
+Required:
 
 - `deployment_targets` (Attributes) The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions. (see [below for nested schema](#nestedatt--stack_instances_group--deployment_targets))
-- `parameter_overrides` (Attributes Set) A list of stack set parameters whose values you want to override in the selected stack instances. (see [below for nested schema](#nestedatt--stack_instances_group--parameter_overrides))
 - `regions` (Set of String) The names of one or more Regions where you want to create stack instances using the specified AWS account(s).
+
+Optional:
+
+- `parameter_overrides` (Attributes Set) A list of stack set parameters whose values you want to override in the selected stack instances. (see [below for nested schema](#nestedatt--stack_instances_group--parameter_overrides))
 
 <a id="nestedatt--stack_instances_group--deployment_targets"></a>
 ### Nested Schema for `stack_instances_group.deployment_targets`
@@ -102,7 +105,7 @@ Optional:
 <a id="nestedatt--stack_instances_group--parameter_overrides"></a>
 ### Nested Schema for `stack_instances_group.parameter_overrides`
 
-Optional:
+Required:
 
 - `parameter_key` (String) The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.
 - `parameter_value` (String) The input value associated with the parameter.
@@ -112,7 +115,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.
 - `value` (String) A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.

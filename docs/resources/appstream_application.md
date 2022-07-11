@@ -51,7 +51,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `tag_key` (String)
 - `tag_value` (String)

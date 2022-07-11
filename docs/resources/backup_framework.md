@@ -46,8 +46,11 @@ Contains detailed information about a framework. Frameworks contain controls, wh
 
 Required:
 
-- `control_input_parameters` (Attributes Set) A list of ParameterName and ParameterValue pairs. (see [below for nested schema](#nestedatt--framework_controls--control_input_parameters))
 - `control_name` (String) The name of a control. This name is between 1 and 256 characters.
+
+Optional:
+
+- `control_input_parameters` (Attributes Set) A list of ParameterName and ParameterValue pairs. (see [below for nested schema](#nestedatt--framework_controls--control_input_parameters))
 - `control_scope` (Attributes) The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. (see [below for nested schema](#nestedatt--framework_controls--control_scope))
 
 <a id="nestedatt--framework_controls--control_input_parameters"></a>
@@ -62,7 +65,7 @@ Required:
 <a id="nestedatt--framework_controls--control_scope"></a>
 ### Nested Schema for `framework_controls.control_scope`
 
-Required:
+Optional:
 
 - `compliance_resource_ids` (List of String) The ID of the only AWS resource that you want your control scope to contain.
 - `compliance_resource_types` (List of String) Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.
@@ -71,7 +74,7 @@ Required:
 <a id="nestedatt--framework_controls--control_scope--tags"></a>
 ### Nested Schema for `framework_controls.control_scope.tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

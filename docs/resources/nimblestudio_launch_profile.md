@@ -45,6 +45,11 @@ Required:
 - `clipboard_mode` (String)
 - `ec_2_instance_types` (List of String) <p>The EC2 instance types that users can select from when launching a streaming session
             with this launch profile.</p>
+- `streaming_image_ids` (List of String) <p>The streaming images that users can select from when launching a streaming session
+            with this launch profile.</p>
+
+Optional:
+
 - `max_session_length_in_minutes` (Number) <p>The length of time, in minutes, that a streaming session can be active before it is
             stopped or terminated. After this point, Nimble Studio automatically terminates or
             stops the session. The default length of time is 690 minutes, and the maximum length of
@@ -60,13 +65,11 @@ Required:
             stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will
             automatically be stopped by AWS (instead of terminated).</p>
 - `session_storage` (Attributes) <p>The configuration for a streaming session’s upload storage.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage))
-- `streaming_image_ids` (List of String) <p>The streaming images that users can select from when launching a streaming session
-            with this launch profile.</p>
 
 <a id="nestedatt--stream_configuration--session_storage"></a>
 ### Nested Schema for `stream_configuration.session_storage`
 
-Required:
+Optional:
 
 - `mode` (List of String) <p>Allows artists to upload files to their workstations. The only valid option is
                 <code>UPLOAD</code>.</p>
@@ -76,7 +79,7 @@ Required:
 <a id="nestedatt--stream_configuration--session_storage--root"></a>
 ### Nested Schema for `stream_configuration.session_storage.root`
 
-Required:
+Optional:
 
 - `linux` (String) <p>The folder path in Linux workstations where files are uploaded.</p>
 - `windows` (String) <p>The folder path in Windows workstations where files are uploaded.</p>

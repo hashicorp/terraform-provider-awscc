@@ -37,31 +37,40 @@ Resource Type definition for AWS::SSM::ResourceDataSync
 <a id="nestedatt--s3_destination"></a>
 ### Nested Schema for `s3_destination`
 
-Optional:
+Required:
 
 - `bucket_name` (String)
-- `bucket_prefix` (String)
 - `bucket_region` (String)
-- `kms_key_arn` (String)
 - `sync_format` (String)
+
+Optional:
+
+- `bucket_prefix` (String)
+- `kms_key_arn` (String)
 
 
 <a id="nestedatt--sync_source"></a>
 ### Nested Schema for `sync_source`
 
+Required:
+
+- `source_regions` (List of String)
+- `source_type` (String)
+
 Optional:
 
 - `aws_organizations_source` (Attributes) (see [below for nested schema](#nestedatt--sync_source--aws_organizations_source))
 - `include_future_regions` (Boolean)
-- `source_regions` (List of String)
-- `source_type` (String)
 
 <a id="nestedatt--sync_source--aws_organizations_source"></a>
 ### Nested Schema for `sync_source.aws_organizations_source`
 
-Optional:
+Required:
 
 - `organization_source_type` (String)
+
+Optional:
+
 - `organizational_units` (List of String)
 
 ## Import

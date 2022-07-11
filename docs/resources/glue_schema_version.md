@@ -28,7 +28,7 @@ This resource represents an individual schema version of a schema defined in Glu
 <a id="nestedatt--schema"></a>
 ### Nested Schema for `schema`
 
-Required:
+Optional:
 
 - `registry_name` (String) Name of the registry to identify where the Schema is located.
 - `schema_arn` (String) Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.

@@ -36,7 +36,7 @@ Resource Type definition for AWS::Route53Resolver::ResolverRule
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -45,9 +45,12 @@ Optional:
 <a id="nestedatt--target_ips"></a>
 ### Nested Schema for `target_ips`
 
-Optional:
+Required:
 
 - `ip` (String) One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+
+Optional:
+
 - `port` (String) The port at Ip that you want to forward DNS queries to.
 
 ## Import

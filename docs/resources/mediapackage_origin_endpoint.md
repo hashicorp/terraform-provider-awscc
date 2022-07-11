@@ -43,7 +43,7 @@ Resource schema for AWS::MediaPackage::OriginEndpoint
 <a id="nestedatt--authorization"></a>
 ### Nested Schema for `authorization`
 
-Optional:
+Required:
 
 - `cdn_identifier_secret` (String) The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.
 - `secrets_role_arn` (String) The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
@@ -63,28 +63,34 @@ Optional:
 <a id="nestedatt--cmaf_package--encryption"></a>
 ### Nested Schema for `cmaf_package.encryption`
 
+Required:
+
+- `speke_key_provider` (Attributes) A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys. (see [below for nested schema](#nestedatt--cmaf_package--encryption--speke_key_provider))
+
 Optional:
 
 - `constant_initialization_vector` (String) An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
 - `key_rotation_interval_seconds` (Number) Time (in seconds) between each encryption key rotation.
-- `speke_key_provider` (Attributes) A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys. (see [below for nested schema](#nestedatt--cmaf_package--encryption--speke_key_provider))
 
 <a id="nestedatt--cmaf_package--encryption--speke_key_provider"></a>
 ### Nested Schema for `cmaf_package.encryption.speke_key_provider`
 
-Optional:
+Required:
 
-- `certificate_arn` (String) An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.
-- `encryption_contract_configuration` (Attributes) The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0. (see [below for nested schema](#nestedatt--cmaf_package--encryption--speke_key_provider--encryption_contract_configuration))
 - `resource_id` (String) The resource ID to include in key requests.
 - `role_arn` (String) An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.
 - `system_ids` (List of String) The system IDs to include in key requests.
 - `url` (String) The URL of the external key provider service.
 
-<a id="nestedatt--cmaf_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `cmaf_package.encryption.speke_key_provider.url`
-
 Optional:
+
+- `certificate_arn` (String) An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.
+- `encryption_contract_configuration` (Attributes) The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0. (see [below for nested schema](#nestedatt--cmaf_package--encryption--speke_key_provider--encryption_contract_configuration))
+
+<a id="nestedatt--cmaf_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
+### Nested Schema for `cmaf_package.encryption.speke_key_provider.encryption_contract_configuration`
+
+Required:
 
 - `preset_speke_20_audio` (String) A collection of audio encryption presets.
 - `preset_speke_20_video` (String) A collection of video encryption presets.
@@ -95,12 +101,15 @@ Optional:
 <a id="nestedatt--cmaf_package--hls_manifests"></a>
 ### Nested Schema for `cmaf_package.hls_manifests`
 
+Required:
+
+- `id` (String) The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.
+
 Optional:
 
 - `ad_markers` (String) This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. "DATERANGE" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.
 - `ad_triggers` (List of String) A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.
 - `ads_on_delivery_restrictions` (String) This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing "NONE" means no SCTE-35 messages become ads.  Choosing "RESTRICTED" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing "UNRESTRICTED" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing "BOTH" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.
-- `id` (String) The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.
 - `include_iframe_only_stream` (Boolean) When enabled, an I-Frame only stream will be included in the output.
 - `manifest_name` (String) An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.
 - `playlist_type` (String) The HTTP Live Streaming (HLS) playlist type. When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.
@@ -144,27 +153,33 @@ Optional:
 <a id="nestedatt--dash_package--encryption"></a>
 ### Nested Schema for `dash_package.encryption`
 
+Required:
+
+- `speke_key_provider` (Attributes) A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys. (see [below for nested schema](#nestedatt--dash_package--encryption--speke_key_provider))
+
 Optional:
 
 - `key_rotation_interval_seconds` (Number) Time (in seconds) between each encryption key rotation.
-- `speke_key_provider` (Attributes) A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys. (see [below for nested schema](#nestedatt--dash_package--encryption--speke_key_provider))
 
 <a id="nestedatt--dash_package--encryption--speke_key_provider"></a>
 ### Nested Schema for `dash_package.encryption.speke_key_provider`
 
-Optional:
+Required:
 
-- `certificate_arn` (String) An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.
-- `encryption_contract_configuration` (Attributes) The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0. (see [below for nested schema](#nestedatt--dash_package--encryption--speke_key_provider--encryption_contract_configuration))
 - `resource_id` (String) The resource ID to include in key requests.
 - `role_arn` (String) An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.
 - `system_ids` (List of String) The system IDs to include in key requests.
 - `url` (String) The URL of the external key provider service.
 
-<a id="nestedatt--dash_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `dash_package.encryption.speke_key_provider.url`
-
 Optional:
+
+- `certificate_arn` (String) An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.
+- `encryption_contract_configuration` (Attributes) The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0. (see [below for nested schema](#nestedatt--dash_package--encryption--speke_key_provider--encryption_contract_configuration))
+
+<a id="nestedatt--dash_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
+### Nested Schema for `dash_package.encryption.speke_key_provider.encryption_contract_configuration`
+
+Required:
 
 - `preset_speke_20_audio` (String) A collection of audio encryption presets.
 - `preset_speke_20_video` (String) A collection of video encryption presets.
@@ -203,30 +218,36 @@ Optional:
 <a id="nestedatt--hls_package--encryption"></a>
 ### Nested Schema for `hls_package.encryption`
 
+Required:
+
+- `speke_key_provider` (Attributes) A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys. (see [below for nested schema](#nestedatt--hls_package--encryption--speke_key_provider))
+
 Optional:
 
 - `constant_initialization_vector` (String) A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated.
 - `encryption_method` (String) The encryption method to use.
 - `key_rotation_interval_seconds` (Number) Interval (in seconds) between each encryption key rotation.
 - `repeat_ext_x_key` (Boolean) When enabled, the EXT-X-KEY tag will be repeated in output manifests.
-- `speke_key_provider` (Attributes) A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys. (see [below for nested schema](#nestedatt--hls_package--encryption--speke_key_provider))
 
 <a id="nestedatt--hls_package--encryption--speke_key_provider"></a>
 ### Nested Schema for `hls_package.encryption.speke_key_provider`
 
-Optional:
+Required:
 
-- `certificate_arn` (String) An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.
-- `encryption_contract_configuration` (Attributes) The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0. (see [below for nested schema](#nestedatt--hls_package--encryption--speke_key_provider--encryption_contract_configuration))
 - `resource_id` (String) The resource ID to include in key requests.
 - `role_arn` (String) An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.
 - `system_ids` (List of String) The system IDs to include in key requests.
 - `url` (String) The URL of the external key provider service.
 
-<a id="nestedatt--hls_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `hls_package.encryption.speke_key_provider.url`
-
 Optional:
+
+- `certificate_arn` (String) An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.
+- `encryption_contract_configuration` (Attributes) The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0. (see [below for nested schema](#nestedatt--hls_package--encryption--speke_key_provider--encryption_contract_configuration))
+
+<a id="nestedatt--hls_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
+### Nested Schema for `hls_package.encryption.speke_key_provider.encryption_contract_configuration`
+
+Required:
 
 - `preset_speke_20_audio` (String) A collection of audio encryption presets.
 - `preset_speke_20_video` (String) A collection of video encryption presets.
@@ -258,26 +279,29 @@ Optional:
 <a id="nestedatt--mss_package--encryption"></a>
 ### Nested Schema for `mss_package.encryption`
 
-Optional:
+Required:
 
 - `speke_key_provider` (Attributes) A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys. (see [below for nested schema](#nestedatt--mss_package--encryption--speke_key_provider))
 
 <a id="nestedatt--mss_package--encryption--speke_key_provider"></a>
 ### Nested Schema for `mss_package.encryption.speke_key_provider`
 
-Optional:
+Required:
 
-- `certificate_arn` (String) An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.
-- `encryption_contract_configuration` (Attributes) The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0. (see [below for nested schema](#nestedatt--mss_package--encryption--speke_key_provider--encryption_contract_configuration))
 - `resource_id` (String) The resource ID to include in key requests.
 - `role_arn` (String) An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.
 - `system_ids` (List of String) The system IDs to include in key requests.
 - `url` (String) The URL of the external key provider service.
 
-<a id="nestedatt--mss_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `mss_package.encryption.speke_key_provider.url`
-
 Optional:
+
+- `certificate_arn` (String) An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.
+- `encryption_contract_configuration` (Attributes) The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0. (see [below for nested schema](#nestedatt--mss_package--encryption--speke_key_provider--encryption_contract_configuration))
+
+<a id="nestedatt--mss_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
+### Nested Schema for `mss_package.encryption.speke_key_provider.encryption_contract_configuration`
+
+Required:
 
 - `preset_speke_20_audio` (String) A collection of audio encryption presets.
 - `preset_speke_20_video` (String) A collection of video encryption presets.
@@ -299,7 +323,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

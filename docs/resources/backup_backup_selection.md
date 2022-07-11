@@ -30,17 +30,20 @@ Resource Type definition for AWS::Backup::BackupSelection
 
 Required:
 
-- `conditions` (Attributes) (see [below for nested schema](#nestedatt--backup_selection--conditions))
 - `iam_role_arn` (String)
+- `selection_name` (String)
+
+Optional:
+
+- `conditions` (Attributes) (see [below for nested schema](#nestedatt--backup_selection--conditions))
 - `list_of_tags` (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--list_of_tags))
 - `not_resources` (List of String)
 - `resources` (List of String)
-- `selection_name` (String)
 
 <a id="nestedatt--backup_selection--conditions"></a>
 ### Nested Schema for `backup_selection.conditions`
 
-Required:
+Optional:
 
 - `string_equals` (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--conditions--string_equals))
 - `string_like` (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--conditions--string_like))
@@ -50,7 +53,7 @@ Required:
 <a id="nestedatt--backup_selection--conditions--string_equals"></a>
 ### Nested Schema for `backup_selection.conditions.string_equals`
 
-Required:
+Optional:
 
 - `condition_key` (String)
 - `condition_value` (String)
@@ -59,7 +62,7 @@ Required:
 <a id="nestedatt--backup_selection--conditions--string_like"></a>
 ### Nested Schema for `backup_selection.conditions.string_like`
 
-Required:
+Optional:
 
 - `condition_key` (String)
 - `condition_value` (String)
@@ -68,7 +71,7 @@ Required:
 <a id="nestedatt--backup_selection--conditions--string_not_equals"></a>
 ### Nested Schema for `backup_selection.conditions.string_not_equals`
 
-Required:
+Optional:
 
 - `condition_key` (String)
 - `condition_value` (String)
@@ -77,7 +80,7 @@ Required:
 <a id="nestedatt--backup_selection--conditions--string_not_like"></a>
 ### Nested Schema for `backup_selection.conditions.string_not_like`
 
-Required:
+Optional:
 
 - `condition_key` (String)
 - `condition_value` (String)

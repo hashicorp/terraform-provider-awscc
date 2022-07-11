@@ -34,7 +34,7 @@ Resource Type definition for AWS::LookoutMetrics::Alert
 <a id="nestedatt--action"></a>
 ### Nested Schema for `action`
 
-Required:
+Optional:
 
 - `lambda_configuration` (Attributes) Configuration options for a Lambda alert action. (see [below for nested schema](#nestedatt--action--lambda_configuration))
 - `sns_configuration` (Attributes) Configuration options for an SNS alert action. (see [below for nested schema](#nestedatt--action--sns_configuration))

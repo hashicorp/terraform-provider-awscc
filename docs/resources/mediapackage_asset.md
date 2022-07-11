@@ -36,7 +36,7 @@ Resource schema for AWS::MediaPackage::Asset
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -45,7 +45,7 @@ Optional:
 <a id="nestedatt--egress_endpoints"></a>
 ### Nested Schema for `egress_endpoints`
 
-Read-Only:
+Required:
 
 - `packaging_configuration_id` (String) The ID of the PackagingConfiguration being applied to the Asset.
 - `url` (String) The URL of the parent manifest for the repackaged Asset.

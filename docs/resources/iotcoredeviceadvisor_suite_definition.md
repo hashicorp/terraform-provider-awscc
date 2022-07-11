@@ -36,15 +36,18 @@ An example resource schema demonstrating some basic constructs and validation ru
 Required:
 
 - `device_permission_role_arn` (String) The device permission role arn of the test suite.
+- `root_group` (String) The root group of the test suite.
+
+Optional:
+
 - `devices` (Attributes List) The devices being tested in the test suite (see [below for nested schema](#nestedatt--suite_definition_configuration--devices))
 - `intended_for_qualification` (Boolean) Whether the tests are intended for qualification in a suite.
-- `root_group` (String) The root group of the test suite.
 - `suite_definition_name` (String) The Name of the suite definition.
 
 <a id="nestedatt--suite_definition_configuration--devices"></a>
 ### Nested Schema for `suite_definition_configuration.devices`
 
-Required:
+Optional:
 
 - `certificate_arn` (String)
 - `thing_arn` (String)
@@ -54,7 +57,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

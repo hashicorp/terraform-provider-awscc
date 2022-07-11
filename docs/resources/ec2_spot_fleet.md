@@ -28,10 +28,14 @@ Resource Type definition for AWS::EC2::SpotFleet
 
 Required:
 
+- `iam_fleet_role` (String)
+- `target_capacity` (Number)
+
+Optional:
+
 - `allocation_strategy` (String)
 - `context` (String)
 - `excess_capacity_termination_policy` (String)
-- `iam_fleet_role` (String)
 - `instance_interruption_behavior` (String)
 - `instance_pools_to_use_count` (Number)
 - `launch_specifications` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications))
@@ -44,7 +48,6 @@ Required:
 - `spot_maintenance_strategies` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--spot_maintenance_strategies))
 - `spot_max_total_price` (String)
 - `spot_price` (String)
-- `target_capacity` (Number)
 - `target_capacity_unit_type` (String)
 - `terminate_instances_with_expiration` (Boolean)
 - `type` (String)
@@ -56,10 +59,13 @@ Required:
 
 Required:
 
+- `image_id` (String)
+
+Optional:
+
 - `block_device_mappings` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--block_device_mappings))
 - `ebs_optimized` (Boolean)
 - `iam_instance_profile` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--iam_instance_profile))
-- `image_id` (String)
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements))
 - `instance_type` (String)
 - `kernel_id` (String)
@@ -81,6 +87,9 @@ Required:
 Required:
 
 - `device_name` (String)
+
+Optional:
+
 - `ebs` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--block_device_mappings--ebs))
 - `no_device` (String)
 - `virtual_name` (String)
@@ -88,7 +97,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--block_device_mappings--ebs"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.block_device_mappings.virtual_name`
 
-Required:
+Optional:
 
 - `delete_on_termination` (Boolean)
 - `encrypted` (Boolean)
@@ -102,7 +111,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--iam_instance_profile"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.iam_instance_profile`
 
-Required:
+Optional:
 
 - `arn` (String)
 
@@ -110,7 +119,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements`
 
-Required:
+Optional:
 
 - `accelerator_count` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--accelerator_count))
 - `accelerator_manufacturers` (List of String)
@@ -137,7 +146,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--accelerator_count"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -146,7 +155,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--accelerator_total_memory_mi_b"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -155,7 +164,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--baseline_ebs_bandwidth_mbps"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -164,7 +173,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--memory_gi_b_per_v_cpu"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -173,7 +182,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--memory_mi_b"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -182,7 +191,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--network_interface_count"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -191,7 +200,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--total_local_storage_gb"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -200,7 +209,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--v_cpu_count"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -210,7 +219,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--monitoring"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.monitoring`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 
@@ -218,7 +227,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--network_interfaces"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.network_interfaces`
 
-Required:
+Optional:
 
 - `associate_public_ip_address` (Boolean)
 - `delete_on_termination` (Boolean)
@@ -245,15 +254,18 @@ Required:
 
 Required:
 
-- `primary` (Boolean)
 - `private_ip_address` (String)
+
+Optional:
+
+- `primary` (Boolean)
 
 
 
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--placement"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.placement`
 
-Required:
+Optional:
 
 - `availability_zone` (String)
 - `group_name` (String)
@@ -271,7 +283,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--tag_specifications"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.tag_specifications`
 
-Required:
+Optional:
 
 - `resource_type` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--tag_specifications--tags))
@@ -290,7 +302,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs`
 
-Required:
+Optional:
 
 - `launch_template_specification` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--launch_template_specification))
 - `overrides` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides))
@@ -300,15 +312,18 @@ Required:
 
 Required:
 
+- `version` (String)
+
+Optional:
+
 - `launch_template_id` (String)
 - `launch_template_name` (String)
-- `version` (String)
 
 
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides`
 
-Required:
+Optional:
 
 - `availability_zone` (String)
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements))
@@ -321,7 +336,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity`
 
-Required:
+Optional:
 
 - `accelerator_count` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--accelerator_count))
 - `accelerator_manufacturers` (List of String)
@@ -348,7 +363,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--accelerator_count"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity.accelerator_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -357,7 +372,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--accelerator_total_memory_mi_b"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity.accelerator_total_memory_mi_b`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -366,7 +381,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--baseline_ebs_bandwidth_mbps"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity.baseline_ebs_bandwidth_mbps`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -375,7 +390,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--memory_gi_b_per_v_cpu"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity.memory_gi_b_per_v_cpu`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -384,7 +399,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--memory_mi_b"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity.memory_mi_b`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -393,7 +408,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--network_interface_count"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity.network_interface_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -402,7 +417,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--total_local_storage_gb"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity.total_local_storage_gb`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -411,7 +426,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--v_cpu_count"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity.v_cpu_count`
 
-Required:
+Optional:
 
 - `max` (Number)
 - `min` (Number)
@@ -423,7 +438,7 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--load_balancers_config"></a>
 ### Nested Schema for `spot_fleet_request_config_data.load_balancers_config`
 
-Required:
+Optional:
 
 - `classic_load_balancers_config` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--load_balancers_config--classic_load_balancers_config))
 - `target_groups_config` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--load_balancers_config--target_groups_config))
@@ -464,14 +479,14 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--spot_maintenance_strategies"></a>
 ### Nested Schema for `spot_fleet_request_config_data.spot_maintenance_strategies`
 
-Required:
+Optional:
 
 - `capacity_rebalance` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--spot_maintenance_strategies--capacity_rebalance))
 
 <a id="nestedatt--spot_fleet_request_config_data--spot_maintenance_strategies--capacity_rebalance"></a>
 ### Nested Schema for `spot_fleet_request_config_data.spot_maintenance_strategies.capacity_rebalance`
 
-Required:
+Optional:
 
 - `replacement_strategy` (String)
 - `termination_delay` (Number)

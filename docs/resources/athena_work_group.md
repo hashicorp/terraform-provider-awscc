@@ -36,7 +36,7 @@ Resource schema for AWS::Athena::WorkGroup
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -59,8 +59,11 @@ Optional:
 
 Optional:
 
-- `effective_engine_version` (String) Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
 - `selected_engine_version` (String) The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
+
+Read-Only:
+
+- `effective_engine_version` (String) Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
 
 
 <a id="nestedatt--work_group_configuration--result_configuration"></a>
@@ -74,9 +77,12 @@ Optional:
 <a id="nestedatt--work_group_configuration--result_configuration--encryption_configuration"></a>
 ### Nested Schema for `work_group_configuration.result_configuration.encryption_configuration`
 
-Optional:
+Required:
 
 - `encryption_option` (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
+
+Optional:
+
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 
 
@@ -100,8 +106,11 @@ Optional:
 
 Optional:
 
-- `effective_engine_version` (String) Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
 - `selected_engine_version` (String) The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
+
+Read-Only:
+
+- `effective_engine_version` (String) Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
 
 
 <a id="nestedatt--work_group_configuration_updates--result_configuration_updates"></a>
@@ -117,9 +126,12 @@ Optional:
 <a id="nestedatt--work_group_configuration_updates--result_configuration_updates--encryption_configuration"></a>
 ### Nested Schema for `work_group_configuration_updates.result_configuration_updates.encryption_configuration`
 
-Optional:
+Required:
 
 - `encryption_option` (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
+
+Optional:
+
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 
 ## Import

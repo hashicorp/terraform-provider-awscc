@@ -39,7 +39,7 @@ AWS::NetworkManager::CoreNetwork Resource Type Definition.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -48,7 +48,7 @@ Optional:
 <a id="nestedatt--edges"></a>
 ### Nested Schema for `edges`
 
-Read-Only:
+Optional:
 
 - `asn` (Number) The ASN of a core network edge.
 - `edge_location` (String) The Region where a core network edge is located.
@@ -58,7 +58,7 @@ Read-Only:
 <a id="nestedatt--segments"></a>
 ### Nested Schema for `segments`
 
-Read-Only:
+Optional:
 
 - `edge_locations` (List of String)
 - `name` (String) Name of segment

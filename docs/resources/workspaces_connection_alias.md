@@ -33,7 +33,7 @@ Resource Type definition for AWS::WorkSpaces::ConnectionAlias
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -42,7 +42,7 @@ Optional:
 <a id="nestedatt--associations"></a>
 ### Nested Schema for `associations`
 
-Read-Only:
+Optional:
 
 - `associated_account_id` (String)
 - `association_status` (String)

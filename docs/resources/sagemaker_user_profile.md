@@ -35,7 +35,7 @@ Resource Type definition for AWS::SageMaker::UserProfile
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -82,10 +82,13 @@ Optional:
 <a id="nestedatt--user_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `user_settings.kernel_gateway_app_settings.custom_images`
 
-Optional:
+Required:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
+
+Optional:
+
 - `image_version_number` (Number) The version number of the CustomImage.
 
 

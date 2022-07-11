@@ -33,6 +33,10 @@ Resource schema for AWS::Route53::HealthCheck.
 
 Required:
 
+- `type` (String)
+
+Optional:
+
 - `alarm_identifier` (Attributes) A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy. (see [below for nested schema](#nestedatt--health_check_config--alarm_identifier))
 - `child_health_checks` (List of String)
 - `enable_sni` (Boolean)
@@ -49,7 +53,6 @@ Required:
 - `resource_path` (String)
 - `routing_control_arn` (String)
 - `search_string` (String)
-- `type` (String)
 
 <a id="nestedatt--health_check_config--alarm_identifier"></a>
 ### Nested Schema for `health_check_config.alarm_identifier`
@@ -64,7 +67,7 @@ Required:
 <a id="nestedatt--health_check_tags"></a>
 ### Nested Schema for `health_check_tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag.
 - `value` (String) The value for the tag.

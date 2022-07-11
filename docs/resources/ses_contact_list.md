@@ -29,7 +29,7 @@ Resource schema for AWS::SES::ContactList.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -38,12 +38,15 @@ Optional:
 <a id="nestedatt--topics"></a>
 ### Nested Schema for `topics`
 
-Optional:
+Required:
 
 - `default_subscription_status` (String)
-- `description` (String) The description of the topic.
 - `display_name` (String) The display name of the topic.
 - `topic_name` (String) The name of the topic.
+
+Optional:
+
+- `description` (String) The description of the topic.
 
 ## Import
 

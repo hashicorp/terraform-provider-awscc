@@ -29,12 +29,15 @@ Resource Type definition for AWS::CloudFront::CachePolicy
 
 Required:
 
-- `comment` (String)
 - `default_ttl` (Number)
 - `max_ttl` (Number)
 - `min_ttl` (Number)
 - `name` (String)
 - `parameters_in_cache_key_and_forwarded_to_origin` (Attributes) (see [below for nested schema](#nestedatt--cache_policy_config--parameters_in_cache_key_and_forwarded_to_origin))
+
+Optional:
+
+- `comment` (String)
 
 <a id="nestedatt--cache_policy_config--parameters_in_cache_key_and_forwarded_to_origin"></a>
 ### Nested Schema for `cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin`
@@ -42,10 +45,13 @@ Required:
 Required:
 
 - `cookies_config` (Attributes) (see [below for nested schema](#nestedatt--cache_policy_config--parameters_in_cache_key_and_forwarded_to_origin--cookies_config))
-- `enable_accept_encoding_brotli` (Boolean)
 - `enable_accept_encoding_gzip` (Boolean)
 - `headers_config` (Attributes) (see [below for nested schema](#nestedatt--cache_policy_config--parameters_in_cache_key_and_forwarded_to_origin--headers_config))
 - `query_strings_config` (Attributes) (see [below for nested schema](#nestedatt--cache_policy_config--parameters_in_cache_key_and_forwarded_to_origin--query_strings_config))
+
+Optional:
+
+- `enable_accept_encoding_brotli` (Boolean)
 
 <a id="nestedatt--cache_policy_config--parameters_in_cache_key_and_forwarded_to_origin--cookies_config"></a>
 ### Nested Schema for `cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.cookies_config`
@@ -53,6 +59,9 @@ Required:
 Required:
 
 - `cookie_behavior` (String)
+
+Optional:
+
 - `cookies` (List of String)
 
 
@@ -62,6 +71,9 @@ Required:
 Required:
 
 - `header_behavior` (String)
+
+Optional:
+
 - `headers` (List of String)
 
 
@@ -71,6 +83,9 @@ Required:
 Required:
 
 - `query_string_behavior` (String)
+
+Optional:
+
 - `query_strings` (List of String)
 
 ## Import

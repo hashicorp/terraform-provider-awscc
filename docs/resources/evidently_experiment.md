@@ -45,14 +45,17 @@ Required:
 - `entity_id_key` (String) The JSON path to reference the entity id in the event.
 - `event_pattern` (String) Event patterns have the same structure as the events they match. Rules use event patterns to select events. An event pattern either matches an event or it doesn't.
 - `metric_name` (String)
-- `unit_label` (String)
 - `value_key` (String) The JSON path to reference the numerical metric value in the event.
+
+Optional:
+
+- `unit_label` (String)
 
 
 <a id="nestedatt--online_ab_config"></a>
 ### Nested Schema for `online_ab_config`
 
-Required:
+Optional:
 
 - `control_treatment_name` (String)
 - `treatment_weights` (Attributes Set) (see [below for nested schema](#nestedatt--online_ab_config--treatment_weights))
@@ -72,10 +75,13 @@ Required:
 
 Required:
 
-- `description` (String)
 - `feature` (String)
 - `treatment_name` (String)
 - `variation` (String)
+
+Optional:
+
+- `description` (String)
 
 
 <a id="nestedatt--running_status"></a>
@@ -92,7 +98,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

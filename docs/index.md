@@ -240,13 +240,16 @@ credential_process = custom-process --username jdoe
 <a id="nestedatt--assume_role"></a>
 ### Nested Schema for `assume_role`
 
+Required:
+
+- `role_arn` (String) Amazon Resource Name (ARN) of the IAM Role to assume.
+
 Optional:
 
 - `duration` (String) Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. A sequence of numbers with a unit suffix, "h" for hour, "m" for minute, and "s" for second. Default value is 1h0m0s
 - `external_id` (String) External identifier to use when assuming the role.
 - `policy` (String) IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.
 - `policy_arns` (List of String) Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.
-- `role_arn` (String) Amazon Resource Name (ARN) of the IAM Role to assume.
 - `session_name` (String) Session name to use when assuming the role.
 - `tags` (Map of String) Map of assume role session tags.
 - `transitive_tag_keys` (Set of String) Set of assume role session tag keys to pass to any subsequent sessions.
@@ -255,12 +258,15 @@ Optional:
 <a id="nestedatt--assume_role_with_web_identity"></a>
 ### Nested Schema for `assume_role_with_web_identity`
 
+Required:
+
+- `role_arn` (String) Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.
+
 Optional:
 
 - `duration` (String) Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. A sequence of numbers with a unit suffix, "h" for hour, "m" for minute, and "s" for second. Default value is 1h0m0s
 - `policy` (String) IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.
 - `policy_arns` (List of String) Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.
-- `role_arn` (String) Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.
 - `session_name` (String) Session name to use when assuming the role. Can also be set with the environment variable `AWS_ROLE_SESSION_NAME`.
 - `web_identity_token` (String) The value of a web identity token from an OpenID Connect (OIDC) or OAuth provider. One of `web_identity_token` or `web_identity_token_file` is required.
 - `web_identity_token_file` (String) File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. Can also be set with the  environment variable`AWS_WEB_IDENTITY_TOKEN_FILE`. One of `web_identity_token_file` or `web_identity_token` is required.
@@ -269,8 +275,11 @@ Optional:
 <a id="nestedatt--user_agent"></a>
 ### Nested Schema for `user_agent`
 
+Required:
+
+- `product_name` (String) Product name. At least one of `product_name` or `comment` must be set.
+
 Optional:
 
 - `comment` (String) User-Agent comment. At least one of `comment` or `product_name` must be set.
-- `product_name` (String) Product name. At least one of `product_name` or `comment` must be set.
 - `product_version` (String) Product version. Optional, and should only be set when `product_name` is set.

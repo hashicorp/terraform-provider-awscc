@@ -38,13 +38,16 @@ Resource schema for AWS::FIS::ExperimentTemplate
 Required:
 
 - `source` (String)
+
+Optional:
+
 - `value` (String)
 
 
 <a id="nestedatt--targets"></a>
 ### Nested Schema for `targets`
 
-Required:
+Optional:
 
 - `filters` (Attributes List) (see [below for nested schema](#nestedatt--targets--filters))
 - `parameters` (Map of String)
@@ -78,16 +81,19 @@ Optional:
 <a id="nestedatt--log_configuration"></a>
 ### Nested Schema for `log_configuration`
 
+Required:
+
+- `log_schema_version` (Number)
+
 Optional:
 
 - `cloudwatch_logs_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--cloudwatch_logs_configuration))
-- `log_schema_version` (Number)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--s3_configuration))
 
 <a id="nestedatt--log_configuration--cloudwatch_logs_configuration"></a>
 ### Nested Schema for `log_configuration.cloudwatch_logs_configuration`
 
-Optional:
+Required:
 
 - `log_group_arn` (String)
 
@@ -95,9 +101,12 @@ Optional:
 <a id="nestedatt--log_configuration--s3_configuration"></a>
 ### Nested Schema for `log_configuration.s3_configuration`
 
-Optional:
+Required:
 
 - `bucket_name` (String)
+
+Optional:
+
 - `prefix` (String)
 
 ## Import

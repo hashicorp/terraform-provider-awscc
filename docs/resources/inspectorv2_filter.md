@@ -33,7 +33,7 @@ Inspector Filter resource schema
 <a id="nestedatt--filter_criteria"></a>
 ### Nested Schema for `filter_criteria`
 
-Required:
+Optional:
 
 - `aws_account_id` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--aws_account_id))
 - `component_id` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--component_id))
@@ -142,7 +142,7 @@ Required:
 <a id="nestedatt--filter_criteria--ecr_image_pushed_at"></a>
 ### Nested Schema for `filter_criteria.ecr_image_pushed_at`
 
-Required:
+Optional:
 
 - `end_inclusive` (Number)
 - `start_inclusive` (Number)
@@ -205,7 +205,7 @@ Required:
 <a id="nestedatt--filter_criteria--first_observed_at"></a>
 ### Nested Schema for `filter_criteria.first_observed_at`
 
-Required:
+Optional:
 
 - `end_inclusive` (Number)
 - `start_inclusive` (Number)
@@ -214,7 +214,7 @@ Required:
 <a id="nestedatt--filter_criteria--inspector_score"></a>
 ### Nested Schema for `filter_criteria.inspector_score`
 
-Required:
+Optional:
 
 - `lower_inclusive` (Number)
 - `upper_inclusive` (Number)
@@ -223,7 +223,7 @@ Required:
 <a id="nestedatt--filter_criteria--last_observed_at"></a>
 ### Nested Schema for `filter_criteria.last_observed_at`
 
-Required:
+Optional:
 
 - `end_inclusive` (Number)
 - `start_inclusive` (Number)
@@ -241,7 +241,7 @@ Required:
 <a id="nestedatt--filter_criteria--port_range"></a>
 ### Nested Schema for `filter_criteria.port_range`
 
-Required:
+Optional:
 
 - `begin_inclusive` (Number)
 - `end_inclusive` (Number)
@@ -271,6 +271,9 @@ Required:
 Required:
 
 - `comparison` (String)
+
+Optional:
+
 - `key` (String)
 - `value` (String)
 
@@ -305,7 +308,7 @@ Required:
 <a id="nestedatt--filter_criteria--updated_at"></a>
 ### Nested Schema for `filter_criteria.updated_at`
 
-Required:
+Optional:
 
 - `end_inclusive` (Number)
 - `start_inclusive` (Number)
@@ -341,7 +344,7 @@ Required:
 <a id="nestedatt--filter_criteria--vulnerable_packages"></a>
 ### Nested Schema for `filter_criteria.vulnerable_packages`
 
-Required:
+Optional:
 
 - `architecture` (Attributes) (see [below for nested schema](#nestedatt--filter_criteria--vulnerable_packages--architecture))
 - `epoch` (Attributes) (see [below for nested schema](#nestedatt--filter_criteria--vulnerable_packages--epoch))
@@ -362,7 +365,7 @@ Required:
 <a id="nestedatt--filter_criteria--vulnerable_packages--epoch"></a>
 ### Nested Schema for `filter_criteria.vulnerable_packages.epoch`
 
-Required:
+Optional:
 
 - `lower_inclusive` (Number)
 - `upper_inclusive` (Number)

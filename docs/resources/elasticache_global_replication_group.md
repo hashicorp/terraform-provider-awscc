@@ -39,7 +39,7 @@ The AWS::ElastiCache::GlobalReplicationGroup resource creates an Amazon ElastiCa
 <a id="nestedatt--members"></a>
 ### Nested Schema for `members`
 
-Required:
+Optional:
 
 - `replication_group_id` (String) Regionally unique identifier for the member i.e. ReplicationGroupId.
 - `replication_group_region` (String) The AWS region of the Global Datastore member.

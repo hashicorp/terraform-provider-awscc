@@ -29,9 +29,12 @@ Resource Type definition for AWS::CloudFront::KeyGroup
 
 Required:
 
-- `comment` (String)
 - `items` (List of String)
 - `name` (String)
+
+Optional:
+
+- `comment` (String)
 
 ## Import
 

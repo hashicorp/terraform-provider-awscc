@@ -33,7 +33,7 @@ A dimension can be used to limit the scope of a metric used in a security profil
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The tag's key.
 - `value` (String) The tag's value.

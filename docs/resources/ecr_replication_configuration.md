@@ -37,6 +37,9 @@ Required:
 Required:
 
 - `destinations` (Attributes List) An array of objects representing the details of a replication destination. (see [below for nested schema](#nestedatt--replication_configuration--rules--destinations))
+
+Optional:
+
 - `repository_filters` (Attributes List) An array of objects representing the details of a repository filter. (see [below for nested schema](#nestedatt--replication_configuration--rules--repository_filters))
 
 <a id="nestedatt--replication_configuration--rules--destinations"></a>

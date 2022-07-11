@@ -50,7 +50,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -59,14 +59,14 @@ Optional:
 <a id="nestedatt--hls_ingest"></a>
 ### Nested Schema for `hls_ingest`
 
-Read-Only:
+Optional:
 
 - `ingest_endpoints` (Attributes List) A list of endpoints to which the source stream should be sent. (see [below for nested schema](#nestedatt--hls_ingest--ingest_endpoints))
 
 <a id="nestedatt--hls_ingest--ingest_endpoints"></a>
 ### Nested Schema for `hls_ingest.ingest_endpoints`
 
-Read-Only:
+Optional:
 
 - `id` (String) The system generated unique identifier for the IngestEndpoint
 - `password` (String) The system generated password for ingest authentication.

@@ -33,7 +33,7 @@ Resource Type Definition for AWS::S3Outposts::AccessPoint
 <a id="nestedatt--vpc_configuration"></a>
 ### Nested Schema for `vpc_configuration`
 
-Required:
+Optional:
 
 - `vpc_id` (String) Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.
 

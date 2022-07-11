@@ -45,7 +45,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -54,7 +54,7 @@ Optional:
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
 
-Read-Only:
+Optional:
 
 - `bgp_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--bgp_configurations))
 - `core_network_address` (String)
@@ -65,7 +65,7 @@ Read-Only:
 <a id="nestedatt--configuration--bgp_configurations"></a>
 ### Nested Schema for `configuration.bgp_configurations`
 
-Read-Only:
+Optional:
 
 - `core_network_address` (String)
 - `core_network_asn` (Number)

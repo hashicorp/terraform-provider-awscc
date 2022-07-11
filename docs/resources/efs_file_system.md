@@ -38,7 +38,7 @@ Resource Type definition for AWS::EFS::FileSystem
 <a id="nestedatt--backup_policy"></a>
 ### Nested Schema for `backup_policy`
 
-Optional:
+Required:
 
 - `status` (String)
 
@@ -46,7 +46,7 @@ Optional:
 <a id="nestedatt--file_system_tags"></a>
 ### Nested Schema for `file_system_tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

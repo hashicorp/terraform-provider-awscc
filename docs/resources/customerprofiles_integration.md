@@ -36,32 +36,30 @@ The resource schema for creating an Amazon Connect Customer Profiles Integration
 <a id="nestedatt--flow_definition"></a>
 ### Nested Schema for `flow_definition`
 
-Optional:
+Required:
 
-- `description` (String)
 - `flow_name` (String)
 - `kms_arn` (String)
 - `source_flow_config` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config))
 - `tasks` (Attributes List) (see [below for nested schema](#nestedatt--flow_definition--tasks))
 - `trigger_config` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--trigger_config))
 
+Optional:
+
+- `description` (String)
+
 <a id="nestedatt--flow_definition--source_flow_config"></a>
 ### Nested Schema for `flow_definition.source_flow_config`
+
+Required:
+
+- `connector_type` (String)
+- `source_connector_properties` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties))
 
 Optional:
 
 - `connector_profile_name` (String)
-- `connector_type` (String)
 - `incremental_pull_config` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--incremental_pull_config))
-- `source_connector_properties` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties))
-
-<a id="nestedatt--flow_definition--source_flow_config--incremental_pull_config"></a>
-### Nested Schema for `flow_definition.source_flow_config.incremental_pull_config`
-
-Optional:
-
-- `datetime_type_field_name` (String)
-
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties"></a>
 ### Nested Schema for `flow_definition.source_flow_config.source_connector_properties`
@@ -77,7 +75,7 @@ Optional:
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--marketo"></a>
 ### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
 
-Optional:
+Required:
 
 - `object` (String)
 
@@ -85,26 +83,32 @@ Optional:
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--s3"></a>
 ### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
 
-Optional:
+Required:
 
 - `bucket_name` (String)
+
+Optional:
+
 - `bucket_prefix` (String)
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--salesforce"></a>
 ### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
 
+Required:
+
+- `object` (String)
+
 Optional:
 
 - `enable_dynamic_field_update` (Boolean)
 - `include_deleted_records` (Boolean)
-- `object` (String)
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--service_now"></a>
 ### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
 
-Optional:
+Required:
 
 - `object` (String)
 
@@ -112,23 +116,34 @@ Optional:
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--zendesk"></a>
 ### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
 
-Optional:
+Required:
 
 - `object` (String)
 
+
+
+<a id="nestedatt--flow_definition--source_flow_config--incremental_pull_config"></a>
+### Nested Schema for `flow_definition.source_flow_config.incremental_pull_config`
+
+Optional:
+
+- `datetime_type_field_name` (String)
 
 
 
 <a id="nestedatt--flow_definition--tasks"></a>
 ### Nested Schema for `flow_definition.tasks`
 
+Required:
+
+- `source_fields` (List of String)
+- `task_type` (String)
+
 Optional:
 
 - `connector_operator` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--tasks--connector_operator))
 - `destination_field` (String)
-- `source_fields` (List of String)
 - `task_properties` (Attributes List) (see [below for nested schema](#nestedatt--flow_definition--tasks--task_properties))
-- `task_type` (String)
 
 <a id="nestedatt--flow_definition--tasks--connector_operator"></a>
 ### Nested Schema for `flow_definition.tasks.connector_operator`
@@ -145,7 +160,7 @@ Optional:
 <a id="nestedatt--flow_definition--tasks--task_properties"></a>
 ### Nested Schema for `flow_definition.tasks.task_properties`
 
-Optional:
+Required:
 
 - `operator_property_key` (String)
 - `property` (String)
@@ -155,10 +170,13 @@ Optional:
 <a id="nestedatt--flow_definition--trigger_config"></a>
 ### Nested Schema for `flow_definition.trigger_config`
 
+Required:
+
+- `trigger_type` (String)
+
 Optional:
 
 - `trigger_properties` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--trigger_config--trigger_properties))
-- `trigger_type` (String)
 
 <a id="nestedatt--flow_definition--trigger_config--trigger_properties"></a>
 ### Nested Schema for `flow_definition.trigger_config.trigger_properties`
@@ -170,12 +188,15 @@ Optional:
 <a id="nestedatt--flow_definition--trigger_config--trigger_properties--scheduled"></a>
 ### Nested Schema for `flow_definition.trigger_config.trigger_properties.scheduled`
 
+Required:
+
+- `schedule_expression` (String)
+
 Optional:
 
 - `data_pull_mode` (String)
 - `first_execution_from` (Number)
 - `schedule_end_time` (Number)
-- `schedule_expression` (String)
 - `schedule_offset` (Number)
 - `schedule_start_time` (Number)
 - `timezone` (String)
@@ -187,7 +208,7 @@ Optional:
 <a id="nestedatt--object_type_names"></a>
 ### Nested Schema for `object_type_names`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -196,7 +217,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

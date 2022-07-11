@@ -50,7 +50,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -59,9 +59,12 @@ Optional:
 <a id="nestedatt--thumbnail_configuration"></a>
 ### Nested Schema for `thumbnail_configuration`
 
-Optional:
+Required:
 
 - `recording_mode` (String) Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.
+
+Optional:
+
 - `target_interval_seconds` (Number) Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.
 
 ## Import

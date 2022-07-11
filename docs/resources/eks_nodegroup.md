@@ -57,9 +57,12 @@ Optional:
 <a id="nestedatt--remote_access"></a>
 ### Nested Schema for `remote_access`
 
-Optional:
+Required:
 
 - `ec_2_ssh_key` (String)
+
+Optional:
+
 - `source_security_groups` (List of String)
 
 

@@ -35,14 +35,17 @@ Resource schema for AWS::SageMaker::DeviceFleet
 
 Required:
 
-- `kms_key_id` (String) The KMS key id used for encryption on the S3 bucket
 - `s3_output_location` (String) The Amazon Simple Storage (S3) bucket URI
+
+Optional:
+
+- `kms_key_id` (String) The KMS key id used for encryption on the S3 bucket
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

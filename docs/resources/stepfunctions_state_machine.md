@@ -40,10 +40,13 @@ Resource schema for StateMachine
 <a id="nestedatt--definition_s3_location"></a>
 ### Nested Schema for `definition_s3_location`
 
-Optional:
+Required:
 
 - `bucket` (String)
 - `key` (String)
+
+Optional:
+
 - `version` (String)
 
 
@@ -76,7 +79,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

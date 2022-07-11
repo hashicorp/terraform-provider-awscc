@@ -40,7 +40,7 @@ Resource schema for AWS::RDS::DBProxy
 <a id="nestedatt--auth"></a>
 ### Nested Schema for `auth`
 
-Required:
+Optional:
 
 - `auth_scheme` (String) The type of authentication that the proxy uses for connections from the proxy to the underlying database.
 - `description` (String) A user-specified description about the authentication used by a proxy to log in as a specific database user.

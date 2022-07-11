@@ -30,9 +30,12 @@ Resource Type definition for AWS::Config::ConfigurationAggregator
 <a id="nestedatt--account_aggregation_sources"></a>
 ### Nested Schema for `account_aggregation_sources`
 
-Optional:
+Required:
 
 - `account_ids` (List of String)
+
+Optional:
+
 - `all_aws_regions` (Boolean)
 - `aws_regions` (List of String)
 
@@ -40,17 +43,20 @@ Optional:
 <a id="nestedatt--organization_aggregation_source"></a>
 ### Nested Schema for `organization_aggregation_source`
 
+Required:
+
+- `role_arn` (String)
+
 Optional:
 
 - `all_aws_regions` (Boolean)
 - `aws_regions` (List of String)
-- `role_arn` (String)
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

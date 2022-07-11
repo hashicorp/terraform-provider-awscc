@@ -32,7 +32,7 @@ Resource schema for AWS::DataBrew::Schedule.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

@@ -31,7 +31,7 @@ AWS Ground Station DataflowEndpointGroup schema for CloudFormation
 <a id="nestedatt--endpoint_details"></a>
 ### Nested Schema for `endpoint_details`
 
-Required:
+Optional:
 
 - `endpoint` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--endpoint))
 - `security_details` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--security_details))
@@ -39,7 +39,7 @@ Required:
 <a id="nestedatt--endpoint_details--endpoint"></a>
 ### Nested Schema for `endpoint_details.endpoint`
 
-Required:
+Optional:
 
 - `address` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--endpoint--address))
 - `mtu` (Number)
@@ -48,7 +48,7 @@ Required:
 <a id="nestedatt--endpoint_details--endpoint--address"></a>
 ### Nested Schema for `endpoint_details.endpoint.address`
 
-Required:
+Optional:
 
 - `name` (String)
 - `port` (Number)
@@ -58,7 +58,7 @@ Required:
 <a id="nestedatt--endpoint_details--security_details"></a>
 ### Nested Schema for `endpoint_details.security_details`
 
-Required:
+Optional:
 
 - `role_arn` (String)
 - `security_group_ids` (List of String)

@@ -36,10 +36,13 @@ The AWS::S3ObjectLambda::AccessPoint resource is an Amazon S3ObjectLambda resour
 
 Required:
 
-- `allowed_features` (Set of String)
-- `cloudwatch_metrics_enabled` (Boolean)
 - `supporting_access_point` (String)
 - `transformation_configurations` (Attributes Set) (see [below for nested schema](#nestedatt--object_lambda_configuration--transformation_configurations))
+
+Optional:
+
+- `allowed_features` (Set of String)
+- `cloudwatch_metrics_enabled` (Boolean)
 
 <a id="nestedatt--object_lambda_configuration--transformation_configurations"></a>
 ### Nested Schema for `object_lambda_configuration.transformation_configurations`
@@ -52,7 +55,7 @@ Required:
 <a id="nestedatt--object_lambda_configuration--transformation_configurations--content_transformation"></a>
 ### Nested Schema for `object_lambda_configuration.transformation_configurations.content_transformation`
 
-Required:
+Optional:
 
 - `aws_lambda` (Attributes) (see [below for nested schema](#nestedatt--object_lambda_configuration--transformation_configurations--content_transformation--aws_lambda))
 
@@ -62,6 +65,9 @@ Required:
 Required:
 
 - `function_arn` (String)
+
+Optional:
+
 - `function_payload` (String)
 
 
@@ -71,7 +77,7 @@ Required:
 <a id="nestedatt--policy_status"></a>
 ### Nested Schema for `policy_status`
 
-Read-Only:
+Optional:
 
 - `is_public` (Boolean) Specifies whether the Object lambda Access Point Policy is Public or not. Object lambda Access Points are private by default.
 
@@ -79,7 +85,7 @@ Read-Only:
 <a id="nestedatt--public_access_block_configuration"></a>
 ### Nested Schema for `public_access_block_configuration`
 
-Read-Only:
+Optional:
 
 - `block_public_acls` (Boolean) Specifies whether Amazon S3 should block public access control lists (ACLs) to this object lambda access point. Setting this element to TRUE causes the following behavior:
 - PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.

@@ -41,7 +41,7 @@ Resource Type definition for AWS::LicenseManager::License
 <a id="nestedatt--consumption_configuration"></a>
 ### Nested Schema for `consumption_configuration`
 
-Required:
+Optional:
 
 - `borrow_configuration` (Attributes) (see [below for nested schema](#nestedatt--consumption_configuration--borrow_configuration))
 - `provisional_configuration` (Attributes) (see [below for nested schema](#nestedatt--consumption_configuration--provisional_configuration))
@@ -70,11 +70,14 @@ Required:
 
 Required:
 
+- `name` (String)
+- `unit` (String)
+
+Optional:
+
 - `allow_check_in` (Boolean)
 - `max_count` (Number)
-- `name` (String)
 - `overage` (Boolean)
-- `unit` (String)
 - `value` (String)
 
 
@@ -84,6 +87,9 @@ Required:
 Required:
 
 - `name` (String)
+
+Optional:
+
 - `sign_key` (String)
 
 
@@ -99,7 +105,7 @@ Required:
 <a id="nestedatt--license_metadata"></a>
 ### Nested Schema for `license_metadata`
 
-Optional:
+Required:
 
 - `name` (String)
 - `value` (String)

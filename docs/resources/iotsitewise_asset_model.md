@@ -36,37 +36,46 @@ Resource schema for AWS::IoTSiteWise::AssetModel
 <a id="nestedatt--asset_model_composite_models"></a>
 ### Nested Schema for `asset_model_composite_models`
 
+Required:
+
+- `name` (String) A unique, friendly name for the asset composite model.
+- `type` (String) The type of the composite model. For alarm composite models, this type is AWS/ALARM
+
 Optional:
 
 - `composite_model_properties` (Attributes List) The property definitions of the asset model. You can specify up to 200 properties per asset model. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties))
 - `description` (String) A description for the asset composite model.
-- `name` (String) A unique, friendly name for the asset composite model.
-- `type` (String) The type of the composite model. For alarm composite models, this type is AWS/ALARM
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties"></a>
 ### Nested Schema for `asset_model_composite_models.composite_model_properties`
 
-Optional:
+Required:
 
 - `data_type` (String) The data type of the asset model property.
-- `data_type_spec` (String) The data type of the structure for this property.
 - `logical_id` (String) Customer provided ID for property.
 - `name` (String) The name of the asset model property.
 - `type` (Attributes) The property type (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type))
+
+Optional:
+
+- `data_type_spec` (String) The data type of the structure for this property.
 - `unit` (String) The unit of the asset model property, such as Newtons or RPM.
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type"></a>
 ### Nested Schema for `asset_model_composite_models.composite_model_properties.type`
+
+Required:
+
+- `type_name` (String)
 
 Optional:
 
 - `attribute` (Attributes) (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--attribute))
 - `metric` (Attributes) (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--metric))
 - `transform` (Attributes) (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform))
-- `type_name` (String)
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--attribute"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name`
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform`
 
 Optional:
 
@@ -74,73 +83,82 @@ Optional:
 
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--metric"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name`
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform`
 
-Optional:
+Required:
 
 - `expression` (String) The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.
-- `variables` (Attributes List) The list of variables used in the expression. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables))
-- `window` (Attributes) The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--window))
+- `variables` (Attributes List) The list of variables used in the expression. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables))
+- `window` (Attributes) The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform--window))
 
-<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name.variables`
+<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables"></a>
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform.variables`
 
-Optional:
+Required:
 
 - `name` (String) The friendly name of the variable to be used in the expression.
-- `value` (Attributes) The variable that identifies an asset property from which to use values. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables--value))
+- `value` (Attributes) The variable that identifies an asset property from which to use values. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables--value))
 
-<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables--value"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name.variables.value`
+<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables--value"></a>
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform.variables.value`
+
+Required:
+
+- `property_logical_id` (String)
 
 Optional:
 
 - `hierarchy_logical_id` (String)
-- `property_logical_id` (String)
 
 
 
-<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--window"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name.window`
-
-Optional:
-
-- `tumbling` (Attributes) Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--window--tumbling))
-
-<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--window--tumbling"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name.window.tumbling`
+<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform--window"></a>
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform.window`
 
 Optional:
+
+- `tumbling` (Attributes) Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform--window--tumbling))
+
+<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform--window--tumbling"></a>
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform.window.tumbling`
+
+Required:
 
 - `interval` (String) The time interval for the tumbling window.
+
+Optional:
+
 - `offset` (String) The shift or reference point on timeline for the contiguous time intervals.
 
 
 
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name`
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform`
 
-Optional:
+Required:
 
 - `expression` (String) The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.
-- `variables` (Attributes List) The list of variables used in the expression. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables))
+- `variables` (Attributes List) The list of variables used in the expression. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables))
 
-<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name.variables`
+<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables"></a>
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform.variables`
 
-Optional:
+Required:
 
 - `name` (String) The friendly name of the variable to be used in the expression.
-- `value` (Attributes) The variable that identifies an asset property from which to use values. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables--value))
+- `value` (Attributes) The variable that identifies an asset property from which to use values. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables--value))
 
-<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables--value"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name.variables.value`
+<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables--value"></a>
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform.variables.value`
+
+Required:
+
+- `property_logical_id` (String)
 
 Optional:
 
 - `hierarchy_logical_id` (String)
-- `property_logical_id` (String)
 
 
 
@@ -151,7 +169,7 @@ Optional:
 <a id="nestedatt--asset_model_hierarchies"></a>
 ### Nested Schema for `asset_model_hierarchies`
 
-Optional:
+Required:
 
 - `child_asset_model_id` (String) The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.
 - `logical_id` (String) Customer provided ID for hierarchy.
@@ -161,24 +179,30 @@ Optional:
 <a id="nestedatt--asset_model_properties"></a>
 ### Nested Schema for `asset_model_properties`
 
-Optional:
+Required:
 
 - `data_type` (String) The data type of the asset model property.
-- `data_type_spec` (String) The data type of the structure for this property.
 - `logical_id` (String) Customer provided ID for property.
 - `name` (String) The name of the asset model property.
 - `type` (Attributes) The property type (see [below for nested schema](#nestedatt--asset_model_properties--type))
+
+Optional:
+
+- `data_type_spec` (String) The data type of the structure for this property.
 - `unit` (String) The unit of the asset model property, such as Newtons or RPM.
 
 <a id="nestedatt--asset_model_properties--type"></a>
 ### Nested Schema for `asset_model_properties.type`
+
+Required:
+
+- `type_name` (String)
 
 Optional:
 
 - `attribute` (Attributes) (see [below for nested schema](#nestedatt--asset_model_properties--type--attribute))
 - `metric` (Attributes) (see [below for nested schema](#nestedatt--asset_model_properties--type--metric))
 - `transform` (Attributes) (see [below for nested schema](#nestedatt--asset_model_properties--type--transform))
-- `type_name` (String)
 
 <a id="nestedatt--asset_model_properties--type--attribute"></a>
 ### Nested Schema for `asset_model_properties.type.attribute`
@@ -191,7 +215,7 @@ Optional:
 <a id="nestedatt--asset_model_properties--type--metric"></a>
 ### Nested Schema for `asset_model_properties.type.metric`
 
-Optional:
+Required:
 
 - `expression` (String) The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.
 - `variables` (Attributes List) The list of variables used in the expression. (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--variables))
@@ -200,7 +224,7 @@ Optional:
 <a id="nestedatt--asset_model_properties--type--metric--variables"></a>
 ### Nested Schema for `asset_model_properties.type.metric.window`
 
-Optional:
+Required:
 
 - `name` (String) The friendly name of the variable to be used in the expression.
 - `value` (Attributes) The variable that identifies an asset property from which to use values. (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--window--value))
@@ -208,10 +232,13 @@ Optional:
 <a id="nestedatt--asset_model_properties--type--metric--window--value"></a>
 ### Nested Schema for `asset_model_properties.type.metric.window.value`
 
+Required:
+
+- `property_logical_id` (String)
+
 Optional:
 
 - `hierarchy_logical_id` (String)
-- `property_logical_id` (String)
 
 
 
@@ -225,9 +252,12 @@ Optional:
 <a id="nestedatt--asset_model_properties--type--metric--window--tumbling"></a>
 ### Nested Schema for `asset_model_properties.type.metric.window.tumbling`
 
-Optional:
+Required:
 
 - `interval` (String) The time interval for the tumbling window.
+
+Optional:
+
 - `offset` (String) The shift or reference point on timeline for the contiguous time intervals.
 
 
@@ -236,7 +266,7 @@ Optional:
 <a id="nestedatt--asset_model_properties--type--transform"></a>
 ### Nested Schema for `asset_model_properties.type.transform`
 
-Optional:
+Required:
 
 - `expression` (String) The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.
 - `variables` (Attributes List) The list of variables used in the expression. (see [below for nested schema](#nestedatt--asset_model_properties--type--transform--variables))
@@ -244,7 +274,7 @@ Optional:
 <a id="nestedatt--asset_model_properties--type--transform--variables"></a>
 ### Nested Schema for `asset_model_properties.type.transform.variables`
 
-Optional:
+Required:
 
 - `name` (String) The friendly name of the variable to be used in the expression.
 - `value` (Attributes) The variable that identifies an asset property from which to use values. (see [below for nested schema](#nestedatt--asset_model_properties--type--transform--variables--value))
@@ -252,10 +282,13 @@ Optional:
 <a id="nestedatt--asset_model_properties--type--transform--variables--value"></a>
 ### Nested Schema for `asset_model_properties.type.transform.variables.value`
 
+Required:
+
+- `property_logical_id` (String)
+
 Optional:
 
 - `hierarchy_logical_id` (String)
-- `property_logical_id` (String)
 
 
 
@@ -265,7 +298,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

@@ -36,16 +36,19 @@ Resource schema for AWS::DataBrew::Ruleset.
 Required:
 
 - `check_expression` (String) Expression with rule conditions
+- `name` (String) Name of the rule
+
+Optional:
+
 - `column_selectors` (Attributes List) (see [below for nested schema](#nestedatt--rules--column_selectors))
 - `disabled` (Boolean) Boolean value to disable/enable a rule
-- `name` (String) Name of the rule
 - `substitution_map` (Attributes List) (see [below for nested schema](#nestedatt--rules--substitution_map))
 - `threshold` (Attributes) (see [below for nested schema](#nestedatt--rules--threshold))
 
 <a id="nestedatt--rules--column_selectors"></a>
 ### Nested Schema for `rules.column_selectors`
 
-Required:
+Optional:
 
 - `name` (String) The name of a column from a dataset
 - `regex` (String) A regular expression for selecting a column from a dataset
@@ -65,16 +68,19 @@ Required:
 
 Required:
 
+- `value` (Number) Threshold value for a rule
+
+Optional:
+
 - `type` (String) Threshold type for a rule
 - `unit` (String) Threshold unit for a rule
-- `value` (Number) Threshold value for a rule
 
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

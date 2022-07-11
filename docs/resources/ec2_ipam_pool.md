@@ -49,7 +49,7 @@ Resource Schema of AWS::EC2::IPAMPool Type
 <a id="nestedatt--allocation_resource_tags"></a>
 ### Nested Schema for `allocation_resource_tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -58,7 +58,7 @@ Optional:
 <a id="nestedatt--provisioned_cidrs"></a>
 ### Nested Schema for `provisioned_cidrs`
 
-Optional:
+Required:
 
 - `cidr` (String) Represents a single IPv4 or IPv6 CIDR
 
@@ -66,7 +66,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

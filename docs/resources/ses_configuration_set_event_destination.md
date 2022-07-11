@@ -29,17 +29,20 @@ Resource Type definition for AWS::SES::ConfigurationSetEventDestination
 
 Required:
 
+- `matching_event_types` (List of String) The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure.
+
+Optional:
+
 - `cloudwatch_destination` (Attributes) An object that contains the names, default values, and sources of the dimensions associated with an Amazon CloudWatch event destination. (see [below for nested schema](#nestedatt--event_destination--cloudwatch_destination))
 - `enabled` (Boolean) Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to true to enable publishing to this destination; set to false to prevent publishing to this destination. The default value is false.
 - `kinesis_firehose_destination` (Attributes) An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination. (see [below for nested schema](#nestedatt--event_destination--kinesis_firehose_destination))
-- `matching_event_types` (List of String) The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure.
 - `name` (String) The name of the event destination set.
 - `sns_destination` (Attributes) An object that contains SNS topic ARN associated event destination. (see [below for nested schema](#nestedatt--event_destination--sns_destination))
 
 <a id="nestedatt--event_destination--cloudwatch_destination"></a>
 ### Nested Schema for `event_destination.cloudwatch_destination`
 
-Required:
+Optional:
 
 - `dimension_configurations` (Attributes List) A list of dimensions upon which to categorize your emails when you publish email sending events to Amazon CloudWatch. (see [below for nested schema](#nestedatt--event_destination--cloudwatch_destination--dimension_configurations))
 

@@ -46,7 +46,7 @@ Schema for ApplicationInstance CloudFormation Resource
 <a id="nestedatt--manifest_payload"></a>
 ### Nested Schema for `manifest_payload`
 
-Required:
+Optional:
 
 - `payload_data` (String)
 
@@ -62,7 +62,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) A string used to identify this tag
 - `value` (String) A string containing the value for the tag

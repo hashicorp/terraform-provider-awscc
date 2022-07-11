@@ -30,9 +30,12 @@ Resource Type definition for AWS::CloudFront::PublicKey
 Required:
 
 - `caller_reference` (String)
-- `comment` (String)
 - `encoded_key` (String)
 - `name` (String)
+
+Optional:
+
+- `comment` (String)
 
 ## Import
 

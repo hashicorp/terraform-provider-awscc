@@ -34,13 +34,16 @@ Resource Type definition for AWS::ECS::CapacityProvider.
 Required:
 
 - `auto_scaling_group_arn` (String)
+
+Optional:
+
 - `managed_scaling` (Attributes) The managed scaling settings for the Auto Scaling group capacity provider. (see [below for nested schema](#nestedatt--auto_scaling_group_provider--managed_scaling))
 - `managed_termination_protection` (String)
 
 <a id="nestedatt--auto_scaling_group_provider--managed_scaling"></a>
 ### Nested Schema for `auto_scaling_group_provider.managed_scaling`
 
-Required:
+Optional:
 
 - `instance_warmup_period` (Number)
 - `maximum_scaling_step_size` (Number)

@@ -44,7 +44,7 @@ Resource Type definition for AWS::SageMaker::Domain
 <a id="nestedatt--default_user_settings"></a>
 ### Nested Schema for `default_user_settings`
 
-Required:
+Optional:
 
 - `execution_role` (String) The user profile Amazon Resource Name (ARN).
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings))
@@ -57,14 +57,14 @@ Required:
 <a id="nestedatt--default_user_settings--jupyter_server_app_settings"></a>
 ### Nested Schema for `default_user_settings.jupyter_server_app_settings`
 
-Required:
+Optional:
 
 - `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings--default_resource_spec))
 
 <a id="nestedatt--default_user_settings--jupyter_server_app_settings--default_resource_spec"></a>
 ### Nested Schema for `default_user_settings.jupyter_server_app_settings.default_resource_spec`
 
-Required:
+Optional:
 
 - `instance_type` (String) The instance type that the image version runs on.
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
@@ -76,7 +76,7 @@ Required:
 <a id="nestedatt--default_user_settings--kernel_gateway_app_settings"></a>
 ### Nested Schema for `default_user_settings.kernel_gateway_app_settings`
 
-Required:
+Optional:
 
 - `custom_images` (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--custom_images))
 - `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--default_resource_spec))
@@ -88,13 +88,16 @@ Required:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
+
+Optional:
+
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
 <a id="nestedatt--default_user_settings--kernel_gateway_app_settings--default_resource_spec"></a>
 ### Nested Schema for `default_user_settings.kernel_gateway_app_settings.default_resource_spec`
 
-Required:
+Optional:
 
 - `instance_type` (String) The instance type that the image version runs on.
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
@@ -106,7 +109,7 @@ Required:
 <a id="nestedatt--default_user_settings--r_session_app_settings"></a>
 ### Nested Schema for `default_user_settings.r_session_app_settings`
 
-Required:
+Optional:
 
 - `custom_images` (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--r_session_app_settings--custom_images))
 - `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--r_session_app_settings--default_resource_spec))
@@ -118,13 +121,16 @@ Required:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
+
+Optional:
+
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
 <a id="nestedatt--default_user_settings--r_session_app_settings--default_resource_spec"></a>
 ### Nested Schema for `default_user_settings.r_session_app_settings.default_resource_spec`
 
-Required:
+Optional:
 
 - `instance_type` (String) The instance type that the image version runs on.
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
@@ -136,7 +142,7 @@ Required:
 <a id="nestedatt--default_user_settings--r_studio_server_pro_app_settings"></a>
 ### Nested Schema for `default_user_settings.r_studio_server_pro_app_settings`
 
-Required:
+Optional:
 
 - `access_status` (String) Indicates whether the current user has access to the RStudioServerPro app.
 - `user_group` (String) The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.
@@ -145,7 +151,7 @@ Required:
 <a id="nestedatt--default_user_settings--sharing_settings"></a>
 ### Nested Schema for `default_user_settings.sharing_settings`
 
-Required:
+Optional:
 
 - `notebook_output_option` (String) Whether to include the notebook cell output when sharing the notebook. The default is Disabled.
 - `s3_kms_key_id` (String) When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
@@ -164,10 +170,13 @@ Optional:
 <a id="nestedatt--domain_settings--r_studio_server_pro_domain_settings"></a>
 ### Nested Schema for `domain_settings.r_studio_server_pro_domain_settings`
 
+Required:
+
+- `domain_execution_role_arn` (String) The ARN of the execution role for the RStudioServerPro Domain-level app.
+
 Optional:
 
 - `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--domain_settings--r_studio_server_pro_domain_settings--default_resource_spec))
-- `domain_execution_role_arn` (String) The ARN of the execution role for the RStudioServerPro Domain-level app.
 - `r_studio_connect_url` (String) A URL pointing to an RStudio Connect server.
 - `r_studio_package_manager_url` (String) A URL pointing to an RStudio Package Manager server.
 
@@ -187,7 +196,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

@@ -37,18 +37,24 @@ Resource schema of AWS::EC2::PrefixList Type
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
-Optional:
+Required:
 
 - `cidr` (String)
+
+Optional:
+
 - `description` (String)
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
+
+Optional:
+
 - `value` (String)
 
 ## Import

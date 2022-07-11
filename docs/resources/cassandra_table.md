@@ -55,7 +55,7 @@ Optional:
 <a id="nestedatt--billing_mode--provisioned_throughput"></a>
 ### Nested Schema for `billing_mode.provisioned_throughput`
 
-Optional:
+Required:
 
 - `read_capacity_units` (Number)
 - `write_capacity_units` (Number)
@@ -65,15 +65,18 @@ Optional:
 <a id="nestedatt--clustering_key_columns"></a>
 ### Nested Schema for `clustering_key_columns`
 
-Optional:
+Required:
 
 - `column` (Attributes) (see [below for nested schema](#nestedatt--clustering_key_columns--column))
+
+Optional:
+
 - `order_by` (String)
 
 <a id="nestedatt--clustering_key_columns--column"></a>
 ### Nested Schema for `clustering_key_columns.column`
 
-Optional:
+Required:
 
 - `column_name` (String)
 - `column_type` (String)
@@ -92,7 +95,7 @@ Optional:
 <a id="nestedatt--regular_columns"></a>
 ### Nested Schema for `regular_columns`
 
-Optional:
+Required:
 
 - `column_name` (String)
 - `column_type` (String)
@@ -101,7 +104,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

@@ -48,9 +48,12 @@ Resource Type definition for AWS::Lightsail::Instance
 <a id="nestedatt--add_ons"></a>
 ### Nested Schema for `add_ons`
 
-Optional:
+Required:
 
 - `add_on_type` (String) The add-on type
+
+Optional:
+
 - `auto_snapshot_add_on_request` (Attributes) An object that represents additional parameters when enabling or modifying the automatic snapshot add-on (see [below for nested schema](#nestedatt--add_ons--auto_snapshot_add_on_request))
 - `status` (String) Status of the Addon
 
@@ -68,21 +71,27 @@ Optional:
 
 Optional:
 
-- `cpu_count` (Number) CPU count of the Instance.
 - `disks` (Attributes Set) Disks attached to the Instance. (see [below for nested schema](#nestedatt--hardware--disks))
+
+Read-Only:
+
+- `cpu_count` (Number) CPU count of the Instance.
 - `ram_size_in_gb` (Number) RAM Size of the Instance.
 
 <a id="nestedatt--hardware--disks"></a>
 ### Nested Schema for `hardware.disks`
 
+Required:
+
+- `disk_name` (String) The names to use for your new Lightsail disk.
+- `path` (String) Path of the disk attached to the instance.
+
 Optional:
 
 - `attached_to` (String) Instance attached to the disk.
 - `attachment_state` (String) Attachment state of the disk.
-- `disk_name` (String) The names to use for your new Lightsail disk.
 - `iops` (Number) IOPS of disk.
 - `is_system_disk` (Boolean) Is the Attached disk is the system disk of the Instance.
-- `path` (String) Path of the disk attached to the instance.
 - `size_in_gb` (String) Size of the disk attached to the Instance.
 
 
@@ -90,7 +99,7 @@ Optional:
 <a id="nestedatt--location"></a>
 ### Nested Schema for `location`
 
-Optional:
+Read-Only:
 
 - `availability_zone` (String) The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
 - `region_name` (String) The Region Name in which to create your instance.
@@ -99,18 +108,13 @@ Optional:
 <a id="nestedatt--networking"></a>
 ### Nested Schema for `networking`
 
+Required:
+
+- `ports` (Attributes Set) Ports to the Instance. (see [below for nested schema](#nestedatt--networking--ports))
+
 Optional:
 
 - `monthly_transfer` (Attributes) Monthly Transfer of the Instance. (see [below for nested schema](#nestedatt--networking--monthly_transfer))
-- `ports` (Attributes Set) Ports to the Instance. (see [below for nested schema](#nestedatt--networking--ports))
-
-<a id="nestedatt--networking--monthly_transfer"></a>
-### Nested Schema for `networking.monthly_transfer`
-
-Optional:
-
-- `gb_per_month_allocated` (String) GbPerMonthAllocated of the Instance.
-
 
 <a id="nestedatt--networking--ports"></a>
 ### Nested Schema for `networking.ports`
@@ -129,11 +133,19 @@ Optional:
 - `to_port` (Number) To Port of the Instance.
 
 
+<a id="nestedatt--networking--monthly_transfer"></a>
+### Nested Schema for `networking.monthly_transfer`
+
+Read-Only:
+
+- `gb_per_month_allocated` (String) GbPerMonthAllocated of the Instance.
+
+
 
 <a id="nestedatt--state"></a>
 ### Nested Schema for `state`
 
-Optional:
+Read-Only:
 
 - `code` (Number) Status code of the Instance.
 - `name` (String) Status code of the Instance.
@@ -142,9 +154,12 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+Optional:
+
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import

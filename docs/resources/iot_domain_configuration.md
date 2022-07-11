@@ -45,7 +45,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)
@@ -54,7 +54,7 @@ Optional:
 <a id="nestedatt--server_certificates"></a>
 ### Nested Schema for `server_certificates`
 
-Read-Only:
+Optional:
 
 - `server_certificate_arn` (String)
 - `server_certificate_status` (String)

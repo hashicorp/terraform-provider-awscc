@@ -33,7 +33,7 @@ Resource schema for AWS::IoTSiteWise::Gateway
 <a id="nestedatt--gateway_platform"></a>
 ### Nested Schema for `gateway_platform`
 
-Required:
+Optional:
 
 - `greengrass` (Attributes) A gateway that runs on AWS IoT Greengrass V1. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
 - `greengrass_v2` (Attributes) A gateway that runs on AWS IoT Greengrass V2. (see [below for nested schema](#nestedatt--gateway_platform--greengrass_v2))
@@ -58,16 +58,19 @@ Required:
 <a id="nestedatt--gateway_capability_summaries"></a>
 ### Nested Schema for `gateway_capability_summaries`
 
+Required:
+
+- `capability_namespace` (String) The namespace of the capability configuration.
+
 Optional:
 
 - `capability_configuration` (String) The JSON document that defines the gateway capability's configuration.
-- `capability_namespace` (String) The namespace of the capability configuration.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

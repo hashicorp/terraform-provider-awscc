@@ -60,7 +60,7 @@ Optional:
 <a id="nestedatt--source_configuration--app_integrations"></a>
 ### Nested Schema for `source_configuration.app_integrations`
 
-Optional:
+Required:
 
 - `app_integration_arn` (String)
 - `object_fields` (List of String)
@@ -70,7 +70,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

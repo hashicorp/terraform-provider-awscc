@@ -27,7 +27,7 @@ This resource schema represents the ResourceCollection resource in the Amazon De
 <a id="nestedatt--resource_collection_filter"></a>
 ### Nested Schema for `resource_collection_filter`
 
-Required:
+Optional:
 
 - `cloudformation` (Attributes) CloudFormation resource for DevOps Guru to monitor (see [below for nested schema](#nestedatt--resource_collection_filter--cloudformation))
 - `tags` (Attributes List) Tagged resources for DevOps Guru to monitor (see [below for nested schema](#nestedatt--resource_collection_filter--tags))
@@ -35,7 +35,7 @@ Required:
 <a id="nestedatt--resource_collection_filter--cloudformation"></a>
 ### Nested Schema for `resource_collection_filter.cloudformation`
 
-Required:
+Optional:
 
 - `stack_names` (List of String) An array of CloudFormation stack names.
 
@@ -43,7 +43,7 @@ Required:
 <a id="nestedatt--resource_collection_filter--tags"></a>
 ### Nested Schema for `resource_collection_filter.tags`
 
-Required:
+Optional:
 
 - `app_boundary_key` (String) A Tag key for DevOps Guru app boundary.
 - `tag_values` (List of String) Tag values of DevOps Guru app boundary.

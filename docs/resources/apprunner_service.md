@@ -41,7 +41,7 @@ The AWS::AppRunner::Service resource specifies an AppRunner Service.
 <a id="nestedatt--source_configuration"></a>
 ### Nested Schema for `source_configuration`
 
-Required:
+Optional:
 
 - `authentication_configuration` (Attributes) Authentication Configuration (see [below for nested schema](#nestedatt--source_configuration--authentication_configuration))
 - `auto_deployments_enabled` (Boolean) Auto Deployment enabled
@@ -51,7 +51,7 @@ Required:
 <a id="nestedatt--source_configuration--authentication_configuration"></a>
 ### Nested Schema for `source_configuration.authentication_configuration`
 
-Required:
+Optional:
 
 - `access_role_arn` (String) Access Role Arn
 - `connection_arn` (String) Connection Arn
@@ -62,39 +62,12 @@ Required:
 
 Required:
 
-- `code_configuration` (Attributes) Code Configuration (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration))
 - `repository_url` (String) Repository Url
 - `source_code_version` (Attributes) Source Code Version (see [below for nested schema](#nestedatt--source_configuration--code_repository--source_code_version))
 
-<a id="nestedatt--source_configuration--code_repository--code_configuration"></a>
-### Nested Schema for `source_configuration.code_repository.code_configuration`
+Optional:
 
-Required:
-
-- `code_configuration_values` (Attributes) Code Configuration Values (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration--code_configuration_values))
-- `configuration_source` (String) Configuration Source
-
-<a id="nestedatt--source_configuration--code_repository--code_configuration--code_configuration_values"></a>
-### Nested Schema for `source_configuration.code_repository.code_configuration.configuration_source`
-
-Required:
-
-- `build_command` (String) Build Command
-- `port` (String) Port
-- `runtime` (String) Runtime
-- `runtime_environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration--configuration_source--runtime_environment_variables))
-- `start_command` (String) Start Command
-
-<a id="nestedatt--source_configuration--code_repository--code_configuration--configuration_source--runtime_environment_variables"></a>
-### Nested Schema for `source_configuration.code_repository.code_configuration.configuration_source.runtime_environment_variables`
-
-Required:
-
-- `name` (String)
-- `value` (String)
-
-
-
+- `code_configuration` (Attributes) Code Configuration (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration))
 
 <a id="nestedatt--source_configuration--code_repository--source_code_version"></a>
 ### Nested Schema for `source_configuration.code_repository.source_code_version`
@@ -105,20 +78,59 @@ Required:
 - `value` (String) Source Code Version Value
 
 
+<a id="nestedatt--source_configuration--code_repository--code_configuration"></a>
+### Nested Schema for `source_configuration.code_repository.code_configuration`
+
+Required:
+
+- `configuration_source` (String) Configuration Source
+
+Optional:
+
+- `code_configuration_values` (Attributes) Code Configuration Values (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration--code_configuration_values))
+
+<a id="nestedatt--source_configuration--code_repository--code_configuration--code_configuration_values"></a>
+### Nested Schema for `source_configuration.code_repository.code_configuration.code_configuration_values`
+
+Required:
+
+- `runtime` (String) Runtime
+
+Optional:
+
+- `build_command` (String) Build Command
+- `port` (String) Port
+- `runtime_environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration--code_configuration_values--runtime_environment_variables))
+- `start_command` (String) Start Command
+
+<a id="nestedatt--source_configuration--code_repository--code_configuration--code_configuration_values--runtime_environment_variables"></a>
+### Nested Schema for `source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables`
+
+Optional:
+
+- `name` (String)
+- `value` (String)
+
+
+
+
 
 <a id="nestedatt--source_configuration--image_repository"></a>
 ### Nested Schema for `source_configuration.image_repository`
 
 Required:
 
-- `image_configuration` (Attributes) Image Configuration (see [below for nested schema](#nestedatt--source_configuration--image_repository--image_configuration))
 - `image_identifier` (String) Image Identifier
 - `image_repository_type` (String) Image Repository Type
+
+Optional:
+
+- `image_configuration` (Attributes) Image Configuration (see [below for nested schema](#nestedatt--source_configuration--image_repository--image_configuration))
 
 <a id="nestedatt--source_configuration--image_repository--image_configuration"></a>
 ### Nested Schema for `source_configuration.image_repository.image_configuration`
 
-Required:
+Optional:
 
 - `port` (String) Port
 - `runtime_environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_variables))
@@ -127,7 +139,7 @@ Required:
 <a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_variables"></a>
 ### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -139,7 +151,7 @@ Required:
 <a id="nestedatt--encryption_configuration"></a>
 ### Nested Schema for `encryption_configuration`
 
-Optional:
+Required:
 
 - `kms_key` (String) The KMS Key
 
@@ -170,16 +182,19 @@ Optional:
 <a id="nestedatt--network_configuration"></a>
 ### Nested Schema for `network_configuration`
 
-Optional:
+Required:
 
 - `egress_configuration` (Attributes) Network egress configuration (see [below for nested schema](#nestedatt--network_configuration--egress_configuration))
 
 <a id="nestedatt--network_configuration--egress_configuration"></a>
 ### Nested Schema for `network_configuration.egress_configuration`
 
-Optional:
+Required:
 
 - `egress_type` (String) Network egress type.
+
+Optional:
+
 - `vpc_connector_arn` (String) The Amazon Resource Name (ARN) of the App Runner VpcConnector.
 
 
@@ -187,10 +202,13 @@ Optional:
 <a id="nestedatt--observability_configuration"></a>
 ### Nested Schema for `observability_configuration`
 
+Required:
+
+- `observability_enabled` (Boolean) Observability enabled
+
 Optional:
 
 - `observability_configuration_arn` (String) The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.
-- `observability_enabled` (Boolean) Observability enabled
 
 
 <a id="nestedatt--tags"></a>

@@ -46,7 +46,7 @@ Required:
 <a id="nestedatt--definition"></a>
 ### Nested Schema for `definition`
 
-Required:
+Optional:
 
 - `iam_action_definition` (Attributes) (see [below for nested schema](#nestedatt--definition--iam_action_definition))
 - `scp_action_definition` (Attributes) (see [below for nested schema](#nestedatt--definition--scp_action_definition))
@@ -57,8 +57,11 @@ Required:
 
 Required:
 
-- `groups` (List of String)
 - `policy_arn` (String)
+
+Optional:
+
+- `groups` (List of String)
 - `roles` (List of String)
 - `users` (List of String)
 

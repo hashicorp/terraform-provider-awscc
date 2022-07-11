@@ -51,7 +51,7 @@ Resource Type definition for AWS::Lambda::Function
 <a id="nestedatt--code"></a>
 ### Nested Schema for `code`
 
-Required:
+Optional:
 
 - `image_uri` (String) ImageUri.
 - `s3_bucket` (String) An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
@@ -79,7 +79,7 @@ Optional:
 <a id="nestedatt--ephemeral_storage"></a>
 ### Nested Schema for `ephemeral_storage`
 
-Optional:
+Required:
 
 - `size` (Number) The amount of ephemeral storage that your function has access to.
 
@@ -87,7 +87,7 @@ Optional:
 <a id="nestedatt--file_system_configs"></a>
 ### Nested Schema for `file_system_configs`
 
-Optional:
+Required:
 
 - `arn` (String) The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.
 - `local_mount_path` (String) The path where the function can access the file system, starting with /mnt/.
@@ -106,9 +106,12 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+Optional:
+
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

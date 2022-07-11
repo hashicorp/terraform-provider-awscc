@@ -34,7 +34,7 @@ Definition of AWS::ConnectCampaigns::Campaign Resource Type
 <a id="nestedatt--dialer_config"></a>
 ### Nested Schema for `dialer_config`
 
-Required:
+Optional:
 
 - `predictive_dialer_config` (Attributes) Predictive Dialer config (see [below for nested schema](#nestedatt--dialer_config--predictive_dialer_config))
 - `progressive_dialer_config` (Attributes) Progressive Dialer config (see [below for nested schema](#nestedatt--dialer_config--progressive_dialer_config))
@@ -63,13 +63,16 @@ Required:
 
 - `connect_contact_flow_arn` (String) The identifier of the contact flow for the outbound call.
 - `connect_queue_arn` (String) The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.
+
+Optional:
+
 - `connect_source_phone_number` (String) The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that's 1 to 256 characters in length.

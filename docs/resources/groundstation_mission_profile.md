@@ -37,7 +37,7 @@ AWS Ground Station Mission Profile resource type for CloudFormation.
 <a id="nestedatt--dataflow_edges"></a>
 ### Nested Schema for `dataflow_edges`
 
-Required:
+Optional:
 
 - `destination` (String)
 - `source` (String)

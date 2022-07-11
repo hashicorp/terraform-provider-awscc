@@ -44,12 +44,15 @@ Required:
 
 Required:
 
-- `dimension_list` (List of String) Dimensions for this MetricSet.
 - `metric_list` (Attributes List) Metrics captured by this MetricSet. (see [below for nested schema](#nestedatt--metric_set_list--metric_list))
-- `metric_set_description` (String) A description for the MetricSet.
-- `metric_set_frequency` (String) A frequency period to aggregate the data
 - `metric_set_name` (String) The name of the MetricSet.
 - `metric_source` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source))
+
+Optional:
+
+- `dimension_list` (List of String) Dimensions for this MetricSet.
+- `metric_set_description` (String) A description for the MetricSet.
+- `metric_set_frequency` (String) A frequency period to aggregate the data
 - `offset` (Number) Offset, in seconds, between the frequency interval and the time at which the metrics are available.
 - `timestamp_column` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--timestamp_column))
 - `timezone` (String)
@@ -61,13 +64,16 @@ Required:
 
 - `aggregation_function` (String) Operator used to aggregate metric values
 - `metric_name` (String) Name of a column in the data.
+
+Optional:
+
 - `namespace` (String)
 
 
 <a id="nestedatt--metric_set_list--metric_source"></a>
 ### Nested Schema for `metric_set_list.metric_source`
 
-Required:
+Optional:
 
 - `app_flow_config` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--app_flow_config))
 - `cloudwatch_config` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--cloudwatch_config))
@@ -146,14 +152,17 @@ Required:
 Required:
 
 - `file_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor))
-- `historical_data_path_list` (List of String)
 - `role_arn` (String)
+
+Optional:
+
+- `historical_data_path_list` (List of String)
 - `templated_path_list` (List of String)
 
 <a id="nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor"></a>
 ### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list`
 
-Required:
+Optional:
 
 - `csv_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--csv_format_descriptor))
 - `json_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--json_format_descriptor))
@@ -161,7 +170,7 @@ Required:
 <a id="nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--csv_format_descriptor"></a>
 ### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list.csv_format_descriptor`
 
-Required:
+Optional:
 
 - `charset` (String)
 - `contains_header` (Boolean)
@@ -174,7 +183,7 @@ Required:
 <a id="nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--json_format_descriptor"></a>
 ### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list.json_format_descriptor`
 
-Required:
+Optional:
 
 - `charset` (String)
 - `file_compression` (String)
@@ -186,7 +195,7 @@ Required:
 <a id="nestedatt--metric_set_list--timestamp_column"></a>
 ### Nested Schema for `metric_set_list.timestamp_column`
 
-Required:
+Optional:
 
 - `column_format` (String) A timestamp format for the timestamps in the dataset
 - `column_name` (String) Name of a column in the data.

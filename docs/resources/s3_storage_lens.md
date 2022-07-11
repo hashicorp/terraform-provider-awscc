@@ -33,12 +33,18 @@ The AWS::S3::StorageLens resource is an Amazon S3 resource type that you can use
 Required:
 
 - `account_level` (Attributes) Account-level metrics configurations. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level))
+- `id` (String) The ID that identifies the Amazon S3 Storage Lens configuration.
+- `is_enabled` (Boolean) Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.
+
+Optional:
+
 - `aws_org` (Attributes) The AWS Organizations ARN to use in the Amazon S3 Storage Lens configuration. (see [below for nested schema](#nestedatt--storage_lens_configuration--aws_org))
 - `data_export` (Attributes) Specifies how Amazon S3 Storage Lens metrics should be exported. (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export))
 - `exclude` (Attributes) S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration. (see [below for nested schema](#nestedatt--storage_lens_configuration--exclude))
-- `id` (String) The ID that identifies the Amazon S3 Storage Lens configuration.
 - `include` (Attributes) S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration. (see [below for nested schema](#nestedatt--storage_lens_configuration--include))
-- `is_enabled` (Boolean) Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.
+
+Read-Only:
+
 - `storage_lens_arn` (String) The ARN for the Amazon S3 Storage Lens configuration.
 
 <a id="nestedatt--storage_lens_configuration--account_level"></a>
@@ -46,21 +52,16 @@ Required:
 
 Required:
 
-- `activity_metrics` (Attributes) Enables activity metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--activity_metrics))
 - `bucket_level` (Attributes) Bucket-level metrics configurations. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level))
 
-<a id="nestedatt--storage_lens_configuration--account_level--activity_metrics"></a>
-### Nested Schema for `storage_lens_configuration.account_level.activity_metrics`
+Optional:
 
-Required:
-
-- `is_enabled` (Boolean) Specifies whether activity metrics are enabled or disabled.
-
+- `activity_metrics` (Attributes) Enables activity metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--activity_metrics))
 
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level"></a>
 ### Nested Schema for `storage_lens_configuration.account_level.bucket_level`
 
-Required:
+Optional:
 
 - `activity_metrics` (Attributes) Enables activity metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level--activity_metrics))
 - `prefix_level` (Attributes) Prefix-level metrics configurations. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level--prefix_level))
@@ -68,7 +69,7 @@ Required:
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level--activity_metrics"></a>
 ### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level`
 
-Required:
+Optional:
 
 - `is_enabled` (Boolean) Specifies whether activity metrics are enabled or disabled.
 
@@ -83,7 +84,7 @@ Required:
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level--prefix_level--storage_metrics"></a>
 ### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics`
 
-Required:
+Optional:
 
 - `is_enabled` (Boolean) Specifies whether prefix-level storage metrics are enabled or disabled.
 - `selection_criteria` (Attributes) Selection criteria for prefix-level metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level--prefix_level--storage_metrics--selection_criteria))
@@ -91,7 +92,7 @@ Required:
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level--prefix_level--storage_metrics--selection_criteria"></a>
 ### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.selection_criteria`
 
-Required:
+Optional:
 
 - `delimiter` (String) Delimiter to divide S3 key into hierarchy of prefixes.
 - `max_depth` (Number) Max depth of prefixes of S3 key that Amazon S3 Storage Lens will analyze.
@@ -99,6 +100,14 @@ Required:
 
 
 
+
+
+<a id="nestedatt--storage_lens_configuration--account_level--activity_metrics"></a>
+### Nested Schema for `storage_lens_configuration.account_level.activity_metrics`
+
+Optional:
+
+- `is_enabled` (Boolean) Specifies whether activity metrics are enabled or disabled.
 
 
 
@@ -113,7 +122,7 @@ Required:
 <a id="nestedatt--storage_lens_configuration--data_export"></a>
 ### Nested Schema for `storage_lens_configuration.data_export`
 
-Required:
+Optional:
 
 - `cloudwatch_metrics` (Attributes) CloudWatch metrics settings for the Amazon S3 Storage Lens metrics export. (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--cloudwatch_metrics))
 - `s3_bucket_destination` (Attributes) S3 bucket destination settings for the Amazon S3 Storage Lens metrics export. (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--s3_bucket_destination))
@@ -133,15 +142,18 @@ Required:
 
 - `account_id` (String) The AWS account ID that owns the destination S3 bucket.
 - `arn` (String) The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.
-- `encryption` (Attributes) Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS). (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--encryption))
 - `format` (String) Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.
 - `output_schema_version` (String) The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.
+
+Optional:
+
+- `encryption` (Attributes) Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS). (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--encryption))
 - `prefix` (String) The prefix to use for Amazon S3 Storage Lens export.
 
 <a id="nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--encryption"></a>
 ### Nested Schema for `storage_lens_configuration.data_export.s3_bucket_destination.prefix`
 
-Required:
+Optional:
 
 - `ssekms` (Attributes) AWS KMS server-side encryption. (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--prefix--ssekms))
 - `sses3` (Map of String) S3 default server-side encryption.
@@ -160,7 +172,7 @@ Required:
 <a id="nestedatt--storage_lens_configuration--exclude"></a>
 ### Nested Schema for `storage_lens_configuration.exclude`
 
-Required:
+Optional:
 
 - `buckets` (Set of String)
 - `regions` (Set of String)
@@ -169,7 +181,7 @@ Required:
 <a id="nestedatt--storage_lens_configuration--include"></a>
 ### Nested Schema for `storage_lens_configuration.include`
 
-Required:
+Optional:
 
 - `buckets` (Set of String)
 - `regions` (Set of String)
@@ -179,7 +191,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
 - `value` (String)

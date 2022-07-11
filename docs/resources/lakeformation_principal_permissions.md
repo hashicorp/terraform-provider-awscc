@@ -35,7 +35,7 @@ A resource schema representing a Lake Formation Permission.
 <a id="nestedatt--principal"></a>
 ### Nested Schema for `principal`
 
-Required:
+Optional:
 
 - `data_lake_principal_identifier` (String)
 
@@ -43,7 +43,7 @@ Required:
 <a id="nestedatt--resource"></a>
 ### Nested Schema for `resource`
 
-Required:
+Optional:
 
 - `catalog` (Map of String)
 - `data_cells_filter` (Attributes) (see [below for nested schema](#nestedatt--resource--data_cells_filter))
@@ -105,7 +105,7 @@ Required:
 <a id="nestedatt--resource--lf_tag_policy--expression"></a>
 ### Nested Schema for `resource.lf_tag_policy.expression`
 
-Required:
+Optional:
 
 - `tag_key` (String)
 - `tag_values` (List of String)
@@ -119,6 +119,9 @@ Required:
 
 - `catalog_id` (String)
 - `database_name` (String)
+
+Optional:
+
 - `name` (String)
 - `table_wildcard` (Map of String)
 
@@ -129,15 +132,18 @@ Required:
 Required:
 
 - `catalog_id` (String)
-- `column_names` (List of String)
-- `column_wildcard` (Attributes) (see [below for nested schema](#nestedatt--resource--table_with_columns--column_wildcard))
 - `database_name` (String)
 - `name` (String)
+
+Optional:
+
+- `column_names` (List of String)
+- `column_wildcard` (Attributes) (see [below for nested schema](#nestedatt--resource--table_with_columns--column_wildcard))
 
 <a id="nestedatt--resource--table_with_columns--column_wildcard"></a>
 ### Nested Schema for `resource.table_with_columns.column_wildcard`
 
-Required:
+Optional:
 
 - `excluded_column_names` (List of String)
 

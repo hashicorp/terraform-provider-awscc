@@ -41,7 +41,7 @@ Resource Type definition for AWS::KafkaConnect::Connector
 <a id="nestedatt--capacity"></a>
 ### Nested Schema for `capacity`
 
-Required:
+Optional:
 
 - `auto_scaling` (Attributes) Details about auto scaling of a connector. (see [below for nested schema](#nestedatt--capacity--auto_scaling))
 - `provisioned_capacity` (Attributes) Details about a fixed capacity allocated to a connector. (see [below for nested schema](#nestedatt--capacity--provisioned_capacity))
@@ -79,8 +79,11 @@ Required:
 
 Required:
 
-- `mcu_count` (Number) Specifies how many MSK Connect Units (MCU) are allocated to the connector.
 - `worker_count` (Number) Number of workers for a connector.
+
+Optional:
+
+- `mcu_count` (Number) Specifies how many MSK Connect Units (MCU) are allocated to the connector.
 
 
 
@@ -146,7 +149,7 @@ Required:
 <a id="nestedatt--log_delivery"></a>
 ### Nested Schema for `log_delivery`
 
-Optional:
+Required:
 
 - `worker_log_delivery` (Attributes) Specifies where worker logs are delivered. (see [below for nested schema](#nestedatt--log_delivery--worker_log_delivery))
 
@@ -162,28 +165,37 @@ Optional:
 <a id="nestedatt--log_delivery--worker_log_delivery--cloudwatch_logs"></a>
 ### Nested Schema for `log_delivery.worker_log_delivery.cloudwatch_logs`
 
-Optional:
+Required:
 
 - `enabled` (Boolean) Specifies whether the logs get sent to the specified CloudWatch Logs destination.
+
+Optional:
+
 - `log_group` (String) The CloudWatch log group that is the destination for log delivery.
 
 
 <a id="nestedatt--log_delivery--worker_log_delivery--firehose"></a>
 ### Nested Schema for `log_delivery.worker_log_delivery.firehose`
 
+Required:
+
+- `enabled` (Boolean) Specifies whether the logs get sent to the specified Kinesis Data Firehose delivery stream.
+
 Optional:
 
 - `delivery_stream` (String) The Kinesis Data Firehose delivery stream that is the destination for log delivery.
-- `enabled` (Boolean) Specifies whether the logs get sent to the specified Kinesis Data Firehose delivery stream.
 
 
 <a id="nestedatt--log_delivery--worker_log_delivery--s3"></a>
 ### Nested Schema for `log_delivery.worker_log_delivery.s3`
 
+Required:
+
+- `enabled` (Boolean) Specifies whether the logs get sent to the specified Amazon S3 destination.
+
 Optional:
 
 - `bucket` (String) The name of the S3 bucket that is the destination for log delivery.
-- `enabled` (Boolean) Specifies whether the logs get sent to the specified Amazon S3 destination.
 - `prefix` (String) The S3 prefix that is the destination for log delivery.
 
 
@@ -192,7 +204,7 @@ Optional:
 <a id="nestedatt--worker_configuration"></a>
 ### Nested Schema for `worker_configuration`
 
-Optional:
+Required:
 
 - `revision` (Number) The revision of the worker configuration to use.
 - `worker_configuration_arn` (String) The Amazon Resource Name (ARN) of the worker configuration to use.

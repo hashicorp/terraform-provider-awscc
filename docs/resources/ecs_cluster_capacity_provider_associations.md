@@ -30,8 +30,11 @@ Associate a set of ECS Capacity Providers with a specified ECS Cluster
 
 Required:
 
-- `base` (Number)
 - `capacity_provider` (String) If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.
+
+Optional:
+
+- `base` (Number)
 - `weight` (Number)
 
 ## Import
