@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	"github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"github.com/mattbaird/jsonpatch"
 )
@@ -394,12 +395,28 @@ var (
 	idAttributePath = tftypes.NewAttributePath().WithAttributeName("id")
 )
 
+type providerMetaData struct {
+	UserAgent types.UserAgentProducts `tfsdk:"user_agent"`
+}
+
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
 	ctx = r.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "Resource.Create")
 
+	var metadata providerMetaData
+
+	response.Diagnostics.Append(request.ProviderMeta.Get(ctx, &metadata)...)
+
+	if response.Diagnostics.HasError() {
+		return
+	}
+
+	ctx = context.WithValue(ctx, "awsbase.ContextScopedUserAgent", metadata.UserAgent.UserAgentProducts())
+
 	conn := r.provider.CloudControlApiClient(ctx)
+
+	// conn := r.provider.CloudControlApiClient(ctx)
 
 	tflog.Debug(ctx, "Request.Plan.Raw", map[string]interface{}{
 		"value": hclog.Fmt("%v", request.Plan.Raw),
