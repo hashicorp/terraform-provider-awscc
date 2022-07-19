@@ -7,9 +7,9 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
@@ -183,9 +183,9 @@ func (validator stringInSliceValidator) Validate(ctx context.Context, request tf
 	))
 }
 
-func newStringNotInSliceError(path *tftypes.AttributePath, valid []string, value string) diag.Diagnostic {
+func newStringNotInSliceError(p path.Path, valid []string, value string) diag.Diagnostic {
 	return ccdiag.NewInvalidValueAttributeError(
-		path,
+		p,
 		fmt.Sprintf("expected value to be one of %v, got %s", valid, value),
 	)
 }
