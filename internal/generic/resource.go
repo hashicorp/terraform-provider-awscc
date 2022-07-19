@@ -12,6 +12,7 @@ import (
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -391,7 +392,7 @@ func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfs
 var (
 	// Path to the "id" attribute which uniquely (for a specific resource type) identifies the resource.
 	// This attribute is required for acceptance testing.
-	idAttributePath = tftypes.NewAttributePath().WithAttributeName("id")
+	idAttributePath = path.Root("id")
 )
 
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
