@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -346,7 +347,7 @@ func TestRequiredAttributesValidator_Object(t *testing.T) {
 			}
 
 			request := tfsdk.ValidateAttributeRequest{
-				AttributePath:   tftypes.NewAttributePath().WithAttributeName("test"),
+				AttributePath:   path.Root("test"),
 				AttributeConfig: val,
 			}
 			response := tfsdk.ValidateAttributeResponse{}
@@ -508,7 +509,7 @@ func TestRequiredAttributesValidator_List(t *testing.T) {
 			}
 
 			request := tfsdk.ValidateAttributeRequest{
-				AttributePath:   tftypes.NewAttributePath().WithAttributeName("test"),
+				AttributePath:   path.Root("test"),
 				AttributeConfig: val,
 			}
 			response := tfsdk.ValidateAttributeResponse{}
@@ -669,7 +670,7 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 			}
 
 			request := tfsdk.ValidateAttributeRequest{
-				AttributePath:   tftypes.NewAttributePath().WithAttributeName("test"),
+				AttributePath:   path.Root("test"),
 				AttributeConfig: val,
 			}
 			response := tfsdk.ValidateAttributeResponse{}
@@ -792,7 +793,7 @@ func TestResourceConfigRequiredAttributesValidator(t *testing.T) {
 				},
 			}
 			response := tfsdk.ValidateResourceConfigResponse{}
-			ResourceConfigRequiredAttributes(test.fs...).Validate(ctx, request, &response)
+			ResourceConfigRequiredAttributes(test.fs...).ValidateResource(ctx, request, &response)
 
 			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
