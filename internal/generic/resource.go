@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
@@ -119,7 +118,7 @@ func resourceWithSyntheticIDAttribute(v bool) ResourceTypeOptionsFunc {
 // the previous calls' values.
 func resourceWithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
 	return func(o *resourceType) error {
-		writeOnlyAttributePaths := make([]*tftypes.AttributePath, 0)
+		writeOnlyAttributePaths := make([]*path.Path, 0)
 
 		for _, writeOnlyPropertyPath := range v {
 			writeOnlyAttributePath, err := o.propertyPathToAttributePath(writeOnlyPropertyPath)
@@ -303,7 +302,7 @@ type resourceType struct {
 	cfToTfNameMap                map[string]string                 // Map of CloudFormation property name to Terraform attribute name
 	isImmutableType              bool                              // Resources cannot be updated and must be recreated
 	syntheticIDAttribute         bool                              // Resource type has a synthetic ID attribute
-	writeOnlyAttributePaths      []*tftypes.AttributePath          // Paths to any write-only attributes
+	writeOnlyAttributePaths      []*path.Path                      // Paths to any write-only attributes
 	createTimeout                time.Duration                     // Maximum wait time for resource creation
 	updateTimeout                time.Duration                     // Maximum wait time for resource update
 	deleteTimeout                time.Duration                     // Maximum wait time for resource deletion
@@ -342,7 +341,7 @@ func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider
 }
 
 // propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
-func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*tftypes.AttributePath, error) {
+func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*path.Path, error) {
 	segments := strings.Split(propertyPath, "/")
 
 	if got, expected := len(segments), 3; got < expected {
@@ -357,7 +356,7 @@ func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*tftyp
 		return nil, fmt.Errorf("expected %q for the second property path segment, got: %q", expected, got)
 	}
 
-	attributePath := tftypes.NewAttributePath()
+	attributePath := path.Empty()
 
 	for _, segment := range segments[2:] {
 		switch segment {
@@ -369,11 +368,11 @@ func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*tftyp
 			if !ok {
 				return nil, fmt.Errorf("attribute name mapping not found: %s", segment)
 			}
-			attributePath = attributePath.WithAttributeName(attributeName)
+			attributePath = attributePath.AtName(attributeName)
 		}
 	}
 
-	return attributePath, nil
+	return &attributePath, nil
 }
 
 // Implements tfsdk.Resource.
@@ -552,7 +551,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	// Copy over any write-only values.
 	// They can only be in the current state.
 	for _, path := range r.resourceType.writeOnlyAttributePaths {
-		err = CopyValueAtPath(ctx, &response.State, &request.State, path)
+		err = CopyValueAtPath(ctx, &response.State, &request.State, *path)
 
 		if err != nil {
 			response.Diagnostics.AddError(

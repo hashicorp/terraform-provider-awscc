@@ -3,7 +3,7 @@ package generic
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 )
 
 func TestPropertyPathToAttributePath(t *testing.T) {
@@ -11,7 +11,7 @@ func TestPropertyPathToAttributePath(t *testing.T) {
 		TestName      string
 		PropertyPath  string
 		ExpectedError bool
-		ExpectedValue *tftypes.AttributePath
+		ExpectedValue path.Path
 	}{
 		{
 			TestName:      "empty property path",
@@ -35,12 +35,12 @@ func TestPropertyPathToAttributePath(t *testing.T) {
 		{
 			TestName:      "one path segment",
 			PropertyPath:  "/properties/Tags",
-			ExpectedValue: tftypes.NewAttributePath().WithAttributeName("tags"),
+			ExpectedValue: path.Root("tags"),
 		},
 		{
 			TestName:      "two path segments",
 			PropertyPath:  "/properties/BasicAuthParameters/Password",
-			ExpectedValue: tftypes.NewAttributePath().WithAttributeName("basic_auth_parameters").WithAttributeName("password"),
+			ExpectedValue: path.Root("basic_auth_parameters").AtName("password"),
 		},
 		{
 			TestName:      "empty segment",
