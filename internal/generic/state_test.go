@@ -6,6 +6,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -260,7 +261,7 @@ func TestCopyValueAtPath(t *testing.T) {
 		TestName      string
 		SrcState      tfsdk.State
 		DstState      tfsdk.State
-		Path          *tftypes.AttributePath
+		Path          path.Path
 		ExpectedError bool
 		ExpectedState tfsdk.State
 	}{
@@ -298,7 +299,7 @@ func TestCopyValueAtPath(t *testing.T) {
 				}),
 				Schema: testSimpleSchema,
 			},
-			Path: tftypes.NewAttributePath().WithAttributeName("number"),
+			Path: path.Root("number"),
 			ExpectedState: tfsdk.State{
 				Raw: tftypes.NewValue(tftypes.Object{
 					AttributeTypes: map[string]tftypes.Type{
@@ -350,7 +351,7 @@ func TestCopyValueAtPath(t *testing.T) {
 				}),
 				Schema: testSimpleSchema,
 			},
-			Path: tftypes.NewAttributePath().WithAttributeName("arn"),
+			Path: path.Root("arn"),
 			ExpectedState: tfsdk.State{
 				Raw: tftypes.NewValue(tftypes.Object{
 					AttributeTypes: map[string]tftypes.Type{
@@ -402,7 +403,7 @@ func TestCopyValueAtPath(t *testing.T) {
 				}),
 				Schema: testSimpleSchema,
 			},
-			Path: tftypes.NewAttributePath().WithAttributeName("arn"),
+			Path: path.Root("arn"),
 			ExpectedState: tfsdk.State{
 				Raw: tftypes.NewValue(tftypes.Object{
 					AttributeTypes: map[string]tftypes.Type{
@@ -454,7 +455,7 @@ func TestCopyValueAtPath(t *testing.T) {
 				}),
 				Schema: testSimpleSchema,
 			},
-			Path:          tftypes.NewAttributePath().WithAttributeName("height"),
+			Path:          path.Root("height"),
 			ExpectedError: true,
 		},
 	}
