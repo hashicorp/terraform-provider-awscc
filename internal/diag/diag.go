@@ -5,6 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
@@ -15,7 +16,7 @@ const (
 	summaryInvalidLength    = "Invalid length"
 )
 
-func NewInvalidValueAttributeError(path *tftypes.AttributePath, detail string) diag.Diagnostic {
+func NewInvalidValueAttributeError(path path.Path, detail string) diag.Diagnostic {
 	return diag.NewAttributeErrorDiagnostic(
 		path,
 		summaryInvalidValue,
@@ -23,7 +24,7 @@ func NewInvalidValueAttributeError(path *tftypes.AttributePath, detail string) d
 	)
 }
 
-func NewIncorrectValueTypeAttributeError(path *tftypes.AttributePath, v attr.Value) diag.Diagnostic {
+func NewIncorrectValueTypeAttributeError(path path.Path, v attr.Value) diag.Diagnostic {
 	return diag.NewAttributeErrorDiagnostic(
 		path,
 		summaryInvalidValueType,
@@ -38,7 +39,7 @@ func NewIncorrectValueTypeResourceConfigError(t tftypes.Type) diag.Diagnostic {
 	)
 }
 
-func NewUnableToConvertValueTypeAttributeError(path *tftypes.AttributePath, err error) diag.Diagnostic {
+func NewUnableToConvertValueTypeAttributeError(path path.Path, err error) diag.Diagnostic {
 	return diag.NewAttributeErrorDiagnostic(
 		path,
 		summaryInvalidValueType,
@@ -53,7 +54,7 @@ func NewUnableToConvertValueTypeResourceConfigError(err error) diag.Diagnostic {
 	)
 }
 
-func NewUnableToObtainValueAttributeError(path *tftypes.AttributePath, err error) diag.Diagnostic {
+func NewUnableToObtainValueAttributeError(path path.Path, err error) diag.Diagnostic {
 	return diag.NewAttributeErrorDiagnostic(
 		path,
 		summaryNoTerraformValue,
@@ -61,7 +62,7 @@ func NewUnableToObtainValueAttributeError(path *tftypes.AttributePath, err error
 	)
 }
 
-func NewInvalidLengthBetweenAttributeError(path *tftypes.AttributePath, min, max, len int) diag.Diagnostic {
+func NewInvalidLengthBetweenAttributeError(path path.Path, min, max, len int) diag.Diagnostic {
 	return diag.NewAttributeErrorDiagnostic(
 		path,
 		summaryInvalidLength,
@@ -69,7 +70,7 @@ func NewInvalidLengthBetweenAttributeError(path *tftypes.AttributePath, min, max
 	)
 }
 
-func NewInvalidLengthAtLeastAttributeError(path *tftypes.AttributePath, min, len int) diag.Diagnostic {
+func NewInvalidLengthAtLeastAttributeError(path path.Path, min, len int) diag.Diagnostic {
 	return diag.NewAttributeErrorDiagnostic(
 		path,
 		summaryInvalidLength,
@@ -77,7 +78,7 @@ func NewInvalidLengthAtLeastAttributeError(path *tftypes.AttributePath, min, len
 	)
 }
 
-func NewInvalidLengthAtMostAttributeError(path *tftypes.AttributePath, max, len int) diag.Diagnostic {
+func NewInvalidLengthAtMostAttributeError(path path.Path, max, len int) diag.Diagnostic {
 	return diag.NewAttributeErrorDiagnostic(
 		path,
 		summaryInvalidLength,
@@ -85,7 +86,7 @@ func NewInvalidLengthAtMostAttributeError(path *tftypes.AttributePath, max, len 
 	)
 }
 
-func NewInvalidFormatAttributeError(path *tftypes.AttributePath, detail string) diag.Diagnostic {
+func NewInvalidFormatAttributeError(path path.Path, detail string) diag.Diagnostic {
 	return diag.NewAttributeErrorDiagnostic(
 		path,
 		summaryInvalidLength,
