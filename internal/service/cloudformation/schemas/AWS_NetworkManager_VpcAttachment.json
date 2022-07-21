@@ -177,7 +177,8 @@
                 "networkmanager:TagResource",
                 "ec2:DescribeRegions",
                 "iam:CreateServiceLinkedRole"
-            ]
+            ],
+            "timeoutInMinutes": 60
         },
         "read": {
             "permissions": [
@@ -192,7 +193,8 @@
                 "networkmanager:TagResource",
                 "networkmanager:UntagResource",
                 "ec2:DescribeRegions"
-            ]
+            ],
+            "timeoutInMinutes": 60
         },
         "delete": {
             "permissions": [
@@ -200,7 +202,8 @@
                 "networkmanager:GetVpcAttachment",
                 "networkmanager:UntagResource",
                 "ec2:DescribeRegions"
-            ]
+            ],
+            "timeoutInMinutes": 60
         },
         "list": {
             "permissions": [

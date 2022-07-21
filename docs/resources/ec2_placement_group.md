@@ -17,6 +17,7 @@ Resource Type definition for AWS::EC2::PlacementGroup
 
 ### Optional
 
+- `spread_level` (String) The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread
 - `strategy` (String) The placement strategy.
 
 ### Read-Only

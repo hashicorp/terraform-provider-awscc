@@ -22,6 +22,7 @@ Data Source schema for AWS::EC2::PlacementGroup
 ### Read-Only
 
 - `group_name` (String) The Group Name of Placement Group.
+- `spread_level` (String) The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread
 - `strategy` (String) The placement strategy.
 
 

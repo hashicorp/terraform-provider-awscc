@@ -101,7 +101,8 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "HMAC_224",
 			//     "HMAC_256",
 			//     "HMAC_384",
-			//     "HMAC_512"
+			//     "HMAC_512",
+			//     "SM2"
 			//   ],
 			//   "type": "string"
 			// }

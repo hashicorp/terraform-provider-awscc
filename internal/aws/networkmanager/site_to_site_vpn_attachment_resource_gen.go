@@ -390,7 +390,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/VpnConnectionArn",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(40).WithDeleteTimeoutInMinutes(720)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

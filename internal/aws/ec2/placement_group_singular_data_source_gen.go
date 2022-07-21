@@ -30,6 +30,17 @@ func placementGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"spread_level": {
+			// Property: SpreadLevel
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
+			//   "type": "string"
+			// }
+			Description: "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"strategy": {
 			// Property: Strategy
 			// CloudFormation resource type schema:
@@ -60,8 +71,9 @@ func placementGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::PlacementGroup").WithTerraformTypeName("awscc_ec2_placement_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"group_name": "GroupName",
-		"strategy":   "Strategy",
+		"group_name":   "GroupName",
+		"spread_level": "SpreadLevel",
+		"strategy":     "Strategy",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

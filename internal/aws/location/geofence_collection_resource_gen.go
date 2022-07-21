@@ -112,8 +112,13 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"pricing_plan": {
@@ -146,11 +151,6 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Type:     types.StringType,
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
-			},
 		},
 		"update_time": {
 			// Property: UpdateTime

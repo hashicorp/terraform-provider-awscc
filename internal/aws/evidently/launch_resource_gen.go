@@ -351,6 +351,55 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "array",
 			//         "uniqueItems": true
 			//       },
+			//       "SegmentOverrides": {
+			//         "insertionOrder": false,
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "EvaluationOrder": {
+			//               "type": "integer"
+			//             },
+			//             "Segment": {
+			//               "maxLength": 2048,
+			//               "minLength": 1,
+			//               "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:segment/[-a-zA-Z0-9._]*)",
+			//               "type": "string"
+			//             },
+			//             "Weights": {
+			//               "insertionOrder": false,
+			//               "items": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "GroupName": {
+			//                     "maxLength": 127,
+			//                     "minLength": 1,
+			//                     "pattern": "[-a-zA-Z0-9._]*",
+			//                     "type": "string"
+			//                   },
+			//                   "SplitWeight": {
+			//                     "type": "integer"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "GroupName",
+			//                   "SplitWeight"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "type": "array",
+			//               "uniqueItems": true
+			//             }
+			//           },
+			//           "required": [
+			//             "Segment",
+			//             "EvaluationOrder",
+			//             "Weights"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
 			//       "StartTime": {
 			//         "type": "string"
 			//       }
@@ -389,6 +438,50 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Required: true,
+					},
+					"segment_overrides": {
+						// Property: SegmentOverrides
+						Attributes: tfsdk.SetNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"evaluation_order": {
+									// Property: EvaluationOrder
+									Type:     types.Int64Type,
+									Required: true,
+								},
+								"segment": {
+									// Property: Segment
+									Type:     types.StringType,
+									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 2048),
+										validate.StringMatch(regexp.MustCompile("([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:segment/[-a-zA-Z0-9._]*)"), ""),
+									},
+								},
+								"weights": {
+									// Property: Weights
+									Attributes: tfsdk.SetNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"group_name": {
+												// Property: GroupName
+												Type:     types.StringType,
+												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 127),
+													validate.StringMatch(regexp.MustCompile("[-a-zA-Z0-9._]*"), ""),
+												},
+											},
+											"split_weight": {
+												// Property: SplitWeight
+												Type:     types.Int64Type,
+												Required: true,
+											},
+										},
+									),
+									Required: true,
+								},
+							},
+						),
+						Optional: true,
 					},
 					"start_time": {
 						// Property: StartTime
@@ -488,6 +581,7 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description":             "Description",
 		"desired_state":           "DesiredState",
 		"entity_id_key":           "EntityIdKey",
+		"evaluation_order":        "EvaluationOrder",
 		"event_pattern":           "EventPattern",
 		"execution_status":        "ExecutionStatus",
 		"feature":                 "Feature",
@@ -502,6 +596,8 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"randomization_salt":      "RandomizationSalt",
 		"reason":                  "Reason",
 		"scheduled_splits_config": "ScheduledSplitsConfig",
+		"segment":                 "Segment",
+		"segment_overrides":       "SegmentOverrides",
 		"split_weight":            "SplitWeight",
 		"start_time":              "StartTime",
 		"status":                  "Status",
@@ -510,6 +606,7 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"value":                   "Value",
 		"value_key":               "ValueKey",
 		"variation":               "Variation",
+		"weights":                 "Weights",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

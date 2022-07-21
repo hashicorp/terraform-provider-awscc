@@ -167,7 +167,8 @@
                 "networkmanager:GetCoreNetworkPolicy",
                 "networkmanager:TagResource",
                 "ec2:DescribeRegions"
-            ]
+            ],
+            "timeoutInMinutes": 720
         },
         "read": {
             "permissions": [
@@ -186,7 +187,8 @@
                 "networkmanager:TagResource",
                 "networkmanager:UntagResource",
                 "ec2:DescribeRegions"
-            ]
+            ],
+            "timeoutInMinutes": 720
         },
         "delete": {
             "permissions": [
@@ -195,7 +197,8 @@
                 "networkmanager:GetCoreNetwork",
                 "networkmanager:GetCoreNetworkPolicy",
                 "ec2:DescribeRegions"
-            ]
+            ],
+            "timeoutInMinutes": 720
         },
         "list": {
             "permissions": [

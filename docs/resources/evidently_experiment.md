@@ -27,8 +27,10 @@ Resource Type definition for AWS::Evidently::Experiment.
 
 - `description` (String)
 - `randomization_salt` (String)
+- `remove_segment` (Boolean)
 - `running_status` (Attributes) Start Experiment. Default is False (see [below for nested schema](#nestedatt--running_status))
 - `sampling_rate` (Number)
+- `segment` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

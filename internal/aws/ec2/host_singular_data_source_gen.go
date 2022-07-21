@@ -63,6 +63,17 @@ func hostDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"instance_family": {
+			// Property: InstanceFamily
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family.",
+			//   "type": "string"
+			// }
+			Description: "Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"instance_type": {
 			// Property: InstanceType
 			// CloudFormation resource type schema:
@@ -71,6 +82,17 @@ func hostDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "string"
 			// }
 			Description: "Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
+		"outpost_arn": {
+			// Property: OutpostArn
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.",
+			//   "type": "string"
+			// }
+			Description: "The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -97,7 +119,9 @@ func hostDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"availability_zone": "AvailabilityZone",
 		"host_id":           "HostId",
 		"host_recovery":     "HostRecovery",
+		"instance_family":   "InstanceFamily",
 		"instance_type":     "InstanceType",
+		"outpost_arn":       "OutpostArn",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

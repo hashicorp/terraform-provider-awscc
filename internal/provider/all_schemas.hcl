@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 562 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 570 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -103,6 +103,15 @@ resource_schema "aws_apigateway_client_certificate" {
 resource_schema "aws_apigateway_deployment" {
   cloudformation_type_name               = "AWS::ApiGateway::Deployment"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_apigateway_documentation_part" {
+  cloudformation_type_name = "AWS::ApiGateway::DocumentationPart"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apigateway_documentation_version" {
@@ -209,6 +218,15 @@ resource_schema "aws_appstream_entitlement" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_appstream_image_builder" {
+  cloudformation_type_name = "AWS::AppStream::ImageBuilder"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_appsync_domain_name" {
   cloudformation_type_name               = "AWS::AppSync::DomainName"
   suppress_plural_data_source_generation = true
@@ -252,6 +270,15 @@ resource_schema "aws_autoscaling_launch_configuration" {
 resource_schema "aws_autoscaling_lifecycle_hook" {
   cloudformation_type_name               = "AWS::AutoScaling::LifecycleHook"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_autoscaling_scaling_policy" {
+  cloudformation_type_name = "AWS::AutoScaling::ScalingPolicy"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_autoscaling_warm_pool" {
@@ -1028,6 +1055,11 @@ resource_schema "aws_evidently_project" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_evidently_segment" {
+  cloudformation_type_name               = "AWS::Evidently::Segment"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_fis_experiment_template" {
   cloudformation_type_name = "AWS::FIS::ExperimentTemplate"
 }
@@ -1271,6 +1303,15 @@ resource_schema "aws_iot_logging" {
 
 resource_schema "aws_iot_mitigation_action" {
   cloudformation_type_name = "AWS::IoT::MitigationAction"
+}
+
+resource_schema "aws_iot_policy" {
+  cloudformation_type_name = "AWS::IoT::Policy"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iot_provisioning_template" {
@@ -1642,6 +1683,15 @@ resource_schema "aws_location_tracker_consumer" {
 
 resource_schema "aws_logs_log_group" {
   cloudformation_type_name = "AWS::Logs::LogGroup"
+}
+
+resource_schema "aws_logs_metric_filter" {
+  cloudformation_type_name = "AWS::Logs::MetricFilter"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_logs_query_definition" {
@@ -2016,6 +2066,10 @@ resource_schema "aws_redshiftserverless_namespace" {
   cloudformation_type_name = "AWS::RedshiftServerless::Namespace"
 }
 
+resource_schema "aws_redshiftserverless_workgroup" {
+  cloudformation_type_name = "AWS::RedshiftServerless::Workgroup"
+}
+
 # Validation error: "minLength cannot be greater than maxLength"
 # resource_schema "aws_refactorspaces_application" {
 #   cloudformation_type_name               = "AWS::RefactorSpaces::Application"
@@ -2089,6 +2143,10 @@ resource_schema "aws_robomaker_simulation_application" {
 resource_schema "aws_robomaker_simulation_application_version" {
   cloudformation_type_name               = "AWS::RoboMaker::SimulationApplicationVersion"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_rolesanywhere_crl" {
+  cloudformation_type_name = "AWS::RolesAnywhere::CRL"
 }
 
 resource_schema "aws_rolesanywhere_profile" {

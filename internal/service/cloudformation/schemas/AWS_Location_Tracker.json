@@ -73,7 +73,6 @@
     ],
     "createOnlyProperties": [
         "/properties/KmsKeyId",
-        "/properties/PricingPlanDataSource",
         "/properties/TrackerName",
         "/properties/PricingPlan",
         "/properties/Description",

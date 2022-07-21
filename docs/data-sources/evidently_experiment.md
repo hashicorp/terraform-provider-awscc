@@ -28,8 +28,10 @@ Data Source schema for AWS::Evidently::Experiment
 - `online_ab_config` (Attributes) (see [below for nested schema](#nestedatt--online_ab_config))
 - `project` (String)
 - `randomization_salt` (String)
+- `remove_segment` (Boolean)
 - `running_status` (Attributes) Start Experiment. Default is False (see [below for nested schema](#nestedatt--running_status))
 - `sampling_rate` (Number)
+- `segment` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `treatments` (Attributes List) (see [below for nested schema](#nestedatt--treatments))
 

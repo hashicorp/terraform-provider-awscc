@@ -71,6 +71,7 @@ Read-Only:
 Read-Only:
 
 - `group_weights` (Attributes Set) (see [below for nested schema](#nestedatt--scheduled_splits_config--group_weights))
+- `segment_overrides` (Attributes Set) (see [below for nested schema](#nestedatt--scheduled_splits_config--segment_overrides))
 - `start_time` (String)
 
 <a id="nestedatt--scheduled_splits_config--group_weights"></a>
@@ -80,6 +81,25 @@ Read-Only:
 
 - `group_name` (String)
 - `split_weight` (Number)
+
+
+<a id="nestedatt--scheduled_splits_config--segment_overrides"></a>
+### Nested Schema for `scheduled_splits_config.segment_overrides`
+
+Read-Only:
+
+- `evaluation_order` (Number)
+- `segment` (String)
+- `weights` (Attributes Set) (see [below for nested schema](#nestedatt--scheduled_splits_config--segment_overrides--weights))
+
+<a id="nestedatt--scheduled_splits_config--segment_overrides--weights"></a>
+### Nested Schema for `scheduled_splits_config.segment_overrides.weights`
+
+Read-Only:
+
+- `group_name` (String)
+- `split_weight` (Number)
+
 
 
 
