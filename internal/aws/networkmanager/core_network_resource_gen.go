@@ -349,9 +349,9 @@ func coreNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"value":              "Value",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(720).WithDeleteTimeoutInMinutes(720)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(720)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

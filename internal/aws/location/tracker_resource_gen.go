@@ -144,11 +144,6 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
-			},
 		},
 		"tracker_arn": {
 			// Property: TrackerArn
@@ -233,9 +228,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"update_time":              "UpdateTime",
 	})
 
-	opts = opts.IsImmutableType(true)
-
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

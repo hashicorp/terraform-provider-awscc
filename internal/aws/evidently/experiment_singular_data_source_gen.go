@@ -239,6 +239,15 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"remove_segment": {
+			// Property: RemoveSegment
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "boolean"
+			// }
+			Type:     types.BoolType,
+			Computed: true,
+		},
 		"running_status": {
 			// Property: RunningStatus
 			// CloudFormation resource type schema:
@@ -321,6 +330,18 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Type:     types.Int64Type,
+			Computed: true,
+		},
+		"segment": {
+			// Property: Segment
+			// CloudFormation resource type schema:
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 0,
+			//   "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:segment/[-a-zA-Z0-9._]*)",
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
@@ -477,8 +498,10 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"project":                "Project",
 		"randomization_salt":     "RandomizationSalt",
 		"reason":                 "Reason",
+		"remove_segment":         "RemoveSegment",
 		"running_status":         "RunningStatus",
 		"sampling_rate":          "SamplingRate",
+		"segment":                "Segment",
 		"split_weight":           "SplitWeight",
 		"status":                 "Status",
 		"tags":                   "Tags",

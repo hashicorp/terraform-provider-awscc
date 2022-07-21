@@ -444,9 +444,9 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/VpcArn",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(60).WithDeleteTimeoutInMinutes(60)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(60)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

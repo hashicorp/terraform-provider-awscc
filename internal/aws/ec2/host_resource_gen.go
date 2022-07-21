@@ -69,6 +69,22 @@ func hostResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 		},
+		"instance_family": {
+			// Property: InstanceFamily
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family.",
+			//   "type": "string"
+			// }
+			Description: "Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
+		},
 		"instance_type": {
 			// Property: InstanceType
 			// CloudFormation resource type schema:
@@ -78,8 +94,26 @@ func hostResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
+		},
+		"outpost_arn": {
+			// Property: OutpostArn
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.",
+			//   "type": "string"
+			// }
+			Description: "The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -110,7 +144,9 @@ func hostResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"availability_zone": "AvailabilityZone",
 		"host_id":           "HostId",
 		"host_recovery":     "HostRecovery",
+		"instance_family":   "InstanceFamily",
 		"instance_type":     "InstanceType",
+		"outpost_arn":       "OutpostArn",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

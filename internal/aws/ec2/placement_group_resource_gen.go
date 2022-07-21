@@ -33,6 +33,22 @@ func placementGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				tfsdk.UseStateForUnknown(),
 			},
 		},
+		"spread_level": {
+			// Property: SpreadLevel
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
+			//   "type": "string"
+			// }
+			Description: "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
+		},
 		"strategy": {
 			// Property: Strategy
 			// CloudFormation resource type schema:
@@ -72,8 +88,9 @@ func placementGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"group_name": "GroupName",
-		"strategy":   "Strategy",
+		"group_name":   "GroupName",
+		"spread_level": "SpreadLevel",
+		"strategy":     "Strategy",
 	})
 
 	opts = opts.IsImmutableType(true)
