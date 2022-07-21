@@ -61,7 +61,7 @@
         "/properties/UpdateTime"
     ],
     "createOnlyProperties": [
-        "/properties/PricingPlanDataSource",
+        "/properties/KmsKeyId",
         "/properties/PricingPlan",
         "/properties/Description",
         "/properties/CollectionName"

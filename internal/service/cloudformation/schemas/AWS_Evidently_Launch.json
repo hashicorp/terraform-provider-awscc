@@ -143,6 +143,34 @@
         "SplitWeight"
       ]
     },
+    "SegmentOverride": {
+      "type": "object",
+      "properties": {
+        "Segment": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:segment/[-a-zA-Z0-9._]*)"
+        },
+        "EvaluationOrder": {
+          "type": "integer"
+        },
+        "Weights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupToWeight"
+          },
+          "uniqueItems": true,
+          "insertionOrder": false
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "Segment",
+        "EvaluationOrder",
+        "Weights"
+      ]
+    },
     "StepConfig": {
       "type": "object",
       "properties": {
@@ -153,6 +181,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/GroupToWeight"
+          },
+          "uniqueItems": true,
+          "insertionOrder": false
+        },
+        "SegmentOverrides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SegmentOverride"
           },
           "uniqueItems": true,
           "insertionOrder": false

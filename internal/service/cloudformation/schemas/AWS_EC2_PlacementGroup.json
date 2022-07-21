@@ -10,11 +10,16 @@
     "GroupName": {
       "description": "The Group Name of Placement Group.",
       "type": "string"
+    },
+    "SpreadLevel": {
+      "description": "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
+      "type": "string"
     }
   },
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/Strategy"
+    "/properties/Strategy",
+    "/properties/SpreadLevel"
   ],
   "readOnlyProperties": [
     "/properties/GroupName"

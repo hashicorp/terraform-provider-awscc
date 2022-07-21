@@ -155,7 +155,8 @@
                 "networkmanager:GetSiteToSiteVpnAttachment",
                 "networkmanager:CreateSiteToSiteVpnAttachment",
                 "ec2:DescribeRegions"
-            ]
+            ],
+            "timeoutInMinutes": 40
         },
         "read": {
             "permissions": [
@@ -176,7 +177,8 @@
                 "networkmanager:GetSiteToSiteVpnAttachment",
                 "networkmanager:DeleteAttachment",
                 "ec2:DescribeRegions"
-            ]
+            ],
+            "timeoutInMinutes": 720
         },
         "list": {
             "permissions": [
