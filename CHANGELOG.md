@@ -1,4 +1,16 @@
 ## 0.28.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_evidently_segment`
+* **New Data Source:** `awscc_redshiftserverless_workgroup`
+* **New Data Source:** `awscc_redshiftserverless_workgroups`
+* **New Data Source:** `awscc_rolesanywhere_crl`
+* **New Data Source:** `awscc_rolesanywhere_crls`
+* **New Resource:** `awscc_evidently_segment`
+* **New Resource:** `awscc_redshiftserverless_workgroup`
+* **New Resource:** `awscc_rolesanywhere_crl`
+
 ## [0.27.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.27.0) (July  7, 2022)
 
 FEATURES:
