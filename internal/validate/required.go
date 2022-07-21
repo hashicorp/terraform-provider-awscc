@@ -213,7 +213,7 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 			var vals map[string]tftypes.Value
 			if err := val.As(&vals); err != nil {
 				response.Diagnostics.Append(ccdiag.NewUnableToConvertValueTypeAttributeError(
-					request.AttributePath.WithElementKeyInt(i),
+					request.AttributePath.AtListIndex(i),
 					err,
 				))
 

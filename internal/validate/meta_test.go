@@ -6,6 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -15,7 +16,7 @@ import (
 func TestAllValidator(t *testing.T) {
 	t.Parallel()
 
-	rootPath := tftypes.NewAttributePath().WithAttributeName("test")
+	rootPath := path.Root("test")
 
 	type testCase struct {
 		val           tftypes.Value

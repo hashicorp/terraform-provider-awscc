@@ -101,7 +101,7 @@ func (pd *pluralDataSource) list(ctx context.Context, conn *cloudcontrol.Client)
 
 // cfnTypeContext injects the CloudFormation type name into logger contexts.
 func (pd *pluralDataSource) cfnTypeContext(ctx context.Context) context.Context {
-	ctx = tflog.With(ctx, LoggingKeyCFNType, pd.dataSourceType.cfTypeName)
+	ctx = tflog.SetField(ctx, LoggingKeyCFNType, pd.dataSourceType.cfTypeName)
 
 	return ctx
 }

@@ -6,6 +6,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -97,7 +98,7 @@ func TestJSONStringTypeValidate(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
 
-			attributePath := tftypes.NewAttributePath().WithAttributeName("test")
+			attributePath := path.Root("test")
 			diags := JSONStringType.Validate(ctx, test.val, attributePath)
 
 			if !diags.HasError() && test.expectError {
@@ -158,7 +159,7 @@ func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
 			request := tfsdk.ModifyAttributePlanRequest{
-				AttributePath:  tftypes.NewAttributePath().WithAttributeName("test"),
+				AttributePath:  path.Root("test"),
 				AttributePlan:  test.plannedValue,
 				AttributeState: test.currentValue,
 			}

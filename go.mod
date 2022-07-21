@@ -15,10 +15,10 @@ require (
 	github.com/hashicorp/go-hclog v1.2.1
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hashicorp/hcl/v2 v2.13.0
-	github.com/hashicorp/terraform-plugin-framework v0.9.0
-	github.com/hashicorp/terraform-plugin-go v0.10.0
-	github.com/hashicorp/terraform-plugin-log v0.4.1
-	github.com/hashicorp/terraform-plugin-sdk/v2 v2.18.0
+	github.com/hashicorp/terraform-plugin-framework v0.10.0
+	github.com/hashicorp/terraform-plugin-go v0.12.0
+	github.com/hashicorp/terraform-plugin-log v0.6.0
+	github.com/hashicorp/terraform-plugin-sdk/v2 v2.19.0
 	github.com/jinzhu/inflection v1.0.0
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
 	github.com/mitchellh/cli v1.1.4
@@ -88,6 +88,6 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/appengine v1.6.6 // indirect
 	google.golang.org/genproto v0.0.0-20200711021454-869866162049 // indirect
-	google.golang.org/grpc v1.47.0 // indirect
+	google.golang.org/grpc v1.48.0 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 )

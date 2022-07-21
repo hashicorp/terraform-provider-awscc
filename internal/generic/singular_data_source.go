@@ -159,7 +159,7 @@ func (sd *singularDataSource) setId(ctx context.Context, val string, state *tfsd
 
 // cfnTypeContext injects the CloudFormation type name into logger contexts.
 func (sd *singularDataSource) cfnTypeContext(ctx context.Context) context.Context {
-	ctx = tflog.With(ctx, LoggingKeyCFNType, sd.dataSourceType.cfTypeName)
+	ctx = tflog.SetField(ctx, LoggingKeyCFNType, sd.dataSourceType.cfTypeName)
 
 	return ctx
 }
