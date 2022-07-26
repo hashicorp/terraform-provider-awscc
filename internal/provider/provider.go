@@ -300,14 +300,8 @@ type providerData struct {
 	Token                     types.String                   `tfsdk:"token"`
 	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
 	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
-	UserAgent                 []userAgentProduct             `tfsdk:"user_agent"`
+	UserAgent                 cctypes.UserAgentProducts      `tfsdk:"user_agent"`
 	terraformVersion          string
-}
-
-type userAgentProduct struct {
-	ProductName    types.String `tfsdk:"product_name"`
-	ProductVersion types.String `tfsdk:"product_version"`
-	Comment        types.String `tfsdk:"comment"`
 }
 
 type assumeRoleData struct {
@@ -461,6 +455,38 @@ func (p *AwsCloudControlApiProvider) GetDataSources(ctx context.Context) (map[st
 	return dataSources, diags
 }
 
+func (p *AwsCloudControlApiProvider) GetMetaSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
+	return tfsdk.Schema{
+		Version: 1,
+		Attributes: map[string]tfsdk.Attribute{
+			"user_agent": {
+				Attributes: tfsdk.ListNestedAttributes(
+					map[string]tfsdk.Attribute{
+						"product_name": {
+							Type:        types.StringType,
+							Description: "Product name. At least one of `product_name` or `comment` must be set.",
+							Required:    true,
+						},
+						"product_version": {
+							Type:        types.StringType,
+							Description: "Product version. Optional, and should only be set when `product_name` is set.",
+							Optional:    true,
+						},
+						"comment": {
+							Type:        types.StringType,
+							Description: "User-Agent comment. At least one of `comment` or `product_name` must be set.",
+							Optional:    true,
+						},
+					},
+					tfsdk.ListNestedAttributesOptions{},
+				),
+				Description: "Product details to append to User-Agent string in all AWS API calls.",
+				Optional:    true,
+			},
+		},
+	}, nil
+}
+
 func (p *AwsCloudControlApiProvider) CloudControlApiClient(_ context.Context) *cloudcontrol.Client {
 	return p.ccClient
 }
@@ -493,7 +519,7 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 			},
 		},
 	}
-	config.UserAgent = userAgentProducts(pd.UserAgent)
+	config.UserAgent = pd.UserAgent.UserAgentProducts()
 	if pd.MaxRetries.Null {
 		config.MaxRetries = defaultMaxRetries
 	} else {
@@ -566,16 +592,4 @@ func (l awsSdkContextLogger) Logf(classification logging.Classification, format 
 			"message": hclog.Fmt(format, v...),
 		})
 	}
-}
-
-func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {
-	results := make([]awsbase.UserAgentProduct, len(products))
-	for i, p := range products {
-		results[i] = awsbase.UserAgentProduct{
-			Name:    p.ProductName.Value,
-			Version: p.ProductVersion.Value,
-			Comment: p.Comment.Value,
-		}
-	}
-	return results
 }
