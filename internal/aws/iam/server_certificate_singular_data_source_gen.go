@@ -96,6 +96,7 @@ func serverCertificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "A key-value pair to associate with a resource.",

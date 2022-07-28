@@ -2495,6 +2495,9 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           ],
 			//           "type": "string"
 			//         },
+			//         "FirstExecutionFrom": {
+			//           "type": "number"
+			//         },
 			//         "FlowErrorDeactivationThreshold": {
 			//           "maximum": 100,
 			//           "minimum": 1,
@@ -2552,6 +2555,11 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"data_pull_mode": {
 									// Property: DataPullMode
 									Type:     types.StringType,
+									Computed: true,
+								},
+								"first_execution_from": {
+									// Property: FirstExecutionFrom
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"flow_error_deactivation_threshold": {
@@ -2643,6 +2651,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"event_bridge":                      "EventBridge",
 		"fail_on_first_error":               "FailOnFirstError",
 		"file_type":                         "FileType",
+		"first_execution_from":              "FirstExecutionFrom",
 		"flow_arn":                          "FlowArn",
 		"flow_error_deactivation_threshold": "FlowErrorDeactivationThreshold",
 		"flow_name":                         "FlowName",

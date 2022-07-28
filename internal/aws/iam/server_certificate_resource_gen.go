@@ -56,6 +56,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
+			// CertificateBody is a write-only property.
 		},
 		"certificate_chain": {
 			// Property: CertificateChain
@@ -76,6 +77,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
+			// CertificateChain is a write-only property.
 		},
 		"path": {
 			// Property: Path
@@ -111,6 +113,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
+			// PrivateKey is a write-only property.
 		},
 		"server_certificate_name": {
 			// Property: ServerCertificateName
@@ -137,6 +140,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "A key-value pair to associate with a resource.",
@@ -186,6 +190,9 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 
@@ -221,6 +228,11 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"value":                   "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/PrivateKey",
+		"/properties/CertificateBody",
+		"/properties/CertificateChain",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -772,7 +772,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     }
 			//   },
 			//   "required": [
-			//     "Enabled"
+			//     "Enabled",
+			//     "DefaultCacheBehavior"
 			//   ],
 			//   "type": "object"
 			// }
@@ -1355,7 +1356,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 							},
 						),
-						Optional: true,
+						Required: true,
 					},
 					"default_root_object": {
 						// Property: DefaultRootObject

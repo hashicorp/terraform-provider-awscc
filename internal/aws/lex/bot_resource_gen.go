@@ -2381,6 +2381,14 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                       "maxItems": 5,
 			//                       "minItems": 1,
 			//                       "type": "array"
+			//                     },
+			//                     "MessageSelectionStrategy": {
+			//                       "description": "Indicates how a message is selected from a message group among retries.",
+			//                       "enum": [
+			//                         "Random",
+			//                         "Ordered"
+			//                       ],
+			//                       "type": "string"
 			//                     }
 			//                   },
 			//                   "required": [
@@ -2866,6 +2874,14 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                             "maxItems": 5,
 			//                             "minItems": 1,
 			//                             "type": "array"
+			//                           },
+			//                           "MessageSelectionStrategy": {
+			//                             "description": "Indicates how a message is selected from a message group among retries.",
+			//                             "enum": [
+			//                               "Random",
+			//                               "Ordered"
+			//                             ],
+			//                             "type": "string"
 			//                           }
 			//                         },
 			//                         "required": [
@@ -6552,6 +6568,18 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																Multiset(),
 															},
 														},
+														"message_selection_strategy": {
+															// Property: MessageSelectionStrategy
+															Description: "Indicates how a message is selected from a message group among retries.",
+															Type:        types.StringType,
+															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"Random",
+																	"Ordered",
+																}),
+															},
+														},
 													},
 												),
 												Required: true,
@@ -7108,6 +7136,18 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		},
 																		PlanModifiers: []tfsdk.AttributePlanModifier{
 																			Multiset(),
+																		},
+																	},
+																	"message_selection_strategy": {
+																		// Property: MessageSelectionStrategy
+																		Description: "Indicates how a message is selected from a message group among retries.",
+																		Type:        types.StringType,
+																		Optional:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"Random",
+																				"Ordered",
+																			}),
 																		},
 																	},
 																},
@@ -9108,6 +9148,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"message":                               "Message",
 		"message_groups":                        "MessageGroups",
 		"message_groups_list":                   "MessageGroupsList",
+		"message_selection_strategy":            "MessageSelectionStrategy",
 		"multiple_values_setting":               "MultipleValuesSetting",
 		"name":                                  "Name",
 		"nlu_confidence_threshold":              "NluConfidenceThreshold",

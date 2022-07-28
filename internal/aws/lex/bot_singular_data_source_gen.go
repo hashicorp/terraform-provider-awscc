@@ -2363,6 +2363,14 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                       "maxItems": 5,
 			//                       "minItems": 1,
 			//                       "type": "array"
+			//                     },
+			//                     "MessageSelectionStrategy": {
+			//                       "description": "Indicates how a message is selected from a message group among retries.",
+			//                       "enum": [
+			//                         "Random",
+			//                         "Ordered"
+			//                       ],
+			//                       "type": "string"
 			//                     }
 			//                   },
 			//                   "required": [
@@ -2848,6 +2856,14 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                             "maxItems": 5,
 			//                             "minItems": 1,
 			//                             "type": "array"
+			//                           },
+			//                           "MessageSelectionStrategy": {
+			//                             "description": "Indicates how a message is selected from a message group among retries.",
+			//                             "enum": [
+			//                               "Random",
+			//                               "Ordered"
+			//                             ],
+			//                             "type": "string"
 			//                           }
 			//                         },
 			//                         "required": [
@@ -5921,6 +5937,12 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 															),
 															Computed: true,
 														},
+														"message_selection_strategy": {
+															// Property: MessageSelectionStrategy
+															Description: "Indicates how a message is selected from a message group among retries.",
+															Type:        types.StringType,
+															Computed:    true,
+														},
 													},
 												),
 												Computed: true,
@@ -6341,6 +6363,12 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 																			},
 																		),
 																		Computed: true,
+																	},
+																	"message_selection_strategy": {
+																		// Property: MessageSelectionStrategy
+																		Description: "Indicates how a message is selected from a message group among retries.",
+																		Type:        types.StringType,
+																		Computed:    true,
 																	},
 																},
 															),
@@ -7975,6 +8003,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"message":                               "Message",
 		"message_groups":                        "MessageGroups",
 		"message_groups_list":                   "MessageGroupsList",
+		"message_selection_strategy":            "MessageSelectionStrategy",
 		"multiple_values_setting":               "MultipleValuesSetting",
 		"name":                                  "Name",
 		"nlu_confidence_threshold":              "NluConfidenceThreshold",
