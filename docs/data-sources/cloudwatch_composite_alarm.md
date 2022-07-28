@@ -22,6 +22,9 @@ Data Source schema for AWS::CloudWatch::CompositeAlarm
 ### Read-Only
 
 - `actions_enabled` (Boolean) Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.
+- `actions_suppressor` (String) Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm.
+- `actions_suppressor_extension_period` (Number) Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.
+- `actions_suppressor_wait_period` (Number) Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.
 - `alarm_actions` (List of String) The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).
 - `alarm_description` (String) The description of the alarm
 - `alarm_name` (String) The name of the Composite Alarm
