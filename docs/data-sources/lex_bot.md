@@ -1064,6 +1064,7 @@ Read-Only:
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 - `max_retries` (Number) The maximum number of times the bot tries to elicit a resonse from the user using this prompt.
 - `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list))
+- `message_selection_strategy` (String) Indicates how a message is selected from a message group among retries.
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list"></a>
 ### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list`
@@ -1286,45 +1287,46 @@ Read-Only:
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 - `max_retries` (Number) The maximum number of times the bot tries to elicit a resonse from the user using this prompt.
 - `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list))
+- `message_selection_strategy` (String) Indicates how a message is selected from a message group among retries.
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy`
 
 Read-Only:
 
-- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message))
-- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations))
+- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--message))
+- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations`
 
 Read-Only:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
 
 Read-Only:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
 
 Read-Only:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--ssml_message--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--ssml_message--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations.ssml_message.buttons`
 
 Read-Only:
 
@@ -1333,16 +1335,16 @@ Read-Only:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
 
 Read-Only:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
 
 Read-Only:
 
@@ -1350,36 +1352,36 @@ Read-Only:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations`
 
 Read-Only:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
 
 Read-Only:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
 
 Read-Only:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--ssml_message--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--ssml_message--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations.ssml_message.buttons`
 
 Read-Only:
 
@@ -1388,16 +1390,16 @@ Read-Only:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
 
 Read-Only:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_selection_strategy--variations--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
 
 Read-Only:
 

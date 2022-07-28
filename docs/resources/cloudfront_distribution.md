@@ -33,6 +33,7 @@ Resource Type definition for AWS::CloudFront::Distribution
 
 Required:
 
+- `default_cache_behavior` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior))
 - `enabled` (Boolean)
 
 Optional:
@@ -43,7 +44,6 @@ Optional:
 - `comment` (String)
 - `custom_error_responses` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--custom_error_responses))
 - `custom_origin` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--custom_origin))
-- `default_cache_behavior` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior))
 - `default_root_object` (String)
 - `http_version` (String)
 - `ipv6_enabled` (Boolean)
@@ -55,6 +55,80 @@ Optional:
 - `s3_origin` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--s3_origin))
 - `viewer_certificate` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--viewer_certificate))
 - `web_acl_id` (String)
+
+<a id="nestedatt--distribution_config--default_cache_behavior"></a>
+### Nested Schema for `distribution_config.default_cache_behavior`
+
+Required:
+
+- `target_origin_id` (String)
+- `viewer_protocol_policy` (String)
+
+Optional:
+
+- `allowed_methods` (List of String)
+- `cache_policy_id` (String)
+- `cached_methods` (List of String)
+- `compress` (Boolean)
+- `default_ttl` (Number)
+- `field_level_encryption_id` (String)
+- `forwarded_values` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior--forwarded_values))
+- `function_associations` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior--function_associations))
+- `lambda_function_associations` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior--lambda_function_associations))
+- `max_ttl` (Number)
+- `min_ttl` (Number)
+- `origin_request_policy_id` (String)
+- `realtime_log_config_arn` (String)
+- `response_headers_policy_id` (String)
+- `smooth_streaming` (Boolean)
+- `trusted_key_groups` (List of String)
+- `trusted_signers` (List of String)
+
+<a id="nestedatt--distribution_config--default_cache_behavior--forwarded_values"></a>
+### Nested Schema for `distribution_config.default_cache_behavior.forwarded_values`
+
+Required:
+
+- `query_string` (Boolean)
+
+Optional:
+
+- `cookies` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior--forwarded_values--cookies))
+- `headers` (List of String)
+- `query_string_cache_keys` (List of String)
+
+<a id="nestedatt--distribution_config--default_cache_behavior--forwarded_values--cookies"></a>
+### Nested Schema for `distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys`
+
+Required:
+
+- `forward` (String)
+
+Optional:
+
+- `whitelisted_names` (List of String)
+
+
+
+<a id="nestedatt--distribution_config--default_cache_behavior--function_associations"></a>
+### Nested Schema for `distribution_config.default_cache_behavior.function_associations`
+
+Optional:
+
+- `event_type` (String)
+- `function_arn` (String)
+
+
+<a id="nestedatt--distribution_config--default_cache_behavior--lambda_function_associations"></a>
+### Nested Schema for `distribution_config.default_cache_behavior.lambda_function_associations`
+
+Optional:
+
+- `event_type` (String)
+- `include_body` (Boolean)
+- `lambda_function_arn` (String)
+
+
 
 <a id="nestedatt--distribution_config--cache_behaviors"></a>
 ### Nested Schema for `distribution_config.cache_behaviors`
@@ -158,80 +232,6 @@ Optional:
 
 - `http_port` (Number)
 - `https_port` (Number)
-
-
-<a id="nestedatt--distribution_config--default_cache_behavior"></a>
-### Nested Schema for `distribution_config.default_cache_behavior`
-
-Required:
-
-- `target_origin_id` (String)
-- `viewer_protocol_policy` (String)
-
-Optional:
-
-- `allowed_methods` (List of String)
-- `cache_policy_id` (String)
-- `cached_methods` (List of String)
-- `compress` (Boolean)
-- `default_ttl` (Number)
-- `field_level_encryption_id` (String)
-- `forwarded_values` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior--forwarded_values))
-- `function_associations` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior--function_associations))
-- `lambda_function_associations` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior--lambda_function_associations))
-- `max_ttl` (Number)
-- `min_ttl` (Number)
-- `origin_request_policy_id` (String)
-- `realtime_log_config_arn` (String)
-- `response_headers_policy_id` (String)
-- `smooth_streaming` (Boolean)
-- `trusted_key_groups` (List of String)
-- `trusted_signers` (List of String)
-
-<a id="nestedatt--distribution_config--default_cache_behavior--forwarded_values"></a>
-### Nested Schema for `distribution_config.default_cache_behavior.forwarded_values`
-
-Required:
-
-- `query_string` (Boolean)
-
-Optional:
-
-- `cookies` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--default_cache_behavior--forwarded_values--cookies))
-- `headers` (List of String)
-- `query_string_cache_keys` (List of String)
-
-<a id="nestedatt--distribution_config--default_cache_behavior--forwarded_values--cookies"></a>
-### Nested Schema for `distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys`
-
-Required:
-
-- `forward` (String)
-
-Optional:
-
-- `whitelisted_names` (List of String)
-
-
-
-<a id="nestedatt--distribution_config--default_cache_behavior--function_associations"></a>
-### Nested Schema for `distribution_config.default_cache_behavior.function_associations`
-
-Optional:
-
-- `event_type` (String)
-- `function_arn` (String)
-
-
-<a id="nestedatt--distribution_config--default_cache_behavior--lambda_function_associations"></a>
-### Nested Schema for `distribution_config.default_cache_behavior.lambda_function_associations`
-
-Optional:
-
-- `event_type` (String)
-- `include_body` (Boolean)
-- `lambda_function_arn` (String)
-
 
 
 <a id="nestedatt--distribution_config--logging"></a>

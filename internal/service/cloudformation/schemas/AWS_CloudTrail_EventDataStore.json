@@ -154,7 +154,6 @@
             "items": {
                 "$ref": "#/definitions/AdvancedEventSelector"
             },
-            "maxItems": 5,
             "uniqueItems": true,
             "insertionOrder": false
         },

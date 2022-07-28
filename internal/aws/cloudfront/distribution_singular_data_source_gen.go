@@ -771,7 +771,8 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//     }
 			//   },
 			//   "required": [
-			//     "Enabled"
+			//     "Enabled",
+			//     "DefaultCacheBehavior"
 			//   ],
 			//   "type": "object"
 			// }

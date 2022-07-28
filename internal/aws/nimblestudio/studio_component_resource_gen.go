@@ -25,18 +25,17 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// Property: Configuration
 			// CloudFormation resource type schema:
 			// {
-			//   "additionalProperties": false,
 			//   "description": "\u003cp\u003eThe configuration of the studio component, based on component type.\u003c/p\u003e",
 			//   "properties": {
 			//     "ActiveDirectoryConfiguration": {
 			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe configuration for a Microsoft Active Directory (Microsoft AD) studio resource.\u003c/p\u003e",
+			//       "description": "\u003cp\u003eThe configuration for a Microsoft Active Directory (Microsoft AD) studio\n            resource.\u003c/p\u003e",
 			//       "properties": {
 			//         "ComputerAttributes": {
 			//           "description": "\u003cp\u003eA collection of custom attributes for an Active Directory computer.\u003c/p\u003e",
 			//           "items": {
 			//             "additionalProperties": false,
-			//             "description": "\u003cp\u003eAn LDAP attribute of an Active Directory computer account, in the form of a name:value pair.\u003c/p\u003e",
+			//             "description": "\u003cp\u003eAn LDAP attribute of an Active Directory computer account, in the form of a name:value\n            pair.\u003c/p\u003e",
 			//             "properties": {
 			//               "Name": {
 			//                 "description": "\u003cp\u003eThe name for the LDAP attribute.\u003c/p\u003e",
@@ -58,11 +57,11 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//           "type": "array"
 			//         },
 			//         "DirectoryId": {
-			//           "description": "\u003cp\u003eThe directory ID of the Directory Service for Microsoft Active Directory to access using this studio component.\u003c/p\u003e",
+			//           "description": "\u003cp\u003eThe directory ID of the Directory Service for Microsoft Active Directory to access\n            using this studio component.\u003c/p\u003e",
 			//           "type": "string"
 			//         },
 			//         "OrganizationalUnitDistinguishedName": {
-			//           "description": "\u003cp\u003eThe distinguished name (DN) and organizational unit (OU) of an Active Directory computer.\u003c/p\u003e",
+			//           "description": "\u003cp\u003eThe distinguished name (DN) and organizational unit (OU) of an Active Directory\n            computer.\u003c/p\u003e",
 			//           "maxLength": 2000,
 			//           "minLength": 1,
 			//           "type": "string"
@@ -75,11 +74,11 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//       "description": "\u003cp\u003eThe configuration for a render farm that is associated with a studio resource.\u003c/p\u003e",
 			//       "properties": {
 			//         "ActiveDirectoryUser": {
-			//           "description": "\u003cp\u003eThe name of an Active Directory user that is used on ComputeFarm worker instances.\u003c/p\u003e",
+			//           "description": "\u003cp\u003eThe name of an Active Directory user that is used on ComputeFarm worker\n            instances.\u003c/p\u003e",
 			//           "type": "string"
 			//         },
 			//         "Endpoint": {
-			//           "description": "\u003cp\u003eThe endpoint of the ComputeFarm that is accessed by the studio component resource.\u003c/p\u003e",
+			//           "description": "\u003cp\u003eThe endpoint of the ComputeFarm that is accessed by the studio component\n            resource.\u003c/p\u003e",
 			//           "type": "string"
 			//         }
 			//       },
@@ -87,10 +86,10 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//     },
 			//     "LicenseServiceConfiguration": {
 			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe configuration for a license service that is associated with a studio resource.\u003c/p\u003e",
+			//       "description": "\u003cp\u003eThe configuration for a license service that is associated with a studio\n            resource.\u003c/p\u003e",
 			//       "properties": {
 			//         "Endpoint": {
-			//           "description": "\u003cp\u003eThe endpoint of the license service that is accessed by the studio component resource.\u003c/p\u003e",
+			//           "description": "\u003cp\u003eThe endpoint of the license service that is accessed by the studio component\n            resource.\u003c/p\u003e",
 			//           "type": "string"
 			//         }
 			//       },
@@ -98,10 +97,10 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//     },
 			//     "SharedFileSystemConfiguration": {
 			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe configuration for a shared file storage system that is associated with a studio resource.\u003c/p\u003e",
+			//       "description": "\u003cp\u003eThe configuration for a shared file storage system that is associated with a studio\n            resource.\u003c/p\u003e",
 			//       "properties": {
 			//         "Endpoint": {
-			//           "description": "\u003cp\u003eThe endpoint of the shared file system that is accessed by the studio component resource.\u003c/p\u003e",
+			//           "description": "\u003cp\u003eThe endpoint of the shared file system that is accessed by the studio component\n            resource.\u003c/p\u003e",
 			//           "type": "string"
 			//         },
 			//         "FileSystemId": {
@@ -135,7 +134,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]tfsdk.Attribute{
 					"active_directory_configuration": {
 						// Property: ActiveDirectoryConfiguration
-						Description: "<p>The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.</p>",
+						Description: "<p>The configuration for a Microsoft Active Directory (Microsoft AD) studio\n            resource.</p>",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"computer_attributes": {
@@ -170,13 +169,13 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								},
 								"directory_id": {
 									// Property: DirectoryId
-									Description: "<p>The directory ID of the Directory Service for Microsoft Active Directory to access using this studio component.</p>",
+									Description: "<p>The directory ID of the Directory Service for Microsoft Active Directory to access\n            using this studio component.</p>",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"organizational_unit_distinguished_name": {
 									// Property: OrganizationalUnitDistinguishedName
-									Description: "<p>The distinguished name (DN) and organizational unit (OU) of an Active Directory computer.</p>",
+									Description: "<p>The distinguished name (DN) and organizational unit (OU) of an Active Directory\n            computer.</p>",
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
@@ -194,13 +193,13 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 							map[string]tfsdk.Attribute{
 								"active_directory_user": {
 									// Property: ActiveDirectoryUser
-									Description: "<p>The name of an Active Directory user that is used on ComputeFarm worker instances.</p>",
+									Description: "<p>The name of an Active Directory user that is used on ComputeFarm worker\n            instances.</p>",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"endpoint": {
 									// Property: Endpoint
-									Description: "<p>The endpoint of the ComputeFarm that is accessed by the studio component resource.</p>",
+									Description: "<p>The endpoint of the ComputeFarm that is accessed by the studio component\n            resource.</p>",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -210,12 +209,12 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"license_service_configuration": {
 						// Property: LicenseServiceConfiguration
-						Description: "<p>The configuration for a license service that is associated with a studio resource.</p>",
+						Description: "<p>The configuration for a license service that is associated with a studio\n            resource.</p>",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"endpoint": {
 									// Property: Endpoint
-									Description: "<p>The endpoint of the license service that is accessed by the studio component resource.</p>",
+									Description: "<p>The endpoint of the license service that is accessed by the studio component\n            resource.</p>",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -225,12 +224,12 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"shared_file_system_configuration": {
 						// Property: SharedFileSystemConfiguration
-						Description: "<p>The configuration for a shared file storage system that is associated with a studio resource.</p>",
+						Description: "<p>The configuration for a shared file storage system that is associated with a studio\n            resource.</p>",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"endpoint": {
 									// Property: Endpoint
-									Description: "<p>The endpoint of the shared file system that is accessed by the studio component resource.</p>",
+									Description: "<p>The endpoint of the shared file system that is accessed by the studio component\n            resource.</p>",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -295,18 +294,17 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "description": "\u003cp\u003eThe EC2 security groups that control access to the studio component.\u003c/p\u003e",
 			//   "items": {
-			//     "description": "",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 30,
-			//   "minItems": 1,
+			//   "minItems": 0,
 			//   "type": "array"
 			// }
 			Description: "<p>The EC2 security groups that control access to the studio component.</p>",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 30),
+				validate.ArrayLenBetween(0, 30),
 			},
 		},
 		"initialization_scripts": {
@@ -319,14 +317,13 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//     "description": "\u003cp\u003eInitialization scripts for studio components.\u003c/p\u003e",
 			//     "properties": {
 			//       "LaunchProfileProtocolVersion": {
-			//         "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".\u003c/p\u003e",
+			//         "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".\u003c/p\u003e",
 			//         "maxLength": 10,
 			//         "minLength": 0,
 			//         "pattern": "^2021\\-03\\-31$",
 			//         "type": "string"
 			//       },
 			//       "Platform": {
-			//         "description": "",
 			//         "enum": [
 			//           "LINUX",
 			//           "WINDOWS"
@@ -334,7 +331,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//         "type": "string"
 			//       },
 			//       "RunContext": {
-			//         "description": "",
 			//         "enum": [
 			//           "SYSTEM_INITIALIZATION",
 			//           "USER_INITIALIZATION"
@@ -357,7 +353,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]tfsdk.Attribute{
 					"launch_profile_protocol_version": {
 						// Property: LaunchProfileProtocolVersion
-						Description: "<p>The version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".</p>",
+						Description: "<p>The version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".</p>",
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
@@ -367,9 +363,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"platform": {
 						// Property: Platform
-						Description: "",
-						Type:        types.StringType,
-						Optional:    true,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"LINUX",
@@ -379,9 +374,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"run_context": {
 						// Property: RunContext
-						Description: "",
-						Type:        types.StringType,
-						Optional:    true,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"SYSTEM_INITIALIZATION",
@@ -416,6 +410,20 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
+			},
+		},
+		"runtime_role_arn": {
+			// Property: RuntimeRoleArn
+			// CloudFormation resource type schema:
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
 			},
 		},
 		"script_parameters": {
@@ -476,6 +484,20 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.ArrayLenBetween(0, 30),
 			},
 		},
+		"secure_initialization_role_arn": {
+			// Property: SecureInitializationRoleArn
+			// CloudFormation resource type schema:
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
+		},
 		"studio_component_id": {
 			// Property: StudioComponentId
 			// CloudFormation resource type schema:
@@ -492,10 +514,10 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// Property: StudioId
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "\u003cp\u003eThe studioId. \u003c/p\u003e",
+			//   "description": "\u003cp\u003eThe studio ID. \u003c/p\u003e",
 			//   "type": "string"
 			// }
-			Description: "<p>The studioId. </p>",
+			Description: "<p>The studio ID. </p>",
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -506,7 +528,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// Property: Subtype
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "",
 			//   "enum": [
 			//     "AWS_MANAGED_MICROSOFT_AD",
 			//     "AMAZON_FSX_FOR_WINDOWS",
@@ -515,10 +536,9 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   ],
 			//   "type": "string"
 			// }
-			Description: "",
-			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"AWS_MANAGED_MICROSOFT_AD",
@@ -537,7 +557,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "",
 			//   "patternProperties": {
 			//     "": {
 			//       "type": "string"
@@ -545,7 +564,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   },
 			//   "type": "object"
 			// }
-			Description: "",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
@@ -559,7 +577,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// Property: Type
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "",
 			//   "enum": [
 			//     "ACTIVE_DIRECTORY",
 			//     "SHARED_FILE_SYSTEM",
@@ -569,9 +586,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   ],
 			//   "type": "string"
 			// }
-			Description: "",
-			Type:        types.StringType,
-			Required:    true,
+			Type:     types.StringType,
+			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ACTIVE_DIRECTORY",
@@ -594,7 +610,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	}
 
 	schema := tfsdk.Schema{
-		Description: "Represents a studio component which connects a non-Nimble Studio resource in your account to your studio",
+		Description: "Represents a studio component that connects a non-Nimble Studio resource in your account to your studio",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -624,8 +640,10 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"organizational_unit_distinguished_name": "OrganizationalUnitDistinguishedName",
 		"platform":                               "Platform",
 		"run_context":                            "RunContext",
+		"runtime_role_arn":                       "RuntimeRoleArn",
 		"script":                                 "Script",
 		"script_parameters":                      "ScriptParameters",
+		"secure_initialization_role_arn":         "SecureInitializationRoleArn",
 		"share_name":                             "ShareName",
 		"shared_file_system_configuration":       "SharedFileSystemConfiguration",
 		"studio_component_id":                    "StudioComponentId",

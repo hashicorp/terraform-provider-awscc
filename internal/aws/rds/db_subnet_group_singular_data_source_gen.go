@@ -75,8 +75,7 @@ func dBSubnetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//       }
 			//     },
 			//     "required": [
-			//       "Key",
-			//       "Value"
+			//       "Key"
 			//     ],
 			//     "type": "object"
 			//   },

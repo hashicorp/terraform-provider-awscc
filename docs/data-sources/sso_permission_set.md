@@ -21,15 +21,44 @@ Data Source schema for AWS::SSO::PermissionSet
 
 ### Read-Only
 
+- `customer_managed_policy_references` (Attributes List) (see [below for nested schema](#nestedatt--customer_managed_policy_references))
 - `description` (String) The permission set description.
 - `inline_policy` (String) The inline policy to put in permission set.
 - `instance_arn` (String) The sso instance arn that the permission set is owned.
 - `managed_policies` (List of String)
 - `name` (String) The name you want to assign to this permission set.
 - `permission_set_arn` (String) The permission set that the policy will be attached to
+- `permissions_boundary` (Attributes) (see [below for nested schema](#nestedatt--permissions_boundary))
 - `relay_state_type` (String) The relay state URL that redirect links to any service in the AWS Management Console.
 - `session_duration` (String) The length of time that a user can be signed in to an AWS account.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--customer_managed_policy_references"></a>
+### Nested Schema for `customer_managed_policy_references`
+
+Read-Only:
+
+- `name` (String)
+- `path` (String)
+
+
+<a id="nestedatt--permissions_boundary"></a>
+### Nested Schema for `permissions_boundary`
+
+Read-Only:
+
+- `customer_managed_policy_reference` (Attributes) (see [below for nested schema](#nestedatt--permissions_boundary--customer_managed_policy_reference))
+- `managed_policy_arn` (String) The managed policy to attach.
+
+<a id="nestedatt--permissions_boundary--customer_managed_policy_reference"></a>
+### Nested Schema for `permissions_boundary.customer_managed_policy_reference`
+
+Read-Only:
+
+- `name` (String)
+- `path` (String)
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

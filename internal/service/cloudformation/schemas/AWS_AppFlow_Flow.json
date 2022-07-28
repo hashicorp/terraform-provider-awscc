@@ -376,6 +376,9 @@
                 "ScheduleEndTime": {
                     "type": "number"
                 },
+                "FirstExecutionFrom": {
+                    "type": "number"
+                },
                 "TimeZone": {
                     "type": "string",
                     "maxLength": 256

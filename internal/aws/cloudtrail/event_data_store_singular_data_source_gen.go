@@ -143,7 +143,6 @@ func eventDataStoreDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     ],
 			//     "type": "object"
 			//   },
-			//   "maxItems": 5,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }

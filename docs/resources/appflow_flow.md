@@ -628,6 +628,7 @@ Required:
 Optional:
 
 - `data_pull_mode` (String)
+- `first_execution_from` (Number)
 - `flow_error_deactivation_threshold` (Number)
 - `schedule_end_time` (Number)
 - `schedule_offset` (Number)

@@ -31,6 +31,52 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.BoolType,
 			Optional:    true,
 		},
+		"actions_suppressor": {
+			// Property: ActionsSuppressor
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. ",
+			//   "maxLength": 1600,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
+			Description: "Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. ",
+			Type:        types.StringType,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1600),
+			},
+		},
+		"actions_suppressor_extension_period": {
+			// Property: ActionsSuppressorExtensionPeriod
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.",
+			//   "minimum": 0,
+			//   "type": "integer"
+			// }
+			Description: "Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.",
+			Type:        types.Int64Type,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
+		},
+		"actions_suppressor_wait_period": {
+			// Property: ActionsSuppressorWaitPeriod
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.",
+			//   "minimum": 0,
+			//   "type": "integer"
+			// }
+			Description: "Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.",
+			Type:        types.Int64Type,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
+		},
 		"alarm_actions": {
 			// Property: AlarmActions
 			// CloudFormation resource type schema:
@@ -187,14 +233,17 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"actions_enabled":           "ActionsEnabled",
-		"alarm_actions":             "AlarmActions",
-		"alarm_description":         "AlarmDescription",
-		"alarm_name":                "AlarmName",
-		"alarm_rule":                "AlarmRule",
-		"arn":                       "Arn",
-		"insufficient_data_actions": "InsufficientDataActions",
-		"ok_actions":                "OKActions",
+		"actions_enabled":                     "ActionsEnabled",
+		"actions_suppressor":                  "ActionsSuppressor",
+		"actions_suppressor_extension_period": "ActionsSuppressorExtensionPeriod",
+		"actions_suppressor_wait_period":      "ActionsSuppressorWaitPeriod",
+		"alarm_actions":                       "AlarmActions",
+		"alarm_description":                   "AlarmDescription",
+		"alarm_name":                          "AlarmName",
+		"alarm_rule":                          "AlarmRule",
+		"arn":                                 "Arn",
+		"insufficient_data_actions":           "InsufficientDataActions",
+		"ok_actions":                          "OKActions",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

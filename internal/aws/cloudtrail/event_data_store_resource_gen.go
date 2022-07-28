@@ -145,7 +145,6 @@ func eventDataStoreResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//     ],
 			//     "type": "object"
 			//   },
-			//   "maxItems": 5,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
@@ -252,9 +251,6 @@ func eventDataStoreResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 			),
 			Optional: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(5),
-			},
 		},
 		"created_timestamp": {
 			// Property: CreatedTimestamp

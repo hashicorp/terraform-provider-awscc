@@ -6,6 +6,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -21,6 +22,69 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::SSO::PermissionSet resource type.
 func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"customer_managed_policy_references": {
+			// Property: CustomerManagedPolicyReferences
+			// CloudFormation resource type schema:
+			// {
+			//   "default": [],
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Name": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "[\\w+=,.@-]+",
+			//         "type": "string"
+			//       },
+			//       "Path": {
+			//         "maxLength": 512,
+			//         "minLength": 1,
+			//         "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Name"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 20,
+			//   "type": "array"
+			// }
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"name": {
+						// Property: Name
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("[\\w+=,.@-]+"), ""),
+						},
+					},
+					"path": {
+						// Property: Path
+						Type:     types.StringType,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+							validate.StringMatch(regexp.MustCompile("((/[A-Za-z0-9\\.,\\+@=_-]+)*)/"), ""),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtMost(20),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+				tfsdk.UseStateForUnknown(),
+			},
+		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -28,7 +92,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "description": "The permission set description.",
 			//   "maxLength": 700,
 			//   "minLength": 1,
-			//   "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
+			//   "pattern": "",
 			//   "type": "string"
 			// }
 			Description: "The permission set description.",
@@ -36,7 +100,6 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 700),
-				validate.StringMatch(regexp.MustCompile("[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*"), ""),
 			},
 		},
 		"inline_policy": {
@@ -75,6 +138,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: ManagedPolicies
 			// CloudFormation resource type schema:
 			// {
+			//   "default": [],
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "description": "The managed policy to attach.",
@@ -87,12 +151,15 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(20),
 				validate.ArrayForEach(validate.StringLenBetween(20, 2048)),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -132,6 +199,83 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 			},
+		},
+		"permissions_boundary": {
+			// Property: PermissionsBoundary
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "CustomerManagedPolicyReference": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Name": {
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "pattern": "[\\w+=,.@-]+",
+			//           "type": "string"
+			//         },
+			//         "Path": {
+			//           "maxLength": 512,
+			//           "minLength": 1,
+			//           "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Name"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "ManagedPolicyArn": {
+			//       "description": "The managed policy to attach.",
+			//       "maxLength": 2048,
+			//       "minLength": 20,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"customer_managed_policy_reference": {
+						// Property: CustomerManagedPolicyReference
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"name": {
+									// Property: Name
+									Type:     types.StringType,
+									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 128),
+										validate.StringMatch(regexp.MustCompile("[\\w+=,.@-]+"), ""),
+									},
+								},
+								"path": {
+									// Property: Path
+									Type:     types.StringType,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 512),
+										validate.StringMatch(regexp.MustCompile("((/[A-Za-z0-9\\.,\\+@=_-]+)*)/"), ""),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
+					"managed_policy_arn": {
+						// Property: ManagedPolicyArn
+						Description: "The managed policy to attach.",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(20, 2048),
+						},
+					},
+				},
+			),
+			Optional: true,
 		},
 		"relay_state_type": {
 			// Property: RelayStateType
@@ -252,17 +396,22 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"description":        "Description",
-		"inline_policy":      "InlinePolicy",
-		"instance_arn":       "InstanceArn",
-		"key":                "Key",
-		"managed_policies":   "ManagedPolicies",
-		"name":               "Name",
-		"permission_set_arn": "PermissionSetArn",
-		"relay_state_type":   "RelayStateType",
-		"session_duration":   "SessionDuration",
-		"tags":               "Tags",
-		"value":              "Value",
+		"customer_managed_policy_reference":  "CustomerManagedPolicyReference",
+		"customer_managed_policy_references": "CustomerManagedPolicyReferences",
+		"description":                        "Description",
+		"inline_policy":                      "InlinePolicy",
+		"instance_arn":                       "InstanceArn",
+		"key":                                "Key",
+		"managed_policies":                   "ManagedPolicies",
+		"managed_policy_arn":                 "ManagedPolicyArn",
+		"name":                               "Name",
+		"path":                               "Path",
+		"permission_set_arn":                 "PermissionSetArn",
+		"permissions_boundary":               "PermissionsBoundary",
+		"relay_state_type":                   "RelayStateType",
+		"session_duration":                   "SessionDuration",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

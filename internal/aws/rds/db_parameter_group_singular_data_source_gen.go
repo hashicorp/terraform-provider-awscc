@@ -87,7 +87,6 @@ func dBParameterGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//       }
 			//     },
 			//     "required": [
-			//       "Value",
 			//       "Key"
 			//     ],
 			//     "type": "object"

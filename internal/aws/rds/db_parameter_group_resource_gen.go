@@ -98,7 +98,6 @@ func dBParameterGroupResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//       }
 			//     },
 			//     "required": [
-			//       "Value",
 			//       "Key"
 			//     ],
 			//     "type": "object"
@@ -123,7 +122,7 @@ func dBParameterGroupResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},

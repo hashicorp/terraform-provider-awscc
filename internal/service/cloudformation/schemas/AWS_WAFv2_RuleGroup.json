@@ -677,6 +677,9 @@
           "items": {
             "$ref": "#/definitions/TextTransformation"
           }
+        },
+        "SensitivityLevel": {
+          "$ref": "#/definitions/SensitivityLevel"
         }
       },
       "required": [
@@ -1074,6 +1077,14 @@
         "CONTINUE",
         "MATCH",
         "NO_MATCH"
+      ]
+    },
+    "SensitivityLevel": {
+      "description": "Sensitivity Level current only used for sqli match statements.",
+      "type": "string",
+      "enum": [
+        "LOW",
+        "HIGH"
       ]
     }
   },

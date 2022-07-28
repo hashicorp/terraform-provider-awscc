@@ -123,14 +123,27 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//                 "PresetSpeke20Audio": {
 			//                   "description": "A collection of audio encryption presets.",
 			//                   "enum": [
-			//                     "PRESET-AUDIO-1"
+			//                     "PRESET-AUDIO-1",
+			//                     "PRESET-AUDIO-2",
+			//                     "PRESET-AUDIO-3",
+			//                     "SHARED",
+			//                     "UNENCRYPTED"
 			//                   ],
 			//                   "type": "string"
 			//                 },
 			//                 "PresetSpeke20Video": {
 			//                   "description": "A collection of video encryption presets.",
 			//                   "enum": [
-			//                     "PRESET-VIDEO-1"
+			//                     "PRESET-VIDEO-1",
+			//                     "PRESET-VIDEO-2",
+			//                     "PRESET-VIDEO-3",
+			//                     "PRESET-VIDEO-4",
+			//                     "PRESET-VIDEO-5",
+			//                     "PRESET-VIDEO-6",
+			//                     "PRESET-VIDEO-7",
+			//                     "PRESET-VIDEO-8",
+			//                     "SHARED",
+			//                     "UNENCRYPTED"
 			//                   ],
 			//                   "type": "string"
 			//                 }
@@ -341,6 +354,10 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"PRESET-AUDIO-1",
+																	"PRESET-AUDIO-2",
+																	"PRESET-AUDIO-3",
+																	"SHARED",
+																	"UNENCRYPTED",
 																}),
 															},
 														},
@@ -352,6 +369,15 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"PRESET-VIDEO-1",
+																	"PRESET-VIDEO-2",
+																	"PRESET-VIDEO-3",
+																	"PRESET-VIDEO-4",
+																	"PRESET-VIDEO-5",
+																	"PRESET-VIDEO-6",
+																	"PRESET-VIDEO-7",
+																	"PRESET-VIDEO-8",
+																	"SHARED",
+																	"UNENCRYPTED",
 																}),
 															},
 														},
@@ -602,14 +628,27 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//                 "PresetSpeke20Audio": {
 			//                   "description": "A collection of audio encryption presets.",
 			//                   "enum": [
-			//                     "PRESET-AUDIO-1"
+			//                     "PRESET-AUDIO-1",
+			//                     "PRESET-AUDIO-2",
+			//                     "PRESET-AUDIO-3",
+			//                     "SHARED",
+			//                     "UNENCRYPTED"
 			//                   ],
 			//                   "type": "string"
 			//                 },
 			//                 "PresetSpeke20Video": {
 			//                   "description": "A collection of video encryption presets.",
 			//                   "enum": [
-			//                     "PRESET-VIDEO-1"
+			//                     "PRESET-VIDEO-1",
+			//                     "PRESET-VIDEO-2",
+			//                     "PRESET-VIDEO-3",
+			//                     "PRESET-VIDEO-4",
+			//                     "PRESET-VIDEO-5",
+			//                     "PRESET-VIDEO-6",
+			//                     "PRESET-VIDEO-7",
+			//                     "PRESET-VIDEO-8",
+			//                     "SHARED",
+			//                     "UNENCRYPTED"
 			//                   ],
 			//                   "type": "string"
 			//                 }
@@ -653,6 +692,10 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//         "SpekeKeyProvider"
 			//       ],
 			//       "type": "object"
+			//     },
+			//     "IncludeIframeOnlyStream": {
+			//       "description": "When enabled, an I-Frame only stream will be included in the output.",
+			//       "type": "boolean"
 			//     },
 			//     "ManifestLayout": {
 			//       "description": "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
@@ -820,6 +863,10 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"PRESET-AUDIO-1",
+																	"PRESET-AUDIO-2",
+																	"PRESET-AUDIO-3",
+																	"SHARED",
+																	"UNENCRYPTED",
 																}),
 															},
 														},
@@ -831,6 +878,15 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"PRESET-VIDEO-1",
+																	"PRESET-VIDEO-2",
+																	"PRESET-VIDEO-3",
+																	"PRESET-VIDEO-4",
+																	"PRESET-VIDEO-5",
+																	"PRESET-VIDEO-6",
+																	"PRESET-VIDEO-7",
+																	"PRESET-VIDEO-8",
+																	"SHARED",
+																	"UNENCRYPTED",
 																}),
 															},
 														},
@@ -869,6 +925,12 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							},
 						),
 						Optional: true,
+					},
+					"include_iframe_only_stream": {
+						// Property: IncludeIframeOnlyStream
+						Description: "When enabled, an I-Frame only stream will be included in the output.",
+						Type:        types.BoolType,
+						Optional:    true,
 					},
 					"manifest_layout": {
 						// Property: ManifestLayout
@@ -1100,14 +1162,27 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//                 "PresetSpeke20Audio": {
 			//                   "description": "A collection of audio encryption presets.",
 			//                   "enum": [
-			//                     "PRESET-AUDIO-1"
+			//                     "PRESET-AUDIO-1",
+			//                     "PRESET-AUDIO-2",
+			//                     "PRESET-AUDIO-3",
+			//                     "SHARED",
+			//                     "UNENCRYPTED"
 			//                   ],
 			//                   "type": "string"
 			//                 },
 			//                 "PresetSpeke20Video": {
 			//                   "description": "A collection of video encryption presets.",
 			//                   "enum": [
-			//                     "PRESET-VIDEO-1"
+			//                     "PRESET-VIDEO-1",
+			//                     "PRESET-VIDEO-2",
+			//                     "PRESET-VIDEO-3",
+			//                     "PRESET-VIDEO-4",
+			//                     "PRESET-VIDEO-5",
+			//                     "PRESET-VIDEO-6",
+			//                     "PRESET-VIDEO-7",
+			//                     "PRESET-VIDEO-8",
+			//                     "SHARED",
+			//                     "UNENCRYPTED"
 			//                   ],
 			//                   "type": "string"
 			//                 }
@@ -1316,6 +1391,10 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"PRESET-AUDIO-1",
+																	"PRESET-AUDIO-2",
+																	"PRESET-AUDIO-3",
+																	"SHARED",
+																	"UNENCRYPTED",
 																}),
 															},
 														},
@@ -1327,6 +1406,15 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"PRESET-VIDEO-1",
+																	"PRESET-VIDEO-2",
+																	"PRESET-VIDEO-3",
+																	"PRESET-VIDEO-4",
+																	"PRESET-VIDEO-5",
+																	"PRESET-VIDEO-6",
+																	"PRESET-VIDEO-7",
+																	"PRESET-VIDEO-8",
+																	"SHARED",
+																	"UNENCRYPTED",
 																}),
 															},
 														},
@@ -1504,14 +1592,27 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//                 "PresetSpeke20Audio": {
 			//                   "description": "A collection of audio encryption presets.",
 			//                   "enum": [
-			//                     "PRESET-AUDIO-1"
+			//                     "PRESET-AUDIO-1",
+			//                     "PRESET-AUDIO-2",
+			//                     "PRESET-AUDIO-3",
+			//                     "SHARED",
+			//                     "UNENCRYPTED"
 			//                   ],
 			//                   "type": "string"
 			//                 },
 			//                 "PresetSpeke20Video": {
 			//                   "description": "A collection of video encryption presets.",
 			//                   "enum": [
-			//                     "PRESET-VIDEO-1"
+			//                     "PRESET-VIDEO-1",
+			//                     "PRESET-VIDEO-2",
+			//                     "PRESET-VIDEO-3",
+			//                     "PRESET-VIDEO-4",
+			//                     "PRESET-VIDEO-5",
+			//                     "PRESET-VIDEO-6",
+			//                     "PRESET-VIDEO-7",
+			//                     "PRESET-VIDEO-8",
+			//                     "SHARED",
+			//                     "UNENCRYPTED"
 			//                   ],
 			//                   "type": "string"
 			//                 }
@@ -1623,6 +1724,10 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"PRESET-AUDIO-1",
+																	"PRESET-AUDIO-2",
+																	"PRESET-AUDIO-3",
+																	"SHARED",
+																	"UNENCRYPTED",
 																}),
 															},
 														},
@@ -1634,6 +1739,15 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"PRESET-VIDEO-1",
+																	"PRESET-VIDEO-2",
+																	"PRESET-VIDEO-3",
+																	"PRESET-VIDEO-4",
+																	"PRESET-VIDEO-5",
+																	"PRESET-VIDEO-6",
+																	"PRESET-VIDEO-7",
+																	"PRESET-VIDEO-8",
+																	"SHARED",
+																	"UNENCRYPTED",
 																}),
 															},
 														},

@@ -30,6 +30,43 @@ func compositeAlarmDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			Type:        types.BoolType,
 			Computed:    true,
 		},
+		"actions_suppressor": {
+			// Property: ActionsSuppressor
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. ",
+			//   "maxLength": 1600,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
+			Description: "Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. ",
+			Type:        types.StringType,
+			Computed:    true,
+		},
+		"actions_suppressor_extension_period": {
+			// Property: ActionsSuppressorExtensionPeriod
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.",
+			//   "minimum": 0,
+			//   "type": "integer"
+			// }
+			Description: "Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.",
+			Type:        types.Int64Type,
+			Computed:    true,
+		},
+		"actions_suppressor_wait_period": {
+			// Property: ActionsSuppressorWaitPeriod
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.",
+			//   "minimum": 0,
+			//   "type": "integer"
+			// }
+			Description: "Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.",
+			Type:        types.Int64Type,
+			Computed:    true,
+		},
 		"alarm_actions": {
 			// Property: AlarmActions
 			// CloudFormation resource type schema:
@@ -155,14 +192,17 @@ func compositeAlarmDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::CompositeAlarm").WithTerraformTypeName("awscc_cloudwatch_composite_alarm")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"actions_enabled":           "ActionsEnabled",
-		"alarm_actions":             "AlarmActions",
-		"alarm_description":         "AlarmDescription",
-		"alarm_name":                "AlarmName",
-		"alarm_rule":                "AlarmRule",
-		"arn":                       "Arn",
-		"insufficient_data_actions": "InsufficientDataActions",
-		"ok_actions":                "OKActions",
+		"actions_enabled":                     "ActionsEnabled",
+		"actions_suppressor":                  "ActionsSuppressor",
+		"actions_suppressor_extension_period": "ActionsSuppressorExtensionPeriod",
+		"actions_suppressor_wait_period":      "ActionsSuppressorWaitPeriod",
+		"alarm_actions":                       "AlarmActions",
+		"alarm_description":                   "AlarmDescription",
+		"alarm_name":                          "AlarmName",
+		"alarm_rule":                          "AlarmRule",
+		"arn":                                 "Arn",
+		"insufficient_data_actions":           "InsufficientDataActions",
+		"ok_actions":                          "OKActions",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

@@ -3233,6 +3233,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           ],
 			//           "type": "string"
 			//         },
+			//         "FirstExecutionFrom": {
+			//           "type": "number"
+			//         },
 			//         "FlowErrorDeactivationThreshold": {
 			//           "maximum": 100,
 			//           "minimum": 1,
@@ -3297,6 +3300,11 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"Complete",
 										}),
 									},
+								},
+								"first_execution_from": {
+									// Property: FirstExecutionFrom
+									Type:     types.Float64Type,
+									Optional: true,
 								},
 								"flow_error_deactivation_threshold": {
 									// Property: FlowErrorDeactivationThreshold
@@ -3410,6 +3418,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"event_bridge":                      "EventBridge",
 		"fail_on_first_error":               "FailOnFirstError",
 		"file_type":                         "FileType",
+		"first_execution_from":              "FirstExecutionFrom",
 		"flow_arn":                          "FlowArn",
 		"flow_error_deactivation_threshold": "FlowErrorDeactivationThreshold",
 		"flow_name":                         "FlowName",
