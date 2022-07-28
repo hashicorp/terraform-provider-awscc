@@ -918,11 +918,35 @@ func integerValidators(path []string, property *cfschema.Property) (Features, []
 	var validators []string
 
 	if property.Minimum != nil && property.Maximum == nil {
-		validators = append(validators, fmt.Sprintf("validate.IntAtLeast(%d)", *property.Minimum))
+		min, err := (*property.Minimum).Int64()
+
+		if err != nil {
+			return features, nil, err
+		}
+
+		validators = append(validators, fmt.Sprintf("validate.IntAtLeast(%d)", min))
 	} else if property.Minimum == nil && property.Maximum != nil {
-		validators = append(validators, fmt.Sprintf("validate.IntAtMost(%d)", *property.Maximum))
+		max, err := (*property.Maximum).Int64()
+
+		if err != nil {
+			return features, nil, err
+		}
+
+		validators = append(validators, fmt.Sprintf("validate.IntAtMost(%d)", max))
 	} else if property.Minimum != nil && property.Maximum != nil {
-		validators = append(validators, fmt.Sprintf("validate.IntBetween(%d,%d)", *property.Minimum, *property.Maximum))
+		min, err := (*property.Minimum).Int64()
+
+		if err != nil {
+			return features, nil, err
+		}
+
+		max, err := (*property.Maximum).Int64()
+
+		if err != nil {
+			return features, nil, err
+		}
+
+		validators = append(validators, fmt.Sprintf("validate.IntBetween(%d,%d)", min, max))
 	}
 
 	if property.Format != nil {
@@ -956,11 +980,35 @@ func numberValidators(path []string, property *cfschema.Property) (Features, []s
 	var validators []string
 
 	if property.Minimum != nil && property.Maximum == nil {
-		validators = append(validators, fmt.Sprintf("validate.FloatAtLeast(%f)", float64(*property.Minimum)))
+		min, err := (*property.Minimum).Float64()
+
+		if err != nil {
+			return features, nil, err
+		}
+
+		validators = append(validators, fmt.Sprintf("validate.FloatAtLeast(%f)", min))
 	} else if property.Minimum == nil && property.Maximum != nil {
-		validators = append(validators, fmt.Sprintf("validate.FloatAtMost(%f)", float64(*property.Maximum)))
+		max, err := (*property.Maximum).Float64()
+
+		if err != nil {
+			return features, nil, err
+		}
+
+		validators = append(validators, fmt.Sprintf("validate.FloatAtMost(%f)", max))
 	} else if property.Minimum != nil && property.Maximum != nil {
-		validators = append(validators, fmt.Sprintf("validate.FloatBetween(%f,%f)", float64(*property.Minimum), float64(*property.Maximum)))
+		min, err := (*property.Minimum).Float64()
+
+		if err != nil {
+			return features, nil, err
+		}
+
+		max, err := (*property.Maximum).Float64()
+
+		if err != nil {
+			return features, nil, err
+		}
+
+		validators = append(validators, fmt.Sprintf("validate.FloatBetween(%f,%f)", min, max))
 	}
 
 	if property.Format != nil {
