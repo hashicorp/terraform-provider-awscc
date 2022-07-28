@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.0
 	github.com/aws/smithy-go v1.12.0
 	github.com/google/go-cmp v0.5.8
-	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.17.0
+	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.17.1-0.20220728185410-a4b2da097c5c
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.16
 	github.com/hashicorp/go-hclog v1.2.1
 	github.com/hashicorp/go-multierror v1.1.1
