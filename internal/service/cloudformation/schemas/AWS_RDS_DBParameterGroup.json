@@ -22,7 +22,6 @@
         }
       },
       "required": [
-        "Value",
         "Key"
       ]
     }

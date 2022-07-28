@@ -42,6 +42,7 @@
         "Tags": {
             "type": "array",
             "uniqueItems": false,
+            "insertionOrder": false,
             "items": {
                 "$ref": "#/definitions/Tag"
             }
@@ -80,6 +81,11 @@
     ],
     "readOnlyProperties": [
         "/properties/Arn"
+    ],
+    "writeOnlyProperties": [
+        "/properties/PrivateKey",
+        "/properties/CertificateBody",
+        "/properties/CertificateChain"
     ],
     "primaryIdentifier": [
         "/properties/ServerCertificateName"

@@ -685,6 +685,14 @@
       "minimum": 0,
       "maximum": 5
     },
+    "MessageSelectionStrategy": {
+      "description": "Indicates how a message is selected from a message group among retries.",
+      "type": "string",
+      "enum": [
+        "Random",
+        "Ordered"
+      ]
+    },
     "PromptSpecification": {
       "description": "Prompts the user to confirm the intent.",
       "type": "object",
@@ -698,6 +706,9 @@
         "AllowInterrupt": {
           "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
           "type": "boolean"
+        },
+        "MessageSelectionStrategy": {
+          "$ref": "#/definitions/MessageSelectionStrategy"
         }
       },
       "required": [
