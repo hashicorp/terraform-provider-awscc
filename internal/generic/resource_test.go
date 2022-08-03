@@ -74,7 +74,7 @@ func TestPropertyPathToAttributePath(t *testing.T) {
 				t.Fatalf("unexpected error from propertyPathToAttributePath: %s", err)
 			}
 
-			if !attributePath.Equal(testCase.ExpectedValue) {
+			if err == nil && !attributePath.Equal(testCase.ExpectedValue) {
 				t.Errorf("got: %s, expected: %s", attributePath, testCase.ExpectedValue)
 			}
 		})
