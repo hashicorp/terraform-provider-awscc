@@ -64,7 +64,7 @@ func TestUnknowns(t *testing.T) {
 	}
 }
 
-func TestUnknowsSetValue(t *testing.T) {
+func TestUnknownsSetValue(t *testing.T) {
 	testCases := []struct {
 		TestName      string
 		State         tfsdk.State
