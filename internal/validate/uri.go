@@ -9,9 +9,7 @@ import (
 )
 
 // uriValidator validates that a string is a URI.
-type uriValidator struct {
-	tfsdk.AttributeValidator
-}
+type uriValidator struct{}
 
 // Description describes the validation in plain text formatting.
 func (validator uriValidator) Description(_ context.Context) string {

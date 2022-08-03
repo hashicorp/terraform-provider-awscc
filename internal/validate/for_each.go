@@ -9,8 +9,6 @@ import (
 
 // arrayForEachValidator validates that a List Attribute's contents all satisfy the included validator.
 type arrayForEachValidator struct {
-	tfsdk.AttributeValidator
-
 	validator tfsdk.AttributeValidator
 }
 

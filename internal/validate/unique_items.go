@@ -9,9 +9,7 @@ import (
 )
 
 // uniqueItemsValidator validates that an Attribute's list items have unique values.
-type uniqueItemsValidator struct {
-	tfsdk.AttributeValidator
-}
+type uniqueItemsValidator struct{}
 
 // Description describes the validation in plain text formatting.
 func (v uniqueItemsValidator) Description(_ context.Context) string {

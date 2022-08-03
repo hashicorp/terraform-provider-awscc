@@ -14,8 +14,6 @@ import (
 
 // arrayLenBetweenValidator validates that an array (List/Set) Attribute's length is in a range.
 type arrayLenBetweenValidator struct {
-	tfsdk.AttributeValidator
-
 	minItems, maxItems int
 }
 
@@ -59,8 +57,6 @@ func ArrayLenBetween(minItems, maxItems int) tfsdk.AttributeValidator {
 
 // arrayLenAtLeastValidator validates that an array (List/Set) Attribute's length is at least a certain value.
 type arrayLenAtLeastValidator struct {
-	tfsdk.AttributeValidator
-
 	minItems int
 }
 
@@ -103,8 +99,6 @@ func ArrayLenAtLeast(minItems int) tfsdk.AttributeValidator {
 
 // arrayLenAtMostValidator validates that an array (List/Set) Attribute's length is at most a certain value.
 type arrayLenAtMostValidator struct {
-	tfsdk.AttributeValidator
-
 	maxItems int
 }
 

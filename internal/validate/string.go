@@ -15,8 +15,6 @@ import (
 
 // stringLenBetweenValidator validates that a string Attribute's length is in a range.
 type stringLenBetweenValidator struct {
-	tfsdk.AttributeValidator
-
 	minLength, maxLength int
 }
 
@@ -60,8 +58,6 @@ func StringLenBetween(minLength, maxLength int) tfsdk.AttributeValidator {
 
 // stringLenAtLeastValidator validates that a string Attribute's length is at least a certain value.
 type stringLenAtLeastValidator struct {
-	tfsdk.AttributeValidator
-
 	minLength int
 }
 
@@ -104,8 +100,6 @@ func StringLenAtLeast(minLength int) tfsdk.AttributeValidator {
 
 // stringLenAtMostValidator validates that a string Attribute's length is at most a certain value.
 type stringLenAtMostValidator struct {
-	tfsdk.AttributeValidator
-
 	maxLength int
 }
 
@@ -148,8 +142,6 @@ func StringLenAtMost(maxLength int) tfsdk.AttributeValidator {
 
 // stringInSliceValidator validates that a string Attribute's value matches the value of an element in the valid slice.
 type stringInSliceValidator struct {
-	tfsdk.AttributeValidator
-
 	valid []string
 }
 
@@ -199,8 +191,6 @@ func StringInSlice(valid []string) tfsdk.AttributeValidator {
 
 // stringMatchValidator validates that a string Attribute's value matches the specified regular expression.
 type stringMatchValidator struct {
-	tfsdk.AttributeValidator
-
 	re      *regexp.Regexp
 	message string
 }
@@ -244,9 +234,7 @@ func StringMatch(re *regexp.Regexp, message string) tfsdk.AttributeValidator {
 }
 
 // stringIsJsonObjectValidator validates that a string Attribute's value is a valid JSON object.
-type stringIsJsonObjectValidator struct {
-	tfsdk.AttributeValidator
-}
+type stringIsJsonObjectValidator struct{}
 
 // Description describes the validation in plain text formatting.
 func (validator stringIsJsonObjectValidator) Description(_ context.Context) string {

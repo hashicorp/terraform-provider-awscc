@@ -11,8 +11,6 @@ import (
 
 // floatBetweenValidator validates that an float Attribute's value is in a range.
 type floatBetweenValidator struct {
-	tfsdk.AttributeValidator
-
 	min, max float64
 }
 
@@ -57,8 +55,6 @@ func FloatBetween(min, max float64) tfsdk.AttributeValidator {
 
 // floatAtLeastValidator validates that an float Attribute's value is at least a certain value.
 type floatAtLeastValidator struct {
-	tfsdk.AttributeValidator
-
 	min float64
 }
 
@@ -98,8 +94,6 @@ func FloatAtLeast(min float64) tfsdk.AttributeValidator {
 
 // floatAtMostValidator validates that an float Attribute's value is at most a certain value.
 type floatAtMostValidator struct {
-	tfsdk.AttributeValidator
-
 	max float64
 }
 
