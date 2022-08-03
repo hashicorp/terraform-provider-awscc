@@ -108,8 +108,6 @@ func OneOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
 
 // requiredAttributesValidator validates that required Attributes are specified.
 type requiredAttributesValidator struct {
-	tfsdk.AttributeValidator
-
 	fs []RequiredAttributesFunc
 }
 
@@ -213,7 +211,7 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 			var vals map[string]tftypes.Value
 			if err := val.As(&vals); err != nil {
 				response.Diagnostics.Append(ccdiag.NewUnableToConvertValueTypeAttributeError(
-					request.AttributePath.WithElementKeyInt(i),
+					request.AttributePath.AtListIndex(i),
 					err,
 				))
 
@@ -245,8 +243,6 @@ func RequiredAttributes(fs ...RequiredAttributesFunc) tfsdk.AttributeValidator {
 
 // requiredAttributesResourceConfigValidator validates that resource schema-level required Attributes are specified.
 type resourceConfigRequiredAttributesValidator struct {
-	tfsdk.ResourceConfigValidator
-
 	fs []RequiredAttributesFunc
 }
 
@@ -261,7 +257,7 @@ func (validator resourceConfigRequiredAttributesValidator) MarkdownDescription(c
 }
 
 // Validate performs the validation.
-func (validator resourceConfigRequiredAttributesValidator) Validate(ctx context.Context, request tfsdk.ValidateResourceConfigRequest, response *tfsdk.ValidateResourceConfigResponse) {
+func (validator resourceConfigRequiredAttributesValidator) ValidateResource(ctx context.Context, request tfsdk.ValidateResourceConfigRequest, response *tfsdk.ValidateResourceConfigResponse) {
 	val := request.Config.Raw
 
 	if val.IsNull() || !val.IsFullyKnown() {

@@ -10,9 +10,7 @@ import (
 )
 
 // isRFC3339TimeValidator validates that a string Attribute's length is a valid RFC33349Time.
-type isRFC3339TimeValidator struct {
-	tfsdk.AttributeValidator
-}
+type isRFC3339TimeValidator struct{}
 
 // Description describes the validation in plain text formatting.
 func (validator isRFC3339TimeValidator) Description(_ context.Context) string {

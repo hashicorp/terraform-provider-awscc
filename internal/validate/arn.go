@@ -11,9 +11,7 @@ import (
 )
 
 // arnValidator validates that a string is an Amazon Resource Name (ARN).
-type arnValidator struct {
-	tfsdk.AttributeValidator
-}
+type arnValidator struct{}
 
 // Description describes the validation in plain text formatting.
 func (validator arnValidator) Description(_ context.Context) string {
@@ -48,9 +46,7 @@ func ARN() tfsdk.AttributeValidator {
 }
 
 // iamPolicyARNValidator validates that a string is a valid IAM Policy ARN.
-type iamPolicyARNValidator struct {
-	tfsdk.AttributeValidator
-}
+type iamPolicyARNValidator struct{}
 
 func (validator iamPolicyARNValidator) Description(_ context.Context) string {
 	return "string must be an IAM Policy ARN"

@@ -5,16 +5,14 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // intBetweenValidator validates that an integer Attribute's value is in a range.
 type intBetweenValidator struct {
-	tfsdk.AttributeValidator
-
 	min, max int64
 }
 
@@ -59,8 +57,6 @@ func IntBetween(min, max int64) tfsdk.AttributeValidator {
 
 // intAtLeastValidator validates that an integer Attribute's value is at least a certain value.
 type intAtLeastValidator struct {
-	tfsdk.AttributeValidator
-
 	min int64
 }
 
@@ -100,8 +96,6 @@ func IntAtLeast(min int64) tfsdk.AttributeValidator {
 
 // intAtMostValidator validates that an integer Attribute's value is at most a certain value.
 type intAtMostValidator struct {
-	tfsdk.AttributeValidator
-
 	max int64
 }
 
@@ -141,8 +135,6 @@ func IntAtMost(max int64) tfsdk.AttributeValidator {
 
 // intInSliceValidator validates that an integer Attribute's value matches the value of an element in the valid slice.
 type intInSliceValidator struct {
-	tfsdk.AttributeValidator
-
 	valid []int
 }
 
@@ -177,9 +169,9 @@ func (validator intInSliceValidator) Validate(ctx context.Context, request tfsdk
 
 }
 
-func newIntNotInSliceError(path *tftypes.AttributePath, valid []int, value int64) diag.Diagnostic {
+func newIntNotInSliceError(p path.Path, valid []int, value int64) diag.Diagnostic {
 	return ccdiag.NewInvalidValueAttributeError(
-		path,
+		p,
 		fmt.Sprintf("expected value to be one of %v, got %d", valid, value),
 	)
 }
@@ -191,8 +183,8 @@ func IntInSlice(valid []int) tfsdk.AttributeValidator {
 	}
 }
 
-func newNotAnIntegerValueError(path *tftypes.AttributePath) diag.Diagnostic {
-	return ccdiag.NewInvalidValueAttributeError(path, "Not an integer")
+func newNotAnIntegerValueError(p path.Path) diag.Diagnostic {
+	return ccdiag.NewInvalidValueAttributeError(p, "Not an integer")
 }
 
 func validateInt(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (int64, bool) {

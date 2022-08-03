@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -55,7 +56,7 @@ func TestURIValidator(t *testing.T) {
 			}
 
 			request := tfsdk.ValidateAttributeRequest{
-				AttributePath:   tftypes.NewAttributePath().WithAttributeName("test"),
+				AttributePath:   path.Root("test"),
 				AttributeConfig: val,
 			}
 			response := tfsdk.ValidateAttributeResponse{}

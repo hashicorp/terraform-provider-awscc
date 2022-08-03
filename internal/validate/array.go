@@ -6,16 +6,14 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // arrayLenBetweenValidator validates that an array (List/Set) Attribute's length is in a range.
 type arrayLenBetweenValidator struct {
-	tfsdk.AttributeValidator
-
 	minItems, maxItems int
 }
 
@@ -59,8 +57,6 @@ func ArrayLenBetween(minItems, maxItems int) tfsdk.AttributeValidator {
 
 // arrayLenAtLeastValidator validates that an array (List/Set) Attribute's length is at least a certain value.
 type arrayLenAtLeastValidator struct {
-	tfsdk.AttributeValidator
-
 	minItems int
 }
 
@@ -103,8 +99,6 @@ func ArrayLenAtLeast(minItems int) tfsdk.AttributeValidator {
 
 // arrayLenAtMostValidator validates that an array (List/Set) Attribute's length is at most a certain value.
 type arrayLenAtMostValidator struct {
-	tfsdk.AttributeValidator
-
 	maxItems int
 }
 
@@ -147,19 +141,14 @@ func ArrayLenAtMost(maxItems int) tfsdk.AttributeValidator {
 	}
 }
 
-type arrayKeyer func(context.Context, *tftypes.AttributePath, int, attr.Value) (*tftypes.AttributePath, diag.Diagnostic)
+type arrayKeyer func(context.Context, path.Path, int, attr.Value) (path.Path, diag.Diagnostic)
 
-func listKeyer(ctx context.Context, path *tftypes.AttributePath, i int, v attr.Value) (*tftypes.AttributePath, diag.Diagnostic) {
-	return path.WithElementKeyInt(i), nil
+func listKeyer(ctx context.Context, p path.Path, i int, v attr.Value) (path.Path, diag.Diagnostic) {
+	return p.AtListIndex(i), nil
 }
 
-func setKeyer(ctx context.Context, path *tftypes.AttributePath, i int, v attr.Value) (*tftypes.AttributePath, diag.Diagnostic) {
-	val, err := v.ToTerraformValue(ctx)
-	if err != nil {
-		return nil, ccdiag.NewUnableToObtainValueAttributeError(path, err)
-	}
-
-	return path.WithElementKeyValue(val), nil
+func setKeyer(ctx context.Context, p path.Path, i int, v attr.Value) (path.Path, diag.Diagnostic) {
+	return p.AtSetValue(v), nil
 }
 
 func validateArray(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) ([]attr.Value, arrayKeyer, bool) {

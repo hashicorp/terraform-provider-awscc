@@ -9,8 +9,6 @@ import (
 
 // allValidator validates that a string Attribute's length is in a range.
 type allValidator struct {
-	tfsdk.AttributeValidator
-
 	validators []tfsdk.AttributeValidator
 }
 
