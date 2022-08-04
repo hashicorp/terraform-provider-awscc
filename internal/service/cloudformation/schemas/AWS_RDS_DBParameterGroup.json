@@ -55,6 +55,9 @@
       }
     }
   },
+  "propertyTransform": {
+    "/properties/DBParameterGroupName": "$lowercase(DBParameterGroupName)"
+  },
   "required": [
     "Family",
     "Description"

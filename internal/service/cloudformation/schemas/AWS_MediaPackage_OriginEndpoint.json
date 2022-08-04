@@ -131,7 +131,8 @@
           "enum": [
             "NONE",
             "HBBTV_1_5",
-            "HYBRIDCAST"
+            "HYBRIDCAST",
+            "DVB_DASH_2014"
           ]
         },
         "MinUpdatePeriodSeconds": {
@@ -207,13 +208,14 @@
           "description": "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
           "type": "string",
           "enum": [
+            "HTTP-XSDATE",
             "HTTP-ISO",
             "HTTP-HEAD",
             "NONE"
           ]
         },
         "UtcTimingUri": {
-          "description": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD",
+          "description": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
           "type": "string"
         }
       }

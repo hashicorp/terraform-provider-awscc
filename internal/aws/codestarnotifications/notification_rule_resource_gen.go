@@ -80,6 +80,7 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
+			// EventTypeId is a write-only property.
 		},
 		"event_type_ids": {
 			// Property: EventTypeIds
@@ -177,6 +178,7 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
+			// TargetAddress is a write-only property.
 		},
 		"targets": {
 			// Property: Targets
@@ -258,6 +260,10 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"targets":        "Targets",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/EventTypeId",
+		"/properties/TargetAddress",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -73,6 +73,9 @@
     }
   },
   "additionalProperties": false,
+  "propertyTransform": {
+    "/properties/SubscriptionName": "$lowercase(SubscriptionName)"
+  },
   "required": [
     "SnsTopicArn"
   ],

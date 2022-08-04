@@ -40,6 +40,7 @@ Optional:
 
 - `role_arn` (String)
 - `template_body` (String)
+- `template_name` (String)
 
 
 <a id="nestedatt--tags"></a>

@@ -124,6 +124,12 @@ func cACertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//       "minLength": 0,
 			//       "pattern": "[\\s\\S]*",
 			//       "type": "string"
+			//     },
+			//     "TemplateName": {
+			//       "maxLength": 36,
+			//       "minLength": 1,
+			//       "pattern": "^[0-9A-Za-z_-]+$",
+			//       "type": "string"
 			//     }
 			//   },
 			//   "type": "object"
@@ -146,6 +152,15 @@ func cACertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 10240),
 							validate.StringMatch(regexp.MustCompile("[\\s\\S]*"), ""),
+						},
+					},
+					"template_name": {
+						// Property: TemplateName
+						Type:     types.StringType,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 36),
+							validate.StringMatch(regexp.MustCompile("^[0-9A-Za-z_-]+$"), ""),
 						},
 					},
 				},
@@ -281,6 +296,7 @@ func cACertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"status":                       "Status",
 		"tags":                         "Tags",
 		"template_body":                "TemplateBody",
+		"template_name":                "TemplateName",
 		"value":                        "Value",
 		"verification_certificate_pem": "VerificationCertificatePem",
 	})

@@ -149,7 +149,7 @@ Optional:
 - `stream_selection` (Attributes) A StreamSelection configuration. (see [below for nested schema](#nestedatt--dash_package--stream_selection))
 - `suggested_presentation_delay_seconds` (Number) Duration (in seconds) to delay live content before presentation.
 - `utc_timing` (String) Determines the type of UTCTiming included in the Media Presentation Description (MPD)
-- `utc_timing_uri` (String) Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
+- `utc_timing_uri` (String) Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE
 
 <a id="nestedatt--dash_package--encryption"></a>
 ### Nested Schema for `dash_package.encryption`

@@ -95,6 +95,7 @@ func groupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {

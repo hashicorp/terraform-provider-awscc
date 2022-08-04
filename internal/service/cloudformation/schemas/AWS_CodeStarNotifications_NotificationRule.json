@@ -102,6 +102,10 @@
     "readOnlyProperties": [
         "/properties/Arn"
     ],
+    "writeOnlyProperties": [
+        "/properties/EventTypeId",
+        "/properties/TargetAddress"
+    ],
     "handlers": {
         "create": {
             "permissions": [

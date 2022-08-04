@@ -92,6 +92,12 @@ func cACertificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//       "minLength": 0,
 			//       "pattern": "[\\s\\S]*",
 			//       "type": "string"
+			//     },
+			//     "TemplateName": {
+			//       "maxLength": 36,
+			//       "minLength": 1,
+			//       "pattern": "^[0-9A-Za-z_-]+$",
+			//       "type": "string"
 			//     }
 			//   },
 			//   "type": "object"
@@ -105,6 +111,11 @@ func cACertificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 					},
 					"template_body": {
 						// Property: TemplateBody
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"template_name": {
+						// Property: TemplateName
 						Type:     types.StringType,
 						Computed: true,
 					},
@@ -222,6 +233,7 @@ func cACertificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 		"status":                       "Status",
 		"tags":                         "Tags",
 		"template_body":                "TemplateBody",
+		"template_name":                "TemplateName",
 		"value":                        "Value",
 		"verification_certificate_pem": "VerificationCertificatePem",
 	})

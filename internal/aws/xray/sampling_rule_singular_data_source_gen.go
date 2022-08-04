@@ -571,6 +571,7 @@ func samplingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {

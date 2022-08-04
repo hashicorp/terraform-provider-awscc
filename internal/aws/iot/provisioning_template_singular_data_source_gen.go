@@ -145,6 +145,19 @@ func provisioningTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"template_type": {
+			// Property: TemplateType
+			// CloudFormation resource type schema:
+			// {
+			//   "enum": [
+			//     "FLEET_PROVISIONING",
+			//     "JITP"
+			//   ],
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -175,6 +188,7 @@ func provisioningTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 		"template_arn":          "TemplateArn",
 		"template_body":         "TemplateBody",
 		"template_name":         "TemplateName",
+		"template_type":         "TemplateType",
 		"value":                 "Value",
 	})
 

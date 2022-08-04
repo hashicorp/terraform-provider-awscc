@@ -660,7 +660,8 @@ func originEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "enum": [
 			//         "NONE",
 			//         "HBBTV_1_5",
-			//         "HYBRIDCAST"
+			//         "HYBRIDCAST",
+			//         "DVB_DASH_2014"
 			//       ],
 			//       "type": "string"
 			//     },
@@ -708,6 +709,7 @@ func originEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "UtcTiming": {
 			//       "description": "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
 			//       "enum": [
+			//         "HTTP-XSDATE",
 			//         "HTTP-ISO",
 			//         "HTTP-HEAD",
 			//         "NONE"
@@ -715,7 +717,7 @@ func originEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "type": "string"
 			//     },
 			//     "UtcTimingUri": {
-			//       "description": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD",
+			//       "description": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
 			//       "type": "string"
 			//     }
 			//   },
@@ -906,7 +908,7 @@ func originEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 					},
 					"utc_timing_uri": {
 						// Property: UtcTimingUri
-						Description: "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD",
+						Description: "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
 						Type:        types.StringType,
 						Computed:    true,
 					},

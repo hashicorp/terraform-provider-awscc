@@ -29,6 +29,7 @@ Data Source schema for AWS::IoT::ProvisioningTemplate
 - `template_arn` (String)
 - `template_body` (String)
 - `template_name` (String)
+- `template_type` (String)
 
 <a id="nestedatt--pre_provisioning_hook"></a>
 ### Nested Schema for `pre_provisioning_hook`
