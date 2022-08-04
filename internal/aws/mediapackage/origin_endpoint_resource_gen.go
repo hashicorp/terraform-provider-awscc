@@ -732,7 +732,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "enum": [
 			//         "NONE",
 			//         "HBBTV_1_5",
-			//         "HYBRIDCAST"
+			//         "HYBRIDCAST",
+			//         "DVB_DASH_2014"
 			//       ],
 			//       "type": "string"
 			//     },
@@ -780,6 +781,7 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//     "UtcTiming": {
 			//       "description": "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
 			//       "enum": [
+			//         "HTTP-XSDATE",
 			//         "HTTP-ISO",
 			//         "HTTP-HEAD",
 			//         "NONE"
@@ -787,7 +789,7 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "type": "string"
 			//     },
 			//     "UtcTimingUri": {
-			//       "description": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD",
+			//       "description": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
 			//       "type": "string"
 			//     }
 			//   },
@@ -983,6 +985,7 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"NONE",
 								"HBBTV_1_5",
 								"HYBRIDCAST",
+								"DVB_DASH_2014",
 							}),
 						},
 					},
@@ -1052,6 +1055,7 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
+								"HTTP-XSDATE",
 								"HTTP-ISO",
 								"HTTP-HEAD",
 								"NONE",
@@ -1060,7 +1064,7 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"utc_timing_uri": {
 						// Property: UtcTimingUri
-						Description: "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD",
+						Description: "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
 						Type:        types.StringType,
 						Optional:    true,
 					},

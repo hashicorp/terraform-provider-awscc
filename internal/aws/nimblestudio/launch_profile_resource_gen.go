@@ -132,7 +132,19 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//           "g4dn.4xlarge",
 			//           "g4dn.8xlarge",
 			//           "g4dn.12xlarge",
-			//           "g4dn.16xlarge"
+			//           "g4dn.16xlarge",
+			//           "g3.4xlarge",
+			//           "g3.8xlarge",
+			//           "g3.16xlarge",
+			//           "g3s.xlarge",
+			//           "g5.xlarge",
+			//           "g5.2xlarge",
+			//           "g5.4xlarge",
+			//           "g5.8xlarge",
+			//           "g5.12xlarge",
+			//           "g5.16xlarge",
+			//           "g5.24xlarge",
+			//           "g5.48xlarge"
 			//         ],
 			//         "type": "string"
 			//       },
@@ -147,14 +159,14 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//       "type": "number"
 			//     },
 			//     "MaxStoppedSessionLengthInMinutes": {
-			//       "description": "\u003cp\u003eInteger that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.\u003c/p\u003e\n        \u003cp\u003eIf the value is missing or set to 0, your sessions can’t be stopped. If you then call\n            StopStreamingSession, the session fails. If the time that a session stays in the READY\n            state exceeds the maxSessionLengthInMinutes value, the session will automatically be\n            terminated by AWS (instead of stopped).\u003c/p\u003e\n        \u003cp\u003eIf the value is set to a positive number, the session can be stopped. You can call\n            StopStreamingSession to stop sessions in the READY state. If the time that a session\n            stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will\n            automatically be stopped by AWS (instead of terminated).\u003c/p\u003e",
+			//       "description": "\u003cp\u003eInteger that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.\u003c/p\u003e\n        \u003cp\u003eIf the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                \u003ccode\u003eStopStreamingSession\u003c/code\u003e, the session fails. If the time that a session\n            stays in the READY state exceeds the \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e value, the\n            session will automatically be terminated (instead of stopped).\u003c/p\u003e\n        \u003cp\u003eIf the value is set to a positive number, the session can be stopped. You can call\n                \u003ccode\u003eStopStreamingSession\u003c/code\u003e to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e value, the session will automatically be\n            stopped (instead of terminated).\u003c/p\u003e",
 			//       "maximum": 5760,
 			//       "minimum": 0,
 			//       "type": "number"
 			//     },
 			//     "SessionStorage": {
 			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe configuration for a streaming session’s upload storage.\u003c/p\u003e",
+			//       "description": "\u003cp\u003eThe configuration for a streaming session?s upload storage.\u003c/p\u003e",
 			//       "properties": {
 			//         "Mode": {
 			//           "description": "\u003cp\u003eAllows artists to upload files to their workstations. The only valid option is\n                \u003ccode\u003eUPLOAD\u003c/code\u003e.\u003c/p\u003e",
@@ -175,7 +187,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//               "description": "\u003cp\u003eThe folder path in Linux workstations where files are uploaded.\u003c/p\u003e",
 			//               "maxLength": 128,
 			//               "minLength": 1,
-			//               "pattern": "^(/?|(\\$HOME)?(/[^\\$/\\n\\s\\\\]+)*)$",
+			//               "pattern": "^(\\$HOME|/)[/]?([A-Za-z0-9-_]+/)*([A-Za-z0-9_-]+)$",
 			//               "type": "string"
 			//             },
 			//             "Windows": {
@@ -189,6 +201,9 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//           "type": "object"
 			//         }
 			//       },
+			//       "required": [
+			//         "Mode"
+			//       ],
 			//       "type": "object"
 			//     },
 			//     "StreamingImageIds": {
@@ -239,6 +254,18 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 								"g4dn.8xlarge",
 								"g4dn.12xlarge",
 								"g4dn.16xlarge",
+								"g3.4xlarge",
+								"g3.8xlarge",
+								"g3.16xlarge",
+								"g3s.xlarge",
+								"g5.xlarge",
+								"g5.2xlarge",
+								"g5.4xlarge",
+								"g5.8xlarge",
+								"g5.12xlarge",
+								"g5.16xlarge",
+								"g5.24xlarge",
+								"g5.48xlarge",
 							})),
 						},
 					},
@@ -253,7 +280,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"max_stopped_session_length_in_minutes": {
 						// Property: MaxStoppedSessionLengthInMinutes
-						Description: "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n        <p>If the value is missing or set to 0, your sessions can’t be stopped. If you then call\n            StopStreamingSession, the session fails. If the time that a session stays in the READY\n            state exceeds the maxSessionLengthInMinutes value, the session will automatically be\n            terminated by AWS (instead of stopped).</p>\n        <p>If the value is set to a positive number, the session can be stopped. You can call\n            StopStreamingSession to stop sessions in the READY state. If the time that a session\n            stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will\n            automatically be stopped by AWS (instead of terminated).</p>",
+						Description: "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n        <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the\n            session will automatically be terminated (instead of stopped).</p>\n        <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped (instead of terminated).</p>",
 						Type:        types.Float64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
@@ -262,14 +289,14 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"session_storage": {
 						// Property: SessionStorage
-						Description: "<p>The configuration for a streaming session’s upload storage.</p>",
+						Description: "<p>The configuration for a streaming session?s upload storage.</p>",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"mode": {
 									// Property: Mode
 									Description: "<p>Allows artists to upload files to their workstations. The only valid option is\n                <code>UPLOAD</code>.</p>",
 									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringInSlice([]string{
@@ -289,7 +316,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 128),
-													validate.StringMatch(regexp.MustCompile("^(/?|(\\$HOME)?(/[^\\$/\\n\\s\\\\]+)*)$"), ""),
+													validate.StringMatch(regexp.MustCompile("^(\\$HOME|/)[/]?([A-Za-z0-9-_]+/)*([A-Za-z0-9_-]+)$"), ""),
 												},
 											},
 											"windows": {

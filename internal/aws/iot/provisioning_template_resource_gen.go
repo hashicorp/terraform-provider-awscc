@@ -162,6 +162,30 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"template_type": {
+			// Property: TemplateType
+			// CloudFormation resource type schema:
+			// {
+			//   "enum": [
+			//     "FLEET_PROVISIONING",
+			//     "JITP"
+			//   ],
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"FLEET_PROVISIONING",
+					"JITP",
+				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -196,6 +220,7 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"template_arn":          "TemplateArn",
 		"template_body":         "TemplateBody",
 		"template_name":         "TemplateName",
+		"template_type":         "TemplateType",
 		"value":                 "Value",
 	})
 
