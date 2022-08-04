@@ -27,6 +27,7 @@ Creates a fleet provisioning template.
 - `pre_provisioning_hook` (Attributes) (see [below for nested schema](#nestedatt--pre_provisioning_hook))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `template_name` (String)
+- `template_type` (String)
 
 ### Read-Only
 
