@@ -57,6 +57,9 @@
     "DBSubnetGroupDescription",
     "SubnetIds"
   ],
+  "propertyTransform": {
+    "/properties/DBSubnetGroupName": "$lowercase(DBSubnetGroupName)"
+  },
   "createOnlyProperties": [
     "/properties/DBSubnetGroupName"
   ],
