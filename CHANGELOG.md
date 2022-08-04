@@ -1,4 +1,10 @@
 ## 0.29.0 (Unreleased)
+
+BUG FIXES:
+
+* Documentation: Nested attributes are now correctly grouped in "optional", "required" and "read-only" ([#580](https://github.com/hashicorp/terraform-provider-awscc/issues/580))
+
+
 ## [0.28.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.28.0) (July 21, 2022)
 
 FEATURES:
