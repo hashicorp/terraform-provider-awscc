@@ -13,6 +13,8 @@ Use the navigation to the left to read about the available resources.
 
 To learn the basics of Terraform using this provider, follow the hands-on [get started tutorials](https://learn.hashicorp.com/tutorials/terraform/aws-cloud-control?in=terraform/aws) on HashiCorp's Learn platform.
 
+~> **NOTE:** The AWS Cloud Control provider requires the use of Terraform 1.0.7 or later.
+
 ## Example Usage
 
 Terraform 1.0.7 and later:
