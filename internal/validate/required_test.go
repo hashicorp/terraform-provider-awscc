@@ -6,6 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -787,12 +788,12 @@ func TestResourceConfigRequiredAttributesValidator(t *testing.T) {
 		name, test := name, test
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
-			request := tfsdk.ValidateResourceConfigRequest{
+			request := resource.ValidateConfigRequest{
 				Config: tfsdk.Config{
 					Raw: test.val,
 				},
 			}
-			response := tfsdk.ValidateResourceConfigResponse{}
+			response := resource.ValidateConfigResponse{}
 			ResourceConfigRequiredAttributes(test.fs...).ValidateResource(ctx, request, &response)
 
 			if !response.Diagnostics.HasError() && test.expectError {
