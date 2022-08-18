@@ -5,6 +5,7 @@ package apigateway
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // apiKeysDataSourceType returns the Terraform awscc_apigateway_api_keys data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ApiGateway::ApiKey resource type.
-func apiKeysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func apiKeysDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",

@@ -5,6 +5,7 @@ package transfer
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // workflowDataSourceType returns the Terraform awscc_transfer_workflow data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Transfer::Workflow resource type.
-func workflowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func workflowDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

@@ -5,6 +5,8 @@ package wafv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // loggingConfigurationResourceType returns the Terraform awscc_wafv2_logging_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::LoggingConfiguration resource type.
-func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func loggingConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"log_destination_configs": {
 			// Property: LogDestinationConfigs
@@ -251,7 +253,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.BoolType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"redacted_fields": {
@@ -457,7 +459,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -467,7 +469,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

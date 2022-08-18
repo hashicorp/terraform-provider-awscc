@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // resiliencyPolicyResourceType returns the Terraform awscc_resiliencehub_resiliency_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ResilienceHub::ResiliencyPolicy resource type.
-func resiliencyPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func resiliencyPolicyResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"data_location_constraint": {
 			// Property: DataLocationConstraint
@@ -103,7 +105,7 @@ func resiliencyPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"policy_description": {
@@ -187,7 +189,7 @@ func resiliencyPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

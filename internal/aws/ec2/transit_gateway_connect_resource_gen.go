@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // transitGatewayConnectResourceType returns the Terraform awscc_ec2_transit_gateway_connect resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayConnect resource type.
-func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayConnectResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -30,7 +32,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"options": {
@@ -60,7 +62,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"state": {
@@ -74,7 +76,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -128,7 +130,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"transit_gateway_id": {
@@ -142,7 +144,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"transport_transit_gateway_attachment_id": {
@@ -156,7 +158,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -166,7 +168,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // featureGroupResourceType returns the Terraform awscc_sagemaker_feature_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::FeatureGroup resource type.
-func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func featureGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
@@ -37,8 +39,8 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"event_time_feature_name": {
@@ -59,7 +61,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"feature_definitions": {
@@ -127,7 +129,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenBetween(1, 2500),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"feature_group_name": {
@@ -148,7 +150,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"offline_store_config": {
@@ -282,8 +284,8 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"online_store_config": {
@@ -336,8 +338,8 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"record_identifier_feature_name": {
@@ -358,7 +360,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"role_arn": {
@@ -380,8 +382,8 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -431,8 +433,8 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -442,7 +444,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

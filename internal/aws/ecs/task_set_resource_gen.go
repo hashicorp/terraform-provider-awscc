@@ -5,6 +5,8 @@ package ecs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // taskSetResourceType returns the Terraform awscc_ecs_task_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::TaskSet resource type.
-func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func taskSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cluster": {
 			// Property: Cluster
@@ -31,7 +33,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"external_id": {
@@ -46,8 +48,8 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"id": {
@@ -61,7 +63,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"launch_type": {
@@ -86,8 +88,8 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"load_balancers": {
@@ -150,8 +152,8 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"network_configuration": {
@@ -245,8 +247,8 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"platform_version": {
@@ -261,8 +263,8 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"scale": {
@@ -326,7 +328,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"service_registries": {
@@ -390,8 +392,8 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"task_definition": {
@@ -405,7 +407,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}

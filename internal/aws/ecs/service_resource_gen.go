@@ -5,6 +5,8 @@ package ecs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // serviceResourceType returns the Terraform awscc_ecs_service resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::Service resource type.
-func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity_provider_strategy": {
 			// Property: CapacityProviderStrategy
@@ -72,8 +74,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"deployment_configuration": {
@@ -177,8 +179,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"desired_count": {
@@ -239,8 +241,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"load_balancers": {
@@ -302,7 +304,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_configuration": {
@@ -482,7 +484,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "LATEST"}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"propagate_tags": {
@@ -514,8 +516,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"scheduling_strategy": {
@@ -538,8 +540,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"service_arn": {
@@ -551,7 +553,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"service_name": {
@@ -564,8 +566,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"service_registries": {
@@ -668,7 +670,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

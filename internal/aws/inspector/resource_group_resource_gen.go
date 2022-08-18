@@ -5,6 +5,8 @@ package inspector
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // resourceGroupResourceType returns the Terraform awscc_inspector_resource_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Inspector::ResourceGroup resource type.
-func resourceGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func resourceGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -28,7 +30,7 @@ func resourceGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource_group_tags": {
@@ -70,7 +72,7 @@ func resourceGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -80,7 +82,7 @@ func resourceGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -8,7 +8,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
@@ -16,12 +18,12 @@ import (
 )
 
 // singularDataSourceType is a type alias for a data source type.
-type singularDataSourceType dataSourceType
+type singularDataSourceType genericDataSourceType
 
 // NewSingularDataSourceType returns a new singularDataSourceType from the specified variadic list of functional options.
 // It's public as it's called from generated code.
-func NewSingularDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (tfsdk.DataSourceType, error) {
-	dataSourceType := &dataSourceType{}
+func NewSingularDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (provider.DataSourceType, error) {
+	dataSourceType := &genericDataSourceType{}
 
 	for _, optFn := range optFns {
 		err := optFn(dataSourceType)
@@ -48,24 +50,24 @@ func (sdt *singularDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema,
 	return sdt.tfSchema, nil
 }
 
-func (sdt *singularDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, diag.Diagnostics) {
+func (sdt *singularDataSourceType) NewDataSource(ctx context.Context, provider provider.Provider) (datasource.DataSource, diag.Diagnostics) {
 	return newGenericSingularDataSource(provider, sdt), nil
 }
 
-// Implements tfsdk.DataSource
+// Implements provider.DataSource
 type singularDataSource struct {
 	provider       tfcloudcontrol.Provider
 	dataSourceType *singularDataSourceType
 }
 
-func newGenericSingularDataSource(provider tfsdk.Provider, singularDataSourceType *singularDataSourceType) tfsdk.DataSource {
+func newGenericSingularDataSource(provider provider.Provider, singularDataSourceType *singularDataSourceType) datasource.DataSource {
 	return &singularDataSource{
 		provider:       provider.(tfcloudcontrol.Provider),
 		dataSourceType: singularDataSourceType,
 	}
 }
 
-func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSourceRequest, response *tfsdk.ReadDataSourceResponse) {
+func (sd *singularDataSource) Read(ctx context.Context, request datasource.ReadRequest, response *datasource.ReadResponse) {
 	ctx = sd.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "SingularDataSource.Read")

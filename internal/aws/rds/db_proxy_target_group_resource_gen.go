@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // dBProxyTargetGroupResourceType returns the Terraform awscc_rds_db_proxy_target_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxyTargetGroup resource type.
-func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func dBProxyTargetGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"connection_pool_configuration_info": {
 			// Property: ConnectionPoolConfigurationInfo
@@ -139,7 +141,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringMatch(regexp.MustCompile("[A-z][0-z]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"target_group_arn": {
@@ -153,7 +155,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"target_group_name": {
@@ -175,7 +177,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -185,7 +187,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

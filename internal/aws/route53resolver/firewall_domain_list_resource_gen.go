@@ -5,6 +5,8 @@ package route53resolver
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // firewallDomainListResourceType returns the Terraform awscc_route53resolver_firewall_domain_list resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::FirewallDomainList resource type.
-func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func firewallDomainListResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -33,7 +35,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"creation_time": {
@@ -49,7 +51,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"creator_request_id": {
@@ -65,7 +67,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"domain_count": {
@@ -80,7 +82,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"domain_file_url": {
@@ -136,7 +138,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"managed_owner_name": {
@@ -152,7 +154,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"modification_time": {
@@ -168,7 +170,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -189,8 +191,8 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"status": {
@@ -212,7 +214,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status_message": {
@@ -226,7 +228,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {

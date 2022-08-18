@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // workflowResourceType returns the Terraform awscc_transfer_workflow resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Transfer::Workflow resource type.
-func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -35,7 +37,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -57,8 +59,8 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^[\\w\\- ]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"on_exception_steps": {
@@ -490,8 +492,8 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"steps": {
@@ -922,7 +924,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -1000,7 +1002,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -1010,7 +1012,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

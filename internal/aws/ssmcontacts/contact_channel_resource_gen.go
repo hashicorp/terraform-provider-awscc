@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // contactChannelResourceType returns the Terraform awscc_ssmcontacts_contact_channel resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSMContacts::ContactChannel resource type.
-func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func contactChannelResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -32,7 +34,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"channel_address": {
@@ -87,8 +89,8 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"contact_id": {
@@ -110,8 +112,8 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringMatch(regexp.MustCompile("arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"defer_activation": {
@@ -132,7 +134,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

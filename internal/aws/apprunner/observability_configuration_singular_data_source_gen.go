@@ -5,6 +5,7 @@ package apprunner
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // observabilityConfigurationDataSourceType returns the Terraform awscc_apprunner_observability_configuration data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::AppRunner::ObservabilityConfiguration resource type.
-func observabilityConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func observabilityConfigurationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"latest": {
 			// Property: Latest

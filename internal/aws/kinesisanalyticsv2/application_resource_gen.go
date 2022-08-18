@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // applicationResourceType returns the Terraform awscc_kinesisanalyticsv2_application resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::KinesisAnalyticsV2::Application resource type.
-func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func applicationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_configuration": {
 			// Property: ApplicationConfiguration
@@ -1504,7 +1506,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: ""}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"application_maintenance_configuration": {
@@ -1563,8 +1565,8 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"application_name": {
@@ -1586,8 +1588,8 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"run_configuration": {
@@ -1703,7 +1705,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"service_execution_role": {
@@ -1796,7 +1798,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

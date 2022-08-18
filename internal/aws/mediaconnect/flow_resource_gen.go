@@ -5,6 +5,8 @@ package mediaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // flowResourceType returns the Terraform awscc_mediaconnect_flow resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::Flow resource type.
-func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"availability_zone": {
 			// Property: AvailabilityZone
@@ -32,8 +34,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"flow_arn": {
@@ -47,7 +49,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"flow_availability_zone": {
@@ -61,7 +63,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -75,7 +77,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"source": {
@@ -258,7 +260,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: "static-key"}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"region": {
@@ -313,7 +315,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ingest_port": {
@@ -336,7 +338,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Int64{Value: 2000}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"min_latency": {
@@ -347,7 +349,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Int64{Value: 2000}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"name": {
@@ -357,8 +359,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"protocol": {
@@ -382,7 +384,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"source_ingest_port": {
@@ -391,7 +393,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"stream_id": {
@@ -468,7 +470,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

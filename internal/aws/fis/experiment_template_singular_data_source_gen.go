@@ -5,6 +5,7 @@ package fis
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // experimentTemplateDataSourceType returns the Terraform awscc_fis_experiment_template data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::FIS::ExperimentTemplate resource type.
-func experimentTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func experimentTemplateDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"actions": {
 			// Property: Actions

@@ -5,6 +5,8 @@ package globalaccelerator
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // endpointGroupResourceType returns the Terraform awscc_globalaccelerator_endpoint_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GlobalAccelerator::EndpointGroup resource type.
-func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func endpointGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"endpoint_configurations": {
 			// Property: EndpointConfigurations
@@ -64,7 +66,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Bool{Value: true}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"endpoint_id": {
@@ -84,7 +86,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Int64{Value: 100}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -102,7 +104,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"endpoint_group_region": {
@@ -116,7 +118,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"health_check_interval_seconds": {
@@ -133,7 +135,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Int64{Value: 30}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"health_check_path": {
@@ -150,7 +152,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "/"}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"health_check_port": {
@@ -172,7 +174,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Int64{Value: -1}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"health_check_protocol": {
@@ -201,7 +203,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "TCP"}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"listener_arn": {
@@ -215,7 +217,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"port_overrides": {
@@ -285,7 +287,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Int64{Value: 3}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"traffic_dial_percentage": {
@@ -307,7 +309,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Float64{Value: 100.000000}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -317,7 +319,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

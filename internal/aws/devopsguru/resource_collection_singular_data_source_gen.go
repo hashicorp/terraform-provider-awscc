@@ -5,6 +5,7 @@ package devopsguru
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // resourceCollectionDataSourceType returns the Terraform awscc_devopsguru_resource_collection data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DevOpsGuru::ResourceCollection resource type.
-func resourceCollectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func resourceCollectionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_collection_filter": {
 			// Property: ResourceCollectionFilter

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // multiRegionAccessPointResourceType returns the Terraform awscc_s3_multi_region_access_point resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3::MultiRegionAccessPoint resource type.
-func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func multiRegionAccessPointResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alias": {
 			// Property: Alias
@@ -32,7 +34,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"created_at": {
@@ -46,7 +48,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -68,8 +70,8 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringMatch(regexp.MustCompile("^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"public_access_block_configuration": {
@@ -130,8 +132,8 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"regions": {
@@ -194,7 +196,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -204,7 +206,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // schemaVersionResourceType returns the Terraform awscc_glue_schema_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Glue::SchemaVersion resource type.
-func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func schemaVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"schema": {
 			// Property: Schema
@@ -82,7 +84,7 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"schema_definition": {
@@ -101,7 +103,7 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringLenBetween(1, 170000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"version_id": {
@@ -116,7 +118,7 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -126,7 +128,7 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

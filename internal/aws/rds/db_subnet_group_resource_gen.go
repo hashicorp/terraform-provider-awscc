@@ -5,6 +5,8 @@ package rds
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // dBSubnetGroupResourceType returns the Terraform awscc_rds_db_subnet_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBSubnetGroup resource type.
-func dBSubnetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func dBSubnetGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"db_subnet_group_description": {
 			// Property: DBSubnetGroupDescription
@@ -40,8 +42,8 @@ func dBSubnetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"subnet_ids": {
@@ -128,7 +130,7 @@ func dBSubnetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

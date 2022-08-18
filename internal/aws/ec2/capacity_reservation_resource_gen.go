@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // capacityReservationResourceType returns the Terraform awscc_ec2_capacity_reservation resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::CapacityReservation resource type.
-func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func capacityReservationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"availability_zone": {
 			// Property: AvailabilityZone
@@ -28,7 +30,7 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"available_instance_count": {
@@ -40,7 +42,7 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"ebs_optimized": {
@@ -53,8 +55,8 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"end_date": {
@@ -85,8 +87,8 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"id": {
@@ -98,7 +100,7 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"instance_count": {
@@ -120,8 +122,8 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"instance_platform": {
@@ -133,7 +135,7 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"instance_type": {
@@ -145,7 +147,7 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"out_post_arn": {
@@ -158,8 +160,8 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"placement_group_arn": {
@@ -172,8 +174,8 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tag_specifications": {
@@ -248,8 +250,8 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tenancy": {
@@ -262,8 +264,8 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"total_instance_count": {
@@ -275,7 +277,7 @@ func capacityReservationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

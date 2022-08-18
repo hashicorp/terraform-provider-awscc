@@ -5,6 +5,8 @@ package eks
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // nodegroupResourceType returns the Terraform awscc_eks_nodegroup resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EKS::Nodegroup resource type.
-func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func nodegroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"ami_type": {
 			// Property: AmiType
@@ -32,8 +34,8 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"arn": {
@@ -45,7 +47,7 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"capacity_type": {
@@ -60,8 +62,8 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"cluster_name": {
@@ -79,7 +81,7 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"disk_size": {
@@ -94,8 +96,8 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"force_update_enabled": {
@@ -112,7 +114,7 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Bool{Value: false}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 			// ForceUpdateEnabled is a write-only property.
 		},
@@ -125,7 +127,7 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"instance_types": {
@@ -146,8 +148,8 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"labels": {
@@ -225,7 +227,7 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"nodegroup_name": {
@@ -244,8 +246,8 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"release_version": {
@@ -304,8 +306,8 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"scaling_config": {
@@ -378,7 +380,7 @@ func nodegroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {

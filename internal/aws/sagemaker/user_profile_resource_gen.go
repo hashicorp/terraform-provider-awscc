@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // userProfileResourceType returns the Terraform awscc_sagemaker_user_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::UserProfile resource type.
-func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func userProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"domain_id": {
 			// Property: DomainId
@@ -37,7 +39,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"single_sign_on_user_identifier": {
@@ -56,8 +58,8 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("UserName"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"single_sign_on_user_value": {
@@ -77,8 +79,8 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -138,8 +140,8 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenBetween(0, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// Tags is a write-only property.
 		},
@@ -156,7 +158,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"user_profile_name": {
@@ -175,7 +177,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"user_settings": {
@@ -650,8 +652,8 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										}),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.UseStateForUnknown(),
-										tfsdk.RequiresReplace(),
+										resource.UseStateForUnknown(),
+										resource.RequiresReplace(),
 									},
 								},
 								"user_group": {
@@ -667,8 +669,8 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										}),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.UseStateForUnknown(),
-										tfsdk.RequiresReplace(),
+										resource.UseStateForUnknown(),
+										resource.RequiresReplace(),
 									},
 								},
 							},
@@ -738,7 +740,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

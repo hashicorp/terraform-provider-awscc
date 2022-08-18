@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // routeResourceType returns the Terraform awscc_refactorspaces_route resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RefactorSpaces::Route resource type.
-func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func routeResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_identifier": {
 			// Property: ApplicationIdentifier
@@ -37,7 +39,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^app-([0-9A-Za-z]{10}$)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"arn": {
@@ -52,7 +54,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"default_route": {
@@ -108,7 +110,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^env-([0-9A-Za-z]{10}$)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"path_resource_to_id": {
@@ -120,7 +122,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"route_identifier": {
@@ -135,7 +137,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"route_type": {
@@ -158,8 +160,8 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// RouteType is a write-only property.
 		},
@@ -179,7 +181,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^svc-([0-9A-Za-z]{10}$)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 			// ServiceIdentifier is a write-only property.
 		},
@@ -306,8 +308,8 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"methods": {
@@ -328,8 +330,8 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"source_path": {
@@ -342,8 +344,8 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.StringMatch(regexp.MustCompile("^(/[a-zA-Z0-9._-]+)+$"), ""),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 				},
@@ -358,7 +360,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

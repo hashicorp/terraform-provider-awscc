@@ -5,6 +5,8 @@ package backup
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // backupSelectionResourceType returns the Terraform awscc_backup_backup_selection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupSelection resource type.
-func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func backupSelectionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"backup_plan_id": {
 			// Property: BackupPlanId
@@ -28,7 +30,7 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"backup_selection": {
@@ -315,7 +317,7 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"id": {
@@ -327,7 +329,7 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"selection_id": {
@@ -339,7 +341,7 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

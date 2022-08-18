@@ -5,6 +5,7 @@ package iot
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // fleetMetricDataSourceType returns the Terraform awscc_iot_fleet_metric data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::FleetMetric resource type.
-func fleetMetricDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func fleetMetricDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"aggregation_field": {
 			// Property: AggregationField

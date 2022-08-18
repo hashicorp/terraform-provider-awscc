@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // resourceCollectionResourceType returns the Terraform awscc_devopsguru_resource_collection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DevOpsGuru::ResourceCollection resource type.
-func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func resourceCollectionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_collection_filter": {
 			// Property: ResourceCollectionFilter
@@ -148,7 +150,7 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -158,7 +160,7 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

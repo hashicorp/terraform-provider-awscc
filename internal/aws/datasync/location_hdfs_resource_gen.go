@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // locationHDFSResourceType returns the Terraform awscc_datasync_location_hdfs resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationHDFS resource type.
-func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationHDFSResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"agent_arns": {
 			// Property: AgentArns
@@ -159,7 +161,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"location_uri": {
@@ -175,7 +177,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name_nodes": {
@@ -293,7 +295,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "PRIVACY"}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"rpc_protection": {
@@ -312,7 +314,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "PRIVACY"}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -339,7 +341,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Int64{Value: 3}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"simple_user": {
@@ -446,7 +448,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

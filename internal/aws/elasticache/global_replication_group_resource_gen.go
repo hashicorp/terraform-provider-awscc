@@ -5,6 +5,8 @@ package elasticache
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // globalReplicationGroupResourceType returns the Terraform awscc_elasticache_global_replication_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ElastiCache::GlobalReplicationGroup resource type.
-func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"automatic_failover_enabled": {
 			// Property: AutomaticFailoverEnabled
@@ -102,7 +104,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"global_replication_group_id_suffix": {
@@ -286,7 +288,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -296,7 +298,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

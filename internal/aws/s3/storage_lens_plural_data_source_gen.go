@@ -5,6 +5,7 @@ package s3
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // storageLensesDataSourceType returns the Terraform awscc_s3_storage_lenses data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::S3::StorageLens resource type.
-func storageLensesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func storageLensesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",

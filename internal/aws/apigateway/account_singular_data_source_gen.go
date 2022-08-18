@@ -5,6 +5,7 @@ package apigateway
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // accountDataSourceType returns the Terraform awscc_apigateway_account data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ApiGateway::Account resource type.
-func accountDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func accountDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cloudwatch_role_arn": {
 			// Property: CloudWatchRoleArn

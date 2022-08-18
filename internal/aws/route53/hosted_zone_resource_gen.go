@@ -5,6 +5,8 @@ package route53
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // hostedZoneResourceType returns the Terraform awscc_route53_hosted_zone resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::HostedZone resource type.
-func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func hostedZoneResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"hosted_zone_config": {
 			// Property: HostedZoneConfig
@@ -115,7 +117,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -134,8 +136,8 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"name_servers": {
@@ -151,7 +153,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"query_logging_config": {

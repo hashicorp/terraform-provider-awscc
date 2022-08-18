@@ -5,6 +5,8 @@ package networkmanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // customerGatewayAssociationResourceType returns the Terraform awscc_networkmanager_customer_gateway_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::CustomerGatewayAssociation resource type.
-func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func customerGatewayAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"customer_gateway_arn": {
 			// Property: CustomerGatewayArn
@@ -30,7 +32,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"device_id": {
@@ -44,7 +46,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"global_network_id": {
@@ -58,7 +60,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"link_id": {
@@ -73,8 +75,8 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -84,7 +86,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

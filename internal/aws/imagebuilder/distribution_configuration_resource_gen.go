@@ -5,6 +5,8 @@ package imagebuilder
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // distributionConfigurationResourceType returns the Terraform awscc_imagebuilder_distribution_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::DistributionConfiguration resource type.
-func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func distributionConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -31,7 +33,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -525,7 +527,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -553,7 +555,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

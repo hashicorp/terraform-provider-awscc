@@ -5,6 +5,7 @@ package iot
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // domainConfigurationDataSourceType returns the Terraform awscc_iot_domain_configuration data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::DomainConfiguration resource type.
-func domainConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func domainConfigurationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

@@ -5,6 +5,7 @@ package ses
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // emailIdentityDataSourceType returns the Terraform awscc_ses_email_identity data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SES::EmailIdentity resource type.
-func emailIdentityDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func emailIdentityDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"configuration_set_attributes": {
 			// Property: ConfigurationSetAttributes

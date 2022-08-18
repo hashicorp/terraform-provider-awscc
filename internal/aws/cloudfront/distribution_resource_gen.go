@@ -6,6 +6,8 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // distributionResourceType returns the Terraform awscc_cloudfront_distribution resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::Distribution resource type.
-func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func distributionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"distribution_config": {
 			// Property: DistributionConfig
@@ -803,7 +805,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											types.String{Value: "GET"},
 											types.String{Value: "HEAD"},
 										}}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"cache_policy_id": {
@@ -821,7 +823,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											types.String{Value: "GET"},
 											types.String{Value: "HEAD"},
 										}}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"compress": {
@@ -831,7 +833,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"default_ttl": {
@@ -841,7 +843,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Float64{Value: 86400.000000}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"field_level_encryption_id": {
@@ -851,7 +853,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: ""}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"forwarded_values": {
@@ -886,7 +888,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 													},
 													),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"headers": {
@@ -956,7 +958,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Float64{Value: 31536000.000000}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"min_ttl": {
@@ -966,7 +968,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Float64{Value: 0.000000}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"origin_request_policy_id": {
@@ -996,7 +998,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"target_origin_id": {
@@ -1030,7 +1032,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: ""}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"custom_error_responses": {
@@ -1044,7 +1046,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Float64{Value: 300.000000}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"error_code": {
@@ -1082,7 +1084,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Int64{Value: 80}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"https_port": {
@@ -1092,7 +1094,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Int64{Value: 443}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"origin_protocol_policy": {
@@ -1123,7 +1125,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											types.String{Value: "GET"},
 											types.String{Value: "HEAD"},
 										}}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"cache_policy_id": {
@@ -1133,7 +1135,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: ""}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"cached_methods": {
@@ -1146,7 +1148,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											types.String{Value: "GET"},
 											types.String{Value: "HEAD"},
 										}}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"compress": {
@@ -1156,7 +1158,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"default_ttl": {
@@ -1166,7 +1168,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Float64{Value: 86400.000000}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"field_level_encryption_id": {
@@ -1176,7 +1178,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: ""}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"forwarded_values": {
@@ -1211,7 +1213,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 													},
 													),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"headers": {
@@ -1281,7 +1283,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Float64{Value: 31536000.000000}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"min_ttl": {
@@ -1291,7 +1293,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Float64{Value: 0.000000}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"origin_request_policy_id": {
@@ -1301,7 +1303,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: ""}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"realtime_log_config_arn": {
@@ -1311,7 +1313,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: ""}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"response_headers_policy_id": {
@@ -1321,7 +1323,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: ""}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"smooth_streaming": {
@@ -1331,7 +1333,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"target_origin_id": {
@@ -1365,7 +1367,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: ""}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"enabled": {
@@ -1380,7 +1382,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "http1.1"}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ipv6_enabled": {
@@ -1404,7 +1406,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"prefix": {
@@ -1414,7 +1416,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: ""}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -1524,7 +1526,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Int64{Value: 80}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"https_port": {
@@ -1534,7 +1536,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Int64{Value: 443}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"origin_keepalive_timeout": {
@@ -1544,7 +1546,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Int64{Value: 5}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"origin_protocol_policy": {
@@ -1559,7 +1561,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Int64{Value: 30}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"origin_ssl_protocols": {
@@ -1572,7 +1574,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														types.String{Value: "TLSv1"},
 														types.String{Value: "SSLv3"},
 													}}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -1614,7 +1616,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: ""}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"origin_shield": {
@@ -1646,7 +1648,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.String{Value: ""}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -1664,7 +1666,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "PriceClass_All"}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"restrictions": {
@@ -1714,7 +1716,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 							},
 							),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"s3_origin": {
@@ -1733,7 +1735,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: ""}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -1783,7 +1785,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 							},
 							),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"web_acl_id": {
@@ -1793,7 +1795,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: ""}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -1809,7 +1811,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -1821,7 +1823,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {

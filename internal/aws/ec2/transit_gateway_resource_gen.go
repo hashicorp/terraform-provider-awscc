@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // transitGatewayResourceType returns the Terraform awscc_ec2_transit_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGateway resource type.
-func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"amazon_side_asn": {
 			// Property: AmazonSideAsn
@@ -30,8 +32,8 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"association_default_route_table_id": {
@@ -97,7 +99,7 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"multicast_support": {
@@ -110,8 +112,8 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"propagation_default_route_table_id": {

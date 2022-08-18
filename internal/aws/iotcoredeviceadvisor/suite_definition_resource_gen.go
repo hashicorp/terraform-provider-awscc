@@ -5,6 +5,8 @@ package iotcoredeviceadvisor
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // suiteDefinitionResourceType returns the Terraform awscc_iotcoredeviceadvisor_suite_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTCoreDeviceAdvisor::SuiteDefinition resource type.
-func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func suiteDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"suite_definition_arn": {
 			// Property: SuiteDefinitionArn
@@ -33,7 +35,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"suite_definition_configuration": {
@@ -173,7 +175,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"suite_definition_version": {
@@ -189,7 +191,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -256,7 +258,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

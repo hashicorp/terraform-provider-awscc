@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // modelPackageGroupResourceType returns the Terraform awscc_sagemaker_model_package_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelPackageGroup resource type.
-func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func modelPackageGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -32,7 +34,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"model_package_group_arn": {
@@ -49,7 +51,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"model_package_group_description": {
@@ -70,8 +72,8 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringMatch(regexp.MustCompile("[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_package_group_name": {
@@ -91,7 +93,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_package_group_policy": {
@@ -122,7 +124,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -194,7 +196,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,7 @@ package connect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // hoursOfOperationDataSourceType returns the Terraform awscc_connect_hours_of_operation data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Connect::HoursOfOperation resource type.
-func hoursOfOperationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func hoursOfOperationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"config": {
 			// Property: Config

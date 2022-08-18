@@ -5,6 +5,7 @@ package datasync
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // locationFSxWindowsPluralDataSourceType returns the Terraform awscc_datasync_location_fsx_windows_plural data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationFSxWindows resource type.
-func locationFSxWindowsPluralDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func locationFSxWindowsPluralDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",

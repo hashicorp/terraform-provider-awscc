@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // configurationSetEventDestinationResourceType returns the Terraform awscc_ses_configuration_set_event_destination resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SES::ConfigurationSetEventDestination resource type.
-func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func configurationSetEventDestinationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"configuration_set_name": {
 			// Property: ConfigurationSetName
@@ -32,7 +34,7 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"event_destination": {
@@ -270,7 +272,7 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

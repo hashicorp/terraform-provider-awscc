@@ -5,6 +5,7 @@ package config
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // conformancePackDataSourceType returns the Terraform awscc_config_conformance_pack data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Config::ConformancePack resource type.
-func conformancePackDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func conformancePackDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"conformance_pack_input_parameters": {
 			// Property: ConformancePackInputParameters

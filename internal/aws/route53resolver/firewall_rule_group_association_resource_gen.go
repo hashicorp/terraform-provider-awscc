@@ -5,6 +5,8 @@ package route53resolver
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // firewallRuleGroupAssociationResourceType returns the Terraform awscc_route53resolver_firewall_rule_group_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::FirewallRuleGroupAssociation resource type.
-func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func firewallRuleGroupAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -33,7 +35,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"creation_time": {
@@ -49,7 +51,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"creator_request_id": {
@@ -65,7 +67,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"firewall_rule_group_id": {
@@ -84,7 +86,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"id": {
@@ -100,7 +102,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"managed_owner_name": {
@@ -116,7 +118,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"modification_time": {
@@ -132,7 +134,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"mutation_protection": {
@@ -201,7 +203,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status_message": {
@@ -215,7 +217,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -291,7 +293,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}

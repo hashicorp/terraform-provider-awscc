@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // gatewayRouteTableAssociationResourceType returns the Terraform awscc_ec2_gateway_route_table_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::GatewayRouteTableAssociation resource type.
-func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func gatewayRouteTableAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"association_id": {
 			// Property: AssociationId
@@ -30,7 +32,7 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"gateway_id": {
@@ -44,7 +46,7 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"route_table_id": {
@@ -65,7 +67,7 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

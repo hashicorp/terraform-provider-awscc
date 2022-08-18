@@ -116,7 +116,7 @@ func attributePath(ctx context.Context, tfType *tftypes.AttributePath, schema tf
 	for tfTypeStepIndex, tfTypeStep := range tfType.Steps() {
 		currentTfTypeSteps := tfType.Steps()[:tfTypeStepIndex+1]
 		currentTfTypePath := tftypes.NewAttributePathWithSteps(currentTfTypeSteps)
-		attrType, err := schema.AttributeTypeAtPath(currentTfTypePath)
+		attrType, err := schema.TypeAtTerraformPath(ctx, currentTfTypePath)
 
 		if err != nil {
 			return path.Empty(), diag.Diagnostics{

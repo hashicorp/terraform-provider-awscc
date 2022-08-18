@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // networkInsightsAccessScopeResourceType returns the Terraform awscc_ec2_network_insights_access_scope resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAccessScope resource type.
-func networkInsightsAccessScopeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func networkInsightsAccessScopeResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"created_date": {
 			// Property: CreatedDate
@@ -29,7 +31,7 @@ func networkInsightsAccessScopeResourceType(ctx context.Context) (tfsdk.Resource
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"exclude_paths": {
@@ -428,8 +430,8 @@ func networkInsightsAccessScopeResourceType(ctx context.Context) (tfsdk.Resource
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// ExcludePaths is a write-only property.
 		},
@@ -829,8 +831,8 @@ func networkInsightsAccessScopeResourceType(ctx context.Context) (tfsdk.Resource
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// MatchPaths is a write-only property.
 		},
@@ -843,7 +845,7 @@ func networkInsightsAccessScopeResourceType(ctx context.Context) (tfsdk.Resource
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_insights_access_scope_id": {
@@ -855,7 +857,7 @@ func networkInsightsAccessScopeResourceType(ctx context.Context) (tfsdk.Resource
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -908,7 +910,7 @@ func networkInsightsAccessScopeResourceType(ctx context.Context) (tfsdk.Resource
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -918,7 +920,7 @@ func networkInsightsAccessScopeResourceType(ctx context.Context) (tfsdk.Resource
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

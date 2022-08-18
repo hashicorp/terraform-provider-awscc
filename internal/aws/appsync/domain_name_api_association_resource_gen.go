@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // domainNameApiAssociationResourceType returns the Terraform awscc_appsync_domain_name_api_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppSync::DomainNameApiAssociation resource type.
-func domainNameApiAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func domainNameApiAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"api_association_identifier": {
 			// Property: ApiAssociationIdentifier
@@ -30,7 +32,7 @@ func domainNameApiAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"api_id": {
@@ -58,7 +60,7 @@ func domainNameApiAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 				validate.StringMatch(regexp.MustCompile("^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -68,7 +70,7 @@ func domainNameApiAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

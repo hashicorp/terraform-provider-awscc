@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // connectorResourceType returns the Terraform awscc_kafkaconnect_connector resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::KafkaConnect::Connector resource type.
-func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity": {
 			// Property: Capacity
@@ -262,7 +264,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"connector_configuration": {
@@ -283,7 +285,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.MapType{ElemType: types.StringType},
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"connector_description": {
@@ -302,8 +304,8 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"connector_name": {
@@ -322,7 +324,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"kafka_cluster": {
@@ -429,7 +431,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"kafka_cluster_client_authentication": {
@@ -472,7 +474,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"kafka_cluster_encryption_in_transit": {
@@ -515,7 +517,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"kafka_connect_version": {
@@ -529,7 +531,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"log_delivery": {
@@ -696,8 +698,8 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"plugins": {
@@ -779,7 +781,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"service_execution_role_arn": {
@@ -797,7 +799,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):iam:.*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"worker_configuration": {
@@ -851,8 +853,8 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -862,7 +864,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

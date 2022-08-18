@@ -5,6 +5,7 @@ package route53resolver
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // resolverConfigDataSourceType returns the Terraform awscc_route53resolver_resolver_config data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Route53Resolver::ResolverConfig resource type.
-func resolverConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func resolverConfigDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"autodefined_reverse": {
 			// Property: AutodefinedReverse

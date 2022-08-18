@@ -5,6 +5,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // eC2FleetDataSourceType returns the Terraform awscc_ec2_ec2_fleet data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::EC2Fleet resource type.
-func eC2FleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func eC2FleetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"context": {
 			// Property: Context

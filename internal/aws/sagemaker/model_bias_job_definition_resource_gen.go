@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // modelBiasJobDefinitionResourceType returns the Terraform awscc_sagemaker_model_bias_job_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelBiasJobDefinition resource type.
-func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func modelBiasJobDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -32,7 +34,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"endpoint_name": {
@@ -65,7 +67,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"job_definition_name": {
@@ -86,8 +88,8 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"job_resources": {
@@ -183,7 +185,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_bias_app_specification": {
@@ -263,7 +265,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_bias_baseline_config": {
@@ -333,8 +335,8 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_bias_job_input": {
@@ -570,7 +572,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_bias_job_output_config": {
@@ -706,7 +708,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"network_config": {
@@ -811,8 +813,8 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"role_arn": {
@@ -833,7 +835,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringMatch(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"stopping_condition": {
@@ -872,8 +874,8 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -939,8 +941,8 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -950,7 +952,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

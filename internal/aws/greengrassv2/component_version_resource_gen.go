@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // componentVersionResourceType returns the Terraform awscc_greengrassv2_component_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GreengrassV2::ComponentVersion resource type.
-func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func componentVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -30,7 +32,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"component_name": {
@@ -42,7 +44,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"component_version": {
@@ -54,7 +56,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"inline_recipe": {
@@ -67,8 +69,8 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// InlineRecipe is a write-only property.
 		},
@@ -541,8 +543,8 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// LambdaFunction is a write-only property.
 		},
@@ -570,7 +572,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

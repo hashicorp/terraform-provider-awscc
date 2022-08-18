@@ -5,6 +5,7 @@ package mediaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // flowSourceDataSourceType returns the Terraform awscc_mediaconnect_flow_source data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::MediaConnect::FlowSource resource type.
-func flowSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func flowSourceDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"decryption": {
 			// Property: Decryption

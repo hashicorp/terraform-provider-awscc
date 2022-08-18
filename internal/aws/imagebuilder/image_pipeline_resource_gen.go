@@ -5,6 +5,8 @@ package imagebuilder
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // imagePipelineResourceType returns the Terraform awscc_imagebuilder_image_pipeline resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ImagePipeline resource type.
-func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -31,7 +33,7 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"container_recipe_arn": {
@@ -154,8 +156,8 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"schedule": {
@@ -251,7 +253,7 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

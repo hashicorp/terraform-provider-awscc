@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // launchProfileResourceType returns the Terraform awscc_nimblestudio_launch_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NimbleStudio::LaunchProfile resource type.
-func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func launchProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
@@ -56,7 +58,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.ArrayLenBetween(0, 6),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"launch_profile_id": {
@@ -68,7 +70,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"launch_profile_protocol_versions": {
@@ -382,7 +384,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -402,8 +404,8 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -413,7 +415,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

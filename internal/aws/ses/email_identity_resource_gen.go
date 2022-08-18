@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // emailIdentityResourceType returns the Terraform awscc_ses_email_identity resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SES::EmailIdentity resource type.
-func emailIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"configuration_set_attributes": {
 			// Property: ConfigurationSetAttributes
@@ -84,7 +86,7 @@ func emailIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dkim_dns_token_name_2": {
@@ -96,7 +98,7 @@ func emailIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dkim_dns_token_name_3": {
@@ -108,7 +110,7 @@ func emailIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dkim_dns_token_value_1": {
@@ -120,7 +122,7 @@ func emailIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dkim_dns_token_value_2": {
@@ -132,7 +134,7 @@ func emailIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dkim_dns_token_value_3": {
@@ -144,7 +146,7 @@ func emailIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dkim_signing_attributes": {
@@ -210,7 +212,7 @@ func emailIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"feedback_attributes": {
@@ -288,7 +290,7 @@ func emailIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // publicTypeVersionResourceType returns the Terraform awscc_cloudformation_public_type_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::PublicTypeVersion resource type.
-func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func publicTypeVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -37,8 +39,8 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringMatch(regexp.MustCompile("arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"log_delivery_bucket": {
@@ -53,8 +55,8 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"public_type_arn": {
@@ -70,7 +72,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"public_version_number": {
@@ -90,8 +92,8 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(5, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"publisher_id": {
@@ -108,7 +110,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type": {
@@ -135,8 +137,8 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"type_name": {
@@ -155,8 +157,8 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringMatch(regexp.MustCompile("[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"type_version_arn": {
@@ -171,7 +173,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -181,7 +183,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

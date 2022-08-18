@@ -5,6 +5,7 @@ package route53recoverycontrol
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // controlPanelDataSourceType returns the Terraform awscc_route53recoverycontrol_control_panel data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Route53RecoveryControl::ControlPanel resource type.
-func controlPanelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func controlPanelDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cluster_arn": {
 			// Property: ClusterArn

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // schemaVersionMetadataResourceType returns the Terraform awscc_glue_schema_version_metadata resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Glue::SchemaVersionMetadata resource type.
-func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func schemaVersionMetadataResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"key": {
 			// Property: Key
@@ -37,7 +39,7 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"schema_version_id": {
@@ -55,7 +57,7 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringMatch(regexp.MustCompile("[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"value": {
@@ -74,7 +76,7 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -84,7 +86,7 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

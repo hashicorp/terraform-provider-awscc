@@ -5,6 +5,7 @@ package servicecatalog
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // serviceActionDataSourceType returns the Terraform awscc_servicecatalog_service_action data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ServiceCatalog::ServiceAction resource type.
-func serviceActionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func serviceActionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"accept_language": {
 			// Property: AcceptLanguage

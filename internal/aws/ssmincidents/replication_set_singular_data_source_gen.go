@@ -5,6 +5,7 @@ package ssmincidents
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // replicationSetDataSourceType returns the Terraform awscc_ssmincidents_replication_set data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SSMIncidents::ReplicationSet resource type.
-func replicationSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func replicationSetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

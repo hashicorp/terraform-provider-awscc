@@ -5,6 +5,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // localGatewayRouteTableVPCAssociationDataSourceType returns the Terraform awscc_ec2_local_gateway_route_table_vpc_association data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::LocalGatewayRouteTableVPCAssociation resource type.
-func localGatewayRouteTableVPCAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func localGatewayRouteTableVPCAssociationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"local_gateway_id": {
 			// Property: LocalGatewayId

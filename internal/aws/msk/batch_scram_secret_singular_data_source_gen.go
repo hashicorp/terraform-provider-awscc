@@ -5,6 +5,7 @@ package msk
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // batchScramSecretDataSourceType returns the Terraform awscc_msk_batch_scram_secret data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::MSK::BatchScramSecret resource type.
-func batchScramSecretDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func batchScramSecretDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cluster_arn": {
 			// Property: ClusterArn

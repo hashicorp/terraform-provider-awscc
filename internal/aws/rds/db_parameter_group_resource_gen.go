@@ -5,6 +5,8 @@ package rds
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // dBParameterGroupResourceType returns the Terraform awscc_rds_db_parameter_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBParameterGroup resource type.
-func dBParameterGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func dBParameterGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"db_parameter_group_name": {
 			// Property: DBParameterGroupName
@@ -32,7 +34,7 @@ func dBParameterGroupResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -46,7 +48,7 @@ func dBParameterGroupResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"family": {
@@ -60,7 +62,7 @@ func dBParameterGroupResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"parameters": {
@@ -144,7 +146,7 @@ func dBParameterGroupResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -54,7 +54,7 @@ func TestPropertyPathToAttributePath(t *testing.T) {
 		},
 	}
 
-	rt := resourceType{
+	rt := genericResourceType{
 		cfToTfNameMap: map[string]string{
 			"BasicAuthParameters": "basic_auth_parameters",
 			"Password":            "password",

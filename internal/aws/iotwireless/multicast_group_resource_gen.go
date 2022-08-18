@@ -5,6 +5,8 @@ package iotwireless
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // multicastGroupResourceType returns the Terraform awscc_iotwireless_multicast_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::MulticastGroup resource type.
-func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func multicastGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -31,7 +33,7 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"associate_wireless_device": {
@@ -91,7 +93,7 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"lo_ra_wan": {
@@ -146,7 +148,7 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:        types.Int64Type,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"number_of_devices_requested": {
@@ -155,7 +157,7 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:        types.Int64Type,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"rf_region": {
@@ -197,7 +199,7 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {

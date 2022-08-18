@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // pullThroughCacheRuleResourceType returns the Terraform awscc_ecr_pull_through_cache_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECR::PullThroughCacheRule resource type.
-func pullThroughCacheRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func pullThroughCacheRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"ecr_repository_prefix": {
 			// Property: EcrRepositoryPrefix
@@ -40,8 +42,8 @@ func pullThroughCacheRuleResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringMatch(regexp.MustCompile("^([a-z0-9]+(?:[._-][a-z0-9]+)*)$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"upstream_registry_url": {
@@ -56,8 +58,8 @@ func pullThroughCacheRuleResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -67,7 +69,7 @@ func pullThroughCacheRuleResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

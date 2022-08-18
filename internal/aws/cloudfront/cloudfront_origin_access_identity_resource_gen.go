@@ -5,6 +5,8 @@ package cloudfront
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // cloudFrontOriginAccessIdentityResourceType returns the Terraform awscc_cloudfront_cloudfront_origin_access_identity resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::CloudFrontOriginAccessIdentity resource type.
-func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cloudfront_origin_access_identity_config": {
 			// Property: CloudFrontOriginAccessIdentityConfig
@@ -54,7 +56,7 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"s3_canonical_user_id": {
@@ -66,7 +68,7 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

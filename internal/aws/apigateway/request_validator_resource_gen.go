@@ -5,6 +5,8 @@ package apigateway
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // requestValidatorResourceType returns the Terraform awscc_apigateway_request_validator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::RequestValidator resource type.
-func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func requestValidatorResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"name": {
 			// Property: Name
@@ -31,8 +33,8 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"request_validator_id": {
@@ -46,7 +48,7 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"rest_api_id": {
@@ -60,7 +62,7 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"validate_request_body": {
@@ -92,7 +94,7 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

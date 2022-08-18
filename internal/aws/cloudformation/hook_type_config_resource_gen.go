@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // hookTypeConfigResourceType returns the Terraform awscc_cloudformation_hook_type_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::HookTypeConfig resource type.
-func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func hookTypeConfigResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"configuration": {
 			// Property: Configuration
@@ -60,8 +62,8 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "default"}),
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"configuration_arn": {
@@ -76,7 +78,7 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type_arn": {
@@ -116,7 +118,7 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

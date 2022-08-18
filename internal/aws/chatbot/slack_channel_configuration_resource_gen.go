@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // slackChannelConfigurationResourceType returns the Terraform awscc_chatbot_slack_channel_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Chatbot::SlackChannelConfiguration resource type.
-func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func slackChannelConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -33,7 +35,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"configuration_name": {
@@ -54,7 +56,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9-_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"guardrail_policies": {
@@ -106,7 +108,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "NONE"}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"slack_channel_id": {
@@ -145,7 +147,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringMatch(regexp.MustCompile("^[0-9A-Z]{1,255}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"sns_topic_arns": {
@@ -181,7 +183,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Bool{Value: false}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -191,7 +193,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // gameServerGroupResourceType returns the Terraform awscc_gamelift_game_server_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GameLift::GameServerGroup resource type.
-func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"auto_scaling_group_arn": {
 			// Property: AutoScalingGroupArn
@@ -35,7 +37,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"auto_scaling_policy": {
@@ -158,7 +160,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"game_server_group_name": {
@@ -433,7 +435,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

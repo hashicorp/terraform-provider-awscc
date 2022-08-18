@@ -5,6 +5,7 @@ package sagemaker
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // appImageConfigDataSourceType returns the Terraform awscc_sagemaker_app_image_config data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SageMaker::AppImageConfig resource type.
-func appImageConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func appImageConfigDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"app_image_config_arn": {
 			// Property: AppImageConfigArn

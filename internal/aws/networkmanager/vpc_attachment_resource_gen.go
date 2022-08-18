@@ -5,6 +5,8 @@ package networkmanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // vpcAttachmentResourceType returns the Terraform awscc_networkmanager_vpc_attachment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::VpcAttachment resource type.
-func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func vpcAttachmentResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"attachment_id": {
 			// Property: AttachmentId
@@ -30,7 +32,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"attachment_policy_rule_number": {
@@ -44,7 +46,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"attachment_type": {
@@ -58,7 +60,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"core_network_arn": {
@@ -72,7 +74,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"core_network_id": {
@@ -87,8 +89,8 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"created_at": {
@@ -102,7 +104,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"edge_location": {
@@ -116,7 +118,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"options": {
@@ -145,7 +147,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Bool{Value: false}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -163,7 +165,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"proposed_segment_change": {
@@ -252,7 +254,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource_arn": {
@@ -266,7 +268,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"segment_name": {
@@ -280,7 +282,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"state": {
@@ -294,7 +296,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"subnet_arns": {
@@ -376,7 +378,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpc_arn": {
@@ -391,8 +393,8 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// VpcArn is a write-only property.
 		},
@@ -403,7 +405,7 @@ func vpcAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

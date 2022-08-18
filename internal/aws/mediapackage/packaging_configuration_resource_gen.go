@@ -5,6 +5,8 @@ package mediapackage
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // packagingConfigurationResourceType returns the Terraform awscc_mediapackage_packaging_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::PackagingConfiguration resource type.
-func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func packagingConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -31,7 +33,7 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"cmaf_package": {
@@ -895,7 +897,7 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"mss_package": {

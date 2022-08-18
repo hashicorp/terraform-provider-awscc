@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // loadBalancerTlsCertificateResourceType returns the Terraform awscc_lightsail_load_balancer_tls_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lightsail::LoadBalancerTlsCertificate resource type.
-func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func loadBalancerTlsCertificateResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"certificate_alternative_names": {
 			// Property: CertificateAlternativeNames
@@ -38,8 +40,8 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.Resource
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"certificate_domain_name": {
@@ -53,7 +55,7 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"certificate_name": {
@@ -67,7 +69,7 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"https_redirection_enabled": {
@@ -107,7 +109,7 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.Resource
 				validate.StringMatch(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"load_balancer_tls_certificate_arn": {
@@ -119,7 +121,7 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.Resource
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -133,7 +135,7 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -143,7 +145,7 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.Resource
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

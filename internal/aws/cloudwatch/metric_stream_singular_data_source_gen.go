@@ -5,6 +5,7 @@ package cloudwatch
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // metricStreamDataSourceType returns the Terraform awscc_cloudwatch_metric_stream data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudWatch::MetricStream resource type.
-func metricStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func metricStreamDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

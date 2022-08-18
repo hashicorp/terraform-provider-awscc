@@ -5,6 +5,8 @@ package cloudfront
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // publicKeyResourceType returns the Terraform awscc_cloudfront_public_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::PublicKey resource type.
-func publicKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func publicKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"created_time": {
 			// Property: CreatedTime
@@ -28,7 +30,7 @@ func publicKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -40,7 +42,7 @@ func publicKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"public_key_config": {

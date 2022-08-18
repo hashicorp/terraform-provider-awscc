@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // transitGatewayPeeringAttachmentResourceType returns the Terraform awscc_ec2_transit_gateway_peering_attachment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayPeeringAttachment resource type.
-func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -31,7 +33,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"peer_account_id": {
@@ -45,7 +47,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"peer_region": {
@@ -59,7 +61,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"peer_transit_gateway_id": {
@@ -73,7 +75,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"state": {
@@ -87,7 +89,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -127,7 +129,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -181,7 +183,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"transit_gateway_id": {
@@ -195,7 +197,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -205,7 +207,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

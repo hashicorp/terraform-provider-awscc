@@ -5,6 +5,7 @@ package kms
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // aliasesDataSourceType returns the Terraform awscc_kms_aliases data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::KMS::Alias resource type.
-func aliasesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func aliasesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",

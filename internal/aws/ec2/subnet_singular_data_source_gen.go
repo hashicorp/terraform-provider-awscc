@@ -5,6 +5,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // subnetDataSourceType returns the Terraform awscc_ec2_subnet data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::Subnet resource type.
-func subnetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func subnetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"assign_ipv_6_address_on_creation": {
 			// Property: AssignIpv6AddressOnCreation

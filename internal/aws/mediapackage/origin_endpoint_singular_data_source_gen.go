@@ -5,6 +5,7 @@ package mediapackage
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // originEndpointDataSourceType returns the Terraform awscc_mediapackage_origin_endpoint data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::MediaPackage::OriginEndpoint resource type.
-func originEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func originEndpointDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

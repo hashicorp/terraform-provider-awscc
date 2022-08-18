@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // inferenceSchedulerResourceType returns the Terraform awscc_lookoutequipment_inference_scheduler resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LookoutEquipment::InferenceScheduler resource type.
-func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"data_delay_offset_in_minutes": {
 			// Property: DataDelayOffsetInMinutes
@@ -289,7 +291,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"inference_scheduler_name": {
@@ -311,8 +313,8 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringMatch(regexp.MustCompile("^[0-9a-zA-Z_-]{1,200}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_name": {
@@ -333,7 +335,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringMatch(regexp.MustCompile("^[0-9a-zA-Z_-]{1,200}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"role_arn": {
@@ -372,8 +374,8 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -447,7 +449,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

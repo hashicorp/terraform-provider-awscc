@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // transitGatewayAttachmentResourceType returns the Terraform awscc_ec2_transit_gateway_attachment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayAttachment resource type.
-func transitGatewayAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayAttachmentResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -28,7 +30,7 @@ func transitGatewayAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"options": {
@@ -147,7 +149,7 @@ func transitGatewayAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"vpc_id": {
@@ -159,7 +161,7 @@ func transitGatewayAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}

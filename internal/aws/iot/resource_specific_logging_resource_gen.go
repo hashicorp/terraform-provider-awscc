@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // resourceSpecificLoggingResourceType returns the Terraform awscc_iot_resource_specific_logging resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::ResourceSpecificLogging resource type.
-func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func resourceSpecificLoggingResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"log_level": {
 			// Property: LogLevel
@@ -62,7 +64,7 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"target_name": {
@@ -83,7 +85,7 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceTyp
 				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.:_-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"target_type": {
@@ -111,7 +113,7 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceTyp
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -121,7 +123,7 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

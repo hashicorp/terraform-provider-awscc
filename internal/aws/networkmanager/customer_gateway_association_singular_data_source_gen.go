@@ -5,6 +5,7 @@ package networkmanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // customerGatewayAssociationDataSourceType returns the Terraform awscc_networkmanager_customer_gateway_association data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::NetworkManager::CustomerGatewayAssociation resource type.
-func customerGatewayAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func customerGatewayAssociationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"customer_gateway_arn": {
 			// Property: CustomerGatewayArn

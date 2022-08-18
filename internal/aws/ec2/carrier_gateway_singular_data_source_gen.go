@@ -5,6 +5,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // carrierGatewayDataSourceType returns the Terraform awscc_ec2_carrier_gateway data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::CarrierGateway resource type.
-func carrierGatewayDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func carrierGatewayDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"carrier_gateway_id": {
 			// Property: CarrierGatewayId

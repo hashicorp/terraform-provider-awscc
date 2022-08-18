@@ -5,6 +5,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // subnetNetworkAclAssociationDataSourceType returns the Terraform awscc_ec2_subnet_network_acl_association data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::SubnetNetworkAclAssociation resource type.
-func subnetNetworkAclAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func subnetNetworkAclAssociationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"association_id": {
 			// Property: AssociationId

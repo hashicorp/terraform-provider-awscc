@@ -5,6 +5,8 @@ package msk
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // clusterResourceType returns the Terraform awscc_msk_cluster resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MSK::Cluster resource type.
-func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -29,7 +31,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"broker_node_group_info": {
@@ -128,8 +130,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.StringLenBetween(6, 9),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"client_subnets": {
@@ -138,7 +140,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
-							tfsdk.RequiresReplace(),
+							resource.RequiresReplace(),
 						},
 					},
 					"connectivity_info": {
@@ -180,8 +182,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"storage_info": {
@@ -386,7 +388,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"configuration_info": {
@@ -489,8 +491,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"encryption_in_transit": {
@@ -515,8 +517,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.UseStateForUnknown(),
-										tfsdk.RequiresReplace(),
+										resource.UseStateForUnknown(),
+										resource.RequiresReplace(),
 									},
 								},
 							},
@@ -816,8 +818,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -827,7 +829,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

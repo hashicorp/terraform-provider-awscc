@@ -5,6 +5,7 @@ package imagebuilder
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // imageRecipeDataSourceType returns the Terraform awscc_imagebuilder_image_recipe data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ImageBuilder::ImageRecipe resource type.
-func imageRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func imageRecipeDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"additional_instance_configuration": {
 			// Property: AdditionalInstanceConfiguration

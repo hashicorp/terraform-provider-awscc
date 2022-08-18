@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // assistantAssociationResourceType returns the Terraform awscc_wisdom_assistant_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Wisdom::AssistantAssociation resource type.
-func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func assistantAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"assistant_arn": {
 			// Property: AssistantArn
@@ -31,7 +33,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"assistant_association_arn": {
@@ -44,7 +46,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"assistant_association_id": {
@@ -57,7 +59,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"assistant_id": {
@@ -73,7 +75,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringMatch(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"association": {
@@ -106,7 +108,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"association_type": {
@@ -126,7 +128,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -181,8 +183,8 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -192,7 +194,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,7 @@ package amplify
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // branchDataSourceType returns the Terraform awscc_amplify_branch data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Amplify::Branch resource type.
-func branchDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func branchDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"app_id": {
 			// Property: AppId

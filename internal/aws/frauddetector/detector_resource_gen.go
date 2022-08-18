@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // detectorResourceType returns the Terraform awscc_frauddetector_detector resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FraudDetector::Detector resource type.
-func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func detectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -32,7 +34,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"associated_models": {
@@ -84,7 +86,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -121,7 +123,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^[0-9a-z_-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"detector_version_id": {
@@ -135,7 +137,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"detector_version_status": {
@@ -475,7 +477,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"created_time": {
@@ -484,7 +486,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"description": {
@@ -820,7 +822,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"name": {
@@ -879,7 +881,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"rule_execution_mode": {
@@ -1286,7 +1288,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

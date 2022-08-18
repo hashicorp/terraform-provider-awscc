@@ -5,6 +5,8 @@ package iot
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // accountAuditConfigurationResourceType returns the Terraform awscc_iot_account_audit_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::AccountAuditConfiguration resource type.
-func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func accountAuditConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"account_id": {
 			// Property: AccountId
@@ -36,7 +38,7 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringLenBetween(12, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"audit_check_configurations": {
@@ -513,7 +515,7 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

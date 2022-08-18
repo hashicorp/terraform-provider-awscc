@@ -5,6 +5,7 @@ package lightsail
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // certificatesDataSourceType returns the Terraform awscc_lightsail_certificates data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Lightsail::Certificate resource type.
-func certificatesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func certificatesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",

@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // subnetNetworkAclAssociationResourceType returns the Terraform awscc_ec2_subnet_network_acl_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::SubnetNetworkAclAssociation resource type.
-func subnetNetworkAclAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func subnetNetworkAclAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"association_id": {
 			// Property: AssociationId
@@ -28,7 +30,7 @@ func subnetNetworkAclAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_acl_id": {
@@ -42,7 +44,7 @@ func subnetNetworkAclAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"subnet_id": {
@@ -56,7 +58,7 @@ func subnetNetworkAclAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -66,7 +68,7 @@ func subnetNetworkAclAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

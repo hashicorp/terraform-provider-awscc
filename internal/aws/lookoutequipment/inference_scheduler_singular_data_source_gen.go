@@ -5,6 +5,7 @@ package lookoutequipment
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // inferenceSchedulerDataSourceType returns the Terraform awscc_lookoutequipment_inference_scheduler data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::LookoutEquipment::InferenceScheduler resource type.
-func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func inferenceSchedulerDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"data_delay_offset_in_minutes": {
 			// Property: DataDelayOffsetInMinutes

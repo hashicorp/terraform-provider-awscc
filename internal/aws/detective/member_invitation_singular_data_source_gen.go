@@ -5,6 +5,7 @@ package detective
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // memberInvitationDataSourceType returns the Terraform awscc_detective_member_invitation data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Detective::MemberInvitation resource type.
-func memberInvitationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func memberInvitationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"disable_email_notification": {
 			// Property: DisableEmailNotification

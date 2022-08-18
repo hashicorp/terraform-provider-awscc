@@ -5,6 +5,8 @@ package acmpca
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // certificateResourceType returns the Terraform awscc_acmpca_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ACMPCA::Certificate resource type.
-func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func certificateResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"api_passthrough": {
 			// Property: ApiPassthrough
@@ -481,7 +483,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Bool{Value: false}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"data_encipherment": {
@@ -491,7 +493,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Bool{Value: false}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"decipher_only": {
@@ -501,7 +503,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Bool{Value: false}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"digital_signature": {
@@ -511,7 +513,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Bool{Value: false}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"encipher_only": {
@@ -521,7 +523,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Bool{Value: false}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"key_agreement": {
@@ -531,7 +533,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Bool{Value: false}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"key_cert_sign": {
@@ -541,7 +543,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Bool{Value: false}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"key_encipherment": {
@@ -551,7 +553,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Bool{Value: false}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"non_repudiation": {
@@ -561,7 +563,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Bool{Value: false}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -852,8 +854,8 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// ApiPassthrough is a write-only property.
 		},
@@ -868,7 +870,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"certificate": {
@@ -882,7 +884,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"certificate_authority_arn": {
@@ -896,7 +898,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"certificate_signing_request": {
@@ -914,7 +916,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 			// CertificateSigningRequest is a write-only property.
 		},
@@ -929,7 +931,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"template_arn": {
@@ -944,8 +946,8 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"validity": {
@@ -985,7 +987,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"validity_not_before": {
@@ -1026,8 +1028,8 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -1037,7 +1039,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,7 @@ package route53
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // cidrCollectionDataSourceType returns the Terraform awscc_route53_cidr_collection data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Route53::CidrCollection resource type.
-func cidrCollectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func cidrCollectionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // missionProfileResourceType returns the Terraform awscc_groundstation_mission_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GroundStation::MissionProfile resource type.
-func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func missionProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -30,7 +32,7 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"contact_post_pass_duration_seconds": {
@@ -104,7 +106,7 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"minimum_viable_contact_duration_seconds": {
@@ -142,7 +144,7 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {

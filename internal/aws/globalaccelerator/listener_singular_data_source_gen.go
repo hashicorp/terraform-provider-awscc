@@ -5,6 +5,7 @@ package globalaccelerator
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // listenerDataSourceType returns the Terraform awscc_globalaccelerator_listener data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::GlobalAccelerator::Listener resource type.
-func listenerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func listenerDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"accelerator_arn": {
 			// Property: AcceleratorArn

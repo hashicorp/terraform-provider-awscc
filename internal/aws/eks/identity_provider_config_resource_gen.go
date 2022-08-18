@@ -5,6 +5,8 @@ package eks
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // identityProviderConfigResourceType returns the Terraform awscc_eks_identity_provider_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EKS::IdentityProviderConfig resource type.
-func identityProviderConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func identityProviderConfigResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cluster_name": {
 			// Property: ClusterName
@@ -31,7 +33,7 @@ func identityProviderConfigResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"identity_provider_config_arn": {
@@ -45,7 +47,7 @@ func identityProviderConfigResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"identity_provider_config_name": {
@@ -60,8 +62,8 @@ func identityProviderConfigResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"oidc": {
@@ -200,8 +202,8 @@ func identityProviderConfigResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -280,7 +282,7 @@ func identityProviderConfigResourceType(ctx context.Context) (tfsdk.ResourceType
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -290,7 +292,7 @@ func identityProviderConfigResourceType(ctx context.Context) (tfsdk.ResourceType
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

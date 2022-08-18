@@ -5,6 +5,7 @@ package cloudtrail
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // trailDataSourceType returns the Terraform awscc_cloudtrail_trail data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudTrail::Trail resource type.
-func trailDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func trailDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

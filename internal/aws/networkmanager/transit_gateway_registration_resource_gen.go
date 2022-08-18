@@ -5,6 +5,8 @@ package networkmanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // transitGatewayRegistrationResourceType returns the Terraform awscc_networkmanager_transit_gateway_registration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::TransitGatewayRegistration resource type.
-func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayRegistrationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"global_network_id": {
 			// Property: GlobalNetworkId
@@ -30,7 +32,7 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"transit_gateway_arn": {
@@ -44,7 +46,7 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -54,7 +56,7 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

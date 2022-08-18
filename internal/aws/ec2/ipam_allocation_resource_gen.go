@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // iPAMAllocationResourceType returns the Terraform awscc_ec2_ipam_allocation resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::IPAMAllocation resource type.
-func iPAMAllocationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func iPAMAllocationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cidr": {
 			// Property: Cidr
@@ -31,8 +33,8 @@ func iPAMAllocationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"description": {
@@ -45,8 +47,8 @@ func iPAMAllocationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"ipam_pool_allocation_id": {
@@ -60,7 +62,7 @@ func iPAMAllocationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"ipam_pool_id": {
@@ -74,7 +76,7 @@ func iPAMAllocationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"netmask_length": {
@@ -89,8 +91,8 @@ func iPAMAllocationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// NetmaskLength is a write-only property.
 		},
@@ -101,7 +103,7 @@ func iPAMAllocationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

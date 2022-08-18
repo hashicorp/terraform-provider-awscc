@@ -5,6 +5,7 @@ package ecr
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // publicRepositoryDataSourceType returns the Terraform awscc_ecr_public_repository data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ECR::PublicRepository resource type.
-func publicRepositoryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func publicRepositoryDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

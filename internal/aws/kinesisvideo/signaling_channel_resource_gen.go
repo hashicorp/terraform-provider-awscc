@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // signalingChannelResourceType returns the Terraform awscc_kinesisvideo_signaling_channel resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::KinesisVideo::SignalingChannel resource type.
-func signalingChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func signalingChannelResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -32,7 +34,7 @@ func signalingChannelResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"message_ttl_seconds": {
@@ -70,8 +72,8 @@ func signalingChannelResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_.-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -165,7 +167,7 @@ func signalingChannelResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

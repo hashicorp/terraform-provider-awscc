@@ -5,6 +5,7 @@ package xray
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // groupDataSourceType returns the Terraform awscc_xray_group data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::XRay::Group resource type.
-func groupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func groupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"filter_expression": {
 			// Property: FilterExpression

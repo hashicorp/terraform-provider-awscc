@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	tfdiag "github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -257,7 +258,7 @@ func (validator resourceConfigRequiredAttributesValidator) MarkdownDescription(c
 }
 
 // Validate performs the validation.
-func (validator resourceConfigRequiredAttributesValidator) ValidateResource(ctx context.Context, request tfsdk.ValidateResourceConfigRequest, response *tfsdk.ValidateResourceConfigResponse) {
+func (validator resourceConfigRequiredAttributesValidator) ValidateResource(ctx context.Context, request resource.ValidateConfigRequest, response *resource.ValidateConfigResponse) {
 	val := request.Config.Raw
 
 	if val.IsNull() || !val.IsFullyKnown() {
@@ -288,7 +289,7 @@ func (validator resourceConfigRequiredAttributesValidator) ValidateResource(ctx 
 }
 
 // ResourceConfigRequiredAttributes returns a new resource schema-level required Attributes validator.
-func ResourceConfigRequiredAttributes(fs ...RequiredAttributesFunc) tfsdk.ResourceConfigValidator {
+func ResourceConfigRequiredAttributes(fs ...RequiredAttributesFunc) resource.ConfigValidator {
 	return resourceConfigRequiredAttributesValidator{
 		fs: fs,
 	}

@@ -5,6 +5,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // vPNGatewayDataSourceType returns the Terraform awscc_ec2_vpn_gateway data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::VPNGateway resource type.
-func vPNGatewayDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func vPNGatewayDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"amazon_side_asn": {
 			// Property: AmazonSideAsn

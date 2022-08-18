@@ -5,6 +5,7 @@ package iot
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // roleAliasesDataSourceType returns the Terraform awscc_iot_role_aliases data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::RoleAlias resource type.
-func roleAliasesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func roleAliasesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",

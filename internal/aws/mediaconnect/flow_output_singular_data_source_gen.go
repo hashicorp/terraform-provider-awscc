@@ -5,6 +5,7 @@ package mediaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // flowOutputDataSourceType returns the Terraform awscc_mediaconnect_flow_output data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::MediaConnect::FlowOutput resource type.
-func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func flowOutputDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cidr_allow_list": {
 			// Property: CidrAllowList

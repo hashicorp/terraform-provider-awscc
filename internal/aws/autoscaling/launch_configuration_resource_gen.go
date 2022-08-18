@@ -5,6 +5,8 @@ package autoscaling
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // launchConfigurationResourceType returns the Terraform awscc_autoscaling_launch_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AutoScaling::LaunchConfiguration resource type.
-func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func launchConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"associate_public_ip_address": {
 			// Property: AssociatePublicIpAddress
@@ -32,8 +34,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"block_device_mappings": {
@@ -179,8 +181,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"classic_link_vpc_id": {
@@ -195,8 +197,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"classic_link_vpc_security_groups": {
@@ -216,8 +218,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"ebs_optimized": {
@@ -232,8 +234,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"iam_instance_profile": {
@@ -248,8 +250,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"image_id": {
@@ -263,7 +265,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"instance_id": {
@@ -278,8 +280,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"instance_monitoring": {
@@ -294,8 +296,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"instance_type": {
@@ -309,7 +311,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"kernel_id": {
@@ -324,8 +326,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"key_name": {
@@ -340,8 +342,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"launch_configuration_name": {
@@ -361,8 +363,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"metadata_options": {
@@ -413,8 +415,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"placement_tenancy": {
@@ -429,8 +431,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"ram_disk_id": {
@@ -445,8 +447,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"security_groups": {
@@ -466,8 +468,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"spot_price": {
@@ -482,8 +484,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"user_data": {
@@ -502,8 +504,8 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenAtMost(21847),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -513,7 +515,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

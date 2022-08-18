@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // connectorProfileResourceType returns the Terraform awscc_appflow_connector_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppFlow::ConnectorProfile resource type.
-func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"connection_mode": {
 			// Property: ConnectionMode
@@ -72,7 +74,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"connector_profile_config": {
@@ -2334,7 +2336,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringMatch(regexp.MustCompile("[\\w/!@#+=.-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"connector_type": {
@@ -2388,7 +2390,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"credentials_arn": {
@@ -2404,7 +2406,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"kms_arn": {
@@ -2426,8 +2428,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringMatch(regexp.MustCompile("arn:aws:kms:.*:[0-9]+:.*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -2437,7 +2439,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

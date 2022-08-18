@@ -5,6 +5,7 @@ package iot
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // securityProfileDataSourceType returns the Terraform awscc_iot_security_profile data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::SecurityProfile resource type.
-func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func securityProfileDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"additional_metrics_to_retain_v2": {
 			// Property: AdditionalMetricsToRetainV2

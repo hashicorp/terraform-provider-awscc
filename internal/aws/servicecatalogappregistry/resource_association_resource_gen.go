@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // resourceAssociationResourceType returns the Terraform awscc_servicecatalogappregistry_resource_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::ResourceAssociation resource type.
-func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func resourceAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application": {
 			// Property: Application
@@ -49,7 +51,7 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -61,7 +63,7 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource": {
@@ -89,7 +91,7 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource_type": {

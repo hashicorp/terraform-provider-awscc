@@ -7,6 +7,8 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -20,7 +22,7 @@ func init() {
 
 // locationNFSResourceType returns the Terraform awscc_datasync_location_nfs resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationNFS resource type.
-func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationNFSResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"location_arn": {
 			// Property: LocationArn
@@ -35,7 +37,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"location_uri": {
@@ -51,7 +53,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"mount_options": {
@@ -108,7 +110,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 				},
 				),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"on_prem_config": {
@@ -174,7 +176,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 			// ServerHostname is a write-only property.
 		},
@@ -268,7 +270,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

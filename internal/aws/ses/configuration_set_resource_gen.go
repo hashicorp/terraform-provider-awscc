@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // configurationSetResourceType returns the Terraform awscc_ses_configuration_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SES::ConfigurationSet resource type.
-func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func configurationSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"delivery_options": {
 			// Property: DeliveryOptions
@@ -78,8 +80,8 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{1,64}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"reputation_options": {
@@ -210,7 +212,7 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

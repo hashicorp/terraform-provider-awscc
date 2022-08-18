@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // transitGatewayMulticastDomainAssociationResourceType returns the Terraform awscc_ec2_transit_gateway_multicast_domain_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastDomainAssociation resource type.
-func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_id": {
 			// Property: ResourceId
@@ -30,7 +32,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource_type": {
@@ -44,7 +46,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"state": {
@@ -58,7 +60,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"subnet_id": {
@@ -72,7 +74,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"transit_gateway_attachment_id": {
@@ -86,7 +88,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"transit_gateway_multicast_domain_id": {
@@ -100,7 +102,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -110,7 +112,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

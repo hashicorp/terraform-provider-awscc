@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // moduleDefaultVersionResourceType returns the Terraform awscc_cloudformation_module_default_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::ModuleDefaultVersion resource type.
-func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func moduleDefaultVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -37,8 +39,8 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringMatch(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/module/.+/[0-9]{8}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"module_name": {
@@ -57,8 +59,8 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::MODULE"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// ModuleName is a write-only property.
 		},
@@ -78,8 +80,8 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringMatch(regexp.MustCompile("^[0-9]{8}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// VersionId is a write-only property.
 		},
@@ -90,7 +92,7 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

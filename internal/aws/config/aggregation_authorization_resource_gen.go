@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // aggregationAuthorizationResourceType returns the Terraform awscc_config_aggregation_authorization resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::AggregationAuthorization resource type.
-func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func aggregationAuthorizationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"aggregation_authorization_arn": {
 			// Property: AggregationAuthorizationArn
@@ -32,7 +34,7 @@ func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"authorized_account_id": {
@@ -50,7 +52,7 @@ func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceTy
 				validate.StringMatch(regexp.MustCompile("^\\d{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"authorized_aws_region": {
@@ -69,7 +71,7 @@ func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceTy
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -140,7 +142,7 @@ func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // instanceAccessControlAttributeConfigurationResourceType returns the Terraform awscc_sso_instance_access_control_attribute_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSO::InstanceAccessControlAttributeConfiguration resource type.
-func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_control_attributes": {
 			// Property: AccessControlAttributes
@@ -224,7 +226,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 				validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -234,7 +236,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

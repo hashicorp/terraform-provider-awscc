@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // serverCertificateResourceType returns the Terraform awscc_iam_server_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IAM::ServerCertificate resource type.
-func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func serverCertificateResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -34,7 +36,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"certificate_body": {
@@ -53,8 +55,8 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 16384),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// CertificateBody is a write-only property.
 		},
@@ -74,8 +76,8 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 2097152),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// CertificateChain is a write-only property.
 		},
@@ -110,8 +112,8 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 16384),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// PrivateKey is a write-only property.
 		},
@@ -132,8 +134,8 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringMatch(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -201,7 +203,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,7 @@ package datasync
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // locationNFSDataSourceType returns the Terraform awscc_datasync_location_nfs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationNFS resource type.
-func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func locationNFSDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"location_arn": {
 			// Property: LocationArn

@@ -5,6 +5,7 @@ package eks
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // fargateProfileDataSourceType returns the Terraform awscc_eks_fargate_profile data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EKS::FargateProfile resource type.
-func fargateProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func fargateProfileDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

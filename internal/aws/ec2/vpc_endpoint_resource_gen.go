@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // vPCEndpointResourceType returns the Terraform awscc_ec2_vpc_endpoint resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::VPCEndpoint resource type.
-func vPCEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func vPCEndpointResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_timestamp": {
 			// Property: CreationTimestamp
@@ -29,7 +31,7 @@ func vPCEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dns_entries": {
@@ -45,7 +47,7 @@ func vPCEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -57,7 +59,7 @@ func vPCEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_interface_ids": {
@@ -73,7 +75,7 @@ func vPCEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"policy_document": {
@@ -135,7 +137,7 @@ func vPCEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"subnet_ids": {
@@ -164,8 +166,8 @@ func vPCEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"vpc_id": {
@@ -177,7 +179,7 @@ func vPCEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}

@@ -65,7 +65,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema *tfsdk.Schema, 
 	if len(path.Steps()) == 0 {
 		attributeType = schema.AttributeType()
 	} else {
-		v, err := schema.AttributeTypeAtPath(path)
+		v, err := schema.TypeAtTerraformPath(ctx, path)
 
 		if err != nil {
 			return nil, fmt.Errorf("getting attribute type at %s: %w", path, err)
@@ -205,7 +205,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, pat
 	if len(path.Steps()) == 0 {
 		typ = schema.AttributeType().TerraformType(ctx)
 	} else {
-		attrType, err := schema.AttributeTypeAtPath(path)
+		attrType, err := schema.TypeAtTerraformPath(ctx, path)
 
 		if err != nil {
 			return tftypes.Value{}, fmt.Errorf("getting attribute type at %s: %w", path, err)

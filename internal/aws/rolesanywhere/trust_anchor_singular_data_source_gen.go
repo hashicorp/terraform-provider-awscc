@@ -5,6 +5,7 @@ package rolesanywhere
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // trustAnchorDataSourceType returns the Terraform awscc_rolesanywhere_trust_anchor data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::RolesAnywhere::TrustAnchor resource type.
-func trustAnchorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func trustAnchorDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"enabled": {
 			// Property: Enabled

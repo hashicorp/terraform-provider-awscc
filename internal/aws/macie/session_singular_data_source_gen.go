@@ -5,6 +5,7 @@ package macie
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // sessionDataSourceType returns the Terraform awscc_macie_session data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Macie::Session resource type.
-func sessionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func sessionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"aws_account_id": {
 			// Property: AwsAccountId

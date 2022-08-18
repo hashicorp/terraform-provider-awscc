@@ -5,6 +5,7 @@ package lakeformation
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // principalPermissionsDataSourceType returns the Terraform awscc_lakeformation_principal_permissions data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::LakeFormation::PrincipalPermissions resource type.
-func principalPermissionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func principalPermissionsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"catalog": {
 			// Property: Catalog

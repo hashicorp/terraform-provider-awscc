@@ -5,6 +5,7 @@ package iot
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // customMetricDataSourceType returns the Terraform awscc_iot_custom_metric data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::CustomMetric resource type.
-func customMetricDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func customMetricDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"display_name": {
 			// Property: DisplayName

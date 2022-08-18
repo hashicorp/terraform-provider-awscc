@@ -5,6 +5,8 @@ package eks
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // fargateProfileResourceType returns the Terraform awscc_eks_fargate_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EKS::FargateProfile resource type.
-func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func fargateProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -29,7 +31,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"cluster_name": {
@@ -47,7 +49,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"fargate_profile_name": {
@@ -66,8 +68,8 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"pod_execution_role_arn": {
@@ -85,7 +87,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"selectors": {
@@ -177,7 +179,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.ArrayLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"subnets": {
@@ -193,8 +195,8 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -263,7 +265,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

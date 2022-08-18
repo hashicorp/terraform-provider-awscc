@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // packageVersionResourceType returns the Terraform awscc_panorama_package_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Panorama::PackageVersion resource type.
-func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func packageVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"is_latest_patch": {
 			// Property: IsLatestPatch
@@ -30,7 +32,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.BoolType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"mark_latest": {
@@ -59,8 +61,8 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringMatch(regexp.MustCompile("^[0-9a-z\\_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"package_arn": {
@@ -74,7 +76,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"package_id": {
@@ -93,7 +95,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_\\/]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"package_name": {
@@ -108,7 +110,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"package_version": {
@@ -127,7 +129,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringMatch(regexp.MustCompile("^([0-9]+)\\.([0-9]+)$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"patch_version": {
@@ -146,7 +148,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringMatch(regexp.MustCompile("^[a-z0-9]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"registered_time": {
@@ -158,7 +160,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -176,7 +178,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status_description": {
@@ -190,7 +192,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"updated_latest_patch_version": {
@@ -216,7 +218,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

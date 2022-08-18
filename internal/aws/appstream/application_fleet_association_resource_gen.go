@@ -5,6 +5,8 @@ package appstream
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // applicationFleetAssociationResourceType returns the Terraform awscc_appstream_application_fleet_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppStream::ApplicationFleetAssociation resource type.
-func applicationFleetAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func applicationFleetAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_arn": {
 			// Property: ApplicationArn
@@ -28,7 +30,7 @@ func applicationFleetAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"fleet_name": {
@@ -40,7 +42,7 @@ func applicationFleetAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -50,7 +52,7 @@ func applicationFleetAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

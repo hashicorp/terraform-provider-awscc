@@ -5,6 +5,8 @@ package ssm
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // resourceDataSyncResourceType returns the Terraform awscc_ssm_resource_data_sync resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSM::ResourceDataSync resource type.
-func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func resourceDataSyncResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"bucket_name": {
 			// Property: BucketName
@@ -35,8 +37,8 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"bucket_prefix": {
@@ -54,8 +56,8 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"bucket_region": {
@@ -73,8 +75,8 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"kms_key_arn": {
@@ -92,8 +94,8 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 512),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"s3_destination": {
@@ -182,8 +184,8 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"sync_format": {
@@ -201,8 +203,8 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"sync_name": {
@@ -219,7 +221,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"sync_source": {
@@ -331,8 +333,8 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -342,7 +344,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

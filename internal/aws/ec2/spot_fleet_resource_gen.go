@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // spotFleetResourceType returns the Terraform awscc_ec2_spot_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::SpotFleet resource type.
-func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func spotFleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -30,7 +32,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"spot_fleet_request_config_data": {
@@ -1035,8 +1037,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"context": {
@@ -1062,7 +1064,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Required: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							resource.RequiresReplace(),
 						},
 					},
 					"instance_interruption_behavior": {
@@ -1078,8 +1080,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"instance_pools_to_use_count": {
@@ -1088,8 +1090,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"launch_specifications": {
@@ -1178,7 +1180,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"iam_instance_profile": {
@@ -1514,7 +1516,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													DefaultValue(types.Bool{Value: false}),
-													tfsdk.UseStateForUnknown(),
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -1781,8 +1783,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.UniqueItems(),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"launch_template_configs": {
@@ -2154,8 +2156,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.UniqueItems(),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"load_balancers_config": {
@@ -2215,8 +2217,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"on_demand_allocation_strategy": {
@@ -2225,8 +2227,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"on_demand_max_total_price": {
@@ -2235,8 +2237,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"on_demand_target_capacity": {
@@ -2245,8 +2247,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"replace_unhealthy_instances": {
@@ -2255,8 +2257,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"spot_maintenance_strategies": {
@@ -2292,8 +2294,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"spot_max_total_price": {
@@ -2302,8 +2304,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"spot_price": {
@@ -2312,8 +2314,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"target_capacity": {
@@ -2339,8 +2341,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"type": {
@@ -2355,8 +2357,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"valid_from": {
@@ -2365,8 +2367,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"valid_until": {
@@ -2375,8 +2377,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 				},

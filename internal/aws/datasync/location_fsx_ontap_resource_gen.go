@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // locationFSxONTAPResourceType returns the Terraform awscc_datasync_location_fsx_ontap resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationFSxONTAP resource type.
-func locationFSxONTAPResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"fsx_filesystem_arn": {
 			// Property: FsxFilesystemArn
@@ -34,7 +36,7 @@ func locationFSxONTAPResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"location_arn": {
@@ -50,7 +52,7 @@ func locationFSxONTAPResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"location_uri": {
@@ -66,7 +68,7 @@ func locationFSxONTAPResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"protocol": {
@@ -252,7 +254,7 @@ func locationFSxONTAPResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"security_group_arns": {
@@ -280,7 +282,7 @@ func locationFSxONTAPResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"storage_virtual_machine_arn": {
@@ -300,7 +302,7 @@ func locationFSxONTAPResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:storage-virtual-machine/fs-[0-9a-f]+/svm-[0-9a-f]{17,}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"subdirectory": {
@@ -321,8 +323,8 @@ func locationFSxONTAPResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -399,7 +401,7 @@ func locationFSxONTAPResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,7 @@ package lambda
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // eventSourceMappingDataSourceType returns the Terraform awscc_lambda_event_source_mapping data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Lambda::EventSourceMapping resource type.
-func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func eventSourceMappingDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"batch_size": {
 			// Property: BatchSize

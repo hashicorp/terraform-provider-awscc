@@ -5,6 +5,7 @@ package lambda
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // codeSigningConfigDataSourceType returns the Terraform awscc_lambda_code_signing_config data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Lambda::CodeSigningConfig resource type.
-func codeSigningConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func codeSigningConfigDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"allowed_publishers": {
 			// Property: AllowedPublishers

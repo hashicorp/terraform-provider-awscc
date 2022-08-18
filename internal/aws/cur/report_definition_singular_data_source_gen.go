@@ -5,6 +5,7 @@ package cur
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // reportDefinitionDataSourceType returns the Terraform awscc_cur_report_definition data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CUR::ReportDefinition resource type.
-func reportDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func reportDefinitionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"additional_artifacts": {
 			// Property: AdditionalArtifacts

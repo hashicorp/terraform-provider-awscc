@@ -5,6 +5,8 @@ package ecs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // clusterCapacityProviderAssociationsResourceType returns the Terraform awscc_ecs_cluster_capacity_provider_associations resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource type.
-func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity_providers": {
 			// Property: CapacityProviders
@@ -59,7 +61,7 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"default_capacity_provider_strategy": {
@@ -132,7 +134,7 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // contactFlowModuleResourceType returns the Terraform awscc_connect_contact_flow_module resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Connect::ContactFlowModule resource type.
-func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func contactFlowModuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"contact_flow_module_arn": {
 			// Property: ContactFlowModuleArn
@@ -35,7 +37,7 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"content": {
@@ -143,7 +145,7 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -214,7 +216,7 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

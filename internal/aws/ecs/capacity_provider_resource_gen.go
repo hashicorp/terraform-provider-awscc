@@ -5,6 +5,8 @@ package ecs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // capacityProviderResourceType returns the Terraform awscc_ecs_capacity_provider resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::CapacityProvider resource type.
-func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func capacityProviderResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"auto_scaling_group_provider": {
 			// Property: AutoScalingGroupProvider
@@ -75,7 +77,7 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Type:     types.StringType,
 						Required: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							resource.RequiresReplace(),
 						},
 					},
 					"managed_scaling": {
@@ -143,8 +145,8 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -196,7 +198,7 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

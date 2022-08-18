@@ -5,6 +5,7 @@ package redshift
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // eventSubscriptionDataSourceType returns the Terraform awscc_redshift_event_subscription data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Redshift::EventSubscription resource type.
-func eventSubscriptionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func eventSubscriptionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cust_subscription_id": {
 			// Property: CustSubscriptionId

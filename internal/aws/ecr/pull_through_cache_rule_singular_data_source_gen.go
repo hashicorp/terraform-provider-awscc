@@ -5,6 +5,7 @@ package ecr
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // pullThroughCacheRuleDataSourceType returns the Terraform awscc_ecr_pull_through_cache_rule data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ECR::PullThroughCacheRule resource type.
-func pullThroughCacheRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func pullThroughCacheRuleDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"ecr_repository_prefix": {
 			// Property: EcrRepositoryPrefix

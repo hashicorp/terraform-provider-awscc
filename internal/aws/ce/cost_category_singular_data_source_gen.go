@@ -5,6 +5,7 @@ package ce
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // costCategoryDataSourceType returns the Terraform awscc_ce_cost_category data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CE::CostCategory resource type.
-func costCategoryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func costCategoryDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

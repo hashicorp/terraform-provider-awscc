@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // modelExplainabilityJobDefinitionResourceType returns the Terraform awscc_sagemaker_model_explainability_job_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelExplainabilityJobDefinition resource type.
-func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -32,7 +34,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"endpoint_name": {
@@ -65,7 +67,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"job_definition_name": {
@@ -86,8 +88,8 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"job_resources": {
@@ -183,7 +185,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_explainability_app_specification": {
@@ -263,7 +265,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_explainability_baseline_config": {
@@ -333,8 +335,8 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_explainability_job_input": {
@@ -491,7 +493,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_explainability_job_output_config": {
@@ -627,7 +629,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"network_config": {
@@ -732,8 +734,8 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"role_arn": {
@@ -754,7 +756,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 				validate.StringMatch(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"stopping_condition": {
@@ -793,8 +795,8 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -860,8 +862,8 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -871,7 +873,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

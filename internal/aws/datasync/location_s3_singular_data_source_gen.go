@@ -5,6 +5,7 @@ package datasync
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // locationS3DataSourceType returns the Terraform awscc_datasync_location_s3 data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationS3 resource type.
-func locationS3DataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func locationS3DataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"location_arn": {
 			// Property: LocationArn

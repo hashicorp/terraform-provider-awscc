@@ -5,6 +5,8 @@ package servicecatalog
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // serviceActionAssociationResourceType returns the Terraform awscc_servicecatalog_service_action_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalog::ServiceActionAssociation resource type.
-func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func serviceActionAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"product_id": {
 			// Property: ProductId
@@ -35,7 +37,7 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"provisioning_artifact_id": {
@@ -53,7 +55,7 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"service_action_id": {
@@ -71,7 +73,7 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -81,7 +83,7 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

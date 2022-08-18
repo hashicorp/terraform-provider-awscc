@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // loggingConfigurationResourceType returns the Terraform awscc_networkfirewall_logging_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkFirewall::LoggingConfiguration resource type.
-func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func loggingConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"firewall_arn": {
 			// Property: FirewallArn
@@ -39,7 +41,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringMatch(regexp.MustCompile("^arn:aws.*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"firewall_name": {
@@ -59,8 +61,8 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"logging_configuration": {
@@ -175,7 +177,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

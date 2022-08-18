@@ -16,12 +16,13 @@ import (
 type Features int
 
 const (
-	HasUpdatableProperty    Features = 1 << iota // At least one property can be updated.
-	HasRequiredRootProperty                      // At least one root property is required.
-	UsesFrameworkAttr                            // Uses a type from the terraform-plugin-framework/attr package.
-	UsesRegexpInValidation                       // Uses a type from the Go standard regexp package for attribute validation.
-	UsesValidation                               // Uses a type or function from the internal/validate package.
-	HasIDRootProperty                            // Has a root property named "id"
+	HasUpdatableProperty      Features = 1 << iota // At least one property can be updated.
+	HasRequiredRootProperty                        // At least one root property is required.
+	UsesFrameworkAttr                              // Uses a type from the terraform-plugin-framework/attr package.
+	UsesRegexpInValidation                         // Uses a type from the Go standard regexp package for attribute validation.
+	UsesValidation                                 // Uses a type or function from the internal/validate package.
+	HasIDRootProperty                              // Has a root property named "id"
+	HasFrameworkPlanModifiers                      // Has any Attribute PlanModifiers implemented in terraform-plugin-framework/resource.
 )
 
 var (
@@ -620,12 +621,14 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 	if computed {
 		// Computed.
-		planModifiers = append(planModifiers, "tfsdk.UseStateForUnknown()")
+		planModifiers = append(planModifiers, "resource.UseStateForUnknown()")
+		features |= HasFrameworkPlanModifiers
 	}
 
 	if createOnly {
 		// ForceNew.
-		planModifiers = append(planModifiers, "tfsdk.RequiresReplace()")
+		planModifiers = append(planModifiers, "resource.RequiresReplace()")
+		features |= HasFrameworkPlanModifiers
 	}
 
 	if len(planModifiers) > 0 {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // eventIntegrationResourceType returns the Terraform awscc_appintegrations_event_integration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppIntegrations::EventIntegration resource type.
-func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func eventIntegrationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"associations": {
 			// Property: Associations
@@ -161,7 +163,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -198,7 +200,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"event_filter": {
@@ -238,7 +240,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"event_integration_arn": {
@@ -255,7 +257,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -276,7 +278,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -346,7 +348,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

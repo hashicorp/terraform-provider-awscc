@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // observabilityConfigurationResourceType returns the Terraform awscc_apprunner_observability_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppRunner::ObservabilityConfiguration resource type.
-func observabilityConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func observabilityConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"latest": {
 			// Property: Latest
@@ -32,7 +34,7 @@ func observabilityConfigurationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.BoolType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"observability_configuration_arn": {
@@ -49,7 +51,7 @@ func observabilityConfigurationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"observability_configuration_name": {
@@ -71,8 +73,8 @@ func observabilityConfigurationResourceType(ctx context.Context) (tfsdk.Resource
 				validate.StringMatch(regexp.MustCompile("[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"observability_configuration_revision": {
@@ -86,7 +88,7 @@ func observabilityConfigurationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -126,8 +128,8 @@ func observabilityConfigurationResourceType(ctx context.Context) (tfsdk.Resource
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// Tags is a write-only property.
 		},
@@ -170,8 +172,8 @@ func observabilityConfigurationResourceType(ctx context.Context) (tfsdk.Resource
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -181,7 +183,7 @@ func observabilityConfigurationResourceType(ctx context.Context) (tfsdk.Resource
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

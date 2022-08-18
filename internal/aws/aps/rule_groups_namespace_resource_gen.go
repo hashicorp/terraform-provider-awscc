@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // ruleGroupsNamespaceResourceType returns the Terraform awscc_aps_rule_groups_namespace resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::APS::RuleGroupsNamespace resource type.
-func ruleGroupsNamespaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func ruleGroupsNamespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -33,7 +35,7 @@ func ruleGroupsNamespaceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"data": {
@@ -63,7 +65,7 @@ func ruleGroupsNamespaceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -145,7 +147,7 @@ func ruleGroupsNamespaceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,8 @@ package mediaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // flowVpcInterfaceResourceType returns the Terraform awscc_mediaconnect_flow_vpc_interface resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowVpcInterface resource type.
-func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func flowVpcInterfaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"flow_arn": {
 			// Property: FlowArn
@@ -30,7 +32,7 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -44,7 +46,7 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"network_interface_ids": {
@@ -61,7 +63,7 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"role_arn": {
@@ -107,7 +109,7 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

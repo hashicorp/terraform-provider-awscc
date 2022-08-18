@@ -5,6 +5,8 @@ package iotwireless
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // serviceProfileResourceType returns the Terraform awscc_iotwireless_service_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::ServiceProfile resource type.
-func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func serviceProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -31,7 +33,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -46,7 +48,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"lo_ra_wan": {
@@ -129,7 +131,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.StringType,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"dev_status_req_freq": {
@@ -137,7 +139,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"dl_bucket_size": {
@@ -145,7 +147,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"dl_rate": {
@@ -153,7 +155,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"dl_rate_policy": {
@@ -161,7 +163,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.StringType,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"dr_max": {
@@ -169,7 +171,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"dr_min": {
@@ -177,7 +179,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"hr_allowed": {
@@ -185,7 +187,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.BoolType,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"min_gw_diversity": {
@@ -193,7 +195,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"nwk_geo_loc": {
@@ -201,7 +203,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.BoolType,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"pr_allowed": {
@@ -209,7 +211,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.BoolType,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ra_allowed": {
@@ -217,7 +219,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.BoolType,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"report_dev_status_battery": {
@@ -225,7 +227,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.BoolType,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"report_dev_status_margin": {
@@ -233,7 +235,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.BoolType,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"target_per": {
@@ -241,7 +243,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ul_bucket_size": {
@@ -249,7 +251,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ul_rate": {
@@ -257,7 +259,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ul_rate_policy": {
@@ -265,7 +267,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:     types.StringType,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

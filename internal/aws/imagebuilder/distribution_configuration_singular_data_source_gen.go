@@ -5,6 +5,7 @@ package imagebuilder
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // distributionConfigurationDataSourceType returns the Terraform awscc_imagebuilder_distribution_configuration data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ImageBuilder::DistributionConfiguration resource type.
-func distributionConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func distributionConfigurationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

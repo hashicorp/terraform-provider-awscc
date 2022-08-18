@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // endpointAuthorizationResourceType returns the Terraform awscc_redshift_endpoint_authorization resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Redshift::EndpointAuthorization resource type.
-func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func endpointAuthorizationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"account": {
 			// Property: Account
@@ -36,7 +38,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringMatch(regexp.MustCompile("^\\d{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"allowed_all_vp_cs": {
@@ -50,7 +52,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.BoolType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"allowed_vp_cs": {
@@ -70,7 +72,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"authorize_time": {
@@ -84,7 +86,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"cluster_identifier": {
@@ -99,7 +101,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"cluster_status": {
@@ -113,7 +115,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"endpoint_count": {
@@ -127,7 +129,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"force": {
@@ -154,7 +156,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"grantor": {
@@ -169,7 +171,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -183,7 +185,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpc_ids": {
@@ -215,7 +217,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

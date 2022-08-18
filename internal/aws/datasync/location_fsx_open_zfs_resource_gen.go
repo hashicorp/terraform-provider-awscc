@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // locationFSxOpenZFSResourceType returns the Terraform awscc_datasync_location_fsx_open_zfs resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationFSxOpenZFS resource type.
-func locationFSxOpenZFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationFSxOpenZFSResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"fsx_filesystem_arn": {
 			// Property: FsxFilesystemArn
@@ -38,7 +40,7 @@ func locationFSxOpenZFSResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 			// FsxFilesystemArn is a write-only property.
 		},
@@ -55,7 +57,7 @@ func locationFSxOpenZFSResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"location_uri": {
@@ -71,7 +73,7 @@ func locationFSxOpenZFSResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"protocol": {
@@ -150,7 +152,7 @@ func locationFSxOpenZFSResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"security_group_arns": {
@@ -178,7 +180,7 @@ func locationFSxOpenZFSResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"subdirectory": {
@@ -199,8 +201,8 @@ func locationFSxOpenZFSResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -277,7 +279,7 @@ func locationFSxOpenZFSResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

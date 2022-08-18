@@ -5,6 +5,7 @@ package quicksight
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // dataSetDataSourceType returns the Terraform awscc_quicksight_data_set data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::QuickSight::DataSet resource type.
-func dataSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func dataSetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

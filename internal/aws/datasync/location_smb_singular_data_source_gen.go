@@ -5,6 +5,7 @@ package datasync
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // locationSMBDataSourceType returns the Terraform awscc_datasync_location_smb data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationSMB resource type.
-func locationSMBDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func locationSMBDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"agent_arns": {
 			// Property: AgentArns

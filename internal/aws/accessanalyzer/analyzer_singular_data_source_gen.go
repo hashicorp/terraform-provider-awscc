@@ -5,6 +5,7 @@ package accessanalyzer
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // analyzerDataSourceType returns the Terraform awscc_accessanalyzer_analyzer data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::AccessAnalyzer::Analyzer resource type.
-func analyzerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func analyzerDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"analyzer_name": {
 			// Property: AnalyzerName

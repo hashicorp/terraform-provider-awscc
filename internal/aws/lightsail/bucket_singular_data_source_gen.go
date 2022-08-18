@@ -5,6 +5,7 @@ package lightsail
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // bucketDataSourceType returns the Terraform awscc_lightsail_bucket data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Lightsail::Bucket resource type.
-func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func bucketDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"able_to_update_bundle": {
 			// Property: AbleToUpdateBundle

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // healthCheckResourceType returns the Terraform awscc_route53_health_check resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::HealthCheck resource type.
-func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func healthCheckResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"health_check_config": {
 			// Property: HealthCheckConfig
@@ -242,8 +244,8 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"port": {
@@ -274,8 +276,8 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.IntBetween(10, 30),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"resource_path": {
@@ -319,7 +321,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							resource.RequiresReplace(),
 						},
 					},
 				},
@@ -335,7 +337,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"health_check_tags": {
@@ -400,7 +402,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

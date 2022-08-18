@@ -5,6 +5,7 @@ package nimblestudio
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // launchProfileDataSourceType returns the Terraform awscc_nimblestudio_launch_profile data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::NimbleStudio::LaunchProfile resource type.
-func launchProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func launchProfileDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description

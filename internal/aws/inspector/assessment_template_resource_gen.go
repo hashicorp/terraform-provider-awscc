@@ -5,6 +5,8 @@ package inspector
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // assessmentTemplateResourceType returns the Terraform awscc_inspector_assessment_template resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Inspector::AssessmentTemplate resource type.
-func assessmentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func assessmentTemplateResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -28,7 +30,7 @@ func assessmentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"assessment_target_arn": {
@@ -40,7 +42,7 @@ func assessmentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"assessment_template_name": {
@@ -53,8 +55,8 @@ func assessmentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"duration_in_seconds": {
@@ -66,7 +68,7 @@ func assessmentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:     types.Int64Type,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"rules_package_arns": {
@@ -82,7 +84,7 @@ func assessmentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:     types.ListType{ElemType: types.StringType},
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"user_attributes_for_findings": {
@@ -125,8 +127,8 @@ func assessmentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -136,7 +138,7 @@ func assessmentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

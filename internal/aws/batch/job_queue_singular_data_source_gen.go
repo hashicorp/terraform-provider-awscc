@@ -5,6 +5,7 @@ package batch
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // jobQueueDataSourceType returns the Terraform awscc_batch_job_queue data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Batch::JobQueue resource type.
-func jobQueueDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func jobQueueDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"compute_environment_order": {
 			// Property: ComputeEnvironmentOrder

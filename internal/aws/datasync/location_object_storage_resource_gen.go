@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // locationObjectStorageResourceType returns the Terraform awscc_datasync_location_object_storage resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationObjectStorage resource type.
-func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationObjectStorageResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_key": {
 			// Property: AccessKey
@@ -84,7 +86,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 			// BucketName is a write-only property.
 		},
@@ -101,7 +103,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"location_uri": {
@@ -117,7 +119,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"secret_key": {
@@ -156,7 +158,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringMatch(regexp.MustCompile("^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 			// ServerHostname is a write-only property.
 		},
@@ -287,7 +289,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

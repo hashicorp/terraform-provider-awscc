@@ -5,6 +5,8 @@ package lakeformation
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // dataCellsFilterResourceType returns the Terraform awscc_lakeformation_data_cells_filter resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LakeFormation::DataCellsFilter resource type.
-func dataCellsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func dataCellsFilterResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"column_names": {
 			// Property: ColumnNames
@@ -43,8 +45,8 @@ func dataCellsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"column_wildcard": {
@@ -88,8 +90,8 @@ func dataCellsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"database_name": {
@@ -108,7 +110,7 @@ func dataCellsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -127,7 +129,7 @@ func dataCellsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"row_filter": {
@@ -169,8 +171,8 @@ func dataCellsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"table_catalog_id": {
@@ -189,7 +191,7 @@ func dataCellsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(12, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"table_name": {
@@ -208,7 +210,7 @@ func dataCellsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -218,7 +220,7 @@ func dataCellsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

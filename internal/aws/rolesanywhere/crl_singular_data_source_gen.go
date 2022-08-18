@@ -5,6 +5,7 @@ package rolesanywhere
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // cRLDataSourceType returns the Terraform awscc_rolesanywhere_crl data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::RolesAnywhere::CRL resource type.
-func cRLDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func cRLDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"crl_data": {
 			// Property: CrlData

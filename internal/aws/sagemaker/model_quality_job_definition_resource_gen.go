@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // modelQualityJobDefinitionResourceType returns the Terraform awscc_sagemaker_model_quality_job_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelQualityJobDefinition resource type.
-func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func modelQualityJobDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -32,7 +34,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"endpoint_name": {
@@ -65,7 +67,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"job_definition_name": {
@@ -86,8 +88,8 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"job_resources": {
@@ -183,7 +185,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_quality_app_specification": {
@@ -341,7 +343,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_quality_baseline_config": {
@@ -411,8 +413,8 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_quality_job_input": {
@@ -634,7 +636,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"model_quality_job_output_config": {
@@ -770,7 +772,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"network_config": {
@@ -875,8 +877,8 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"role_arn": {
@@ -897,7 +899,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringMatch(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"stopping_condition": {
@@ -936,8 +938,8 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -1003,8 +1005,8 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -1014,7 +1016,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // capacityReservationFleetResourceType returns the Terraform awscc_ec2_capacity_reservation_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::CapacityReservationFleet resource type.
-func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func capacityReservationFleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"allocation_strategy": {
 			// Property: AllocationStrategy
@@ -30,8 +32,8 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"capacity_reservation_fleet_id": {
@@ -43,7 +45,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"end_date": {
@@ -56,8 +58,8 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"instance_match_criteria": {
@@ -78,8 +80,8 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"instance_type_specifications": {
@@ -168,8 +170,8 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"no_remove_end_date": {
@@ -262,8 +264,8 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tenancy": {
@@ -284,8 +286,8 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"total_target_capacity": {
@@ -309,7 +311,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 
