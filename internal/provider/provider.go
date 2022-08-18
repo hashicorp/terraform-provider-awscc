@@ -11,6 +11,7 @@ import (
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -24,7 +25,7 @@ const (
 	defaultAssumeRoleDuration = 1 * time.Hour
 )
 
-func New() tfsdk.Provider {
+func New() provider.Provider {
 	return &AwsCloudControlApiProvider{}
 }
 
@@ -384,7 +385,7 @@ func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdenti
 	return assumeRole
 }
 
-func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
+func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request provider.ConfigureRequest, response *provider.ConfigureResponse) {
 	var config providerData
 
 	diags := request.Config.Get(ctx, &config)
@@ -417,9 +418,9 @@ func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsd
 	p.roleARN = config.RoleARN.Value
 }
 
-func (p *AwsCloudControlApiProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, diag.Diagnostics) {
+func (p *AwsCloudControlApiProvider) GetResources(ctx context.Context) (map[string]provider.ResourceType, diag.Diagnostics) {
 	var diags diag.Diagnostics
-	resources := make(map[string]tfsdk.ResourceType)
+	resources := make(map[string]provider.ResourceType)
 
 	for name, factory := range registry.ResourceFactories() {
 		resourceType, err := factory(ctx)
@@ -439,9 +440,9 @@ func (p *AwsCloudControlApiProvider) GetResources(ctx context.Context) (map[stri
 	return resources, diags
 }
 
-func (p *AwsCloudControlApiProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, diag.Diagnostics) {
+func (p *AwsCloudControlApiProvider) GetDataSources(ctx context.Context) (map[string]provider.DataSourceType, diag.Diagnostics) {
 	var diags diag.Diagnostics
-	dataSources := make(map[string]tfsdk.DataSourceType)
+	dataSources := make(map[string]provider.DataSourceType)
 
 	for name, factory := range registry.DataSourceFactories() {
 		dataSourceType, err := factory(ctx)
