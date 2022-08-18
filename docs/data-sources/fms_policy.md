@@ -32,7 +32,7 @@ Data Source schema for AWS::FMS::Policy
 - `resource_type` (String) An AWS resource type
 - `resource_type_list` (List of String)
 - `resources_clean_up` (Boolean)
-- `security_service_policy_data` (Attributes) (see [below for nested schema](#nestedatt--security_service_policy_data))
+- `security_service_policy_data` (Attributes) Firewall security service policy data. (see [below for nested schema](#nestedatt--security_service_policy_data))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--exclude_map"></a>
@@ -67,8 +67,34 @@ Read-Only:
 
 Read-Only:
 
-- `managed_service_data` (String)
-- `type` (String)
+- `managed_service_data` (String) Firewall managed service data.
+- `policy_option` (Attributes) Firewall policy option. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option))
+- `type` (String) Firewall policy type.
+
+<a id="nestedatt--security_service_policy_data--policy_option"></a>
+### Nested Schema for `security_service_policy_data.policy_option`
+
+Read-Only:
+
+- `network_firewall_policy` (Attributes) Network firewall policy. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_firewall_policy))
+- `third_party_firewall_policy` (Attributes) Third party firewall policy. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--third_party_firewall_policy))
+
+<a id="nestedatt--security_service_policy_data--policy_option--network_firewall_policy"></a>
+### Nested Schema for `security_service_policy_data.policy_option.network_firewall_policy`
+
+Read-Only:
+
+- `firewall_deployment_model` (String) Firewall deployment mode.
+
+
+<a id="nestedatt--security_service_policy_data--policy_option--third_party_firewall_policy"></a>
+### Nested Schema for `security_service_policy_data.policy_option.third_party_firewall_policy`
+
+Read-Only:
+
+- `firewall_deployment_model` (String) Firewall deployment mode.
+
+
 
 
 <a id="nestedatt--tags"></a>

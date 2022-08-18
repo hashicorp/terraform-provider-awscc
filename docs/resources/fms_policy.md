@@ -21,7 +21,7 @@ Creates an AWS Firewall Manager policy.
 - `policy_name` (String)
 - `remediation_enabled` (Boolean)
 - `resource_type` (String) An AWS resource type
-- `security_service_policy_data` (Attributes) (see [below for nested schema](#nestedatt--security_service_policy_data))
+- `security_service_policy_data` (Attributes) Firewall security service policy data. (see [below for nested schema](#nestedatt--security_service_policy_data))
 
 ### Optional
 
@@ -43,11 +43,37 @@ Creates an AWS Firewall Manager policy.
 
 Required:
 
-- `type` (String)
+- `type` (String) Firewall policy type.
 
 Optional:
 
-- `managed_service_data` (String)
+- `managed_service_data` (String) Firewall managed service data.
+- `policy_option` (Attributes) Firewall policy option. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option))
+
+<a id="nestedatt--security_service_policy_data--policy_option"></a>
+### Nested Schema for `security_service_policy_data.policy_option`
+
+Optional:
+
+- `network_firewall_policy` (Attributes) Network firewall policy. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_firewall_policy))
+- `third_party_firewall_policy` (Attributes) Third party firewall policy. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--third_party_firewall_policy))
+
+<a id="nestedatt--security_service_policy_data--policy_option--network_firewall_policy"></a>
+### Nested Schema for `security_service_policy_data.policy_option.network_firewall_policy`
+
+Required:
+
+- `firewall_deployment_model` (String) Firewall deployment mode.
+
+
+<a id="nestedatt--security_service_policy_data--policy_option--third_party_firewall_policy"></a>
+### Nested Schema for `security_service_policy_data.policy_option.third_party_firewall_policy`
+
+Required:
+
+- `firewall_deployment_model` (String) Firewall deployment mode.
+
+
 
 
 <a id="nestedatt--exclude_map"></a>

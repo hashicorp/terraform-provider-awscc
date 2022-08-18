@@ -27,6 +27,7 @@ Resource Schema of AWS::EC2::IPAMPool Type
 - `allocation_min_netmask_length` (Number) The minimum allowed netmask length for allocations made from this pool.
 - `allocation_resource_tags` (Attributes Set) When specified, an allocation will not be allowed unless a resource has a matching set of tags. (see [below for nested schema](#nestedatt--allocation_resource_tags))
 - `auto_import` (Boolean) Determines what to do if IPAM discovers resources that haven't been assigned an allocation. If set to true, an allocation will be made automatically.
+- `aws_service` (String) Limits which service in Amazon Web Services that the pool can be used in.
 - `description` (String)
 - `locale` (String) The region of this pool. If not set, this will default to "None" which will disable non-custom allocations. If the locale has been specified for the source pool, this value must match.
 - `provisioned_cidrs` (Attributes Set) A list of cidrs representing the address space available for allocation in this pool. (see [below for nested schema](#nestedatt--provisioned_cidrs))

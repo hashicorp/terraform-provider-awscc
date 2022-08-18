@@ -20,13 +20,13 @@ Resource Type definition for AWS::Connect::ContactFlow
 - `content` (String) The content of the contact flow in JSON format.
 - `instance_arn` (String) The identifier of the Amazon Connect instance (ARN).
 - `name` (String) The name of the contact flow.
+- `type` (String) The type of the contact flow.
 
 ### Optional
 
 - `description` (String) The description of the contact flow.
 - `state` (String) The state of the contact flow.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
-- `type` (String) The type of the contact flow.
 
 ### Read-Only
 

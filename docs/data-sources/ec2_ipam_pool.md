@@ -28,6 +28,7 @@ Data Source schema for AWS::EC2::IPAMPool
 - `allocation_resource_tags` (Attributes Set) When specified, an allocation will not be allowed unless a resource has a matching set of tags. (see [below for nested schema](#nestedatt--allocation_resource_tags))
 - `arn` (String) The Amazon Resource Name (ARN) of the IPAM Pool.
 - `auto_import` (Boolean) Determines what to do if IPAM discovers resources that haven't been assigned an allocation. If set to true, an allocation will be made automatically.
+- `aws_service` (String) Limits which service in Amazon Web Services that the pool can be used in.
 - `description` (String)
 - `ipam_arn` (String) The Amazon Resource Name (ARN) of the IPAM this pool is a part of.
 - `ipam_pool_id` (String) Id of the IPAM Pool.
