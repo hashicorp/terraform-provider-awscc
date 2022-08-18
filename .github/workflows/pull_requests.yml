@@ -1,0 +1,15 @@
+on:
+  - pull_request_target
+
+name: Pull Request Target (All types)
+jobs:
+  NeedsTriageLabeler:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Apply needs-triage Label
+      uses: actions/labeler@v3
+      if: github.event.action == 'opened' && !contains(fromJSON('["breathingdust", "ewbankkit", "gdavison", "johnsonaj", "YakDriver", "zhelding"]'), github.actor)
+      with:
+        configuration-path: .github/labeler-pr-needs-triage.yml
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
