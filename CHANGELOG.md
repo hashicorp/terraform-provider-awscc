@@ -1,10 +1,16 @@
 ## 0.30.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_msk_serverless_cluster`
+* **New Data Source:** `awscc_msk_serverless_clusters`
+* **New Resource:** `awscc_msk_serverless_cluster`
+
 ## [0.29.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.29.0) (August  4, 2022)
 
 BUG FIXES:
 
 * Documentation: Nested attributes are now correctly grouped in "optional", "required" and "read-only" ([#580](https://github.com/hashicorp/terraform-provider-awscc/issues/580))
-
 
 ## [0.28.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.28.0) (July 21, 2022)
 
