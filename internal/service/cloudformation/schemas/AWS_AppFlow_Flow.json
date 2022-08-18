@@ -518,7 +518,8 @@
             "enum": [
                 "INSERT",
                 "UPSERT",
-                "UPDATE"
+                "UPDATE",
+                "DELETE"
             ]
         },
         "FileType": {

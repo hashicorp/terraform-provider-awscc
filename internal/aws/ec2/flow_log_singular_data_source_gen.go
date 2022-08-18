@@ -169,7 +169,9 @@ func flowLogDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 			//   "enum": [
 			//     "NetworkInterface",
 			//     "Subnet",
-			//     "VPC"
+			//     "VPC",
+			//     "TransitGateway",
+			//     "TransitGatewayAttachment"
 			//   ],
 			//   "type": "string"
 			// }

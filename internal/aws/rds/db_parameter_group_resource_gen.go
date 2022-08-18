@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -26,13 +25,10 @@ func dBParameterGroupResourceType(ctx context.Context) (provider.ResourceType, e
 			// Property: DBParameterGroupName
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Specifies the name of the DB parameter group",
-			//   "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
-			Description: "Specifies the name of the DB parameter group",
-			Type:        types.StringType,
-			Computed:    true,
+			Type:     types.StringType,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 			},
@@ -41,12 +37,10 @@ func dBParameterGroupResourceType(ctx context.Context) (provider.ResourceType, e
 			// Property: Description
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Provides the customer-specified description for this DB parameter group.",
 			//   "type": "string"
 			// }
-			Description: "Provides the customer-specified description for this DB parameter group.",
-			Type:        types.StringType,
-			Required:    true,
+			Type:     types.StringType,
+			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.RequiresReplace(),
 			},
@@ -55,103 +49,78 @@ func dBParameterGroupResourceType(ctx context.Context) (provider.ResourceType, e
 			// Property: Family
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The DB parameter group family name.",
 			//   "type": "string"
 			// }
-			Description: "The DB parameter group family name.",
-			Type:        types.StringType,
-			Required:    true,
+			Type:     types.StringType,
+			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.RequiresReplace(),
+			},
+		},
+		"id": {
+			// Property: Id
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"parameters": {
 			// Property: Parameters
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "An array of parameter names and values for the parameter update.",
 			//   "type": "object"
 			// }
-			Description: "An array of parameter names and values for the parameter update.",
-			Type:        types.MapType{ElemType: types.StringType},
-			Optional:    true,
-			// Parameters is a write-only property.
+			Type:     types.MapType{ElemType: types.StringType},
+			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
 			//   "items": {
-			//     "description": "A key-value pair to associate with a resource.",
+			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
 			//         "type": "string"
 			//       },
 			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
 			//         "type": "string"
 			//       }
 			//     },
 			//     "required": [
+			//       "Value",
 			//       "Key"
 			//     ],
 			//     "type": "object"
 			//   },
-			//   "maxItems": 50,
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
+						Type:     types.StringType,
+						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Optional:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
+						Type:     types.StringType,
+						Required: true,
 					},
 				},
 			),
 			Optional: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(50),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-			},
-		},
-	}
-
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
 		},
 	}
 
 	schema := tfsdk.Schema{
-		Description: "The AWS::RDS::DBParameterGroup resource creates a custom parameter group for an RDS database family",
+		Description: "Resource Type definition for AWS::RDS::DBParameterGroup",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -160,20 +129,18 @@ func dBParameterGroupResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBParameterGroup").WithTerraformTypeName("awscc_rds_db_parameter_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"db_parameter_group_name": "DBParameterGroupName",
 		"description":             "Description",
 		"family":                  "Family",
+		"id":                      "Id",
 		"key":                     "Key",
 		"parameters":              "Parameters",
 		"tags":                    "Tags",
 		"value":                   "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Parameters",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

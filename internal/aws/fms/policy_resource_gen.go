@@ -318,13 +318,71 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Firewall security service policy data.",
 			//   "properties": {
 			//     "ManagedServiceData": {
+			//       "description": "Firewall managed service data.",
 			//       "maxLength": 8192,
 			//       "minLength": 1,
 			//       "type": "string"
 			//     },
+			//     "PolicyOption": {
+			//       "additionalProperties": false,
+			//       "description": "Firewall policy option.",
+			//       "oneOf": [
+			//         {
+			//           "required": [
+			//             "NetworkFirewallPolicy"
+			//           ]
+			//         },
+			//         {
+			//           "required": [
+			//             "ThirdPartyFirewallPolicy"
+			//           ]
+			//         }
+			//       ],
+			//       "properties": {
+			//         "NetworkFirewallPolicy": {
+			//           "additionalProperties": false,
+			//           "description": "Network firewall policy.",
+			//           "properties": {
+			//             "FirewallDeploymentModel": {
+			//               "description": "Firewall deployment mode.",
+			//               "enum": [
+			//                 "DISTRIBUTED",
+			//                 "CENTRALIZED"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "FirewallDeploymentModel"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "ThirdPartyFirewallPolicy": {
+			//           "additionalProperties": false,
+			//           "description": "Third party firewall policy.",
+			//           "properties": {
+			//             "FirewallDeploymentModel": {
+			//               "description": "Firewall deployment mode.",
+			//               "enum": [
+			//                 "DISTRIBUTED",
+			//                 "CENTRALIZED"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "FirewallDeploymentModel"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
 			//     "Type": {
+			//       "description": "Firewall policy type.",
 			//       "enum": [
 			//         "WAF",
 			//         "WAFV2",
@@ -333,6 +391,7 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//         "SECURITY_GROUPS_CONTENT_AUDIT",
 			//         "SECURITY_GROUPS_USAGE_AUDIT",
 			//         "NETWORK_FIREWALL",
+			//         "THIRD_PARTY_FIREWALL",
 			//         "DNS_FIREWALL"
 			//       ],
 			//       "type": "string"
@@ -343,20 +402,86 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Firewall security service policy data.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"managed_service_data": {
 						// Property: ManagedServiceData
-						Type:     types.StringType,
-						Optional: true,
+						Description: "Firewall managed service data.",
+						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 8192),
 						},
 					},
+					"policy_option": {
+						// Property: PolicyOption
+						Description: "Firewall policy option.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"network_firewall_policy": {
+									// Property: NetworkFirewallPolicy
+									Description: "Network firewall policy.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"firewall_deployment_model": {
+												// Property: FirewallDeploymentModel
+												Description: "Firewall deployment mode.",
+												Type:        types.StringType,
+												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"DISTRIBUTED",
+														"CENTRALIZED",
+													}),
+												},
+											},
+										},
+									),
+									Optional: true,
+								},
+								"third_party_firewall_policy": {
+									// Property: ThirdPartyFirewallPolicy
+									Description: "Third party firewall policy.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"firewall_deployment_model": {
+												// Property: FirewallDeploymentModel
+												Description: "Firewall deployment mode.",
+												Type:        types.StringType,
+												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"DISTRIBUTED",
+														"CENTRALIZED",
+													}),
+												},
+											},
+										},
+									),
+									Optional: true,
+								},
+							},
+						),
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.RequiredAttributes(
+								validate.OneOfRequired(
+									validate.Required(
+										"network_firewall_policy",
+									),
+									validate.Required(
+										"third_party_firewall_policy",
+									),
+								),
+							),
+						},
+					},
 					"type": {
 						// Property: Type
-						Type:     types.StringType,
-						Required: true,
+						Description: "Firewall policy type.",
+						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"WAF",
@@ -366,6 +491,7 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"SECURITY_GROUPS_CONTENT_AUDIT",
 								"SECURITY_GROUPS_USAGE_AUDIT",
 								"NETWORK_FIREWALL",
+								"THIRD_PARTY_FIREWALL",
 								"DNS_FIREWALL",
 							}),
 						},
@@ -446,12 +572,15 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 		"delete_all_policy_resources":  "DeleteAllPolicyResources",
 		"exclude_map":                  "ExcludeMap",
 		"exclude_resource_tags":        "ExcludeResourceTags",
+		"firewall_deployment_model":    "FirewallDeploymentModel",
 		"id":                           "Id",
 		"include_map":                  "IncludeMap",
 		"key":                          "Key",
 		"managed_service_data":         "ManagedServiceData",
+		"network_firewall_policy":      "NetworkFirewallPolicy",
 		"orgunit":                      "ORGUNIT",
 		"policy_name":                  "PolicyName",
+		"policy_option":                "PolicyOption",
 		"remediation_enabled":          "RemediationEnabled",
 		"resource_tags":                "ResourceTags",
 		"resource_type":                "ResourceType",
@@ -459,6 +588,7 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 		"resources_clean_up":           "ResourcesCleanUp",
 		"security_service_policy_data": "SecurityServicePolicyData",
 		"tags":                         "Tags",
+		"third_party_firewall_policy":  "ThirdPartyFirewallPolicy",
 		"type":                         "Type",
 		"value":                        "Value",
 	})

@@ -3,12 +3,12 @@
 page_title: "awscc_rds_db_parameter_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::RDS::DBParameterGroup resource creates a custom parameter group for an RDS database family
+  Resource Type definition for AWS::RDS::DBParameterGroup
 ---
 
 # awscc_rds_db_parameter_group (Resource)
 
-The AWS::RDS::DBParameterGroup resource creates a custom parameter group for an RDS database family
+Resource Type definition for AWS::RDS::DBParameterGroup
 
 
 
@@ -17,29 +17,26 @@ The AWS::RDS::DBParameterGroup resource creates a custom parameter group for an 
 
 ### Required
 
-- `description` (String) Provides the customer-specified description for this DB parameter group.
-- `family` (String) The DB parameter group family name.
+- `description` (String)
+- `family` (String)
 
 ### Optional
 
-- `parameters` (Map of String) An array of parameter names and values for the parameter update.
-- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `parameters` (Map of String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `db_parameter_group_name` (String) Specifies the name of the DB parameter group
-- `id` (String) Uniquely identifies the resource.
+- `db_parameter_group_name` (String)
+- `id` (String) The ID of this resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Required:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-Optional:
-
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String)
+- `value` (String)
 
 ## Import
 

@@ -80,6 +80,9 @@
     },
     "KinesisStreamSpecification": {
       "$ref": "#/definitions/KinesisStreamSpecification"
+    },
+    "ImportSourceSpecification" : {
+      "$ref": "#/definitions/ImportSourceSpecification"
     }
   },
   "propertyTransform": {
@@ -290,6 +293,71 @@
         }
       },
       "required" : [ "Enabled" ]
+    },
+    "ImportSourceSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "S3BucketSource" : {
+          "$ref" : "#/definitions/S3BucketSource"
+        },
+        "InputFormat" : {
+          "type" : "string"
+        },
+        "InputFormatOptions" : {
+          "$ref" : "#/definitions/InputFormatOptions"
+        },
+        "InputCompressionType" : {
+          "type" : "string"
+        }
+      },
+      "required" : [
+        "S3BucketSource",
+        "InputFormat"
+      ]
+    },
+    "S3BucketSource" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "S3BucketOwner" : {
+          "type" : "string"
+        },
+        "S3Bucket" : {
+          "type" : "string"
+        },
+        "S3KeyPrefix" : {
+          "type" : "string"
+        }
+      },
+      "required" : [
+        "S3Bucket"
+      ]
+    },
+    "InputFormatOptions" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Csv" : {
+          "$ref" : "#/definitions/Csv"
+        }
+      }
+    },
+    "Csv" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "HeaderList" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Delimiter" : {
+          "type" : "string"
+        }
+      }
     }
   },
   "tagging": {
@@ -301,12 +369,19 @@
   },
   "required" : [ "KeySchema" ],
   "readOnlyProperties" : [ "/properties/Arn", "/properties/StreamArn" ],
-  "createOnlyProperties" : [ "/properties/TableName" ],
+  "createOnlyProperties" : [
+    "/properties/TableName",
+    "/properties/ImportSourceSpecification"
+  ],
   "primaryIdentifier" : [ "/properties/TableName" ],
+  "writeOnlyProperties": [
+    "/properties/ImportSourceSpecification"
+  ],
   "handlers": {
         "create": {
             "permissions": [
               "dynamodb:CreateTable",
+              "dynamodb:DescribeImport",
               "dynamodb:DescribeTable",
               "dynamodb:DescribeTimeToLive",
               "dynamodb:UpdateTimeToLive",
@@ -317,17 +392,30 @@
               "dynamodb:EnableKinesisStreamingDestination",
               "dynamodb:DisableKinesisStreamingDestination",
               "dynamodb:DescribeKinesisStreamingDestination",
+              "dynamodb:ImportTable",
               "dynamodb:ListTagsOfResource",
               "dynamodb:TagResource",
               "kinesis:DescribeStream",
               "kinesis:PutRecords",
               "iam:CreateServiceLinkedRole",
               "kms:CreateGrant",
+              "kms:Decrypt",
               "kms:Describe*",
+              "kms:Encrypt",
               "kms:Get*",
               "kms:List*",
-              "kms:RevokeGrant"
-            ]
+              "kms:RevokeGrant",
+              "logs:CreateLogGroup",
+              "logs:CreateLogStream",
+              "logs:DescribeLogGroups",
+              "logs:DescribeLogStreams",
+              "logs:PutLogEvents",
+              "logs:PutRetentionPolicy",
+              "s3:GetObject",
+              "s3:GetObjectMetadata",
+              "s3:ListBucket"
+            ],
+            "timeoutInMinutes": 720
         },
         "read": {
             "permissions": [
@@ -360,13 +448,15 @@
                 "kms:Get*",
                 "kms:List*",
                 "kms:RevokeGrant"
-            ]
+            ],
+            "timeoutInMinutes": 720
         },
         "delete": {
             "permissions": [
                 "dynamodb:DeleteTable",
                 "dynamodb:DescribeTable"
-            ]
+            ],
+            "timeoutInMinutes": 720
         },
         "list": {
             "permissions": [

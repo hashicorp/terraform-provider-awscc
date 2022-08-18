@@ -23,6 +23,45 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::EventSourceMapping resource type.
 func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"amazon_managed_kafka_event_source_config": {
+			// Property: AmazonManagedKafkaEventSourceConfig
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Specific configuration settings for an MSK event source.",
+			//   "properties": {
+			//     "ConsumerGroupId": {
+			//       "description": "The identifier for the Kafka Consumer Group to join.",
+			//       "maxLength": 200,
+			//       "minLength": 1,
+			//       "pattern": "[a-zA-Z0-9-\\/*:_+=.@-]*",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "Specific configuration settings for an MSK event source.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"consumer_group_id": {
+						// Property: ConsumerGroupId
+						Description: "The identifier for the Kafka Consumer Group to join.",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 200),
+							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9-\\/*:_+=.@-]*"), ""),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 		"batch_size": {
 			// Property: BatchSize
 			// CloudFormation resource type schema:
@@ -410,6 +449,45 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 				resource.RequiresReplace(),
 			},
 		},
+		"self_managed_kafka_event_source_config": {
+			// Property: SelfManagedKafkaEventSourceConfig
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Specific configuration settings for a Self-Managed Apache Kafka event source.",
+			//   "properties": {
+			//     "ConsumerGroupId": {
+			//       "description": "The identifier for the Kafka Consumer Group to join.",
+			//       "maxLength": 200,
+			//       "minLength": 1,
+			//       "pattern": "[a-zA-Z0-9-\\/*:_+=.@-]*",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "Specific configuration settings for a Self-Managed Apache Kafka event source.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"consumer_group_id": {
+						// Property: ConsumerGroupId
+						Description: "The identifier for the Kafka Consumer Group to join.",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 200),
+							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9-\\/*:_+=.@-]*"), ""),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 		"source_access_configurations": {
 			// Property: SourceAccessConfigurations
 			// CloudFormation resource type schema:
@@ -582,34 +660,37 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"batch_size":                         "BatchSize",
-		"bisect_batch_on_function_error":     "BisectBatchOnFunctionError",
-		"destination":                        "Destination",
-		"destination_config":                 "DestinationConfig",
-		"enabled":                            "Enabled",
-		"endpoints":                          "Endpoints",
-		"event_source_arn":                   "EventSourceArn",
-		"filter_criteria":                    "FilterCriteria",
-		"filters":                            "Filters",
-		"function_name":                      "FunctionName",
-		"function_response_types":            "FunctionResponseTypes",
-		"id":                                 "Id",
-		"kafka_bootstrap_servers":            "KafkaBootstrapServers",
-		"maximum_batching_window_in_seconds": "MaximumBatchingWindowInSeconds",
-		"maximum_record_age_in_seconds":      "MaximumRecordAgeInSeconds",
-		"maximum_retry_attempts":             "MaximumRetryAttempts",
-		"on_failure":                         "OnFailure",
-		"parallelization_factor":             "ParallelizationFactor",
-		"pattern":                            "Pattern",
-		"queues":                             "Queues",
-		"self_managed_event_source":          "SelfManagedEventSource",
-		"source_access_configurations":       "SourceAccessConfigurations",
-		"starting_position":                  "StartingPosition",
-		"starting_position_timestamp":        "StartingPositionTimestamp",
-		"topics":                             "Topics",
-		"tumbling_window_in_seconds":         "TumblingWindowInSeconds",
-		"type":                               "Type",
-		"uri":                                "URI",
+		"amazon_managed_kafka_event_source_config": "AmazonManagedKafkaEventSourceConfig",
+		"batch_size":                             "BatchSize",
+		"bisect_batch_on_function_error":         "BisectBatchOnFunctionError",
+		"consumer_group_id":                      "ConsumerGroupId",
+		"destination":                            "Destination",
+		"destination_config":                     "DestinationConfig",
+		"enabled":                                "Enabled",
+		"endpoints":                              "Endpoints",
+		"event_source_arn":                       "EventSourceArn",
+		"filter_criteria":                        "FilterCriteria",
+		"filters":                                "Filters",
+		"function_name":                          "FunctionName",
+		"function_response_types":                "FunctionResponseTypes",
+		"id":                                     "Id",
+		"kafka_bootstrap_servers":                "KafkaBootstrapServers",
+		"maximum_batching_window_in_seconds":     "MaximumBatchingWindowInSeconds",
+		"maximum_record_age_in_seconds":          "MaximumRecordAgeInSeconds",
+		"maximum_retry_attempts":                 "MaximumRetryAttempts",
+		"on_failure":                             "OnFailure",
+		"parallelization_factor":                 "ParallelizationFactor",
+		"pattern":                                "Pattern",
+		"queues":                                 "Queues",
+		"self_managed_event_source":              "SelfManagedEventSource",
+		"self_managed_kafka_event_source_config": "SelfManagedKafkaEventSourceConfig",
+		"source_access_configurations":           "SourceAccessConfigurations",
+		"starting_position":                      "StartingPosition",
+		"starting_position_timestamp":            "StartingPositionTimestamp",
+		"topics":                                 "Topics",
+		"tumbling_window_in_seconds":             "TumblingWindowInSeconds",
+		"type":                                   "Type",
+		"uri":                                    "URI",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

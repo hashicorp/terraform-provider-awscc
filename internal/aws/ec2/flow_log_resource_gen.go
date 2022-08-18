@@ -225,7 +225,9 @@ func flowLogResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//   "enum": [
 			//     "NetworkInterface",
 			//     "Subnet",
-			//     "VPC"
+			//     "VPC",
+			//     "TransitGateway",
+			//     "TransitGatewayAttachment"
 			//   ],
 			//   "type": "string"
 			// }
@@ -237,6 +239,8 @@ func flowLogResourceType(ctx context.Context) (provider.ResourceType, error) {
 					"NetworkInterface",
 					"Subnet",
 					"VPC",
+					"TransitGateway",
+					"TransitGatewayAttachment",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{

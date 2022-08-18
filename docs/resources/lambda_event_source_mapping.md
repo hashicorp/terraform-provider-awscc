@@ -21,6 +21,7 @@ Resource Type definition for AWS::Lambda::EventSourceMapping
 
 ### Optional
 
+- `amazon_managed_kafka_event_source_config` (Attributes) Specific configuration settings for an MSK event source. (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config))
 - `batch_size` (Number) The maximum number of items to retrieve in a single batch.
 - `bisect_batch_on_function_error` (Boolean) (Streams) If the function returns an error, split the batch in two and retry.
 - `destination_config` (Attributes) (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records. (see [below for nested schema](#nestedatt--destination_config))
@@ -34,6 +35,7 @@ Resource Type definition for AWS::Lambda::EventSourceMapping
 - `parallelization_factor` (Number) (Streams) The number of batches to process from each shard concurrently.
 - `queues` (List of String) (ActiveMQ) A list of ActiveMQ queues.
 - `self_managed_event_source` (Attributes) Self-managed event source endpoints. (see [below for nested schema](#nestedatt--self_managed_event_source))
+- `self_managed_kafka_event_source_config` (Attributes) Specific configuration settings for a Self-Managed Apache Kafka event source. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config))
 - `source_access_configurations` (Attributes List) A list of SourceAccessConfiguration. (see [below for nested schema](#nestedatt--source_access_configurations))
 - `starting_position` (String) The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.
 - `starting_position_timestamp` (Number) With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.
@@ -43,6 +45,14 @@ Resource Type definition for AWS::Lambda::EventSourceMapping
 ### Read-Only
 
 - `id` (String) Event Source Mapping Identifier UUID.
+
+<a id="nestedatt--amazon_managed_kafka_event_source_config"></a>
+### Nested Schema for `amazon_managed_kafka_event_source_config`
+
+Optional:
+
+- `consumer_group_id` (String) The identifier for the Kafka Consumer Group to join.
+
 
 <a id="nestedatt--destination_config"></a>
 ### Nested Schema for `destination_config`
@@ -90,6 +100,14 @@ Optional:
 
 - `kafka_bootstrap_servers` (List of String) A list of Kafka server endpoints.
 
+
+
+<a id="nestedatt--self_managed_kafka_event_source_config"></a>
+### Nested Schema for `self_managed_kafka_event_source_config`
+
+Optional:
+
+- `consumer_group_id` (String) The identifier for the Kafka Consumer Group to join.
 
 
 <a id="nestedatt--source_access_configurations"></a>

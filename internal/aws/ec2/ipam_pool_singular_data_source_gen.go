@@ -137,6 +137,20 @@ func iPAMPoolDataSourceType(ctx context.Context) (provider.DataSourceType, error
 			Type:        types.BoolType,
 			Computed:    true,
 		},
+		"aws_service": {
+			// Property: AwsService
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Limits which service in Amazon Web Services that the pool can be used in.",
+			//   "enum": [
+			//     "ec2"
+			//   ],
+			//   "type": "string"
+			// }
+			Description: "Limits which service in Amazon Web Services that the pool can be used in.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -392,6 +406,7 @@ func iPAMPoolDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		"allocation_resource_tags":          "AllocationResourceTags",
 		"arn":                               "Arn",
 		"auto_import":                       "AutoImport",
+		"aws_service":                       "AwsService",
 		"cidr":                              "Cidr",
 		"description":                       "Description",
 		"ipam_arn":                          "IpamArn",

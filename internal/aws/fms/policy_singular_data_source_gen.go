@@ -271,13 +271,71 @@ func policyDataSourceType(ctx context.Context) (provider.DataSourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Firewall security service policy data.",
 			//   "properties": {
 			//     "ManagedServiceData": {
+			//       "description": "Firewall managed service data.",
 			//       "maxLength": 8192,
 			//       "minLength": 1,
 			//       "type": "string"
 			//     },
+			//     "PolicyOption": {
+			//       "additionalProperties": false,
+			//       "description": "Firewall policy option.",
+			//       "oneOf": [
+			//         {
+			//           "required": [
+			//             "NetworkFirewallPolicy"
+			//           ]
+			//         },
+			//         {
+			//           "required": [
+			//             "ThirdPartyFirewallPolicy"
+			//           ]
+			//         }
+			//       ],
+			//       "properties": {
+			//         "NetworkFirewallPolicy": {
+			//           "additionalProperties": false,
+			//           "description": "Network firewall policy.",
+			//           "properties": {
+			//             "FirewallDeploymentModel": {
+			//               "description": "Firewall deployment mode.",
+			//               "enum": [
+			//                 "DISTRIBUTED",
+			//                 "CENTRALIZED"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "FirewallDeploymentModel"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "ThirdPartyFirewallPolicy": {
+			//           "additionalProperties": false,
+			//           "description": "Third party firewall policy.",
+			//           "properties": {
+			//             "FirewallDeploymentModel": {
+			//               "description": "Firewall deployment mode.",
+			//               "enum": [
+			//                 "DISTRIBUTED",
+			//                 "CENTRALIZED"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "FirewallDeploymentModel"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
 			//     "Type": {
+			//       "description": "Firewall policy type.",
 			//       "enum": [
 			//         "WAF",
 			//         "WAFV2",
@@ -286,6 +344,7 @@ func policyDataSourceType(ctx context.Context) (provider.DataSourceType, error) 
 			//         "SECURITY_GROUPS_CONTENT_AUDIT",
 			//         "SECURITY_GROUPS_USAGE_AUDIT",
 			//         "NETWORK_FIREWALL",
+			//         "THIRD_PARTY_FIREWALL",
 			//         "DNS_FIREWALL"
 			//       ],
 			//       "type": "string"
@@ -296,17 +355,59 @@ func policyDataSourceType(ctx context.Context) (provider.DataSourceType, error) 
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Firewall security service policy data.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"managed_service_data": {
 						// Property: ManagedServiceData
-						Type:     types.StringType,
+						Description: "Firewall managed service data.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"policy_option": {
+						// Property: PolicyOption
+						Description: "Firewall policy option.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"network_firewall_policy": {
+									// Property: NetworkFirewallPolicy
+									Description: "Network firewall policy.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"firewall_deployment_model": {
+												// Property: FirewallDeploymentModel
+												Description: "Firewall deployment mode.",
+												Type:        types.StringType,
+												Computed:    true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"third_party_firewall_policy": {
+									// Property: ThirdPartyFirewallPolicy
+									Description: "Third party firewall policy.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"firewall_deployment_model": {
+												// Property: FirewallDeploymentModel
+												Description: "Firewall deployment mode.",
+												Type:        types.StringType,
+												Computed:    true,
+											},
+										},
+									),
+									Computed: true,
+								},
+							},
+						),
 						Computed: true,
 					},
 					"type": {
 						// Property: Type
-						Type:     types.StringType,
-						Computed: true,
+						Description: "Firewall policy type.",
+						Type:        types.StringType,
+						Computed:    true,
 					},
 				},
 			),
@@ -381,12 +482,15 @@ func policyDataSourceType(ctx context.Context) (provider.DataSourceType, error) 
 		"delete_all_policy_resources":  "DeleteAllPolicyResources",
 		"exclude_map":                  "ExcludeMap",
 		"exclude_resource_tags":        "ExcludeResourceTags",
+		"firewall_deployment_model":    "FirewallDeploymentModel",
 		"id":                           "Id",
 		"include_map":                  "IncludeMap",
 		"key":                          "Key",
 		"managed_service_data":         "ManagedServiceData",
+		"network_firewall_policy":      "NetworkFirewallPolicy",
 		"orgunit":                      "ORGUNIT",
 		"policy_name":                  "PolicyName",
+		"policy_option":                "PolicyOption",
 		"remediation_enabled":          "RemediationEnabled",
 		"resource_tags":                "ResourceTags",
 		"resource_type":                "ResourceType",
@@ -394,6 +498,7 @@ func policyDataSourceType(ctx context.Context) (provider.DataSourceType, error) 
 		"resources_clean_up":           "ResourcesCleanUp",
 		"security_service_policy_data": "SecurityServicePolicyData",
 		"tags":                         "Tags",
+		"third_party_firewall_policy":  "ThirdPartyFirewallPolicy",
 		"type":                         "Type",
 		"value":                        "Value",
 	})
