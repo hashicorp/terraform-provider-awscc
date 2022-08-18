@@ -2561,6 +2561,11 @@ resource_schema "aws_synthetics_canary" {
 
 resource_schema "aws_synthetics_group" {
   cloudformation_type_name = "AWS::Synthetics::Group"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_timestream_database" {

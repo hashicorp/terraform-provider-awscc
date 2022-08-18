@@ -114,17 +114,12 @@ func launchProfileDataSourceType(ctx context.Context) (provider.DataSourceType, 
 			//           "g4dn.12xlarge",
 			//           "g4dn.16xlarge",
 			//           "g3.4xlarge",
-			//           "g3.8xlarge",
-			//           "g3.16xlarge",
 			//           "g3s.xlarge",
 			//           "g5.xlarge",
 			//           "g5.2xlarge",
 			//           "g5.4xlarge",
 			//           "g5.8xlarge",
-			//           "g5.12xlarge",
-			//           "g5.16xlarge",
-			//           "g5.24xlarge",
-			//           "g5.48xlarge"
+			//           "g5.16xlarge"
 			//         ],
 			//         "type": "string"
 			//       },

@@ -363,7 +363,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_servicecatalogappregistry_applications -cftype AWS::ServiceCatalogAppRegistry::Application -package servicecatalogappregistry ../aws/servicecatalogappregistry/application_plural_data_source_gen.go ../aws/servicecatalogappregistry/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_servicecatalogappregistry_attribute_groups -cftype AWS::ServiceCatalogAppRegistry::AttributeGroup -package servicecatalogappregistry ../aws/servicecatalogappregistry/attribute_group_plural_data_source_gen.go ../aws/servicecatalogappregistry/attribute_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_signer_signing_profiles -cftype AWS::Signer::SigningProfile -package signer ../aws/signer/signing_profile_plural_data_source_gen.go ../aws/signer/signing_profile_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_synthetics_groups -cftype AWS::Synthetics::Group -package synthetics ../aws/synthetics/group_plural_data_source_gen.go ../aws/synthetics/group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_databases -cftype AWS::Timestream::Database -package timestream ../aws/timestream/database_plural_data_source_gen.go ../aws/timestream/database_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_scheduled_queries -cftype AWS::Timestream::ScheduledQuery -package timestream ../aws/timestream/scheduled_query_plural_data_source_gen.go ../aws/timestream/scheduled_query_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_tables -cftype AWS::Timestream::Table -package timestream ../aws/timestream/table_plural_data_source_gen.go ../aws/timestream/table_plural_data_source_gen_test.go
@@ -496,7 +495,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sqs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/synthetics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/transfer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/voiceid"

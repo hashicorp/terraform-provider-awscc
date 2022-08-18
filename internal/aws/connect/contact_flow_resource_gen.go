@@ -207,8 +207,7 @@ func contactFlowResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Description: "The type of the contact flow.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"CONTACT_FLOW",
@@ -223,7 +222,6 @@ func contactFlowResourceType(ctx context.Context) (provider.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},

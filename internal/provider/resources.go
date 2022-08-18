@@ -523,7 +523,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_signer_signing_profile -cfschema ../service/cloudformation/schemas/AWS_Signer_SigningProfile.json -package signer -- ../aws/signer/signing_profile_resource_gen.go ../aws/signer/signing_profile_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_stepfunctions_activity -cfschema ../service/cloudformation/schemas/AWS_StepFunctions_Activity.json -package stepfunctions -- ../aws/stepfunctions/activity_resource_gen.go ../aws/stepfunctions/activity_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_stepfunctions_state_machine -cfschema ../service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json -package stepfunctions -- ../aws/stepfunctions/state_machine_resource_gen.go ../aws/stepfunctions/state_machine_resource_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_synthetics_group -cfschema ../service/cloudformation/schemas/AWS_Synthetics_Group.json -package synthetics -- ../aws/synthetics/group_resource_gen.go ../aws/synthetics/group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_database -cfschema ../service/cloudformation/schemas/AWS_Timestream_Database.json -package timestream -- ../aws/timestream/database_resource_gen.go ../aws/timestream/database_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_scheduled_query -cfschema ../service/cloudformation/schemas/AWS_Timestream_ScheduledQuery.json -package timestream -- ../aws/timestream/scheduled_query_resource_gen.go ../aws/timestream/scheduled_query_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_table -cfschema ../service/cloudformation/schemas/AWS_Timestream_Table.json -package timestream -- ../aws/timestream/table_resource_gen.go ../aws/timestream/table_resource_gen_test.go
@@ -679,7 +678,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sso"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/synthetics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/transfer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/voiceid"

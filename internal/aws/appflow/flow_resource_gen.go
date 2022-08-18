@@ -143,7 +143,8 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//                 "enum": [
 			//                   "INSERT",
 			//                   "UPSERT",
-			//                   "UPDATE"
+			//                   "UPDATE",
+			//                   "DELETE"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -400,7 +401,8 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//                 "enum": [
 			//                   "INSERT",
 			//                   "UPSERT",
-			//                   "UPDATE"
+			//                   "UPDATE",
+			//                   "DELETE"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -448,7 +450,8 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//                 "enum": [
 			//                   "INSERT",
 			//                   "UPSERT",
-			//                   "UPDATE"
+			//                   "UPDATE",
+			//                   "DELETE"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -613,7 +616,8 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//                 "enum": [
 			//                   "INSERT",
 			//                   "UPSERT",
-			//                   "UPDATE"
+			//                   "UPDATE",
+			//                   "DELETE"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -759,6 +763,7 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"INSERT",
 														"UPSERT",
 														"UPDATE",
+														"DELETE",
 													}),
 												},
 											},
@@ -1127,6 +1132,7 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"INSERT",
 														"UPSERT",
 														"UPDATE",
+														"DELETE",
 													}),
 												},
 											},
@@ -1192,6 +1198,7 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"INSERT",
 														"UPSERT",
 														"UPDATE",
+														"DELETE",
 													}),
 												},
 											},
@@ -1419,6 +1426,7 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"INSERT",
 														"UPSERT",
 														"UPDATE",
+														"DELETE",
 													}),
 												},
 											},

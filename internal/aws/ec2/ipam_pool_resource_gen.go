@@ -151,6 +151,30 @@ func iPAMPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Type:        types.BoolType,
 			Optional:    true,
 		},
+		"aws_service": {
+			// Property: AwsService
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Limits which service in Amazon Web Services that the pool can be used in.",
+			//   "enum": [
+			//     "ec2"
+			//   ],
+			//   "type": "string"
+			// }
+			Description: "Limits which service in Amazon Web Services that the pool can be used in.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ec2",
+				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -456,6 +480,7 @@ func iPAMPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 		"allocation_resource_tags":          "AllocationResourceTags",
 		"arn":                               "Arn",
 		"auto_import":                       "AutoImport",
+		"aws_service":                       "AwsService",
 		"cidr":                              "Cidr",
 		"description":                       "Description",
 		"ipam_arn":                          "IpamArn",

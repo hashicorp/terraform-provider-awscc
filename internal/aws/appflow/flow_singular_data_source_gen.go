@@ -136,7 +136,8 @@ func flowDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 			//                 "enum": [
 			//                   "INSERT",
 			//                   "UPSERT",
-			//                   "UPDATE"
+			//                   "UPDATE",
+			//                   "DELETE"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -393,7 +394,8 @@ func flowDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 			//                 "enum": [
 			//                   "INSERT",
 			//                   "UPSERT",
-			//                   "UPDATE"
+			//                   "UPDATE",
+			//                   "DELETE"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -441,7 +443,8 @@ func flowDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 			//                 "enum": [
 			//                   "INSERT",
 			//                   "UPSERT",
-			//                   "UPDATE"
+			//                   "UPDATE",
+			//                   "DELETE"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -606,7 +609,8 @@ func flowDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 			//                 "enum": [
 			//                   "INSERT",
 			//                   "UPSERT",
-			//                   "UPDATE"
+			//                   "UPDATE",
+			//                   "DELETE"
 			//                 ],
 			//                 "type": "string"
 			//               }

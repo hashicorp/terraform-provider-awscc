@@ -144,7 +144,6 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 			// Property: TargetAction
 			// CloudFormation resource type schema:
 			// {
-			//   "additionalProperties": false,
 			//   "description": "A JSON format string of the Amazon Redshift API operation with input parameters.",
 			//   "properties": {
 			//     "PauseCluster": {

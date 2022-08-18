@@ -734,6 +734,9 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 		"weight":                            "Weight",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ServiceConnectConfiguration",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(30)
 
 	opts = opts.WithUpdateTimeoutInMinutes(180)
