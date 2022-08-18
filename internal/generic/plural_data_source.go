@@ -8,7 +8,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -16,12 +18,12 @@ import (
 )
 
 // pluralDataSourceType is a type alias for a data source type.
-type pluralDataSourceType dataSourceType
+type pluralDataSourceType genericDataSourceType
 
 // NewPluralDataSourceType returns a new pluralDataSourceType from the specified variadic list of functional options.
 // It's public as it's called from generated code.
-func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (tfsdk.DataSourceType, error) {
-	dataSourceType := &dataSourceType{}
+func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (provider.DataSourceType, error) {
+	dataSourceType := &genericDataSourceType{}
 
 	for _, optFn := range optFns {
 		err := optFn(dataSourceType)
@@ -48,24 +50,24 @@ func (pdt *pluralDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, d
 	return pdt.tfSchema, nil
 }
 
-func (pdt *pluralDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, diag.Diagnostics) {
+func (pdt *pluralDataSourceType) NewDataSource(ctx context.Context, provider provider.Provider) (datasource.DataSource, diag.Diagnostics) {
 	return newGenericPluralDataSource(provider, pdt), nil
 }
 
-// Implements tfsdk.DataSource
+// Implements datasource.DataSource
 type pluralDataSource struct {
 	provider       tfcloudcontrol.Provider
 	dataSourceType *pluralDataSourceType
 }
 
-func newGenericPluralDataSource(provider tfsdk.Provider, pluralDataSourceType *pluralDataSourceType) tfsdk.DataSource {
+func newGenericPluralDataSource(provider provider.Provider, pluralDataSourceType *pluralDataSourceType) datasource.DataSource {
 	return &pluralDataSource{
 		provider:       provider.(tfcloudcontrol.Provider),
 		dataSourceType: pluralDataSourceType,
 	}
 }
 
-func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequest, response *tfsdk.ReadDataSourceResponse) {
+func (pd *pluralDataSource) Read(ctx context.Context, _ datasource.ReadRequest, response *datasource.ReadResponse) {
 	ctx = pd.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "PluralDataSource.Read")

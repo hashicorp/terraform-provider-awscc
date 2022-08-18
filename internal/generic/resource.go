@@ -13,6 +13,8 @@ import (
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
@@ -22,14 +24,14 @@ import (
 )
 
 // ResourceTypeOptionsFunc is a type alias for a resource type functional option.
-type ResourceTypeOptionsFunc func(*resourceType) error
+type ResourceTypeOptionsFunc func(*genericResourceType) error
 
 // resourceWithAttributeNameMap is a helper function to construct functional options
 // that set a resource type's attribute name maps.
 // If multiple resourceWithAttributeNameMap calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithAttributeNameMap(v map[string]string) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		if _, ok := v["id"]; !ok {
 			// Synthesize a mapping for the reserved top-level "id" attribute.
 			v["id"] = "ID"
@@ -57,7 +59,7 @@ func resourceWithAttributeNameMap(v map[string]string) ResourceTypeOptionsFunc {
 // If multiple resourceWithCloudFormationTypeName calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithCloudFormationTypeName(v string) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		o.cfTypeName = v
 
 		return nil
@@ -69,7 +71,7 @@ func resourceWithCloudFormationTypeName(v string) ResourceTypeOptionsFunc {
 // If multiple resourceWithTerraformSchema calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithTerraformSchema(v tfsdk.Schema) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		o.tfSchema = v
 
 		return nil
@@ -81,7 +83,7 @@ func resourceWithTerraformSchema(v tfsdk.Schema) ResourceTypeOptionsFunc {
 // If multiple resourceWithTerraformTypeName calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithTerraformTypeName(v string) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		o.tfTypeName = v
 
 		return nil
@@ -93,7 +95,7 @@ func resourceWithTerraformTypeName(v string) ResourceTypeOptionsFunc {
 // If multiple resourceIsImmutableType calls are made, the last call overrides
 // the previous calls' values.
 func resourceIsImmutableType(v bool) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		o.isImmutableType = v
 
 		return nil
@@ -105,7 +107,7 @@ func resourceIsImmutableType(v bool) ResourceTypeOptionsFunc {
 // If multiple resourceWithSyntheticIDAttribute calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithSyntheticIDAttribute(v bool) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		o.syntheticIDAttribute = v
 
 		return nil
@@ -117,7 +119,7 @@ func resourceWithSyntheticIDAttribute(v bool) ResourceTypeOptionsFunc {
 // If multiple resourceWithWriteOnlyPropertyPaths calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		writeOnlyAttributePaths := make([]*path.Path, 0)
 
 		for _, writeOnlyPropertyPath := range v {
@@ -147,7 +149,7 @@ const (
 // If multiple resourceWithCreateTimeoutInMinutes calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithCreateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		if v > 0 {
 			o.createTimeout = time.Duration(v) * time.Minute
 		} else {
@@ -163,7 +165,7 @@ func resourceWithCreateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 // If multiple resourceWithUpdateTimeoutInMinutes calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithUpdateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		if v > 0 {
 			o.updateTimeout = time.Duration(v) * time.Minute
 		} else {
@@ -179,7 +181,7 @@ func resourceWithUpdateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 // If multiple resourceWithDeleteTimeoutInMinutes calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		if v > 0 {
 			o.deleteTimeout = time.Duration(v) * time.Minute
 		} else {
@@ -195,7 +197,7 @@ func resourceWithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 // If multiple resourceWithRequiredAttributesValidators calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithRequiredAttributesValidators(fs ...validate.RequiredAttributesFunc) ResourceTypeOptionsFunc {
-	return func(o *resourceType) error {
+	return func(o *genericResourceType) error {
 		o.requiredAttributesValidators = fs
 
 		return nil
@@ -293,8 +295,8 @@ func (opts ResourceTypeOptions) WithRequiredAttributesValidators(v ...validate.R
 	return append(opts, resourceWithRequiredAttributesValidators(v...))
 }
 
-// resourceType implements tfsdk.ResourceType.
-type resourceType struct {
+// genericResourceType implements provider.ResourceType.
+type genericResourceType struct {
 	cfTypeName                   string                            // CloudFormation type name for the resource type
 	tfSchema                     tfsdk.Schema                      // Terraform schema for the resource type
 	tfTypeName                   string                            // Terraform type name for resource type
@@ -311,8 +313,8 @@ type resourceType struct {
 
 // NewResourceType returns a new ResourceType from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
-func NewResourceType(_ context.Context, optFns ...ResourceTypeOptionsFunc) (tfsdk.ResourceType, error) {
-	resourceType := &resourceType{}
+func NewResourceType(_ context.Context, optFns ...ResourceTypeOptionsFunc) (provider.ResourceType, error) {
+	resourceType := &genericResourceType{}
 
 	for _, optFn := range optFns {
 		err := optFn(resourceType)
@@ -332,16 +334,16 @@ func NewResourceType(_ context.Context, optFns ...ResourceTypeOptionsFunc) (tfsd
 	return resourceType, nil
 }
 
-func (rt *resourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
+func (rt *genericResourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return rt.tfSchema, nil
 }
 
-func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider) (tfsdk.Resource, diag.Diagnostics) {
+func (rt *genericResourceType) NewResource(ctx context.Context, provider provider.Provider) (resource.Resource, diag.Diagnostics) {
 	return newGenericResource(provider, rt), nil
 }
 
 // propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
-func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*path.Path, error) {
+func (rt *genericResourceType) propertyPathToAttributePath(propertyPath string) (*path.Path, error) {
 	segments := strings.Split(propertyPath, "/")
 
 	if got, expected := len(segments), 3; got < expected {
@@ -375,14 +377,14 @@ func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*path.
 	return &attributePath, nil
 }
 
-// Implements tfsdk.Resource.
-type resource struct {
+// Implements genericResource.Resource.
+type genericResource struct {
 	provider     tfcloudcontrol.Provider
-	resourceType *resourceType
+	resourceType *genericResourceType
 }
 
-func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfsdk.Resource {
-	return &resource{
+func newGenericResource(provider provider.Provider, resourceType *genericResourceType) resource.Resource {
+	return &genericResource{
 		provider:     provider.(tfcloudcontrol.Provider),
 		resourceType: resourceType,
 	}
@@ -394,7 +396,7 @@ var (
 	idAttributePath = path.Root("id")
 )
 
-func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
+func (r *genericResource) Create(ctx context.Context, request resource.CreateRequest, response *resource.CreateResponse) {
 	ctx = r.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "Resource.Create")
@@ -495,7 +497,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	traceExit(ctx, "Resource.Create")
 }
 
-func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
+func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest, response *resource.ReadResponse) {
 	ctx = r.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "Resource.Read")
@@ -581,7 +583,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	traceExit(ctx, "Resource.Read")
 }
 
-func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
+func (r *genericResource) Update(ctx context.Context, request resource.UpdateRequest, response *resource.UpdateResponse) {
 	ctx = r.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "Resource.Update")
@@ -680,7 +682,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	traceExit(ctx, "Resource.Update")
 }
 
-func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
+func (r *genericResource) Delete(ctx context.Context, request resource.DeleteRequest, response *resource.DeleteResponse) {
 	ctx = r.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "Resource.Delete")
@@ -708,7 +710,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	traceExit(ctx, "Resource.Delete")
 }
 
-func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResourceStateRequest, response *tfsdk.ImportResourceStateResponse) {
+func (r *genericResource) ImportState(ctx context.Context, request resource.ImportStateRequest, response *resource.ImportStateResponse) {
 	ctx = r.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "Resource.ImportState")
@@ -717,14 +719,14 @@ func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResource
 		"value": hclog.Fmt("%v", request.ID),
 	})
 
-	tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
+	resource.ImportStatePassthroughID(ctx, idAttributePath, request, response)
 
 	traceExit(ctx, "Resource.ImportState")
 }
 
 // ConfigValidators returns a list of functions which will all be performed during validation.
-func (r *resource) ConfigValidators(context.Context) []tfsdk.ResourceConfigValidator {
-	validators := make([]tfsdk.ResourceConfigValidator, 0)
+func (r *genericResource) ConfigValidators(context.Context) []resource.ConfigValidator {
+	validators := make([]resource.ConfigValidator, 0)
 
 	if len(r.resourceType.requiredAttributesValidators) > 0 {
 		validators = append(validators, validate.ResourceConfigRequiredAttributes(r.resourceType.requiredAttributesValidators...))
@@ -734,12 +736,12 @@ func (r *resource) ConfigValidators(context.Context) []tfsdk.ResourceConfigValid
 }
 
 // describe returns the live state of the specified resource.
-func (r *resource) describe(ctx context.Context, conn *cloudcontrol.Client, id string) (*cctypes.ResourceDescription, error) {
+func (r *genericResource) describe(ctx context.Context, conn *cloudcontrol.Client, id string) (*cctypes.ResourceDescription, error) {
 	return tfcloudcontrol.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, id)
 }
 
 // getId returns the resource's primary identifier value from State.
-func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error) {
+func (r *genericResource) getId(ctx context.Context, state *tfsdk.State) (string, error) {
 	var val string
 	diags := state.GetAttribute(ctx, idAttributePath, &val)
 
@@ -751,7 +753,7 @@ func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error
 }
 
 // setId sets the resource's primary identifier value in State.
-func (r *resource) setId(ctx context.Context, val string, state *tfsdk.State) error {
+func (r *genericResource) setId(ctx context.Context, val string, state *tfsdk.State) error {
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
 	if diags.HasError() {
@@ -762,7 +764,7 @@ func (r *resource) setId(ctx context.Context, val string, state *tfsdk.State) er
 }
 
 // populateUnknownValues populates and unknown values in State with values from the current resource description.
-func (r *resource) populateUnknownValues(ctx context.Context, id string, state *tfsdk.State) diag.Diagnostics {
+func (r *genericResource) populateUnknownValues(ctx context.Context, id string, state *tfsdk.State) diag.Diagnostics {
 	var diags diag.Diagnostics
 
 	unknowns, err := UnknownValuePaths(ctx, state.Raw)
@@ -815,7 +817,7 @@ func (r *resource) populateUnknownValues(ctx context.Context, id string, state *
 }
 
 // cfnTypeContext injects the CloudFormation type name into logger contexts.
-func (r *resource) cfnTypeContext(ctx context.Context) context.Context {
+func (r *genericResource) cfnTypeContext(ctx context.Context) context.Context {
 	ctx = tflog.SetField(ctx, LoggingKeyCFNType, r.resourceType.cfTypeName)
 
 	return ctx
