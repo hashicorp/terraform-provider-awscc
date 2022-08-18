@@ -139,6 +139,14 @@
         "SelfManagedEventSource": {
             "description": "Self-managed event source endpoints.",
             "$ref": "#/definitions/SelfManagedEventSource"
+        },
+        "AmazonManagedKafkaEventSourceConfig": {
+            "description": "Specific configuration settings for an MSK event source.",
+            "$ref": "#/definitions/AmazonManagedKafkaEventSourceConfig"
+        },
+        "SelfManagedKafkaEventSourceConfig": {
+            "description": "Specific configuration settings for a Self-Managed Apache Kafka event source.",
+            "$ref": "#/definitions/SelfManagedKafkaEventSourceConfig"
         }
     },
     "definitions" : {
@@ -257,10 +265,46 @@
                     "maxItems": 10
                 }
             }
+        },
+        "ConsumerGroupId": {
+            "description": "The identifier for the Kafka Consumer Group to join.",
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-\\/*:_+=.@-]*",
+            "minLength": 1,
+            "maxLength": 200
+        },
+        "AmazonManagedKafkaEventSourceConfig": {
+            "description": "Specific configuration settings for an MSK event source.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ConsumerGroupId": {
+                    "description": "The identifier for the Kafka Consumer Group to join.",
+                    "$ref": "#/definitions/ConsumerGroupId"
+                }
+            }
+        },
+        "SelfManagedKafkaEventSourceConfig": {
+            "description": "Specific configuration settings for a Self-Managed Apache Kafka event source.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ConsumerGroupId": {
+                    "description": "The identifier for the Kafka Consumer Group to join.",
+                    "$ref": "#/definitions/ConsumerGroupId"
+                }
+            }
         }
     },
     "required" : [ "FunctionName" ],
-    "createOnlyProperties" : [ "/properties/EventSourceArn", "/properties/StartingPosition", "/properties/StartingPositionTimestamp", "/properties/SelfManagedEventSource" ],
+    "createOnlyProperties" : [
+        "/properties/EventSourceArn",
+        "/properties/StartingPosition",
+        "/properties/StartingPositionTimestamp",
+        "/properties/SelfManagedEventSource",
+        "/properties/AmazonManagedKafkaEventSourceConfig",
+        "/properties/SelfManagedKafkaEventSourceConfig"
+    ],
     "readOnlyProperties" : [ "/properties/Id" ],
     "primaryIdentifier" : [ "/properties/Id" ],
     "handlers": {

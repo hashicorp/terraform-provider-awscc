@@ -182,6 +182,9 @@
                 },
                 "VolumeSize": {
                     "type": "integer"
+                },
+                "Throughput": {
+                    "type": "integer"
                 }
             }
         },

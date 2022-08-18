@@ -92,6 +92,105 @@
             "pattern": "^([^\\s]*)$",
             "minLength": 1,
             "maxLength": 1024
+        },
+        "SecurityServicePolicyData": {
+            "description": "Firewall security service policy data.",
+            "type": "object",
+            "properties": {
+                "ManagedServiceData": {
+                    "$ref": "#/definitions/ManagedServiceData"
+                },
+                "Type": {
+                    "$ref": "#/definitions/PolicyType"
+                },
+                "PolicyOption": {
+                    "$ref": "#/definitions/PolicyOption"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "Type"
+            ]
+        },
+        "FirewallDeploymentModel": {
+            "description": "Firewall deployment mode.",
+            "type": "string",
+            "enum": [
+                "DISTRIBUTED",
+                "CENTRALIZED"
+            ]
+        },
+        "ManagedServiceData": {
+            "description": "Firewall managed service data.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8192
+        },
+        "PolicyType": {
+            "description": "Firewall policy type.",
+            "type": "string",
+            "enum": [
+                "WAF",
+                "WAFV2",
+                "SHIELD_ADVANCED",
+                "SECURITY_GROUPS_COMMON",
+                "SECURITY_GROUPS_CONTENT_AUDIT",
+                "SECURITY_GROUPS_USAGE_AUDIT",
+                "NETWORK_FIREWALL",
+                "THIRD_PARTY_FIREWALL",
+                "DNS_FIREWALL"
+            ]
+        },
+        "NetworkFirewallPolicy": {
+            "description": "Network firewall policy.",
+            "type": "object",
+            "properties": {
+                "FirewallDeploymentModel": {
+                    "$ref": "#/definitions/FirewallDeploymentModel"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "FirewallDeploymentModel"
+            ]
+        },
+        "ThirdPartyFirewallPolicy": {
+            "description": "Third party firewall policy.",
+            "type": "object",
+            "properties": {
+                "FirewallDeploymentModel": {
+                    "$ref": "#/definitions/FirewallDeploymentModel"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "FirewallDeploymentModel"
+            ]
+        },
+        "PolicyOption": {
+            "description": "Firewall policy option.",
+            "type": "object",
+            "properties": {
+                "NetworkFirewallPolicy": {
+                    "$ref": "#/definitions/NetworkFirewallPolicy"
+                },
+                "ThirdPartyFirewallPolicy": {
+                    "$ref": "#/definitions/ThirdPartyFirewallPolicy"
+                }
+            },
+            "additionalProperties": false,
+            "oneOf": [
+                {
+                    "required": [
+                        "NetworkFirewallPolicy"
+                    ]
+                },
+                {
+                    "required": [
+                        "ThirdPartyFirewallPolicy"
+                    ]
+                }
+            ]
         }
     },
     "properties": {
@@ -138,31 +237,7 @@
             "insertionOrder": true
         },
         "SecurityServicePolicyData": {
-            "type": "object",
-            "properties": {
-                "ManagedServiceData": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 8192
-                },
-                "Type": {
-                    "type": "string",
-                    "enum": [
-                        "WAF",
-                        "WAFV2",
-                        "SHIELD_ADVANCED",
-                        "SECURITY_GROUPS_COMMON",
-                        "SECURITY_GROUPS_CONTENT_AUDIT",
-                        "SECURITY_GROUPS_USAGE_AUDIT",
-                        "NETWORK_FIREWALL",
-                        "DNS_FIREWALL"
-                    ]
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "Type"
-            ]
+            "$ref": "#/definitions/SecurityServicePolicyData"
         },
         "Arn": {
             "$ref": "#/definitions/ResourceArn"
@@ -208,8 +283,12 @@
                 "wafv2:CheckCapacity",
                 "wafv2:ListRuleGroups",
                 "wafv2:ListAvailableManagedRuleGroups",
+                "wafv2:ListAvailableManagedRuleGroupVersions",
                 "network-firewall:DescribeRuleGroup",
-                "route53resolver:ListFirewallRuleGroups"
+                "route53resolver:ListFirewallRuleGroups",
+                "ec2:DescribeAvailabilityZones",
+                "s3:PutBucketPolicy",
+                "s3:GetBucketPolicy"
             ]
         },
         "update": {
@@ -223,8 +302,12 @@
                 "wafv2:CheckCapacity",
                 "wafv2:ListRuleGroups",
                 "wafv2:ListAvailableManagedRuleGroups",
+                "wafv2:ListAvailableManagedRuleGroupVersions",
                 "network-firewall:DescribeRuleGroup",
-                "route53resolver:ListFirewallRuleGroups"
+                "route53resolver:ListFirewallRuleGroups",
+                "ec2:DescribeAvailabilityZones",
+                "s3:PutBucketPolicy",
+                "s3:GetBucketPolicy"
             ]
         },
         "read": {
