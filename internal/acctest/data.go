@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
 )
@@ -23,7 +23,7 @@ type TestData struct {
 	// TerraformResourceType is the Terraform resource type, e.g. "aws_s3_bucket".
 	TerraformResourceType string
 
-	provider tfsdk.Provider
+	provider fwprovider.Provider
 }
 
 // EmptyConfig returns an empty (no attributes) Terraform configuration for the resource.
