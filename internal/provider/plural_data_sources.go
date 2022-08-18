@@ -234,6 +234,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lakeformation_tags -cftype AWS::LakeFormation::Tag -package lakeformation ../aws/lakeformation/tag_plural_data_source_gen.go ../aws/lakeformation/tag_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lambda_code_signing_configs -cftype AWS::Lambda::CodeSigningConfig -package lambda ../aws/lambda/code_signing_config_plural_data_source_gen.go ../aws/lambda/code_signing_config_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lambda_event_source_mappings -cftype AWS::Lambda::EventSourceMapping -package lambda ../aws/lambda/event_source_mapping_plural_data_source_gen.go ../aws/lambda/event_source_mapping_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_lambda_functions -cftype AWS::Lambda::Function -package lambda ../aws/lambda/function_plural_data_source_gen.go ../aws/lambda/function_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lex_bots -cftype AWS::Lex::Bot -package lex ../aws/lex/bot_plural_data_source_gen.go ../aws/lex/bot_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_licensemanager_grants -cftype AWS::LicenseManager::Grant -package licensemanager ../aws/licensemanager/grant_plural_data_source_gen.go ../aws/licensemanager/grant_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_licensemanager_licenses -cftype AWS::LicenseManager::License -package licensemanager ../aws/licensemanager/license_plural_data_source_gen.go ../aws/licensemanager/license_plural_data_source_gen_test.go
@@ -261,6 +262,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lookoutvision_projects -cftype AWS::LookoutVision::Project -package lookoutvision ../aws/lookoutvision/project_plural_data_source_gen.go ../aws/lookoutvision/project_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_clusters -cftype AWS::MSK::Cluster -package msk ../aws/msk/cluster_plural_data_source_gen.go ../aws/msk/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_configurations -cftype AWS::MSK::Configuration -package msk ../aws/msk/configuration_plural_data_source_gen.go ../aws/msk/configuration_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_serverless_clusters -cftype AWS::MSK::ServerlessCluster -package msk ../aws/msk/serverless_cluster_plural_data_source_gen.go ../aws/msk/serverless_cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mwaa_environments -cftype AWS::MWAA::Environment -package mwaa ../aws/mwaa/environment_plural_data_source_gen.go ../aws/mwaa/environment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_macie_sessions -cftype AWS::Macie::Session -package macie ../aws/macie/session_plural_data_source_gen.go ../aws/macie/session_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mediaconnect_flows -cftype AWS::MediaConnect::Flow -package mediaconnect ../aws/mediaconnect/flow_plural_data_source_gen.go ../aws/mediaconnect/flow_plural_data_source_gen_test.go
@@ -361,6 +363,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_servicecatalogappregistry_applications -cftype AWS::ServiceCatalogAppRegistry::Application -package servicecatalogappregistry ../aws/servicecatalogappregistry/application_plural_data_source_gen.go ../aws/servicecatalogappregistry/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_servicecatalogappregistry_attribute_groups -cftype AWS::ServiceCatalogAppRegistry::AttributeGroup -package servicecatalogappregistry ../aws/servicecatalogappregistry/attribute_group_plural_data_source_gen.go ../aws/servicecatalogappregistry/attribute_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_signer_signing_profiles -cftype AWS::Signer::SigningProfile -package signer ../aws/signer/signing_profile_plural_data_source_gen.go ../aws/signer/signing_profile_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_synthetics_groups -cftype AWS::Synthetics::Group -package synthetics ../aws/synthetics/group_plural_data_source_gen.go ../aws/synthetics/group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_databases -cftype AWS::Timestream::Database -package timestream ../aws/timestream/database_plural_data_source_gen.go ../aws/timestream/database_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_scheduled_queries -cftype AWS::Timestream::ScheduledQuery -package timestream ../aws/timestream/scheduled_query_plural_data_source_gen.go ../aws/timestream/scheduled_query_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_tables -cftype AWS::Timestream::Table -package timestream ../aws/timestream/table_plural_data_source_gen.go ../aws/timestream/table_plural_data_source_gen_test.go
@@ -493,6 +496,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sqs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/synthetics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/transfer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/voiceid"
