@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // anomalyDetectorResourceType returns the Terraform awscc_lookoutmetrics_anomaly_detector resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LookoutMetrics::AnomalyDetector resource type.
-func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"anomaly_detector_config": {
 			// Property: AnomalyDetectorConfig
@@ -101,8 +103,8 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"arn": {
@@ -116,7 +118,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"kms_key_arn": {
@@ -1095,7 +1097,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

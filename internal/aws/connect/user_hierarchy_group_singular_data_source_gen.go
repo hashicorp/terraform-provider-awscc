@@ -5,6 +5,7 @@ package connect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // userHierarchyGroupDataSourceType returns the Terraform awscc_connect_user_hierarchy_group data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Connect::UserHierarchyGroup resource type.
-func userHierarchyGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func userHierarchyGroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"instance_arn": {
 			// Property: InstanceArn

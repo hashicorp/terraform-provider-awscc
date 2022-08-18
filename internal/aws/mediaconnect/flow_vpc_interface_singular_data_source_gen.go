@@ -5,6 +5,7 @@ package mediaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // flowVpcInterfaceDataSourceType returns the Terraform awscc_mediaconnect_flow_vpc_interface data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::MediaConnect::FlowVpcInterface resource type.
-func flowVpcInterfaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func flowVpcInterfaceDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"flow_arn": {
 			// Property: FlowArn

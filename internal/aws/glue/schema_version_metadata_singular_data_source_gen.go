@@ -5,6 +5,7 @@ package glue
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // schemaVersionMetadataDataSourceType returns the Terraform awscc_glue_schema_version_metadata data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Glue::SchemaVersionMetadata resource type.
-func schemaVersionMetadataDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func schemaVersionMetadataDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"key": {
 			// Property: Key

@@ -5,6 +5,7 @@ package cloudfront
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // cachePolicyDataSourceType returns the Terraform awscc_cloudfront_cache_policy data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::CachePolicy resource type.
-func cachePolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func cachePolicyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cache_policy_config": {
 			// Property: CachePolicyConfig

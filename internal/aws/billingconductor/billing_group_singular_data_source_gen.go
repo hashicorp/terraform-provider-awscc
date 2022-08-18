@@ -5,6 +5,7 @@ package billingconductor
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // billingGroupDataSourceType returns the Terraform awscc_billingconductor_billing_group data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::BillingConductor::BillingGroup resource type.
-func billingGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func billingGroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"account_grouping": {
 			// Property: AccountGrouping

@@ -5,6 +5,7 @@ package cloudformation
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // publicTypeVersionsDataSourceType returns the Terraform awscc_cloudformation_public_type_versions data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFormation::PublicTypeVersion resource type.
-func publicTypeVersionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func publicTypeVersionsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",

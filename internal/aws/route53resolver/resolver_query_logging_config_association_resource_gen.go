@@ -5,6 +5,8 @@ package route53resolver
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // resolverQueryLoggingConfigAssociationResourceType returns the Terraform awscc_route53resolver_resolver_query_logging_config_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation resource type.
-func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -33,7 +35,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"error": {
@@ -52,7 +54,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"error_message": {
@@ -66,7 +68,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -82,7 +84,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resolver_query_log_config_id": {
@@ -102,8 +104,8 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"resource_id": {
@@ -123,8 +125,8 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"status": {
@@ -146,7 +148,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

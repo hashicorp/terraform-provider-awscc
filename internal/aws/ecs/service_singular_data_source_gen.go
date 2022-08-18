@@ -5,6 +5,7 @@ package ecs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // serviceDataSourceType returns the Terraform awscc_ecs_service data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ECS::Service resource type.
-func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func serviceDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity_provider_strategy": {
 			// Property: CapacityProviderStrategy

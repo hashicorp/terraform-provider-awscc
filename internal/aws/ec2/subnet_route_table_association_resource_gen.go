@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // subnetRouteTableAssociationResourceType returns the Terraform awscc_ec2_subnet_route_table_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::SubnetRouteTableAssociation resource type.
-func subnetRouteTableAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func subnetRouteTableAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -28,7 +30,7 @@ func subnetRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"route_table_id": {
@@ -40,7 +42,7 @@ func subnetRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"subnet_id": {
@@ -52,7 +54,7 @@ func subnetRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}

@@ -5,6 +5,7 @@ package sso
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // instanceAccessControlAttributeConfigurationDataSourceType returns the Terraform awscc_sso_instance_access_control_attribute_configuration data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SSO::InstanceAccessControlAttributeConfiguration resource type.
-func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_control_attributes": {
 			// Property: AccessControlAttributes

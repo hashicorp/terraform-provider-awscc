@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // multiRegionAccessPointPolicyResourceType returns the Terraform awscc_s3_multi_region_access_point_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3::MultiRegionAccessPointPolicy resource type.
-func multiRegionAccessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func multiRegionAccessPointPolicyResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"mrap_name": {
 			// Property: MrapName
@@ -39,7 +41,7 @@ func multiRegionAccessPointPolicyResourceType(ctx context.Context) (tfsdk.Resour
 				validate.StringMatch(regexp.MustCompile("^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"policy": {
@@ -93,7 +95,7 @@ func multiRegionAccessPointPolicyResourceType(ctx context.Context) (tfsdk.Resour
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -103,7 +105,7 @@ func multiRegionAccessPointPolicyResourceType(ctx context.Context) (tfsdk.Resour
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

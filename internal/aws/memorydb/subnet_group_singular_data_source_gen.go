@@ -5,6 +5,7 @@ package memorydb
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // subnetGroupDataSourceType returns the Terraform awscc_memorydb_subnet_group data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::MemoryDB::SubnetGroup resource type.
-func subnetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func subnetGroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: ARN

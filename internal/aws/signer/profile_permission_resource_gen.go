@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // profilePermissionResourceType returns the Terraform awscc_signer_profile_permission resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Signer::ProfilePermission resource type.
-func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func profilePermissionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"action": {
 			// Property: Action
@@ -30,7 +32,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"principal": {
@@ -42,7 +44,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"profile_name": {
@@ -54,7 +56,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"profile_version": {
@@ -71,8 +73,8 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringMatch(regexp.MustCompile("^[0-9a-zA-Z]{10}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"statement_id": {
@@ -84,7 +86,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -94,7 +96,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // networkInsightsPathResourceType returns the Terraform awscc_ec2_network_insights_path resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsPath resource type.
-func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func networkInsightsPathResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"created_date": {
 			// Property: CreatedDate
@@ -29,7 +31,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"destination": {
@@ -41,7 +43,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"destination_ip": {
@@ -54,8 +56,8 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"destination_port": {
@@ -68,8 +70,8 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"network_insights_path_arn": {
@@ -81,7 +83,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_insights_path_id": {
@@ -93,7 +95,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"protocol": {
@@ -115,7 +117,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"source": {
@@ -127,7 +129,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"source_ip": {
@@ -140,8 +142,8 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -192,7 +194,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

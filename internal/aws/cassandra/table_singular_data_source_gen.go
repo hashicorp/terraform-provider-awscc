@@ -5,6 +5,7 @@ package cassandra
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // tableDataSourceType returns the Terraform awscc_cassandra_table data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Cassandra::Table resource type.
-func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func tableDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"billing_mode": {
 			// Property: BillingMode

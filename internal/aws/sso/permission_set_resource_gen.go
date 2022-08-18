@@ -7,6 +7,8 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -20,7 +22,7 @@ func init() {
 
 // permissionSetResourceType returns the Terraform awscc_sso_permission_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSO::PermissionSet resource type.
-func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func permissionSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"customer_managed_policy_references": {
 			// Property: CustomerManagedPolicyReferences
@@ -82,7 +84,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -131,7 +133,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"managed_policies": {
@@ -159,7 +161,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -180,7 +182,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringMatch(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"permission_set_arn": {
@@ -197,7 +199,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"permissions_boundary": {
@@ -380,7 +382,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

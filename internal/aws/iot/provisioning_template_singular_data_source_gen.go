@@ -5,6 +5,7 @@ package iot
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // provisioningTemplateDataSourceType returns the Terraform awscc_iot_provisioning_template data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::ProvisioningTemplate resource type.
-func provisioningTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func provisioningTemplateDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description

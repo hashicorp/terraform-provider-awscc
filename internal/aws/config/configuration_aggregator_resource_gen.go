@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // configurationAggregatorResourceType returns the Terraform awscc_config_configuration_aggregator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::ConfigurationAggregator resource type.
-func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func configurationAggregatorResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"account_aggregation_sources": {
 			// Property: AccountAggregationSources
@@ -86,7 +88,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"configuration_aggregator_name": {
@@ -108,8 +110,8 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 				validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"organization_aggregation_source": {
@@ -226,7 +228,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // cloudFormationProvisionedProductResourceType returns the Terraform awscc_servicecatalog_cloudformation_provisioned_product resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalog::CloudFormationProvisionedProduct resource type.
-func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"accept_language": {
 			// Property: AcceptLanguage
@@ -53,7 +55,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"notification_arns": {
@@ -75,8 +77,8 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"outputs": {
@@ -97,7 +99,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"path_id": {
@@ -167,7 +169,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"provisioned_product_name": {
@@ -185,8 +187,8 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"provisioning_artifact_id": {
@@ -389,7 +391,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -451,7 +453,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

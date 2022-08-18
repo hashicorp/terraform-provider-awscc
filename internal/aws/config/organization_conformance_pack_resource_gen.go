@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // organizationConformancePackResourceType returns the Terraform awscc_config_organization_conformance_pack resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::OrganizationConformancePack resource type.
-func organizationConformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func organizationConformancePackResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"conformance_pack_input_parameters": {
 			// Property: ConformancePackInputParameters
@@ -145,7 +147,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 				validate.StringMatch(regexp.MustCompile("[a-zA-Z][-a-zA-Z0-9]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"template_body": {
@@ -191,7 +193,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

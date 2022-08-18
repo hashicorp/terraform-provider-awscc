@@ -5,6 +5,7 @@ package datasync
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // locationEFSDataSourceType returns the Terraform awscc_datasync_location_efs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationEFS resource type.
-func locationEFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func locationEFSDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_point_arn": {
 			// Property: AccessPointArn

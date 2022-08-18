@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // connectionAliasResourceType returns the Terraform awscc_workspaces_connection_alias resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WorkSpaces::ConnectionAlias resource type.
-func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func connectionAliasResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alias_id": {
 			// Property: AliasId
@@ -33,7 +35,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"associations": {
@@ -118,7 +120,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"connection_alias_state": {
@@ -135,7 +137,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"connection_string": {
@@ -154,7 +156,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringMatch(regexp.MustCompile("^[.0-9a-zA-Z\\-]{1,255}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -197,8 +199,8 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -208,7 +210,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

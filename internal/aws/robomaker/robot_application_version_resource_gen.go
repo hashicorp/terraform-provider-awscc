@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // robotApplicationVersionResourceType returns the Terraform awscc_robomaker_robot_application_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RoboMaker::RobotApplicationVersion resource type.
-func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func robotApplicationVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application": {
 			// Property: Application
@@ -34,7 +36,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 				validate.StringMatch(regexp.MustCompile("arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"application_version": {
@@ -46,7 +48,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"arn": {
@@ -59,7 +61,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"current_revision_id": {
@@ -81,8 +83,8 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_.\\-]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -92,7 +94,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

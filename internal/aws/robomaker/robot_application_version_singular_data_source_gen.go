@@ -5,6 +5,7 @@ package robomaker
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // robotApplicationVersionDataSourceType returns the Terraform awscc_robomaker_robot_application_version data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::RoboMaker::RobotApplicationVersion resource type.
-func robotApplicationVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func robotApplicationVersionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application": {
 			// Property: Application

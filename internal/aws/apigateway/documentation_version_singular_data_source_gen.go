@@ -5,6 +5,7 @@ package apigateway
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // documentationVersionDataSourceType returns the Terraform awscc_apigateway_documentation_version data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ApiGateway::DocumentationVersion resource type.
-func documentationVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func documentationVersionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description

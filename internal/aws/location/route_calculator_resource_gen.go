@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // routeCalculatorResourceType returns the Terraform awscc_location_route_calculator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Location::RouteCalculator resource type.
-func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func routeCalculatorResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -32,7 +34,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"calculator_arn": {
@@ -46,7 +48,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"calculator_name": {
@@ -65,7 +67,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringMatch(regexp.MustCompile("^[-._\\w]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"create_time": {
@@ -80,7 +82,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"data_source": {
@@ -92,7 +94,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"description": {
@@ -110,8 +112,8 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(0, 1000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"pricing_plan": {
@@ -132,8 +134,8 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"update_time": {
@@ -148,7 +150,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -158,7 +160,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

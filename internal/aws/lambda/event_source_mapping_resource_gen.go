@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // eventSourceMappingResourceType returns the Terraform awscc_lambda_event_source_mapping resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::EventSourceMapping resource type.
-func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"batch_size": {
 			// Property: BatchSize
@@ -128,8 +130,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringMatch(regexp.MustCompile("arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"filter_criteria": {
@@ -251,7 +253,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"maximum_batching_window_in_seconds": {
@@ -404,8 +406,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"source_access_configurations": {
@@ -504,8 +506,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringMatch(regexp.MustCompile("(LATEST|TRIM_HORIZON|AT_TIMESTAMP)+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"starting_position_timestamp": {
@@ -520,8 +522,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"topics": {

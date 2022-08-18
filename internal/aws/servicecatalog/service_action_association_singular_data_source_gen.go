@@ -5,6 +5,7 @@ package servicecatalog
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // serviceActionAssociationDataSourceType returns the Terraform awscc_servicecatalog_service_action_association data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ServiceCatalog::ServiceActionAssociation resource type.
-func serviceActionAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func serviceActionAssociationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"product_id": {
 			// Property: ProductId

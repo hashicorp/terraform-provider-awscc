@@ -5,6 +5,7 @@ package apigateway
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // stageDataSourceType returns the Terraform awscc_apigateway_stage data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ApiGateway::Stage resource type.
-func stageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func stageDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_log_setting": {
 			// Property: AccessLogSetting

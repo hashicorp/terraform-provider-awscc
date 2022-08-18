@@ -5,6 +5,8 @@ package rds
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // eventSubscriptionResourceType returns the Terraform awscc_rds_event_subscription resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::EventSubscription resource type.
-func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"enabled": {
 			// Property: Enabled
@@ -34,7 +36,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Bool{Value: true}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"event_categories": {
@@ -66,7 +68,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"source_ids": {
@@ -112,8 +114,8 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenAtMost(255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -185,7 +187,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

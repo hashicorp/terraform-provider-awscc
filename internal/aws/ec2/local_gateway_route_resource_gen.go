@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // localGatewayRouteResourceType returns the Terraform awscc_ec2_local_gateway_route resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::LocalGatewayRoute resource type.
-func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func localGatewayRouteResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"destination_cidr_block": {
 			// Property: DestinationCidrBlock
@@ -30,7 +32,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"local_gateway_route_table_id": {
@@ -44,7 +46,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"local_gateway_virtual_interface_group_id": {
@@ -58,7 +60,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"state": {
@@ -72,7 +74,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type": {
@@ -86,7 +88,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -96,7 +98,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

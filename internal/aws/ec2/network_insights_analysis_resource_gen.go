@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // networkInsightsAnalysisResourceType returns the Terraform awscc_ec2_network_insights_analysis resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAnalysis resource type.
-func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func networkInsightsAnalysisResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alternate_path_hints": {
 			// Property: AlternatePathHints
@@ -53,7 +55,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"explanations": {
@@ -1347,7 +1349,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"filter_in_arns": {
@@ -1363,8 +1365,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"forward_path_components": {
@@ -2025,7 +2027,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_insights_analysis_arn": {
@@ -2037,7 +2039,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_insights_analysis_id": {
@@ -2049,7 +2051,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_insights_path_id": {
@@ -2061,7 +2063,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"network_path_found": {
@@ -2073,7 +2075,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.BoolType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"return_path_components": {
@@ -2734,7 +2736,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"start_date": {
@@ -2746,7 +2748,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -2763,7 +2765,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status_message": {
@@ -2775,7 +2777,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -2822,7 +2824,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

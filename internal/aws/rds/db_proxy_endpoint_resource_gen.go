@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // dBProxyEndpointResourceType returns the Terraform awscc_rds_db_proxy_endpoint resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxyEndpoint resource type.
-func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func dBProxyEndpointResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"db_proxy_endpoint_arn": {
 			// Property: DBProxyEndpointArn
@@ -33,7 +35,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"db_proxy_endpoint_name": {
@@ -53,7 +55,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringMatch(regexp.MustCompile("[0-z]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"db_proxy_name": {
@@ -73,7 +75,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringMatch(regexp.MustCompile("[0-z]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"endpoint": {
@@ -88,7 +90,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"is_default": {
@@ -102,7 +104,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.BoolType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -179,8 +181,8 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"vpc_id": {
@@ -194,7 +196,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpc_security_group_ids": {
@@ -239,7 +241,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -249,7 +251,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

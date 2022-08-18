@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // customLineItemResourceType returns the Terraform awscc_billingconductor_custom_line_item resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::BillingConductor::CustomLineItem resource type.
-func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func customLineItemResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -33,7 +35,7 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"association_size": {
@@ -47,7 +49,7 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"billing_group_arn": {
@@ -65,7 +67,7 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringMatch(regexp.MustCompile("arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"billing_period_range": {
@@ -96,8 +98,8 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							validate.StringMatch(regexp.MustCompile("\\d{4}-(0?[1-9]|1[012])"), ""),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"inclusive_start_billing_period": {
@@ -109,8 +111,8 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							validate.StringMatch(regexp.MustCompile("\\d{4}-(0?[1-9]|1[012])"), ""),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 				},
@@ -128,7 +130,7 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"currency_code": {
@@ -144,7 +146,7 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"custom_line_item_charge_details": {
@@ -256,7 +258,7 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							resource.RequiresReplace(),
 						},
 					},
 				},
@@ -287,7 +289,7 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -317,7 +319,7 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -377,7 +379,7 @@ func customLineItemResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

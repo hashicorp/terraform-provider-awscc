@@ -5,6 +5,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // localGatewayRouteDataSourceType returns the Terraform awscc_ec2_local_gateway_route data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::LocalGatewayRoute resource type.
-func localGatewayRouteDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func localGatewayRouteDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"destination_cidr_block": {
 			// Property: DestinationCidrBlock

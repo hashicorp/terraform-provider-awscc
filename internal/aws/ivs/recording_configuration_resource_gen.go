@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // recordingConfigurationResourceType returns the Terraform awscc_ivs_recording_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IVS::RecordingConfiguration resource type.
-func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func recordingConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -35,7 +37,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"destination_configuration": {
@@ -84,21 +86,21 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 										validate.StringMatch(regexp.MustCompile("^[a-z0-9-.]+$"), ""),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.RequiresReplace(),
+										resource.RequiresReplace(),
 									},
 								},
 							},
 						),
 						Required: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							resource.RequiresReplace(),
 						},
 					},
 				},
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -120,8 +122,8 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"state": {
@@ -140,7 +142,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -241,7 +243,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							resource.RequiresReplace(),
 						},
 					},
 					"target_interval_seconds": {
@@ -254,8 +256,8 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 							validate.IntBetween(5, 60),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 				},
@@ -263,8 +265,8 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -274,7 +276,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

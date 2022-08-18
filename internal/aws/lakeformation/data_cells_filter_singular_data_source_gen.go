@@ -5,6 +5,7 @@ package lakeformation
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // dataCellsFilterDataSourceType returns the Terraform awscc_lakeformation_data_cells_filter data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::LakeFormation::DataCellsFilter resource type.
-func dataCellsFilterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func dataCellsFilterDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"column_names": {
 			// Property: ColumnNames

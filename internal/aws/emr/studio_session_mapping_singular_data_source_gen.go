@@ -5,6 +5,7 @@ package emr
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // studioSessionMappingDataSourceType returns the Terraform awscc_emr_studio_session_mapping data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource type.
-func studioSessionMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func studioSessionMappingDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"identity_name": {
 			// Property: IdentityName

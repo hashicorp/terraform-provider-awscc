@@ -5,6 +5,7 @@ package ssm
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // resourceDataSyncDataSourceType returns the Terraform awscc_ssm_resource_data_sync data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SSM::ResourceDataSync resource type.
-func resourceDataSyncDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func resourceDataSyncDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"bucket_name": {
 			// Property: BucketName

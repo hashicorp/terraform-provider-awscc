@@ -5,6 +5,8 @@ package autoscaling
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // warmPoolResourceType returns the Terraform awscc_autoscaling_warm_pool resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AutoScaling::WarmPool resource type.
-func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func warmPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"auto_scaling_group_name": {
 			// Property: AutoScalingGroupName
@@ -28,7 +30,7 @@ func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"instance_reuse_policy": {
@@ -88,7 +90,7 @@ func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

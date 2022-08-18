@@ -5,6 +5,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // vPCEndpointDataSourceType returns the Terraform awscc_ec2_vpc_endpoint data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::VPCEndpoint resource type.
-func vPCEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func vPCEndpointDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_timestamp": {
 			// Property: CreationTimestamp

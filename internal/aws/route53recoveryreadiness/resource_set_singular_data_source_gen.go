@@ -5,6 +5,7 @@ package route53recoveryreadiness
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // resourceSetDataSourceType returns the Terraform awscc_route53recoveryreadiness_resource_set data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ResourceSet resource type.
-func resourceSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func resourceSetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_set_arn": {
 			// Property: ResourceSetArn

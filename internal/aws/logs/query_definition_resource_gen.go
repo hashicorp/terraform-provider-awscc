@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // queryDefinitionResourceType returns the Terraform awscc_logs_query_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Logs::QueryDefinition resource type.
-func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func queryDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"log_group_names": {
 			// Property: LogGroupNames
@@ -78,7 +80,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"query_string": {
@@ -104,7 +106,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

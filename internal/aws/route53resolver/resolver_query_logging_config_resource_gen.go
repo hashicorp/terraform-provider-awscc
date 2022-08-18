@@ -5,6 +5,8 @@ package route53resolver
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // resolverQueryLoggingConfigResourceType returns the Terraform awscc_route53resolver_resolver_query_logging_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfig resource type.
-func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func resolverQueryLoggingConfigResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -33,7 +35,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"association_count": {
@@ -47,7 +49,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"creation_time": {
@@ -63,7 +65,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"creator_request_id": {
@@ -79,7 +81,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"destination_arn": {
@@ -99,8 +101,8 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 				validate.StringLenBetween(1, 600),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"id": {
@@ -116,7 +118,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -137,8 +139,8 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"owner_id": {
@@ -154,7 +156,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"share_status": {
@@ -173,7 +175,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -193,7 +195,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

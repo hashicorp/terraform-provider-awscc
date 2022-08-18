@@ -5,6 +5,7 @@ package location
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // placeIndexDataSourceType returns the Terraform awscc_location_place_index data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Location::PlaceIndex resource type.
-func placeIndexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func placeIndexDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

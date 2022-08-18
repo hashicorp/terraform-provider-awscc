@@ -5,6 +5,7 @@ package ecr
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // replicationConfigurationDataSourceType returns the Terraform awscc_ecr_replication_configuration data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ECR::ReplicationConfiguration resource type.
-func replicationConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func replicationConfigurationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"registry_id": {
 			// Property: RegistryId

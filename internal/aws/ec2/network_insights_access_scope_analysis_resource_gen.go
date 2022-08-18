@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // networkInsightsAccessScopeAnalysisResourceType returns the Terraform awscc_ec2_network_insights_access_scope_analysis resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAccessScopeAnalysis resource type.
-func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"analyzed_eni_count": {
 			// Property: AnalyzedEniCount
@@ -28,7 +30,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"end_date": {
@@ -40,7 +42,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"findings_found": {
@@ -57,7 +59,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_insights_access_scope_analysis_arn": {
@@ -69,7 +71,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_insights_access_scope_analysis_id": {
@@ -81,7 +83,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_insights_access_scope_id": {
@@ -93,7 +95,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"start_date": {
@@ -105,7 +107,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -122,7 +124,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status_message": {
@@ -134,7 +136,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -185,7 +187,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

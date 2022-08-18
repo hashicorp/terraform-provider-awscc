@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // accessPointPolicyResourceType returns the Terraform awscc_s3objectlambda_access_point_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3ObjectLambda::AccessPointPolicy resource type.
-func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func accessPointPolicyResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"object_lambda_access_point": {
 			// Property: ObjectLambdaAccessPoint
@@ -39,7 +41,7 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringMatch(regexp.MustCompile("^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"policy_document": {
@@ -60,7 +62,7 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

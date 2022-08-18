@@ -7,6 +7,8 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -20,7 +22,7 @@ func init() {
 
 // reportDefinitionResourceType returns the Terraform awscc_cur_report_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CUR::ReportDefinition resource type.
-func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func reportDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"additional_artifacts": {
 			// Property: AdditionalArtifacts
@@ -52,7 +54,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"additional_schema_elements": {
@@ -81,8 +83,8 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"billing_view_arn": {
@@ -104,8 +106,8 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringMatch(regexp.MustCompile("(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"compression": {
@@ -181,7 +183,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringMatch(regexp.MustCompile("[0-9A-Za-z!\\-_.*\\'()]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"report_versioning": {
@@ -205,7 +207,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"s3_bucket": {
@@ -278,7 +280,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -288,7 +290,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

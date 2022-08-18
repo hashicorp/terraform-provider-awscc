@@ -5,6 +5,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // natGatewayDataSourceType returns the Terraform awscc_ec2_nat_gateway data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::NatGateway resource type.
-func natGatewayDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func natGatewayDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"allocation_id": {
 			// Property: AllocationId

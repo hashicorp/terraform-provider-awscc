@@ -5,6 +5,7 @@ package route53recoveryreadiness
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // readinessCheckDataSourceType returns the Terraform awscc_route53recoveryreadiness_readiness_check data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ReadinessCheck resource type.
-func readinessCheckDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func readinessCheckDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"readiness_check_arn": {
 			// Property: ReadinessCheckArn

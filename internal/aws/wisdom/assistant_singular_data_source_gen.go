@@ -5,6 +5,7 @@ package wisdom
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // assistantDataSourceType returns the Terraform awscc_wisdom_assistant data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Wisdom::Assistant resource type.
-func assistantDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func assistantDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"assistant_arn": {
 			// Property: AssistantArn

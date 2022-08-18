@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // enclaveCertificateIamRoleAssociationResourceType returns the Terraform awscc_ec2_enclave_certificate_iam_role_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::EnclaveCertificateIamRoleAssociation resource type.
-func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"certificate_arn": {
 			// Property: CertificateArn
@@ -39,7 +41,7 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 				validate.StringMatch(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:acm:[A-Za-z0-9-]{1,64}:([0-9]{12})?:certificate/.+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"certificate_s3_bucket_name": {
@@ -53,7 +55,7 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"certificate_s3_object_key": {
@@ -67,7 +69,7 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"encryption_kms_key_id": {
@@ -81,7 +83,7 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"role_arn": {
@@ -102,7 +104,7 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 				validate.StringMatch(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:iam:.*:([0-9]{12})?:role/.+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -112,7 +114,7 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

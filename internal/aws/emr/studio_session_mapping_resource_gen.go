@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // studioSessionMappingResourceType returns the Terraform awscc_emr_studio_session_mapping resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource type.
-func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func studioSessionMappingResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"identity_name": {
 			// Property: IdentityName
@@ -32,7 +34,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"identity_type": {
@@ -56,7 +58,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"session_policy_arn": {
@@ -92,7 +94,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringMatch(regexp.MustCompile("^es-[0-9A-Z]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -102,7 +104,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

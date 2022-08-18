@@ -5,6 +5,7 @@ package efs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // mountTargetDataSourceType returns the Terraform awscc_efs_mount_target data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EFS::MountTarget resource type.
-func mountTargetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func mountTargetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"file_system_id": {
 			// Property: FileSystemId

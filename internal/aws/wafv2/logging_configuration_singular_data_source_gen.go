@@ -5,6 +5,7 @@ package wafv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // loggingConfigurationDataSourceType returns the Terraform awscc_wafv2_logging_configuration data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::WAFv2::LoggingConfiguration resource type.
-func loggingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func loggingConfigurationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"log_destination_configs": {
 			// Property: LogDestinationConfigs

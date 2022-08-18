@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // environmentResourceType returns the Terraform awscc_mwaa_environment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MWAA::Environment resource type.
-func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func environmentResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"airflow_configuration_options": {
 			// Property: AirflowConfigurationOptions
@@ -63,7 +65,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dag_s3_path": {
@@ -134,8 +136,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^(((arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?key\\/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|(arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?alias/.+)$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"logging_configuration": {
@@ -302,7 +304,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Computed:    true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"enabled": {
@@ -341,7 +343,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Computed:    true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"enabled": {
@@ -380,7 +382,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Computed:    true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"enabled": {
@@ -419,7 +421,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Computed:    true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"enabled": {
@@ -458,7 +460,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Computed:    true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.UseStateForUnknown(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"enabled": {
@@ -538,7 +540,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z][0-9a-zA-Z\\-_]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"network_configuration": {
@@ -604,8 +606,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^subnet-[a-zA-Z0-9\\-._]+$"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 				},
@@ -755,7 +757,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"weekly_maintenance_window_start": {
@@ -782,7 +784,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,7 @@ package ssmincidents
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // responsePlanDataSourceType returns the Terraform awscc_ssmincidents_response_plan data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SSMIncidents::ResponsePlan resource type.
-func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func responsePlanDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"actions": {
 			// Property: Actions

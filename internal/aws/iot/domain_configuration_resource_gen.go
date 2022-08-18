@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // domainConfigurationResourceType returns the Terraform awscc_iot_domain_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::DomainConfiguration resource type.
-func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func domainConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -30,7 +32,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"authorizer_config": {
@@ -88,8 +90,8 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringMatch(regexp.MustCompile("^[\\w.-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"domain_configuration_status": {
@@ -126,8 +128,8 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 253),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"domain_type": {
@@ -144,7 +146,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"server_certificate_arns": {
@@ -170,8 +172,8 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// ServerCertificateArns is a write-only property.
 		},
@@ -234,7 +236,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"service_type": {
@@ -259,8 +261,8 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -315,8 +317,8 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringMatch(regexp.MustCompile("^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -326,7 +328,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

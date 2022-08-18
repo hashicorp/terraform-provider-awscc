@@ -5,6 +5,8 @@ package athena
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // preparedStatementResourceType returns the Terraform awscc_athena_prepared_statement resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Athena::PreparedStatement resource type.
-func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func preparedStatementResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
@@ -68,7 +70,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"work_group": {
@@ -87,7 +89,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -97,7 +99,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

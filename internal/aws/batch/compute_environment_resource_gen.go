@@ -5,6 +5,8 @@ package batch
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // computeEnvironmentResourceType returns the Terraform awscc_batch_compute_environment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Batch::ComputeEnvironment resource type.
-func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"compute_environment_arn": {
 			// Property: ComputeEnvironmentArn
@@ -28,7 +30,7 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"compute_environment_name": {
@@ -41,8 +43,8 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"compute_resources": {
@@ -278,8 +280,8 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.UseStateForUnknown(),
-							tfsdk.RequiresReplace(),
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
 						},
 					},
 					"subnets": {
@@ -309,7 +311,7 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Bool{Value: false}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 						// UpdateToLatestImageVersion is a write-only property.
 					},
@@ -329,7 +331,7 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Bool{Value: true}),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 			// ReplaceComputeEnvironment is a write-only property.
 		},
@@ -370,8 +372,8 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"type": {
@@ -383,7 +385,7 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"unmanagedv_cpus": {
@@ -421,7 +423,7 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Int64{Value: 30}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"terminate_jobs_on_update": {
@@ -431,7 +433,7 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Bool{Value: false}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -445,7 +447,7 @@ func computeEnvironmentResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

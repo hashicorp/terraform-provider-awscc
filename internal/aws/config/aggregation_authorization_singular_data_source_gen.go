@@ -5,6 +5,7 @@ package config
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // aggregationAuthorizationDataSourceType returns the Terraform awscc_config_aggregation_authorization data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Config::AggregationAuthorization resource type.
-func aggregationAuthorizationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func aggregationAuthorizationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"aggregation_authorization_arn": {
 			// Property: AggregationAuthorizationArn

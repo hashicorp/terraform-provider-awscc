@@ -5,6 +5,7 @@ package wafv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // webACLAssociationDataSourceType returns the Terraform awscc_wafv2_web_acl_association data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::WAFv2::WebACLAssociation resource type.
-func webACLAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func webACLAssociationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_arn": {
 			// Property: ResourceArn

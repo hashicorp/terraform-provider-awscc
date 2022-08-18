@@ -5,6 +5,7 @@ package eks
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // nodegroupDataSourceType returns the Terraform awscc_eks_nodegroup data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EKS::Nodegroup resource type.
-func nodegroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func nodegroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"ami_type": {
 			// Property: AmiType

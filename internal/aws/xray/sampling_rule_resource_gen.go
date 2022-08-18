@@ -5,6 +5,8 @@ package xray
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // samplingRuleResourceType returns the Terraform awscc_xray_sampling_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::XRay::SamplingRule resource type.
-func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"rule_arn": {
 			// Property: RuleARN
@@ -31,7 +33,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"rule_name": {
@@ -719,7 +721,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

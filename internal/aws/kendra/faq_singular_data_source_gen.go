@@ -5,6 +5,7 @@ package kendra
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // faqDataSourceType returns the Terraform awscc_kendra_faq data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Kendra::Faq resource type.
-func faqDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func faqDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

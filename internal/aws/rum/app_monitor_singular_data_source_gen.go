@@ -5,6 +5,7 @@ package rum
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // appMonitorDataSourceType returns the Terraform awscc_rum_app_monitor data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::RUM::AppMonitor resource type.
-func appMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func appMonitorDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"app_monitor_configuration": {
 			// Property: AppMonitorConfiguration

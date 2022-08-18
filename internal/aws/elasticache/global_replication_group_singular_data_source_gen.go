@@ -5,6 +5,7 @@ package elasticache
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // globalReplicationGroupDataSourceType returns the Terraform awscc_elasticache_global_replication_group data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ElastiCache::GlobalReplicationGroup resource type.
-func globalReplicationGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func globalReplicationGroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"automatic_failover_enabled": {
 			// Property: AutomaticFailoverEnabled

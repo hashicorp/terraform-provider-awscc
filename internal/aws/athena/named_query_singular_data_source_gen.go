@@ -5,6 +5,7 @@ package athena
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // namedQueryDataSourceType returns the Terraform awscc_athena_named_query data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Athena::NamedQuery resource type.
-func namedQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func namedQueryDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"database": {
 			// Property: Database

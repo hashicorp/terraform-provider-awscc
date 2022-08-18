@@ -5,6 +5,7 @@ package iotwireless
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // taskDefinitionDataSourceType returns the Terraform awscc_iotwireless_task_definition data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoTWireless::TaskDefinition resource type.
-func taskDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func taskDefinitionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

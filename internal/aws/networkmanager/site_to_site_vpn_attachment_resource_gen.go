@@ -5,6 +5,8 @@ package networkmanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // siteToSiteVpnAttachmentResourceType returns the Terraform awscc_networkmanager_site_to_site_vpn_attachment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::SiteToSiteVpnAttachment resource type.
-func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func siteToSiteVpnAttachmentResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"attachment_id": {
 			// Property: AttachmentId
@@ -30,7 +32,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"attachment_policy_rule_number": {
@@ -44,7 +46,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"attachment_type": {
@@ -58,7 +60,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"core_network_arn": {
@@ -72,7 +74,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"core_network_id": {
@@ -87,8 +89,8 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"created_at": {
@@ -102,7 +104,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"edge_location": {
@@ -116,7 +118,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"owner_account_id": {
@@ -130,7 +132,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"proposed_segment_change": {
@@ -219,7 +221,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			),
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource_arn": {
@@ -233,7 +235,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"segment_name": {
@@ -247,7 +249,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"state": {
@@ -261,7 +263,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -325,7 +327,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpn_connection_arn": {
@@ -340,8 +342,8 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 			// VpnConnectionArn is a write-only property.
 		},
@@ -352,7 +354,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

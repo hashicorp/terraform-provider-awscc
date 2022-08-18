@@ -5,6 +5,7 @@ package emr
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // studioDataSourceType returns the Terraform awscc_emr_studio data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EMR::Studio resource type.
-func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func studioDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

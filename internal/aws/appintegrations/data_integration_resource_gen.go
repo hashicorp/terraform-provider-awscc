@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // dataIntegrationResourceType returns the Terraform awscc_appintegrations_data_integration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppIntegrations::DataIntegration resource type.
-func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func dataIntegrationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"data_integration_arn": {
 			// Property: DataIntegrationArn
@@ -35,7 +37,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -68,7 +70,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"kms_key": {
@@ -89,7 +91,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -183,7 +185,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"source_uri": {
@@ -204,7 +206,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringMatch(regexp.MustCompile("^\\w+\\:\\/\\/\\w+\\/[\\w/!@#+=.-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {

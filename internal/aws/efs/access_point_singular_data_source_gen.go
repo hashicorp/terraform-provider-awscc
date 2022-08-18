@@ -5,6 +5,7 @@ package efs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // accessPointDataSourceType returns the Terraform awscc_efs_access_point data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EFS::AccessPoint resource type.
-func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func accessPointDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_point_id": {
 			// Property: AccessPointId

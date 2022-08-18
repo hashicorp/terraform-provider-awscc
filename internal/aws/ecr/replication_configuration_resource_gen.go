@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // replicationConfigurationResourceType returns the Terraform awscc_ecr_replication_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECR::ReplicationConfiguration resource type.
-func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func replicationConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"registry_id": {
 			// Property: RegistryId
@@ -32,7 +34,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"replication_configuration": {
@@ -208,7 +210,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

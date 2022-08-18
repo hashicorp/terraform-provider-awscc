@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // detectorModelResourceType returns the Terraform awscc_iotevents_detector_model resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTEvents::DetectorModel resource type.
-func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func detectorModelResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"detector_model_definition": {
 			// Property: DetectorModelDefinition
@@ -4817,8 +4819,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"evaluation_method": {
@@ -4861,8 +4863,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringMatch(regexp.MustCompile("^((`[\\w\\- ]+`)|([\\w\\-]+))(\\.((`[\\w\\- ]+`)|([\\w\\-]+)))*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"role_arn": {
@@ -4938,7 +4940,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,7 @@ package frauddetector
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // detectorDataSourceType returns the Terraform awscc_frauddetector_detector data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::FraudDetector::Detector resource type.
-func detectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func detectorDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

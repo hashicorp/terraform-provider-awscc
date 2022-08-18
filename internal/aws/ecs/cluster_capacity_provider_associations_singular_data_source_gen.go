@@ -5,6 +5,7 @@ package ecs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // clusterCapacityProviderAssociationsDataSourceType returns the Terraform awscc_ecs_cluster_capacity_provider_associations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource type.
-func clusterCapacityProviderAssociationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func clusterCapacityProviderAssociationsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity_providers": {
 			// Property: CapacityProviders

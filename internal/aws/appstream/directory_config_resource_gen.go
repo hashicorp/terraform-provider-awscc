@@ -5,6 +5,8 @@ package appstream
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // directoryConfigResourceType returns the Terraform awscc_appstream_directory_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppStream::DirectoryConfig resource type.
-func directoryConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func directoryConfigResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"directory_name": {
 			// Property: DirectoryName
@@ -28,7 +30,7 @@ func directoryConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"organizational_unit_distinguished_names": {
@@ -87,7 +89,7 @@ func directoryConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

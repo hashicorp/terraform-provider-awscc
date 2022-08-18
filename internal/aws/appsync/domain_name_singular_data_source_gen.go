@@ -5,6 +5,7 @@ package appsync
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // domainNameDataSourceType returns the Terraform awscc_appsync_domain_name data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::AppSync::DomainName resource type.
-func domainNameDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func domainNameDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"app_sync_domain_name": {
 			// Property: AppSyncDomainName

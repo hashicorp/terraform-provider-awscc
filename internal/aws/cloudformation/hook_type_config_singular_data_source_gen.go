@@ -5,6 +5,7 @@ package cloudformation
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // hookTypeConfigDataSourceType returns the Terraform awscc_cloudformation_hook_type_config data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFormation::HookTypeConfig resource type.
-func hookTypeConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func hookTypeConfigDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"configuration": {
 			// Property: Configuration

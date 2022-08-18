@@ -5,6 +5,7 @@ package auditmanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // assessmentDataSourceType returns the Terraform awscc_auditmanager_assessment data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::AuditManager::Assessment resource type.
-func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func assessmentDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

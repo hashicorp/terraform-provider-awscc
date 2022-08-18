@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // simulationApplicationResourceType returns the Terraform awscc_robomaker_simulation_application resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RoboMaker::SimulationApplication resource type.
-func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func simulationApplicationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -31,7 +33,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"current_revision_id": {
@@ -75,8 +77,8 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_\\-]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"rendering_engine": {
@@ -379,7 +381,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

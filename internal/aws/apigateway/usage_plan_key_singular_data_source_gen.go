@@ -5,6 +5,7 @@ package apigateway
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // usagePlanKeyDataSourceType returns the Terraform awscc_apigateway_usage_plan_key data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ApiGateway::UsagePlanKey resource type.
-func usagePlanKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func usagePlanKeyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id

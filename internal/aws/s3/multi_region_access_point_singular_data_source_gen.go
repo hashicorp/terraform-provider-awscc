@@ -5,6 +5,7 @@ package s3
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // multiRegionAccessPointDataSourceType returns the Terraform awscc_s3_multi_region_access_point data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::S3::MultiRegionAccessPoint resource type.
-func multiRegionAccessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func multiRegionAccessPointDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alias": {
 			// Property: Alias

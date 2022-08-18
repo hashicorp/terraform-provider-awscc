@@ -5,6 +5,7 @@ package logs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // queryDefinitionDataSourceType returns the Terraform awscc_logs_query_definition data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Logs::QueryDefinition resource type.
-func queryDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func queryDefinitionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"log_group_names": {
 			// Property: LogGroupNames

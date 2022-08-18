@@ -5,6 +5,7 @@ package apigatewayv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // vpcLinksDataSourceType returns the Terraform awscc_apigatewayv2_vpc_links data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ApiGatewayV2::VpcLink resource type.
-func vpcLinksDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func vpcLinksDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",

@@ -5,6 +5,7 @@ package appstream
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // applicationEntitlementAssociationDataSourceType returns the Terraform awscc_appstream_application_entitlement_association data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::AppStream::ApplicationEntitlementAssociation resource type.
-func applicationEntitlementAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func applicationEntitlementAssociationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_identifier": {
 			// Property: ApplicationIdentifier

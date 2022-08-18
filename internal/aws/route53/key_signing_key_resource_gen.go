@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // keySigningKeyResourceType returns the Terraform awscc_route53_key_signing_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::KeySigningKey resource type.
-func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func keySigningKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"hosted_zone_id": {
 			// Property: HostedZoneId
@@ -36,7 +38,7 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringMatch(regexp.MustCompile("^[A-Z0-9]{1,32}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"key_management_service_arn": {
@@ -55,7 +57,7 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -73,7 +75,7 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_]{3,128}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"status": {
@@ -104,7 +106,7 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

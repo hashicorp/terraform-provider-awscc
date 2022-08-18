@@ -5,6 +5,7 @@ package iam
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // sAMLProviderDataSourceType returns the Terraform awscc_iam_saml_provider data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IAM::SAMLProvider resource type.
-func sAMLProviderDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func sAMLProviderDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

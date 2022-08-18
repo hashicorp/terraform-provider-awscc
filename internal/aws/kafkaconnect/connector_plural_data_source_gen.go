@@ -5,6 +5,7 @@ package kafkaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // connectorsDataSourceType returns the Terraform awscc_kafkaconnect_connectors data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::KafkaConnect::Connector resource type.
-func connectorsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func connectorsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",

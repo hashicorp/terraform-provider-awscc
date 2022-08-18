@@ -5,6 +5,7 @@ package macie
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // customDataIdentifierDataSourceType returns the Terraform awscc_macie_custom_data_identifier data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Macie::CustomDataIdentifier resource type.
-func customDataIdentifierDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func customDataIdentifierDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

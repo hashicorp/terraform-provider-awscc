@@ -5,6 +5,8 @@ package wafv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // webACLAssociationResourceType returns the Terraform awscc_wafv2_web_acl_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::WebACLAssociation resource type.
-func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func webACLAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_arn": {
 			// Property: ResourceArn
@@ -34,7 +36,7 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"web_acl_arn": {
@@ -51,7 +53,7 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -61,7 +63,7 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

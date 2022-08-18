@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // repositoryAssociationResourceType returns the Terraform awscc_codegurureviewer_repository_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CodeGuruReviewer::RepositoryAssociation resource type.
-func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func repositoryAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"association_arn": {
 			// Property: AssociationArn
@@ -35,7 +37,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"bucket_name": {
@@ -57,8 +59,8 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringMatch(regexp.MustCompile("^\\S(.*\\S)?$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"connection_arn": {
@@ -80,8 +82,8 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringMatch(regexp.MustCompile("arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -102,7 +104,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringMatch(regexp.MustCompile("^\\S[\\w.-]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"owner": {
@@ -124,8 +126,8 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringMatch(regexp.MustCompile("^\\S(.*\\S)?$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -189,8 +191,8 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"type": {
@@ -218,7 +220,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -228,7 +230,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

@@ -5,6 +5,7 @@ package backup
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // frameworksDataSourceType returns the Terraform awscc_backup_frameworks data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Backup::Framework resource type.
-func frameworksDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func frameworksDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",

@@ -5,6 +5,8 @@ package lakeformation
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // tagAssociationResourceType returns the Terraform awscc_lakeformation_tag_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LakeFormation::TagAssociation resource type.
-func tagAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func tagAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"lf_tags": {
 			// Property: LFTags
@@ -96,7 +98,7 @@ func tagAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"resource": {
@@ -314,7 +316,7 @@ func tagAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"resource_identifier": {
@@ -328,7 +330,7 @@ func tagAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags_identifier": {
@@ -342,7 +344,7 @@ func tagAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -352,7 +354,7 @@ func tagAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

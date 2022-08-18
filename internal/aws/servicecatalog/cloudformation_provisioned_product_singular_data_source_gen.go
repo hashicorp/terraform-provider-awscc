@@ -5,6 +5,7 @@ package servicecatalog
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // cloudFormationProvisionedProductDataSourceType returns the Terraform awscc_servicecatalog_cloudformation_provisioned_product data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ServiceCatalog::CloudFormationProvisionedProduct resource type.
-func cloudFormationProvisionedProductDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func cloudFormationProvisionedProductDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"accept_language": {
 			// Property: AcceptLanguage

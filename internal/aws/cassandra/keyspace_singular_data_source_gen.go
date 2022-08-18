@@ -5,6 +5,7 @@ package cassandra
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // keyspaceDataSourceType returns the Terraform awscc_cassandra_keyspace data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Cassandra::Keyspace resource type.
-func keyspaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func keyspaceDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"keyspace_name": {
 			// Property: KeyspaceName

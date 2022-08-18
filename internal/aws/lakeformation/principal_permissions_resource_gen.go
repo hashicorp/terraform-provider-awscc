@@ -5,6 +5,8 @@ package lakeformation
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // principalPermissionsResourceType returns the Terraform awscc_lakeformation_principal_permissions resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LakeFormation::PrincipalPermissions resource type.
-func principalPermissionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func principalPermissionsResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"catalog": {
 			// Property: Catalog
@@ -35,8 +37,8 @@ func principalPermissionsResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(12, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"permissions": {
@@ -83,7 +85,7 @@ func principalPermissionsResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"permissions_with_grant_option": {
@@ -130,7 +132,7 @@ func principalPermissionsResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"principal": {
@@ -161,7 +163,7 @@ func principalPermissionsResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"principal_identifier": {
@@ -173,7 +175,7 @@ func principalPermissionsResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource": {
@@ -713,7 +715,7 @@ func principalPermissionsResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"resource_identifier": {
@@ -725,7 +727,7 @@ func principalPermissionsResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
@@ -735,7 +737,7 @@ func principalPermissionsResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

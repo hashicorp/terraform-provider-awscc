@@ -5,6 +5,7 @@ package backup
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // reportPlanDataSourceType returns the Terraform awscc_backup_report_plan data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Backup::ReportPlan resource type.
-func reportPlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func reportPlanDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"report_delivery_channel": {
 			// Property: ReportDeliveryChannel

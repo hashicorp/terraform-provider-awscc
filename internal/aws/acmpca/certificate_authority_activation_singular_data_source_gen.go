@@ -5,6 +5,7 @@ package acmpca
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // certificateAuthorityActivationDataSourceType returns the Terraform awscc_acmpca_certificate_authority_activation data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthorityActivation resource type.
-func certificateAuthorityActivationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func certificateAuthorityActivationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"certificate": {
 			// Property: Certificate

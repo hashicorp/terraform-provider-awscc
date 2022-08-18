@@ -5,6 +5,7 @@ package connect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // contactFlowDataSourceType returns the Terraform awscc_connect_contact_flow data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Connect::ContactFlow resource type.
-func contactFlowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func contactFlowDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"contact_flow_arn": {
 			// Property: ContactFlowArn

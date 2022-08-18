@@ -5,6 +5,8 @@ package acmpca
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // certificateAuthorityActivationResourceType returns the Terraform awscc_acmpca_certificate_authority_activation resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthorityActivation resource type.
-func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func certificateAuthorityActivationResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"certificate": {
 			// Property: Certificate
@@ -42,7 +44,7 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"certificate_chain": {
@@ -68,7 +70,7 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -89,7 +91,7 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

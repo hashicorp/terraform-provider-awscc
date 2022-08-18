@@ -5,6 +5,8 @@ package mediaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // flowEntitlementResourceType returns the Terraform awscc_mediaconnect_flow_entitlement resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowEntitlement resource type.
-func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func flowEntitlementResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"data_transfer_subscriber_fee_percent": {
 			// Property: DataTransferSubscriberFeePercent
@@ -34,8 +36,8 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Int64{Value: 0}),
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"description": {
@@ -151,7 +153,7 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "static-key"}),
-							tfsdk.UseStateForUnknown(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"region": {
@@ -199,7 +201,7 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"entitlement_status": {
@@ -245,7 +247,7 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"subscribers": {
@@ -269,7 +271,7 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

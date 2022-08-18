@@ -5,6 +5,7 @@ package mediapackage
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // packagingGroupDataSourceType returns the Terraform awscc_mediapackage_packaging_group data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::MediaPackage::PackagingGroup resource type.
-func packagingGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func packagingGroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

@@ -5,6 +5,7 @@ package route53
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // keySigningKeyDataSourceType returns the Terraform awscc_route53_key_signing_key data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Route53::KeySigningKey resource type.
-func keySigningKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func keySigningKeyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"hosted_zone_id": {
 			// Property: HostedZoneId

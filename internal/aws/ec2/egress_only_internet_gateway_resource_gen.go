@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // egressOnlyInternetGatewayResourceType returns the Terraform awscc_ec2_egress_only_internet_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::EgressOnlyInternetGateway resource type.
-func egressOnlyInternetGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func egressOnlyInternetGatewayResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -30,7 +32,7 @@ func egressOnlyInternetGatewayResourceType(ctx context.Context) (tfsdk.ResourceT
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpc_id": {
@@ -44,7 +46,7 @@ func egressOnlyInternetGatewayResourceType(ctx context.Context) (tfsdk.ResourceT
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}

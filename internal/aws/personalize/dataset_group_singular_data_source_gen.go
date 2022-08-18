@@ -5,6 +5,7 @@ package personalize
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // datasetGroupDataSourceType returns the Terraform awscc_personalize_dataset_group data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Personalize::DatasetGroup resource type.
-func datasetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func datasetGroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"dataset_group_arn": {
 			// Property: DatasetGroupArn

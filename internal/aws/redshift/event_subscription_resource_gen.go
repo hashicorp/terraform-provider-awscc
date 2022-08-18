@@ -5,6 +5,8 @@ package redshift
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +20,7 @@ func init() {
 
 // eventSubscriptionResourceType returns the Terraform awscc_redshift_event_subscription resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Redshift::EventSubscription resource type.
-func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cust_subscription_id": {
 			// Property: CustSubscriptionId
@@ -31,7 +33,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"customer_aws_id": {
@@ -45,7 +47,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"enabled": {
@@ -107,7 +109,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"severity": {
@@ -176,7 +178,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"source_type": {
@@ -222,7 +224,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"subscription_creation_time": {
@@ -236,7 +238,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"subscription_name": {
@@ -251,7 +253,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -320,7 +322,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

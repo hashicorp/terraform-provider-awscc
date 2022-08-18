@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // notificationChannelResourceType returns the Terraform awscc_devopsguru_notification_channel resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DevOpsGuru::NotificationChannel resource type.
-func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func notificationChannelResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"config": {
 			// Property: Config
@@ -69,7 +71,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"id": {
@@ -86,7 +88,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

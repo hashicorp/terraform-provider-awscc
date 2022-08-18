@@ -5,6 +5,7 @@ package config
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // configurationAggregatorDataSourceType returns the Terraform awscc_config_configuration_aggregator data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Config::ConfigurationAggregator resource type.
-func configurationAggregatorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func configurationAggregatorDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"account_aggregation_sources": {
 			// Property: AccountAggregationSources

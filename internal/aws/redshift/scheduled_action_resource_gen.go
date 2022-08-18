@@ -5,6 +5,8 @@ package redshift
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // scheduledActionResourceType returns the Terraform awscc_redshift_scheduled_action resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Redshift::ScheduledAction resource type.
-func scheduledActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"enable": {
 			// Property: Enable
@@ -68,7 +70,7 @@ func scheduledActionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"schedule": {
@@ -106,7 +108,7 @@ func scheduledActionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"start_time": {
@@ -135,7 +137,7 @@ func scheduledActionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"target_action": {
@@ -275,7 +277,7 @@ func scheduledActionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

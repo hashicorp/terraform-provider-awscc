@@ -5,6 +5,7 @@ package iot
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +18,7 @@ func init() {
 
 // cACertificateDataSourceType returns the Terraform awscc_iot_ca_certificate data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::CACertificate resource type.
-func cACertificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func cACertificateDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn

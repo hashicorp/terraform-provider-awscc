@@ -6,6 +6,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -19,7 +21,7 @@ func init() {
 
 // applicationInstanceResourceType returns the Terraform awscc_panorama_application_instance resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Panorama::ApplicationInstance resource type.
-func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func applicationInstanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_instance_id": {
 			// Property: ApplicationInstanceId
@@ -33,7 +35,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"application_instance_id_to_replace": {
@@ -53,8 +55,8 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"arn": {
@@ -68,7 +70,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"created_time": {
@@ -80,7 +82,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"default_runtime_context_device": {
@@ -99,7 +101,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"default_runtime_context_device_name": {
@@ -114,7 +116,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -134,8 +136,8 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"device_id": {
@@ -168,7 +170,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"last_updated_time": {
@@ -180,7 +182,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"manifest_overrides_payload": {
@@ -214,8 +216,8 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"manifest_payload": {
@@ -248,7 +250,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -268,8 +270,8 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"runtime_role_arn": {
@@ -289,8 +291,8 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringMatch(regexp.MustCompile("^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"status": {
@@ -314,7 +316,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status_description": {
@@ -328,7 +330,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status_filter": {
@@ -425,7 +427,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 

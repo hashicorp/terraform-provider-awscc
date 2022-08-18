@@ -5,6 +5,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -17,7 +19,7 @@ func init() {
 
 // transitGatewayMulticastGroupSourceResourceType returns the Terraform awscc_ec2_transit_gateway_multicast_group_source resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastGroupSource resource type.
-func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"group_ip_address": {
 			// Property: GroupIpAddress
@@ -30,7 +32,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"group_member": {
@@ -44,7 +46,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.BoolType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"group_source": {
@@ -58,7 +60,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.BoolType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"member_type": {
@@ -72,7 +74,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"network_interface_id": {
@@ -86,7 +88,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 		"resource_id": {
@@ -100,7 +102,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource_type": {
@@ -114,7 +116,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"source_type": {
@@ -128,7 +130,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"subnet_id": {
@@ -142,7 +144,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"transit_gateway_attachment_id": {
@@ -156,7 +158,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"transit_gateway_multicast_domain_id": {
@@ -170,7 +172,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				resource.RequiresReplace(),
 			},
 		},
 	}
@@ -180,7 +182,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 
