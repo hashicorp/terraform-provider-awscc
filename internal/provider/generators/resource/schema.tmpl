@@ -8,6 +8,7 @@ import (
 
 	{{if .ImportFrameworkAttr }}"github.com/hashicorp/terraform-plugin-framework/attr"{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/provider"
+	{{ if .ImportFrameworkResource }}"github.com/hashicorp/terraform-plugin-framework/resource"{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -30,7 +31,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (provider.ResourceType, err
 		Type:        types.StringType,
 		Computed:    true,
 		PlanModifiers: []tfsdk.AttributePlanModifier{
-			tfsdk.UseStateForUnknown(),
+			resource.UseStateForUnknown(),
 		},
 	}
 {{- end }}
