@@ -46,6 +46,8 @@ linters-settings:
           - os.Exit
           - validate.StringLenAtMost
           - validate.StringLenBetween
+  nolintlint:
+    allow-unused: true # Because of the disabled rules with Go 1.18
   unparam:
     check-exported: true
 
