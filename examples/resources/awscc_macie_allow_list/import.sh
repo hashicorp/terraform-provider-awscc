@@ -1,0 +1,1 @@
+$ terraform import awscc_macie_allow_list.example <resource ID>

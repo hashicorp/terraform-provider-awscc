@@ -26,6 +26,7 @@ A conformance pack is a collection of AWS Config rules and remediation actions t
 - `delivery_s3_key_prefix` (String) The prefix for delivery S3 bucket.
 - `template_body` (String) A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.
 - `template_s3_uri` (String) Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.
+- `template_ssm_document_details` (Attributes) The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document. (see [below for nested schema](#nestedatt--template_ssm_document_details))
 
 ### Read-Only
 
@@ -38,6 +39,15 @@ Required:
 
 - `parameter_name` (String) Key part of key-value pair with value being parameter value
 - `parameter_value` (String) Value part of key-value pair with key being parameter Name
+
+
+<a id="nestedatt--template_ssm_document_details"></a>
+### Nested Schema for `template_ssm_document_details`
+
+Optional:
+
+- `document_name` (String)
+- `document_version` (String)
 
 ## Import
 

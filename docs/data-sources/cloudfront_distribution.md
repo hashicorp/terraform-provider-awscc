@@ -277,6 +277,7 @@ Read-Only:
 - `custom_origin_config` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--origins--custom_origin_config))
 - `domain_name` (String)
 - `id` (String)
+- `origin_access_control_id` (String)
 - `origin_custom_headers` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--origins--origin_custom_headers))
 - `origin_path` (String)
 - `origin_shield` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--origins--origin_shield))

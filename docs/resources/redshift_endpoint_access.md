@@ -17,14 +17,14 @@ Resource schema for a Redshift-managed VPC endpoint.
 
 ### Required
 
+- `cluster_identifier` (String) A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account
 - `endpoint_name` (String) The name of the endpoint.
+- `subnet_group_name` (String) The subnet group name where Amazon Redshift chooses to deploy the endpoint.
 - `vpc_security_group_ids` (List of String) A list of vpc security group ids to apply to the created endpoint access.
 
 ### Optional
 
-- `cluster_identifier` (String) A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account
 - `resource_owner` (String) The AWS account ID of the owner of the cluster.
-- `subnet_group_name` (String) The subnet group name where Amazon Redshift chooses to deploy the endpoint.
 
 ### Read-Only
 
