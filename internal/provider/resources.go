@@ -106,12 +106,15 @@
 //go:generate go run generators/resource/main.go -resource awscc_connect_contact_flow -cfschema ../service/cloudformation/schemas/AWS_Connect_ContactFlow.json -package connect -- ../aws/connect/contact_flow_resource_gen.go ../aws/connect/contact_flow_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_contact_flow_module -cfschema ../service/cloudformation/schemas/AWS_Connect_ContactFlowModule.json -package connect -- ../aws/connect/contact_flow_module_resource_gen.go ../aws/connect/contact_flow_module_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_hours_of_operation -cfschema ../service/cloudformation/schemas/AWS_Connect_HoursOfOperation.json -package connect -- ../aws/connect/hours_of_operation_resource_gen.go ../aws/connect/hours_of_operation_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_connect_instance -cfschema ../service/cloudformation/schemas/AWS_Connect_Instance.json -package connect -- ../aws/connect/instance_resource_gen.go ../aws/connect/instance_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_connect_instance_storage_config -cfschema ../service/cloudformation/schemas/AWS_Connect_InstanceStorageConfig.json -package connect -- ../aws/connect/instance_storage_config_resource_gen.go ../aws/connect/instance_storage_config_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_phone_number -cfschema ../service/cloudformation/schemas/AWS_Connect_PhoneNumber.json -package connect -- ../aws/connect/phone_number_resource_gen.go ../aws/connect/phone_number_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_quick_connect -cfschema ../service/cloudformation/schemas/AWS_Connect_QuickConnect.json -package connect -- ../aws/connect/quick_connect_resource_gen.go ../aws/connect/quick_connect_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_task_template -cfschema ../service/cloudformation/schemas/AWS_Connect_TaskTemplate.json -package connect -- ../aws/connect/task_template_resource_gen.go ../aws/connect/task_template_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_user -cfschema ../service/cloudformation/schemas/AWS_Connect_User.json -package connect -- ../aws/connect/user_resource_gen.go ../aws/connect/user_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_user_hierarchy_group -cfschema ../service/cloudformation/schemas/AWS_Connect_UserHierarchyGroup.json -package connect -- ../aws/connect/user_hierarchy_group_resource_gen.go ../aws/connect/user_hierarchy_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connectcampaigns_campaign -cfschema ../service/cloudformation/schemas/AWS_ConnectCampaigns_Campaign.json -package connectcampaigns -- ../aws/connectcampaigns/campaign_resource_gen.go ../aws/connectcampaigns/campaign_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_controltower_enabled_control -cfschema ../service/cloudformation/schemas/AWS_ControlTower_EnabledControl.json -package controltower -- ../aws/controltower/enabled_control_resource_gen.go ../aws/controltower/enabled_control_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cur_report_definition -cfschema ../service/cloudformation/schemas/AWS_CUR_ReportDefinition.json -package cur -- ../aws/cur/report_definition_resource_gen.go ../aws/cur/report_definition_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_customerprofiles_domain -cfschema ../service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json -package customerprofiles -- ../aws/customerprofiles/domain_resource_gen.go ../aws/customerprofiles/domain_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_customerprofiles_integration -cfschema ../service/cloudformation/schemas/AWS_CustomerProfiles_Integration.json -package customerprofiles -- ../aws/customerprofiles/integration_resource_gen.go ../aws/customerprofiles/integration_resource_gen_test.go
@@ -362,6 +365,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_msk_configuration -cfschema ../service/cloudformation/schemas/AWS_MSK_Configuration.json -package msk -- ../aws/msk/configuration_resource_gen.go ../aws/msk/configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_msk_serverless_cluster -cfschema ../service/cloudformation/schemas/AWS_MSK_ServerlessCluster.json -package msk -- ../aws/msk/serverless_cluster_resource_gen.go ../aws/msk/serverless_cluster_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_mwaa_environment -cfschema ../service/cloudformation/schemas/AWS_MWAA_Environment.json -package mwaa -- ../aws/mwaa/environment_resource_gen.go ../aws/mwaa/environment_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_macie_allow_list -cfschema ../service/cloudformation/schemas/AWS_Macie_AllowList.json -package macie -- ../aws/macie/allow_list_resource_gen.go ../aws/macie/allow_list_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_macie_custom_data_identifier -cfschema ../service/cloudformation/schemas/AWS_Macie_CustomDataIdentifier.json -package macie -- ../aws/macie/custom_data_identifier_resource_gen.go ../aws/macie/custom_data_identifier_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_macie_findings_filter -cfschema ../service/cloudformation/schemas/AWS_Macie_FindingsFilter.json -package macie -- ../aws/macie/findings_filter_resource_gen.go ../aws/macie/findings_filter_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_macie_session -cfschema ../service/cloudformation/schemas/AWS_Macie_Session.json -package macie -- ../aws/macie/session_resource_gen.go ../aws/macie/session_resource_gen_test.go
@@ -525,6 +529,8 @@
 //go:generate go run generators/resource/main.go -resource awscc_stepfunctions_state_machine -cfschema ../service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json -package stepfunctions -- ../aws/stepfunctions/state_machine_resource_gen.go ../aws/stepfunctions/state_machine_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_database -cfschema ../service/cloudformation/schemas/AWS_Timestream_Database.json -package timestream -- ../aws/timestream/database_resource_gen.go ../aws/timestream/database_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_scheduled_query -cfschema ../service/cloudformation/schemas/AWS_Timestream_ScheduledQuery.json -package timestream -- ../aws/timestream/scheduled_query_resource_gen.go ../aws/timestream/scheduled_query_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_supportapp_account_alias -cfschema ../service/cloudformation/schemas/AWS_SupportApp_AccountAlias.json -package supportapp -- ../aws/supportapp/account_alias_resource_gen.go ../aws/supportapp/account_alias_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_supportapp_slack_channel_configuration -cfschema ../service/cloudformation/schemas/AWS_SupportApp_SlackChannelConfiguration.json -package supportapp -- ../aws/supportapp/slack_channel_configuration_resource_gen.go ../aws/supportapp/slack_channel_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_table -cfschema ../service/cloudformation/schemas/AWS_Timestream_Table.json -package timestream -- ../aws/timestream/table_resource_gen.go ../aws/timestream/table_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_transfer_workflow -cfschema ../service/cloudformation/schemas/AWS_Transfer_Workflow.json -package transfer -- ../aws/transfer/workflow_resource_gen.go ../aws/transfer/workflow_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_voiceid_domain -cfschema ../service/cloudformation/schemas/AWS_VoiceID_Domain.json -package voiceid -- ../aws/voiceid/domain_resource_gen.go ../aws/voiceid/domain_resource_gen_test.go
@@ -577,6 +583,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/config"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/connect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/connectcampaigns"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/controltower"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cur"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/customerprofiles"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/databrew"
@@ -678,6 +685,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sso"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/supportapp"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/transfer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/voiceid"

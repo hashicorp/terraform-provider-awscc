@@ -60,6 +60,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_conformance_packs -cftype AWS::Config::ConformancePack -package config ../aws/config/conformance_pack_plural_data_source_gen.go ../aws/config/conformance_pack_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_organization_conformance_packs -cftype AWS::Config::OrganizationConformancePack -package config ../aws/config/organization_conformance_pack_plural_data_source_gen.go ../aws/config/organization_conformance_pack_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_stored_queries -cftype AWS::Config::StoredQuery -package config ../aws/config/stored_query_plural_data_source_gen.go ../aws/config/stored_query_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_connect_instances -cftype AWS::Connect::Instance -package connect ../aws/connect/instance_plural_data_source_gen.go ../aws/connect/instance_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_connectcampaigns_campaigns -cftype AWS::ConnectCampaigns::Campaign -package connectcampaigns ../aws/connectcampaigns/campaign_plural_data_source_gen.go ../aws/connectcampaigns/campaign_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cur_report_definitions -cftype AWS::CUR::ReportDefinition -package cur ../aws/cur/report_definition_plural_data_source_gen.go ../aws/cur/report_definition_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_customerprofiles_domains -cftype AWS::CustomerProfiles::Domain -package customerprofiles ../aws/customerprofiles/domain_plural_data_source_gen.go ../aws/customerprofiles/domain_plural_data_source_gen_test.go
@@ -365,6 +366,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_signer_signing_profiles -cftype AWS::Signer::SigningProfile -package signer ../aws/signer/signing_profile_plural_data_source_gen.go ../aws/signer/signing_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_databases -cftype AWS::Timestream::Database -package timestream ../aws/timestream/database_plural_data_source_gen.go ../aws/timestream/database_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_scheduled_queries -cftype AWS::Timestream::ScheduledQuery -package timestream ../aws/timestream/scheduled_query_plural_data_source_gen.go ../aws/timestream/scheduled_query_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_supportapp_account_aliases -cftype AWS::SupportApp::AccountAlias -package supportapp ../aws/supportapp/account_alias_plural_data_source_gen.go ../aws/supportapp/account_alias_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_supportapp_slack_channel_configurations -cftype AWS::SupportApp::SlackChannelConfiguration -package supportapp ../aws/supportapp/slack_channel_configuration_plural_data_source_gen.go ../aws/supportapp/slack_channel_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_tables -cftype AWS::Timestream::Table -package timestream ../aws/timestream/table_plural_data_source_gen.go ../aws/timestream/table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_transfer_workflows -cftype AWS::Transfer::Workflow -package transfer ../aws/transfer/workflow_plural_data_source_gen.go ../aws/transfer/workflow_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_voiceid_domains -cftype AWS::VoiceID::Domain -package voiceid ../aws/voiceid/domain_plural_data_source_gen.go ../aws/voiceid/domain_plural_data_source_gen_test.go
@@ -403,6 +406,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codestarconnections"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codestarnotifications"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/config"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/connect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/connectcampaigns"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cur"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/customerprofiles"
@@ -495,6 +499,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sqs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/supportapp"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/transfer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/voiceid"
