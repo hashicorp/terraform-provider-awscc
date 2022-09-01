@@ -46,10 +46,8 @@ func endpointAccessResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},
@@ -140,10 +138,8 @@ func endpointAccessResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Description: "The subnet group name where Amazon Redshift chooses to deploy the endpoint.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},

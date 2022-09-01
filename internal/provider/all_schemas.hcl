@@ -539,6 +539,11 @@ resource_schema "aws_connect_hours_of_operation" {
 
 resource_schema "aws_connect_instance" {
   cloudformation_type_name = "AWS::Connect::Instance"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_connect_instance_storage_config" {

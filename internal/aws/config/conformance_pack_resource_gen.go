@@ -29,6 +29,7 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 			// {
 			//   "description": "A list of ConformancePackInputParameter objects.",
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "Input parameters in the form of key-value pairs for the conformance pack.",
 			//     "properties": {
 			//       "ParameterName": {
@@ -171,6 +172,50 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 			},
 			// TemplateS3Uri is a write-only property.
 		},
+		"template_ssm_document_details": {
+			// Property: TemplateSSMDocumentDetails
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
+			//   "properties": {
+			//     "DocumentName": {
+			//       "maxLength": 128,
+			//       "minLength": 3,
+			//       "type": "string"
+			//     },
+			//     "DocumentVersion": {
+			//       "maxLength": 128,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"document_name": {
+						// Property: DocumentName
+						Type:     types.StringType,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(3, 128),
+						},
+					},
+					"document_version": {
+						// Property: DocumentVersion
+						Type:     types.StringType,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+					},
+				},
+			),
+			Optional: true,
+			// TemplateSSMDocumentDetails is a write-only property.
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -198,15 +243,19 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 		"conformance_pack_name":             "ConformancePackName",
 		"delivery_s3_bucket":                "DeliveryS3Bucket",
 		"delivery_s3_key_prefix":            "DeliveryS3KeyPrefix",
+		"document_name":                     "DocumentName",
+		"document_version":                  "DocumentVersion",
 		"parameter_name":                    "ParameterName",
 		"parameter_value":                   "ParameterValue",
 		"template_body":                     "TemplateBody",
 		"template_s3_uri":                   "TemplateS3Uri",
+		"template_ssm_document_details":     "TemplateSSMDocumentDetails",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/TemplateBody",
 		"/properties/TemplateS3Uri",
+		"/properties/TemplateSSMDocumentDetails",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

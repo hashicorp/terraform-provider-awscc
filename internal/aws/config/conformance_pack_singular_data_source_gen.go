@@ -26,6 +26,7 @@ func conformancePackDataSourceType(ctx context.Context) (provider.DataSourceType
 			// {
 			//   "description": "A list of ConformancePackInputParameter objects.",
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "Input parameters in the form of key-value pairs for the conformance pack.",
 			//     "properties": {
 			//       "ParameterName": {
@@ -137,6 +138,43 @@ func conformancePackDataSourceType(ctx context.Context) (provider.DataSourceType
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"template_ssm_document_details": {
+			// Property: TemplateSSMDocumentDetails
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
+			//   "properties": {
+			//     "DocumentName": {
+			//       "maxLength": 128,
+			//       "minLength": 3,
+			//       "type": "string"
+			//     },
+			//     "DocumentVersion": {
+			//       "maxLength": 128,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"document_name": {
+						// Property: DocumentName
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"document_version": {
+						// Property: DocumentVersion
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -160,10 +198,13 @@ func conformancePackDataSourceType(ctx context.Context) (provider.DataSourceType
 		"conformance_pack_name":             "ConformancePackName",
 		"delivery_s3_bucket":                "DeliveryS3Bucket",
 		"delivery_s3_key_prefix":            "DeliveryS3KeyPrefix",
+		"document_name":                     "DocumentName",
+		"document_version":                  "DocumentVersion",
 		"parameter_name":                    "ParameterName",
 		"parameter_value":                   "ParameterValue",
 		"template_body":                     "TemplateBody",
 		"template_s3_uri":                   "TemplateS3Uri",
+		"template_ssm_document_details":     "TemplateSSMDocumentDetails",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

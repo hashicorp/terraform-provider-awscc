@@ -281,6 +281,23 @@ func responseHeadersPolicyDataSourceType(ctx context.Context) (provider.DataSour
 			//         }
 			//       },
 			//       "type": "object"
+			//     },
+			//     "ServerTimingHeadersConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Enabled": {
+			//           "type": "boolean"
+			//         },
+			//         "SamplingRate": {
+			//           "maximum": 100,
+			//           "minimum": 0,
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Enabled"
+			//       ],
+			//       "type": "object"
 			//     }
 			//   },
 			//   "required": [
@@ -537,6 +554,24 @@ func responseHeadersPolicyDataSourceType(ctx context.Context) (provider.DataSour
 						),
 						Computed: true,
 					},
+					"server_timing_headers_config": {
+						// Property: ServerTimingHeadersConfig
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"enabled": {
+									// Property: Enabled
+									Type:     types.BoolType,
+									Computed: true,
+								},
+								"sampling_rate": {
+									// Property: SamplingRate
+									Type:     types.Float64Type,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
 				},
 			),
 			Computed: true,
@@ -571,6 +606,7 @@ func responseHeadersPolicyDataSourceType(ctx context.Context) (provider.DataSour
 		"content_type_options":             "ContentTypeOptions",
 		"cors_config":                      "CorsConfig",
 		"custom_headers_config":            "CustomHeadersConfig",
+		"enabled":                          "Enabled",
 		"frame_option":                     "FrameOption",
 		"frame_options":                    "FrameOptions",
 		"header":                           "Header",
@@ -587,7 +623,9 @@ func responseHeadersPolicyDataSourceType(ctx context.Context) (provider.DataSour
 		"referrer_policy":                  "ReferrerPolicy",
 		"report_uri":                       "ReportUri",
 		"response_headers_policy_config":   "ResponseHeadersPolicyConfig",
+		"sampling_rate":                    "SamplingRate",
 		"security_headers_config":          "SecurityHeadersConfig",
+		"server_timing_headers_config":     "ServerTimingHeadersConfig",
 		"strict_transport_security":        "StrictTransportSecurity",
 		"value":                            "Value",
 		"xss_protection":                   "XSSProtection",
