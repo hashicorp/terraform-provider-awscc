@@ -123,6 +123,8 @@
     },
     "additionalProperties": false,
     "required": [
+        "ClusterIdentifier",
+        "SubnetGroupName",
         "EndpointName",
         "VpcSecurityGroupIds"
     ],
