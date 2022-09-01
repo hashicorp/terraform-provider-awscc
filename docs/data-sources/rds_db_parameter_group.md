@@ -21,18 +21,18 @@ Data Source schema for AWS::RDS::DBParameterGroup
 
 ### Read-Only
 
-- `db_parameter_group_name` (String)
-- `description` (String)
-- `family` (String)
-- `parameters` (Map of String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `db_parameter_group_name` (String) Specifies the name of the DB parameter group
+- `description` (String) Provides the customer-specified description for this DB parameter group.
+- `family` (String) The DB parameter group family name.
+- `parameters` (Map of String) An array of parameter names and values for the parameter update.
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

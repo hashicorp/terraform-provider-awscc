@@ -37,6 +37,7 @@ Optional:
 - `cors_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config))
 - `custom_headers_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--custom_headers_config))
 - `security_headers_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config))
+- `server_timing_headers_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--server_timing_headers_config))
 
 <a id="nestedatt--response_headers_policy_config--cors_config"></a>
 ### Nested Schema for `response_headers_policy_config.cors_config`
@@ -178,6 +179,19 @@ Optional:
 
 - `mode_block` (Boolean)
 - `report_uri` (String)
+
+
+
+<a id="nestedatt--response_headers_policy_config--server_timing_headers_config"></a>
+### Nested Schema for `response_headers_policy_config.server_timing_headers_config`
+
+Required:
+
+- `enabled` (Boolean)
+
+Optional:
+
+- `sampling_rate` (Number)
 
 ## Import
 

@@ -60,7 +60,6 @@ func wirelessGatewayDataSourceType(ctx context.Context) (provider.DataSourceType
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The date and time when the most recent uplink was received.",
-			//   "pattern": "",
 			//   "type": "string"
 			// }
 			Description: "The date and time when the most recent uplink was received.",
@@ -176,10 +175,10 @@ func wirelessGatewayDataSourceType(ctx context.Context) (provider.DataSourceType
 			// Property: ThingName
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
+			//   "description": "Thing Name. If there is a Thing created, this can be returned with a Get call.",
 			//   "type": "string"
 			// }
-			Description: "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
+			Description: "Thing Name. If there is a Thing created, this can be returned with a Get call.",
 			Type:        types.StringType,
 			Computed:    true,
 		},

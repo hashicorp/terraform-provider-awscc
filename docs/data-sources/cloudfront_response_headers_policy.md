@@ -34,6 +34,7 @@ Read-Only:
 - `custom_headers_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--custom_headers_config))
 - `name` (String)
 - `security_headers_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config))
+- `server_timing_headers_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--server_timing_headers_config))
 
 <a id="nestedatt--response_headers_policy_config--cors_config"></a>
 ### Nested Schema for `response_headers_policy_config.cors_config`
@@ -166,5 +167,15 @@ Read-Only:
 - `override` (Boolean)
 - `protection` (Boolean)
 - `report_uri` (String)
+
+
+
+<a id="nestedatt--response_headers_policy_config--server_timing_headers_config"></a>
+### Nested Schema for `response_headers_policy_config.server_timing_headers_config`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `sampling_rate` (Number)
 
 

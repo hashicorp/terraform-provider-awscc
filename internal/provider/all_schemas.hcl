@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 575 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 586 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -537,6 +537,20 @@ resource_schema "aws_connect_hours_of_operation" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_instance" {
+  cloudformation_type_name = "AWS::Connect::Instance"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_connect_instance_storage_config" {
+  cloudformation_type_name               = "AWS::Connect::InstanceStorageConfig"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_phone_number" {
   cloudformation_type_name               = "AWS::Connect::PhoneNumber"
   suppress_plural_data_source_generation = true
@@ -564,6 +578,11 @@ resource_schema "aws_connect_user_hierarchy_group" {
 
 resource_schema "aws_connectcampaigns_campaign" {
   cloudformation_type_name = "AWS::ConnectCampaigns::Campaign"
+}
+
+resource_schema "aws_controltower_enabled_control" {
+  cloudformation_type_name               = "AWS::ControlTower::EnabledControl"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_cur_report_definition" {
@@ -1757,6 +1776,11 @@ resource_schema "aws_mwaa_environment" {
   cloudformation_type_name = "AWS::MWAA::Environment"
 }
 
+resource_schema "aws_macie_allow_list" {
+  cloudformation_type_name               = "AWS::Macie::AllowList"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_macie_custom_data_identifier" {
   cloudformation_type_name               = "AWS::Macie::CustomDataIdentifier"
   suppress_plural_data_source_generation = true
@@ -2024,6 +2048,24 @@ resource_schema "aws_quicksight_template" {
 resource_schema "aws_quicksight_theme" {
   cloudformation_type_name               = "AWS::QuickSight::Theme"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_rds_db_cluster" {
+  cloudformation_type_name = "AWS::RDS::DBCluster"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_rds_db_cluster_parameter_group" {
+  cloudformation_type_name = "AWS::RDS::DBClusterParameterGroup"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_rds_db_instance" {
@@ -2370,6 +2412,15 @@ resource_schema "aws_ses_template" {
   cloudformation_type_name = "AWS::SES::Template"
 }
 
+resource_schema "aws_sns_topic" {
+  cloudformation_type_name = "AWS::SNS::Topic"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_ssm_association" {
   cloudformation_type_name               = "AWS::SSM::Association"
   suppress_plural_data_source_generation = true
@@ -2574,6 +2625,14 @@ resource_schema "aws_timestream_database" {
 
 resource_schema "aws_timestream_scheduled_query" {
   cloudformation_type_name = "AWS::Timestream::ScheduledQuery"
+}
+
+resource_schema "aws_supportapp_account_alias" {
+  cloudformation_type_name = "AWS::SupportApp::AccountAlias"
+}
+
+resource_schema "aws_supportapp_slack_channel_configuration" {
+  cloudformation_type_name = "AWS::SupportApp::SlackChannelConfiguration"
 }
 
 resource_schema "aws_timestream_table" {

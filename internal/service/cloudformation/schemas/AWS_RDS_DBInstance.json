@@ -134,6 +134,8 @@
     "DBInstanceIdentifier": {
       "type": "string",
       "pattern": "^$|^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
+      "minLength": 1,
+      "maxLength": 63,
       "description": "A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance."
     },
     "DBName": {
@@ -368,7 +370,6 @@
     "/properties/BackupRetentionPeriod",
     "/properties/DBParameterGroupName",
     "/properties/Engine",
-    "/properties/EngineVersion",
     "/properties/MonitoringInterval",
     "/properties/MultiAZ",
     "/properties/PerformanceInsightsKMSKeyId",
@@ -466,7 +467,8 @@
       "permissions": [
         "rds:DeleteDBInstance",
         "rds:DescribeDBInstances"
-      ]
+      ],
+      "timeoutInMinutes": 2160
     },
     "list": {
       "permissions": [

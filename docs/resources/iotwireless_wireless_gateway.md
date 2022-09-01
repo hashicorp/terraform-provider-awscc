@@ -26,12 +26,12 @@ Create and manage wireless gateways, including LoRa gateways.
 - `name` (String) Name of Wireless Gateway.
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
 - `thing_arn` (String) Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.
+- `thing_name` (String) Thing Name. If there is a Thing created, this can be returned with a Get call.
 
 ### Read-Only
 
 - `arn` (String) Arn for Wireless Gateway. Returned upon successful create.
 - `id` (String) Id for Wireless Gateway. Returned upon successful create.
-- `thing_name` (String) Thing Arn. If there is a Thing created, this can be returned with a Get call.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`

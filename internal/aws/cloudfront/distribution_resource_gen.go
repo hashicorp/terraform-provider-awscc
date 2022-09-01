@@ -635,6 +635,9 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 			//           "Id": {
 			//             "type": "string"
 			//           },
+			//           "OriginAccessControlId": {
+			//             "type": "string"
+			//           },
 			//           "OriginCustomHeaders": {
 			//             "items": {
 			//               "additionalProperties": false,
@@ -1591,6 +1594,11 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									Type:     types.StringType,
 									Required: true,
 								},
+								"origin_access_control_id": {
+									// Property: OriginAccessControlId
+									Type:     types.StringType,
+									Optional: true,
+								},
 								"origin_custom_headers": {
 									// Property: OriginCustomHeaders
 									Attributes: tfsdk.ListNestedAttributes(
@@ -1934,6 +1942,7 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 		"members":                        "Members",
 		"min_ttl":                        "MinTTL",
 		"minimum_protocol_version":       "MinimumProtocolVersion",
+		"origin_access_control_id":       "OriginAccessControlId",
 		"origin_access_identity":         "OriginAccessIdentity",
 		"origin_custom_headers":          "OriginCustomHeaders",
 		"origin_groups":                  "OriginGroups",

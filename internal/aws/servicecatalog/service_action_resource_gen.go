@@ -42,6 +42,7 @@ func serviceActionResourceType(ctx context.Context) (provider.ResourceType, erro
 					"zh",
 				}),
 			},
+			// AcceptLanguage is a write-only property.
 		},
 		"definition": {
 			// Property: Definition
@@ -172,6 +173,9 @@ func serviceActionResourceType(ctx context.Context) (provider.ResourceType, erro
 		"value":           "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/AcceptLanguage",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

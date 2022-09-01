@@ -316,6 +316,7 @@ Optional:
 - `connection_attempts` (Number)
 - `connection_timeout` (Number)
 - `custom_origin_config` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--origins--custom_origin_config))
+- `origin_access_control_id` (String)
 - `origin_custom_headers` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--origins--origin_custom_headers))
 - `origin_path` (String)
 - `origin_shield` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--origins--origin_shield))

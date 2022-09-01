@@ -215,6 +215,9 @@
                 },
                 "SecurityHeadersConfig": {
                     "$ref": "#/definitions/SecurityHeadersConfig"
+                },
+                "ServerTimingHeadersConfig": {
+                    "$ref": "#/definitions/ServerTimingHeadersConfig"
                 }
             },
             "required": [
@@ -245,6 +248,24 @@
                 }
             },
             "required": [],
+            "type": "object"
+        },
+        "ServerTimingHeadersConfig": {
+            "additionalProperties": false,
+            "properties": {
+                "Enabled": {
+                    "type": "boolean"
+                },
+                "SamplingRate": {
+                    "minimum": 0,
+                    "maximum": 100,
+                    "multipleOf": 0.0001,
+                    "type": "number"
+                }
+            },
+            "required": [
+                "Enabled"
+            ],
             "type": "object"
         },
         "StrictTransportSecurity": {

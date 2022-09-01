@@ -139,6 +139,12 @@
         "ec2:DescribeSubnets",
         "ec2:DeleteSubnet"
       ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeSubnets",
+        "ec2:DescribeNetworkAcls"
+      ]
     }
   }
 }

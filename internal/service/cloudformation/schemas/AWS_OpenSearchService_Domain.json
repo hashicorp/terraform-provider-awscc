@@ -343,8 +343,11 @@
     },
     "additionalProperties": false,
     "createOnlyProperties": [
-        "/properties/AdvancedSecurityOptions",
         "/properties/DomainName"
+    ],
+    "conditionalCreateOnlyProperties":[
+        "/properties/EncryptionAtRestOptions/properties",
+        "/properties/AdvancedSecurityOptions/properties/Enabled"
     ],
     "readOnlyProperties": [
         "/properties/Id",

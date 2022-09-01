@@ -77,12 +77,11 @@
       "type": "string"
     },
     "ThingName": {
-      "description": "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
+      "description": "Thing Name. If there is a Thing created, this can be returned with a Get call.",
       "type": "string"
     },
     "LastUplinkReceivedAt": {
       "description": "The date and time when the most recent uplink was received.",
-      "pattern": "",
       "type": "string"
     }
   },
@@ -91,7 +90,6 @@
     "LoRaWAN"
   ],
   "readOnlyProperties": [
-    "/properties/ThingName",
     "/properties/Id",
     "/properties/Arn"
   ],
@@ -117,12 +115,14 @@
       "permissions": [
         "iotwireless:UpdateWirelessGateway",
         "iotwireless:UntagResource",
-        "iotwireless:ListTagsForResource"
+        "iotwireless:ListTagsForResource",
+        "iotwireless:AssociateWirelessGatewayWithThing"
       ]
     },
     "delete": {
       "permissions": [
-        "iotwireless:DeleteWirelessGateway"
+        "iotwireless:DeleteWirelessGateway",
+        "iotwireless:DisassociateWirelessGatewayFromThing"
       ]
     },
     "list": {

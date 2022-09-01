@@ -290,6 +290,23 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 			//         }
 			//       },
 			//       "type": "object"
+			//     },
+			//     "ServerTimingHeadersConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Enabled": {
+			//           "type": "boolean"
+			//         },
+			//         "SamplingRate": {
+			//           "maximum": 100,
+			//           "minimum": 0,
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Enabled"
+			//       ],
+			//       "type": "object"
 			//     }
 			//   },
 			//   "required": [
@@ -567,6 +584,27 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 						),
 						Optional: true,
 					},
+					"server_timing_headers_config": {
+						// Property: ServerTimingHeadersConfig
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"enabled": {
+									// Property: Enabled
+									Type:     types.BoolType,
+									Required: true,
+								},
+								"sampling_rate": {
+									// Property: SamplingRate
+									Type:     types.Float64Type,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(0.000000, 100.000000),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
 				},
 			),
 			Required: true,
@@ -596,6 +634,7 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 		"content_type_options":             "ContentTypeOptions",
 		"cors_config":                      "CorsConfig",
 		"custom_headers_config":            "CustomHeadersConfig",
+		"enabled":                          "Enabled",
 		"frame_option":                     "FrameOption",
 		"frame_options":                    "FrameOptions",
 		"header":                           "Header",
@@ -612,7 +651,9 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 		"referrer_policy":                  "ReferrerPolicy",
 		"report_uri":                       "ReportUri",
 		"response_headers_policy_config":   "ResponseHeadersPolicyConfig",
+		"sampling_rate":                    "SamplingRate",
 		"security_headers_config":          "SecurityHeadersConfig",
+		"server_timing_headers_config":     "ServerTimingHeadersConfig",
 		"strict_transport_security":        "StrictTransportSecurity",
 		"value":                            "Value",
 		"xss_protection":                   "XSSProtection",
