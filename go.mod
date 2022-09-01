@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.16.13
 	github.com/aws/aws-sdk-go-v2/config v1.17.4
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.14
-	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.10.9
+	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.10.10
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.5
 	github.com/aws/smithy-go v1.13.1
 	github.com/google/go-cmp v0.5.8
