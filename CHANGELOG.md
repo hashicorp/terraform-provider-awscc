@@ -1,4 +1,21 @@
 ## 0.31.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_connect_instance_storage_config`
+* **New Data Source:** `awscc_controltower_enabled_control`
+* **New Data Source:** `awscc_macie_allow_list`
+* **New Data Source:** `awscc_supportapp_account_alias`
+* **New Data Source:** `awscc_supportapp_account_aliases`
+* **New Data Source:** `awscc_supportapp_slack_channel_configuration`
+* **New Data Source:** `awscc_supportapp_slack_channel_configurations`
+* **New Resource:** `awscc_connect_instance_storage_config`
+* **New Resource:** `awscc_controltower_enabled_control`
+* **New Resource:** `awscc_macie_allow_list`
+* **New Resource:** `awscc_supportapp_account_alias`
+* **New Resource:** `awscc_supportapp_slack_channel_configuration`
+* provider: Support `me-central-1` as a valid AWS Region
+
 ## [0.30.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.30.0) (August 18, 2022)
 
 FEATURES:
