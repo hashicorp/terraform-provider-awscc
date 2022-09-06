@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.14
 	github.com/aws/aws-sdk-go-v2/config v1.17.4
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.14
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.15
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.10.11
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.7
 	github.com/aws/smithy-go v1.13.2
