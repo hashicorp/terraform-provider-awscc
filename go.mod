@@ -8,13 +8,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.14
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.10.10
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.7
-	github.com/aws/smithy-go v1.13.1
+	github.com/aws/smithy-go v1.13.2
 	github.com/google/go-cmp v0.5.8
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.18.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.17
 	github.com/hashicorp/go-hclog v1.2.1
 	github.com/hashicorp/go-multierror v1.1.1
-	github.com/hashicorp/hcl/v2 v2.13.0
+	github.com/hashicorp/hcl/v2 v2.14.0
 	github.com/hashicorp/terraform-plugin-framework v0.11.1
 	github.com/hashicorp/terraform-plugin-go v0.14.0
 	github.com/hashicorp/terraform-plugin-log v0.7.0
