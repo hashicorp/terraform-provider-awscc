@@ -24,9 +24,18 @@ Data Source schema for AWS::APS::Workspace
 - `alert_manager_definition` (String) The AMP Workspace alert manager definition data
 - `alias` (String) AMP Workspace alias.
 - `arn` (String) Workspace arn.
+- `logging_configuration` (Attributes) Logging configuration (see [below for nested schema](#nestedatt--logging_configuration))
 - `prometheus_endpoint` (String) AMP Workspace prometheus endpoint
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `workspace_id` (String) Required to identify a specific APS Workspace.
+
+<a id="nestedatt--logging_configuration"></a>
+### Nested Schema for `logging_configuration`
+
+Read-Only:
+
+- `log_group_arn` (String) CloudWatch log group ARN
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

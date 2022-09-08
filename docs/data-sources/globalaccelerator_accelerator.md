@@ -22,11 +22,13 @@ Data Source schema for AWS::GlobalAccelerator::Accelerator
 ### Read-Only
 
 - `accelerator_arn` (String) The Amazon Resource Name (ARN) of the accelerator.
-- `dns_name` (String) The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.
+- `dns_name` (String) The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.
+- `dual_stack_dns_name` (String) The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.
 - `enabled` (Boolean) Indicates whether an accelerator is enabled. The value is true or false.
 - `ip_address_type` (String) IP Address type.
 - `ip_addresses` (List of String) The IP addresses from BYOIP Prefix pool.
 - `ipv_4_addresses` (List of String) The IPv4 addresses assigned to the accelerator.
+- `ipv_6_addresses` (List of String) The IPv6 addresses assigned if the accelerator is dualstack
 - `name` (String) Name of accelerator.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
