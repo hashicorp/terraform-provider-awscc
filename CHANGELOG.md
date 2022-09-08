@@ -1,4 +1,14 @@
 ## 0.32.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cloudfront_origin_access_control`
+* **New Data Source:** `awscc_cloudfront_origin_access_controls`
+* **New Data Source:** `awscc_m2_environment`
+* **New Data Source:** `awscc_m2_environments`
+* **New Resource:** `awscc_cloudfront_origin_access_control`
+* **New Resource:** `awscc_m2_environment`
+
 ## [0.31.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.31.0) (September  1, 2022)
 
 FEATURES:
