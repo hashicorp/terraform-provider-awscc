@@ -1,0 +1,138 @@
+{
+    "typeName": "AWS::Redshift::ClusterParameterGroup",
+    "description": "Resource Type definition for AWS::Redshift::ClusterParameterGroup",
+    "additionalProperties": false,
+    "properties": {
+        "ParameterGroupName": {
+            "description": "Cloudformation will generate a unique group name.",
+            "type": "string",
+            "maxLength": 255
+        },
+        "Description": {
+            "type": "string"
+        },
+        "ParameterGroupFamily": {
+            "type": "string"
+        },
+        "Parameters": {
+            "type": "array",
+            "uniqueItems": false,
+            "insertionOrder": false,
+            "items": {
+                "$ref": "#/definitions/Parameter"
+            }
+        },
+        "Tags": {
+            "type": "array",
+            "uniqueItems": false,
+            "insertionOrder": false,
+            "items": {
+                "$ref": "#/definitions/Tag"
+            }
+        }
+    },
+    "definitions": {
+        "Parameter": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ParameterName": {
+                    "type": "string"
+                },
+                "ParameterValue": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ParameterValue",
+                "ParameterName"
+            ]
+        },
+        "Tag": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Key": {
+                    "type": "string"
+                },
+                "Value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Value",
+                "Key"
+            ]
+        }
+    },
+    "tagging": {
+        "taggable": true
+    },
+    "required": [
+        "Description",
+        "ParameterGroupFamily"
+    ],
+    "createOnlyProperties": [
+        "/properties/ParameterGroupFamily",
+        "/properties/Description"
+    ],
+    "writeOnlyProperties": [
+        "/properties/Parameters",
+        "/properties/Parameters/*/ParameterName",
+        "/properties/Parameters/*/ParameterValue"
+    ],
+    "primaryIdentifier": [
+        "/properties/ParameterGroupName"
+    ],
+    "readOnlyProperties": [
+        "/properties/ParameterGroupName"
+    ],
+    "handlers": {
+        "create": {
+            "permissions": [
+                "redshift:CreateClusterParameterGroup",
+                "redshift:ModifyClusterParameterGroup",
+                "redshift:DescribeClusterParameterGroups",
+                "redshift:CreateTags",
+                "ec2:AllocateAddress",
+                "ec2:AssociateAddress",
+                "ec2:AttachNetworkInterface",
+                "ec2:DescribeAccountAttributes",
+                "ec2:DescribeAddresses",
+                "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeInternetGateways",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcs"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "redshift:DescribeClusterParameterGroups",
+                "initech:DescribeReport"
+            ]
+        },
+        "update": {
+            "permissions": [
+                "redshift:ResetClusterParameterGroup",
+                "redshift:ModifyClusterParameterGroup",
+                "redshift:DescribeTags",
+                "redshift:CreateTags",
+                "redshift:DeleteTags",
+                "initech:UpdateReport"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "redshift:DeleteClusterParameterGroup",
+                "initech:DeleteReport"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "redshift:DescribeClusterParameterGroups",
+                "initech:ListReports"
+            ]
+        }
+    }
+}

@@ -42,6 +42,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudfront_distributions -cftype AWS::CloudFront::Distribution -package cloudfront ../aws/cloudfront/distribution_plural_data_source_gen.go ../aws/cloudfront/distribution_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudfront_functions -cftype AWS::CloudFront::Function -package cloudfront ../aws/cloudfront/function_plural_data_source_gen.go ../aws/cloudfront/function_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudfront_key_groups -cftype AWS::CloudFront::KeyGroup -package cloudfront ../aws/cloudfront/key_group_plural_data_source_gen.go ../aws/cloudfront/key_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudfront_origin_access_controls -cftype AWS::CloudFront::OriginAccessControl -package cloudfront ../aws/cloudfront/origin_access_control_plural_data_source_gen.go ../aws/cloudfront/origin_access_control_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudfront_origin_request_policies -cftype AWS::CloudFront::OriginRequestPolicy -package cloudfront ../aws/cloudfront/origin_request_policy_plural_data_source_gen.go ../aws/cloudfront/origin_request_policy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudfront_public_keys -cftype AWS::CloudFront::PublicKey -package cloudfront ../aws/cloudfront/public_key_plural_data_source_gen.go ../aws/cloudfront/public_key_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudfront_realtime_log_configs -cftype AWS::CloudFront::RealtimeLogConfig -package cloudfront ../aws/cloudfront/realtime_log_config_plural_data_source_gen.go ../aws/cloudfront/realtime_log_config_plural_data_source_gen_test.go
@@ -260,6 +261,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lookoutmetrics_alerts -cftype AWS::LookoutMetrics::Alert -package lookoutmetrics ../aws/lookoutmetrics/alert_plural_data_source_gen.go ../aws/lookoutmetrics/alert_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lookoutmetrics_anomaly_detectors -cftype AWS::LookoutMetrics::AnomalyDetector -package lookoutmetrics ../aws/lookoutmetrics/anomaly_detector_plural_data_source_gen.go ../aws/lookoutmetrics/anomaly_detector_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lookoutvision_projects -cftype AWS::LookoutVision::Project -package lookoutvision ../aws/lookoutvision/project_plural_data_source_gen.go ../aws/lookoutvision/project_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_m2_environments -cftype AWS::M2::Environment -package m2 ../aws/m2/environment_plural_data_source_gen.go ../aws/m2/environment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_clusters -cftype AWS::MSK::Cluster -package msk ../aws/msk/cluster_plural_data_source_gen.go ../aws/msk/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_configurations -cftype AWS::MSK::Configuration -package msk ../aws/msk/configuration_plural_data_source_gen.go ../aws/msk/configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_serverless_clusters -cftype AWS::MSK::ServerlessCluster -package msk ../aws/msk/serverless_cluster_plural_data_source_gen.go ../aws/msk/serverless_cluster_plural_data_source_gen_test.go
@@ -461,6 +463,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lookoutequipment"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lookoutmetrics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lookoutvision"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/m2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/macie"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/mediaconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/mediapackage"
