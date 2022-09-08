@@ -96,6 +96,10 @@ func logGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//     545,
 			//     731,
 			//     1827,
+			//     2192,
+			//     2557,
+			//     2922,
+			//     3288,
 			//     3653
 			//   ],
 			//   "type": "integer"
@@ -121,6 +125,10 @@ func logGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 					545,
 					731,
 					1827,
+					2192,
+					2557,
+					2922,
+					3288,
 					3653,
 				}),
 			},

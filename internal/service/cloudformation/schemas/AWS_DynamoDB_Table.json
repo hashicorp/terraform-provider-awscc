@@ -395,6 +395,7 @@
               "dynamodb:ImportTable",
               "dynamodb:ListTagsOfResource",
               "dynamodb:TagResource",
+              "dynamodb:UpdateTable",
               "kinesis:DescribeStream",
               "kinesis:PutRecords",
               "iam:CreateServiceLinkedRole",

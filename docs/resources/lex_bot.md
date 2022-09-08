@@ -2117,6 +2117,10 @@ Required:
 
 - `voice_id` (String) The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.
 
+Optional:
+
+- `engine` (String) Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.
+
 
 
 <a id="nestedatt--bot_tags"></a>

@@ -12,6 +12,10 @@
             "description": "The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms. For more examples, see KeyId in the AWS Key Management Service API Reference.\n\nThis property applies only to [server-side-encryption](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html).",
             "type": "string"
         },
+        "DataProtectionPolicy": {
+            "description": "The body of the policy document you want to use for this topic.\n\nYou can only add one policy per topic.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 30720",
+            "type": "object"
+        },
         "Subscription": {
             "description": "The SNS subscriptions (endpoints) for this topic.",
             "type": "array",
@@ -106,14 +110,17 @@
                 "sns:Subscribe",
                 "sns:GetTopicAttributes",
                 "sns:ListTagsForResource",
-                "sns:ListSubscriptionsByTopic"
+                "sns:ListSubscriptionsByTopic",
+                "sns:GetDataProtectionPolicy",
+                "sns:PutDataProtectionPolicy"
             ]
         },
         "read": {
             "permissions": [
                 "sns:GetTopicAttributes",
                 "sns:ListTagsForResource",
-                "sns:ListSubscriptionsByTopic"
+                "sns:ListSubscriptionsByTopic",
+                "sns:GetDataProtectionPolicy"
             ]
         },
         "update": {
@@ -125,7 +132,9 @@
                 "sns:Unsubscribe",
                 "sns:GetTopicAttributes",
                 "sns:ListTagsForResource",
-                "sns:ListSubscriptionsByTopic"
+                "sns:ListSubscriptionsByTopic",
+                "sns:GetDataProtectionPolicy",
+                "sns:PutDataProtectionPolicy"
             ]
         },
         "delete": {

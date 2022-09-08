@@ -25,6 +25,19 @@
                 "Value"
             ],
             "additionalProperties": false
+        },
+        "LoggingConfiguration": {
+            "description": "Logging configuration",
+            "type": "object",
+            "properties": {
+                "LogGroupArn": {
+                    "description": "CloudWatch log group ARN",
+                    "type": "string",
+                    "minLength": 0,
+                    "maxLength": 512
+                }
+            },
+            "additionalProperties": false
         }
     },
     "properties": {
@@ -55,6 +68,9 @@
         "PrometheusEndpoint": {
             "description": "AMP Workspace prometheus endpoint",
             "type": "string"
+        },
+        "LoggingConfiguration": {
+            "$ref": "#/definitions/LoggingConfiguration"
         },
         "Tags": {
             "description": "An array of key-value pairs to apply to this resource.",
@@ -88,14 +104,17 @@
             "permissions": [
                 "aps:CreateWorkspace",
                 "aps:TagResource",
-                "aps:CreateAlertManagerDefinition"
+                "aps:CreateAlertManagerDefinition",
+                "aps:DescribeAlertManagerDefinition",
+                "aps:CreateLoggingConfiguration"
             ]
         },
         "read": {
             "permissions": [
                 "aps:DescribeWorkspace",
                 "aps:ListTagsForResource",
-                "aps:DescribeAlertManagerDefinition"
+                "aps:DescribeAlertManagerDefinition",
+                "aps:DescribeLoggingConfiguration"
             ]
         },
         "update": {
@@ -104,13 +123,15 @@
                 "aps:TagResource",
                 "aps:UntagResource",
                 "aps:ListTagsForResource",
-                "aps:PutAlertManagerDefinition"
+                "aps:PutAlertManagerDefinition",
+                "aps:UpdateLoggingConfiguration"
             ]
         },
         "delete": {
             "permissions": [
                 "aps:DeleteWorkspace",
-                "aps:DeleteAlertManagerDefinition"
+                "aps:DeleteAlertManagerDefinition",
+                "aps:DeleteLoggingConfiguration"
             ]
         },
         "list": {
