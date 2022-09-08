@@ -80,6 +80,10 @@ func logGroupDataSourceType(ctx context.Context) (provider.DataSourceType, error
 			//     545,
 			//     731,
 			//     1827,
+			//     2192,
+			//     2557,
+			//     2922,
+			//     3288,
 			//     3653
 			//   ],
 			//   "type": "integer"

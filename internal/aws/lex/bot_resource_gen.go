@@ -3953,6 +3953,14 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//         "additionalProperties": false,
 			//         "description": "Settings for using an Amazon Polly voice to communicate with a user.",
 			//         "properties": {
+			//           "Engine": {
+			//             "description": "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
+			//             "enum": [
+			//               "standard",
+			//               "neural"
+			//             ],
+			//             "type": "string"
+			//           },
 			//           "VoiceId": {
 			//             "description": "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
 			//             "type": "string"
@@ -8366,6 +8374,18 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Settings for using an Amazon Polly voice to communicate with a user.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"engine": {
+									// Property: Engine
+									Description: "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"standard",
+											"neural",
+										}),
+									},
+								},
 								"voice_id": {
 									// Property: VoiceId
 									Description: "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
@@ -9123,6 +9143,7 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 		"detect_sentiment":                      "DetectSentiment",
 		"dialog_code_hook":                      "DialogCodeHook",
 		"enabled":                               "Enabled",
+		"engine":                                "Engine",
 		"external_source_setting":               "ExternalSourceSetting",
 		"failure_response":                      "FailureResponse",
 		"frequency_in_seconds":                  "FrequencyInSeconds",

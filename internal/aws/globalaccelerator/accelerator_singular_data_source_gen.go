@@ -35,10 +35,21 @@ func acceleratorDataSourceType(ctx context.Context) (provider.DataSourceType, er
 			// Property: DnsName
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.",
+			//   "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.",
 			//   "type": "string"
 			// }
-			Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.",
+			Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
+		"dual_stack_dns_name": {
+			// Property: DualStackDnsName
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.",
+			//   "type": "string"
+			// }
+			Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -62,7 +73,7 @@ func acceleratorDataSourceType(ctx context.Context) (provider.DataSourceType, er
 			//   "description": "IP Address type.",
 			//   "enum": [
 			//     "IPV4",
-			//     "IPV6"
+			//     "DUAL_STACK"
 			//   ],
 			//   "type": "string"
 			// }
@@ -76,7 +87,7 @@ func acceleratorDataSourceType(ctx context.Context) (provider.DataSourceType, er
 			// {
 			//   "description": "The IP addresses from BYOIP Prefix pool.",
 			//   "items": {
-			//     "description": "The IP addresses from BYOIP Prefix pool.",
+			//     "description": "An IPV4 address",
 			//     "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$",
 			//     "type": "string"
 			//   },
@@ -97,6 +108,20 @@ func acceleratorDataSourceType(ctx context.Context) (provider.DataSourceType, er
 			//   "type": "array"
 			// }
 			Description: "The IPv4 addresses assigned to the accelerator.",
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
+		},
+		"ipv_6_addresses": {
+			// Property: Ipv6Addresses
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The IPv6 addresses assigned if the accelerator is dualstack",
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
+			Description: "The IPv6 addresses assigned if the accelerator is dualstack",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
 		},
@@ -180,16 +205,18 @@ func acceleratorDataSourceType(ctx context.Context) (provider.DataSourceType, er
 	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::Accelerator").WithTerraformTypeName("awscc_globalaccelerator_accelerator")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerator_arn": "AcceleratorArn",
-		"dns_name":        "DnsName",
-		"enabled":         "Enabled",
-		"ip_address_type": "IpAddressType",
-		"ip_addresses":    "IpAddresses",
-		"ipv_4_addresses": "Ipv4Addresses",
-		"key":             "Key",
-		"name":            "Name",
-		"tags":            "Tags",
-		"value":           "Value",
+		"accelerator_arn":     "AcceleratorArn",
+		"dns_name":            "DnsName",
+		"dual_stack_dns_name": "DualStackDnsName",
+		"enabled":             "Enabled",
+		"ip_address_type":     "IpAddressType",
+		"ip_addresses":        "IpAddresses",
+		"ipv_4_addresses":     "Ipv4Addresses",
+		"ipv_6_addresses":     "Ipv6Addresses",
+		"key":                 "Key",
+		"name":                "Name",
+		"tags":                "Tags",
+		"value":               "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

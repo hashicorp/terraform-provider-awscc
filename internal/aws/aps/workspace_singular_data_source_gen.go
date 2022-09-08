@@ -58,6 +58,35 @@ func workspaceDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"logging_configuration": {
+			// Property: LoggingConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Logging configuration",
+			//   "properties": {
+			//     "LogGroupArn": {
+			//       "description": "CloudWatch log group ARN",
+			//       "maxLength": 512,
+			//       "minLength": 0,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "Logging configuration",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"log_group_arn": {
+						// Property: LogGroupArn
+						Description: "CloudWatch log group ARN",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"prometheus_endpoint": {
 			// Property: PrometheusEndpoint
 			// CloudFormation resource type schema:
@@ -157,6 +186,8 @@ func workspaceDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		"alias":                    "Alias",
 		"arn":                      "Arn",
 		"key":                      "Key",
+		"log_group_arn":            "LogGroupArn",
+		"logging_configuration":    "LoggingConfiguration",
 		"prometheus_endpoint":      "PrometheusEndpoint",
 		"tags":                     "Tags",
 		"value":                    "Value",
