@@ -83,11 +83,16 @@ func connectionAliasResourceType(ctx context.Context) (provider.ResourceType, er
 						// Property: AssociatedAccountId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"association_status": {
 						// Property: AssociationStatus
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NOT_ASSOCIATED",
@@ -97,23 +102,34 @@ func connectionAliasResourceType(ctx context.Context) (provider.ResourceType, er
 								"PENDING_DISASSOCIATION",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"connection_identifier": {
 						// Property: ConnectionIdentifier
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 20),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"resource_id": {
 						// Property: ResourceId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1000),
 							validate.StringMatch(regexp.MustCompile(".+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
