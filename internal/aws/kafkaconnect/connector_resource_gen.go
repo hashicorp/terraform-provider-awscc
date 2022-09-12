@@ -206,6 +206,10 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"provisioned_capacity": {
 						// Property: ProvisionedCapacity
@@ -217,6 +221,7 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies how many MSK Connect Units (MCU) are allocated to the connector.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntInSlice([]int{
 											1,
@@ -224,6 +229,9 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 											4,
 											8,
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"worker_count": {
@@ -235,6 +243,10 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -636,10 +648,18 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The CloudWatch log group that is the destination for log delivery.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"firehose": {
 									// Property: Firehose
@@ -651,6 +671,10 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The Kinesis Data Firehose delivery stream that is the destination for log delivery.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"enabled": {
 												// Property: Enabled
@@ -661,6 +685,10 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"s3": {
 									// Property: S3
@@ -672,6 +700,10 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The name of the S3 bucket that is the destination for log delivery.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"enabled": {
 												// Property: Enabled
@@ -684,10 +716,18 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The S3 prefix that is the destination for log delivery.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
