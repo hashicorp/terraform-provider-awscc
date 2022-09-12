@@ -47,6 +47,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "If set to true, application will be configured with recommended monitoring configuration.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"cwe_monitor_enabled": {
 			// Property: CWEMonitorEnabled
@@ -58,6 +62,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Indicates whether Application Insights can listen to CloudWatch events for the application resources.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"component_monitoring_settings": {
 			// Property: ComponentMonitoringSettings
@@ -901,9 +909,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The ARN of the compnonent.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 300),
 							validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"component_configuration_mode": {
@@ -924,9 +936,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The name of the component.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 							validate.StringMatch(regexp.MustCompile("^[\\d\\w\\-_.+]*$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"custom_component_configuration": {
@@ -953,6 +969,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"alarms": {
 												// Property: Alarms
@@ -973,6 +993,7 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "Indicates the degree of outage when the alarm goes off.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"HIGH",
@@ -980,10 +1001,17 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																	"LOW",
 																}),
 															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"ha_cluster_prometheus_exporter": {
 												// Property: HAClusterPrometheusExporter
@@ -995,10 +1023,18 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "Prometheus exporter port.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"hana_prometheus_exporter": {
 												// Property: HANAPrometheusExporter
@@ -1034,10 +1070,18 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "Prometheus exporter port.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"jmx_prometheus_exporter": {
 												// Property: JMXPrometheusExporter
@@ -1049,22 +1093,38 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "Java agent host port",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"jmxurl": {
 															// Property: JMXURL
 															Description: "JMX service URL.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"prometheus_port": {
 															// Property: PrometheusPort
 															Description: "Prometheus exporter port.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"logs": {
 												// Property: Logs
@@ -1076,6 +1136,7 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The type of encoding of the logs to be monitored.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"utf-8",
@@ -1083,15 +1144,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																	"ascii",
 																}),
 															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"log_group_name": {
 															// Property: LogGroupName
 															Description: "The CloudWatch log group name to be associated to the monitored log.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 512),
 																validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"log_path": {
@@ -1099,9 +1167,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The path of the logs to be monitored.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 260),
 																validate.StringMatch(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"log_type": {
@@ -1118,14 +1190,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The name of the log pattern set.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 																validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"windows_events": {
 												// Property: WindowsEvents
@@ -1173,18 +1253,30 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The name of the log pattern set.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 																validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sub_component_type_configurations": {
 									// Property: SubComponentTypeConfigurations
@@ -1210,6 +1302,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"logs": {
 															// Property: Logs
@@ -1221,6 +1317,7 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																		Description: "The type of encoding of the logs to be monitored.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringInSlice([]string{
 																				"utf-8",
@@ -1228,15 +1325,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																				"ascii",
 																			}),
 																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"log_group_name": {
 																		// Property: LogGroupName
 																		Description: "The CloudWatch log group name to be associated to the monitored log.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 512),
 																			validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"log_path": {
@@ -1244,9 +1348,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																		Description: "The path of the logs to be monitored.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 260),
 																			validate.StringMatch(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"log_type": {
@@ -1263,14 +1371,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																		Description: "The name of the log pattern set.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 30),
 																			validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"windows_events": {
 															// Property: WindowsEvents
@@ -1318,14 +1434,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																		Description: "The name of the log pattern set.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 30),
 																			validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
@@ -1346,13 +1470,21 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"default_overwrite_component_configuration": {
 						// Property: DefaultOverwriteComponentConfiguration
@@ -1378,6 +1510,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"alarms": {
 												// Property: Alarms
@@ -1398,6 +1534,7 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "Indicates the degree of outage when the alarm goes off.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"HIGH",
@@ -1405,10 +1542,17 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																	"LOW",
 																}),
 															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"ha_cluster_prometheus_exporter": {
 												// Property: HAClusterPrometheusExporter
@@ -1420,10 +1564,18 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "Prometheus exporter port.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"hana_prometheus_exporter": {
 												// Property: HANAPrometheusExporter
@@ -1459,10 +1611,18 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "Prometheus exporter port.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"jmx_prometheus_exporter": {
 												// Property: JMXPrometheusExporter
@@ -1474,22 +1634,38 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "Java agent host port",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"jmxurl": {
 															// Property: JMXURL
 															Description: "JMX service URL.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"prometheus_port": {
 															// Property: PrometheusPort
 															Description: "Prometheus exporter port.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"logs": {
 												// Property: Logs
@@ -1501,6 +1677,7 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The type of encoding of the logs to be monitored.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"utf-8",
@@ -1508,15 +1685,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																	"ascii",
 																}),
 															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"log_group_name": {
 															// Property: LogGroupName
 															Description: "The CloudWatch log group name to be associated to the monitored log.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 512),
 																validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"log_path": {
@@ -1524,9 +1708,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The path of the logs to be monitored.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 260),
 																validate.StringMatch(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"log_type": {
@@ -1543,14 +1731,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The name of the log pattern set.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 																validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"windows_events": {
 												// Property: WindowsEvents
@@ -1598,18 +1794,30 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The name of the log pattern set.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 																validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sub_component_type_configurations": {
 									// Property: SubComponentTypeConfigurations
@@ -1635,6 +1843,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"logs": {
 															// Property: Logs
@@ -1646,6 +1858,7 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																		Description: "The type of encoding of the logs to be monitored.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringInSlice([]string{
 																				"utf-8",
@@ -1653,15 +1866,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																				"ascii",
 																			}),
 																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"log_group_name": {
 																		// Property: LogGroupName
 																		Description: "The CloudWatch log group name to be associated to the monitored log.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 512),
 																			validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"log_path": {
@@ -1669,9 +1889,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																		Description: "The path of the logs to be monitored.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 260),
 																			validate.StringMatch(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"log_type": {
@@ -1688,14 +1912,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																		Description: "The name of the log pattern set.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 30),
 																			validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"windows_events": {
 															// Property: WindowsEvents
@@ -1743,14 +1975,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																		Description: "The name of the log pattern set.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 30),
 																			validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
@@ -1771,13 +2011,21 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tier": {
 						// Property: Tier
@@ -1791,6 +2039,7 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
 				validate.RequiredAttributes(
@@ -1803,6 +2052,9 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 						),
 					),
 				),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"custom_components": {
@@ -1871,8 +2123,12 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"grouping_type": {
@@ -1888,10 +2144,14 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The grouping type of the application",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ACCOUNT_BASED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"log_pattern_sets": {
@@ -2009,8 +2269,12 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"ops_center_enabled": {
@@ -2023,6 +2287,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "When set to true, creates opsItems for any problems detected on an application.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ops_item_sns_topic_arn": {
 			// Property: OpsItemSNSTopicArn
@@ -2037,9 +2305,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The SNS topic provided to Application Insights that is associated to the created opsItem.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 300),
 				validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource_group_name": {
@@ -2119,8 +2391,12 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
