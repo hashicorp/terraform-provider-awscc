@@ -248,11 +248,19 @@ func featureGroupResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"disable_glue_table_creation": {
 						// Property: DisableGlueTableCreation
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_storage_config": {
 						// Property: S3StorageConfig
@@ -262,8 +270,12 @@ func featureGroupResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: KmsKeyId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(2048),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"s3_uri": {
@@ -316,6 +328,10 @@ func featureGroupResourceType(ctx context.Context) (provider.ResourceType, error
 						// Property: EnableOnlineStore
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"security_config": {
 						// Property: SecurityConfig
@@ -325,13 +341,21 @@ func featureGroupResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: KmsKeyId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(2048),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

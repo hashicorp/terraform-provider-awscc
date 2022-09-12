@@ -53,9 +53,13 @@ func imageResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description of the image.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
 				validate.StringMatch(regexp.MustCompile(".+"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"image_display_name": {
@@ -71,9 +75,13 @@ func imageResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The display name of the image.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9 -_]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"image_name": {
@@ -170,8 +178,12 @@ func imageResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

@@ -429,9 +429,13 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The user profile Amazon Resource Name (ARN).",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
 							validate.StringMatch(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"jupyter_server_app_settings": {
@@ -448,6 +452,7 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "The instance type that the image version runs on.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"system",
@@ -484,15 +489,22 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 														"ml.g4dn.16xlarge",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"sage_maker_image_arn": {
 												// Property: SageMakerImageArn
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"sage_maker_image_version_arn": {
@@ -500,18 +512,30 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"kernel_gateway_app_settings": {
 						// Property: KernelGatewayAppSettings
@@ -548,15 +572,23 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "The version number of the CustomImage.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(0),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 30),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"default_resource_spec": {
@@ -569,6 +601,7 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "The instance type that the image version runs on.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"system",
@@ -605,15 +638,22 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 														"ml.g4dn.16xlarge",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"sage_maker_image_arn": {
 												// Property: SageMakerImageArn
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"sage_maker_image_version_arn": {
@@ -621,18 +661,30 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"r_studio_server_pro_app_settings": {
 						// Property: RStudioServerProAppSettings
@@ -676,16 +728,24 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"security_groups": {
 						// Property: SecurityGroups
 						Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 5),
 							validate.ArrayForEach(validate.StringLenAtMost(32)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"sharing_settings": {
@@ -698,11 +758,15 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"Allowed",
 											"Disabled",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"s3_kms_key_id": {
@@ -710,9 +774,13 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(2048),
 										validate.StringMatch(regexp.MustCompile(".*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"s3_output_path": {
@@ -720,18 +788,30 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
 										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

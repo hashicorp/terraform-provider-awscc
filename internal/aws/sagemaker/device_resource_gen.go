@@ -64,9 +64,13 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Description of the device",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 40),
 							validate.StringMatch(regexp.MustCompile("[\\S\\s]+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"device_name": {
@@ -87,14 +91,22 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "AWS Internet of Things (IoT) object name.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
 							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"device_fleet_name": {
 			// Property: DeviceFleetName
@@ -170,6 +182,10 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

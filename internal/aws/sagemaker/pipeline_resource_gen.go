@@ -54,6 +54,10 @@ func pipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"pipeline_definition": {
 			// Property: PipelineDefinition
@@ -100,6 +104,10 @@ func pipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A specification that defines the pipeline in JSON format.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"pipeline_definition_s3_location": {
 						// Property: PipelineDefinitionS3Location
@@ -116,6 +124,10 @@ func pipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The Amazon S3 ETag (a file checksum) of the PipelineDefinition file. If you don't specify a value, SageMaker skips ETag validation of your PipelineDefinition file.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"key": {
 									// Property: Key
@@ -128,10 +140,18 @@ func pipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "For versioning-enabled buckets, a specific version of the PipelineDefinition file.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -149,8 +169,12 @@ func pipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The description of the Pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 3072),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"pipeline_display_name": {
@@ -166,9 +190,13 @@ func pipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The display name of the Pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"pipeline_name": {
@@ -248,6 +276,10 @@ func pipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
