@@ -32,6 +32,10 @@ func groupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The filter expression defining criteria by which to group traces.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"group_arn": {
 			// Property: GroupARN
@@ -61,8 +65,12 @@ func groupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The case-sensitive name of the new group. Names must be unique.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 32),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"insights_configuration": {
@@ -89,16 +97,28 @@ func groupResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"notifications_enabled": {
 						// Property: NotificationsEnabled
 						Description: "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -138,8 +158,10 @@ func groupResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

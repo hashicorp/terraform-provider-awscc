@@ -48,8 +48,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 32),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"sampling_rule": {
@@ -142,14 +146,22 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"fixed_rate": {
 						// Property: FixedRate
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(0.000000, 1.000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"http_method": {
@@ -157,8 +169,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the HTTP method from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(10),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"host": {
@@ -166,8 +182,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the hostname from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"priority": {
@@ -175,8 +195,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The priority of the sampling rule.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 9999),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"reservoir_size": {
@@ -184,8 +208,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"resource_arn": {
@@ -193,8 +221,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the ARN of the AWS resource on which the service runs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(500),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"rule_arn": {
@@ -202,14 +234,22 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"rule_name": {
 						// Property: RuleName
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 32),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"service_name": {
@@ -217,8 +257,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the name that the service uses to identify itself in segments.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"service_type": {
@@ -226,8 +270,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the origin that the service uses to identify its type in segments.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"url_path": {
@@ -235,8 +283,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the path from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"version": {
@@ -244,13 +296,21 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The version of the sampling rule format (1)",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"sampling_rule_record": {
 			// Property: SamplingRuleRecord
@@ -355,12 +415,20 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "When the rule was created, in Unix time seconds.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"modified_at": {
 						// Property: ModifiedAt
 						Description: "When the rule was modified, in Unix time seconds.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"sampling_rule": {
 						// Property: SamplingRule
@@ -372,14 +440,22 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"fixed_rate": {
 									// Property: FixedRate
 									Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 									Type:        types.Float64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatBetween(0.000000, 1.000000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"http_method": {
@@ -387,8 +463,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "Matches the HTTP method from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(10),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"host": {
@@ -396,8 +476,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "Matches the hostname from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(64),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"priority": {
@@ -405,8 +489,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The priority of the sampling rule.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 9999),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"reservoir_size": {
@@ -414,8 +502,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(0),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"resource_arn": {
@@ -423,8 +515,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "Matches the ARN of the AWS resource on which the service runs.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(500),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"rule_arn": {
@@ -432,14 +528,22 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"rule_name": {
 									// Property: RuleName
 									Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 32),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"service_name": {
@@ -447,8 +551,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "Matches the name that the service uses to identify itself in segments.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(64),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"service_type": {
@@ -456,8 +564,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "Matches the origin that the service uses to identify its type in segments.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(64),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"url_path": {
@@ -465,8 +577,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "Matches the path from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(128),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"version": {
@@ -474,17 +590,29 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The version of the sampling rule format (1)",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"sampling_rule_update": {
 			// Property: SamplingRuleUpdate
@@ -571,14 +699,22 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"fixed_rate": {
 						// Property: FixedRate
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(0.000000, 1.000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"http_method": {
@@ -586,8 +722,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the HTTP method from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(10),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"host": {
@@ -595,8 +735,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the hostname from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"priority": {
@@ -604,8 +748,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The priority of the sampling rule.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 9999),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"reservoir_size": {
@@ -613,8 +761,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"resource_arn": {
@@ -622,8 +774,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the ARN of the AWS resource on which the service runs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(500),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"rule_arn": {
@@ -631,14 +787,22 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"rule_name": {
 						// Property: RuleName
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 32),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"service_name": {
@@ -646,8 +810,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the name that the service uses to identify itself in segments.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"service_type": {
@@ -655,8 +823,12 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the origin that the service uses to identify its type in segments.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"url_path": {
@@ -664,13 +836,21 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "Matches the path from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -710,8 +890,10 @@ func samplingRuleResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
