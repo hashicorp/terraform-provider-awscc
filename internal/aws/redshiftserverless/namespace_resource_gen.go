@@ -36,8 +36,12 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(8, 64),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// AdminUserPassword is a write-only property.
 		},
@@ -52,8 +56,12 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The user name associated with the admin user for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("[a-zA-Z][a-zA-Z_0-9+.@-]*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"db_name": {
@@ -68,9 +76,13 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The database name associated for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(127),
 				validate.StringMatch(regexp.MustCompile("[a-zA-Z][a-zA-Z_0-9+.@-]*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"default_iam_role_arn": {
@@ -83,6 +95,10 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The default IAM role ARN for the namespace that is being created.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"final_snapshot_name": {
 			// Property: FinalSnapshotName
@@ -96,9 +112,13 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The name of the namespace the source snapshot was created from. Please specify the name if needed before deleting namespace",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(255),
 				validate.StringMatch(regexp.MustCompile("[a-z][a-z0-9]*(-[a-z0-9]+)*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"final_snapshot_retention_period": {
@@ -111,6 +131,10 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of days to retain automated snapshot in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3,653.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"iam_roles": {
 			// Property: IamRoles
@@ -128,11 +152,13 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenBetween(0, 512)),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"kms_key_id": {
@@ -145,6 +171,10 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the namespace.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"log_exports": {
 			// Property: LogExports
@@ -167,6 +197,7 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 16),
 				validate.ArrayForEach(validate.StringInSlice([]string{
@@ -177,6 +208,7 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"namespace": {
@@ -253,45 +285,68 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: AdminUsername
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"creation_date": {
 						// Property: CreationDate
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"db_name": {
 						// Property: DbName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("[a-zA-Z][a-zA-Z_0-9+.@-]*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"default_iam_role_arn": {
 						// Property: DefaultIamRoleArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"iam_roles": {
 						// Property: IamRoles
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(0, 512)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"kms_key_id": {
 						// Property: KmsKeyId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"log_exports": {
 						// Property: LogExports
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 16),
 							validate.ArrayForEach(validate.StringInSlice([]string{
@@ -302,37 +357,54 @@ func namespaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"namespace_arn": {
 						// Property: NamespaceArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"namespace_id": {
 						// Property: NamespaceId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"namespace_name": {
 						// Property: NamespaceName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(3, 64),
 							validate.StringMatch(regexp.MustCompile("^[a-z0-9-]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"status": {
 						// Property: Status
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"AVAILABLE",
 								"MODIFYING",
 								"DELETING",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
