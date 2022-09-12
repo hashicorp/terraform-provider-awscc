@@ -311,15 +311,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: IntervalInSeconds
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
@@ -329,37 +341,61 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_group_name": {
 									// Property: LogGroupName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cluster_endpoint": {
 						// Property: ClusterEndpoint
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
 							validate.StringMatch(regexp.MustCompile("https:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"domain_arn": {
 						// Property: DomainARN
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
 							validate.StringMatch(regexp.MustCompile("arn:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"index_name": {
@@ -374,6 +410,7 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: IndexRotationPeriod
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NoRotation",
@@ -382,6 +419,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 								"OneWeek",
 								"OneMonth",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"processing_configuration": {
@@ -392,6 +432,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"processors": {
 									// Property: Processors
@@ -414,8 +458,12 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.UniqueItems(),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"type": {
@@ -434,13 +482,21 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"retry_options": {
 						// Property: RetryOptions
@@ -450,10 +506,18 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: DurationInSeconds
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"role_arn": {
 						// Property: RoleARN
@@ -468,11 +532,15 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"FailedDocumentsOnly",
 								"AllDocuments",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"s3_configuration": {
@@ -496,15 +564,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: IntervalInSeconds
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
@@ -514,25 +594,42 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: Enabled
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_group_name": {
 												// Property: LogGroupName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"compression_format": {
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"UNCOMPRESSED",
@@ -541,6 +638,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 											"Snappy",
 											"HADOOP_SNAPPY",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"encryption_configuration": {
@@ -559,35 +659,55 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"NoEncryption",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"role_arn": {
@@ -607,8 +727,12 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: TypeName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"vpc_configuration": {
@@ -656,6 +780,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -700,9 +828,13 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: KeyARN
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
 							validate.StringMatch(regexp.MustCompile("arn:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"key_type": {
@@ -719,6 +851,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"delivery_stream_name": {
 			// Property: DeliveryStreamName
@@ -1053,15 +1189,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: IntervalInSeconds
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
@@ -1071,37 +1219,61 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_group_name": {
 									// Property: LogGroupName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cluster_endpoint": {
 						// Property: ClusterEndpoint
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
 							validate.StringMatch(regexp.MustCompile("https:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"domain_arn": {
 						// Property: DomainARN
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
 							validate.StringMatch(regexp.MustCompile("arn:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"index_name": {
@@ -1116,6 +1288,7 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: IndexRotationPeriod
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NoRotation",
@@ -1124,6 +1297,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 								"OneWeek",
 								"OneMonth",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"processing_configuration": {
@@ -1134,6 +1310,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"processors": {
 									// Property: Processors
@@ -1156,8 +1336,12 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.UniqueItems(),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"type": {
@@ -1176,13 +1360,21 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"retry_options": {
 						// Property: RetryOptions
@@ -1192,10 +1384,18 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: DurationInSeconds
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"role_arn": {
 						// Property: RoleARN
@@ -1210,11 +1410,15 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"FailedDocumentsOnly",
 								"AllDocuments",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"s3_configuration": {
@@ -1238,15 +1442,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: IntervalInSeconds
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
@@ -1256,25 +1472,42 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: Enabled
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_group_name": {
 												// Property: LogGroupName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"compression_format": {
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"UNCOMPRESSED",
@@ -1283,6 +1516,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 											"Snappy",
 											"HADOOP_SNAPPY",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"encryption_configuration": {
@@ -1301,35 +1537,55 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"NoEncryption",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"role_arn": {
@@ -1349,8 +1605,12 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: TypeName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"vpc_configuration": {
@@ -1398,6 +1658,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"extended_s3_destination_configuration": {
 			// Property: ExtendedS3DestinationConfiguration
@@ -1840,15 +2104,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: IntervalInSeconds
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
@@ -1858,25 +2134,42 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_group_name": {
 									// Property: LogGroupName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"compression_format": {
 						// Property: CompressionFormat
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"UNCOMPRESSED",
@@ -1885,6 +2178,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 								"Snappy",
 								"HADOOP_SNAPPY",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"data_format_conversion_configuration": {
@@ -1895,6 +2191,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"input_format_configuration": {
 									// Property: InputFormatConfiguration
@@ -1912,13 +2212,21 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 																		// Property: TimestampFormats
 																		Type:     types.ListType{ElemType: types.StringType},
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.UniqueItems(),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"open_x_json_ser_de": {
 															// Property: OpenXJsonSerDe
@@ -1928,29 +2236,53 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 																		// Property: CaseInsensitive
 																		Type:     types.BoolType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"column_to_json_key_mappings": {
 																		// Property: ColumnToJsonKeyMappings
 																		// Pattern: ""
 																		Type:     types.MapType{ElemType: types.StringType},
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"convert_dots_in_json_keys_to_underscores": {
 																		// Property: ConvertDotsInJsonKeysToUnderscores
 																		Type:     types.BoolType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"output_format_configuration": {
 									// Property: OutputFormatConfiguration
@@ -1968,58 +2300,102 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 																		// Property: BlockSizeBytes
 																		Type:     types.Int64Type,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"bloom_filter_columns": {
 																		// Property: BloomFilterColumns
 																		Type:     types.ListType{ElemType: types.StringType},
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.UniqueItems(),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"bloom_filter_false_positive_probability": {
 																		// Property: BloomFilterFalsePositiveProbability
 																		Type:     types.Float64Type,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"compression": {
 																		// Property: Compression
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"dictionary_key_threshold": {
 																		// Property: DictionaryKeyThreshold
 																		Type:     types.Float64Type,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"enable_padding": {
 																		// Property: EnablePadding
 																		Type:     types.BoolType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"format_version": {
 																		// Property: FormatVersion
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"padding_tolerance": {
 																		// Property: PaddingTolerance
 																		Type:     types.Float64Type,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"row_index_stride": {
 																		// Property: RowIndexStride
 																		Type:     types.Int64Type,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"stripe_size_bytes": {
 																		// Property: StripeSizeBytes
 																		Type:     types.Int64Type,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"parquet_ser_de": {
 															// Property: ParquetSerDe
@@ -2029,43 +2405,79 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 																		// Property: BlockSizeBytes
 																		Type:     types.Int64Type,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"compression": {
 																		// Property: Compression
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"enable_dictionary_compression": {
 																		// Property: EnableDictionaryCompression
 																		Type:     types.BoolType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"max_padding_bytes": {
 																		// Property: MaxPaddingBytes
 																		Type:     types.Int64Type,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"page_size_bytes": {
 																		// Property: PageSizeBytes
 																		Type:     types.Int64Type,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"writer_version": {
 																		// Property: WriterVersion
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"schema_configuration": {
 									// Property: SchemaConfiguration
@@ -2075,43 +2487,75 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: CatalogId
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"database_name": {
 												// Property: DatabaseName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"region": {
 												// Property: Region
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleARN
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 512),
 													validate.StringMatch(regexp.MustCompile("arn:.*"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"table_name": {
 												// Property: TableName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"version_id": {
 												// Property: VersionId
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"dynamic_partitioning_configuration": {
 						// Property: DynamicPartitioningConfiguration
@@ -2121,6 +2565,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"retry_options": {
 									// Property: RetryOptions
@@ -2130,14 +2578,26 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: DurationInSeconds
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"encryption_configuration": {
 						// Property: EncryptionConfiguration
@@ -2155,35 +2615,55 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"no_encryption_config": {
 									// Property: NoEncryptionConfig
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"NoEncryption",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"error_output_prefix": {
 						// Property: ErrorOutputPrefix
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 1024),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"prefix": {
 						// Property: Prefix
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 1024),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"processing_configuration": {
@@ -2194,6 +2674,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"processors": {
 									// Property: Processors
@@ -2216,8 +2700,12 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.UniqueItems(),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"type": {
@@ -2236,13 +2724,21 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"role_arn": {
 						// Property: RoleARN
@@ -2274,15 +2770,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: IntervalInSeconds
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
@@ -2292,25 +2800,42 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: Enabled
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_group_name": {
 												// Property: LogGroupName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"compression_format": {
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"UNCOMPRESSED",
@@ -2319,6 +2844,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 											"Snappy",
 											"HADOOP_SNAPPY",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"encryption_configuration": {
@@ -2337,35 +2865,55 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"NoEncryption",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"role_arn": {
@@ -2380,21 +2928,33 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Disabled",
 								"Enabled",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"http_endpoint_destination_configuration": {
 			// Property: HttpEndpointDestinationConfiguration
@@ -2671,15 +3231,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: IntervalInSeconds
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
@@ -2689,20 +3261,36 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_group_name": {
 									// Property: LogGroupName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"endpoint_configuration": {
 						// Property: EndpointConfiguration
@@ -2712,16 +3300,24 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: AccessKey
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 4096),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"name": {
 									// Property: Name
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"url": {
@@ -2744,6 +3340,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"processors": {
 									// Property: Processors
@@ -2766,8 +3366,12 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.UniqueItems(),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"type": {
@@ -2786,13 +3390,21 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"request_configuration": {
 						// Property: RequestConfiguration
@@ -2821,25 +3433,37 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 50),
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"content_encoding": {
 									// Property: ContentEncoding
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"NONE",
 											"GZIP",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"retry_options": {
 						// Property: RetryOptions
@@ -2849,24 +3473,40 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: DurationInSeconds
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"role_arn": {
 						// Property: RoleARN
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
 							validate.StringMatch(regexp.MustCompile("arn:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
@@ -2889,15 +3529,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: IntervalInSeconds
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
@@ -2907,25 +3559,42 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: Enabled
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_group_name": {
 												// Property: LogGroupName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"compression_format": {
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"UNCOMPRESSED",
@@ -2934,6 +3603,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 											"Snappy",
 											"HADOOP_SNAPPY",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"encryption_configuration": {
@@ -2952,35 +3624,55 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"NoEncryption",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"role_arn": {
@@ -2999,6 +3691,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"kinesis_stream_source_configuration": {
 			// Property: KinesisStreamSourceConfiguration
@@ -3394,20 +4090,36 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_group_name": {
 									// Property: LogGroupName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cluster_jdbcurl": {
 						// Property: ClusterJDBCURL
@@ -3425,16 +4137,24 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: CopyOptions
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 204800),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"data_table_columns": {
 									// Property: DataTableColumns
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 204800),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"data_table_name": {
@@ -3465,6 +4185,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"processors": {
 									// Property: Processors
@@ -3487,8 +4211,12 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.UniqueItems(),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"type": {
@@ -3507,13 +4235,21 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"retry_options": {
 						// Property: RetryOptions
@@ -3523,10 +4259,18 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: DurationInSeconds
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"role_arn": {
 						// Property: RoleARN
@@ -3558,15 +4302,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: IntervalInSeconds
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
@@ -3576,25 +4332,42 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: Enabled
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_group_name": {
 												// Property: LogGroupName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"compression_format": {
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"UNCOMPRESSED",
@@ -3603,6 +4376,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 											"Snappy",
 											"HADOOP_SNAPPY",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"encryption_configuration": {
@@ -3621,35 +4397,55 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"NoEncryption",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"role_arn": {
@@ -3664,16 +4460,24 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Disabled",
 								"Enabled",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"s3_configuration": {
@@ -3697,15 +4501,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: IntervalInSeconds
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
@@ -3715,25 +4531,42 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: Enabled
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_group_name": {
 												// Property: LogGroupName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"compression_format": {
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"UNCOMPRESSED",
@@ -3742,6 +4575,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 											"Snappy",
 											"HADOOP_SNAPPY",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"encryption_configuration": {
@@ -3760,35 +4596,55 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"NoEncryption",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"role_arn": {
@@ -3815,6 +4671,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"s3_destination_configuration": {
 			// Property: S3DestinationConfiguration
@@ -3931,15 +4791,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: IntervalInSeconds
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
@@ -3949,25 +4821,42 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_group_name": {
 									// Property: LogGroupName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"compression_format": {
 						// Property: CompressionFormat
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"UNCOMPRESSED",
@@ -3976,6 +4865,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 								"Snappy",
 								"HADOOP_SNAPPY",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"encryption_configuration": {
@@ -3994,35 +4886,55 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"no_encryption_config": {
 									// Property: NoEncryptionConfig
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"NoEncryption",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"error_output_prefix": {
 						// Property: ErrorOutputPrefix
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 1024),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"prefix": {
 						// Property: Prefix
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 1024),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"role_arn": {
@@ -4037,6 +4949,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"splunk_destination_configuration": {
 			// Property: SplunkDestinationConfiguration
@@ -4256,27 +5172,47 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_group_name": {
 									// Property: LogGroupName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"hec_acknowledgment_timeout_in_seconds": {
 						// Property: HECAcknowledgmentTimeoutInSeconds
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(180, 600),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"hec_endpoint": {
@@ -4314,6 +5250,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"processors": {
 									// Property: Processors
@@ -4336,8 +5276,12 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.UniqueItems(),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"type": {
@@ -4356,13 +5300,21 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"retry_options": {
 						// Property: RetryOptions
@@ -4372,15 +5324,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: DurationInSeconds
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
@@ -4403,15 +5367,27 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: IntervalInSeconds
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
@@ -4421,25 +5397,42 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 												// Property: Enabled
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_group_name": {
 												// Property: LogGroupName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"compression_format": {
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"UNCOMPRESSED",
@@ -4448,6 +5441,9 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 											"Snappy",
 											"HADOOP_SNAPPY",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"encryption_configuration": {
@@ -4466,35 +5462,55 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"NoEncryption",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"role_arn": {
@@ -4513,6 +5529,10 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -4556,16 +5576,24 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 							validate.StringMatch(regexp.MustCompile("^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
