@@ -275,9 +275,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "Specifies the S3 bucket that contains the file being copied.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(3, 63),
 																validate.StringMatch(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"key": {
@@ -285,27 +289,43 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(0, 1024),
 																validate.StringMatch(regexp.MustCompile(".*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"name": {
 									// Property: Name
 									Description: "The name of the step, used as an identifier.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"overwrite_existing": {
@@ -313,11 +333,15 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"TRUE",
 											"FALSE",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"source_file_location": {
@@ -325,14 +349,22 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies which file to use as input to the workflow step.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"custom_step_details": {
 						// Property: CustomStepDetails
@@ -344,9 +376,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The name of the step, used as an identifier.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"source_file_location": {
@@ -354,9 +390,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies which file to use as input to the workflow step.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"target": {
@@ -364,9 +404,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The ARN for the lambda function that is being called.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 170),
 										validate.StringMatch(regexp.MustCompile("arn:[a-z-]+:lambda:.*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"timeout_seconds": {
@@ -374,13 +418,21 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Timeout, in seconds, for the step.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 1800),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"delete_step_details": {
 						// Property: DeleteStepDetails
@@ -392,9 +444,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The name of the step, used as an identifier.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"source_file_location": {
@@ -402,14 +458,22 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies which file to use as input to the workflow step.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tag_step_details": {
 						// Property: TagStepDetails
@@ -421,9 +485,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The name of the step, used as an identifier.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"source_file_location": {
@@ -431,9 +499,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies which file to use as input to the workflow step.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"tags": {
@@ -462,18 +534,27 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(10),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"COPY",
@@ -481,6 +562,9 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"DELETE",
 								"TAG",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -708,9 +792,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "Specifies the S3 bucket that contains the file being copied.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(3, 63),
 																validate.StringMatch(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"key": {
@@ -718,27 +806,43 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(0, 1024),
 																validate.StringMatch(regexp.MustCompile(".*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"name": {
 									// Property: Name
 									Description: "The name of the step, used as an identifier.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"overwrite_existing": {
@@ -746,11 +850,15 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"TRUE",
 											"FALSE",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"source_file_location": {
@@ -758,14 +866,22 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies which file to use as input to the workflow step.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"custom_step_details": {
 						// Property: CustomStepDetails
@@ -777,9 +893,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The name of the step, used as an identifier.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"source_file_location": {
@@ -787,9 +907,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies which file to use as input to the workflow step.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"target": {
@@ -797,9 +921,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The ARN for the lambda function that is being called.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 170),
 										validate.StringMatch(regexp.MustCompile("arn:[a-z-]+:lambda:.*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"timeout_seconds": {
@@ -807,13 +935,21 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Timeout, in seconds, for the step.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 1800),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"delete_step_details": {
 						// Property: DeleteStepDetails
@@ -825,9 +961,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The name of the step, used as an identifier.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"source_file_location": {
@@ -835,14 +975,22 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies which file to use as input to the workflow step.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tag_step_details": {
 						// Property: TagStepDetails
@@ -854,9 +1002,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The name of the step, used as an identifier.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"source_file_location": {
@@ -864,9 +1016,13 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies which file to use as input to the workflow step.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"tags": {
@@ -895,18 +1051,27 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(10),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"COPY",
@@ -914,6 +1079,9 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"DELETE",
 								"TAG",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -984,8 +1152,12 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"workflow_id": {
