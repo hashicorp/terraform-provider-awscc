@@ -32,6 +32,10 @@ func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"actions_suppressor": {
 			// Property: ActionsSuppressor
@@ -45,8 +49,12 @@ func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. ",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1600),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"actions_suppressor_extension_period": {
@@ -60,8 +68,12 @@ func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(0),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"actions_suppressor_wait_period": {
@@ -75,8 +87,12 @@ func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(0),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"alarm_actions": {
@@ -96,9 +112,13 @@ func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(5),
 				validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"alarm_description": {
@@ -113,8 +133,12 @@ func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The description of the alarm",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"alarm_name": {
@@ -185,9 +209,13 @@ func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(5),
 				validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"ok_actions": {
@@ -207,9 +235,13 @@ func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(5),
 				validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
