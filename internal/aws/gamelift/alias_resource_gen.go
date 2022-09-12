@@ -49,8 +49,12 @@ func aliasResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A human-readable description of the alias.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -121,8 +125,12 @@ func aliasResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^fleet-\\S+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"message": {
@@ -130,6 +138,10 @@ func aliasResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"type": {
 						// Property: Type
