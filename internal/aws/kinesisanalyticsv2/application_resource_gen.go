@@ -738,21 +738,33 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The version of the object containing the application code.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 1024),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"text_content": {
 												// Property: TextContent
 												Description: "The text-format code for a Flink-based Kinesis Data Analytics application.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 102400),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"zip_file_content": {
@@ -760,6 +772,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "The zip-format code for a Flink-based Kinesis Data Analytics application.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 												// ZipFileContent is a write-only property.
 											},
 										},
@@ -781,6 +797,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"application_snapshot_configuration": {
 						// Property: ApplicationSnapshotConfiguration
@@ -796,6 +816,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"environment_properties": {
 						// Property: EnvironmentProperties
@@ -812,9 +836,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "Describes the key of an application execution property key-value pair.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 50),
 													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"property_map": {
@@ -823,20 +851,30 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												// Pattern: ""
 												Type:     types.MapType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(50),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 						// EnvironmentProperties is a write-only property.
 					},
 					"flink_application_configuration": {
@@ -854,8 +892,12 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "Describes the interval in milliseconds between checkpoint operations.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 9223372036854775807),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"checkpointing_enabled": {
@@ -863,6 +905,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "Describes whether checkpointing is enabled for a Flink-based Kinesis Data Analytics application.",
 												Type:        types.BoolType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"configuration_type": {
 												// Property: ConfigurationType
@@ -881,13 +927,21 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start. If a checkpoint operation takes longer than the CheckpointInterval, the application otherwise performs continual checkpoint operations. For more information, see Tuning Checkpointing in the Apache Flink Documentation.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(0, 9223372036854775807),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"monitoring_configuration": {
 									// Property: MonitoringConfiguration
@@ -911,6 +965,7 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "Describes the verbosity of the CloudWatch Logs for an application.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"DEBUG",
@@ -919,12 +974,16 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 														"ERROR",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"metrics_level": {
 												// Property: MetricsLevel
 												Description: "Describes the granularity of the CloudWatch Logs for an application. The Parallelism level is not recommended for applications with a Parallelism over 64 due to excessive costs.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"APPLICATION",
@@ -933,10 +992,17 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 														"TASK",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"parallelism_configuration": {
 									// Property: ParallelismConfiguration
@@ -948,6 +1014,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.",
 												Type:        types.BoolType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"configuration_type": {
 												// Property: ConfigurationType
@@ -966,8 +1036,12 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. The Kinesis Data Analytics service can increase this number automatically if ParallelismConfiguration:AutoScalingEnabled is set to true.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(1),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"parallelism_per_kpu": {
@@ -975,17 +1049,29 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see Amazon Kinesis Data Analytics Pricing.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(1),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"sql_application_configuration": {
 						// Property: SqlApplicationConfiguration
@@ -1007,13 +1093,21 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The number of in-application streams to create.",
 															Type:        types.Int64Type,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntBetween(1, 64),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"input_processing_configuration": {
 												// Property: InputProcessingConfiguration
@@ -1038,10 +1132,18 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"input_schema": {
 												// Property: InputSchema
@@ -1058,8 +1160,12 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																		Description: "A reference to the data element in the streaming input or the reference data source.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 65535),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"name": {
@@ -1096,10 +1202,14 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "Specifies the encoding of the records in the streaming source. For example, UTF-8.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"UTF-8",
 																}),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"record_format": {
@@ -1138,6 +1248,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"json_mapping_parameters": {
 																					// Property: JSONMappingParameters
@@ -1156,10 +1270,18 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"record_format_type": {
 																		// Property: RecordFormatType
@@ -1199,6 +1321,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"kinesis_streams_input": {
 												// Property: KinesisStreamsInput
@@ -1218,6 +1344,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"name_prefix": {
 												// Property: NamePrefix
@@ -1232,16 +1362,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(1),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpc_configurations": {
 						// Property: VpcConfigurations
@@ -1275,11 +1411,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(1),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"zeppelin_application_configuration": {
@@ -1302,18 +1440,30 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The Amazon Resource Name (ARN) of the database.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 2048),
 																validate.StringMatch(regexp.MustCompile("^arn:.*$"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"custom_artifacts_configuration": {
 									// Property: CustomArtifactsConfiguration
@@ -1370,6 +1520,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"s3_content_location": {
 												// Property: S3ContentLocation
@@ -1400,22 +1554,32 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The version of the object containing the application code.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 1024),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(50),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"deploy_as_application_configuration": {
@@ -1433,9 +1597,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The base path for the S3 bucket.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 1024),
 																validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9/!-_.*'()]+$"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"bucket_arn": {
@@ -1455,6 +1623,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"monitoring_configuration": {
 									// Property: MonitoringConfiguration
@@ -1466,6 +1638,7 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "The verbosity of the CloudWatch Logs for an application. You can set it to `INFO`, `WARN`, `ERROR`, or `DEBUG`.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"DEBUG",
@@ -1474,18 +1647,33 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 														"ERROR",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"application_description": {
 			// Property: ApplicationDescription
@@ -1542,6 +1730,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"application_mode": {
 			// Property: ApplicationMode
@@ -1665,14 +1857,22 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 256),
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"flink_run_configuration": {
 						// Property: FlinkRunConfiguration
@@ -1684,14 +1884,26 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. Defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// RunConfiguration is a write-only property.
 		},
 		"runtime_environment": {
@@ -1784,11 +1996,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
