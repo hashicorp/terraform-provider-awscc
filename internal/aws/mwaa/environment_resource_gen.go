@@ -33,6 +33,10 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
 			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"airflow_version": {
 			// Property: AirflowVersion
@@ -46,9 +50,13 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Version of airflow to deploy to the environment.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(32),
 				validate.StringMatch(regexp.MustCompile("^[0-9a-z.]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"arn": {
@@ -80,9 +88,13 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
 				validate.StringMatch(regexp.MustCompile(".*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"environment_class": {
@@ -97,8 +109,12 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Templated configuration for airflow processes and backing infrastructure.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"execution_role_arn": {
@@ -113,9 +129,13 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "IAM role to be used by tasks.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1224),
 				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"kms_key": {
@@ -312,12 +332,17 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_level": {
 									// Property: LogLevel
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"CRITICAL",
@@ -327,10 +352,17 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 											"DEBUG",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"scheduler_logs": {
 						// Property: SchedulerLogs
@@ -351,12 +383,17 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_level": {
 									// Property: LogLevel
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"CRITICAL",
@@ -366,10 +403,17 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 											"DEBUG",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"task_logs": {
 						// Property: TaskLogs
@@ -390,12 +434,17 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_level": {
 									// Property: LogLevel
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"CRITICAL",
@@ -405,10 +454,17 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 											"DEBUG",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"webserver_logs": {
 						// Property: WebserverLogs
@@ -429,12 +485,17 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_level": {
 									// Property: LogLevel
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"CRITICAL",
@@ -444,10 +505,17 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 											"DEBUG",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"worker_logs": {
 						// Property: WorkerLogs
@@ -468,12 +536,17 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"log_level": {
 									// Property: LogLevel
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"CRITICAL",
@@ -483,14 +556,25 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 											"DEBUG",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"max_workers": {
 			// Property: MaxWorkers
@@ -503,8 +587,12 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Maximum worker compute units.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"min_workers": {
@@ -518,8 +606,12 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Minimum worker compute units.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -588,10 +680,14 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "A list of security groups to use for the environment.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 5),
 							validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^sg-[a-zA-Z0-9\\-._]+$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"subnet_ids": {
@@ -613,6 +709,10 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"plugins_s3_object_version": {
 			// Property: PluginsS3ObjectVersion
@@ -625,8 +725,12 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Represents an version ID for an S3 object.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"plugins_s3_path": {
@@ -641,9 +745,13 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
 				validate.StringMatch(regexp.MustCompile(".*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"requirements_s3_object_version": {
@@ -657,8 +765,12 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Represents an version ID for an S3 object.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"requirements_s3_path": {
@@ -673,9 +785,13 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
 				validate.StringMatch(regexp.MustCompile(".*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"schedulers": {
@@ -689,8 +805,12 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Scheduler compute units.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"source_bucket_arn": {
@@ -706,9 +826,13 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1224),
 				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:s3:::[a-z0-9.\\-]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -721,6 +845,10 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "A map of tags for the environment.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"webserver_access_mode": {
 			// Property: WebserverAccessMode
@@ -736,11 +864,15 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Choice for mode of webserver access including over public internet or via private VPC endpoint.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"PRIVATE_ONLY",
 					"PUBLIC_ONLY",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"webserver_url": {
@@ -772,9 +904,13 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Start time for the weekly maintenance window.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(9),
 				validate.StringMatch(regexp.MustCompile("(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\\d|2[0-3]):(00|30)"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
