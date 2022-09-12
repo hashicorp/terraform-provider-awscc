@@ -160,6 +160,10 @@ func backupPlanResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"backup_plan_name": {
 						// Property: BackupPlanName
@@ -174,6 +178,10 @@ func backupPlanResourceType(ctx context.Context) (provider.ResourceType, error) 
 									// Property: CompletionWindowMinutes
 									Type:     types.Float64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"copy_actions": {
 									// Property: CopyActions
@@ -192,24 +200,44 @@ func backupPlanResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DeleteAfterDays
 															Type:     types.Float64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"move_to_cold_storage_after_days": {
 															// Property: MoveToColdStorageAfterDays
 															Type:     types.Float64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"enable_continuous_backup": {
 									// Property: EnableContinuousBackup
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"lifecycle": {
 									// Property: Lifecycle
@@ -219,21 +247,37 @@ func backupPlanResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DeleteAfterDays
 												Type:     types.Float64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"move_to_cold_storage_after_days": {
 												// Property: MoveToColdStorageAfterDays
 												Type:     types.Float64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"recovery_point_tags": {
 									// Property: RecoveryPointTags
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"rule_name": {
 									// Property: RuleName
@@ -244,11 +288,19 @@ func backupPlanResourceType(ctx context.Context) (provider.ResourceType, error) 
 									// Property: ScheduleExpression
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"start_window_minutes": {
 									// Property: StartWindowMinutes
 									Type:     types.Float64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"target_backup_vault": {
 									// Property: TargetBackupVault
@@ -302,6 +354,10 @@ func backupPlanResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"version_id": {
 			// Property: VersionId
