@@ -186,12 +186,20 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (provider.Resource
 						Description: "The rule number in the policy document that applies to this change.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"segment_name": {
 						// Property: SegmentName
 						Description: "The name of the segment to change.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -213,8 +221,10 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (provider.Resource
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -312,8 +322,10 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (provider.Resource
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"updated_at": {
