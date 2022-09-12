@@ -92,6 +92,10 @@ func accessPointResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The access point policy associated with this access point.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vpc_configuration": {
 			// Property: VpcConfiguration
@@ -117,8 +121,12 @@ func accessPointResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1024),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
