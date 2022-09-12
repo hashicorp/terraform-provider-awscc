@@ -57,6 +57,10 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (provider.R
 			Description: "Certificate chain for the Certificate Authority certificate.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// CertificateChain is a write-only property.
 		},
 		"complete_certificate_chain": {
@@ -83,6 +87,10 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (provider.R
 			Description: "The status of the Certificate Authority.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
