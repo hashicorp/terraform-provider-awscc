@@ -84,21 +84,33 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The URL of the specified Amazon S3 bucket.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"destination_type": {
 						// Property: DestinationType
 						Description: "The destination type, such as Amazon S3.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"S3",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"aws_account": {
 			// Property: AwsAccount
@@ -139,9 +151,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The unique identifier for the email account.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 320),
 							validate.StringMatch(regexp.MustCompile("^.*@.*$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"id": {
@@ -149,9 +165,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The identifier for the specified AWS account.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(12, 12),
 							validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"name": {
@@ -159,8 +179,12 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The name of the specified AWS account.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 50),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -278,9 +302,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: AssessmentId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(36, 36),
 							validate.StringMatch(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"assessment_name": {
@@ -288,9 +316,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The name of the related assessment.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_\\.]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"comment": {
@@ -298,9 +330,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The comment related to the delegation.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(350),
 							validate.StringMatch(regexp.MustCompile("^[\\w\\W\\s\\S]*$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"control_set_id": {
@@ -308,9 +344,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The identifier for the specified control set.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 300),
 							validate.StringMatch(regexp.MustCompile("^[\\w\\W\\s\\S]*$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"created_by": {
@@ -318,9 +358,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The IAM user or role that performed the action.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 100),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_()\\[\\]\\s]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"creation_time": {
@@ -328,14 +372,22 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The sequence of characters that identifies when the event occurred.",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"id": {
 						// Property: Id
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(36, 36),
 							validate.StringMatch(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"last_updated": {
@@ -343,15 +395,23 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The sequence of characters that identifies when the event occurred.",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"role_arn": {
 						// Property: RoleArn
 						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
 							validate.StringMatch(regexp.MustCompile("^arn:.*:iam:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"role_type": {
@@ -359,11 +419,15 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: " The IAM role type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"PROCESS_OWNER",
 								"RESOURCE_OWNER",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"status": {
@@ -371,12 +435,16 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The status of the delegation.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"IN_PROGRESS",
 								"UNDER_REVIEW",
 								"COMPLETE",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -396,6 +464,10 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The description of the specified assessment.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Description is a write-only property.
 		},
 		"framework_id": {
@@ -434,9 +506,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The name of the related assessment.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 127),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_\\.]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// Name is a write-only property.
 		},
@@ -477,9 +553,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
 							validate.StringMatch(regexp.MustCompile("^arn:.*:iam:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"role_type": {
@@ -487,16 +567,24 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: " The IAM role type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"PROCESS_OWNER",
 								"RESOURCE_OWNER",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"scope": {
 			// Property: Scope
@@ -568,9 +656,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The unique identifier for the email account.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 320),
 										validate.StringMatch(regexp.MustCompile("^.*@.*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"id": {
@@ -578,9 +670,13 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The identifier for the specified AWS account.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(12, 12),
 										validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"name": {
@@ -588,13 +684,21 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The name of the specified AWS account.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 50),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"aws_services": {
 						// Property: AwsServices
@@ -606,14 +710,26 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The name of the AWS service.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -629,11 +745,15 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The status of the specified assessment. ",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ACTIVE",
 					"INACTIVE",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -690,6 +810,10 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
