@@ -85,6 +85,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"auto_stop_configuration": {
 			// Property: AutoStopConfiguration
@@ -124,10 +128,18 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The amount of time [in minutes] to wait before auto stopping the Application when idle. Defaults to 15 minutes.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"initial_capacity": {
 			// Property: InitialCapacity
@@ -239,9 +251,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "Per worker Disk resource. GB is the only supported unit and specifying GB is optional",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 15),
 													validate.StringMatch(regexp.MustCompile("^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"memory": {
@@ -274,6 +290,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"maximum_capacity": {
 			// Property: MaximumCapacity
@@ -328,9 +348,13 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "Per worker Disk resource. GB is the only supported unit and specifying GB is optional",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 15),
 							validate.StringMatch(regexp.MustCompile("^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"memory": {
@@ -346,6 +370,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -418,10 +446,14 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The ID of the security groups in the VPC to which you want to connect your job or application.",
 						Type:        types.SetType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 5),
 							validate.ArrayForEach(validate.StringLenBetween(1, 32)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[-0-9a-zA-Z]+"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"subnet_ids": {
@@ -429,15 +461,23 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The ID of the subnets in the VPC to which you want to connect your job or application.",
 						Type:        types.SetType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 16),
 							validate.ArrayForEach(validate.StringLenBetween(1, 32)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[-0-9a-zA-Z]+"), "")),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"release_label": {
 			// Property: ReleaseLabel
@@ -520,6 +560,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"type": {
 			// Property: Type
