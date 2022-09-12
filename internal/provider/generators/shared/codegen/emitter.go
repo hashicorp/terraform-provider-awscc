@@ -595,6 +595,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		computed = true
 	}
 
+	// All Optional attributes are also Computed.
+	if optional && !computed {
+		computed = true
+	}
+
 	if required {
 		e.printf("Required:true,\n")
 	}
