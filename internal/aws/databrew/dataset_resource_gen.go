@@ -40,6 +40,7 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Dataset format",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"CSV",
@@ -48,6 +49,9 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 					"EXCEL",
 					"ORC",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"format_options": {
@@ -136,18 +140,30 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: Delimiter
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"header_row": {
 									// Property: HeaderRow
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"excel": {
 						// Property: Excel
@@ -157,26 +173,39 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: HeaderRow
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sheet_indexes": {
 									// Property: SheetIndexes
 									Type:     types.ListType{ElemType: types.Int64Type},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"sheet_names": {
 									// Property: SheetNames
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.RequiredAttributes(
 								validate.OneOfRequired(
@@ -189,6 +218,9 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 								),
 							),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"json": {
 						// Property: Json
@@ -199,14 +231,26 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: MultiLine
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"input": {
 			// Property: Input
@@ -327,18 +371,30 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Catalog id",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"database_name": {
 									// Property: DatabaseName
 									Description: "Database name",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"table_name": {
 									// Property: TableName
 									Description: "Table name",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"temp_directory": {
 									// Property: TempDirectory
@@ -354,14 +410,26 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Key
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"database_input_definition": {
 						// Property: DatabaseInputDefinition
@@ -372,6 +440,10 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Database table name",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"glue_connection_name": {
 									// Property: GlueConnectionName
@@ -384,6 +456,10 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"temp_directory": {
 									// Property: TempDirectory
@@ -399,14 +475,26 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Key
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"metadata": {
 						// Property: Metadata
@@ -417,10 +505,18 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_input_definition": {
 						// Property: S3InputDefinition
@@ -436,10 +532,18 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: Key
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -687,11 +791,15 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Order",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"ASCENDING",
 											"DESCENDING",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"ordered_by": {
@@ -699,15 +807,23 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Ordered by",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"LAST_MODIFIED_DATE",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"last_modified_date_condition": {
 						// Property: LastModifiedDateCondition
@@ -752,6 +868,10 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"parameters": {
 						// Property: Parameters
@@ -766,6 +886,10 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "Add the value of this parameter as a column in a dataset.",
 												Type:        types.BoolType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"datetime_options": {
 												// Property: DatetimeOptions
@@ -785,9 +909,13 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "Locale code for a date parameter",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(2, 100),
 																validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9_\\.#@\\-]+$"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"timezone_offset": {
@@ -795,14 +923,22 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "Timezone offset",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 6),
 																validate.StringMatch(regexp.MustCompile("^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"filter": {
 												// Property: Filter
@@ -847,6 +983,10 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"name": {
 												// Property: Name
@@ -886,10 +1026,18 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
