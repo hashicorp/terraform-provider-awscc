@@ -104,8 +104,12 @@ func assistantResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: KmsKeyId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 4096),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
