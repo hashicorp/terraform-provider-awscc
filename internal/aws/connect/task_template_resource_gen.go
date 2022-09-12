@@ -49,8 +49,12 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "the client token string in uuid format",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"constraints": {
@@ -185,8 +189,12 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(50),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"read_only_fields": {
@@ -215,8 +223,12 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(50),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"required_fields": {
@@ -245,13 +257,21 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(50),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"contact_flow_arn": {
 			// Property: ContactFlowArn
@@ -264,8 +284,12 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The identifier of the contact flow.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"defaults": {
@@ -342,8 +366,12 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -358,8 +386,12 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The description of the task template.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"fields": {
@@ -441,8 +473,12 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The description of the task template's field",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"id": {
@@ -468,10 +504,14 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "list of field options to be used with single select",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(50),
 							validate.ArrayForEach(validate.StringLenBetween(1, 100)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9](?:[A-Za-z0-9_.,\\s-]*[A-Za-z0-9_.,-])?$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"type": {
@@ -499,8 +539,12 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"instance_arn": {
@@ -530,8 +574,12 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The name of the task template.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -548,11 +596,15 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The status of the task template",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ACTIVE",
 					"INACTIVE",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -612,8 +664,12 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

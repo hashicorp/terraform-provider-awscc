@@ -197,8 +197,12 @@ func hoursOfOperationResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "The description of the hours of operation.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 250),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"hours_of_operation_arn": {
@@ -304,8 +308,12 @@ func hoursOfOperationResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"time_zone": {

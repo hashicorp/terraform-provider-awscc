@@ -68,9 +68,13 @@ func contactFlowModuleResourceType(ctx context.Context) (provider.ResourceType, 
 			Description: "The description of the contact flow module.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(500),
 				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"instance_arn": {
@@ -123,11 +127,15 @@ func contactFlowModuleResourceType(ctx context.Context) (provider.ResourceType, 
 			Description: "The state of the contact flow module.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ACTIVE",
 					"ARCHIVED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -205,8 +213,12 @@ func contactFlowModuleResourceType(ctx context.Context) (provider.ResourceType, 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
