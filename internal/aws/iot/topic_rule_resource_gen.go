@@ -85,6 +85,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"topic_rule_payload": {
 			// Property: TopicRulePayload
@@ -1417,6 +1421,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_logs": {
 									// Property: CloudwatchLogs
@@ -1435,6 +1443,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_metric": {
 									// Property: CloudwatchMetric
@@ -1454,6 +1466,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: MetricTimestamp
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"metric_unit": {
 												// Property: MetricUnit
@@ -1473,6 +1489,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"dynamo_db": {
 									// Property: DynamoDB
@@ -1487,6 +1507,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: HashKeyType
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"hash_key_value": {
 												// Property: HashKeyValue
@@ -1497,21 +1521,37 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: PayloadField
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"range_key_field": {
 												// Property: RangeKeyField
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"range_key_type": {
 												// Property: RangeKeyType
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"range_key_value": {
 												// Property: RangeKeyValue
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -1526,6 +1566,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"dynamo_d_bv_2": {
 									// Property: DynamoDBv2
@@ -1543,15 +1587,27 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"elasticsearch": {
 									// Property: Elasticsearch
@@ -1585,6 +1641,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"firehose": {
 									// Property: Firehose
@@ -1594,6 +1654,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BatchMode
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"delivery_stream_name": {
 												// Property: DeliveryStreamName
@@ -1609,10 +1673,18 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Separator
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"http": {
 									// Property: Http
@@ -1644,15 +1716,27 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"confirmation_url": {
 												// Property: ConfirmationUrl
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"headers": {
 												// Property: Headers
@@ -1671,8 +1755,12 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.UniqueItems(),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"url": {
@@ -1683,6 +1771,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iot_analytics": {
 									// Property: IotAnalytics
@@ -1692,6 +1784,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BatchMode
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"channel_name": {
 												// Property: ChannelName
@@ -1706,6 +1802,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iot_events": {
 									// Property: IotEvents
@@ -1715,6 +1815,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BatchMode
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"input_name": {
 												// Property: InputName
@@ -1725,6 +1829,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: MessageId
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -1734,6 +1842,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iot_site_wise": {
 									// Property: IotSiteWise
@@ -1747,21 +1859,37 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: AssetId
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"entry_id": {
 															// Property: EntryId
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"property_alias": {
 															// Property: PropertyAlias
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"property_id": {
 															// Property: PropertyId
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"property_values": {
 															// Property: PropertyValues
@@ -1771,6 +1899,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		// Property: Quality
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"timestamp": {
 																		// Property: Timestamp
@@ -1780,6 +1912,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 																					// Property: OffsetInNanos
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"time_in_seconds": {
 																					// Property: TimeInSeconds
@@ -1798,21 +1934,37 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 																					// Property: BooleanValue
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"double_value": {
 																					// Property: DoubleValue
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"integer_value": {
 																					// Property: IntegerValue
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"string_value": {
 																					// Property: StringValue
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
@@ -1840,6 +1992,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"kafka": {
 									// Property: Kafka
@@ -1860,11 +2016,19 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Key
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"partition": {
 												// Property: Partition
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"topic": {
 												// Property: Topic
@@ -1874,6 +2038,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"kinesis": {
 									// Property: Kinesis
@@ -1883,6 +2051,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: PartitionKey
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -1897,6 +2069,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"lambda": {
 									// Property: Lambda
@@ -1906,10 +2082,18 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: FunctionArn
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"open_search": {
 									// Property: OpenSearch
@@ -1943,6 +2127,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"republish": {
 									// Property: Republish
@@ -1952,6 +2140,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Qos
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -1966,6 +2158,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"s3": {
 									// Property: S3
@@ -1980,6 +2176,7 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: CannedAcl
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"private",
@@ -1991,6 +2188,9 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"bucket-owner-full-control",
 														"log-delivery-write",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"key": {
@@ -2006,6 +2206,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sns": {
 									// Property: Sns
@@ -2015,6 +2219,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: MessageFormat
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -2029,6 +2237,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sqs": {
 									// Property: Sqs
@@ -2048,10 +2260,18 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: UseBase64
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"step_functions": {
 									// Property: StepFunctions
@@ -2061,6 +2281,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: ExecutionNamePrefix
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -2075,6 +2299,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"timestream": {
 									// Property: Timestream
@@ -2084,6 +2312,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BatchMode
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"database_name": {
 												// Property: DatabaseName
@@ -2138,10 +2370,18 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -2151,11 +2391,19 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: AwsIotSqlVersion
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"error_action": {
 						// Property: ErrorAction
@@ -2188,6 +2436,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_logs": {
 									// Property: CloudwatchLogs
@@ -2206,6 +2458,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_metric": {
 									// Property: CloudwatchMetric
@@ -2225,6 +2481,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: MetricTimestamp
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"metric_unit": {
 												// Property: MetricUnit
@@ -2244,6 +2504,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"dynamo_db": {
 									// Property: DynamoDB
@@ -2258,6 +2522,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: HashKeyType
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"hash_key_value": {
 												// Property: HashKeyValue
@@ -2268,21 +2536,37 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: PayloadField
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"range_key_field": {
 												// Property: RangeKeyField
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"range_key_type": {
 												// Property: RangeKeyType
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"range_key_value": {
 												// Property: RangeKeyValue
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -2297,6 +2581,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"dynamo_d_bv_2": {
 									// Property: DynamoDBv2
@@ -2314,15 +2602,27 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"elasticsearch": {
 									// Property: Elasticsearch
@@ -2356,6 +2656,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"firehose": {
 									// Property: Firehose
@@ -2365,6 +2669,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BatchMode
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"delivery_stream_name": {
 												// Property: DeliveryStreamName
@@ -2380,10 +2688,18 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Separator
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"http": {
 									// Property: Http
@@ -2415,15 +2731,27 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"confirmation_url": {
 												// Property: ConfirmationUrl
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"headers": {
 												// Property: Headers
@@ -2442,8 +2770,12 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.UniqueItems(),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"url": {
@@ -2454,6 +2786,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iot_analytics": {
 									// Property: IotAnalytics
@@ -2463,6 +2799,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BatchMode
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"channel_name": {
 												// Property: ChannelName
@@ -2477,6 +2817,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iot_events": {
 									// Property: IotEvents
@@ -2486,6 +2830,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BatchMode
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"input_name": {
 												// Property: InputName
@@ -2496,6 +2844,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: MessageId
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -2505,6 +2857,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iot_site_wise": {
 									// Property: IotSiteWise
@@ -2518,21 +2874,37 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: AssetId
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"entry_id": {
 															// Property: EntryId
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"property_alias": {
 															// Property: PropertyAlias
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"property_id": {
 															// Property: PropertyId
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"property_values": {
 															// Property: PropertyValues
@@ -2542,6 +2914,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		// Property: Quality
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"timestamp": {
 																		// Property: Timestamp
@@ -2551,6 +2927,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 																					// Property: OffsetInNanos
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"time_in_seconds": {
 																					// Property: TimeInSeconds
@@ -2569,21 +2949,37 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 																					// Property: BooleanValue
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"double_value": {
 																					// Property: DoubleValue
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"integer_value": {
 																					// Property: IntegerValue
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"string_value": {
 																					// Property: StringValue
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
@@ -2611,6 +3007,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"kafka": {
 									// Property: Kafka
@@ -2631,11 +3031,19 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Key
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"partition": {
 												// Property: Partition
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"topic": {
 												// Property: Topic
@@ -2645,6 +3053,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"kinesis": {
 									// Property: Kinesis
@@ -2654,6 +3066,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: PartitionKey
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -2668,6 +3084,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"lambda": {
 									// Property: Lambda
@@ -2677,10 +3097,18 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: FunctionArn
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"open_search": {
 									// Property: OpenSearch
@@ -2714,6 +3142,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"republish": {
 									// Property: Republish
@@ -2723,6 +3155,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Qos
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -2737,6 +3173,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"s3": {
 									// Property: S3
@@ -2751,6 +3191,7 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: CannedAcl
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"private",
@@ -2762,6 +3203,9 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"bucket-owner-full-control",
 														"log-delivery-write",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"key": {
@@ -2777,6 +3221,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sns": {
 									// Property: Sns
@@ -2786,6 +3234,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: MessageFormat
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -2800,6 +3252,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sqs": {
 									// Property: Sqs
@@ -2819,10 +3275,18 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: UseBase64
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"step_functions": {
 									// Property: StepFunctions
@@ -2832,6 +3296,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: ExecutionNamePrefix
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -2846,6 +3314,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"timestream": {
 									// Property: Timestream
@@ -2855,6 +3327,10 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BatchMode
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"database_name": {
 												// Property: DatabaseName
@@ -2909,19 +3385,35 @@ func topicRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"rule_disabled": {
 						// Property: RuleDisabled
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"sql": {
 						// Property: Sql

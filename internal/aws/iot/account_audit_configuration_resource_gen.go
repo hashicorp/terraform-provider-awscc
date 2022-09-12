@@ -218,10 +218,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ca_certificate_expiring_check": {
 						// Property: CaCertificateExpiringCheck
@@ -233,10 +241,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ca_certificate_key_quality_check": {
 						// Property: CaCertificateKeyQualityCheck
@@ -248,10 +264,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"conflicting_client_ids_check": {
 						// Property: ConflictingClientIdsCheck
@@ -263,10 +287,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"device_certificate_expiring_check": {
 						// Property: DeviceCertificateExpiringCheck
@@ -278,10 +310,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"device_certificate_key_quality_check": {
 						// Property: DeviceCertificateKeyQualityCheck
@@ -293,10 +333,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"device_certificate_shared_check": {
 						// Property: DeviceCertificateSharedCheck
@@ -308,10 +356,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"iot_policy_overly_permissive_check": {
 						// Property: IotPolicyOverlyPermissiveCheck
@@ -323,10 +379,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"iot_role_alias_allows_access_to_unused_services_check": {
 						// Property: IotRoleAliasAllowsAccessToUnusedServicesCheck
@@ -338,10 +402,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"iot_role_alias_overly_permissive_check": {
 						// Property: IotRoleAliasOverlyPermissiveCheck
@@ -353,10 +425,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"logging_disabled_check": {
 						// Property: LoggingDisabledCheck
@@ -368,10 +448,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"revoked_ca_certificate_still_active_check": {
 						// Property: RevokedCaCertificateStillActiveCheck
@@ -383,10 +471,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"revoked_device_certificate_still_active_check": {
 						// Property: RevokedDeviceCertificateStillActiveCheck
@@ -398,10 +494,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"unauthenticated_cognito_role_overly_permissive_check": {
 						// Property: UnauthenticatedCognitoRoleOverlyPermissiveCheck
@@ -413,10 +517,18 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -465,14 +577,22 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "True if notifications to the target are enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"role_arn": {
 									// Property: RoleArn
 									Description: "The ARN of the role that grants permission to send notifications to the target.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(20, 2048),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"target_arn": {
@@ -480,17 +600,29 @@ func accountAuditConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "The ARN of the target (SNS topic) to which audit notifications are sent.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(2048),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn

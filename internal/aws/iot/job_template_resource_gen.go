@@ -285,6 +285,7 @@ func jobTemplateResourceType(ctx context.Context) (provider.ResourceType, error)
 									// Property: FailureType
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"FAILED",
@@ -292,28 +293,41 @@ func jobTemplateResourceType(ctx context.Context) (provider.ResourceType, error)
 											"ALL",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"number_of_retries": {
 									// Property: NumberOfRetries
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 10),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 2),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"job_executions_rollout_config": {
 			// Property: JobExecutionsRolloutConfig
@@ -403,16 +417,24 @@ func jobTemplateResourceType(ctx context.Context) (provider.ResourceType, error)
 												// Property: NumberOfNotifiedThings
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(1),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"number_of_succeeded_things": {
 												// Property: NumberOfSucceededThings
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(1),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -422,14 +444,22 @@ func jobTemplateResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"maximum_per_minute": {
 						// Property: MaximumPerMinute
 						Description: "The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -493,8 +523,12 @@ func jobTemplateResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "How number (in seconds) pre-signed URLs are valid.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(60, 3600),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"role_arn": {

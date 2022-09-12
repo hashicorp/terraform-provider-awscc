@@ -107,20 +107,32 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "Defines how the dimensionValues of a dimension are interpreted.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"IN",
 											"NOT_IN",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"alert_targets": {
 			// Property: AlertTargets
@@ -163,8 +175,12 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "The ARN of the notification target to which alerts are sent.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(2048),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"role_arn": {
@@ -172,13 +188,21 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "The ARN of the role that grants permission to send alerts to the notification target.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"behaviors": {
 			// Property: Behaviors
@@ -390,6 +414,7 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold).",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"less-than",
@@ -404,14 +429,21 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 											"not-in-set",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"consecutive_datapoints_to_alarm": {
 									// Property: ConsecutiveDatapointsToAlarm
 									Description: "If a device is in violation of the behavior for the specified number of consecutive datapoints, an alarm occurs. If not specified, the default is 1.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 10),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"consecutive_datapoints_to_clear": {
@@ -419,8 +451,12 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "If an alarm has occurred and the offending device is no longer in violation of the behavior for the specified number of consecutive datapoints, the alarm is cleared. If not specified, the default is 1.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 10),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"duration_seconds": {
@@ -428,6 +464,10 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "Use this to specify the time duration over which the behavior is evaluated.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ml_detection_config": {
 									// Property: MlDetectionConfig
@@ -439,6 +479,7 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 												Description: "The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"LOW",
@@ -446,10 +487,17 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 														"HIGH",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"statistical_threshold": {
 									// Property: StatisticalThreshold
@@ -461,6 +509,7 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 												Description: "The percentile which resolves to a threshold value by which compliance with a behavior is determined",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"Average",
@@ -477,10 +526,17 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 														"p100",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"value": {
 									// Property: Value
@@ -492,32 +548,52 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 												Description: "If the ComparisonOperator calls for a set of CIDRs, use this to specify that set to be compared with the metric.",
 												Type:        types.SetType{ElemType: types.StringType},
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"count": {
 												// Property: Count
 												Description: "If the ComparisonOperator calls for a numeric value, use this to specify that (integer) numeric value to be compared with the metric.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"number": {
 												// Property: Number
 												Description: "The numeral value of a metric.",
 												Type:        types.Float64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"numbers": {
 												// Property: Numbers
 												Description: "The numeral values of a metric.",
 												Type:        types.SetType{ElemType: types.Float64Type},
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"ports": {
 												// Property: Ports
 												Description: "If the ComparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.",
 												Type:        types.SetType{ElemType: types.Int64Type},
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.IntBetween(0, 65535)),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"strings": {
@@ -525,23 +601,39 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 												Description: "The string values of a metric.",
 												Type:        types.SetType{ElemType: types.StringType},
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"metric": {
 						// Property: Metric
 						Description: "What is measured by the behavior.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"metric_dimension": {
@@ -564,16 +656,24 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "Defines how the dimensionValues of a dimension are interpreted.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"IN",
 											"NOT_IN",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
@@ -590,10 +690,18 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "Manage Detect alarm SNS notifications by setting behavior notification to on or suppressed. Detect will continue to performing device behavior evaluations. However, suppressed alarms wouldn't be forwarded for SNS notification.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"security_profile_arn": {
 			// Property: SecurityProfileArn
@@ -620,8 +728,12 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "A description of the security profile.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"security_profile_name": {
@@ -704,8 +816,12 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"target_arns": {
@@ -725,8 +841,12 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "A set of target ARNs that the security profile is attached to.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenAtMost(2048)),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
