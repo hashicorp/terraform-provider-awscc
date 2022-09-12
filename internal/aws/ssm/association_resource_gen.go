@@ -31,6 +31,10 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"association_id": {
 			// Property: AssociationId
@@ -62,8 +66,12 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The name of the association.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-.]{3,128}$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"automation_target_parameter_name": {
@@ -76,8 +84,12 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"calendar_names": {
@@ -100,6 +112,10 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"compliance_severity": {
 			// Property: ComplianceSeverity
@@ -116,6 +132,7 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"CRITICAL",
@@ -124,6 +141,9 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 					"LOW",
 					"UNSPECIFIED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"document_version": {
@@ -137,8 +157,12 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The version of the SSM document to associate with the target.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"instance_id": {
@@ -156,8 +180,12 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The ID of the instance that the SSM document is associated with.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"max_concurrency": {
@@ -175,8 +203,12 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^([1-9][0-9]{0,6}|[1-9][0-9]%|[1-9]%|100%)$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"max_errors": {
@@ -194,8 +226,12 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^([1-9][0-9]{0,6}|[0]|[1-9][0-9]%|[0-9]%|100%)$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -256,33 +292,53 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 									// Property: OutputS3BucketName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"output_s3_key_prefix": {
 									// Property: OutputS3KeyPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"output_s3_region": {
 									// Property: OutputS3Region
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 20),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"parameters": {
 			// Property: Parameters
@@ -304,6 +360,10 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.ListType{ElemType: types.StringType}},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"schedule_expression": {
 			// Property: ScheduleExpression
@@ -323,8 +383,12 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "A Cron or Rate expression that specifies when the association is applied to the target.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"schedule_offset": {
@@ -337,8 +401,12 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.Int64Type,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 6),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"sync_compliance": {
@@ -353,11 +421,15 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"AUTO",
 					"MANUAL",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"targets": {
@@ -413,8 +485,12 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 5),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"wait_for_success_timeout_seconds": {
@@ -427,8 +503,12 @@ func associationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.Int64Type,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(15, 172800),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
