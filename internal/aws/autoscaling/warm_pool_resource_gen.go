@@ -51,10 +51,18 @@ func warmPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: ReuseOnScaleIn
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"max_group_prepared_capacity": {
 			// Property: MaxGroupPreparedCapacity
@@ -64,6 +72,10 @@ func warmPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.Int64Type,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"min_size": {
 			// Property: MinSize
@@ -73,6 +85,10 @@ func warmPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.Int64Type,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"pool_state": {
 			// Property: PoolState
@@ -82,6 +98,10 @@ func warmPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
