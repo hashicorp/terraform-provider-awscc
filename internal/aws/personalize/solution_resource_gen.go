@@ -361,6 +361,10 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"auto_ml_config": {
 						// Property: AutoMLConfig
@@ -372,8 +376,12 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The metric to optimize.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"recipe_list": {
@@ -381,23 +389,35 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The list of candidate recipes.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenAtMost(256)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), "")),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"event_value_threshold": {
 						// Property: EventValueThreshold
 						Description: "Only events with a value greater than or equal to this threshold are used for training a model.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"feature_transformation_parameters": {
@@ -406,6 +426,10 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"hpo_config": {
 						// Property: HpoConfig
@@ -427,8 +451,12 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The name of the hyperparameter.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"values": {
@@ -436,16 +464,24 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "A list of the categories for the hyperparameter.",
 															Type:        types.ListType{ElemType: types.StringType},
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayLenAtMost(100),
 																validate.ArrayForEach(validate.StringLenAtMost(1000)),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"continuous_hyper_parameter_ranges": {
@@ -458,8 +494,12 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The maximum allowable value for the hyperparameter.",
 															Type:        types.Float64Type,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.FloatAtLeast(-1000000.000000),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"min_value": {
@@ -467,8 +507,12 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The minimum allowable value for the hyperparameter.",
 															Type:        types.Float64Type,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.FloatAtLeast(-1000000.000000),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"name": {
@@ -476,15 +520,23 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The name of the hyperparameter.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"integer_hyper_parameter_ranges": {
@@ -497,8 +549,12 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The maximum allowable value for the hyperparameter.",
 															Type:        types.Int64Type,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntAtMost(1000000),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"min_value": {
@@ -506,8 +562,12 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The minimum allowable value for the hyperparameter.",
 															Type:        types.Int64Type,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntAtLeast(-1000000),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"name": {
@@ -515,20 +575,32 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The name of the hyperparameter.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"hpo_objective": {
 									// Property: HpoObjective
@@ -540,8 +612,12 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The name of the metric",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"metric_regex": {
@@ -549,8 +625,12 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "A regular expression for finding the metric in the training job logs.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"type": {
@@ -558,16 +638,24 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The type of the metric. Valid values are Maximize and Minimize.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"Maximize",
 														"Minimize",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"hpo_resource_config": {
 									// Property: HpoResourceConfig
@@ -579,8 +667,12 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"max_parallel_training_jobs": {
@@ -588,17 +680,29 @@ func solutionResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
