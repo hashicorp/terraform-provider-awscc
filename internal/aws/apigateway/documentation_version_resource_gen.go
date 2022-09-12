@@ -32,6 +32,10 @@ func documentationVersionResourceType(ctx context.Context) (provider.ResourceTyp
 			Description: "The description of the API documentation snapshot.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"documentation_version": {
 			// Property: DocumentationVersion

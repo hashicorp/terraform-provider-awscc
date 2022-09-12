@@ -75,6 +75,10 @@ func requestValidatorResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "Indicates whether to validate the request body according to the configured schema for the targeted API and method. ",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"validate_request_parameters": {
 			// Property: ValidateRequestParameters
@@ -86,6 +90,10 @@ func requestValidatorResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "Indicates whether to validate request parameters.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
