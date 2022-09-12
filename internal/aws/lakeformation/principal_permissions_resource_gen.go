@@ -155,8 +155,12 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 						// Property: DataLakePrincipalIdentifier
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -429,6 +433,10 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 						// Property: Catalog
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"data_cells_filter": {
 						// Property: DataCellsFilter
@@ -469,6 +477,10 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"data_location": {
 						// Property: DataLocation
@@ -490,6 +502,10 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"database": {
 						// Property: Database
@@ -514,6 +530,10 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"lf_tag": {
 						// Property: LFTag
@@ -550,6 +570,10 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"lf_tag_policy": {
 						// Property: LFTagPolicy
@@ -571,20 +595,26 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 												// Property: TagKey
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 128),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"tag_values": {
 												// Property: TagValues
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 50),
 													validate.ArrayForEach(validate.StringLenBetween(0, 256)),
 												},
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													Multiset(),
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -611,6 +641,10 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"table": {
 						// Property: Table
@@ -636,18 +670,30 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 									// Property: Name
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 255),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"table_wildcard": {
 									// Property: TableWildcard
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"table_with_columns": {
 						// Property: TableWithColumns
@@ -665,11 +711,13 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 									// Property: ColumnNames
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayForEach(validate.StringLenBetween(1, 255)),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"column_wildcard": {
@@ -680,16 +728,22 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 												// Property: ExcludedColumnNames
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringLenBetween(1, 255)),
 												},
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													Multiset(),
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"database_name": {
 									// Property: DatabaseName
@@ -710,6 +764,10 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

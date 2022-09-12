@@ -78,11 +78,13 @@ func dataCellsFilterResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "A list of column names to be excluded from the Data Cells Filter.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(1, 255)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -159,12 +161,20 @@ func dataCellsFilterResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "An empty object representing a row wildcard.",
 						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"filter_expression": {
 						// Property: FilterExpression
 						Description: "A PartiQL predicate.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
