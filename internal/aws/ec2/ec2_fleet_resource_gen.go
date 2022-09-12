@@ -31,6 +31,10 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"excess_capacity_termination_policy": {
 			// Property: ExcessCapacityTerminationPolicy
@@ -44,11 +48,15 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"termination",
 					"no-termination",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"fleet_id": {
@@ -385,24 +393,40 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: LaunchTemplateId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"launch_template_name": {
 									// Property: LaunchTemplateName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 128),
 										validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9\\(\\)\\.\\-/_]+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"version": {
 									// Property: Version
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"overrides": {
 						// Property: Overrides
@@ -412,6 +436,10 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: AvailabilityZone
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"instance_requirements": {
 									// Property: InstanceRequirements
@@ -425,20 +453,33 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Max
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"min": {
 															// Property: Min
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"accelerator_manufacturers": {
 												// Property: AcceleratorManufacturers
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringInSlice([]string{
 														"nvidia",
@@ -447,11 +488,15 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"xilinx",
 													})),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"accelerator_names": {
 												// Property: AcceleratorNames
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringInSlice([]string{
 														"a100",
@@ -465,6 +510,9 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"k520",
 													})),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"accelerator_total_memory_mi_b": {
 												// Property: AcceleratorTotalMemoryMiB
@@ -474,20 +522,33 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Max
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"min": {
 															// Property: Min
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"accelerator_types": {
 												// Property: AcceleratorTypes
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringInSlice([]string{
 														"gpu",
@@ -495,17 +556,24 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"inference",
 													})),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"bare_metal": {
 												// Property: BareMetal
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"included",
 														"required",
 														"excluded",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"baseline_ebs_bandwidth_mbps": {
@@ -516,20 +584,33 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Max
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"min": {
 															// Property: Min
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"burstable_performance": {
 												// Property: BurstablePerformance
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"included",
@@ -537,11 +618,15 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"excluded",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"cpu_manufacturers": {
 												// Property: CpuManufacturers
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringInSlice([]string{
 														"intel",
@@ -549,31 +634,43 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"amazon-web-services",
 													})),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"excluded_instance_types": {
 												// Property: ExcludedInstanceTypes
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringLenBetween(1, 30)),
 													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), "")),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"instance_generations": {
 												// Property: InstanceGenerations
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringInSlice([]string{
 														"current",
 														"previous",
 													})),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"local_storage": {
 												// Property: LocalStorage
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"included",
@@ -581,16 +678,23 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"excluded",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"local_storage_types": {
 												// Property: LocalStorageTypes
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringInSlice([]string{
 														"hdd",
 														"ssd",
 													})),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"memory_gi_b_per_v_cpu": {
@@ -601,15 +705,27 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Max
 															Type:     types.Float64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"min": {
 															// Property: Min
 															Type:     types.Float64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"memory_mi_b": {
 												// Property: MemoryMiB
@@ -619,15 +735,27 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Max
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"min": {
 															// Property: Min
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"network_interface_count": {
 												// Property: NetworkInterfaceCount
@@ -637,30 +765,54 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Max
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"min": {
 															// Property: Min
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"on_demand_max_price_percentage_over_lowest_price": {
 												// Property: OnDemandMaxPricePercentageOverLowestPrice
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"require_hibernate_support": {
 												// Property: RequireHibernateSupport
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"spot_max_price_percentage_over_lowest_price": {
 												// Property: SpotMaxPricePercentageOverLowestPrice
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"total_local_storage_gb": {
 												// Property: TotalLocalStorageGB
@@ -670,15 +822,27 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Max
 															Type:     types.Float64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"min": {
 															// Property: Min
 															Type:     types.Float64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"v_cpu_count": {
 												// Property: VCpuCount
@@ -688,29 +852,53 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Max
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"min": {
 															// Property: Min
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"instance_type": {
 									// Property: InstanceType
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"max_price": {
 									// Property: MaxPrice
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"placement": {
 									// Property: Placement
@@ -720,64 +908,116 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Affinity
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"availability_zone": {
 												// Property: AvailabilityZone
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"group_name": {
 												// Property: GroupName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"host_id": {
 												// Property: HostId
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"host_resource_group_arn": {
 												// Property: HostResourceGroupArn
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"partition_number": {
 												// Property: PartitionNumber
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"spread_domain": {
 												// Property: SpreadDomain
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"tenancy": {
 												// Property: Tenancy
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"priority": {
 									// Property: Priority
 									Type:     types.Float64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"subnet_id": {
 									// Property: SubnetId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"weighted_capacity": {
 									// Property: WeightedCapacity
 									Type:     types.Float64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -831,6 +1071,10 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: AllocationStrategy
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"capacity_reservation_options": {
 						// Property: CapacityReservationOptions
@@ -840,35 +1084,59 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: UsageStrategy
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"use-capacity-reservations-first",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"max_total_price": {
 						// Property: MaxTotalPrice
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"min_target_capacity": {
 						// Property: MinTargetCapacity
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"single_availability_zone": {
 						// Property: SingleAvailabilityZone
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"single_instance_type": {
 						// Property: SingleInstanceType
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -962,6 +1230,7 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: AllocationStrategy
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"lowestPrice",
@@ -970,11 +1239,15 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"capacityOptimizedPrioritized",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"instance_interruption_behavior": {
 						// Property: InstanceInterruptionBehavior
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"hibernate",
@@ -982,11 +1255,18 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"terminate",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"instance_pools_to_use_count": {
 						// Property: InstancePoolsToUseCount
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"maintenance_strategies": {
 						// Property: MaintenanceStrategies
@@ -1000,45 +1280,77 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: ReplacementStrategy
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"launch",
 														"launch-before-terminate",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"termination_delay": {
 												// Property: TerminationDelay
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"max_total_price": {
 						// Property: MaxTotalPrice
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"min_target_capacity": {
 						// Property: MinTargetCapacity
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"single_availability_zone": {
 						// Property: SingleAvailabilityZone
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"single_instance_type": {
 						// Property: SingleInstanceType
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -1140,6 +1452,7 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: ResourceType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"client-vpn-endpoint",
@@ -1191,6 +1504,9 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"vpn-gateway",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -1209,6 +1525,10 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -1261,33 +1581,49 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: DefaultTargetCapacityType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"on-demand",
 								"spot",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"on_demand_target_capacity": {
 						// Property: OnDemandTargetCapacity
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"spot_target_capacity": {
 						// Property: SpotTargetCapacity
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"target_capacity_unit_type": {
 						// Property: TargetCapacityUnitType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"vcpu",
 								"memory-mib",
 								"units",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"total_target_capacity": {

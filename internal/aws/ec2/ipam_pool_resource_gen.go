@@ -46,6 +46,10 @@ func iPAMPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The default netmask length for allocations made from this pool. This value is used when the netmask length of an allocation isn't specified.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"allocation_max_netmask_length": {
 			// Property: AllocationMaxNetmaskLength
@@ -57,6 +61,10 @@ func iPAMPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The maximum allowed netmask length for allocations made from this pool.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"allocation_min_netmask_length": {
 			// Property: AllocationMinNetmaskLength
@@ -68,6 +76,10 @@ func iPAMPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The minimum allowed netmask length for allocations made from this pool.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"allocation_resource_tags": {
 			// Property: AllocationResourceTags
@@ -125,6 +137,10 @@ func iPAMPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -150,6 +166,10 @@ func iPAMPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Determines what to do if IPAM discovers resources that haven't been assigned an allocation. If set to true, an allocation will be made automatically.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"aws_service": {
 			// Property: AwsService
@@ -183,6 +203,10 @@ func iPAMPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ipam_arn": {
 			// Property: IpamArn
@@ -324,6 +348,10 @@ func iPAMPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"publicly_advertisable": {
 			// Property: PubliclyAdvertisable
@@ -449,6 +477,10 @@ func iPAMPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
