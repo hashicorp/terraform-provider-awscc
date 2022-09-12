@@ -46,6 +46,10 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 			Description: "The description of the distribution configuration.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"distributions": {
 			// Property: Distributions
@@ -283,18 +287,30 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"description": {
 									// Property: Description
 									Description: "The description of the AMI distribution configuration.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"kms_key_id": {
 									// Property: KmsKeyId
 									Description: "The KMS key identifier used to encrypt the distributed image.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"launch_permission_configuration": {
 									// Property: LaunchPermissionConfiguration
@@ -306,8 +322,10 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 												Description: "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												Computed:    true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													Multiset(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"organizational_unit_arns": {
@@ -315,8 +333,10 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 												Description: "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												Computed:    true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													Multiset(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"user_groups": {
@@ -324,8 +344,10 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 												Description: "The name of the group.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												Computed:    true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													Multiset(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"user_ids": {
@@ -333,29 +355,47 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 												Description: "The AWS account ID.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												Computed:    true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													Multiset(),
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"name": {
 									// Property: Name
 									Description: "The name of the AMI distribution configuration.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"target_account_ids": {
 									// Property: TargetAccountIds
 									Description: "The ID of accounts to which you want to distribute an image.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"container_distribution_configuration": {
 						// Property: ContainerDistributionConfiguration
@@ -367,12 +407,20 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "Tags that are attached to the container distribution configuration.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"description": {
 									// Property: Description
 									Description: "The description of the container distribution configuration.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"target_repository": {
 									// Property: TargetRepository
@@ -384,25 +432,41 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 												Description: "The repository name of target container repository.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"service": {
 												// Property: Service
 												Description: "The service of target container repository.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"ECR",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"fast_launch_configurations": {
 						// Property: FastLaunchConfigurations
@@ -414,12 +478,20 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "The owner account ID for the fast-launch enabled Windows AMI.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"enabled": {
 									// Property: Enabled
 									Description: "A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"launch_template": {
 									// Property: LaunchTemplate
@@ -431,28 +503,48 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 												Description: "The ID of the launch template to use for faster launching for a Windows AMI.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"launch_template_name": {
 												// Property: LaunchTemplateName
 												Description: "The name of the launch template to use for faster launching for a Windows AMI.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"launch_template_version": {
 												// Property: LaunchTemplateVersion
 												Description: "The version of the launch template to use for faster launching for a Windows AMI.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"max_parallel_launches": {
 									// Property: MaxParallelLaunches
 									Description: "The maximum number of parallel instances that are launched for creating resources.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"snapshot_configuration": {
 									// Property: SnapshotConfiguration
@@ -464,14 +556,26 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 												Description: "The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"launch_template_configurations": {
 						// Property: LaunchTemplateConfigurations
@@ -483,28 +587,48 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 									Description: "The account ID that this configuration applies to.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"launch_template_id": {
 									// Property: LaunchTemplateId
 									Description: "Identifies the EC2 launch template to use.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"set_default_version": {
 									// Property: SetDefaultVersion
 									Description: "Set the specified EC2 launch template as the default launch template for the specified account.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"license_configuration_arns": {
 						// Property: LicenseConfigurationArns
 						Description: "The License Manager Configuration to associate with the AMI in the specified Region.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"region": {
 						// Property: Region
@@ -547,6 +671,10 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

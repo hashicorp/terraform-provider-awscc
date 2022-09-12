@@ -46,6 +46,10 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 			Description: "The description of the infrastructure configuration.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"instance_metadata_options": {
 			// Property: InstanceMetadataOptions
@@ -77,22 +81,34 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 						Description: "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"http_tokens": {
 						// Property: HttpTokens
 						Description: "Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows: ",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"required",
 								"optional",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"instance_profile_name": {
 			// Property: InstanceProfileName
@@ -119,6 +135,10 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 			Description: "The instance types of the infrastructure configuration.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"key_pair": {
 			// Property: KeyPair
@@ -130,6 +150,10 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 			Description: "The EC2 key pair of the infrastructure configuration..",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"logging": {
 			// Property: Logging
@@ -169,20 +193,36 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 									Description: "S3BucketName",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"s3_key_prefix": {
 									// Property: S3KeyPrefix
 									Description: "S3KeyPrefix",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -215,6 +255,10 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"security_group_ids": {
 			// Property: SecurityGroupIds
@@ -230,8 +274,10 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 			Description: "The security group IDs of the infrastructure configuration.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"sns_topic_arn": {
@@ -244,6 +290,10 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 			Description: "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"subnet_id": {
 			// Property: SubnetId
@@ -255,6 +305,10 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 			Description: "The subnet ID of the infrastructure configuration.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -273,6 +327,10 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"terminate_instance_on_failure": {
 			// Property: TerminateInstanceOnFailure
@@ -284,6 +342,10 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 			Description: "The terminate instance on failure configuration of the infrastructure configuration.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

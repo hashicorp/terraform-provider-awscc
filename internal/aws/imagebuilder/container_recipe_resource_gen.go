@@ -63,6 +63,10 @@ func containerRecipeResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "The Amazon Resource Name (ARN) of the component.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -262,6 +266,10 @@ func containerRecipeResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "The device to which these mappings apply.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ebs": {
 									// Property: Ebs
@@ -273,48 +281,77 @@ func containerRecipeResourceType(ctx context.Context) (provider.ResourceType, er
 												Description: "Use to configure delete on termination of the associated device.",
 												Type:        types.BoolType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"encrypted": {
 												// Property: Encrypted
 												Description: "Use to configure device encryption.",
 												Type:        types.BoolType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"iops": {
 												// Property: Iops
 												Description: "Use to configure device IOPS.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"kms_key_id": {
 												// Property: KmsKeyId
 												Description: "Use to configure the KMS key to use when encrypting the device.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"snapshot_id": {
 												// Property: SnapshotId
 												Description: "The snapshot that defines the device contents.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"throughput": {
 												// Property: Throughput
 												Description: "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"volume_size": {
 												// Property: VolumeSize
 												Description: "Use to override the device's volume size.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"volume_type": {
 												// Property: VolumeType
 												Description: "Use to override the device's volume type.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"standard",
@@ -326,28 +363,45 @@ func containerRecipeResourceType(ctx context.Context) (provider.ResourceType, er
 														"st1",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"no_device": {
 									// Property: NoDevice
 									Description: "Use to remove a mapping from the parent image.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"virtual_name": {
 									// Property: VirtualName
 									Description: "Use to manage instance ephemeral devices.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"image": {
@@ -355,6 +409,10 @@ func containerRecipeResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -491,16 +549,24 @@ func containerRecipeResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "The name of the container repository where the output container image is stored. This name is prefixed by the repository location.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"service": {
 						// Property: Service
 						Description: "Specifies the service in which this image was registered.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ECR",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
