@@ -73,6 +73,10 @@ func fileSystemResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"bypass_policy_lockout_safety_check": {
 			// Property: BypassPolicyLockoutSafetyCheck
@@ -84,6 +88,10 @@ func fileSystemResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "Whether to bypass the FileSystemPolicy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request to be locked out from making future PutFileSystemPolicy requests on the file system. Set BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. Defaults to false",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// BypassPolicyLockoutSafetyCheck is a write-only property.
 		},
 		"encrypted": {
@@ -120,6 +128,10 @@ func fileSystemResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"file_system_tags": {
 			// Property: FileSystemTags
@@ -159,8 +171,12 @@ func fileSystemResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"kms_key_id": {
@@ -202,17 +218,29 @@ func fileSystemResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: TransitionToIA
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"transition_to_primary_storage_class": {
 						// Property: TransitionToPrimaryStorageClass
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"performance_mode": {
@@ -237,6 +265,10 @@ func fileSystemResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.Float64Type,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"throughput_mode": {
 			// Property: ThroughputMode
@@ -246,6 +278,10 @@ func fileSystemResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
