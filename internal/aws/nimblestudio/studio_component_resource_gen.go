@@ -149,8 +149,12 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 												Description: "<p>The name for the LDAP attribute.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 40),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"value": {
@@ -158,15 +162,23 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 												Description: "<p>The value for the LDAP attribute.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 64),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 50),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"directory_id": {
@@ -174,19 +186,31 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "<p>The directory ID of the Directory Service for Microsoft Active Directory to access\n            using this studio component.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"organizational_unit_distinguished_name": {
 									// Property: OrganizationalUnitDistinguishedName
 									Description: "<p>The distinguished name (DN) and organizational unit (OU) of an Active Directory\n            computer.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 2000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"compute_farm_configuration": {
 						// Property: ComputeFarmConfiguration
@@ -198,16 +222,28 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "<p>The name of an Active Directory user that is used on ComputeFarm worker\n            instances.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"endpoint": {
 									// Property: Endpoint
 									Description: "<p>The endpoint of the ComputeFarm that is accessed by the studio component\n            resource.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"license_service_configuration": {
 						// Property: LicenseServiceConfiguration
@@ -219,10 +255,18 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "<p>The endpoint of the license service that is accessed by the studio component\n            resource.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"shared_file_system_configuration": {
 						// Property: SharedFileSystemConfiguration
@@ -234,21 +278,33 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "<p>The endpoint of the shared file system that is accessed by the studio component\n            resource.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"file_system_id": {
 									// Property: FileSystemId
 									Description: "<p>The unique identifier for a file system.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"linux_mount_point": {
 									// Property: LinuxMountPoint
 									Description: "<p>The mount location for a shared file system on a Linux virtual workstation.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 128),
 										validate.StringMatch(regexp.MustCompile("^(/?|(\\$HOME)?(/[^/\\n\\s\\\\]+)*)$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"share_name": {
@@ -256,23 +312,39 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "<p>The name of the file share.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"windows_mount_drive": {
 									// Property: WindowsMountDrive
 									Description: "<p>The mount location for a shared file system on a Windows virtual workstation.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^[A-Z]$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -286,8 +358,12 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "<p>The description.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"ec_2_security_group_ids": {
@@ -305,8 +381,12 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "<p>The EC2 security groups that control access to the studio component.</p>",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 30),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"initialization_scripts": {
@@ -358,31 +438,43 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "<p>The version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 10),
 							validate.StringMatch(regexp.MustCompile("^2021\\-03\\-31$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"platform": {
 						// Property: Platform
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"LINUX",
 								"WINDOWS",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"run_context": {
 						// Property: RunContext
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"SYSTEM_INITIALIZATION",
 								"USER_INITIALIZATION",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"script": {
@@ -390,13 +482,21 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "<p>The initialization script.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 5120),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -424,8 +524,12 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"script_parameters": {
@@ -465,9 +569,13 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "<p>A script parameter key.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z_][a-zA-Z0-9_]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"value": {
@@ -475,15 +583,23 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "<p>A script parameter value.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 30),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"secure_initialization_role_arn": {
@@ -496,8 +612,12 @@ func studioComponentResourceType(ctx context.Context) (provider.ResourceType, er
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"studio_component_id": {

@@ -35,8 +35,12 @@ func launchProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "<p>The description.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"ec_2_subnet_ids": {
@@ -266,8 +270,12 @@ func launchProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "<p>The length of time, in minutes, that a streaming session can be active before it is\n            stopped or terminated. After this point, Nimble Studio automatically terminates or\n            stops the session. The default length of time is 690 minutes, and the maximum length of\n            time is 30 days.</p>",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(1.000000, 43200.000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"max_stopped_session_length_in_minutes": {
@@ -275,8 +283,12 @@ func launchProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n        <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the\n            session will automatically be terminated (instead of stopped).</p>\n        <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped (instead of terminated).</p>",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(0.000000, 5760.000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"session_storage": {
@@ -306,9 +318,13 @@ func launchProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 												Description: "<p>The folder path in Linux workstations where files are uploaded.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 128),
 													validate.StringMatch(regexp.MustCompile("^(\\$HOME|/)[/]?([A-Za-z0-9-_]+/)*([A-Za-z0-9_-]+)$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"windows": {
@@ -316,18 +332,30 @@ func launchProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 												Description: "<p>The folder path in Windows workstations where files are uploaded.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 128),
 													validate.StringMatch(regexp.MustCompile("^((\\%HOMEPATH\\%)|[a-zA-Z]:)[\\\\/](?:[a-zA-Z0-9_-]+[\\\\/])*[a-zA-Z0-9_-]+$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"streaming_image_ids": {
 						// Property: StreamingImageIds

@@ -35,8 +35,12 @@ func streamingImageResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "<p>A human-readable description of the streaming image.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"ec_2_image_id": {
@@ -91,9 +95,13 @@ func streamingImageResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "<p>The ARN for a KMS key that is used to encrypt studio data.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtLeast(4),
 							validate.StringMatch(regexp.MustCompile("^arn:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"key_type": {
