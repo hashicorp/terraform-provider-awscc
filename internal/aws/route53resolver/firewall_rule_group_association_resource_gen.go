@@ -151,11 +151,15 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (provider.Res
 			Description: "MutationProtectionStatus",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENABLED",
 					"DISABLED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -171,8 +175,12 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (provider.Res
 			Description: "FirewallRuleGroupAssociationName",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"priority": {
@@ -276,6 +284,10 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (provider.Res
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vpc_id": {
 			// Property: VpcId
