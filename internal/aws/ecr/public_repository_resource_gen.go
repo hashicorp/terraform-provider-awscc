@@ -93,8 +93,12 @@ func publicRepositoryResourceType(ctx context.Context) (provider.ResourceType, e
 						Description: "Provide a detailed description of the repository. Identify what is included in the repository, any licensing details, or other relevant information.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(10240),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"architectures": {
@@ -102,9 +106,13 @@ func publicRepositoryResourceType(ctx context.Context) (provider.ResourceType, e
 						Description: "Select the system architectures that the images in your repository are compatible with.",
 						Type:        types.SetType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(50),
 							validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"operating_systems": {
@@ -112,9 +120,13 @@ func publicRepositoryResourceType(ctx context.Context) (provider.ResourceType, e
 						Description: "Select the operating systems that the images in your repository are compatible with.",
 						Type:        types.SetType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(50),
 							validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"repository_description": {
@@ -122,8 +134,12 @@ func publicRepositoryResourceType(ctx context.Context) (provider.ResourceType, e
 						Description: "The description of the public repository.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(1024),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"usage_text": {
@@ -131,13 +147,21 @@ func publicRepositoryResourceType(ctx context.Context) (provider.ResourceType, e
 						Description: "Provide detailed information about how to use the images in the repository. This provides context, support information, and additional usage details for users of the repository.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(10240),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"repository_name": {
 			// Property: RepositoryName
@@ -171,6 +195,10 @@ func publicRepositoryResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "The JSON repository policy text to apply to the repository. For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html in the Amazon Elastic Container Registry User Guide. ",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -229,8 +257,12 @@ func publicRepositoryResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
