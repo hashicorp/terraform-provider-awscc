@@ -50,6 +50,10 @@ func channelResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Whether the channel is authorized.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ingest_endpoint": {
 			// Property: IngestEndpoint
@@ -79,11 +83,15 @@ func channelResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Channel latency mode.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"NORMAL",
 					"LOW",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -99,9 +107,13 @@ func channelResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Channel",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_]*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"playback_url": {
@@ -194,8 +206,12 @@ func channelResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type": {
@@ -212,11 +228,15 @@ func channelResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"STANDARD",
 					"BASIC",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
