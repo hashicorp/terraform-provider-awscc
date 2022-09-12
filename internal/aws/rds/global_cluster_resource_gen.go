@@ -33,6 +33,10 @@ func globalClusterResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"engine": {
 			// Property: Engine

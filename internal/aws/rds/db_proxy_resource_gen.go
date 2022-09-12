@@ -71,10 +71,14 @@ func dBProxyResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"SECRETS",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"description": {
@@ -82,17 +86,25 @@ func dBProxyResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"iam_auth": {
 						// Property: IAMAuth
 						Description: "Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"DISABLED",
 								"REQUIRED",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"secret_arn": {
@@ -100,12 +112,20 @@ func dBProxyResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"user_name": {
 						// Property: UserName
 						Description: "The name of the database user to which the proxy connects.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -158,6 +178,10 @@ func dBProxyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Whether the proxy includes detailed information about SQL statements in its logs.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"endpoint": {
 			// Property: Endpoint
@@ -207,6 +231,10 @@ func dBProxyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"require_tls": {
 			// Property: RequireTLS
@@ -218,6 +246,10 @@ func dBProxyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -259,23 +291,35 @@ func dBProxyResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
 							validate.StringMatch(regexp.MustCompile("(\\w|\\d|\\s|\\\\|-|\\.:=+-)*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
 							validate.StringMatch(regexp.MustCompile("(\\w|\\d|\\s|\\\\|-|\\.:=+-)*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vpc_security_group_ids": {
 			// Property: VpcSecurityGroupIds
@@ -291,8 +335,12 @@ func dBProxyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "VPC security group IDs to associate with the new proxy.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpc_subnet_ids": {

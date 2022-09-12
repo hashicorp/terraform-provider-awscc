@@ -65,20 +65,32 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (provider.ResourceType,
 						Description: "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"init_query": {
 						// Property: InitQuery
 						Description: "One or more SQL statements for the proxy to run when opening each new database connection.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"max_connections_percent": {
 						// Property: MaxConnectionsPercent
 						Description: "The maximum size of the connection pool for each target in a target group.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"max_idle_connections_percent": {
@@ -86,8 +98,12 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (provider.ResourceType,
 						Description: "Controls how actively the proxy closes idle database connections in the connection pool.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"session_pinning_filters": {
@@ -95,10 +111,18 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (provider.ResourceType,
 						Description: "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"db_cluster_identifiers": {
 			// Property: DBClusterIdentifiers
@@ -111,6 +135,10 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (provider.ResourceType,
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"db_instance_identifiers": {
 			// Property: DBInstanceIdentifiers
@@ -123,6 +151,10 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (provider.ResourceType,
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"db_proxy_name": {
 			// Property: DBProxyName
