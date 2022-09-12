@@ -107,8 +107,12 @@ func userGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "List of users associated to this user group.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

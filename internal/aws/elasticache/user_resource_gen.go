@@ -33,6 +33,10 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Access permissions string used for this user account.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// AccessString is a write-only property.
 		},
 		"arn": {
@@ -81,6 +85,10 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Indicates a password is not required for this user account.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// NoPasswordRequired is a write-only property.
 		},
 		"passwords": {
@@ -99,8 +107,12 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Passwords used for this user account. You can create up to two passwords for each user.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// Passwords is a write-only property.
 		},
