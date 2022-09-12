@@ -82,6 +82,10 @@ func publicKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Comment
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"encoded_key": {
 						// Property: EncodedKey

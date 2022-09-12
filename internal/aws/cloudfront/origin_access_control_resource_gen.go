@@ -74,6 +74,10 @@ func originAccessControlResourceType(ctx context.Context) (provider.ResourceType
 						// Property: Description
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name

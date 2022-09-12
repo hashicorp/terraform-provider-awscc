@@ -65,6 +65,10 @@ func keyGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Comment
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"items": {
 						// Property: Items
