@@ -176,6 +176,10 @@ func resourceSetResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The component identifier of the resource, generated when DNS target resource is used.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"dns_target_resource": {
 						// Property: DnsTargetResource
@@ -187,24 +191,40 @@ func resourceSetResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "The domain name that acts as an ingress point to a portion of the customer application.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"hosted_zone_arn": {
 									// Property: HostedZoneArn
 									Description: "The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"record_set_id": {
 									// Property: RecordSetId
 									Description: "The Route 53 record set ID that will uniquely identify a DNS record, given a name and a type.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"record_type": {
 									// Property: RecordType
 									Description: "The type of DNS record of the target resource.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"target_resource": {
 									// Property: TargetResource
@@ -221,10 +241,18 @@ func resourceSetResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "A Network Load Balancer resource Amazon Resource Name (ARN).",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"r53_resource": {
 												// Property: R53Resource
@@ -236,20 +264,33 @@ func resourceSetResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "The DNS target domain name.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"record_set_id": {
 															// Property: RecordSetId
 															Description: "The Resource Record set id.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.RequiredAttributes(
 											validate.OneOfRequired(
@@ -262,18 +303,27 @@ func resourceSetResourceType(ctx context.Context) (provider.ResourceType, error)
 											),
 										),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"readiness_scopes": {
 						// Property: ReadinessScopes
 						Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"resource_arn": {
@@ -281,6 +331,10 @@ func resourceSetResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The Amazon Resource Name (ARN) of the AWS resource.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -340,8 +394,10 @@ func resourceSetResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

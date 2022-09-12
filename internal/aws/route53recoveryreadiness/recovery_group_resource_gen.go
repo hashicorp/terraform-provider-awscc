@@ -40,12 +40,14 @@ func recoveryGroupResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "A list of the cell Amazon Resource Names (ARNs) in the recovery group.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(5),
 				validate.ArrayForEach(validate.StringLenBetween(1, 256)),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"recovery_group_arn": {
@@ -132,8 +134,10 @@ func recoveryGroupResourceType(ctx context.Context) (provider.ResourceType, erro
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
