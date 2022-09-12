@@ -123,15 +123,23 @@ func urlResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Specifies whether credentials are included in the CORS request.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"allow_headers": {
 						// Property: AllowHeaders
 						Description: "Represents a collection of allowed headers.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 100),
 							validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"allow_methods": {
@@ -139,6 +147,7 @@ func urlResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Represents a collection of allowed HTTP methods.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 6),
 							validate.ArrayForEach(validate.StringInSlice([]string{
@@ -151,15 +160,22 @@ func urlResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"*",
 							})),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"allow_origins": {
 						// Property: AllowOrigins
 						Description: "Represents a collection of allowed origins.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 100),
 							validate.ArrayForEach(validate.StringLenBetween(1, 253)),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"expose_headers": {
@@ -167,22 +183,34 @@ func urlResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Represents a collection of exposed headers.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 100),
 							validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"max_age": {
 						// Property: MaxAge
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 86400),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"function_arn": {
 			// Property: FunctionArn
@@ -227,11 +255,15 @@ func urlResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The invocation mode for the function?s URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"BUFFERED",
 					"RESPONSE_STREAM",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"qualifier": {
