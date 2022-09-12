@@ -176,6 +176,10 @@ func serverlessClusterResourceType(ctx context.Context) (provider.ResourceType, 
 						// Property: SecurityGroups
 						Type:     types.SetType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"subnet_ids": {
 						// Property: SubnetIds

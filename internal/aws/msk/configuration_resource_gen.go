@@ -41,6 +41,10 @@ func configurationResourceType(ctx context.Context) (provider.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"kafka_versions_list": {
 			// Property: KafkaVersionsList
