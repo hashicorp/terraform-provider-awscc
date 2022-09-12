@@ -48,8 +48,12 @@ func logGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"log_group_name": {
@@ -107,6 +111,7 @@ func logGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntInSlice([]int{
 					1,
@@ -131,6 +136,9 @@ func logGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 					3288,
 					3653,
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -189,6 +197,10 @@ func logGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
