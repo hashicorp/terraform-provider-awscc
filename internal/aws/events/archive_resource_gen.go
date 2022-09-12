@@ -56,6 +56,10 @@ func archiveResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"event_pattern": {
 			// Property: EventPattern
@@ -65,6 +69,10 @@ func archiveResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"retention_days": {
 			// Property: RetentionDays
@@ -74,6 +82,10 @@ func archiveResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.Int64Type,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"source_arn": {
 			// Property: SourceArn
