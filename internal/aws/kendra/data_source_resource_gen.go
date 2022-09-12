@@ -346,28 +346,48 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateValue
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"long_value": {
 															// Property: LongValue
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"string_list_value": {
 															// Property: StringListValue
 															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"string_value": {
 															// Property: StringValue
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 2048),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"operator": {
 												// Property: Operator
@@ -392,11 +412,19 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"document_content_deletion": {
 									// Property: DocumentContentDeletion
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"target": {
 									// Property: Target
@@ -419,43 +447,75 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateValue
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"long_value": {
 															// Property: LongValue
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"string_list_value": {
 															// Property: StringListValue
 															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"string_value": {
 															// Property: StringValue
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 2048),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"target_document_attribute_value_deletion": {
 												// Property: TargetDocumentAttributeValueDeletion
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"post_extraction_hook_configuration": {
@@ -483,28 +543,48 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateValue
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"long_value": {
 															// Property: LongValue
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"string_list_value": {
 															// Property: StringListValue
 															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"string_value": {
 															// Property: StringValue
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 2048),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"operator": {
 												// Property: Operator
@@ -529,6 +609,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"lambda_arn": {
 									// Property: LambdaArn
@@ -550,6 +634,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"pre_extraction_hook_configuration": {
 						// Property: PreExtractionHookConfiguration
@@ -576,28 +664,48 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateValue
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"long_value": {
 															// Property: LongValue
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"string_list_value": {
 															// Property: StringListValue
 															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"string_value": {
 															// Property: StringValue
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 2048),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"operator": {
 												// Property: Operator
@@ -622,6 +730,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"lambda_arn": {
 									// Property: LambdaArn
@@ -643,19 +755,31 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"role_arn": {
 						// Property: RoleArn
 						Description: "Role ARN",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1284),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"data_source_configuration": {
 			// Property: DataSourceConfiguration
@@ -2412,8 +2536,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateFieldFormat
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"index_field_name": {
@@ -2427,18 +2555,30 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 11),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"crawl_attachments": {
 												// Property: CrawlAttachments
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"blog_configuration": {
 									// Property: BlogConfiguration
@@ -2470,8 +2610,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateFieldFormat
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"index_field_name": {
@@ -2485,30 +2629,46 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 9),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"page_configuration": {
@@ -2544,8 +2704,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateFieldFormat
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"index_field_name": {
@@ -2559,13 +2723,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 12),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"secret_arn": {
 									// Property: SecretArn
@@ -2592,28 +2764,44 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: CrawlArchivedSpaces
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"crawl_personal_spaces": {
 												// Property: CrawlPersonalSpaces
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"exclude_spaces": {
 												// Property: ExcludeSpaces
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
 													validate.ArrayForEach(validate.StringLenBetween(1, 255)),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"include_spaces": {
 												// Property: IncludeSpaces
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
 													validate.ArrayForEach(validate.StringLenBetween(1, 255)),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"space_field_mappings": {
@@ -2637,8 +2825,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateFieldFormat
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"index_field_name": {
@@ -2652,13 +2844,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 4),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"version": {
 									// Property: Version
@@ -2698,10 +2898,18 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"database_configuration": {
 						// Property: DatabaseConfiguration
@@ -2722,6 +2930,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"column_configuration": {
 									// Property: ColumnConfiguration
@@ -2756,8 +2968,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DocumentTitleColumnName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"field_mappings": {
@@ -2776,8 +2992,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateFieldFormat
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"index_field_name": {
@@ -2791,8 +3011,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -2868,16 +3092,24 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: QueryIdentifiersEnclosingOption
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"DOUBLE_QUOTES",
 														"NONE",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"vpc_configuration": {
 									// Property: VpcConfiguration
@@ -2906,10 +3138,18 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"google_drive_configuration": {
 						// Property: GoogleDriveConfiguration
@@ -2919,36 +3159,52 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									// Property: ExcludeMimeTypes
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 30),
 										validate.ArrayForEach(validate.StringLenBetween(1, 256)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"exclude_shared_drives": {
 									// Property: ExcludeSharedDrives
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 256)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"exclude_user_accounts": {
 									// Property: ExcludeUserAccounts
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 256)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"field_mappings": {
@@ -2967,8 +3223,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DateFieldFormat
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(4, 40),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"index_field_name": {
@@ -2982,17 +3242,25 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"secret_arn": {
@@ -3006,6 +3274,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"one_drive_configuration": {
 						// Property: OneDriveConfiguration
@@ -3015,14 +3287,22 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									// Property: DisableLocalGroups
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"field_mappings": {
@@ -3041,8 +3321,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DateFieldFormat
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(4, 40),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"index_field_name": {
@@ -3056,17 +3340,25 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"one_drive_users": {
@@ -3077,9 +3369,13 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: OneDriveUserList
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 100),
 													validate.ArrayForEach(validate.StringLenBetween(1, 256)),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"one_drive_user_s3_path": {
@@ -3106,6 +3402,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -3143,6 +3443,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
@@ -3157,13 +3461,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: KeyPath
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 1024),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"bucket_name": {
 									// Property: BucketName
@@ -3182,44 +3494,68 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: S3Prefix
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 1024),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"inclusion_prefixes": {
 									// Property: InclusionPrefixes
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"salesforce_configuration": {
 						// Property: SalesforceConfiguration
@@ -3241,8 +3577,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DocumentTitleFieldName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"field_mappings": {
@@ -3261,8 +3601,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateFieldFormat
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"index_field_name": {
@@ -3276,14 +3620,19 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"include_filter_types": {
 												// Property: IncludeFilterTypes
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 2),
 													validate.ArrayForEach(validate.StringInSlice([]string{
@@ -3291,32 +3640,51 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 														"STANDARD_USER",
 													})),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"crawl_attachments": {
 									// Property: CrawlAttachments
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"exclude_attachment_file_patterns": {
 									// Property: ExcludeAttachmentFilePatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"include_attachment_file_patterns": {
 									// Property: IncludeAttachmentFilePatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"knowledge_article_configuration": {
@@ -3339,8 +3707,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DocumentTitleFieldName
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"field_mappings": {
@@ -3359,8 +3731,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 																		// Property: DateFieldFormat
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(4, 40),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"index_field_name": {
@@ -3374,8 +3750,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 																},
 															),
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayLenAtMost(100),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"name": {
@@ -3389,8 +3769,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 10),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"included_states": {
@@ -3422,8 +3806,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DocumentTitleFieldName
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"field_mappings": {
@@ -3442,8 +3830,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 																		// Property: DateFieldFormat
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(4, 40),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"index_field_name": {
@@ -3457,17 +3849,29 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 																},
 															),
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayLenAtMost(100),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"secret_arn": {
 									// Property: SecretArn
@@ -3494,8 +3898,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DocumentTitleFieldName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"field_mappings": {
@@ -3514,8 +3922,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateFieldFormat
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"index_field_name": {
@@ -3529,13 +3941,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"standard_object_configurations": {
 									// Property: StandardObjectConfigurations
@@ -3553,8 +3973,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DocumentTitleFieldName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"field_mappings": {
@@ -3573,8 +3997,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateFieldFormat
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"index_field_name": {
@@ -3588,8 +4016,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"name": {
@@ -3621,13 +4053,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 17),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"service_now_configuration": {
 						// Property: ServiceNowConfiguration
@@ -3637,11 +4077,15 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									// Property: AuthenticationType
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"HTTP_BASIC",
 											"OAUTH2",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"host_url": {
@@ -3660,6 +4104,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: CrawlAttachments
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"document_data_field_name": {
 												// Property: DocumentDataFieldName
@@ -3673,17 +4121,25 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DocumentTitleFieldName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"exclude_attachment_file_patterns": {
 												// Property: ExcludeAttachmentFilePatterns
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
 													validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"field_mappings": {
@@ -3702,8 +4158,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateFieldFormat
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"index_field_name": {
@@ -3717,30 +4177,46 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"filter_query": {
 												// Property: FilterQuery
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 2048),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"include_attachment_file_patterns": {
 												// Property: IncludeAttachmentFilePatterns
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
 													validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"secret_arn": {
 									// Property: SecretArn
@@ -3758,6 +4234,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: CrawlAttachments
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"document_data_field_name": {
 												// Property: DocumentDataFieldName
@@ -3771,17 +4251,25 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DocumentTitleFieldName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"exclude_attachment_file_patterns": {
 												// Property: ExcludeAttachmentFilePatterns
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
 													validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"field_mappings": {
@@ -3800,8 +4288,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DateFieldFormat
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"index_field_name": {
@@ -3815,22 +4307,34 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"include_attachment_file_patterns": {
 												// Property: IncludeAttachmentFilePatterns
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
 													validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"service_now_build_version": {
 									// Property: ServiceNowBuildVersion
@@ -3846,6 +4350,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"share_point_configuration": {
 						// Property: SharePointConfiguration
@@ -3856,27 +4364,43 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									// Property: CrawlAttachments
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"disable_local_groups": {
 									// Property: DisableLocalGroups
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"document_title_field_name": {
 									// Property: DocumentTitleFieldName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 100),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"field_mappings": {
@@ -3895,8 +4419,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DateFieldFormat
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(4, 40),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"index_field_name": {
@@ -3910,17 +4438,25 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"secret_arn": {
@@ -3967,6 +4503,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"urls": {
 									// Property: Urls
@@ -3982,6 +4522,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									// Property: UseChangeLog
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"vpc_configuration": {
 									// Property: VpcConfiguration
@@ -4010,10 +4554,18 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"web_crawler_configuration": {
 						// Property: WebCrawlerConfiguration
@@ -4055,44 +4607,68 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(10),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"crawl_depth": {
 									// Property: CrawlDepth
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 10),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"max_content_size_per_page_in_mega_bytes": {
 									// Property: MaxContentSizePerPageInMegaBytes
 									Type:     types.Float64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatBetween(0.000000, 50.000000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"max_links_per_page": {
 									// Property: MaxLinksPerPage
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 1000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"max_urls_per_minute_crawl_rate": {
 									// Property: MaxUrlsPerMinuteCrawlRate
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 300),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"proxy_configuration": {
@@ -4103,8 +4679,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: Credentials
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 1284),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"host": {
@@ -4127,23 +4707,35 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"url_exclusion_patterns": {
 									// Property: UrlExclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"url_inclusion_patterns": {
 									// Property: UrlInclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"urls": {
@@ -4168,6 +4760,7 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: WebCrawlerMode
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"HOST_ONLY",
@@ -4175,10 +4768,17 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 																	"EVERYTHING",
 																}),
 															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"site_maps_configuration": {
 												// Property: SiteMapsConfiguration
@@ -4197,6 +4797,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -4205,6 +4809,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"work_docs_configuration": {
 						// Property: WorkDocsConfiguration
@@ -4214,14 +4822,22 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									// Property: CrawlComments
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"field_mappings": {
@@ -4240,8 +4856,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DateFieldFormat
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(4, 40),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"index_field_name": {
@@ -4255,17 +4875,25 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"organization_id": {
@@ -4281,14 +4909,23 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									// Property: UseChangeLog
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.RequiredAttributes(
 					validate.OneOfRequired(
@@ -4325,6 +4962,9 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 					),
 				),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -4338,8 +4978,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "Description of data source",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -4403,8 +5047,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "Role ARN",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1284),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"schedule": {
@@ -4418,8 +5066,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "Schedule",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -4477,8 +5129,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type": {
