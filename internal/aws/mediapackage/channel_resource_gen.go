@@ -46,6 +46,10 @@ func channelResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A short text description of the Channel.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"egress_access_logs": {
 			// Property: EgressAccessLogs
@@ -72,13 +76,21 @@ func channelResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"hls_ingest": {
 			// Property: HlsIngest
@@ -130,28 +142,48 @@ func channelResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The system generated unique identifier for the IngestEndpoint",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"password": {
 									// Property: Password
 									Description: "The system generated password for ingest authentication.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"url": {
 									// Property: Url
 									Description: "The ingest URL to which the source stream should be sent.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"username": {
 									// Property: Username
 									Description: "The system generated username for ingest authentication.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -205,13 +237,21 @@ func channelResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags

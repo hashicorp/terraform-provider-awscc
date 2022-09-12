@@ -130,6 +130,10 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The resource ID to include in SPEKE key requests.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"source_arn": {
 			// Property: SourceArn
@@ -193,8 +197,12 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

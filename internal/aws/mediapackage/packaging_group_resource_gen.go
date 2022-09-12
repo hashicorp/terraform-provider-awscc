@@ -76,6 +76,10 @@ func packagingGroupResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -116,13 +120,21 @@ func packagingGroupResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "Sets a custom AWS CloudWatch log group name for egress logs. If a log group name isn't specified, the default name is used: /aws/MediaPackage/VodEgressAccessLogs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id

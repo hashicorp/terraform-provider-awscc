@@ -76,6 +76,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"channel_id": {
 			// Property: ChannelId
@@ -322,8 +326,12 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(32, 32),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"key_rotation_interval_seconds": {
@@ -331,6 +339,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "Time (in seconds) between each encryption key rotation.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
@@ -342,6 +354,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"encryption_contract_configuration": {
 												// Property: EncryptionContractConfiguration
@@ -386,6 +402,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"resource_id": {
 												// Property: ResourceId
@@ -418,6 +438,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"hls_manifests": {
 						// Property: HlsManifests
@@ -429,6 +453,7 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"NONE",
@@ -437,12 +462,16 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 											"DATERANGE",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ad_triggers": {
 									// Property: AdTriggers
 									Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayForEach(validate.StringInSlice([]string{
 											"SPLICE_INSERT",
@@ -455,12 +484,16 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 											"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
 										})),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ads_on_delivery_restrictions": {
 									// Property: AdsOnDeliveryRestrictions
 									Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"NONE",
@@ -468,6 +501,9 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 											"UNRESTRICTED",
 											"BOTH",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"id": {
@@ -481,18 +517,27 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "When enabled, an I-Frame only stream will be included in the output.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"manifest_name": {
 									// Property: ManifestName
 									Description: "An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"playlist_type": {
 									// Property: PlaylistType
 									Description: "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"NONE",
@@ -500,40 +545,67 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 											"VOD",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"playlist_window_seconds": {
 									// Property: PlaylistWindowSeconds
 									Description: "Time window (in seconds) contained in each parent manifest.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"program_date_time_interval_seconds": {
 									// Property: ProgramDateTimeIntervalSeconds
 									Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"url": {
 									// Property: Url
 									Description: "The URL of the packaged OriginEndpoint for consumption.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
 						Description: "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"segment_prefix": {
 						// Property: SegmentPrefix
 						Description: "An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stream_selection": {
 						// Property: StreamSelection
@@ -545,18 +617,27 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "The maximum video bitrate (bps) to include in output.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"min_video_bits_per_second": {
 									// Property: MinVideoBitsPerSecond
 									Description: "The minimum video bitrate (bps) to include in output.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"stream_order": {
 									// Property: StreamOrder
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"ORIGINAL",
@@ -564,14 +645,25 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 											"VIDEO_BITRATE_DESCENDING",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"dash_package": {
 			// Property: DashPackage
@@ -805,6 +897,7 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringInSlice([]string{
 								"SPLICE_INSERT",
@@ -817,12 +910,16 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 								"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
 							})),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ads_on_delivery_restrictions": {
 						// Property: AdsOnDeliveryRestrictions
 						Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
@@ -830,6 +927,9 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 								"UNRESTRICTED",
 								"BOTH",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"encryption": {
@@ -842,6 +942,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "Time (in seconds) between each encryption key rotation.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
@@ -853,6 +957,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"encryption_contract_configuration": {
 												// Property: EncryptionContractConfiguration
@@ -897,6 +1005,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"resource_id": {
 												// Property: ResourceId
@@ -929,23 +1041,35 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"include_iframe_only_stream": {
 						// Property: IncludeIframeOnlyStream
 						Description: "When enabled, an I-Frame only stream will be included in the output.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"manifest_layout": {
 						// Property: ManifestLayout
 						Description: "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"FULL",
 								"COMPACT",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"manifest_window_seconds": {
@@ -953,28 +1077,44 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "Time window (in seconds) contained in each manifest.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"min_buffer_time_seconds": {
 						// Property: MinBufferTimeSeconds
 						Description: "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"min_update_period_seconds": {
 						// Property: MinUpdatePeriodSeconds
 						Description: "Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"period_triggers": {
 						// Property: PeriodTriggers
 						Description: "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Channel source contains SCTE-35 ad markers.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringInSlice([]string{
 								"ADS",
 							})),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"profile": {
@@ -982,6 +1122,7 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
@@ -990,24 +1131,35 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 								"DVB_DASH_2014",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
 						Description: "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"segment_template_format": {
 						// Property: SegmentTemplateFormat
 						Description: "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NUMBER_WITH_TIMELINE",
 								"TIME_WITH_TIMELINE",
 								"NUMBER_WITH_DURATION",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"stream_selection": {
@@ -1020,18 +1172,27 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "The maximum video bitrate (bps) to include in output.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"min_video_bits_per_second": {
 									// Property: MinVideoBitsPerSecond
 									Description: "The minimum video bitrate (bps) to include in output.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"stream_order": {
 									// Property: StreamOrder
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"ORIGINAL",
@@ -1039,22 +1200,34 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 											"VIDEO_BITRATE_DESCENDING",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"suggested_presentation_delay_seconds": {
 						// Property: SuggestedPresentationDelaySeconds
 						Description: "Duration (in seconds) to delay live content before presentation.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"utc_timing": {
 						// Property: UtcTiming
 						Description: "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"HTTP-XSDATE",
@@ -1063,16 +1236,27 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 								"NONE",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"utc_timing_uri": {
 						// Property: UtcTimingUri
 						Description: "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -1084,6 +1268,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "A short text description of the OriginEndpoint.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"hls_package": {
 			// Property: HlsPackage
@@ -1297,6 +1485,7 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
@@ -1305,12 +1494,16 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 								"DATERANGE",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ad_triggers": {
 						// Property: AdTriggers
 						Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringInSlice([]string{
 								"SPLICE_INSERT",
@@ -1323,12 +1516,16 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 								"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
 							})),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ads_on_delivery_restrictions": {
 						// Property: AdsOnDeliveryRestrictions
 						Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
@@ -1336,6 +1533,9 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 								"UNRESTRICTED",
 								"BOTH",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"encryption": {
@@ -1348,17 +1548,25 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"encryption_method": {
 									// Property: EncryptionMethod
 									Description: "The encryption method to use.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"AES_128",
 											"SAMPLE_AES",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"key_rotation_interval_seconds": {
@@ -1366,12 +1574,20 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "Interval (in seconds) between each encryption key rotation.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"repeat_ext_x_key": {
 									// Property: RepeatExtXKey
 									Description: "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
@@ -1383,6 +1599,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"encryption_contract_configuration": {
 												// Property: EncryptionContractConfiguration
@@ -1427,6 +1647,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"resource_id": {
 												// Property: ResourceId
@@ -1459,18 +1683,27 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"include_iframe_only_stream": {
 						// Property: IncludeIframeOnlyStream
 						Description: "When enabled, an I-Frame only stream will be included in the output.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"playlist_type": {
 						// Property: PlaylistType
 						Description: "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
@@ -1478,24 +1711,39 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 								"VOD",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"playlist_window_seconds": {
 						// Property: PlaylistWindowSeconds
 						Description: "Time window (in seconds) contained in each parent manifest.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"program_date_time_interval_seconds": {
 						// Property: ProgramDateTimeIntervalSeconds
 						Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
 						Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stream_selection": {
 						// Property: StreamSelection
@@ -1507,18 +1755,27 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "The maximum video bitrate (bps) to include in output.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"min_video_bits_per_second": {
 									// Property: MinVideoBitsPerSecond
 									Description: "The minimum video bitrate (bps) to include in output.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"stream_order": {
 									// Property: StreamOrder
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"ORIGINAL",
@@ -1526,20 +1783,35 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 											"VIDEO_BITRATE_DESCENDING",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"use_audio_rendition_group": {
 						// Property: UseAudioRenditionGroup
 						Description: "When enabled, audio streams will be placed in rendition groups in the output.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -1571,6 +1843,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "A short string appended to the end of the OriginEndpoint URL.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"mss_package": {
 			// Property: MssPackage
@@ -1716,6 +1992,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"encryption_contract_configuration": {
 												// Property: EncryptionContractConfiguration
@@ -1760,6 +2040,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"resource_id": {
 												// Property: ResourceId
@@ -1792,18 +2076,30 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"manifest_window_seconds": {
 						// Property: ManifestWindowSeconds
 						Description: "The time window (in seconds) contained in each manifest.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
 						Description: "The duration (in seconds) of each segment.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stream_selection": {
 						// Property: StreamSelection
@@ -1815,18 +2111,27 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "The maximum video bitrate (bps) to include in output.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"min_video_bits_per_second": {
 									// Property: MinVideoBitsPerSecond
 									Description: "The minimum video bitrate (bps) to include in output.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"stream_order": {
 									// Property: StreamOrder
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"ORIGINAL",
@@ -1834,14 +2139,25 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 											"VIDEO_BITRATE_DESCENDING",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"origination": {
 			// Property: Origination
@@ -1857,11 +2173,15 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ALLOW",
 					"DENY",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"startover_window_seconds": {
@@ -1874,6 +2194,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Maximum duration (seconds) of content to retain for startover playback. If not specified, startover playback will be disabled for the OriginEndpoint.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -1915,8 +2239,12 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"time_delay_seconds": {
@@ -1929,6 +2257,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Amount of delay (seconds) to enforce on the playback of live content. If not specified, there will be no time delay in effect for the OriginEndpoint.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"url": {
 			// Property: Url
@@ -1957,6 +2289,10 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
