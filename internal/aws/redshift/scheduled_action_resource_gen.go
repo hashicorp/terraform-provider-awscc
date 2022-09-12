@@ -31,6 +31,10 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"end_time": {
 			// Property: EndTime
@@ -42,6 +46,10 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"iam_role": {
 			// Property: IamRole
@@ -53,6 +61,10 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The IAM role to assume to run the target action.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"next_invocations": {
 			// Property: NextInvocations
@@ -83,6 +95,10 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The schedule in `at( )` or `cron( )` format.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"scheduled_action_description": {
 			// Property: ScheduledActionDescription
@@ -95,6 +111,10 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The description of the scheduled action.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"scheduled_action_name": {
 			// Property: ScheduledActionName
@@ -121,6 +141,10 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"state": {
 			// Property: State
@@ -216,6 +240,10 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"resize_cluster": {
 						// Property: ResizeCluster
@@ -226,6 +254,10 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 									// Property: Classic
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cluster_identifier": {
 									// Property: ClusterIdentifier
@@ -236,20 +268,36 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 									// Property: ClusterType
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"node_type": {
 									// Property: NodeType
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"number_of_nodes": {
 									// Property: NumberOfNodes
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"resume_cluster": {
 						// Property: ResumeCluster
@@ -264,10 +312,18 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

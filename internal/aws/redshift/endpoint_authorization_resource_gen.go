@@ -142,6 +142,10 @@ func endpointAuthorizationResourceType(ctx context.Context) (provider.ResourceTy
 			Description: " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Force is a write-only property.
 		},
 		"grantee": {
@@ -203,11 +207,13 @@ func endpointAuthorizationResourceType(ctx context.Context) (provider.ResourceTy
 			Description: "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^vpc-[A-Za-z0-9]{1,17}$"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
