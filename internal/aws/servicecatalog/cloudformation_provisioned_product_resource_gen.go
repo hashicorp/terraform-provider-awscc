@@ -36,12 +36,16 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"en",
 					"jp",
 					"zh",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"cloudformation_stack_arn": {
@@ -112,8 +116,12 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"path_name": {
@@ -126,8 +134,12 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"product_id": {
@@ -140,8 +152,12 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"product_name": {
@@ -154,8 +170,12 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"provisioned_product_id": {
@@ -201,8 +221,12 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"provisioning_artifact_name": {
@@ -213,6 +237,10 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"provisioning_parameters": {
 			// Property: ProvisioningParameters
@@ -260,6 +288,10 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"provisioning_preferences": {
 			// Property: ProvisioningPreferences
@@ -318,47 +350,68 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 						// Property: StackSetAccounts
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"stack_set_failure_tolerance_count": {
 						// Property: StackSetFailureToleranceCount
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"stack_set_failure_tolerance_percentage": {
 						// Property: StackSetFailureTolerancePercentage
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"stack_set_max_concurrency_count": {
 						// Property: StackSetMaxConcurrencyCount
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"stack_set_max_concurrency_percentage": {
 						// Property: StackSetMaxConcurrencyPercentage
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"stack_set_operation_type": {
 						// Property: StackSetOperationType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"CREATE",
@@ -366,19 +419,30 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 								"DELETE",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stack_set_regions": {
 						// Property: StackSetRegions
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-z]{2}-([a-z]+-)+[1-9]"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"record_id": {
 			// Property: RecordId
@@ -445,6 +509,10 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

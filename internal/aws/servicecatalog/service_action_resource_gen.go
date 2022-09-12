@@ -35,12 +35,16 @@ func serviceActionResourceType(ctx context.Context) (provider.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"en",
 					"jp",
 					"zh",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// AcceptLanguage is a write-only property.
 		},
@@ -117,8 +121,12 @@ func serviceActionResourceType(ctx context.Context) (provider.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
