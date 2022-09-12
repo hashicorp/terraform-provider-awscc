@@ -103,12 +103,20 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"device_id": {
 						// Property: DeviceId
 						Description: "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"key_type": {
 						// Property: KeyType
@@ -132,12 +140,20 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"resource_id": {
 						// Property: ResourceId
 						Description: "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"role_arn": {
 						// Property: RoleArn
@@ -150,16 +166,28 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"url": {
 						// Property: Url
 						Description: "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -182,6 +210,10 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"flow_arn": {
 			// Property: FlowArn
@@ -193,6 +225,10 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The ARN of the flow.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ingest_ip": {
 			// Property: IngestIp
@@ -218,6 +254,10 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The port that the flow will be listening on for incoming content.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"max_bitrate": {
 			// Property: MaxBitrate
@@ -229,6 +269,10 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"max_latency": {
 			// Property: MaxLatency
@@ -277,6 +321,7 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The protocol that is used by the source.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"zixi-push",
@@ -284,6 +329,9 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 					"rtp",
 					"rist",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"source_arn": {
@@ -324,6 +372,10 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vpc_interface_name": {
 			// Property: VpcInterfaceName
@@ -335,6 +387,10 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The name of the VPC Interface this Source is configured with.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"whitelist_cidr": {
 			// Property: WhitelistCidr
@@ -346,6 +402,10 @@ func flowSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
