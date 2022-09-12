@@ -47,8 +47,12 @@ func robotApplicationResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "The revision ID of robot application.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 40),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"environment": {
@@ -61,6 +65,10 @@ func robotApplicationResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "The URI of the Docker image for the robot application.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -135,12 +143,16 @@ func robotApplicationResourceType(ctx context.Context) (provider.ResourceType, e
 						Description: "The version of robot software suite.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Kinetic",
 								"Melodic",
 								"Dashing",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -217,8 +229,10 @@ func robotApplicationResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -241,6 +255,10 @@ func robotApplicationResourceType(ctx context.Context) (provider.ResourceType, e
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
