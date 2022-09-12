@@ -124,6 +124,10 @@ func ruleGroupsNamespaceResourceType(ctx context.Context) (provider.ResourceType
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"workspace": {
 			// Property: Workspace

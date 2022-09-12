@@ -32,6 +32,10 @@ func workspaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The AMP Workspace alert manager definition data",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"alias": {
 			// Property: Alias
@@ -45,8 +49,12 @@ func workspaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "AMP Workspace alias.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 100),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"arn": {
@@ -90,13 +98,21 @@ func workspaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "CloudWatch log group ARN",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 512),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"prometheus_endpoint": {
 			// Property: PrometheusEndpoint
@@ -168,6 +184,10 @@ func workspaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"workspace_id": {
 			// Property: WorkspaceId
