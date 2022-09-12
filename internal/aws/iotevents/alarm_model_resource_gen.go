@@ -82,6 +82,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"initialization_configuration": {
 						// Property: InitializationConfiguration
@@ -102,10 +106,18 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"alarm_event_actions": {
 			// Property: AlarmEventActions
@@ -554,6 +566,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 												Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n\n* `STRING` - The hash key is a string.\n\n* `NUMBER` - The hash key is a number.\n\nIf you don't specify `hashKeyType`, the default value is `STRING`.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"hash_key_value": {
 												// Property: HashKeyValue
@@ -566,6 +582,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 												Description: "The type of operation to perform. You can specify the following values:\n\n* `INSERT` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n\n* `UPDATE` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n\n* `DELETE` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n\nIf you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"payload": {
 												// Property: Payload
@@ -590,30 +610,50 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"payload_field": {
 												// Property: PayloadField
 												Description: "The name of the DynamoDB column that receives the action payload.\n\nIf you don't specify this parameter, the name of the DynamoDB column is `payload`.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"range_key_field": {
 												// Property: RangeKeyField
 												Description: "The name of the range key (also called the sort key).",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"range_key_type": {
 												// Property: RangeKeyType
 												Description: "The data type for the range key (also called the sort key), You can specify the following values:\n\n* `STRING` - The range key is a string.\n\n* `NUMBER` - The range key is number.\n\nIf you don't specify `rangeKeyField`, the default value is `STRING`.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"range_key_value": {
 												// Property: RangeKeyValue
 												Description: "The value of the range key (also called the sort key).",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"table_name": {
 												// Property: TableName
@@ -624,6 +664,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"dynamo_d_bv_2": {
 									// Property: DynamoDBv2
@@ -653,6 +697,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"table_name": {
 												// Property: TableName
@@ -663,6 +711,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"firehose": {
 									// Property: Firehose
@@ -698,19 +750,31 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"separator": {
 												// Property: Separator
 												Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("([\\n\\t])|(\\r\\n)|(,)"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iot_events": {
 									// Property: IotEvents
@@ -750,10 +814,18 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iot_site_wise": {
 									// Property: IotSiteWise
@@ -765,24 +837,40 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 												Description: "The ID of the asset that has the specified property. You can specify an expression.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"entry_id": {
 												// Property: EntryId
 												Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"property_alias": {
 												// Property: PropertyAlias
 												Description: "The alias of the asset property. You can also specify an expression.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"property_id": {
 												// Property: PropertyId
 												Description: "The ID of the asset property. You can specify an expression.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"property_value": {
 												// Property: PropertyValue
@@ -794,6 +882,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 															Description: "The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"timestamp": {
 															// Property: Timestamp
@@ -805,6 +897,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 																		Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"time_in_seconds": {
 																		// Property: TimeInSeconds
@@ -815,6 +911,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"value": {
 															// Property: Value
@@ -826,24 +926,40 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 																		Description: "The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"double_value": {
 																		// Property: DoubleValue
 																		Description: "The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"integer_value": {
 																		// Property: IntegerValue
 																		Description: "The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"string_value": {
 																		// Property: StringValue
 																		Description: "The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
@@ -852,10 +968,18 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iot_topic_publish": {
 									// Property: IotTopicPublish
@@ -894,10 +1018,18 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"lambda": {
 									// Property: Lambda
@@ -935,10 +1067,18 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sns": {
 									// Property: Sns
@@ -968,6 +1108,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"target_arn": {
 												// Property: TargetArn
@@ -981,6 +1125,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sqs": {
 									// Property: Sqs
@@ -1009,6 +1157,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"queue_url": {
 												// Property: QueueUrl
@@ -1021,21 +1173,35 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 												Description: "Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.",
 												Type:        types.BoolType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"alarm_model_description": {
 			// Property: AlarmModelDescription
@@ -1048,8 +1214,12 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A brief description of the alarm model.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(128),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"alarm_model_name": {
@@ -1166,6 +1336,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -1222,8 +1396,12 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A non-negative integer that reflects the severity level of the alarm.\n\n",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 2147483647),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -1272,8 +1450,10 @@ func alarmModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
