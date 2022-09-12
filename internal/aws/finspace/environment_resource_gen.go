@@ -88,8 +88,12 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Description of the Environment",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9. ]{1,1000}$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"environment_arn": {
@@ -151,11 +155,15 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Federation mode used with the Environment",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"LOCAL",
 					"FEDERATED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"federation_parameters": {
@@ -208,8 +216,12 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^https?://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]{1,1000}"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"attribute_map": {
@@ -217,15 +229,23 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "Attribute map for SAML configuration",
 						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"federation_provider_name": {
 						// Property: FederationProviderName
 						Description: "Federation provider name to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 32),
 							validate.StringMatch(regexp.MustCompile("[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"federation_urn": {
@@ -233,15 +253,23 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"saml_metadata_document": {
 						// Property: SamlMetadataDocument
 						Description: "SAML metadata document to link the federation provider to the Environment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1000, 10000000),
 							validate.StringMatch(regexp.MustCompile(".*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"saml_metadata_url": {
@@ -249,13 +277,21 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^https?://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]{1,1000}"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"kms_key_id": {
 			// Property: KmsKeyId
@@ -368,9 +404,13 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "Email address",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 							validate.StringMatch(regexp.MustCompile("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"first_name": {
@@ -378,9 +418,13 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "First name",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 50),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]{1,50}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"last_name": {
@@ -388,9 +432,13 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "Last name",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 50),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]{1,50}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
