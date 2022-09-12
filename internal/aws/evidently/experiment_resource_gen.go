@@ -46,8 +46,12 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 160),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"metric_goals": {
@@ -142,9 +146,13 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: UnitLabel
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 							validate.StringMatch(regexp.MustCompile(".*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"value_key": {
@@ -227,9 +235,13 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: ControlTreatmentName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
 							validate.StringMatch(regexp.MustCompile("[-a-zA-Z0-9._]*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"treatment_weights": {
@@ -256,6 +268,10 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -291,9 +307,13 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 127),
 				validate.StringMatch(regexp.MustCompile(".*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"remove_segment": {
@@ -304,6 +324,10 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"running_status": {
 			// Property: RunningStatus
@@ -355,14 +379,22 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "Provide the analysis Completion time for an experiment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"desired_state": {
 						// Property: DesiredState
 						Description: "Provide CANCELLED or COMPLETED desired state when stopping an experiment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^(CANCELLED|COMPLETED)"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"reason": {
@@ -370,16 +402,25 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "Reason is a required input for stopping the experiment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"status": {
 						// Property: Status
 						Description: "Provide START or STOP action to apply on an experiment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.RequiredAttributes(
 					validate.OneOfRequired(
@@ -395,6 +436,9 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 					),
 				),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"sampling_rate": {
 			// Property: SamplingRate
@@ -406,8 +450,12 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.Int64Type,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 100000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"segment": {
@@ -421,9 +469,13 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 2048),
 				validate.StringMatch(regexp.MustCompile("([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:segment/[-a-zA-Z0-9._]*)"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -483,6 +535,10 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"treatments": {
 			// Property: Treatments
@@ -530,6 +586,10 @@ func experimentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: Description
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"feature": {
 						// Property: Feature
