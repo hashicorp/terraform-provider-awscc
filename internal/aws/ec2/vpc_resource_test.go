@@ -36,10 +36,7 @@ func TestAccAWSEC2VPC_CidrBlock(t *testing.T) {
 func testAccAWSEC2VPCCidrBlockConfig(td *acctest.TestData, rName, cidrBlock string) string {
 	return fmt.Sprintf(`
 resource %[1]q %[2]q {
-  cidr_block           = %[4]q
-  enable_dns_hostnames = false
-  enable_dns_support   = true
-  instance_tenancy     = "default"
+  cidr_block = %[4]q
 
   tags = [
     {
