@@ -153,6 +153,10 @@ func geofenceCollectionResourceType(ctx context.Context) (provider.ResourceType,
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"update_time": {
 			// Property: UpdateTime

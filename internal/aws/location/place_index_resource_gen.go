@@ -86,11 +86,15 @@ func placeIndexResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: IntendedUse
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"SingleUse",
 								"Storage",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
