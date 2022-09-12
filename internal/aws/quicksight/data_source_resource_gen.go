@@ -494,6 +494,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"amazon_open_search_parameters": {
 						// Property: AmazonOpenSearchParameters
@@ -512,6 +516,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"athena_parameters": {
 						// Property: AthenaParameters
@@ -523,13 +531,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "<p>The workgroup that Amazon Athena uses.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 128),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"aurora_parameters": {
 						// Property: AuroraParameters
@@ -566,6 +582,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"aurora_postgre_sql_parameters": {
 						// Property: AuroraPostgreSqlParameters
@@ -602,6 +622,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"maria_db_parameters": {
 						// Property: MariaDbParameters
@@ -638,6 +662,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"my_sql_parameters": {
 						// Property: MySqlParameters
@@ -674,6 +702,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"oracle_parameters": {
 						// Property: OracleParameters
@@ -706,6 +738,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"postgre_sql_parameters": {
 						// Property: PostgreSqlParameters
@@ -742,6 +778,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"presto_parameters": {
 						// Property: PrestoParameters
@@ -778,6 +818,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"rds_parameters": {
 						// Property: RdsParameters
@@ -805,6 +849,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"redshift_parameters": {
 						// Property: RedshiftParameters
@@ -816,8 +864,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 64),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"database": {
@@ -834,8 +886,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"port": {
@@ -843,13 +899,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 									Type:        types.Float64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatBetween(0.000000, 65535.000000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_parameters": {
 						// Property: S3Parameters
@@ -886,6 +950,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"snowflake_parameters": {
 						// Property: SnowflakeParameters
@@ -922,6 +990,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"spark_parameters": {
 						// Property: SparkParameters
@@ -949,6 +1021,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"sql_server_parameters": {
 						// Property: SqlServerParameters
@@ -985,6 +1061,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"teradata_parameters": {
 						// Property: TeradataParameters
@@ -1021,12 +1101,20 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"arn": {
@@ -1571,8 +1659,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"credential_pair": {
@@ -1602,6 +1694,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"amazon_open_search_parameters": {
 												// Property: AmazonOpenSearchParameters
@@ -1620,6 +1716,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"athena_parameters": {
 												// Property: AthenaParameters
@@ -1631,13 +1731,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															Description: "<p>The workgroup that Amazon Athena uses.</p>",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 128),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"aurora_parameters": {
 												// Property: AuroraParameters
@@ -1674,6 +1782,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"aurora_postgre_sql_parameters": {
 												// Property: AuroraPostgreSqlParameters
@@ -1710,6 +1822,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"maria_db_parameters": {
 												// Property: MariaDbParameters
@@ -1746,6 +1862,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"my_sql_parameters": {
 												// Property: MySqlParameters
@@ -1782,6 +1902,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"oracle_parameters": {
 												// Property: OracleParameters
@@ -1814,6 +1938,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"postgre_sql_parameters": {
 												// Property: PostgreSqlParameters
@@ -1850,6 +1978,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"presto_parameters": {
 												// Property: PrestoParameters
@@ -1886,6 +2018,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"rds_parameters": {
 												// Property: RdsParameters
@@ -1913,6 +2049,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"redshift_parameters": {
 												// Property: RedshiftParameters
@@ -1924,8 +2064,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 64),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"database": {
@@ -1942,8 +2086,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 256),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"port": {
@@ -1951,13 +2099,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 															Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 															Type:        types.Float64Type,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.FloatBetween(0.000000, 65535.000000),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"s3_parameters": {
 												// Property: S3Parameters
@@ -1994,6 +2150,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"snowflake_parameters": {
 												// Property: SnowflakeParameters
@@ -2030,6 +2190,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"spark_parameters": {
 												// Property: SparkParameters
@@ -2057,6 +2221,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"sql_server_parameters": {
 												// Property: SqlServerParameters
@@ -2093,6 +2261,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"teradata_parameters": {
 												// Property: TeradataParameters
@@ -2129,12 +2301,20 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 50),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"password": {
@@ -2158,10 +2338,18 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Credentials is a write-only property.
 		},
 		"data_source_id": {
@@ -2643,6 +2831,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"amazon_open_search_parameters": {
 						// Property: AmazonOpenSearchParameters
@@ -2661,6 +2853,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"athena_parameters": {
 						// Property: AthenaParameters
@@ -2672,13 +2868,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "<p>The workgroup that Amazon Athena uses.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 128),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"aurora_parameters": {
 						// Property: AuroraParameters
@@ -2715,6 +2919,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"aurora_postgre_sql_parameters": {
 						// Property: AuroraPostgreSqlParameters
@@ -2751,6 +2959,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"maria_db_parameters": {
 						// Property: MariaDbParameters
@@ -2787,6 +2999,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"my_sql_parameters": {
 						// Property: MySqlParameters
@@ -2823,6 +3039,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"oracle_parameters": {
 						// Property: OracleParameters
@@ -2855,6 +3075,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"postgre_sql_parameters": {
 						// Property: PostgreSqlParameters
@@ -2891,6 +3115,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"presto_parameters": {
 						// Property: PrestoParameters
@@ -2927,6 +3155,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"rds_parameters": {
 						// Property: RdsParameters
@@ -2954,6 +3186,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"redshift_parameters": {
 						// Property: RedshiftParameters
@@ -2965,8 +3201,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 64),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"database": {
@@ -2983,8 +3223,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"port": {
@@ -2992,13 +3236,21 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 									Type:        types.Float64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatBetween(0.000000, 65535.000000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_parameters": {
 						// Property: S3Parameters
@@ -3035,6 +3287,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"snowflake_parameters": {
 						// Property: SnowflakeParameters
@@ -3071,6 +3327,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"spark_parameters": {
 						// Property: SparkParameters
@@ -3098,6 +3358,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"sql_server_parameters": {
 						// Property: SqlServerParameters
@@ -3134,6 +3398,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"teradata_parameters": {
 						// Property: TeradataParameters
@@ -3170,10 +3438,18 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"error_info": {
 			// Property: ErrorInfo
@@ -3209,11 +3485,16 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "<p>Error message.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ACCESS_DENIED",
@@ -3226,10 +3507,17 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 								"UNKNOWN",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"last_updated_time": {
 			// Property: LastUpdatedTime
@@ -3258,8 +3546,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "<p>A display name for the data source.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"permissions": {
@@ -3320,8 +3612,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 64),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"ssl_properties": {
@@ -3345,10 +3641,18 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "<p>A Boolean option to control whether SSL should be disabled.</p>",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -3426,8 +3730,12 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type": {
@@ -3526,6 +3834,10 @@ func dataSourceResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
