@@ -271,6 +271,10 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 						// Property: BackgroundColor
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"body_config": {
 						// Property: BodyConfig
@@ -280,6 +284,7 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 									// Property: Alignment
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"LEFT",
@@ -287,20 +292,35 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 											"RIGHT",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"body": {
 									// Property: Body
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"text_color": {
 									// Property: TextColor
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"header_config": {
 						// Property: HeaderConfig
@@ -310,6 +330,7 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 									// Property: Alignment
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"LEFT",
@@ -317,25 +338,44 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 											"RIGHT",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"header": {
 									// Property: Header
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"text_color": {
 									// Property: TextColor
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"image_url": {
 						// Property: ImageUrl
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"primary_btn": {
 						// Property: PrimaryBtn
@@ -349,6 +389,7 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 												// Property: ButtonAction
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"LINK",
@@ -356,15 +397,26 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 														"CLOSE",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"link": {
 												// Property: Link
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"default_config": {
 									// Property: DefaultConfig
@@ -374,16 +426,25 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 												// Property: BackgroundColor
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"border_radius": {
 												// Property: BorderRadius
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"button_action": {
 												// Property: ButtonAction
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"LINK",
@@ -391,25 +452,44 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 														"CLOSE",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"link": {
 												// Property: Link
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"text": {
 												// Property: Text
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"text_color": {
 												// Property: TextColor
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ios": {
 									// Property: IOS
@@ -419,6 +499,7 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 												// Property: ButtonAction
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"LINK",
@@ -426,15 +507,26 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 														"CLOSE",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"link": {
 												// Property: Link
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"web": {
 									// Property: Web
@@ -444,6 +536,7 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 												// Property: ButtonAction
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"LINK",
@@ -451,19 +544,34 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 														"CLOSE",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"link": {
 												// Property: Link
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"secondary_btn": {
 						// Property: SecondaryBtn
@@ -477,6 +585,7 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 												// Property: ButtonAction
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"LINK",
@@ -484,15 +593,26 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 														"CLOSE",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"link": {
 												// Property: Link
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"default_config": {
 									// Property: DefaultConfig
@@ -502,16 +622,25 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 												// Property: BackgroundColor
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"border_radius": {
 												// Property: BorderRadius
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"button_action": {
 												// Property: ButtonAction
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"LINK",
@@ -519,25 +648,44 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 														"CLOSE",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"link": {
 												// Property: Link
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"text": {
 												// Property: Text
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"text_color": {
 												// Property: TextColor
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ios": {
 									// Property: IOS
@@ -547,6 +695,7 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 												// Property: ButtonAction
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"LINK",
@@ -554,15 +703,26 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 														"CLOSE",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"link": {
 												// Property: Link
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"web": {
 									// Property: Web
@@ -572,6 +732,7 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 												// Property: ButtonAction
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"LINK",
@@ -579,23 +740,42 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 														"CLOSE",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"link": {
 												// Property: Link
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"custom_config": {
 			// Property: CustomConfig
@@ -605,6 +785,10 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 			// }
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"layout": {
 			// Property: Layout
@@ -622,6 +806,7 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"BOTTOM_BANNER",
@@ -632,6 +817,9 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 					"CAROUSEL",
 				}),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -641,6 +829,10 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 			// }
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"template_description": {
 			// Property: TemplateDescription
@@ -650,6 +842,10 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"template_name": {
 			// Property: TemplateName
