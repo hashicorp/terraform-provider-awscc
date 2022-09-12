@@ -118,18 +118,27 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "If you set this to true, the RUM web client sets two cookies, a session cookie and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"enable_x_ray": {
 						// Property: EnableXRay
 						Description: "If you set this to true, RUM enables xray tracing for the user sessions that RUM samples. RUM adds an xray trace header to allowed HTTP requests. It also records an xray segment for allowed HTTP requests. You can see traces and segments from these user sessions in the xray console and the CW ServiceLens console.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"excluded_pages": {
 						// Property: ExcludedPages
 						Description: "A list of URLs in your website or application to exclude from RUM data collection. You can't include both ExcludedPages and IncludedPages in the same operation.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 50),
 							validate.ArrayForEach(validate.StringLenBetween(1, 1260)),
@@ -137,6 +146,7 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"favorite_pages": {
@@ -144,11 +154,13 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "A list of pages in the RUM console that are to be displayed with a favorite icon.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 50),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"guest_role_arn": {
@@ -156,8 +168,12 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The ARN of the guest IAM role that is attached to the identity pool that is used to authorize the sending of data to RUM.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("arn:[^:]*:[^:]*:[^:]*:[^:]*:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"identity_pool_id": {
@@ -165,9 +181,13 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The ID of the identity pool that is used to authorize the sending of data to RUM.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 55),
 							validate.StringMatch(regexp.MustCompile("[\\w-]+:[0-9a-f-]+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"included_pages": {
@@ -175,6 +195,7 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "If this app monitor is to collect data from only certain pages in your application, this structure lists those pages. You can't include both ExcludedPages and IncludedPages in the same operation.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 50),
 							validate.ArrayForEach(validate.StringLenBetween(1, 1260)),
@@ -182,6 +203,7 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"session_sample_rate": {
@@ -189,8 +211,12 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. If you omit this parameter, the default of 10 is used.",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(0.000000, 1.000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"telemetries": {
@@ -198,6 +224,7 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "An array that lists the types of telemetry data that this app monitor is to collect.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringInSlice([]string{
 								"errors",
@@ -207,11 +234,16 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"cw_log_enabled": {
 			// Property: CwLogEnabled
@@ -223,6 +255,10 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to CWLlong in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur CWLlong charges. If you omit this parameter, the default is false",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"domain": {
 			// Property: Domain
@@ -319,6 +355,10 @@ func appMonitorResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
