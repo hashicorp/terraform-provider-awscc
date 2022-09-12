@@ -172,6 +172,7 @@ func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"AUTOMATIC",
@@ -179,6 +180,9 @@ func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, e
 														"NFS4_0",
 														"NFS4_1",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -188,6 +192,10 @@ func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, e
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"smb": {
 						// Property: SMB
@@ -199,9 +207,13 @@ func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, e
 									Description: "The name of the Windows domain that the SMB server belongs to.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(253),
 										validate.StringMatch(regexp.MustCompile("^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"mount_options": {
@@ -214,12 +226,16 @@ func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The specific SMB version that you want DataSync to use to mount your SMB share.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"AUTOMATIC",
 														"SMB2",
 														"SMB3",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -249,6 +265,10 @@ func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, e
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -390,8 +410,12 @@ func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

@@ -84,8 +84,12 @@ func locationHDFSResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "Size of chunks (blocks) in bytes that the data is divided into when stored in the HDFS cluster.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1048576, 1073741824),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"kerberos_keytab": {
@@ -98,6 +102,10 @@ func locationHDFSResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The Base64 string representation of the Keytab file.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// KerberosKeytab is a write-only property.
 		},
 		"kerberos_krb_5_conf": {
@@ -110,6 +118,10 @@ func locationHDFSResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// KerberosKrb5Conf is a write-only property.
 		},
 		"kerberos_principal": {
@@ -125,9 +137,13 @@ func locationHDFSResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The unique identity, or principal, to which Kerberos can assign tickets.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 				validate.StringMatch(regexp.MustCompile("^.+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"kms_key_provider_uri": {
@@ -143,9 +159,13 @@ func locationHDFSResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The identifier for the Key Management Server where the encryption keys that encrypt data inside HDFS clusters are stored.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 				validate.StringMatch(regexp.MustCompile("^kms:\\/\\/http[s]?@(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])(;(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9]))*:[0-9]{1,5}\\/kms$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"location_arn": {
@@ -320,6 +340,10 @@ func locationHDFSResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"replication_factor": {
 			// Property: ReplicationFactor
@@ -357,9 +381,13 @@ func locationHDFSResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The user name that has read and write permissions on the specified HDFS cluster.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 				validate.StringMatch(regexp.MustCompile("^[_.A-Za-z0-9][-_.A-Za-z0-9]*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"subdirectory": {
@@ -374,9 +402,13 @@ func locationHDFSResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The subdirectory in HDFS that is used to read data from the HDFS source location or write data to the HDFS destination.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(4096),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -437,8 +469,12 @@ func locationHDFSResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

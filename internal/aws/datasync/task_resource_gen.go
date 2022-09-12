@@ -35,9 +35,13 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(562),
 				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"destination_location_arn": {
@@ -147,6 +151,7 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
 							validate.StringMatch(regexp.MustCompile("^[A-Z0-9_]+$"), ""),
@@ -154,25 +159,34 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"SIMPLE_PATTERN",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(409600),
 							validate.StringMatch(regexp.MustCompile("^[^\\x00]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"includes": {
@@ -213,6 +227,7 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
 							validate.StringMatch(regexp.MustCompile("^[A-Z0-9_]+$"), ""),
@@ -220,25 +235,34 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"SIMPLE_PATTERN",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(409600),
 							validate.StringMatch(regexp.MustCompile("^[^\\x00]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -254,9 +278,13 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The name of a task. This value is a text reference that is used to identify the task in the console.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"options": {
@@ -402,11 +430,15 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
 								"BEST_EFFORT",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"bytes_per_second": {
@@ -414,8 +446,12 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A value that limits the bandwidth used by AWS DataSync.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(-1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"gid": {
@@ -423,6 +459,7 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The group ID (GID) of the file's owners.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
@@ -430,6 +467,9 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"NAME",
 								"BOTH",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"log_level": {
@@ -437,6 +477,7 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"OFF",
@@ -444,17 +485,24 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"TRANSFER",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"mtime": {
 						// Property: Mtime
 						Description: "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
 								"PRESERVE",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"object_tags": {
@@ -462,11 +510,15 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"PRESERVE",
 								"NONE",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"overwrite_mode": {
@@ -474,11 +526,15 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ALWAYS",
 								"NEVER",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"posix_permissions": {
@@ -486,11 +542,15 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
 								"PRESERVE",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"preserve_deleted_files": {
@@ -498,11 +558,15 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"PRESERVE",
 								"REMOVE",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"preserve_devices": {
@@ -510,11 +574,15 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
 								"PRESERVE",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"security_descriptor_copy_flags": {
@@ -522,6 +590,7 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A value that determines which components of the SMB security descriptor are copied during transfer.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
@@ -529,17 +598,24 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"OWNER_DACL_SACL",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"task_queueing": {
 						// Property: TaskQueueing
 						Description: "A value that determines whether tasks should be queued before executing the tasks.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ENABLED",
 								"DISABLED",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"transfer_mode": {
@@ -547,11 +623,15 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"CHANGED",
 								"ALL",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"uid": {
@@ -559,6 +639,7 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The user ID (UID) of the file's owner.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NONE",
@@ -567,12 +648,16 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"BOTH",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"verify_mode": {
 						// Property: VerifyMode
 						Description: "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"POINT_IN_TIME_CONSISTENT",
@@ -580,10 +665,17 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"NONE",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"schedule": {
 			// Property: Schedule
@@ -620,6 +712,10 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"source_location_arn": {
 			// Property: SourceLocationArn
@@ -744,8 +840,12 @@ func taskResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"task_arn": {

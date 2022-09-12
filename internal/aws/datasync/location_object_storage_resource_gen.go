@@ -36,9 +36,13 @@ func locationObjectStorageResourceType(ctx context.Context) (provider.ResourceTy
 			Description: "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(8, 200),
 				validate.StringMatch(regexp.MustCompile("^.+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"agent_arns": {
@@ -135,9 +139,13 @@ func locationObjectStorageResourceType(ctx context.Context) (provider.ResourceTy
 			Description: "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(8, 200),
 				validate.StringMatch(regexp.MustCompile("^.+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// SecretKey is a write-only property.
 		},
@@ -174,8 +182,12 @@ func locationObjectStorageResourceType(ctx context.Context) (provider.ResourceTy
 			Description: "The port that your self-managed server accepts inbound network traffic on.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 65536),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"server_protocol": {
@@ -192,11 +204,15 @@ func locationObjectStorageResourceType(ctx context.Context) (provider.ResourceTy
 			Description: "The protocol that the object storage server uses to communicate.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"HTTPS",
 					"HTTP",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"subdirectory": {
@@ -211,9 +227,13 @@ func locationObjectStorageResourceType(ctx context.Context) (provider.ResourceTy
 			Description: "The subdirectory in the self-managed object storage server that is used to read data from.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(4096),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -278,8 +298,12 @@ func locationObjectStorageResourceType(ctx context.Context) (provider.ResourceTy
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

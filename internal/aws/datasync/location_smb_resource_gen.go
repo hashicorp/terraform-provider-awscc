@@ -63,9 +63,13 @@ func locationSMBResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The name of the Windows domain that the SMB server belongs to.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(253),
 				validate.StringMatch(regexp.MustCompile("^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"location_arn": {
@@ -130,12 +134,16 @@ func locationSMBResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The specific SMB version that you want DataSync to use to mount your SMB share.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"AUTOMATIC",
 								"SMB2",
 								"SMB3",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -273,8 +281,12 @@ func locationSMBResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"user": {
