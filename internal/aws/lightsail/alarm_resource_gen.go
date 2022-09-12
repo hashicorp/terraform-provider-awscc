@@ -79,6 +79,10 @@ func alarmResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"datapoints_to_alarm": {
 			// Property: DatapointsToAlarm
@@ -90,6 +94,10 @@ func alarmResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"evaluation_periods": {
 			// Property: EvaluationPeriods
@@ -140,6 +148,10 @@ func alarmResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"notification_triggers": {
 			// Property: NotificationTriggers
@@ -156,6 +168,10 @@ func alarmResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The alarm states that trigger a notification.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"state": {
 			// Property: State
@@ -192,6 +208,10 @@ func alarmResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Sets how this alarm will handle missing data points.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

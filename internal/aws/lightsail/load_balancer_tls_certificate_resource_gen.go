@@ -82,6 +82,10 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (provider.Resou
 			Description: "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"is_attached": {
 			// Property: IsAttached
@@ -93,6 +97,10 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (provider.Resou
 			Description: "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"load_balancer_name": {
 			// Property: LoadBalancerName

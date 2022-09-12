@@ -38,6 +38,10 @@ func loadBalancerResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The names of the instances attached to the load balancer.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"health_check_path": {
 			// Property: HealthCheckPath
@@ -49,6 +53,10 @@ func loadBalancerResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., \"/\").",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"instance_port": {
 			// Property: InstancePort
@@ -120,6 +128,10 @@ func loadBalancerResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "Configuration option to enable session stickiness.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"session_stickiness_lb_cookie_duration_seconds": {
 			// Property: SessionStickinessLBCookieDurationSeconds
@@ -131,6 +143,10 @@ func loadBalancerResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "Configuration option to adjust session stickiness cookie duration parameter.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -180,13 +196,21 @@ func loadBalancerResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tls_policy_name": {
 			// Property: TlsPolicyName
@@ -198,6 +222,10 @@ func loadBalancerResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The name of the TLS policy to apply to the load balancer.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

@@ -149,18 +149,30 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The HTTP methods that are processed and forwarded to the distribution's origin.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cached_http_methods": {
 						// Property: CachedHTTPMethods
 						Description: "The HTTP method responses that are cached by your distribution.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"default_ttl": {
 						// Property: DefaultTTL
 						Description: "The default amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the content has been updated.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"forwarded_cookies": {
 						// Property: ForwardedCookies
@@ -172,16 +184,28 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The specific cookies to forward to your distribution's origin.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"option": {
 									// Property: Option
 									Description: "Specifies which cookies to forward to the distribution's origin for a cache behavior: all, none, or allow-list to forward only the cookies specified in the cookiesAllowList parameter.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"forwarded_headers": {
 						// Property: ForwardedHeaders
@@ -193,16 +217,28 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The specific headers to forward to your distribution's origin.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"option": {
 									// Property: Option
 									Description: "The headers that you want your distribution to forward to your origin and base caching on.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"forwarded_query_strings": {
 						// Property: ForwardedQueryStrings
@@ -214,32 +250,56 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "Indicates whether the distribution forwards and caches based on query strings.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"query_strings_allow_list": {
 									// Property: QueryStringsAllowList
 									Description: "The specific query strings that the distribution forwards to the origin.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"maximum_ttl": {
 						// Property: MaximumTTL
 						Description: "The maximum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"minimum_ttl": {
 						// Property: MinimumTTL
 						Description: "The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"cache_behaviors": {
 			// Property: CacheBehaviors
@@ -273,16 +333,28 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The cache behavior for the specified path.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"path": {
 						// Property: Path
 						Description: "The path to a directory or file to cached, or not cache. Use an asterisk symbol to specify wildcard directories (path/to/assets/*), and file types (*.html, *jpg, *js). Directories and file paths are case-sensitive.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"certificate_name": {
 			// Property: CertificateName
@@ -294,6 +366,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The certificate attached to the Distribution.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"default_cache_behavior": {
 			// Property: DefaultCacheBehavior
@@ -317,6 +393,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The cache behavior of the distribution.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -378,6 +458,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "Indicates whether the distribution is enabled.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"origin": {
 			// Property: Origin
@@ -409,18 +493,30 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The name of the origin resource.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"protocol_policy": {
 						// Property: ProtocolPolicy
 						Description: "The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"region_name": {
 						// Property: RegionName
 						Description: "The AWS Region name of the origin resource.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -488,13 +584,21 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

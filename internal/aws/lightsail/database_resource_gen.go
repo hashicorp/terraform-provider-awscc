@@ -54,6 +54,10 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "When true, enables automated backup retention for your database. Updates are applied during the next maintenance window because this can result in an outage.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ca_certificate_identifier": {
 			// Property: CaCertificateIdentifier
@@ -65,6 +69,10 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Indicates the certificate that needs to be associated with the database.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"database_arn": {
 			// Property: DatabaseArn
@@ -109,8 +117,12 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The password for the master user. The password can include any printable ASCII character except \"/\", \"\"\", or \"@\". It cannot contain spaces.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// MasterUserPassword is a write-only property.
 		},
@@ -143,6 +155,10 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The daily time range during which automated backups are created for your new database if automated backups are enabled.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"preferred_maintenance_window": {
 			// Property: PreferredMaintenanceWindow
@@ -154,6 +170,10 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The weekly time range during which system maintenance can occur on your new database.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"publicly_accessible": {
 			// Property: PubliclyAccessible
@@ -165,6 +185,10 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies the accessibility options for your new database. A value of true specifies a database that is available to resources outside of your Lightsail account. A value of false specifies a database that is available only to your Lightsail resources in the same region as your database.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"relational_database_blueprint_id": {
 			// Property: RelationalDatabaseBlueprintId
@@ -281,52 +305,88 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Specifies the valid range of values for the parameter.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"apply_method": {
 						// Property: ApplyMethod
 						Description: "Indicates when parameter updates are applied. Can be immediate or pending-reboot.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"apply_type": {
 						// Property: ApplyType
 						Description: "Specifies the engine-specific parameter type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"data_type": {
 						// Property: DataType
 						Description: "Specifies the valid data type for the parameter.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
 						Description: "Provides a description of the parameter.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"is_modifiable": {
 						// Property: IsModifiable
 						Description: "A Boolean value indicating whether the parameter can be modified.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"parameter_name": {
 						// Property: ParameterName
 						Description: "Specifies the name of the parameter.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"parameter_value": {
 						// Property: ParameterValue
 						Description: "Specifies the value of the parameter.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// RelationalDatabaseParameters is a write-only property.
 		},
 		"rotate_master_user_password": {
@@ -339,6 +399,10 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "When true, the master user password is changed to a new strong password generated by Lightsail. Use the get relational database master user password operation to get the new password.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// RotateMasterUserPassword is a write-only property.
 		},
 		"tags": {
@@ -389,13 +453,21 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

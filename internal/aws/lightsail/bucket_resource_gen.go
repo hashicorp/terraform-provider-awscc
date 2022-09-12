@@ -63,16 +63,28 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A Boolean value that indicates whether the access control list (ACL) permissions that are applied to individual objects override the getObject option that is currently specified.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"get_object": {
 						// Property: GetObject
 						Description: "Specifies the anonymous access to all objects in a bucket.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"bucket_arn": {
 			// Property: BucketArn
@@ -128,6 +140,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies whether to enable or disable versioning of objects in the bucket.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"read_only_access_accounts": {
 			// Property: ReadOnlyAccessAccounts
@@ -144,6 +160,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "An array of strings to specify the AWS account IDs that can access the bucket.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"resources_receiving_access": {
 			// Property: ResourcesReceivingAccess
@@ -160,6 +180,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The names of the Lightsail resources for which to set bucket access.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -209,13 +233,21 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"url": {
 			// Property: Url
