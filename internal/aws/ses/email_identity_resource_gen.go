@@ -45,10 +45,18 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"dkim_attributes": {
 			// Property: DkimAttributes
@@ -72,10 +80,18 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "Sets the DKIM signing configuration for the identity. When you set this value true, then the messages that are sent from the identity are signed using DKIM. If you set this value to false, your messages are sent without DKIM signing.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"dkim_dns_token_name_1": {
 			// Property: DkimDNSTokenName1
@@ -180,25 +196,41 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "[Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"domain_signing_selector": {
 						// Property: DomainSigningSelector
 						Description: "[Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"next_signing_key_length": {
 						// Property: NextSigningKeyLength
 						Description: "[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("RSA_1024_BIT|RSA_2048_BIT"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// DkimSigningAttributes is a write-only property.
 		},
 		"email_identity": {
@@ -237,10 +269,18 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "If the value is true, you receive email notifications when bounce or complaint events occur",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"mail_from_attributes": {
 			// Property: MailFromAttributes
@@ -269,8 +309,12 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "The action to take if the required MX record isn't found when you send an email. When you set this value to UseDefaultValue , the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage , the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("USE_DEFAULT_VALUE|REJECT_MESSAGE"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"mail_from_domain": {
@@ -278,10 +322,18 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "The custom MAIL FROM domain that you want the verified identity to use",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
