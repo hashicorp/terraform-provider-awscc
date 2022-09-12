@@ -48,8 +48,12 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Frequency of data collection. This parameter is required for RELATED_TIME_SERIES",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^Y|M|W|D|H|30min|15min|10min|5min|1min$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dataset_name": {
@@ -155,9 +159,13 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "KMS key used to encrypt the Dataset data",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
 							validate.StringMatch(regexp.MustCompile("arn:aws[-a-z]*:kms:.*:key/.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"role_arn": {
@@ -165,14 +173,22 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS key.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"schema": {
 			// Property: Schema
@@ -222,8 +238,12 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Name of the dataset field",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"attribute_type": {
@@ -231,6 +251,7 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Data type of the field",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"string",
@@ -240,12 +261,19 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 											"geolocation",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -307,8 +335,12 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

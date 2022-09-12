@@ -39,9 +39,13 @@ func datasetGroupResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "An array of Amazon Resource Names (ARNs) of the datasets that you want to include in the dataset group.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenAtMost(256)),
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$"), "")),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dataset_group_arn": {
@@ -169,8 +173,12 @@ func datasetGroupResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
