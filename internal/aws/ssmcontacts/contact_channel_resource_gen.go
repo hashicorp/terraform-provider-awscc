@@ -47,6 +47,10 @@ func contactChannelResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The details that SSM Incident Manager uses when trying to engage the contact channel.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"channel_name": {
 			// Property: ChannelName
@@ -61,8 +65,12 @@ func contactChannelResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"channel_type": {
@@ -126,6 +134,10 @@ func contactChannelResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
