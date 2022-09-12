@@ -50,8 +50,12 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A text description of the repository.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"domain_name": {
@@ -104,6 +108,10 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A list of external connections associated with the repository.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -134,6 +142,10 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The access control resource policy on the provided repository.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"repository_name": {
 			// Property: RepositoryName
@@ -210,6 +222,10 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"upstreams": {
 			// Property: Upstreams
@@ -224,6 +240,10 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A list of upstream repositories associated with the repository.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
