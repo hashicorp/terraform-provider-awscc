@@ -38,12 +38,16 @@ func resiliencyPolicyResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "Data Location Constraint of the Policy.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"AnyLocation",
 					"SameContinent",
 					"SameCountry",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"policy": {
@@ -82,12 +86,20 @@ func resiliencyPolicyResourceType(ctx context.Context) (provider.ResourceType, e
 						Description: "RPO in seconds.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"rto_in_secs": {
 						// Property: RtoInSecs
 						Description: "RTO in seconds.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -119,8 +131,12 @@ func resiliencyPolicyResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "Description of Resiliency Policy.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(500),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"policy_name": {
@@ -154,6 +170,10 @@ func resiliencyPolicyResourceType(ctx context.Context) (provider.ResourceType, e
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tier": {
 			// Property: Tier

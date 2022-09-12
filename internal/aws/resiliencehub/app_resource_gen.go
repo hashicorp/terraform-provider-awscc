@@ -52,11 +52,15 @@ func appResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Assessment execution schedule.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"Disabled",
 					"Daily",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"app_template_body": {
@@ -89,8 +93,12 @@ func appResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "App description.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 500),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -122,6 +130,10 @@ func appResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"resource_mappings": {
 			// Property: ResourceMappings
@@ -191,6 +203,10 @@ func appResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: LogicalStackName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"mapping_type": {
 						// Property: MappingType
@@ -208,16 +224,24 @@ func appResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: AwsAccountId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"aws_region": {
 									// Property: AwsRegion
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^[a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"identifier": {
@@ -244,14 +268,22 @@ func appResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: ResourceName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"terraform_source_name": {
 						// Property: TerraformSourceName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -276,6 +308,10 @@ func appResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
