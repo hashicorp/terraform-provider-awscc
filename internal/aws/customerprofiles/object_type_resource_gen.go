@@ -33,6 +33,10 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "Indicates whether a profile should be created when data is received.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"created_at": {
 			// Property: CreatedAt
@@ -60,8 +64,12 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "Description of the profile object type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"domain_name": {
@@ -97,8 +105,12 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The default encryption key",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"expiration_days": {
@@ -113,8 +125,12 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The default number of days until the data within the domain expires.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 1098),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"fields": {
@@ -174,9 +190,13 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: Name
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"object_type_field": {
@@ -189,6 +209,7 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The content type of the field. Used for determining equality when searching.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"STRING",
@@ -198,14 +219,21 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 											"NAME",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source": {
 									// Property: Source
 									Description: "A field of a ProfileObject. For example: _source.FirstName, where \"_source\" is a ProfileObjectType of a Zendesk user and \"FirstName\" is a field in that ObjectType.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"target": {
@@ -213,19 +241,29 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The location of the data in the standard ProfileObject model. For example: _profile.Address.PostalCode.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"keys": {
@@ -290,9 +328,13 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: Name
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"object_type_key_list": {
@@ -304,9 +346,13 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The reference for the key name of the fields map. ",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayForEach(validate.StringLenBetween(1, 64)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"standard_identifiers": {
@@ -314,6 +360,7 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayForEach(validate.StringInSlice([]string{
 											"PROFILE",
@@ -323,19 +370,26 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 											"NEW_ONLY",
 										})),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"last_updated_at": {
@@ -427,8 +481,12 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"template_id": {
@@ -444,9 +502,13 @@ func objectTypeResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A unique identifier for the object template.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

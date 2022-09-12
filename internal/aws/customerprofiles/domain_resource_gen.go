@@ -49,8 +49,12 @@ func domainResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The URL of the SQS dead letter queue",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"default_encryption_key": {
@@ -65,8 +69,12 @@ func domainResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The default encryption key",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"default_expiration_days": {
@@ -81,8 +89,12 @@ func domainResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The default number of days until the data within the domain expires.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 1098),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"domain_name": {
@@ -172,8 +184,12 @@ func domainResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
