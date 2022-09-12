@@ -71,9 +71,13 @@ func domainResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("(?s).+"), "")),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"auto_sub_domain_iam_role": {
@@ -86,9 +90,13 @@ func domainResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
 				validate.StringMatch(regexp.MustCompile("^$|^arn:.+:iam::\\d{12}:role.+"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"certificate_record": {
@@ -141,6 +149,10 @@ func domainResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"status_reason": {
 			// Property: StatusReason
