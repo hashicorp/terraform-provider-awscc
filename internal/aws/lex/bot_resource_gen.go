@@ -48,6 +48,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies whether to build the bot locales after bot creation completes.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// AutoBuildBotLocales is a write-only property.
 		},
 		"bot_file_s3_location": {
@@ -112,13 +116,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1024),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// BotFileS3Location is a write-only property.
 		},
 		"bot_locales": {
@@ -4007,8 +4019,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The degree to which the phrase recognition is boosted.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 3),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -4021,14 +4037,22 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
 						Description: "A description of the resource",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(200),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"intents": {
@@ -4041,8 +4065,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "A description of the resource",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(200),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"dialog_code_hook": {
@@ -4058,6 +4086,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"fulfillment_code_hook": {
 									// Property: FulfillmentCodeHook
@@ -4090,6 +4122,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "Determines whether the user can interrupt the start message while it is playing.",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"delay_in_seconds": {
 																		// Property: DelayInSeconds
@@ -4127,6 +4163,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -4159,11 +4199,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -4171,8 +4213,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -4180,8 +4226,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -4196,6 +4246,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -4214,6 +4268,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -4232,6 +4290,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
@@ -4259,6 +4321,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -4291,11 +4357,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -4303,8 +4371,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -4312,8 +4384,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -4328,6 +4404,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -4346,6 +4426,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -4364,15 +4448,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.ArrayLenAtMost(2),
 																					},
 																					PlanModifiers: []tfsdk.AttributePlanModifier{
 																						Multiset(),
+																						resource.UseStateForUnknown(),
 																					},
 																				},
 																			},
@@ -4388,14 +4478,22 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"timeout_in_seconds": {
 															// Property: TimeoutInSeconds
 															Description: "The length of time that the fulfillment Lambda function should run before it times out.",
 															Type:        types.Int64Type,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntBetween(1, 900),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"update_response": {
@@ -4408,6 +4506,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "Determines whether the user can interrupt an update message while it is playing.",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"frequency_in_seconds": {
 																		// Property: FrequencyInSeconds
@@ -4445,6 +4547,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -4477,11 +4583,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -4489,8 +4597,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -4498,8 +4610,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -4514,6 +4630,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -4532,6 +4652,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -4550,6 +4674,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
@@ -4577,6 +4705,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -4609,11 +4741,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -4621,8 +4755,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -4630,8 +4768,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -4646,6 +4788,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -4664,6 +4810,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -4682,15 +4832,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.ArrayLenAtMost(2),
 																					},
 																					PlanModifiers: []tfsdk.AttributePlanModifier{
 																						Multiset(),
+																						resource.UseStateForUnknown(),
 																					},
 																				},
 																			},
@@ -4706,10 +4862,18 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"post_fulfillment_status_specification": {
 												// Property: PostFulfillmentStatusSpecification
@@ -4726,6 +4890,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"message_groups_list": {
 																		// Property: MessageGroupsList
@@ -4754,6 +4922,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -4786,11 +4958,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -4798,8 +4972,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -4807,8 +4985,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -4823,6 +5005,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -4841,6 +5027,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -4859,6 +5049,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
@@ -4886,6 +5080,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -4918,11 +5116,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -4930,8 +5130,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -4939,8 +5143,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -4955,6 +5163,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -4973,6 +5185,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -4991,15 +5207,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.ArrayLenAtMost(2),
 																					},
 																					PlanModifiers: []tfsdk.AttributePlanModifier{
 																						Multiset(),
+																						resource.UseStateForUnknown(),
 																					},
 																				},
 																			},
@@ -5015,6 +5237,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"success_response": {
 															// Property: SuccessResponse
@@ -5026,6 +5252,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"message_groups_list": {
 																		// Property: MessageGroupsList
@@ -5054,6 +5284,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -5086,11 +5320,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -5098,8 +5334,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -5107,8 +5347,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -5123,6 +5367,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -5141,6 +5389,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -5159,6 +5411,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
@@ -5186,6 +5442,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -5218,11 +5478,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -5230,8 +5492,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -5239,8 +5505,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -5255,6 +5525,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -5273,6 +5547,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -5291,15 +5569,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.ArrayLenAtMost(2),
 																					},
 																					PlanModifiers: []tfsdk.AttributePlanModifier{
 																						Multiset(),
+																						resource.UseStateForUnknown(),
 																					},
 																				},
 																			},
@@ -5315,6 +5599,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"timeout_response": {
 															// Property: TimeoutResponse
@@ -5326,6 +5614,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"message_groups_list": {
 																		// Property: MessageGroupsList
@@ -5354,6 +5646,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -5386,11 +5682,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -5398,8 +5696,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -5407,8 +5709,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -5423,6 +5729,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -5441,6 +5751,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -5459,6 +5773,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
@@ -5486,6 +5804,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -5518,11 +5840,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -5530,8 +5854,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -5539,8 +5867,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -5555,6 +5887,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -5573,6 +5909,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -5591,15 +5931,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.ArrayLenAtMost(2),
 																					},
 																					PlanModifiers: []tfsdk.AttributePlanModifier{
 																						Multiset(),
+																						resource.UseStateForUnknown(),
 																					},
 																				},
 																			},
@@ -5615,14 +5961,26 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"input_contexts": {
 									// Property: InputContexts
@@ -5642,11 +6000,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(5),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"intent_closing_setting": {
@@ -5664,6 +6024,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 															Type:        types.BoolType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"message_groups_list": {
 															// Property: MessageGroupsList
@@ -5692,6 +6056,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"image_response_card": {
 																					// Property: ImageResponseCard
@@ -5724,11 +6092,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayLenAtMost(5),
 																								},
 																								PlanModifiers: []tfsdk.AttributePlanModifier{
 																									Multiset(),
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"image_url": {
@@ -5736,8 +6106,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The URL of an image to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"subtitle": {
@@ -5745,8 +6119,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The subtitle to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"title": {
@@ -5761,6 +6139,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"plain_text_message": {
 																					// Property: PlainTextMessage
@@ -5779,6 +6161,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"ssml_message": {
 																					// Property: SSMLMessage
@@ -5797,6 +6183,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
@@ -5824,6 +6214,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"image_response_card": {
 																					// Property: ImageResponseCard
@@ -5856,11 +6250,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayLenAtMost(5),
 																								},
 																								PlanModifiers: []tfsdk.AttributePlanModifier{
 																									Multiset(),
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"image_url": {
@@ -5868,8 +6264,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The URL of an image to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"subtitle": {
@@ -5877,8 +6277,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The subtitle to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"title": {
@@ -5893,6 +6297,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"plain_text_message": {
 																					// Property: PlainTextMessage
@@ -5911,6 +6319,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"ssml_message": {
 																					// Property: SSMLMessage
@@ -5929,15 +6341,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.ArrayLenAtMost(2),
 																		},
 																		PlanModifiers: []tfsdk.AttributePlanModifier{
 																			Multiset(),
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																},
@@ -5958,10 +6376,18 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: IsActive
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"intent_confirmation_setting": {
 									// Property: IntentConfirmationSetting
@@ -5978,6 +6404,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 															Type:        types.BoolType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"message_groups_list": {
 															// Property: MessageGroupsList
@@ -6006,6 +6436,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"image_response_card": {
 																					// Property: ImageResponseCard
@@ -6038,11 +6472,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayLenAtMost(5),
 																								},
 																								PlanModifiers: []tfsdk.AttributePlanModifier{
 																									Multiset(),
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"image_url": {
@@ -6050,8 +6486,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The URL of an image to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"subtitle": {
@@ -6059,8 +6499,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The subtitle to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"title": {
@@ -6075,6 +6519,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"plain_text_message": {
 																					// Property: PlainTextMessage
@@ -6093,6 +6541,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"ssml_message": {
 																					// Property: SSMLMessage
@@ -6111,6 +6563,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
@@ -6138,6 +6594,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"image_response_card": {
 																					// Property: ImageResponseCard
@@ -6170,11 +6630,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayLenAtMost(5),
 																								},
 																								PlanModifiers: []tfsdk.AttributePlanModifier{
 																									Multiset(),
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"image_url": {
@@ -6182,8 +6644,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The URL of an image to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"subtitle": {
@@ -6191,8 +6657,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The subtitle to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"title": {
@@ -6207,6 +6677,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"plain_text_message": {
 																					// Property: PlainTextMessage
@@ -6225,6 +6699,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"ssml_message": {
 																					// Property: SSMLMessage
@@ -6243,15 +6721,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.ArrayLenAtMost(2),
 																		},
 																		PlanModifiers: []tfsdk.AttributePlanModifier{
 																			Multiset(),
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																},
@@ -6272,6 +6756,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: IsActive
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"prompt_specification": {
 												// Property: PromptSpecification
@@ -6283,6 +6771,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 															Type:        types.BoolType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"max_retries": {
 															// Property: MaxRetries
@@ -6320,6 +6812,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"image_response_card": {
 																					// Property: ImageResponseCard
@@ -6352,11 +6848,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayLenAtMost(5),
 																								},
 																								PlanModifiers: []tfsdk.AttributePlanModifier{
 																									Multiset(),
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"image_url": {
@@ -6364,8 +6862,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The URL of an image to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"subtitle": {
@@ -6373,8 +6875,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The subtitle to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"title": {
@@ -6389,6 +6895,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"plain_text_message": {
 																					// Property: PlainTextMessage
@@ -6407,6 +6917,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"ssml_message": {
 																					// Property: SSMLMessage
@@ -6425,6 +6939,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
@@ -6452,6 +6970,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"image_response_card": {
 																					// Property: ImageResponseCard
@@ -6484,11 +7006,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayLenAtMost(5),
 																								},
 																								PlanModifiers: []tfsdk.AttributePlanModifier{
 																									Multiset(),
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"image_url": {
@@ -6496,8 +7020,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The URL of an image to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"subtitle": {
@@ -6505,8 +7033,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								Description: "The subtitle to display on the response card.",
 																								Type:        types.StringType,
 																								Optional:    true,
+																								Computed:    true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 250),
+																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																							"title": {
@@ -6521,6 +7053,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"plain_text_message": {
 																					// Property: PlainTextMessage
@@ -6539,6 +7075,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"ssml_message": {
 																					// Property: SSMLMessage
@@ -6557,15 +7097,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.ArrayLenAtMost(2),
 																		},
 																		PlanModifiers: []tfsdk.AttributePlanModifier{
 																			Multiset(),
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																},
@@ -6583,11 +7129,15 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "Indicates how a message is selected from a message group among retries.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"Random",
 																	"Ordered",
 																}),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
@@ -6597,6 +7147,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"kendra_configuration": {
 									// Property: KendraConfiguration
@@ -6618,8 +7172,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 5000),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"query_filter_string_enabled": {
@@ -6627,10 +7185,18 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
 												Type:        types.BoolType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"name": {
 									// Property: Name
@@ -6678,11 +7244,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(10),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"parent_intent_signature": {
@@ -6690,6 +7258,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "A unique identifier for the built-in intent to base this intent on.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sample_utterances": {
 									// Property: SampleUtterances
@@ -6705,8 +7277,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"slot_priorities": {
@@ -6736,8 +7310,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"slots": {
@@ -6750,8 +7326,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "A description of the resource",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(200),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"multiple_values_setting": {
@@ -6763,10 +7343,18 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: AllowMultipleValues
 															Type:     types.BoolType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"name": {
 												// Property: Name
@@ -6798,6 +7386,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"slot_type_name": {
 												// Property: SlotTypeName
@@ -6842,6 +7434,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"prompt_specification": {
 															// Property: PromptSpecification
@@ -6853,6 +7449,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"max_retries": {
 																		// Property: MaxRetries
@@ -6890,6 +7490,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -6922,11 +7526,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -6934,8 +7540,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -6943,8 +7553,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -6959,6 +7573,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -6977,6 +7595,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -6995,6 +7617,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
@@ -7022,6 +7648,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"image_response_card": {
 																								// Property: ImageResponseCard
@@ -7054,11 +7684,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.ArrayLenAtMost(5),
 																											},
 																											PlanModifiers: []tfsdk.AttributePlanModifier{
 																												Multiset(),
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"image_url": {
@@ -7066,8 +7698,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The URL of an image to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"subtitle": {
@@ -7075,8 +7711,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																											Description: "The subtitle to display on the response card.",
 																											Type:        types.StringType,
 																											Optional:    true,
+																											Computed:    true,
 																											Validators: []tfsdk.AttributeValidator{
 																												validate.StringLenBetween(1, 250),
+																											},
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
 																											},
 																										},
 																										"title": {
@@ -7091,6 +7731,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"plain_text_message": {
 																								// Property: PlainTextMessage
@@ -7109,6 +7753,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																							"ssml_message": {
 																								// Property: SSMLMessage
@@ -7127,15 +7775,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.ArrayLenAtMost(2),
 																					},
 																					PlanModifiers: []tfsdk.AttributePlanModifier{
 																						Multiset(),
+																						resource.UseStateForUnknown(),
 																					},
 																				},
 																			},
@@ -7153,16 +7807,24 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "Indicates how a message is selected from a message group among retries.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringInSlice([]string{
 																				"Random",
 																				"Ordered",
 																			}),
 																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"sample_utterances": {
 															// Property: SampleUtterances
@@ -7178,8 +7840,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
 																Multiset(),
+																resource.UseStateForUnknown(),
 															},
 														},
 														"slot_constraint": {
@@ -7209,6 +7873,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																					Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																					Type:        types.BoolType,
 																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"message_groups_list": {
 																					// Property: MessageGroupsList
@@ -7237,6 +7905,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"image_response_card": {
 																											// Property: ImageResponseCard
@@ -7269,11 +7941,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																															},
 																														),
 																														Optional: true,
+																														Computed: true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.ArrayLenAtMost(5),
 																														},
 																														PlanModifiers: []tfsdk.AttributePlanModifier{
 																															Multiset(),
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"image_url": {
@@ -7281,8 +7955,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The URL of an image to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"subtitle": {
@@ -7290,8 +7968,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The subtitle to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"title": {
@@ -7306,6 +7988,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"plain_text_message": {
 																											// Property: PlainTextMessage
@@ -7324,6 +8010,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"ssml_message": {
 																											// Property: SSMLMessage
@@ -7342,6 +8032,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																									},
 																								),
@@ -7369,6 +8063,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"image_response_card": {
 																											// Property: ImageResponseCard
@@ -7401,11 +8099,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																															},
 																														),
 																														Optional: true,
+																														Computed: true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.ArrayLenAtMost(5),
 																														},
 																														PlanModifiers: []tfsdk.AttributePlanModifier{
 																															Multiset(),
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"image_url": {
@@ -7413,8 +8113,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The URL of an image to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"subtitle": {
@@ -7422,8 +8126,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The subtitle to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"title": {
@@ -7438,6 +8146,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"plain_text_message": {
 																											// Property: PlainTextMessage
@@ -7456,6 +8168,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"ssml_message": {
 																											// Property: SSMLMessage
@@ -7474,15 +8190,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayLenAtMost(2),
 																								},
 																								PlanModifiers: []tfsdk.AttributePlanModifier{
 																									Multiset(),
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																						},
@@ -7504,6 +8226,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "Specifies whether the bot will wait for a user to respond.",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"still_waiting_response": {
 																		// Property: StillWaitingResponse
@@ -7515,6 +8241,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																					Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																					Type:        types.BoolType,
 																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"frequency_in_seconds": {
 																					// Property: FrequencyInSeconds
@@ -7552,6 +8282,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"image_response_card": {
 																											// Property: ImageResponseCard
@@ -7584,11 +8318,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																															},
 																														),
 																														Optional: true,
+																														Computed: true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.ArrayLenAtMost(5),
 																														},
 																														PlanModifiers: []tfsdk.AttributePlanModifier{
 																															Multiset(),
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"image_url": {
@@ -7596,8 +8332,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The URL of an image to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"subtitle": {
@@ -7605,8 +8345,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The subtitle to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"title": {
@@ -7621,6 +8365,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"plain_text_message": {
 																											// Property: PlainTextMessage
@@ -7639,6 +8387,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"ssml_message": {
 																											// Property: SSMLMessage
@@ -7657,6 +8409,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																									},
 																								),
@@ -7684,6 +8440,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"image_response_card": {
 																											// Property: ImageResponseCard
@@ -7716,11 +8476,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																															},
 																														),
 																														Optional: true,
+																														Computed: true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.ArrayLenAtMost(5),
 																														},
 																														PlanModifiers: []tfsdk.AttributePlanModifier{
 																															Multiset(),
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"image_url": {
@@ -7728,8 +8490,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The URL of an image to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"subtitle": {
@@ -7737,8 +8503,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The subtitle to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"title": {
@@ -7753,6 +8523,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"plain_text_message": {
 																											// Property: PlainTextMessage
@@ -7771,6 +8545,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"ssml_message": {
 																											// Property: SSMLMessage
@@ -7789,15 +8567,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayLenAtMost(2),
 																								},
 																								PlanModifiers: []tfsdk.AttributePlanModifier{
 																									Multiset(),
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																						},
@@ -7822,6 +8606,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																			},
 																		),
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"waiting_response": {
 																		// Property: WaitingResponse
@@ -7833,6 +8621,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																					Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																					Type:        types.BoolType,
 																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"message_groups_list": {
 																					// Property: MessageGroupsList
@@ -7861,6 +8653,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"image_response_card": {
 																											// Property: ImageResponseCard
@@ -7893,11 +8689,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																															},
 																														),
 																														Optional: true,
+																														Computed: true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.ArrayLenAtMost(5),
 																														},
 																														PlanModifiers: []tfsdk.AttributePlanModifier{
 																															Multiset(),
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"image_url": {
@@ -7905,8 +8703,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The URL of an image to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"subtitle": {
@@ -7914,8 +8716,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The subtitle to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"title": {
@@ -7930,6 +8736,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"plain_text_message": {
 																											// Property: PlainTextMessage
@@ -7948,6 +8758,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"ssml_message": {
 																											// Property: SSMLMessage
@@ -7966,6 +8780,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																									},
 																								),
@@ -7993,6 +8811,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"image_response_card": {
 																											// Property: ImageResponseCard
@@ -8025,11 +8847,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																															},
 																														),
 																														Optional: true,
+																														Computed: true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.ArrayLenAtMost(5),
 																														},
 																														PlanModifiers: []tfsdk.AttributePlanModifier{
 																															Multiset(),
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"image_url": {
@@ -8037,8 +8861,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The URL of an image to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"subtitle": {
@@ -8046,8 +8874,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																														Description: "The subtitle to display on the response card.",
 																														Type:        types.StringType,
 																														Optional:    true,
+																														Computed:    true,
 																														Validators: []tfsdk.AttributeValidator{
 																															validate.StringLenBetween(1, 250),
+																														},
+																														PlanModifiers: []tfsdk.AttributePlanModifier{
+																															resource.UseStateForUnknown(),
 																														},
 																													},
 																													"title": {
@@ -8062,6 +8894,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"plain_text_message": {
 																											// Property: PlainTextMessage
@@ -8080,6 +8916,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																										"ssml_message": {
 																											// Property: SSMLMessage
@@ -8098,15 +8938,21 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																												},
 																											),
 																											Optional: true,
+																											Computed: true,
+																											PlanModifiers: []tfsdk.AttributePlanModifier{
+																												resource.UseStateForUnknown(),
+																											},
 																										},
 																									},
 																								),
 																								Optional: true,
+																								Computed: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayLenAtMost(2),
 																								},
 																								PlanModifiers: []tfsdk.AttributePlanModifier{
 																									Multiset(),
+																									resource.UseStateForUnknown(),
 																								},
 																							},
 																						},
@@ -8126,6 +8972,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
@@ -8134,15 +8984,23 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(1000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"locale_id": {
@@ -8170,8 +9028,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "A description of the resource",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(200),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"external_source_setting": {
@@ -8194,9 +9056,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(20, 2048),
 																			validate.StringMatch(regexp.MustCompile("^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"s3_bucket_name": {
@@ -8222,14 +9088,26 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"name": {
 									// Property: Name
@@ -8246,6 +9124,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The built-in slot type used as a parent of this slot type.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"slot_type_values": {
 									// Property: SlotTypeValues
@@ -8287,21 +9169,25 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(10000),
 												},
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													Multiset(),
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(10000),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"value_selection_setting": {
@@ -8319,15 +9205,23 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "Enables using slot values as a custom vocabulary when recognizing user utterances.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"UseSlotValuesAsCustomVocabulary",
 																}),
 															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"regex_filter": {
 												// Property: RegexFilter
@@ -8346,6 +9240,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"resolution_strategy": {
 												// Property: ResolutionStrategy
@@ -8361,12 +9259,20 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"voice_settings": {
@@ -8379,11 +9285,15 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"standard",
 											"neural",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"voice_id": {
@@ -8395,10 +9305,18 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// BotLocales is a write-only property.
 		},
 		"bot_tags": {
@@ -8458,8 +9376,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// BotTags is a write-only property.
 		},
@@ -8504,8 +9426,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description of the resource",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -8849,6 +9775,10 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"enabled": {
 												// Property: Enabled
@@ -8872,8 +9802,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(50),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"conversation_log_settings": {
@@ -8901,9 +9835,13 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(20, 2048),
 																			validate.StringMatch(regexp.MustCompile("^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"log_prefix": {
@@ -8942,8 +9880,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"text_log_settings": {
@@ -8995,21 +9937,33 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
 						Description: "A description of the resource",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(200),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"sentiment_analysis_settings": {
@@ -9026,10 +9980,18 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"test_bot_alias_tags": {
 			// Property: TestBotAliasTags
@@ -9088,8 +10050,12 @@ func botResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// TestBotAliasTags is a write-only property.
 		},

@@ -151,8 +151,12 @@ func botVersionResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A description of the version. Use the description to help identify the version in lists.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
