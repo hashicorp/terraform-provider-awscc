@@ -173,16 +173,28 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 						// Property: AllocationStrategy
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"bid_percentage": {
 						// Property: BidPercentage
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"desiredv_cpus": {
 						// Property: DesiredvCpus
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ec_2_configuration": {
 						// Property: Ec2Configuration
@@ -192,6 +204,10 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 									// Property: ImageIdOverride
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"image_type": {
 									// Property: ImageType
@@ -201,31 +217,47 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ec_2_key_pair": {
 						// Property: Ec2KeyPair
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"image_id": {
 						// Property: ImageId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"instance_role": {
 						// Property: InstanceRole
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"instance_types": {
 						// Property: InstanceTypes
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"launch_template": {
@@ -236,20 +268,36 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 									// Property: LaunchTemplateId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"launch_template_name": {
 									// Property: LaunchTemplateName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"version": {
 									// Property: Version
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"maxv_cpus": {
 						// Property: MaxvCpus
@@ -260,18 +308,28 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 						// Property: MinvCpus
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"placement_group": {
 						// Property: PlacementGroup
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"security_group_ids": {
 						// Property: SecurityGroupIds
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"spot_iam_fleet_role": {
@@ -298,6 +356,10 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"type": {
 						// Property: Type
@@ -318,6 +380,10 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"replace_compute_environment": {
 			// Property: ReplaceComputeEnvironment
@@ -343,6 +409,10 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"state": {
 			// Property: State
@@ -352,6 +422,10 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -396,6 +470,10 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 			// }
 			Type:     types.Int64Type,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"update_policy": {
 			// Property: UpdatePolicy
@@ -439,6 +517,10 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
