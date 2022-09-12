@@ -34,8 +34,12 @@ func hookTypeConfigResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The configuration data for the extension, in this account and region.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("[\\s\\S]+"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"configuration_alias": {
@@ -92,8 +96,12 @@ func hookTypeConfigResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The Amazon Resource Name (ARN) of the type without version number.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type_name": {
@@ -107,8 +115,12 @@ func hookTypeConfigResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

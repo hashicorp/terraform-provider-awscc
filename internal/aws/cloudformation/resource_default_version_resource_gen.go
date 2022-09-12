@@ -49,8 +49,12 @@ func resourceDefaultVersionResourceType(ctx context.Context) (provider.ResourceT
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type_version_arn": {
@@ -64,8 +68,12 @@ func resourceDefaultVersionResourceType(ctx context.Context) (provider.ResourceT
 			Description: "The Amazon Resource Name (ARN) of the type version.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/resource/.+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"version_id": {
@@ -79,8 +87,12 @@ func resourceDefaultVersionResourceType(ctx context.Context) (provider.ResourceT
 			Description: "The ID of an existing version of the resource to set as the default.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9-]{1,128}$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
