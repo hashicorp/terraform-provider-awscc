@@ -48,8 +48,12 @@ func wirelessGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "Description of Wireless Gateway.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -77,6 +81,10 @@ func wirelessGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The date and time when the most recent uplink was received.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"lo_ra_wan": {
 			// Property: LoRaWAN
@@ -134,8 +142,12 @@ func wirelessGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "Name of Wireless Gateway.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -171,23 +183,35 @@ func wirelessGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"thing_arn": {
@@ -200,6 +224,10 @@ func wirelessGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"thing_name": {
 			// Property: ThingName
@@ -211,6 +239,10 @@ func wirelessGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "Thing Name. If there is a Thing created, this can be returned with a Get call.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

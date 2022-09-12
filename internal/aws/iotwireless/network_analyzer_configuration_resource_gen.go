@@ -48,8 +48,12 @@ func networkAnalyzerConfigurationResourceType(ctx context.Context) (provider.Res
 			Description: "The description of the new resource",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -170,6 +174,7 @@ func networkAnalyzerConfigurationResourceType(ctx context.Context) (provider.Res
 						// Property: LogLevel
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"INFO",
@@ -177,21 +182,32 @@ func networkAnalyzerConfigurationResourceType(ctx context.Context) (provider.Res
 								"DISABLED",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"wireless_device_frame_info": {
 						// Property: WirelessDeviceFrameInfo
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ENABLED",
 								"DISABLED",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"wireless_devices": {
 			// Property: WirelessDevices
@@ -208,11 +224,13 @@ func networkAnalyzerConfigurationResourceType(ctx context.Context) (provider.Res
 			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(250),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"wireless_gateways": {
@@ -230,11 +248,13 @@ func networkAnalyzerConfigurationResourceType(ctx context.Context) (provider.Res
 			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(250),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}
