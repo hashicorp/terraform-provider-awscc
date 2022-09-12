@@ -67,8 +67,12 @@ func workspaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The description of the workspace.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 512),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"role": {
@@ -119,6 +123,10 @@ func workspaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"update_date_time": {
 			// Property: UpdateDateTime

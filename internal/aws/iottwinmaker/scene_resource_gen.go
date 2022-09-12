@@ -60,10 +60,14 @@ func sceneResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A list of capabilities that the scene uses to render.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 50),
 				validate.ArrayForEach(validate.StringLenBetween(0, 256)),
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile(".*"), "")),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"content_location": {
@@ -111,8 +115,12 @@ func sceneResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The description of the scene.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 512),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"scene_id": {
@@ -155,6 +163,10 @@ func sceneResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"update_date_time": {
 			// Property: UpdateDateTime
