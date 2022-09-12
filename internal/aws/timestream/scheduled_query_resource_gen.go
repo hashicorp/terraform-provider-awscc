@@ -128,11 +128,15 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "Encryption at rest options for the error reports. If no encryption option is specified, Timestream will choose SSE_S3 as default.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"SSE_S3",
 											"SSE_KMS",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"object_key_prefix": {
@@ -140,9 +144,13 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "Prefix for error report keys.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 896),
 										validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -501,11 +509,13 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"target_configuration": {
@@ -748,6 +758,10 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "Name of the measure name column from the query result.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"mixed_measure_mappings": {
 									// Property: MixedMeasureMappings
@@ -759,6 +773,10 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 												Description: "Refers to the value of the measure name in a result row. This field is required if MeasureNameColumn is provided.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"measure_value_type": {
 												// Property: MeasureValueType
@@ -805,15 +823,21 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 															Description: "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
 												},
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													Multiset(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"source_column": {
@@ -821,21 +845,31 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 												Description: "This field refers to the source column from which the measure value is to be read for result materialization.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"target_measure_name": {
 												// Property: TargetMeasureName
 												Description: "Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"multi_measure_mappings": {
@@ -873,6 +907,10 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 															Description: "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
@@ -889,10 +927,18 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 												Description: "Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"table_name": {
 									// Property: TableName
