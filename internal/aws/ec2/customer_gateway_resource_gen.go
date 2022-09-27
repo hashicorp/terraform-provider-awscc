@@ -108,8 +108,10 @@ func customerGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type": {

@@ -93,9 +93,13 @@ func metricStreamResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(1000),
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"firehose_arn": {
@@ -154,9 +158,13 @@ func metricStreamResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(1000),
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"last_update_date": {
@@ -348,9 +356,13 @@ func metricStreamResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(100),
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -401,16 +413,24 @@ func metricStreamResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "An optional string, which you can use to describe or define the tag.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// Tags is a write-only property.
 		},

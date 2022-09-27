@@ -163,10 +163,14 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("(.+)"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"equals": {
@@ -174,10 +178,14 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("(.+)"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"field": {
@@ -195,10 +203,14 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("(.+)"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"not_equals": {
@@ -206,10 +218,14 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("(.+)"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"not_starts_with": {
@@ -217,10 +233,14 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("(.+)"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"starts_with": {
@@ -228,10 +248,14 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("(.+)"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -246,13 +270,21 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "An optional, descriptive name for an advanced event selector, such as \"Log data events for only two S3 buckets\".",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"created_timestamp": {
 			// Property: CreatedTimestamp
@@ -292,6 +324,10 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Indicates whether the event data store includes events from all regions, or only from the region in which it was created.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -303,6 +339,10 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The name of the event data store.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"organization_enabled": {
 			// Property: OrganizationEnabled
@@ -314,6 +354,10 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Indicates that an event data store is collecting logged events for an organization.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"retention_period": {
 			// Property: RetentionPeriod
@@ -325,6 +369,10 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The retention period, in days.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -384,8 +432,10 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"termination_protection_enabled": {
@@ -398,6 +448,10 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Indicates whether the event data store is protected from termination.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"updated_timestamp": {
 			// Property: UpdatedTimestamp

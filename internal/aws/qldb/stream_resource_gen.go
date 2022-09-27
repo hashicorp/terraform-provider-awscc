@@ -96,13 +96,21 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: AggregationEnabled
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stream_arn": {
 						// Property: StreamArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -209,8 +217,12 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

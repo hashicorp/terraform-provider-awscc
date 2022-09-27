@@ -35,8 +35,12 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"auto_deployment": {
@@ -65,16 +69,28 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"retain_stacks_on_account_removal": {
 						// Property: RetainStacksOnAccountRemoval
 						Description: "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"call_as": {
 			// Property: CallAs
@@ -90,11 +106,15 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"SELF",
 					"DELEGATED_ADMIN",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// CallAs is a write-only property.
 		},
@@ -118,12 +138,16 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringInSlice([]string{
 					"CAPABILITY_IAM",
 					"CAPABILITY_NAMED_IAM",
 					"CAPABILITY_AUTO_EXPAND",
 				})),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -138,8 +162,12 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description of the stack set. You can use the description to identify the stack set's purpose or other important information.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"execution_role_name": {
@@ -154,8 +182,12 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"managed_execution": {
@@ -180,10 +212,18 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"operation_preferences": {
 			// Property: OperationPreferences
@@ -235,32 +275,48 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: FailureToleranceCount
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"failure_tolerance_percentage": {
 						// Property: FailureTolerancePercentage
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"max_concurrent_count": {
 						// Property: MaxConcurrentCount
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"max_concurrent_percentage": {
 						// Property: MaxConcurrentPercentage
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"region_concurrency_type": {
@@ -268,24 +324,36 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"SEQUENTIAL",
 								"PARALLEL",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"region_order": {
 						// Property: RegionOrder
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-]{1,128}$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// OperationPreferences is a write-only property.
 		},
 		"parameters": {
@@ -333,6 +401,10 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"permission_model": {
 			// Property: PermissionModel
@@ -466,6 +538,7 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The filter type you want to apply on organizational units and accounts.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"NONE",
@@ -474,15 +547,22 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 											"DIFFERENCE",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"accounts": {
 									// Property: Accounts
 									Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"organizational_unit_ids": {
@@ -490,9 +570,13 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(ou-[a-z0-9]{4,32}-[a-z0-9]{8,32}|r-[a-z0-9]{4,32})$"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -519,6 +603,10 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"regions": {
 						// Property: Regions
@@ -533,6 +621,10 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"stack_set_id": {
 			// Property: StackSetId
@@ -626,8 +718,12 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"template_body": {
@@ -642,8 +738,12 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 51200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"template_url": {
@@ -658,8 +758,12 @@ func stackSetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 5120),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// TemplateURL is a write-only property.
 		},

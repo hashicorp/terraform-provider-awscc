@@ -58,8 +58,12 @@ func roleResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description of the role that you provide.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"managed_policy_arns": {
@@ -77,6 +81,10 @@ func roleResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A list of Amazon Resource Names (ARNs) of the IAM managed policies that you want to attach to the role. ",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"max_session_duration": {
 			// Property: MaxSessionDuration
@@ -90,8 +98,12 @@ func roleResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. ",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(3600, 43200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"path": {
@@ -120,6 +132,10 @@ func roleResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The ARN of the policy used to set the permissions boundary for the role.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"policies": {
 			// Property: Policies
@@ -172,8 +188,10 @@ func roleResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"role_id": {
@@ -266,8 +284,10 @@ func roleResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

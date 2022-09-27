@@ -54,8 +54,12 @@ func accountResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: DaysBeforeExpiry
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 45),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

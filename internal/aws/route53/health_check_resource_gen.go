@@ -171,60 +171,87 @@ func healthCheckResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"child_health_checks": {
 						// Property: ChildHealthChecks
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(256),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"enable_sni": {
 						// Property: EnableSNI
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"failure_threshold": {
 						// Property: FailureThreshold
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 10),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"fully_qualified_domain_name": {
 						// Property: FullyQualifiedDomainName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"health_threshold": {
 						// Property: HealthThreshold
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ip_address": {
 						// Property: IPAddress
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(45),
 							validate.StringMatch(regexp.MustCompile("^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$|^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"insufficient_data_health_status": {
 						// Property: InsufficientDataHealthStatus
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Healthy",
@@ -232,11 +259,18 @@ func healthCheckResourceType(ctx context.Context) (provider.ResourceType, error)
 								"Unhealthy",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"inverted": {
 						// Property: Inverted
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"measure_latency": {
 						// Property: MeasureLatency
@@ -252,19 +286,25 @@ func healthCheckResourceType(ctx context.Context) (provider.ResourceType, error)
 						// Property: Port
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 65535),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"regions": {
 						// Property: Regions
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(64),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"request_interval": {
@@ -284,24 +324,36 @@ func healthCheckResourceType(ctx context.Context) (provider.ResourceType, error)
 						// Property: ResourcePath
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"routing_control_arn": {
 						// Property: RoutingControlArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"search_string": {
 						// Property: SearchString
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"type": {
@@ -394,6 +446,10 @@ func healthCheckResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

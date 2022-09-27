@@ -117,8 +117,12 @@ func collectionResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

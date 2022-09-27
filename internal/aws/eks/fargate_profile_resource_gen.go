@@ -163,6 +163,10 @@ func fargateProfileResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"namespace": {
 						// Property: Namespace
@@ -254,8 +258,12 @@ func fargateProfileResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

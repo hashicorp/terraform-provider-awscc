@@ -29,6 +29,10 @@ func subnetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"availability_zone": {
 			// Property: AvailabilityZone
@@ -80,6 +84,10 @@ func subnetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ipv_6_cidr_block": {
 			// Property: Ipv6CidrBlock
@@ -89,6 +97,10 @@ func subnetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ipv_6_cidr_blocks": {
 			// Property: Ipv6CidrBlocks
@@ -128,6 +140,10 @@ func subnetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"network_acl_association_id": {
 			// Property: NetworkAclAssociationId
@@ -179,20 +195,36 @@ func subnetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: EnableResourceNameDnsAAAARecord
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"enable_resource_name_dns_a_record": {
 						// Property: EnableResourceNameDnsARecord
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"hostname_type": {
 						// Property: HostnameType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"subnet_id": {
 			// Property: SubnetId
@@ -244,6 +276,10 @@ func subnetResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vpc_id": {
 			// Property: VpcId

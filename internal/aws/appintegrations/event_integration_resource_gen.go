@@ -121,14 +121,22 @@ func eventIntegrationResourceType(ctx context.Context) (provider.ResourceType, e
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"client_id": {
 						// Property: ClientId
 						Description: "The identifier for the client that is associated with the event integration.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"event_bridge_rule_name": {
@@ -136,9 +144,13 @@ func eventIntegrationResourceType(ctx context.Context) (provider.ResourceType, e
 						Description: "The name of the Eventbridge rule.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"event_integration_association_arn": {
@@ -146,8 +158,12 @@ func eventIntegrationResourceType(ctx context.Context) (provider.ResourceType, e
 						Description: "The Amazon Resource Name (ARN) for the event integration association.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"event_integration_association_id": {
@@ -155,8 +171,12 @@ func eventIntegrationResourceType(ctx context.Context) (provider.ResourceType, e
 						Description: "The identifier for the event integration association.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -178,8 +198,12 @@ func eventIntegrationResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "The event integration description.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"event_bridge_bus": {
@@ -337,8 +361,12 @@ func eventIntegrationResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

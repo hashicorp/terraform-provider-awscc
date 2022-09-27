@@ -44,6 +44,10 @@ func stateMachineResourceType(ctx context.Context) (provider.ResourceType, error
 			// }
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Definition is a write-only property.
 		},
 		"definition_s3_location": {
@@ -84,10 +88,18 @@ func stateMachineResourceType(ctx context.Context) (provider.ResourceType, error
 						// Property: Version
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// DefinitionS3Location is a write-only property.
 		},
 		"definition_string": {
@@ -100,8 +112,12 @@ func stateMachineResourceType(ctx context.Context) (provider.ResourceType, error
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1048576),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"definition_substitutions": {
@@ -119,6 +135,10 @@ func stateMachineResourceType(ctx context.Context) (provider.ResourceType, error
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// DefinitionSubstitutions is a write-only property.
 		},
 		"logging_configuration": {
@@ -178,33 +198,48 @@ func stateMachineResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: LogGroupArn
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 256),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"include_execution_data": {
 						// Property: IncludeExecutionData
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"level": {
 						// Property: Level
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ALL",
@@ -213,10 +248,17 @@ func stateMachineResourceType(ctx context.Context) (provider.ResourceType, error
 								"OFF",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -338,8 +380,10 @@ func stateMachineResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tracing_configuration": {
@@ -360,10 +404,18 @@ func stateMachineResourceType(ctx context.Context) (provider.ResourceType, error
 						// Property: Enabled
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

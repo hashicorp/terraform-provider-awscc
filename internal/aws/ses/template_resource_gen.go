@@ -75,6 +75,10 @@ func templateResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The HTML body of the email.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"subject_part": {
 						// Property: SubjectPart
@@ -102,10 +106,18 @@ func templateResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The email body that is visible to recipients whose email clients do not display HTML content.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

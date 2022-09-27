@@ -112,21 +112,33 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (prov
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vpc_id": {
 			// Property: VpcId

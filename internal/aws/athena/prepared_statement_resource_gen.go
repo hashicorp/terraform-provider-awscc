@@ -34,8 +34,12 @@ func preparedStatementResourceType(ctx context.Context) (provider.ResourceType, 
 			Description: "The description of the prepared statement.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"query_statement": {

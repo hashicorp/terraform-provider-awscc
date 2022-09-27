@@ -31,6 +31,10 @@ func firewallResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -42,9 +46,13 @@ func firewallResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(512),
 				validate.StringMatch(regexp.MustCompile("^.*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"endpoint_ids": {
@@ -140,6 +148,10 @@ func firewallResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"subnet_change_protection": {
 			// Property: SubnetChangeProtection
@@ -149,6 +161,10 @@ func firewallResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"subnet_mappings": {
 			// Property: SubnetMappings
@@ -236,6 +252,10 @@ func firewallResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vpc_id": {
 			// Property: VpcId

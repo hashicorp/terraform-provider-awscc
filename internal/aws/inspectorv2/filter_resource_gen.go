@@ -50,8 +50,12 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Findings filter description.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"filter_action": {
@@ -1072,11 +1076,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"component_id": {
@@ -1106,11 +1112,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"component_type": {
@@ -1140,11 +1148,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ec_2_instance_image_id": {
@@ -1174,11 +1184,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ec_2_instance_subnet_id": {
@@ -1208,11 +1220,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ec_2_instance_vpc_id": {
@@ -1242,11 +1256,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ecr_image_architecture": {
@@ -1276,11 +1292,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ecr_image_hash": {
@@ -1310,11 +1328,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ecr_image_pushed_at": {
@@ -1325,20 +1345,30 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: EndInclusive
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"start_inclusive": {
 									// Property: StartInclusive
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ecr_image_registry": {
@@ -1368,11 +1398,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ecr_image_repository_name": {
@@ -1402,11 +1434,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"ecr_image_tags": {
@@ -1436,11 +1470,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"finding_arn": {
@@ -1470,11 +1506,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"finding_status": {
@@ -1504,11 +1542,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"finding_type": {
@@ -1538,11 +1578,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"first_observed_at": {
@@ -1553,20 +1595,30 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: EndInclusive
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"start_inclusive": {
 									// Property: StartInclusive
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"inspector_score": {
@@ -1577,20 +1629,30 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: LowerInclusive
 									Type:     types.Float64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"upper_inclusive": {
 									// Property: UpperInclusive
 									Type:     types.Float64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"last_observed_at": {
@@ -1601,20 +1663,30 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: EndInclusive
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"start_inclusive": {
 									// Property: StartInclusive
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"network_protocol": {
@@ -1644,11 +1716,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"port_range": {
@@ -1659,26 +1733,36 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: BeginInclusive
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 65535),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"end_inclusive": {
 									// Property: EndInclusive
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 65535),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"related_vulnerabilities": {
@@ -1708,11 +1792,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"resource_id": {
@@ -1742,11 +1828,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"resource_tags": {
@@ -1767,26 +1855,36 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: Key
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 128),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"value": {
 									// Property: Value
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"resource_type": {
@@ -1816,11 +1914,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"severity": {
@@ -1850,11 +1950,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"title": {
@@ -1884,11 +1986,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"updated_at": {
@@ -1899,20 +2003,30 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: EndInclusive
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"start_inclusive": {
 									// Property: StartInclusive
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"vendor_severity": {
@@ -1942,11 +2056,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"vulnerability_id": {
@@ -1976,11 +2092,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"vulnerability_source": {
@@ -2010,11 +2128,13 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"vulnerable_packages": {
@@ -2048,6 +2168,10 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"epoch": {
 									// Property: Epoch
@@ -2057,15 +2181,27 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: LowerInclusive
 												Type:     types.Float64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"upper_inclusive": {
 												// Property: UpperInclusive
 												Type:     types.Float64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"name": {
 									// Property: Name
@@ -2094,6 +2230,10 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"release": {
 									// Property: Release
@@ -2122,6 +2262,10 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_layer_hash": {
 									// Property: SourceLayerHash
@@ -2150,6 +2294,10 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"version": {
 									// Property: Version
@@ -2178,15 +2326,21 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

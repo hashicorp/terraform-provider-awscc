@@ -141,6 +141,10 @@ func cachePolicyResourceType(ctx context.Context) (provider.ResourceType, error)
 						// Property: Comment
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"default_ttl": {
 						// Property: DefaultTTL
@@ -191,6 +195,10 @@ func cachePolicyResourceType(ctx context.Context) (provider.ResourceType, error)
 												// Property: Cookies
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -200,6 +208,10 @@ func cachePolicyResourceType(ctx context.Context) (provider.ResourceType, error)
 									// Property: EnableAcceptEncodingBrotli
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"enable_accept_encoding_gzip": {
 									// Property: EnableAcceptEncodingGzip
@@ -222,6 +234,10 @@ func cachePolicyResourceType(ctx context.Context) (provider.ResourceType, error)
 												// Property: Headers
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -243,6 +259,10 @@ func cachePolicyResourceType(ctx context.Context) (provider.ResourceType, error)
 												// Property: QueryStrings
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),

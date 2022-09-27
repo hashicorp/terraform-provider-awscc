@@ -189,8 +189,12 @@ func locationFSxLustreResourceType(ctx context.Context) (provider.ResourceType, 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

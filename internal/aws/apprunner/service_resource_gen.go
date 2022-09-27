@@ -36,8 +36,12 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Autoscaling configuration ARN",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1011),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// AutoScalingConfigurationArn is a write-only property.
 		},
@@ -135,8 +139,12 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Health check Healthy Threshold",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 20),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"interval": {
@@ -144,23 +152,35 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Health check Interval",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"path": {
 						// Property: Path
 						Description: "Health check Path",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"protocol": {
 						// Property: Protocol
 						Description: "Health Check Protocol",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"TCP",
 								"HTTP",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"timeout": {
@@ -168,8 +188,12 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Health check Timeout",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 20),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"unhealthy_threshold": {
@@ -177,13 +201,21 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Health check Unhealthy Threshold",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 20),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"instance_configuration": {
 			// Property: InstanceConfiguration
@@ -224,9 +256,13 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "CPU",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(4, 6),
 							validate.StringMatch(regexp.MustCompile("1024|2048|(1|2) vCPU"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"instance_role_arn": {
@@ -234,9 +270,13 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Instance Role Arn",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(29, 102),
 							validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"memory": {
@@ -244,14 +284,22 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Memory",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(4, 4),
 							validate.StringMatch(regexp.MustCompile("2048|3072|4096|(2|3|4) GB"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"network_configuration": {
 			// Property: NetworkConfiguration
@@ -316,8 +364,12 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(44, 1011),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -327,6 +379,10 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"observability_configuration": {
 			// Property: ObservabilityConfiguration
@@ -360,8 +416,12 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1011),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"observability_enabled": {
@@ -373,6 +433,10 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"service_arn": {
 			// Property: ServiceArn
@@ -651,9 +715,13 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Access Role Arn",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(29, 102),
 										validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"connection_arn": {
@@ -661,19 +729,31 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Connection Arn",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1011),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"auto_deployments_enabled": {
 						// Property: AutoDeploymentsEnabled
 						Description: "Auto Deployment enabled",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"code_repository": {
 						// Property: CodeRepository
@@ -695,12 +775,20 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "Build Command",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"port": {
 															// Property: Port
 															Description: "Port",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"runtime": {
 															// Property: Runtime
@@ -725,25 +813,45 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		// Property: Name
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"value": {
 																		// Property: Value
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"start_command": {
 															// Property: StartCommand
 															Description: "Start Command",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"configuration_source": {
 												// Property: ConfigurationSource
@@ -760,6 +868,10 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"repository_url": {
 									// Property: RepositoryUrl
@@ -796,6 +908,10 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"image_repository": {
 						// Property: ImageRepository
@@ -812,6 +928,10 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "Port",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"runtime_environment_variables": {
 												// Property: RuntimeEnvironmentVariables
@@ -821,25 +941,45 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Name
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"value": {
 															// Property: Value
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"start_command": {
 												// Property: StartCommand
 												Description: "Start Command",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"image_identifier": {
 									// Property: ImageIdentifier
@@ -866,6 +1006,10 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -909,11 +1053,19 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

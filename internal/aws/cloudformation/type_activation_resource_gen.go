@@ -48,6 +48,10 @@ func typeActivationResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Whether to automatically update the extension in this account and region when a new minor version is published by the extension publisher. Major versions released by the publisher must be manually updated.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"execution_role_arn": {
 			// Property: ExecutionRoleArn
@@ -96,9 +100,13 @@ func typeActivationResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
 							validate.StringMatch(regexp.MustCompile("^[\\.\\-_/#A-Za-z0-9]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"log_role_arn": {
@@ -106,8 +114,12 @@ func typeActivationResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -131,8 +143,12 @@ func typeActivationResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The Major Version of the type you want to enable",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"public_type_arn": {
@@ -265,11 +281,15 @@ func typeActivationResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Manually updates a previously-enabled type to a new major or minor version, if available. You can also use this parameter to update the value of AutoUpdateEnabled",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"MAJOR",
 					"MINOR",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

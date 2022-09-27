@@ -49,8 +49,12 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of hours till which Kinesis Video will retain the data in the stream",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 87600),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"device_name": {
@@ -66,9 +70,13 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The name of the device that is writing to the stream.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_.-]+"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"kms_key_id": {
@@ -84,9 +92,13 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 				validate.StringMatch(regexp.MustCompile(".+"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"media_type": {
@@ -102,9 +114,13 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 				validate.StringMatch(regexp.MustCompile("[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+(,[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+)*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -188,11 +204,13 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

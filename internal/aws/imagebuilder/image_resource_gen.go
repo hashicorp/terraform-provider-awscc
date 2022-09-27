@@ -142,14 +142,22 @@ func imageResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "ImageTestsEnabled",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"timeout_minutes": {
 						// Property: TimeoutMinutes
 						Description: "TimeoutMinutes",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(60, 1440),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

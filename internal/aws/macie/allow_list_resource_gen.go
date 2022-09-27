@@ -73,6 +73,10 @@ func allowListResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The S3 object key for the AllowList.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_words_list": {
 						// Property: S3WordsList
@@ -92,6 +96,10 @@ func allowListResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -107,6 +115,10 @@ func allowListResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Description of AllowList.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -202,8 +214,10 @@ func allowListResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

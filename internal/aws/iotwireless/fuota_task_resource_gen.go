@@ -47,8 +47,12 @@ func fuotaTaskResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Multicast group to associate. Only for update request.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"associate_wireless_device": {
@@ -62,8 +66,12 @@ func fuotaTaskResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Wireless device to associate. Only for update request.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -77,8 +85,12 @@ func fuotaTaskResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "FUOTA task description",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"disassociate_multicast_group": {
@@ -92,8 +104,12 @@ func fuotaTaskResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Multicast group to disassociate. Only for update request.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"disassociate_wireless_device": {
@@ -107,8 +123,12 @@ func fuotaTaskResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Wireless device to disassociate. Only for update request.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"firmware_update_image": {
@@ -232,8 +252,12 @@ func fuotaTaskResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Name of FUOTA task",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -269,23 +293,35 @@ func fuotaTaskResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

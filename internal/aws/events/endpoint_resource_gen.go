@@ -48,9 +48,13 @@ func endpointResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(512),
 				validate.StringMatch(regexp.MustCompile(".*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"endpoint_id": {
@@ -182,6 +186,10 @@ func endpointResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -194,9 +202,13 @@ func endpointResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 				validate.StringMatch(regexp.MustCompile("^arn:aws[a-z-]*:iam::\\d{12}:role\\/[\\w+=,.@/-]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"routing_config": {

@@ -84,9 +84,13 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Passwords used for this user account. You can create up to two passwords for each user.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 2),
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"type": {
@@ -94,10 +98,14 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Type of authentication strategy for this user.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"password",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -178,8 +186,12 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"user_name": {

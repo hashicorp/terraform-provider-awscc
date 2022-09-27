@@ -52,8 +52,12 @@ func dataIntegrationResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The data integration description.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -266,8 +270,12 @@ func dataIntegrationResourceType(ctx context.Context) (provider.ResourceType, er
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

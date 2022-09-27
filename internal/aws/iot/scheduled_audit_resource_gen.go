@@ -34,8 +34,12 @@ func scheduledAuditResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The day of the month on which the scheduled audit takes place. Can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^([1-9]|[12][0-9]|3[01])$|^LAST$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"day_of_week": {
@@ -57,6 +61,7 @@ func scheduledAuditResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The day of the week on which the scheduled audit takes place. Can be one of SUN, MON, TUE,WED, THU, FRI, or SAT. This field is required if the frequency parameter is set to WEEKLY or BIWEEKLY.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"SUN",
@@ -67,6 +72,9 @@ func scheduledAuditResourceType(ctx context.Context) (provider.ResourceType, err
 					"FRI",
 					"SAT",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"frequency": {
@@ -190,8 +198,12 @@ func scheduledAuditResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"target_check_names": {

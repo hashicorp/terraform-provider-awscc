@@ -187,6 +187,10 @@ func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, e
 									Description: "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"thing_group_names": {
 									// Property: ThingGroupNames
@@ -201,6 +205,10 @@ func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, e
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"enable_io_t_logging_params": {
 						// Property: EnableIoTLoggingParams
@@ -233,6 +241,10 @@ func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, e
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"publish_finding_to_sns_params": {
 						// Property: PublishFindingToSnsParams
@@ -251,6 +263,10 @@ func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, e
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"replace_default_policy_version_params": {
 						// Property: ReplaceDefaultPolicyVersionParams
@@ -270,6 +286,10 @@ func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, e
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"update_ca_certificate_params": {
 						// Property: UpdateCACertificateParams
@@ -289,6 +309,10 @@ func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, e
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"update_device_certificate_params": {
 						// Property: UpdateDeviceCertificateParams
@@ -308,6 +332,10 @@ func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, e
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -403,8 +431,12 @@ func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

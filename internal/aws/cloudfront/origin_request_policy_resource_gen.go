@@ -134,6 +134,10 @@ func originRequestPolicyResourceType(ctx context.Context) (provider.ResourceType
 						// Property: Comment
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cookies_config": {
 						// Property: CookiesConfig
@@ -151,6 +155,10 @@ func originRequestPolicyResourceType(ctx context.Context) (provider.ResourceType
 									// Property: Cookies
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -172,6 +180,10 @@ func originRequestPolicyResourceType(ctx context.Context) (provider.ResourceType
 									// Property: Headers
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -198,6 +210,10 @@ func originRequestPolicyResourceType(ctx context.Context) (provider.ResourceType
 									// Property: QueryStrings
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),

@@ -320,6 +320,10 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 						// Property: Comment
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cors_config": {
 						// Property: CorsConfig
@@ -393,11 +397,19 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"access_control_max_age_sec": {
 									// Property: AccessControlMaxAgeSec
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"origin_override": {
 									// Property: OriginOverride
@@ -407,6 +419,10 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"custom_headers_config": {
 						// Property: CustomHeadersConfig
@@ -441,6 +457,10 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
@@ -468,6 +488,10 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"content_type_options": {
 									// Property: ContentTypeOptions
@@ -481,6 +505,10 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"frame_options": {
 									// Property: FrameOptions
@@ -502,6 +530,10 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"referrer_policy": {
 									// Property: ReferrerPolicy
@@ -523,6 +555,10 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"strict_transport_security": {
 									// Property: StrictTransportSecurity
@@ -537,6 +573,10 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 												// Property: IncludeSubdomains
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"override": {
 												// Property: Override
@@ -547,10 +587,18 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 												// Property: Preload
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"xss_protection": {
 									// Property: XSSProtection
@@ -560,6 +608,10 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 												// Property: ModeBlock
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"override": {
 												// Property: Override
@@ -575,14 +627,26 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 												// Property: ReportUri
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"server_timing_headers_config": {
 						// Property: ServerTimingHeadersConfig
@@ -597,13 +661,21 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 									// Property: SamplingRate
 									Type:     types.Float64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatBetween(0.000000, 100.000000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

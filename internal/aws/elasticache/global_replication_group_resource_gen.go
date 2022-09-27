@@ -32,6 +32,10 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 			Description: "AutomaticFailoverEnabled",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// AutomaticFailoverEnabled is a write-only property.
 		},
 		"cache_node_type": {
@@ -44,6 +48,10 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 			Description: "The cache node type of the Global Datastore",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// CacheNodeType is a write-only property.
 		},
 		"cache_parameter_group_name": {
@@ -56,6 +64,10 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 			Description: "Cache parameter group name to use for the new engine version. This parameter cannot be modified independently.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"engine_version": {
 			// Property: EngineVersion
@@ -67,6 +79,10 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 			Description: "The engine version of the Global Datastore.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// EngineVersion is a write-only property.
 		},
 		"global_node_group_count": {
@@ -79,6 +95,10 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 			Description: "Indicates the number of node groups in the Global Datastore.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// GlobalNodeGroupCount is a write-only property.
 		},
 		"global_replication_group_description": {
@@ -91,6 +111,10 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 			Description: "The optional description of the Global Datastore",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// GlobalReplicationGroupDescription is a write-only property.
 		},
 		"global_replication_group_id": {
@@ -117,6 +141,10 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 			Description: "The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix to the Global Datastore ID when it is created. Each AWS Region has its own prefix. ",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// GlobalReplicationGroupIdSuffix is a write-only property.
 		},
 		"members": {
@@ -158,23 +186,35 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 						Description: "Regionally unique identifier for the member i.e. ReplicationGroupId.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"replication_group_region": {
 						// Property: ReplicationGroupRegion
 						Description: "The AWS region of the Global Datastore member.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"role": {
 						// Property: Role
 						Description: "Indicates the role of the member, primary or secondary.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"PRIMARY",
 								"SECONDARY",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -238,12 +278,20 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 						Description: "The replication group id of the Global Datastore member.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"replication_group_region": {
 						// Property: ReplicationGroupRegion
 						Description: "The AWS region of the Global Datastore member.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"resharding_configurations": {
 						// Property: ReshardingConfigurations
@@ -255,25 +303,41 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 									Description: "Unique identifier for the Node Group. This is either auto-generated by ElastiCache (4-digit id) or a user supplied id.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"preferred_availability_zones": {
 									// Property: PreferredAvailabilityZones
 									Description: "A list of preferred availability zones for the nodes of new node groups.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// RegionalConfigurations is a write-only property.
 		},

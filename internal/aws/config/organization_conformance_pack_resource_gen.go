@@ -74,8 +74,12 @@ func organizationConformancePackResourceType(ctx context.Context) (provider.Reso
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 60),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"delivery_s3_bucket": {
@@ -90,8 +94,12 @@ func organizationConformancePackResourceType(ctx context.Context) (provider.Reso
 			Description: "AWS Config stores intermediate files while processing conformance pack template.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 63),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"delivery_s3_key_prefix": {
@@ -106,8 +114,12 @@ func organizationConformancePackResourceType(ctx context.Context) (provider.Reso
 			Description: "The prefix for the delivery S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"excluded_accounts": {
@@ -125,8 +137,12 @@ func organizationConformancePackResourceType(ctx context.Context) (provider.Reso
 			Description: "A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"organization_conformance_pack_name": {
@@ -162,8 +178,12 @@ func organizationConformancePackResourceType(ctx context.Context) (provider.Reso
 			Description: "A string containing full conformance pack template body.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 51200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// TemplateBody is a write-only property.
 		},
@@ -180,9 +200,13 @@ func organizationConformancePackResourceType(ctx context.Context) (provider.Reso
 			Description: "Location of file containing the template body.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 				validate.StringMatch(regexp.MustCompile("s3://.*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// TemplateS3Uri is a write-only property.
 		},

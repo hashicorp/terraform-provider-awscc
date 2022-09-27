@@ -62,6 +62,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A flag that enables automatic minor version upgrade when set to true.\n\nYou cannot modify the value of AutoMinorVersionUpgrade after the cluster is created. To enable AutoMinorVersionUpgrade on a cluster you must set AutoMinorVersionUpgrade to true when you create a cluster.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"cluster_endpoint": {
 			// Property: ClusterEndpoint
@@ -105,6 +109,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"cluster_name": {
 			// Property: ClusterName
@@ -134,6 +142,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "An optional description of the cluster.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"engine_version": {
 			// Property: EngineVersion
@@ -145,6 +157,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The Redis engine version used by the cluster.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"final_snapshot_name": {
 			// Property: FinalSnapshotName
@@ -156,6 +172,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"kms_key_id": {
 			// Property: KmsKeyId
@@ -183,6 +203,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"node_type": {
 			// Property: NodeType
@@ -205,6 +229,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of replicas to apply to each shard. The limit is 5.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"num_shards": {
 			// Property: NumShards
@@ -216,6 +244,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of shards the cluster will contain.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"parameter_group_name": {
 			// Property: ParameterGroupName
@@ -227,6 +259,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The name of the parameter group associated with the cluster.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"parameter_group_status": {
 			// Property: ParameterGroupStatus
@@ -273,8 +309,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "One or more Amazon VPC security groups associated with this cluster.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"snapshot_arns": {
@@ -325,6 +363,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"snapshot_window": {
 			// Property: SnapshotWindow
@@ -336,6 +378,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your cluster.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"sns_topic_arn": {
 			// Property: SnsTopicArn
@@ -347,6 +393,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"sns_topic_status": {
 			// Property: SnsTopicStatus
@@ -358,6 +408,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The status of the Amazon SNS notification topic. Notifications are sent only if the status is enabled.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -383,6 +437,10 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The name of the subnet group to be used for the cluster.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tls_enabled": {
 			// Property: TLSEnabled
@@ -459,8 +517,12 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

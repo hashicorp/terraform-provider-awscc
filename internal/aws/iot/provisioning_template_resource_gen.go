@@ -32,8 +32,12 @@ func provisioningTemplateResourceType(ctx context.Context) (provider.ResourceTyp
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(500),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"enabled": {
@@ -44,6 +48,10 @@ func provisioningTemplateResourceType(ctx context.Context) (provider.ResourceTyp
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"pre_provisioning_hook": {
 			// Property: PreProvisioningHook
@@ -65,15 +73,27 @@ func provisioningTemplateResourceType(ctx context.Context) (provider.ResourceTyp
 						// Property: PayloadVersion
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"target_arn": {
 						// Property: TargetArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"provisioning_role_arn": {
 			// Property: ProvisioningRoleArn
@@ -121,6 +141,10 @@ func provisioningTemplateResourceType(ctx context.Context) (provider.ResourceTyp
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"template_arn": {
 			// Property: TemplateArn

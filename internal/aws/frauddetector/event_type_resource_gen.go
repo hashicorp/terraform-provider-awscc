@@ -63,8 +63,12 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The description of the event type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"entity_types": {
@@ -138,37 +142,61 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Arn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"created_time": {
 						// Property: CreatedTime
 						Description: "The time when the event type was created.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
 						Description: "The description.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"inline": {
 						// Property: Inline
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime
 						Description: "The time when the event type was last updated.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -194,11 +222,13 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(200),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -338,27 +368,40 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Arn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"created_time": {
 						// Property: CreatedTime
 						Description: "The time when the event type was created.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"data_source": {
 						// Property: DataSource
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"EVENT",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"data_type": {
 						// Property: DataType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"STRING",
@@ -367,36 +410,59 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"BOOLEAN",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"default_value": {
 						// Property: DefaultValue
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
 						Description: "The description.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"inline": {
 						// Property: Inline
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime
 						Description: "The time when the event type was last updated.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -422,17 +488,20 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(200),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"variable_type": {
 						// Property: VariableType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"AUTH_CODE",
@@ -469,6 +538,9 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"SHIPPING_ZIP",
 								"USERAGENT",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -552,37 +624,61 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Arn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"created_time": {
 						// Property: CreatedTime
 						Description: "The time when the event type was created.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
 						Description: "The description.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"inline": {
 						// Property: Inline
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime
 						Description: "The time when the event type was last updated.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -608,11 +704,13 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(200),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -712,11 +810,13 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

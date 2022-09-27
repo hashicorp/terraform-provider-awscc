@@ -69,9 +69,13 @@ func permissionSetResourceType(ctx context.Context) (provider.ResourceType, erro
 						// Property: Path
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
 							validate.StringMatch(regexp.MustCompile("((/[A-Za-z0-9\\.,\\+@=_-]+)*)/"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -100,8 +104,12 @@ func permissionSetResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The permission set description.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 700),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"inline_policy": {
@@ -114,6 +122,10 @@ func permissionSetResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The inline policy to put in permission set.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"instance_arn": {
 			// Property: InstanceArn
@@ -257,27 +269,43 @@ func permissionSetResourceType(ctx context.Context) (provider.ResourceType, erro
 									// Property: Path
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 512),
 										validate.StringMatch(regexp.MustCompile("((/[A-Za-z0-9\\.,\\+@=_-]+)*)/"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"managed_policy_arn": {
 						// Property: ManagedPolicyArn
 						Description: "The managed policy to attach.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"relay_state_type": {
 			// Property: RelayStateType
@@ -292,9 +320,13 @@ func permissionSetResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The relay state URL that redirect links to any service in the AWS Management Console.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 240),
 				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9&amp;$@#\\/%?=~\\-_'&quot;|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"session_duration": {
@@ -310,8 +342,12 @@ func permissionSetResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The length of time that a user can be signed in to an AWS account.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -368,11 +404,13 @@ func permissionSetResourceType(ctx context.Context) (provider.ResourceType, erro
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

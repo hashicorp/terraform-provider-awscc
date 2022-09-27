@@ -198,9 +198,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The DNS host name for the Docker container.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(63),
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"environment": {
@@ -210,21 +214,33 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Type: types.MapType{ElemType: types.StringType},
 									// Pattern "[\\S\\s]*" ignored.
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"framework": {
 									// Property: Framework
 									Description: "The machine learning framework of the model package container image.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"framework_version": {
 									// Property: FrameworkVersion
 									Description: "The framework version of the Model Package Container Image.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 10),
 										validate.StringMatch(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"image": {
@@ -242,9 +258,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(72),
 										validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"model_data_url": {
@@ -252,9 +272,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "A structure with Model Input details.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
 										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"model_input": {
@@ -274,21 +298,33 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"nearest_model_name": {
 									// Property: NearestModelName
 									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"product_id": {
 									// Property: ProductId
 									Description: "The AWS Marketplace product ID of the model package.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -303,9 +339,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A description of the additional Inference specification.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(1024),
 							validate.StringMatch(regexp.MustCompile(".*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"name": {
@@ -323,9 +363,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The supported MIME types for the input data.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenAtMost(256)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile(".*"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"supported_realtime_inference_instance_types": {
@@ -333,15 +377,23 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A list of the instance types that are used to generate inferences in real-time",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"supported_response_mime_types": {
 						// Property: SupportedResponseMIMETypes
 						Description: "The supported MIME types for the output data.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenAtMost(1024)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[-\\w]+\\/.+$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"supported_transform_instance_types": {
@@ -349,13 +401,21 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"additional_inference_specifications": {
 			// Property: AdditionalInferenceSpecifications
@@ -539,9 +599,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The DNS host name for the Docker container.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(63),
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"environment": {
@@ -551,21 +615,33 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Type: types.MapType{ElemType: types.StringType},
 									// Pattern "[\\S\\s]*" ignored.
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"framework": {
 									// Property: Framework
 									Description: "The machine learning framework of the model package container image.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"framework_version": {
 									// Property: FrameworkVersion
 									Description: "The framework version of the Model Package Container Image.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 10),
 										validate.StringMatch(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"image": {
@@ -583,9 +659,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(72),
 										validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"model_data_url": {
@@ -593,9 +673,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "A structure with Model Input details.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
 										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"model_input": {
@@ -615,21 +699,33 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"nearest_model_name": {
 									// Property: NearestModelName
 									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"product_id": {
 									// Property: ProductId
 									Description: "The AWS Marketplace product ID of the model package.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -644,9 +740,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A description of the additional Inference specification.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(1024),
 							validate.StringMatch(regexp.MustCompile(".*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"name": {
@@ -664,9 +764,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The supported MIME types for the input data.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenAtMost(256)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile(".*"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"supported_realtime_inference_instance_types": {
@@ -674,15 +778,23 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A list of the instance types that are used to generate inferences in real-time",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"supported_response_mime_types": {
 						// Property: SupportedResponseMIMETypes
 						Description: "The supported MIME types for the output data.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenAtMost(1024)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[-\\w]+\\/.+$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"supported_transform_instance_types": {
@@ -690,15 +802,23 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 15),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"additional_inference_specifications_to_add": {
@@ -883,9 +1003,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The DNS host name for the Docker container.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(63),
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"environment": {
@@ -895,21 +1019,33 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Type: types.MapType{ElemType: types.StringType},
 									// Pattern "[\\S\\s]*" ignored.
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"framework": {
 									// Property: Framework
 									Description: "The machine learning framework of the model package container image.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"framework_version": {
 									// Property: FrameworkVersion
 									Description: "The framework version of the Model Package Container Image.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 10),
 										validate.StringMatch(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"image": {
@@ -927,9 +1063,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(72),
 										validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"model_data_url": {
@@ -937,9 +1077,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "A structure with Model Input details.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
 										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"model_input": {
@@ -959,21 +1103,33 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"nearest_model_name": {
 									// Property: NearestModelName
 									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"product_id": {
 									// Property: ProductId
 									Description: "The AWS Marketplace product ID of the model package.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -988,9 +1144,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A description of the additional Inference specification.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(1024),
 							validate.StringMatch(regexp.MustCompile(".*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"name": {
@@ -1008,9 +1168,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The supported MIME types for the input data.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenAtMost(256)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile(".*"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"supported_realtime_inference_instance_types": {
@@ -1018,15 +1182,23 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A list of the instance types that are used to generate inferences in real-time",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"supported_response_mime_types": {
 						// Property: SupportedResponseMIMETypes
 						Description: "The supported MIME types for the output data.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenAtMost(1024)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[-\\w]+\\/.+$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"supported_transform_instance_types": {
@@ -1034,15 +1206,23 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 15),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"approval_description": {
@@ -1057,9 +1237,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "A description provided for the model approval.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
 				validate.StringMatch(regexp.MustCompile(".*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"certify_for_marketplace": {
@@ -1072,6 +1256,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "Whether to certify the model package for listing on AWS Marketplace.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"client_token": {
 			// Property: ClientToken
@@ -1126,22 +1314,38 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The domain associated with the user.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"user_profile_arn": {
 						// Property: UserProfileArn
 						Description: "The Amazon Resource Name (ARN) of the user's profile.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"user_profile_name": {
 						// Property: UserProfileName
 						Description: "The name of the user's profile.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -1182,6 +1386,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 			Type: types.MapType{ElemType: types.StringType},
 			// Pattern "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}" ignored.
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"domain": {
 			// Property: Domain
@@ -1514,9 +1722,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the file source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -1524,9 +1736,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The type of content stored in the file source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 													validate.StringMatch(regexp.MustCompile(".*"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"s3_uri": {
@@ -1542,6 +1758,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"post_training_constraints": {
 									// Property: PostTrainingConstraints
@@ -1553,9 +1773,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -1581,6 +1805,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"pre_training_constraints": {
 									// Property: PreTrainingConstraints
@@ -1592,9 +1820,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -1620,10 +1852,18 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"explainability": {
 						// Property: Explainability
@@ -1640,9 +1880,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the file source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -1650,9 +1894,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The type of content stored in the file source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 													validate.StringMatch(regexp.MustCompile(".*"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"s3_uri": {
@@ -1668,6 +1916,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"constraints": {
 									// Property: Constraints
@@ -1679,9 +1931,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -1707,10 +1963,18 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"model_data_quality": {
 						// Property: ModelDataQuality
@@ -1727,9 +1991,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -1755,6 +2023,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"statistics": {
 									// Property: Statistics
@@ -1766,9 +2038,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -1794,10 +2070,18 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"model_quality": {
 						// Property: ModelQuality
@@ -1814,9 +2098,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -1842,6 +2130,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"statistics": {
 									// Property: Statistics
@@ -1853,9 +2145,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -1881,10 +2177,18 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -1918,6 +2222,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 			Type: types.MapType{ElemType: types.StringType},
 			// Pattern "[\\S\\s]*" ignored.
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"inference_specification": {
 			// Property: InferenceSpecification
@@ -2083,9 +2391,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The DNS host name for the Docker container.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(63),
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"environment": {
@@ -2095,21 +2407,33 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Type: types.MapType{ElemType: types.StringType},
 									// Pattern "[\\S\\s]*" ignored.
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"framework": {
 									// Property: Framework
 									Description: "The machine learning framework of the model package container image.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"framework_version": {
 									// Property: FrameworkVersion
 									Description: "The framework version of the Model Package Container Image.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 10),
 										validate.StringMatch(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"image": {
@@ -2127,9 +2451,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(72),
 										validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"model_data_url": {
@@ -2137,9 +2465,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "A structure with Model Input details.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
 										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"model_input": {
@@ -2159,21 +2491,33 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"nearest_model_name": {
 									// Property: NearestModelName
 									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"product_id": {
 									// Property: ProductId
 									Description: "The AWS Marketplace product ID of the model package.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -2199,6 +2543,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A list of the instance types that are used to generate inferences in real-time",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"supported_response_mime_types": {
 						// Property: SupportedResponseMIMETypes
@@ -2215,8 +2563,12 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -2258,22 +2610,38 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The domain associated with the user.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"user_profile_arn": {
 						// Property: UserProfileArn
 						Description: "The Amazon Resource Name (ARN) of the user's profile.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"user_profile_name": {
 						// Property: UserProfileName
 						Description: "The name of the user's profile.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"last_modified_time": {
 			// Property: LastModifiedTime
@@ -2285,6 +2653,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The time at which the model package was last modified.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"metadata_properties": {
 			// Property: MetadataProperties
@@ -2328,9 +2700,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The commit ID.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(1024),
 							validate.StringMatch(regexp.MustCompile(".*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"generated_by": {
@@ -2338,9 +2714,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The entity this entity was generated by.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(1024),
 							validate.StringMatch(regexp.MustCompile(".*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"project_id": {
@@ -2348,9 +2728,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The project ID metadata.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(1024),
 							validate.StringMatch(regexp.MustCompile(".*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"repository": {
@@ -2358,9 +2742,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The repository metadata.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(1024),
 							validate.StringMatch(regexp.MustCompile(".*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -2387,12 +2775,16 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The approval status of the model package.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"Approved",
 					"Rejected",
 					"PendingManualApproval",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"model_metrics": {
@@ -2683,9 +3075,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -2711,6 +3107,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"pre_training_report": {
 									// Property: PreTrainingReport
@@ -2722,9 +3122,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -2750,6 +3154,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"report": {
 									// Property: Report
@@ -2761,9 +3169,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -2789,10 +3201,18 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"explainability": {
 						// Property: Explainability
@@ -2809,9 +3229,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -2837,10 +3261,18 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"model_data_quality": {
 						// Property: ModelDataQuality
@@ -2857,9 +3289,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -2885,6 +3321,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"statistics": {
 									// Property: Statistics
@@ -2896,9 +3336,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -2924,10 +3368,18 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"model_quality": {
 						// Property: ModelQuality
@@ -2944,9 +3396,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -2972,6 +3428,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"statistics": {
 									// Property: Statistics
@@ -2983,9 +3443,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The digest of the metric source.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(72),
 													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"content_type": {
@@ -3011,10 +3475,18 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -3096,6 +3568,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The name or arn of the model package.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"model_package_status": {
 			// Property: ModelPackageStatus
@@ -3215,6 +3691,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "If the overall status is Failed, the reason for the failure.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"name": {
 									// Property: Name
@@ -3243,6 +3723,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"validation_statuses": {
 						// Property: ValidationStatuses
@@ -3253,6 +3737,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "If the overall status is Failed, the reason for the failure.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"name": {
 									// Property: Name
@@ -3285,6 +3773,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"model_package_status_item": {
 			// Property: ModelPackageStatusItem
@@ -3329,6 +3821,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "If the overall status is Failed, the reason for the failure.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
@@ -3357,6 +3853,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"model_package_version": {
 			// Property: ModelPackageVersion
@@ -3369,8 +3869,12 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The version of the model package.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"sample_payload_url": {
@@ -3461,9 +3965,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
 										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -3535,6 +4043,10 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -3594,8 +4106,12 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"task": {
@@ -3864,11 +4380,15 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "A string that determines the number of records included in a single mini-batch.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"MultiRecord",
 														"SingleRecord",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"environment": {
@@ -3878,14 +4398,22 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Type: types.MapType{ElemType: types.StringType},
 												// Pattern "[\\S\\s]*" ignored.
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"max_concurrent_transforms": {
 												// Property: MaxConcurrentTransforms
 												Description: "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(0),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"max_payload_in_mb": {
@@ -3893,8 +4421,12 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 												Description: "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(0),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"transform_input": {
@@ -3907,11 +4439,15 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 															Description: "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"None",
 																	"Gzip",
 																}),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"content_type": {
@@ -3919,9 +4455,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 															Description: "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
 																validate.StringMatch(regexp.MustCompile(".*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"data_source": {
@@ -3970,6 +4510,7 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 															Description: "The method to use to split the transform job's data files into smaller batches. ",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"None",
@@ -3977,6 +4518,9 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 																	"Line",
 																	"RecordIO",
 																}),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
@@ -3993,9 +4537,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 															Description: "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
 																validate.StringMatch(regexp.MustCompile(".*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"assemble_with": {
@@ -4003,11 +4551,15 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 															Description: "Defines how to assemble the results of the transform job as a single S3 object.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"None",
 																	"Line",
 																}),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"kms_key_id": {
@@ -4015,9 +4567,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 															Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(2048),
 																validate.StringMatch(regexp.MustCompile(".*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"s3_output_path": {
@@ -4059,9 +4615,13 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 															Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(2048),
 																validate.StringMatch(regexp.MustCompile(".*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},

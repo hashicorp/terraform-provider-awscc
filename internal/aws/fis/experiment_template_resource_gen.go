@@ -91,8 +91,12 @@ func experimentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 						Description: "The ID of the action.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"description": {
@@ -100,8 +104,12 @@ func experimentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 						Description: "A description for the action.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(512),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"parameters": {
@@ -110,14 +118,22 @@ func experimentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"start_after": {
 						// Property: StartAfter
 						Description: "The names of the actions that must be completed before the current action starts.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenAtMost(64)),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"targets": {
@@ -126,10 +142,18 @@ func experimentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -224,6 +248,10 @@ func experimentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"log_schema_version": {
 						// Property: LogSchemaVersion
@@ -249,17 +277,29 @@ func experimentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -316,8 +356,12 @@ func experimentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -460,20 +504,32 @@ func experimentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"parameters": {
 						// Property: Parameters
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"resource_arns": {
 						// Property: ResourceArns
 						Description: "The Amazon Resource Names (ARNs) of the target resources.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(20, 2048)),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"resource_tags": {
@@ -481,14 +537,22 @@ func experimentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"resource_type": {
 						// Property: ResourceType
 						Description: "The AWS resource type. The resource type must be supported for the specified action.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"selection_mode": {
@@ -496,8 +560,12 @@ func experimentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 						Description: "Scopes the identified resources to a specific number of the resources at random, or a percentage of the resources.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

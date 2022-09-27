@@ -56,8 +56,12 @@ func attributeGroupResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The description of the attribute group. ",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -107,6 +111,10 @@ func attributeGroupResourceType(ctx context.Context) (provider.ResourceType, err
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

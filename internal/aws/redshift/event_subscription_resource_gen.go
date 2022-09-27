@@ -60,6 +60,10 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 			Description: "A boolean value; set to true to activate the subscription, and set to false to create the subscription but not activate it.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"event_categories": {
 			// Property: EventCategories
@@ -83,6 +87,7 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 			Description: "Specifies the Amazon Redshift event categories to be published by the event notification subscription.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringInSlice([]string{
 					"configuration",
@@ -91,6 +96,9 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 					"security",
 					"pending",
 				})),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"event_categories_list": {
@@ -126,11 +134,15 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 			Description: "Specifies the Amazon Redshift event severity to be published by the event notification subscription.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ERROR",
 					"INFO",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"sns_topic_arn": {
@@ -143,6 +155,10 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 			Description: "The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the event notifications.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"source_ids": {
 			// Property: SourceIds
@@ -158,8 +174,10 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 			Description: "A list of one or more identifiers of Amazon Redshift source objects.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"source_ids_list": {
@@ -198,6 +216,7 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 			Description: "The type of source that will be generating the events.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"cluster",
@@ -206,6 +225,9 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 					"cluster-snapshot",
 					"scheduled-action",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -311,8 +333,10 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

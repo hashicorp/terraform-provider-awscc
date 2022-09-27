@@ -90,6 +90,10 @@ func parameterGroupResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Parameters is a write-only property.
 		},
 		"tags": {
@@ -151,8 +155,12 @@ func parameterGroupResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

@@ -79,9 +79,13 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "A description for the AnomalyDetector.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
 				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"anomaly_detector_name": {
@@ -134,9 +138,13 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "KMS key used to encrypt the AnomalyDetector data",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 				validate.StringMatch(regexp.MustCompile("arn:aws.*:kms:.*:[0-9]{12}:key/.*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"metric_set_list": {
@@ -574,6 +582,7 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "Dimensions for this MetricSet.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(0),
 							validate.ArrayForEach(validate.StringLenBetween(1, 63)),
@@ -581,6 +590,7 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"metric_list": {
@@ -614,9 +624,13 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 									// Property: Namespace
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 255),
 										validate.StringMatch(regexp.MustCompile("[^:].*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -634,9 +648,13 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "A description for the MetricSet.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
 							validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"metric_set_frequency": {
@@ -644,6 +662,7 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "A frequency period to aggregate the data",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"PT5M",
@@ -651,6 +670,9 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 								"PT1H",
 								"P1D",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"metric_set_name": {
@@ -692,6 +714,10 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudwatch_config": {
 									// Property: CloudwatchConfig
@@ -709,6 +735,10 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"rds_source_config": {
 									// Property: RDSSourceConfig
@@ -804,6 +834,10 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"redshift_source_config": {
 									// Property: RedshiftSourceConfig
@@ -899,6 +933,10 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"s3_source_config": {
 									// Property: S3SourceConfig
@@ -916,57 +954,85 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 																		// Property: Charset
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenAtMost(63),
 																			validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"contains_header": {
 																		// Property: ContainsHeader
 																		Type:     types.BoolType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"delimiter": {
 																		// Property: Delimiter
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenAtMost(1),
 																			validate.StringMatch(regexp.MustCompile("[^\\r\\n]"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"file_compression": {
 																		// Property: FileCompression
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringInSlice([]string{
 																				"NONE",
 																				"GZIP",
 																			}),
 																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"header_list": {
 																		// Property: HeaderList
 																		Type:     types.ListType{ElemType: types.StringType},
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.ArrayForEach(validate.StringLenBetween(1, 63)),
 																			validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), "")),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"quote_symbol": {
 																		// Property: QuoteSymbol
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenAtMost(1),
 																			validate.StringMatch(regexp.MustCompile("[^\\r\\n]|^$"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"json_format_descriptor": {
 															// Property: JsonFormatDescriptor
@@ -976,25 +1042,37 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 																		// Property: Charset
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenAtMost(63),
 																			validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"file_compression": {
 																		// Property: FileCompression
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringInSlice([]string{
 																				"NONE",
 																				"GZIP",
 																			}),
 																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
@@ -1004,10 +1082,14 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 												// Property: HistoricalDataPathList
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 1),
 													validate.ArrayForEach(validate.StringLenAtMost(1024)),
 													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^s3://[a-z0-9].+$"), "")),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"role_arn": {
@@ -1023,15 +1105,23 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 												// Property: TemplatedPathList
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 1),
 													validate.ArrayForEach(validate.StringLenAtMost(1024)),
 													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^s3://[a-zA-Z0-9_\\-\\/ {}=]+$"), "")),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -1042,8 +1132,12 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "Offset, in seconds, between the frequency interval and the time at which the metrics are available.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 432000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"timestamp_column": {
@@ -1055,9 +1149,13 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "A timestamp format for the timestamps in the dataset",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(63),
 										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"column_name": {
@@ -1065,22 +1163,34 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 									Description: "Name of a column in the data.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 63),
 										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"timezone": {
 						// Property: Timezone
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(60),
 							validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

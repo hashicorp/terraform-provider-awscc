@@ -225,6 +225,7 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"aes128",
@@ -232,18 +233,29 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 											"aes256",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"constant_initialization_vector": {
 									// Property: ConstantInitializationVector
 									Description: "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"device_id": {
 									// Property: DeviceId
 									Description: "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"key_type": {
 									// Property: KeyType
@@ -268,12 +280,20 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"resource_id": {
 									// Property: ResourceId
 									Description: "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"role_arn": {
 									// Property: RoleArn
@@ -286,28 +306,48 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"url": {
 									// Property: Url
 									Description: "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
 						Description: "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"entitlement_arn": {
 						// Property: EntitlementArn
 						Description: "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ingest_ip": {
 						// Property: IngestIp
@@ -323,12 +363,20 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The port that the flow will be listening on for incoming content.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"max_bitrate": {
 						// Property: MaxBitrate
 						Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"max_latency": {
 						// Property: MaxLatency
@@ -368,6 +416,7 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The protocol that is used by the source or output.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"zixi-push",
@@ -376,6 +425,9 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"rist",
 								"srt-listener",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"source_arn": {
@@ -401,18 +453,30 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpc_interface_name": {
 						// Property: VpcInterfaceName
 						Description: "The name of the VPC Interface this Source is configured with.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"whitelist_cidr": {
 						// Property: WhitelistCidr
 						Description: "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -447,21 +511,33 @@ func flowResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Search window time to look for dash-7 packets",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"state": {
 						// Property: State
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ENABLED",
 								"DISABLED",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

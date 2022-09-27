@@ -58,8 +58,12 @@ func schemaVersionResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "Name of the registry to identify where the Schema is located.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"schema_arn": {
@@ -67,8 +71,12 @@ func schemaVersionResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):glue:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"schema_name": {
@@ -76,8 +84,12 @@ func schemaVersionResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "Name of the schema. This parameter requires RegistryName to be provided.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

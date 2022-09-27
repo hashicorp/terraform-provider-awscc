@@ -115,11 +115,15 @@ func budgetsActionResourceType(ctx context.Context) (provider.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"AUTOMATIC",
 					"MANUAL",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"budget_name": {
@@ -239,8 +243,12 @@ func budgetsActionResourceType(ctx context.Context) (provider.ResourceType, erro
 									// Property: Groups
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 100),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"policy_arn": {
@@ -252,21 +260,33 @@ func budgetsActionResourceType(ctx context.Context) (provider.ResourceType, erro
 									// Property: Roles
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 100),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"users": {
 									// Property: Users
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 100),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"scp_action_definition": {
 						// Property: ScpActionDefinition
@@ -288,6 +308,10 @@ func budgetsActionResourceType(ctx context.Context) (provider.ResourceType, erro
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ssm_action_definition": {
 						// Property: SsmActionDefinition
@@ -320,6 +344,10 @@ func budgetsActionResourceType(ctx context.Context) (provider.ResourceType, erro
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

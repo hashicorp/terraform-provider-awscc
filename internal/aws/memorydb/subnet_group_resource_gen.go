@@ -47,6 +47,10 @@ func subnetGroupResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "An optional description of the subnet group.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"subnet_group_name": {
 			// Property: SubnetGroupName
@@ -141,8 +145,12 @@ func subnetGroupResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

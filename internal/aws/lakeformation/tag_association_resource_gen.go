@@ -207,6 +207,10 @@ func tagAssociationResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: Catalog
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"database": {
 						// Property: Database
@@ -231,6 +235,10 @@ func tagAssociationResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"table": {
 						// Property: Table
@@ -256,18 +264,30 @@ func tagAssociationResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Name
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 255),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"table_wildcard": {
 									// Property: TableWildcard
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"table_with_columns": {
 						// Property: TableWithColumns
@@ -311,6 +331,10 @@ func tagAssociationResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

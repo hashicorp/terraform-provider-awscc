@@ -56,9 +56,13 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
 				validate.StringMatch(regexp.MustCompile("[\\w!@#.-]+"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"connector_profile_arn": {
@@ -1056,6 +1060,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"custom_connector": {
 									// Property: CustomConnector
@@ -1078,14 +1086,22 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															// Property: ApiSecretKey
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"authentication_type": {
 												// Property: AuthenticationType
@@ -1125,6 +1141,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"custom": {
 												// Property: Custom
@@ -1136,6 +1156,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															// Pattern: ""
 															Type:     types.MapType{ElemType: types.StringType},
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"custom_authentication_type": {
 															// Property: CustomAuthenticationType
@@ -1149,6 +1173,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"oauth_2": {
 												// Property: Oauth2
@@ -1158,27 +1186,39 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															// Property: AccessToken
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"client_id": {
 															// Property: ClientId
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"client_secret": {
 															// Property: ClientSecret
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"o_auth_request": {
@@ -1190,33 +1230,57 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 																		Description: "The code provided by the connector when it has been authenticated via the connected app.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"redirect_uri": {
 																		// Property: RedirectUri
 																		Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"refresh_token": {
 															// Property: RefreshToken
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"datadog": {
 									// Property: Datadog
@@ -1245,6 +1309,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"dynatrace": {
 									// Property: Dynatrace
@@ -1263,6 +1331,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"google_analytics": {
 									// Property: GoogleAnalytics
@@ -1273,9 +1345,13 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The credentials used to access protected resources.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"client_id": {
@@ -1308,30 +1384,50 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"redirect_uri": {
 															// Property: RedirectUri
 															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"refresh_token": {
 												// Property: RefreshToken
 												Description: "The credentials used to acquire new access tokens.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"infor_nexus": {
 									// Property: InforNexus
@@ -1380,6 +1476,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"marketo": {
 									// Property: Marketo
@@ -1390,9 +1490,13 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The credentials used to access protected resources.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"client_id": {
@@ -1425,20 +1529,36 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"redirect_uri": {
 															// Property: RedirectUri
 															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"redshift": {
 									// Property: Redshift
@@ -1467,6 +1587,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sapo_data": {
 									// Property: SAPOData
@@ -1497,6 +1621,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"o_auth_credentials": {
 												// Property: OAuthCredentials
@@ -1506,27 +1634,39 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															// Property: AccessToken
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"client_id": {
 															// Property: ClientId
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"client_secret": {
 															// Property: ClientSecret
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"connector_o_auth_request": {
@@ -1538,33 +1678,57 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 																		Description: "The code provided by the connector when it has been authenticated via the connected app.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"redirect_uri": {
 																		// Property: RedirectUri
 																		Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"refresh_token": {
 															// Property: RefreshToken
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"salesforce": {
 									// Property: Salesforce
@@ -1575,9 +1739,13 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The credentials used to access protected resources.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"client_credentials_arn": {
@@ -1585,9 +1753,13 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The client credentials to fetch access token and refresh token.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(2048),
 													validate.StringMatch(regexp.MustCompile("arn:aws:secretsmanager:.*:[0-9]+:.*"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"connector_o_auth_request": {
@@ -1600,30 +1772,50 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"redirect_uri": {
 															// Property: RedirectUri
 															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"refresh_token": {
 												// Property: RefreshToken
 												Description: "The credentials used to acquire new access tokens.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"service_now": {
 									// Property: ServiceNow
@@ -1652,6 +1844,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"singular": {
 									// Property: Singular
@@ -1670,6 +1866,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"slack": {
 									// Property: Slack
@@ -1680,9 +1880,13 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The credentials used to access protected resources.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"client_id": {
@@ -1715,20 +1919,36 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"redirect_uri": {
 															// Property: RedirectUri
 															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"snowflake": {
 									// Property: Snowflake
@@ -1757,6 +1977,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"trendmicro": {
 									// Property: Trendmicro
@@ -1775,6 +1999,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"veeva": {
 									// Property: Veeva
@@ -1803,6 +2031,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"zendesk": {
 									// Property: Zendesk
@@ -1813,9 +2045,13 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The credentials used to access protected resources.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"client_id": {
@@ -1848,20 +2084,36 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"redirect_uri": {
 															// Property: RedirectUri
 															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -1884,20 +2136,28 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															// Property: OAuth2GrantType
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"CLIENT_CREDENTIALS",
 																	"AUTHORIZATION_CODE",
 																}),
 															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"token_url": {
 															// Property: TokenUrl
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(0, 256),
 																validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"token_url_custom_properties": {
@@ -1906,10 +2166,18 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															// Pattern: ""
 															Type:     types.MapType{ElemType: types.StringType},
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"profile_properties": {
 												// Property: ProfileProperties
@@ -1917,10 +2185,18 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												// Pattern: ""
 												Type:     types.MapType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"datadog": {
 									// Property: Datadog
@@ -1939,6 +2215,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"dynatrace": {
 									// Property: Dynatrace
@@ -1957,6 +2237,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"infor_nexus": {
 									// Property: InforNexus
@@ -1975,6 +2259,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"marketo": {
 									// Property: Marketo
@@ -1993,6 +2281,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"redshift": {
 									// Property: Redshift
@@ -2013,8 +2305,12 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(128),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"database_url": {
@@ -2040,6 +2336,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sapo_data": {
 									// Property: SAPOData
@@ -2049,36 +2349,52 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												// Property: ApplicationHostUrl
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 													validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"application_service_path": {
 												// Property: ApplicationServicePath
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"client_number": {
 												// Property: ClientNumber
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(3, 3),
 													validate.StringMatch(regexp.MustCompile("^\\d{3}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"logon_language": {
 												// Property: LogonLanguage
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(2),
 													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_]*$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"o_auth_properties": {
@@ -2089,54 +2405,82 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 															// Property: AuthCodeUrl
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
 																validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"o_auth_scopes": {
 															// Property: OAuthScopes
 															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.UniqueItems(),
 																validate.ArrayForEach(validate.StringLenAtMost(128)),
 																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[/\\w]*"), "")),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"token_url": {
 															// Property: TokenUrl
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
 																validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"port_number": {
 												// Property: PortNumber
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 65535),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"private_link_service_name": {
 												// Property: PrivateLinkServiceName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"salesforce": {
 									// Property: Salesforce
@@ -2147,19 +2491,31 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The location of the Salesforce resource",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"is_sandbox_environment": {
 												// Property: isSandboxEnvironment
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"service_now": {
 									// Property: ServiceNow
@@ -2178,6 +2534,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"slack": {
 									// Property: Slack
@@ -2196,6 +2556,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"snowflake": {
 									// Property: Snowflake
@@ -2206,9 +2570,13 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The name of the account.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"bucket_name": {
@@ -2226,8 +2594,12 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(128),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"private_link_service_name": {
@@ -2235,9 +2607,13 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The Snow?ake Private Link service name to be used for private data transfers.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"region": {
@@ -2245,9 +2621,13 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 												Description: "The region of the Snow?ake account.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(64),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"stage": {
@@ -2273,6 +2653,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"veeva": {
 									// Property: Veeva
@@ -2291,6 +2675,10 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"zendesk": {
 									// Property: Zendesk
@@ -2309,14 +2697,26 @@ func connectorProfileResourceType(ctx context.Context) (provider.ResourceType, e
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// ConnectorProfileConfig is a write-only property.
 		},
 		"connector_profile_name": {

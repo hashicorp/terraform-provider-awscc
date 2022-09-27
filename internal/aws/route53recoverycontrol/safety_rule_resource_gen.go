@@ -69,6 +69,10 @@ func safetyRuleResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"control_panel_arn": {
 			// Property: ControlPanelArn
@@ -151,6 +155,10 @@ func safetyRuleResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -162,6 +170,10 @@ func safetyRuleResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The name for the safety rule.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"rule_config": {
 			// Property: RuleConfig

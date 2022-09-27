@@ -48,9 +48,13 @@ func storedQueryResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 				validate.StringMatch(regexp.MustCompile("[\\s\\S]*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"query_expression": {
@@ -159,9 +163,13 @@ func storedQueryResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

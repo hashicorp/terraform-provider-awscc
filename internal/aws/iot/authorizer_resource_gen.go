@@ -73,6 +73,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"signing_disabled": {
 			// Property: SigningDisabled
@@ -100,11 +104,15 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ACTIVE",
 					"INACTIVE",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -144,6 +152,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"token_key_name": {
 			// Property: TokenKeyName
@@ -153,6 +165,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"token_signing_public_keys": {
 			// Property: TokenSigningPublicKeys
@@ -170,6 +186,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

@@ -151,8 +151,12 @@ func resourceDataSyncResourceType(ctx context.Context) (provider.ResourceType, e
 						// Property: BucketPrefix
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"bucket_region": {
@@ -167,8 +171,12 @@ func resourceDataSyncResourceType(ctx context.Context) (provider.ResourceType, e
 						// Property: KMSKeyArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"sync_format": {
@@ -291,15 +299,27 @@ func resourceDataSyncResourceType(ctx context.Context) (provider.ResourceType, e
 									// Property: OrganizationalUnits
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"include_future_regions": {
 						// Property: IncludeFutureRegions
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"source_regions": {
 						// Property: SourceRegions
@@ -317,6 +337,10 @@ func resourceDataSyncResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"sync_type": {
 			// Property: SyncType

@@ -170,12 +170,20 @@ func containerResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The launch command for the container.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"container_name": {
 									// Property: ContainerName
 									Description: "The name of the container.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"environment": {
 									// Property: Environment
@@ -186,21 +194,37 @@ func containerResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Value
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"variable": {
 												// Property: Variable
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"image": {
 									// Property: Image
 									Description: "The name of the image used for the container.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ports": {
 									// Property: Ports
@@ -211,19 +235,35 @@ func containerResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Port
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"protocol": {
 												// Property: Protocol
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"public_endpoint": {
 						// Property: PublicEndpoint
@@ -235,12 +275,20 @@ func containerResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The name of the container for the endpoint.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"container_port": {
 									// Property: ContainerPort
 									Description: "The port of the container to which traffic is forwarded to.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"health_check_config": {
 									// Property: HealthCheckConfig
@@ -252,48 +300,84 @@ func containerResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The number of consecutive health checks successes required before moving the container to the Healthy state. The default value is 2.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"interval_seconds": {
 												// Property: IntervalSeconds
 												Description: "The approximate interval, in seconds, between health checks of an individual container. You can specify between 5 and 300 seconds. The default value is 5.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"path": {
 												// Property: Path
 												Description: "The path on the container on which to perform the health check. The default value is /.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"success_codes": {
 												// Property: SuccessCodes
 												Description: "The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499. You can specify multiple values (for example, 200,202) or a range of values (for example, 200-299).",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"timeout_seconds": {
 												// Property: TimeoutSeconds
 												Description: "The amount of time, in seconds, during which no response means a failed health check. You can specify between 2 and 60 seconds. The default value is 2.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"unhealthy_threshold": {
 												// Property: UnhealthyThreshold
 												Description: "The number of consecutive health check failures required before moving the container to the Unhealthy state. The default value is 2.",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"is_disabled": {
 			// Property: IsDisabled
@@ -305,6 +389,10 @@ func containerResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A Boolean value to indicate whether the container service is disabled.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"power": {
 			// Property: Power
@@ -352,16 +440,28 @@ func containerResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: CertificateName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"domain_names": {
 						// Property: DomainNames
 						Description: "An object that describes the configuration for the containers of the deployment.",
 						Type:        types.SetType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"scale": {
 			// Property: Scale
@@ -448,13 +548,21 @@ func containerResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"url": {
 			// Property: Url

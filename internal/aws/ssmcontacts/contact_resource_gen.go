@@ -192,6 +192,10 @@ func contactResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"contact_target_info": {
 									// Property: ContactTargetInfo
@@ -213,10 +217,15 @@ func contactResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.RequiredAttributes(
 								validate.OneOfRequired(
@@ -228,6 +237,9 @@ func contactResourceType(ctx context.Context) (provider.ResourceType, error) {
 									),
 								),
 							),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

@@ -129,8 +129,12 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: CatalogId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"database_name": {
@@ -167,27 +171,47 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BucketOwner
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(12, 12),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"overwrite": {
 						// Property: Overwrite
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_options": {
 						// Property: S3Options
@@ -207,14 +231,22 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BucketOwner
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(12, 12),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -223,6 +255,10 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"table_name": {
 						// Property: TableName
@@ -235,6 +271,10 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"database_outputs": {
 			// Property: DatabaseOutputs
@@ -327,18 +367,30 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: BucketOwner
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(12, 12),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -349,10 +401,14 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Database table name",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NEW_TABLE",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"glue_connection_name": {
@@ -364,6 +420,10 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"dataset_name": {
 			// Property: DatasetName
@@ -377,8 +437,12 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Dataset name",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"encryption_key_arn": {
@@ -393,8 +457,12 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Encryption Key Arn",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"encryption_mode": {
@@ -411,11 +479,15 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Encryption mode",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"SSE-KMS",
 					"SSE-S3",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"job_sample": {
@@ -449,11 +521,15 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Sample configuration mode for profile jobs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"FULL_DATASET",
 								"CUSTOM_ROWS",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"size": {
@@ -461,10 +537,18 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Sample configuration size for profile jobs.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"log_subscription": {
 			// Property: LogSubscription
@@ -480,11 +564,15 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Log subscription",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENABLE",
 					"DISABLE",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"max_capacity": {
@@ -497,6 +585,10 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Max capacity",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"max_retries": {
 			// Property: MaxRetries
@@ -508,6 +600,10 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Max retries",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -564,18 +660,30 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: BucketOwner
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(12, 12),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"outputs": {
 			// Property: Outputs
@@ -682,6 +790,7 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: CompressionFormat
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"GZIP",
@@ -695,11 +804,15 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"ZLIB",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"format": {
 						// Property: Format
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"CSV",
@@ -711,6 +824,9 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"XML",
 								"TABLEAUHYPER",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"format_options": {
@@ -727,17 +843,29 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Delimiter
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 1),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"location": {
 						// Property: Location
@@ -753,14 +881,22 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: BucketOwner
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(12, 12),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"key": {
 									// Property: Key
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -770,26 +906,42 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: MaxOutputFiles
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 999),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"overwrite": {
 						// Property: Overwrite
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"partition_columns": {
 						// Property: PartitionColumns
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"profile_configuration": {
 			// Property: ProfileConfiguration
@@ -1006,23 +1158,35 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Name
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 255),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"regex": {
 												// Property: Regex
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 255),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"statistics": {
@@ -1033,10 +1197,14 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: IncludedStatistics
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
 													validate.ArrayForEach(validate.StringLenBetween(1, 128)),
 													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[A-Z\\_]+$"), "")),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"overrides": {
@@ -1061,8 +1229,12 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -1072,8 +1244,12 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"dataset_statistics_configuration": {
@@ -1084,10 +1260,14 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: IncludedStatistics
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[A-Z\\_]+$"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"overrides": {
@@ -1112,13 +1292,21 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"entity_detector_configuration": {
 						// Property: EntityDetectorConfiguration
@@ -1141,6 +1329,10 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"entity_types": {
 									// Property: EntityTypes
@@ -1155,6 +1347,10 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"profile_columns": {
 						// Property: ProfileColumns
@@ -1164,28 +1360,44 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: Name
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 255),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"regex": {
 									// Property: Regex
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 255),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"project_name": {
 			// Property: ProjectName
@@ -1199,8 +1411,12 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Project name",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"recipe": {
@@ -1236,10 +1452,18 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Recipe version",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -1319,6 +1543,10 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Timeout",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"type": {
 			// Property: Type
@@ -1391,17 +1619,25 @@ func jobResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: ValidationMode
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"CHECK_ALL",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

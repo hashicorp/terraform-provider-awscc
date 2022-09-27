@@ -73,6 +73,10 @@ func coreNetworkResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The description of core network",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"edges": {
 			// Property: Edges
@@ -112,19 +116,29 @@ func coreNetworkResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The ASN of a core network edge.",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"edge_location": {
 						// Property: EdgeLocation
 						Description: "The Region where a core network edge is located.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"inside_cidr_blocks": {
 						// Property: InsideCidrBlocks
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -173,8 +187,10 @@ func coreNetworkResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Live policy document for the core network, you must provide PolicyDocument in Json Format",
 			Type:        JSONStringType,
 			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				JSONStringType.AttributePlanModifier(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"segments": {
@@ -218,8 +234,10 @@ func coreNetworkResourceType(ctx context.Context) (provider.ResourceType, error)
 						// Property: EdgeLocations
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"name": {
@@ -227,13 +245,19 @@ func coreNetworkResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "Name of segment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"shared_segments": {
 						// Property: SharedSegments
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -303,8 +327,10 @@ func coreNetworkResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

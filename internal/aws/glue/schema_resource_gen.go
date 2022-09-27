@@ -66,19 +66,31 @@ func schemaResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Indicates if the latest version needs to be updated.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"version_number": {
 						// Property: VersionNumber
 						Description: "Indicates the version number in the schema to update.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 100000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"compatibility": {
 			// Property: Compatibility
@@ -151,8 +163,12 @@ func schemaResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description of the schema. If description is not provided, there will not be any default value for this.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"initial_schema_version_id": {
@@ -218,8 +234,12 @@ func schemaResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Amazon Resource Name for the Registry.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):glue:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"name": {
@@ -227,8 +247,12 @@ func schemaResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Name of the registry in which the schema will be created.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -315,8 +339,12 @@ func schemaResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 10),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

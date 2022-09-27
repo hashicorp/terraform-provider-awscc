@@ -55,6 +55,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.SetType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -76,6 +80,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"display_name": {
 			// Property: DisplayName
@@ -85,6 +93,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"icon_s3_location": {
 			// Property: IconS3Location
@@ -146,6 +158,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"launch_path": {
 			// Property: LaunchPath
@@ -224,6 +240,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Tags is a write-only property.
 		},
 		"working_directory": {
@@ -234,6 +254,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

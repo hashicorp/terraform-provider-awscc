@@ -79,6 +79,10 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"target_tracking_configuration": {
 						// Property: TargetTrackingConfiguration
@@ -98,6 +102,10 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"balancing_strategy": {
 			// Property: BalancingStrategy
@@ -114,12 +122,16 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"SPOT_ONLY",
 					"SPOT_PREFERRED",
 					"ON_DEMAND_ONLY",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"delete_option": {
@@ -137,12 +149,16 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The type of delete to perform.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"SAFE_DELETE",
 					"FORCE_DELETE",
 					"RETAIN",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// DeleteOption is a write-only property.
 		},
@@ -195,11 +211,15 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "A flag that indicates whether instances in the game server group are protected from early termination.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"NO_PROTECTION",
 					"FULL_PROTECTION",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"instance_definitions": {
@@ -245,6 +265,10 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -286,18 +310,30 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "A unique identifier for an existing EC2 launch template.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"launch_template_name": {
 						// Property: LaunchTemplateName
 						Description: "A readable identifier for an existing EC2 launch template.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"version": {
 						// Property: Version
 						Description: "The version of the EC2 launch template to use.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -314,8 +350,12 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group.",
 			Type:        types.Float64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.FloatAtLeast(1.000000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"min_size": {
@@ -329,8 +369,12 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group.",
 			Type:        types.Float64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.FloatAtLeast(0.000000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"role_arn": {
@@ -383,21 +427,31 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "The key for a developer-defined key:value pair for tagging an AWS resource.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for a developer-defined key:value pair for tagging an AWS resource.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpc_subnets": {
@@ -419,6 +473,7 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 20),
 				validate.ArrayForEach(validate.StringLenBetween(15, 24)),
@@ -426,6 +481,7 @@ func gameServerGroupResourceType(ctx context.Context) (provider.ResourceType, er
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

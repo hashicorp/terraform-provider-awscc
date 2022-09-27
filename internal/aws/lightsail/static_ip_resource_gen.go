@@ -31,6 +31,10 @@ func staticIpResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The instance where the static IP is attached.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ip_address": {
 			// Property: IpAddress

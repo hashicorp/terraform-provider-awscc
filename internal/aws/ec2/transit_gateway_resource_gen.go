@@ -44,6 +44,10 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"auto_accept_shared_attachments": {
 			// Property: AutoAcceptSharedAttachments
@@ -53,6 +57,10 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"default_route_table_association": {
 			// Property: DefaultRouteTableAssociation
@@ -62,6 +70,10 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"default_route_table_propagation": {
 			// Property: DefaultRouteTablePropagation
@@ -71,6 +83,10 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -80,6 +96,10 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"dns_support": {
 			// Property: DnsSupport
@@ -89,6 +109,10 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -124,6 +148,10 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -163,6 +191,10 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"transit_gateway_cidr_blocks": {
 			// Property: TransitGatewayCidrBlocks
@@ -175,6 +207,10 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vpn_ecmp_support": {
 			// Property: VpnEcmpSupport
@@ -184,6 +220,10 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

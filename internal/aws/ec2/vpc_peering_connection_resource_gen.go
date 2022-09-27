@@ -139,8 +139,10 @@ func vPCPeeringConnectionResourceType(ctx context.Context) (provider.ResourceTyp
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpc_id": {

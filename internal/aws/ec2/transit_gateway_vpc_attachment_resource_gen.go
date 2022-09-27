@@ -34,8 +34,10 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (provider.Reso
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -80,22 +82,38 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (provider.Reso
 						Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"dns_support": {
 						// Property: DnsSupport
 						Description: "Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ipv_6_support": {
 						// Property: Ipv6Support
 						Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"remove_subnet_ids": {
 			// Property: RemoveSubnetIds
@@ -110,8 +128,10 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (provider.Reso
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"subnet_ids": {
@@ -171,8 +191,10 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (provider.Reso
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"transit_gateway_id": {

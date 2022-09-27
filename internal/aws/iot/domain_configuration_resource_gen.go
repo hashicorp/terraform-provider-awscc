@@ -59,19 +59,31 @@ func domainConfigurationResourceType(ctx context.Context) (provider.ResourceType
 						// Property: AllowAuthorizerOverride
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"default_authorizer_name": {
 						// Property: DefaultAuthorizerName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 							validate.StringMatch(regexp.MustCompile("^[\\w=,@-]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"domain_configuration_name": {
 			// Property: DomainConfigurationName
@@ -106,11 +118,15 @@ func domainConfigurationResourceType(ctx context.Context) (provider.ResourceType
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENABLED",
 					"DISABLED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"domain_name": {
@@ -211,26 +227,38 @@ func domainConfigurationResourceType(ctx context.Context) (provider.ResourceType
 						// Property: ServerCertificateArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
 							validate.StringMatch(regexp.MustCompile("^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"server_certificate_status": {
 						// Property: ServerCertificateStatus
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"INVALID",
 								"VALID",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"server_certificate_status_detail": {
 						// Property: ServerCertificateStatusDetail
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -302,6 +330,10 @@ func domainConfigurationResourceType(ctx context.Context) (provider.ResourceType
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"validation_certificate_arn": {
 			// Property: ValidationCertificateArn

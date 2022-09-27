@@ -31,6 +31,10 @@ func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "A description for the network interface.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"group_set": {
 			// Property: GroupSet
@@ -47,8 +51,10 @@ func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "A list of security group IDs associated with this network interface.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -91,6 +97,10 @@ func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ipv_6_addresses": {
 			// Property: Ipv6Addresses
@@ -124,6 +134,10 @@ func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"primary_private_ip_address": {
 			// Property: PrimaryPrivateIpAddress
@@ -196,8 +210,10 @@ func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"secondary_private_ip_address_count": {
@@ -210,6 +226,10 @@ func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"secondary_private_ip_addresses": {
 			// Property: SecondaryPrivateIpAddresses
@@ -241,6 +261,10 @@ func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "Indicates whether traffic to or from the instance is validated.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"subnet_id": {
 			// Property: SubnetId
@@ -297,8 +321,10 @@ func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

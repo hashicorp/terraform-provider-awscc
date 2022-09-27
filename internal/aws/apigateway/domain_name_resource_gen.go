@@ -29,6 +29,10 @@ func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"distribution_domain_name": {
 			// Property: DistributionDomainName
@@ -89,10 +93,18 @@ func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: Types
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"mutual_tls_authentication": {
 			// Property: MutualTlsAuthentication
@@ -115,15 +127,27 @@ func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: TruststoreUri
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"truststore_version": {
 						// Property: TruststoreVersion
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ownership_verification_certificate_arn": {
 			// Property: OwnershipVerificationCertificateArn
@@ -133,6 +157,10 @@ func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"regional_certificate_arn": {
 			// Property: RegionalCertificateArn
@@ -142,6 +170,10 @@ func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"regional_domain_name": {
 			// Property: RegionalDomainName
@@ -175,6 +207,10 @@ func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -200,15 +236,27 @@ func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

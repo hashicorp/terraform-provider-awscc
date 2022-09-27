@@ -45,11 +45,19 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 						// Property: ComponentArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"component_id": {
 						// Property: ComponentId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -596,15 +604,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"acl_rule": {
 						// Property: AclRule
@@ -614,11 +634,19 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Cidr
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"egress": {
 									// Property: Egress
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"port_range": {
 									// Property: PortRange
@@ -628,44 +656,80 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"protocol": {
 									// Property: Protocol
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"rule_action": {
 									// Property: RuleAction
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"rule_number": {
 									// Property: RuleNumber
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"address": {
 						// Property: Address
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"addresses": {
 						// Property: Addresses
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"attached_to": {
 						// Property: AttachedTo
@@ -675,25 +739,45 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"availability_zones": {
 						// Property: AvailabilityZones
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cidrs": {
 						// Property: Cidrs
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"classic_load_balancer_listener": {
 						// Property: ClassicLoadBalancerListener
@@ -703,15 +787,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: InstancePort
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"load_balancer_port": {
 									// Property: LoadBalancerPort
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"component": {
 						// Property: Component
@@ -721,15 +817,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"customer_gateway": {
 						// Property: CustomerGateway
@@ -739,15 +847,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"destination": {
 						// Property: Destination
@@ -757,15 +877,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"destination_vpc": {
 						// Property: DestinationVpc
@@ -775,20 +907,36 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"direction": {
 						// Property: Direction
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"elastic_load_balancer_listener": {
 						// Property: ElasticLoadBalancerListener
@@ -798,20 +946,36 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"explanation_code": {
 						// Property: ExplanationCode
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ingress_route_table": {
 						// Property: IngressRouteTable
@@ -821,15 +985,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"internet_gateway": {
 						// Property: InternetGateway
@@ -839,25 +1015,45 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"load_balancer_arn": {
 						// Property: LoadBalancerArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"load_balancer_listener_port": {
 						// Property: LoadBalancerListenerPort
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"load_balancer_target": {
 						// Property: LoadBalancerTarget
@@ -867,11 +1063,19 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Address
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"availability_zone": {
 									// Property: AvailabilityZone
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"instance": {
 									// Property: Instance
@@ -881,24 +1085,44 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: Arn
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"id": {
 												// Property: Id
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"port": {
 									// Property: Port
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"load_balancer_target_group": {
 						// Property: LoadBalancerTargetGroup
@@ -908,15 +1132,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"load_balancer_target_groups": {
 						// Property: LoadBalancerTargetGroups
@@ -926,25 +1162,45 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"load_balancer_target_port": {
 						// Property: LoadBalancerTargetPort
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"missing_component": {
 						// Property: MissingComponent
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"nat_gateway": {
 						// Property: NatGateway
@@ -954,15 +1210,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"network_interface": {
 						// Property: NetworkInterface
@@ -972,25 +1240,45 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"packet_field": {
 						// Property: PacketField
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"port": {
 						// Property: Port
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"port_ranges": {
 						// Property: PortRanges
@@ -1000,15 +1288,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: From
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"to": {
 									// Property: To
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"prefix_list": {
 						// Property: PrefixList
@@ -1018,20 +1318,36 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"protocols": {
 						// Property: Protocols
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"route_table": {
 						// Property: RouteTable
@@ -1041,15 +1357,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"route_table_route": {
 						// Property: RouteTableRoute
@@ -1059,55 +1387,99 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: NatGatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"network_interface_id": {
 									// Property: NetworkInterfaceId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"origin": {
 									// Property: Origin
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"transit_gateway_id": {
 									// Property: TransitGatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"vpc_peering_connection_id": {
 									// Property: VpcPeeringConnectionId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_cidr": {
 									// Property: destinationCidr
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_prefix_list_id": {
 									// Property: destinationPrefixListId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"egress_only_internet_gateway_id": {
 									// Property: egressOnlyInternetGatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"gateway_id": {
 									// Property: gatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"instance_id": {
 									// Property: instanceId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"security_group": {
 						// Property: SecurityGroup
@@ -1117,15 +1489,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"security_group_rule": {
 						// Property: SecurityGroupRule
@@ -1135,11 +1519,19 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Cidr
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"direction": {
 									// Property: Direction
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"port_range": {
 									// Property: PortRange
@@ -1149,34 +1541,62 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"prefix_list_id": {
 									// Property: PrefixListId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"protocol": {
 									// Property: Protocol
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"security_group_id": {
 									// Property: SecurityGroupId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"security_groups": {
 						// Property: SecurityGroups
@@ -1186,15 +1606,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"source_vpc": {
 						// Property: SourceVpc
@@ -1204,20 +1636,36 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"state": {
 						// Property: State
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"subnet": {
 						// Property: Subnet
@@ -1227,15 +1675,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"subnet_route_table": {
 						// Property: SubnetRouteTable
@@ -1245,15 +1705,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpc": {
 						// Property: Vpc
@@ -1263,15 +1735,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpc_peering_connection": {
 						// Property: VpcPeeringConnection
@@ -1281,15 +1765,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpn_connection": {
 						// Property: VpnConnection
@@ -1299,15 +1795,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpn_gateway": {
 						// Property: VpnGateway
@@ -1317,15 +1825,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpc_endpoint": {
 						// Property: vpcEndpoint
@@ -1335,15 +1855,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -1658,11 +2190,19 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Cidr
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"egress": {
 									// Property: Egress
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"port_range": {
 									// Property: PortRange
@@ -1672,34 +2212,62 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"protocol": {
 									// Property: Protocol
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"rule_action": {
 									// Property: RuleAction
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"rule_number": {
 									// Property: RuleNumber
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"component": {
 						// Property: Component
@@ -1709,15 +2277,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"destination_vpc": {
 						// Property: DestinationVpc
@@ -1727,15 +2307,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"inbound_header": {
 						// Property: InboundHeader
@@ -1745,6 +2337,10 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: DestinationAddresses
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
@@ -1754,25 +2350,45 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"protocol": {
 									// Property: Protocol
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_addresses": {
 									// Property: SourceAddresses
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
@@ -1782,19 +2398,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"outbound_header": {
 						// Property: OutboundHeader
@@ -1804,6 +2436,10 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: DestinationAddresses
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
@@ -1813,25 +2449,45 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"protocol": {
 									// Property: Protocol
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_addresses": {
 									// Property: SourceAddresses
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
@@ -1841,19 +2497,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"route_table_route": {
 						// Property: RouteTableRoute
@@ -1863,55 +2535,99 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: NatGatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"network_interface_id": {
 									// Property: NetworkInterfaceId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"origin": {
 									// Property: Origin
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"transit_gateway_id": {
 									// Property: TransitGatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"vpc_peering_connection_id": {
 									// Property: VpcPeeringConnectionId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_cidr": {
 									// Property: destinationCidr
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_prefix_list_id": {
 									// Property: destinationPrefixListId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"egress_only_internet_gateway_id": {
 									// Property: egressOnlyInternetGatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"gateway_id": {
 									// Property: gatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"instance_id": {
 									// Property: instanceId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"security_group_rule": {
 						// Property: SecurityGroupRule
@@ -1921,11 +2637,19 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Cidr
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"direction": {
 									// Property: Direction
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"port_range": {
 									// Property: PortRange
@@ -1935,39 +2659,71 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"prefix_list_id": {
 									// Property: PrefixListId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"protocol": {
 									// Property: Protocol
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"security_group_id": {
 									// Property: SecurityGroupId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"sequence_number": {
 						// Property: SequenceNumber
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"source_vpc": {
 						// Property: SourceVpc
@@ -1977,15 +2733,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"subnet": {
 						// Property: Subnet
@@ -1995,15 +2763,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpc": {
 						// Property: Vpc
@@ -2013,15 +2793,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -2367,11 +3159,19 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Cidr
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"egress": {
 									// Property: Egress
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"port_range": {
 									// Property: PortRange
@@ -2381,34 +3181,62 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"protocol": {
 									// Property: Protocol
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"rule_action": {
 									// Property: RuleAction
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"rule_number": {
 									// Property: RuleNumber
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"component": {
 						// Property: Component
@@ -2418,15 +3246,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"destination_vpc": {
 						// Property: DestinationVpc
@@ -2436,15 +3276,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"inbound_header": {
 						// Property: InboundHeader
@@ -2454,6 +3306,10 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: DestinationAddresses
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
@@ -2463,25 +3319,45 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"protocol": {
 									// Property: Protocol
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_addresses": {
 									// Property: SourceAddresses
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
@@ -2491,19 +3367,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"outbound_header": {
 						// Property: OutboundHeader
@@ -2513,6 +3405,10 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: DestinationAddresses
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
@@ -2522,25 +3418,45 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"protocol": {
 									// Property: Protocol
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_addresses": {
 									// Property: SourceAddresses
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
@@ -2550,19 +3466,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"route_table_route": {
 						// Property: RouteTableRoute
@@ -2572,55 +3504,99 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: NatGatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"network_interface_id": {
 									// Property: NetworkInterfaceId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"origin": {
 									// Property: Origin
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"transit_gateway_id": {
 									// Property: TransitGatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"vpc_peering_connection_id": {
 									// Property: VpcPeeringConnectionId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_cidr": {
 									// Property: destinationCidr
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_prefix_list_id": {
 									// Property: destinationPrefixListId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"egress_only_internet_gateway_id": {
 									// Property: egressOnlyInternetGatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"gateway_id": {
 									// Property: gatewayId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"instance_id": {
 									// Property: instanceId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"security_group_rule": {
 						// Property: SecurityGroupRule
@@ -2630,11 +3606,19 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Cidr
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"direction": {
 									// Property: Direction
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"port_range": {
 									// Property: PortRange
@@ -2644,39 +3628,71 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 												// Property: From
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"to": {
 												// Property: To
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"prefix_list_id": {
 									// Property: PrefixListId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"protocol": {
 									// Property: Protocol
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"security_group_id": {
 									// Property: SecurityGroupId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"sequence_number": {
 						// Property: SequenceNumber
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"source_vpc": {
 						// Property: SourceVpc
@@ -2686,15 +3702,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"subnet": {
 						// Property: Subnet
@@ -2704,15 +3732,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpc": {
 						// Property: Vpc
@@ -2722,15 +3762,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 									// Property: Arn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -2812,10 +3864,18 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

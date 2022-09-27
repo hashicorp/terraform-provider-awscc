@@ -34,9 +34,13 @@ func domainResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 				validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// Description is a write-only property.
 		},
@@ -158,11 +162,13 @@ func domainResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

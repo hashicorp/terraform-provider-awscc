@@ -97,8 +97,12 @@ func firewallDomainListResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "S3 URL to import domains from.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// DomainFileUrl is a write-only property.
 		},
@@ -119,9 +123,13 @@ func firewallDomainListResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "An inline list of domains to use for this domain list.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 				validate.ArrayForEach(validate.StringLenBetween(1, 255)),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// Domains is a write-only property.
 		},
@@ -287,6 +295,10 @@ func firewallDomainListResourceType(ctx context.Context) (provider.ResourceType,
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

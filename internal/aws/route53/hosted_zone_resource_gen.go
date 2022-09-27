@@ -45,13 +45,21 @@ func hostedZoneResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "Any comments that you want to include about the hosted zone.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"hosted_zone_tags": {
 			// Property: HostedZoneTags
@@ -107,6 +115,10 @@ func hostedZoneResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -185,6 +197,10 @@ func hostedZoneResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vp_cs": {
 			// Property: VPCs
@@ -232,6 +248,10 @@ func hostedZoneResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

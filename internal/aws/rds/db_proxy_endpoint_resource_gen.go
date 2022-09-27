@@ -138,25 +138,35 @@ func dBProxyEndpointResourceType(ctx context.Context) (provider.ResourceType, er
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
 							validate.StringMatch(regexp.MustCompile("(\\w|\\d|\\s|\\\\|-|\\.:=+-)*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
 							validate.StringMatch(regexp.MustCompile("(\\w|\\d|\\s|\\\\|-|\\.:=+-)*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"target_role": {
@@ -214,11 +224,13 @@ func dBProxyEndpointResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "VPC security group IDs to associate with the new DB proxy endpoint.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpc_subnet_ids": {

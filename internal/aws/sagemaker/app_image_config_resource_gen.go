@@ -140,8 +140,12 @@ func appImageConfigResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "The default POSIX group ID (GID). If not specified, defaults to 100.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 65535),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"default_uid": {
@@ -149,8 +153,12 @@ func appImageConfigResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "The default POSIX user ID (UID). If not specified, defaults to 1000.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 65535),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"mount_path": {
@@ -158,14 +166,22 @@ func appImageConfigResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1024),
 										validate.StringMatch(regexp.MustCompile("^/.*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"kernel_specs": {
 						// Property: KernelSpecs
@@ -177,8 +193,12 @@ func appImageConfigResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "The display name of the kernel.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"name": {
@@ -200,6 +220,10 @@ func appImageConfigResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags

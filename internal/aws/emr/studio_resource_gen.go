@@ -92,8 +92,12 @@ func studioResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A detailed description of the Studio.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"engine_security_group_id": {
@@ -129,9 +133,13 @@ func studioResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(4096),
 				validate.StringMatch(regexp.MustCompile("^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"idp_relay_state_parameter_name": {
@@ -146,8 +154,12 @@ func studioResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The name of relay state parameter for external Identity Provider.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -282,6 +294,10 @@ func studioResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"url": {
 			// Property: Url

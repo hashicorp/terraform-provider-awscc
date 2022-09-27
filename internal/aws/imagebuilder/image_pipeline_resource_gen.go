@@ -46,6 +46,10 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -57,6 +61,10 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The description of the image pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"distribution_configuration_arn": {
 			// Property: DistributionConfigurationArn
@@ -68,6 +76,10 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"enhanced_image_metadata_enabled": {
 			// Property: EnhancedImageMetadataEnabled
@@ -79,6 +91,10 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "Collects additional information about the image being created, including the operating system (OS) version and package list.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"image_recipe_arn": {
 			// Property: ImageRecipeArn
@@ -90,6 +106,10 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"image_tests_configuration": {
 			// Property: ImageTestsConfiguration
@@ -119,19 +139,31 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "Defines if tests should be executed when building this image.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"timeout_minutes": {
 						// Property: TimeoutMinutes
 						Description: "The maximum time in minutes that tests are permitted to run.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(60, 1440),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"infrastructure_configuration_arn": {
 			// Property: InfrastructureConfigurationArn
@@ -143,6 +175,10 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -190,11 +226,15 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "The condition configures when the pipeline should trigger a new image build.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"EXPRESSION_MATCH_ONLY",
 								"EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"schedule_expression": {
@@ -202,10 +242,18 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -221,11 +269,15 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "The status of the image pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"DISABLED",
 					"ENABLED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -245,6 +297,10 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

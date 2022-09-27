@@ -123,58 +123,98 @@ func launchConfigurationResourceType(ctx context.Context) (provider.ResourceType
 									Description: "Indicates whether the volume is deleted on instance termination. ",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"encrypted": {
 									// Property: Encrypted
 									Description: "Specifies whether the volume should be encrypted. ",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iops": {
 									// Property: Iops
 									Description: "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"snapshot_id": {
 									// Property: SnapshotId
 									Description: "The snapshot ID of the volume to use.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"throughput": {
 									// Property: Throughput
 									Description: "The throughput (MiBps) to provision for a gp3 volume.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"volume_size": {
 									// Property: VolumeSize
 									Description: "The volume size, in GiBs.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"volume_type": {
 									// Property: VolumeType
 									Description: "The volume type.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"no_device": {
 						// Property: NoDevice
 						Description: "Setting this value to true suppresses the specified device included in the block device mapping of the AMI.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"virtual_name": {
 						// Property: VirtualName
 						Description: "The name of the virtual device.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -397,18 +437,30 @@ func launchConfigurationResourceType(ctx context.Context) (provider.ResourceType
 						Description: "This parameter enables or disables the HTTP metadata endpoint on your instances.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"http_put_response_hop_limit": {
 						// Property: HttpPutResponseHopLimit
 						Description: "The desired HTTP PUT response hop limit for instance metadata requests.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"http_tokens": {
 						// Property: HttpTokens
 						Description: "The state of token usage for your instance metadata requests.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

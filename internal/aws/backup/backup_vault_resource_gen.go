@@ -31,6 +31,10 @@ func backupVaultResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"backup_vault_arn": {
 			// Property: BackupVaultArn
@@ -75,6 +79,10 @@ func backupVaultResourceType(ctx context.Context) (provider.ResourceType, error)
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"encryption_key_arn": {
 			// Property: EncryptionKeyArn
@@ -117,11 +125,19 @@ func backupVaultResourceType(ctx context.Context) (provider.ResourceType, error)
 						// Property: ChangeableForDays
 						Type:     types.Float64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"max_retention_days": {
 						// Property: MaxRetentionDays
 						Type:     types.Float64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"min_retention_days": {
 						// Property: MinRetentionDays
@@ -131,6 +147,10 @@ func backupVaultResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"notifications": {
 			// Property: Notifications
@@ -174,6 +194,10 @@ func backupVaultResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

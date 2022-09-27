@@ -61,8 +61,12 @@ func pricingPlanResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"last_modified_time": {
@@ -109,11 +113,13 @@ func pricingPlanResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingrule/[a-zA-Z0-9]{10}"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"size": {
@@ -179,6 +185,10 @@ func pricingPlanResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

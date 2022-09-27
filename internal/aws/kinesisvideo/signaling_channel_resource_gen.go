@@ -49,8 +49,12 @@ func signalingChannelResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "The period of time a signaling channel retains undelivered messages before they are discarded.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(5, 120),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -134,11 +138,13 @@ func signalingChannelResourceType(ctx context.Context) (provider.ResourceType, e
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type": {
@@ -154,10 +160,14 @@ func signalingChannelResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "The type of the Kinesis Video Signaling Channel to create. Currently, SINGLE_MASTER is the only supported channel type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"SINGLE_MASTER",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

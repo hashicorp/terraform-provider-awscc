@@ -31,6 +31,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "Optional customer-defined field, used in OpenAPI imports and exports without functional impact.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"authorizer_credentials": {
 			// Property: AuthorizerCredentials
@@ -42,6 +46,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"authorizer_id": {
 			// Property: AuthorizerId
@@ -65,6 +73,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The TTL in seconds of cached authorizer results.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"authorizer_uri": {
 			// Property: AuthorizerUri
@@ -76,6 +88,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "Specifies the authorizer's Uniform Resource Identifier (URI).",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"identity_source": {
 			// Property: IdentitySource
@@ -87,6 +103,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The identity source for which authorization is requested.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"identity_validation_expression": {
 			// Property: IdentityValidationExpression
@@ -98,6 +118,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A validation expression for the incoming identity token.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -125,6 +149,10 @@ func authorizerResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"rest_api_id": {
 			// Property: RestApiId

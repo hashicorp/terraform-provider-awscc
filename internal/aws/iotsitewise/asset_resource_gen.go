@@ -46,6 +46,10 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description for the asset",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"asset_hierarchies": {
 			// Property: AssetHierarchies
@@ -96,8 +100,10 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"asset_id": {
@@ -179,6 +185,10 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The property alias that identifies the property.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"logical_id": {
 						// Property: LogicalId
@@ -194,18 +204,24 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The MQTT notification state (ENABLED or DISABLED) for this asset property.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ENABLED",
 								"DISABLED",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -249,8 +265,10 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

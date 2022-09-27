@@ -49,9 +49,13 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 			Description: "The name of the endpoint used to run the monitoring job.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(63),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"job_definition_arn": {
@@ -167,6 +171,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 									Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"volume_size_in_gb": {
 									// Property: VolumeSizeInGB
@@ -250,6 +258,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 						Type: types.MapType{ElemType: types.StringType},
 						// Pattern "[\\S\\s]*" ignored.
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"image_uri": {
 						// Property: ImageUri
@@ -306,9 +318,13 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 						Description: "The name of a processing job",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 63),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"constraints_resource": {
@@ -321,14 +337,22 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 									Description: "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
 										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -429,8 +453,12 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 									Description: "JSONpath to locate features in JSONlines dataset",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"inference_attribute": {
@@ -438,8 +466,12 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 									Description: "Index or JSONpath to locate predicted label(s)",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"local_path": {
@@ -457,8 +489,12 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 									Description: "Index or JSONpath to locate probabilities",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"s3_data_distribution_type": {
@@ -466,11 +502,15 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 									Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"FullyReplicated",
 											"ShardedByS3Key",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"s3_input_mode": {
@@ -478,11 +518,15 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 									Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"Pipe",
 											"File",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -570,9 +614,13 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 						Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(2048),
 							validate.StringMatch(regexp.MustCompile(".*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"monitoring_outputs": {
@@ -600,11 +648,15 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 												Description: "Whether to upload the results of the monitoring job continuously or after the job completes.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"Continuous",
 														"EndOfJob",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"s3_uri": {
@@ -691,12 +743,20 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 						Description: "Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"enable_network_isolation": {
 						// Property: EnableNetworkIsolation
 						Description: "Whether to allow inbound and outbound network calls to and from the containers used for the processing job.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpc_config": {
 						// Property: VpcConfig
@@ -728,6 +788,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (provider
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

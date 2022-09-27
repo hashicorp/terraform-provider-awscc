@@ -51,8 +51,12 @@ func addonResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Version of Addon",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"arn": {
@@ -102,12 +106,16 @@ func addonResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Resolve parameter value conflicts",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 				validate.StringInSlice([]string{
 					"NONE",
 					"OVERWRITE",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// ResolveConflicts is a write-only property.
 		},
@@ -122,8 +130,12 @@ func addonResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "IAM role to bind to the add-on's service account",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -182,6 +194,10 @@ func addonResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

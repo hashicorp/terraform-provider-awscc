@@ -47,8 +47,12 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The description of the application. ",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -98,6 +102,10 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

@@ -34,8 +34,12 @@ func grantResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// AllowedOperations is a write-only property.
 		},
@@ -64,6 +68,10 @@ func grantResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Name for the created Grant.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"home_region": {
 			// Property: HomeRegion
@@ -75,6 +83,10 @@ func grantResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Home region for the created grant.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"license_arn": {
 			// Property: LicenseArn
@@ -87,8 +99,12 @@ func grantResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "License Arn for the grant.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"principals": {
@@ -104,9 +120,13 @@ func grantResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 				validate.ArrayForEach(validate.StringLenAtMost(2048)),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// Principals is a write-only property.
 		},
@@ -118,6 +138,10 @@ func grantResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"version": {
 			// Property: Version

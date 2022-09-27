@@ -73,9 +73,13 @@ func agentResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The name configured for the agent. Text reference used to identify the agent in the console.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"endpoint_type": {
@@ -212,8 +216,12 @@ func agentResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpc_endpoint_id": {

@@ -48,8 +48,12 @@ func wirelessDeviceResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Wireless device description",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"destination_name": {
@@ -93,6 +97,10 @@ func wirelessDeviceResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "The date and time when the most recent uplink was received.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"lo_ra_wan": {
 			// Property: LoRaWAN
@@ -295,6 +303,10 @@ func wirelessDeviceResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"abp_v11": {
 						// Property: AbpV11
@@ -351,21 +363,33 @@ func wirelessDeviceResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"dev_eui": {
 						// Property: DevEui
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("[a-f0-9]{16}"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"device_profile_id": {
 						// Property: DeviceProfileId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"otaa_v10_x": {
@@ -391,6 +415,10 @@ func wirelessDeviceResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"otaa_v11": {
 						// Property: OtaaV11
@@ -423,18 +451,27 @@ func wirelessDeviceResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"service_profile_id": {
 						// Property: ServiceProfileId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.RequiredAttributes(
 					validate.OneOfRequired(
@@ -453,6 +490,9 @@ func wirelessDeviceResourceType(ctx context.Context) (provider.ResourceType, err
 					),
 				),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -465,8 +505,12 @@ func wirelessDeviceResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Wireless device name",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -502,23 +546,35 @@ func wirelessDeviceResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"thing_arn": {
@@ -531,6 +587,10 @@ func wirelessDeviceResourceType(ctx context.Context) (provider.ResourceType, err
 			Description: "Thing arn. Passed into update to associate Thing with Wireless device.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"thing_name": {
 			// Property: ThingName

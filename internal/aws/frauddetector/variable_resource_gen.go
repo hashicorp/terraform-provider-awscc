@@ -120,8 +120,12 @@ func variableResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The description.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"last_updated_time": {
@@ -208,11 +212,13 @@ func variableResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"variable_type": {
@@ -260,6 +266,7 @@ func variableResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"AUTH_CODE",
@@ -296,6 +303,9 @@ func variableResourceType(ctx context.Context) (provider.ResourceType, error) {
 					"SHIPPING_ZIP",
 					"USERAGENT",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

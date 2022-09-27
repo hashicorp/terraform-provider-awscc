@@ -45,6 +45,10 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"cloudwatch_logs_role_arn": {
 			// Property: CloudWatchLogsRoleArn
@@ -56,6 +60,10 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"enable_log_file_validation": {
 			// Property: EnableLogFileValidation
@@ -67,6 +75,10 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies whether log file validation is enabled. The default is false.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"event_selectors": {
 			// Property: EventSelectors
@@ -153,28 +165,45 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"exclude_management_event_sources": {
 						// Property: ExcludeManagementEventSources
 						Description: "An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing \"kms.amazonaws.com\". By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.",
 						Type:        types.SetType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"include_management_events": {
 						// Property: IncludeManagementEvents
 						Description: "Specify if you want your event selector to include management events for your trail.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"read_write_type": {
 						// Property: ReadWriteType
 						Description: "Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"All",
@@ -182,12 +211,19 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"WriteOnly",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(5),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"include_global_service_events": {
@@ -200,6 +236,10 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies whether the trail is publishing events from global services such as IAM to the log files.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"insight_selectors": {
 			// Property: InsightSelectors
@@ -229,10 +269,18 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The type of insight to log on a trail.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"is_logging": {
 			// Property: IsLogging
@@ -255,6 +303,10 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"is_organization_trail": {
 			// Property: IsOrganizationTrail
@@ -266,6 +318,10 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"kms_key_id": {
 			// Property: KMSKeyId
@@ -277,6 +333,10 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"s3_bucket_name": {
 			// Property: S3BucketName
@@ -300,8 +360,12 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"sns_topic_arn": {
@@ -327,8 +391,12 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -375,8 +443,10 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"trail_name": {

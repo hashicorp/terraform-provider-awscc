@@ -128,39 +128,67 @@ func capacityReservationFleetResourceType(ctx context.Context) (provider.Resourc
 						// Property: AvailabilityZone
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"availability_zone_id": {
 						// Property: AvailabilityZoneId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ebs_optimized": {
 						// Property: EbsOptimized
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"instance_platform": {
 						// Property: InstancePlatform
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"instance_type": {
 						// Property: InstanceType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"priority": {
 						// Property: Priority
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 999),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"weight": {
 						// Property: Weight
 						Type:     types.Float64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -182,6 +210,10 @@ func capacityReservationFleetResourceType(ctx context.Context) (provider.Resourc
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"remove_end_date": {
 			// Property: RemoveEndDate
@@ -191,6 +223,10 @@ func capacityReservationFleetResourceType(ctx context.Context) (provider.Resourc
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tag_specifications": {
 			// Property: TagSpecifications
@@ -236,6 +272,10 @@ func capacityReservationFleetResourceType(ctx context.Context) (provider.Resourc
 						// Property: ResourceType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -254,8 +294,10 @@ func capacityReservationFleetResourceType(ctx context.Context) (provider.Resourc
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -300,8 +342,12 @@ func capacityReservationFleetResourceType(ctx context.Context) (provider.Resourc
 			// }
 			Type:     types.Int64Type,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 25000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

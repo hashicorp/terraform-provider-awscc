@@ -172,8 +172,12 @@ func responsePlanResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The version of the document to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(128),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"dynamic_parameters": {
@@ -199,11 +203,15 @@ func responsePlanResourceType(ctx context.Context) (provider.ResourceType, error
 															Description: "The variable types used as dynamic parameter value when starting the SSM automation document.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"INCIDENT_RECORD_ARN",
 																	"INVOLVED_RESOURCES",
 																}),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
@@ -213,8 +221,12 @@ func responsePlanResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(200),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"parameters": {
@@ -243,8 +255,12 @@ func responsePlanResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(200),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"role_arn": {
@@ -262,16 +278,24 @@ func responsePlanResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The account type to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"IMPACTED_ACCOUNT",
 											"RESPONSE_PLAN_OWNER_ACCOUNT",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -330,15 +354,23 @@ func responsePlanResourceType(ctx context.Context) (provider.ResourceType, error
 						// Property: ChatbotSns
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 							validate.ArrayForEach(validate.StringLenAtMost(1000)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), "")),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"display_name": {
 			// Property: DisplayName
@@ -352,8 +384,12 @@ func responsePlanResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The display name of the response plan.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"engagements": {
@@ -482,8 +518,12 @@ func responsePlanResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The deduplication string.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"impact": {
@@ -538,19 +578,25 @@ func responsePlanResourceType(ctx context.Context) (provider.ResourceType, error
 									Description: "The ARN of the Chatbot SNS topic.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1000),
 										validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(10),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"summary": {
@@ -558,8 +604,12 @@ func responsePlanResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The summary string.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 4000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"title": {

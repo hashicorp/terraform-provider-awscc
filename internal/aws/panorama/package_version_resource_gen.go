@@ -43,6 +43,10 @@ func packageVersionResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"owner_account": {
 			// Property: OwnerAccount
@@ -206,9 +210,13 @@ func packageVersionResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 				validate.StringMatch(regexp.MustCompile("^[a-z0-9]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

@@ -55,6 +55,10 @@ func assessmentTargetResourceType(ctx context.Context) (provider.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

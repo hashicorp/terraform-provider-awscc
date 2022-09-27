@@ -282,9 +282,13 @@ func fHIRDatastoreResourceType(ctx context.Context) (provider.ResourceType, erro
 									Description: "The KMS encryption key id/alias used to encrypt the Data Store contents at rest.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 400),
 										validate.StringMatch(regexp.MustCompile("(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\\d:)?(\\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -353,8 +357,10 @@ func fHIRDatastoreResourceType(ctx context.Context) (provider.ResourceType, erro
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

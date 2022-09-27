@@ -69,9 +69,13 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "<p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of\n\t\t\tthe starting themes defined by Amazon QuickSight. For a list of the starting themes, use\n\t\t\t\t<code>ListThemes</code> or choose <b>Themes</b> from\n\t\t\twithin a QuickSight analysis. </p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 				validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// BaseThemeId is a write-only property.
 		},
@@ -292,9 +296,13 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The hexadecimal codes for the colors.</p>",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"empty_fill_color": {
@@ -302,8 +310,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"min_max_gradient": {
@@ -311,14 +323,22 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), "")),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"sheet": {
 						// Property: Sheet
@@ -340,14 +360,26 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "<p>The option to enable display of borders for visuals.</p>",
 															Type:        types.BoolType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"tile_layout": {
 									// Property: TileLayout
@@ -364,10 +396,18 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
 															Type:        types.BoolType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"margin": {
 												// Property: Margin
@@ -379,18 +419,34 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
 															Type:        types.BoolType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"typography": {
 						// Property: Typography
@@ -405,17 +461,29 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: FontFamily
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 5),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ui_color_palette": {
 						// Property: UIColorPalette
@@ -427,8 +495,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>This color is that applies to selected states and buttons.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"accent_foreground": {
@@ -436,8 +508,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"danger": {
@@ -445,8 +521,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The color that applies to error messages.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"danger_foreground": {
@@ -454,8 +534,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"dimension": {
@@ -463,8 +547,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"dimension_foreground": {
@@ -472,8 +560,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"measure": {
@@ -481,8 +573,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"measure_foreground": {
@@ -490,8 +586,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"primary_background": {
@@ -499,8 +599,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"primary_foreground": {
@@ -508,8 +612,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"secondary_background": {
@@ -517,8 +625,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"secondary_foreground": {
@@ -526,8 +638,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"success": {
@@ -535,8 +651,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"success_foreground": {
@@ -544,8 +664,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"warning": {
@@ -553,8 +677,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>This color that applies to warning and informational messages.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"warning_foreground": {
@@ -562,17 +690,29 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Configuration is a write-only property.
 		},
 		"created_time": {
@@ -617,8 +757,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "<p>A display name for the theme.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"permissions": {
@@ -680,8 +824,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 64),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -740,8 +888,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"theme_id": {
@@ -1061,15 +1213,23 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"base_theme_id": {
 						// Property: BaseThemeId
 						Description: "<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default QuickSight theme.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
 							validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"configuration": {
@@ -1087,9 +1247,13 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The hexadecimal codes for the colors.</p>",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 100),
 													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), "")),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"empty_fill_color": {
@@ -1097,8 +1261,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"min_max_gradient": {
@@ -1106,14 +1274,22 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 100),
 													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), "")),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"sheet": {
 									// Property: Sheet
@@ -1135,14 +1311,26 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "<p>The option to enable display of borders for visuals.</p>",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"tile_layout": {
 												// Property: TileLayout
@@ -1159,10 +1347,18 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"margin": {
 															// Property: Margin
@@ -1174,18 +1370,34 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 																		Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"typography": {
 									// Property: Typography
@@ -1200,17 +1412,29 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: FontFamily
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 5),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ui_color_palette": {
 									// Property: UIColorPalette
@@ -1222,8 +1446,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>This color is that applies to selected states and buttons.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"accent_foreground": {
@@ -1231,8 +1459,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"danger": {
@@ -1240,8 +1472,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The color that applies to error messages.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"danger_foreground": {
@@ -1249,8 +1485,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"dimension": {
@@ -1258,8 +1498,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"dimension_foreground": {
@@ -1267,8 +1511,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"measure": {
@@ -1276,8 +1524,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"measure_foreground": {
@@ -1285,8 +1537,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"primary_background": {
@@ -1294,8 +1550,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"primary_foreground": {
@@ -1303,8 +1563,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"secondary_background": {
@@ -1312,8 +1576,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"secondary_foreground": {
@@ -1321,8 +1589,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"success": {
@@ -1330,8 +1602,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"success_foreground": {
@@ -1339,8 +1615,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"warning": {
@@ -1348,8 +1628,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>This color that applies to warning and informational messages.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"warning_foreground": {
@@ -1357,31 +1641,51 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"created_time": {
 						// Property: CreatedTime
 						Description: "<p>The date and time that this theme version was created.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
 						Description: "<p>The description of the theme.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"errors": {
@@ -1394,31 +1698,44 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The error message.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"type": {
 									// Property: Type
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"INTERNAL_FAILURE",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"status": {
 						// Property: Status
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"CREATION_IN_PROGRESS",
@@ -1430,14 +1747,21 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"DELETED",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"version_number": {
 						// Property: VersionNumber
 						Description: "<p>The version number of the theme.</p>",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatAtLeast(1.000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -1459,8 +1783,12 @@ func themeResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "<p>A description of the first version of the theme that you're creating. Every time\n\t\t\t\t<code>UpdateTheme</code> is called, a new version is created. Each version of the\n\t\t\ttheme has a description of the version in the <code>VersionDescription</code>\n\t\t\tfield.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// VersionDescription is a write-only property.
 		},

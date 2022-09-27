@@ -36,9 +36,13 @@ func deviceFleetResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Description for the edge device fleet",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 800),
 				validate.StringMatch(regexp.MustCompile("[\\S\\s]+"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"device_fleet_name": {
@@ -96,9 +100,13 @@ func deviceFleetResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The KMS key id used for encryption on the S3 bucket",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
 							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"s3_output_location": {
@@ -190,6 +198,10 @@ func deviceFleetResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

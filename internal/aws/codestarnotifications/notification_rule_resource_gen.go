@@ -46,8 +46,12 @@ func notificationRuleResourceType(ctx context.Context) (provider.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"detail_type": {
@@ -79,8 +83,12 @@ func notificationRuleResourceType(ctx context.Context) (provider.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// EventTypeId is a write-only property.
 		},
@@ -146,11 +154,15 @@ func notificationRuleResourceType(ctx context.Context) (provider.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENABLED",
 					"DISABLED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -177,8 +189,12 @@ func notificationRuleResourceType(ctx context.Context) (provider.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// TargetAddress is a write-only property.
 		},

@@ -47,11 +47,15 @@ func cACertificateResourceType(ctx context.Context) (provider.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENABLE",
 					"DISABLE",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"ca_certificate_pem": {
@@ -142,32 +146,48 @@ func cACertificateResourceType(ctx context.Context) (provider.ResourceType, erro
 						// Property: RoleArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
 							validate.StringMatch(regexp.MustCompile("arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"template_body": {
 						// Property: TemplateBody
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 10240),
 							validate.StringMatch(regexp.MustCompile("[\\s\\S]*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"template_name": {
 						// Property: TemplateName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 36),
 							validate.StringMatch(regexp.MustCompile("^[0-9A-Za-z_-]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -248,6 +268,10 @@ func cACertificateResourceType(ctx context.Context) (provider.ResourceType, erro
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"verification_certificate_pem": {
 			// Property: VerificationCertificatePem

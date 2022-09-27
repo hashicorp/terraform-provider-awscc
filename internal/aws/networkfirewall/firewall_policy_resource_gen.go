@@ -34,9 +34,13 @@ func firewallPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
 				validate.StringMatch(regexp.MustCompile("^.*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"firewall_policy": {
@@ -204,6 +208,10 @@ func firewallPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 						// Property: StatefulDefaultActions
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stateful_engine_options": {
 						// Property: StatefulEngineOptions
@@ -213,16 +221,24 @@ func firewallPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: RuleOrder
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"DEFAULT_ACTION_ORDER",
 											"STRICT_ORDER",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stateful_rule_group_references": {
 						// Property: StatefulRuleGroupReferences
@@ -232,8 +248,12 @@ func firewallPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 									// Property: Priority
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 65535),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"resource_arn": {
@@ -249,6 +269,10 @@ func firewallPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stateless_custom_actions": {
 						// Property: StatelessCustomActions
@@ -282,6 +306,10 @@ func firewallPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -299,6 +327,10 @@ func firewallPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stateless_default_actions": {
 						// Property: StatelessDefaultActions
@@ -335,6 +367,10 @@ func firewallPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -444,6 +480,10 @@ func firewallPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

@@ -35,8 +35,12 @@ func quickConnectResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The description of the quick connect.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 250),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"instance_arn": {
@@ -184,6 +188,10 @@ func quickConnectResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"queue_config": {
 						// Property: QueueConfig
@@ -211,6 +219,10 @@ func quickConnectResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"quick_connect_type": {
 						// Property: QuickConnectType
@@ -251,6 +263,10 @@ func quickConnectResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -313,8 +329,12 @@ func quickConnectResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

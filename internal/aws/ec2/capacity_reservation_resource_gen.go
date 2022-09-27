@@ -67,6 +67,10 @@ func capacityReservationResourceType(ctx context.Context) (provider.ResourceType
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"end_date_type": {
 			// Property: EndDateType
@@ -76,6 +80,10 @@ func capacityReservationResourceType(ctx context.Context) (provider.ResourceType
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ephemeral_storage": {
 			// Property: EphemeralStorage
@@ -222,6 +230,10 @@ func capacityReservationResourceType(ctx context.Context) (provider.ResourceType
 						// Property: ResourceType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -240,8 +252,10 @@ func capacityReservationResourceType(ctx context.Context) (provider.ResourceType
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

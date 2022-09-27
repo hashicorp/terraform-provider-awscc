@@ -88,6 +88,10 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: EnableBasicAuth
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"password": {
 						// Property: Password
@@ -108,6 +112,10 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// BasicAuthConfig is a write-only property.
 		},
 		"branch_name": {
@@ -140,9 +148,13 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 25000),
 				validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -155,9 +167,13 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
 				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"enable_auto_build": {
@@ -168,6 +184,10 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"enable_performance_mode": {
 			// Property: EnablePerformanceMode
@@ -177,6 +197,10 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"enable_pull_request_preview": {
 			// Property: EnablePullRequestPreview
@@ -186,6 +210,10 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"environment_variables": {
 			// Property: EnvironmentVariables
@@ -237,6 +265,10 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"pull_request_environment_name": {
 			// Property: PullRequestEnvironmentName
@@ -248,9 +280,13 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(20),
 				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"stage": {
@@ -268,6 +304,7 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"EXPERIMENTAL",
@@ -276,6 +313,9 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 					"PRODUCTION",
 					"DEVELOPMENT",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -330,6 +370,10 @@ func branchResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

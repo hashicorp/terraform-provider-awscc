@@ -366,6 +366,10 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"subject_information_access": {
 						// Property: SubjectInformationAccess
@@ -386,11 +390,19 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 															// Property: CommonName
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"country": {
 															// Property: Country
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"custom_attributes": {
 															// Property: CustomAttributes
@@ -411,76 +423,136 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"distinguished_name_qualifier": {
 															// Property: DistinguishedNameQualifier
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"generation_qualifier": {
 															// Property: GenerationQualifier
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"given_name": {
 															// Property: GivenName
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"initials": {
 															// Property: Initials
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"locality": {
 															// Property: Locality
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"organization": {
 															// Property: Organization
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"organizational_unit": {
 															// Property: OrganizationalUnit
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"pseudonym": {
 															// Property: Pseudonym
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"serial_number": {
 															// Property: SerialNumber
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"state": {
 															// Property: State
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"surname": {
 															// Property: Surname
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"title": {
 															// Property: Title
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"dns_name": {
 												// Property: DnsName
 												Description: "String that contains X.509 DnsName information.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"edi_party_name": {
 												// Property: EdiPartyName
@@ -500,12 +572,20 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"ip_address": {
 												// Property: IpAddress
 												Description: "String that contains X.509 IpAddress information.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"other_name": {
 												// Property: OtherName
@@ -526,24 +606,40 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"registered_id": {
 												// Property: RegisteredId
 												Description: "String that contains X.509 ObjectIdentifier information.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"rfc_822_name": {
 												// Property: Rfc822Name
 												Description: "String that contains X.509 Rfc822Name information.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"uniform_resource_identifier": {
 												// Property: UniformResourceIdentifier
 												Description: "String that contains X.509 UniformResourceIdentifier information.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -559,12 +655,20 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 												Description: "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"custom_object_identifier": {
 												// Property: CustomObjectIdentifier
 												Description: "String that contains X.509 ObjectIdentifier information.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -573,6 +677,10 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -670,30 +778,54 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 									// Property: CustomCname
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"expiration_in_days": {
 									// Property: ExpirationInDays
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"s3_bucket_name": {
 									// Property: S3BucketName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"s3_object_acl": {
 									// Property: S3ObjectAcl
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ocsp_configuration": {
 						// Property: OcspConfiguration
@@ -704,19 +836,35 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 									// Property: Enabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ocsp_custom_cname": {
 									// Property: OcspCustomCname
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"signing_algorithm": {
 			// Property: SigningAlgorithm
@@ -813,11 +961,19 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 						// Property: CommonName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"country": {
 						// Property: Country
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"custom_attributes": {
 						// Property: CustomAttributes
@@ -838,66 +994,118 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"distinguished_name_qualifier": {
 						// Property: DistinguishedNameQualifier
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"generation_qualifier": {
 						// Property: GenerationQualifier
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"given_name": {
 						// Property: GivenName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"initials": {
 						// Property: Initials
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"locality": {
 						// Property: Locality
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"organization": {
 						// Property: Organization
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"organizational_unit": {
 						// Property: OrganizationalUnit
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"pseudonym": {
 						// Property: Pseudonym
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"serial_number": {
 						// Property: SerialNumber
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"state": {
 						// Property: State
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"surname": {
 						// Property: Surname
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"title": {
 						// Property: Title
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -931,15 +1139,27 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"type": {
 			// Property: Type

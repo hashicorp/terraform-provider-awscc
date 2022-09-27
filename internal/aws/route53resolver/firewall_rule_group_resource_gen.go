@@ -159,10 +159,14 @@ func firewallRuleGroupResourceType(ctx context.Context) (provider.ResourceType, 
 						Description: "BlockOverrideDnsType",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"CNAME",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"block_override_domain": {
@@ -170,8 +174,12 @@ func firewallRuleGroupResourceType(ctx context.Context) (provider.ResourceType, 
 						Description: "BlockOverrideDomain",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"block_override_ttl": {
@@ -179,8 +187,12 @@ func firewallRuleGroupResourceType(ctx context.Context) (provider.ResourceType, 
 						Description: "BlockOverrideTtl",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 604800),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"block_response": {
@@ -188,12 +200,16 @@ func firewallRuleGroupResourceType(ctx context.Context) (provider.ResourceType, 
 						Description: "BlockResponse",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"NODATA",
 								"NXDOMAIN",
 								"OVERRIDE",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"firewall_domain_list_id": {
@@ -214,6 +230,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (provider.ResourceType, 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -408,6 +428,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (provider.ResourceType, 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

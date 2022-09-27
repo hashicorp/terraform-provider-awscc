@@ -197,8 +197,12 @@ func recordingConfigurationResourceType(ctx context.Context) (provider.ResourceT
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"thumbnail_configuration": {

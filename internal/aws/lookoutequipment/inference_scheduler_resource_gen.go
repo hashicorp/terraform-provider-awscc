@@ -35,8 +35,12 @@ func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "A period of time (in minutes) by which inference on the data is delayed after the data starts.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 60),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"data_input_configuration": {
@@ -110,9 +114,13 @@ func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType,
 									Description: "Indicates the delimiter character used between items in the data.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1),
 										validate.StringMatch(regexp.MustCompile("^(\\-|\\_|\\s)?$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"timestamp_format": {
@@ -120,21 +128,33 @@ func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType,
 									Description: "The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"input_time_zone_offset": {
 						// Property: InputTimeZoneOffset
 						Description: "Indicates the difference between your time zone and Greenwich Mean Time (GMT).",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^(\\+|\\-)[0-9]{2}\\:[0-9]{2}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"s3_input_configuration": {
@@ -155,8 +175,12 @@ func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType,
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -216,8 +240,12 @@ func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType,
 						Description: "The ID number for the AWS KMS key used to encrypt the inference output.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"s3_output_configuration": {
@@ -238,8 +266,12 @@ func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType,
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -438,8 +470,12 @@ func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType,
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

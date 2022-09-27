@@ -91,6 +91,10 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"global_secondary_indexes": {
 			// Property: GlobalSecondaryIndexes
@@ -254,14 +258,22 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 									// Property: NonKeyAttributes
 									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(20),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"projection_type": {
 									// Property: ProjectionType
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -295,8 +307,12 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 												// Property: SeedCapacity
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(1),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"target_tracking_scaling_policy_configuration": {
@@ -307,21 +323,33 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 															// Property: DisableScaleIn
 															Type:     types.BoolType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"scale_in_cooldown": {
 															// Property: ScaleInCooldown
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntAtLeast(0),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"scale_out_cooldown": {
 															// Property: ScaleOutCooldown
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntAtLeast(0),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"target_value": {
@@ -336,14 +364,26 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"key_schema": {
 			// Property: KeySchema
@@ -506,14 +546,22 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 									// Property: NonKeyAttributes
 									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(20),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"projection_type": {
 									// Property: ProjectionType
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -765,6 +813,10 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"global_secondary_indexes": {
 						// Property: GlobalSecondaryIndexes
@@ -782,6 +834,10 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"index_name": {
 									// Property: IndexName
@@ -819,8 +875,12 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 															// Property: SeedCapacity
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntAtLeast(1),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"target_tracking_scaling_policy_configuration": {
@@ -831,21 +891,33 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 																		// Property: DisableScaleIn
 																		Type:     types.BoolType,
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"scale_in_cooldown": {
 																		// Property: ScaleInCooldown
 																		Type:     types.Int64Type,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.IntAtLeast(0),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"scale_out_cooldown": {
 																		// Property: ScaleOutCooldown
 																		Type:     types.Int64Type,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.IntAtLeast(0),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"target_value": {
@@ -860,22 +932,38 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"read_capacity_units": {
 												// Property: ReadCapacityUnits
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(1),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"point_in_time_recovery_specification": {
 						// Property: PointInTimeRecoverySpecification
@@ -885,10 +973,18 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 									// Property: PointInTimeRecoveryEnabled
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"read_provisioned_throughput_settings": {
 						// Property: ReadProvisionedThroughputSettings
@@ -918,8 +1014,12 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 												// Property: SeedCapacity
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(1),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"target_tracking_scaling_policy_configuration": {
@@ -930,21 +1030,33 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 															// Property: DisableScaleIn
 															Type:     types.BoolType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"scale_in_cooldown": {
 															// Property: ScaleInCooldown
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntAtLeast(0),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"scale_out_cooldown": {
 															// Property: ScaleOutCooldown
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntAtLeast(0),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"target_value": {
@@ -959,18 +1071,30 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"read_capacity_units": {
 									// Property: ReadCapacityUnits
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"region": {
 						// Property: Region
@@ -989,11 +1113,19 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"table_class": {
 						// Property: TableClass
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -1012,6 +1144,10 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -1049,10 +1185,18 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 						// Property: SSEType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"stream_arn": {
 			// Property: StreamArn
@@ -1091,6 +1235,10 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"table_id": {
 			// Property: TableId
@@ -1142,6 +1290,10 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 						// Property: AttributeName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"enabled": {
 						// Property: Enabled
@@ -1151,6 +1303,10 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"write_provisioned_throughput_settings": {
 			// Property: WriteProvisionedThroughputSettings
@@ -1234,8 +1390,12 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 									// Property: SeedCapacity
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"target_tracking_scaling_policy_configuration": {
@@ -1246,21 +1406,33 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 												// Property: DisableScaleIn
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"scale_in_cooldown": {
 												// Property: ScaleInCooldown
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(0),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"scale_out_cooldown": {
 												// Property: ScaleOutCooldown
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(0),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"target_value": {
@@ -1275,10 +1447,18 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

@@ -47,6 +47,10 @@ func modelResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description that identifies this model.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -88,6 +92,10 @@ func modelResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The schema to use to transform data to one or more output formats. Specify null ({}) if you don't want to specify a schema.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

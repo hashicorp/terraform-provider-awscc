@@ -105,8 +105,12 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (provi
 						// Property: Base
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"capacity_provider": {
@@ -119,8 +123,12 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (provi
 						// Property: Weight
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 1000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

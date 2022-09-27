@@ -103,8 +103,12 @@ func memberInvitationResourceType(ctx context.Context) (provider.ResourceType, e
 			Description: "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

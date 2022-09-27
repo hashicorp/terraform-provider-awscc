@@ -31,6 +31,10 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The description of the device.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"device_arn": {
 			// Property: DeviceArn
@@ -104,22 +108,38 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The physical address.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"latitude": {
 						// Property: Latitude
 						Description: "The latitude.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"longitude": {
 						// Property: Longitude
 						Description: "The longitude.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"model": {
 			// Property: Model
@@ -131,6 +151,10 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The device model",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"serial_number": {
 			// Property: SerialNumber
@@ -142,6 +166,10 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The device serial number.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"site_id": {
 			// Property: SiteId
@@ -153,6 +181,10 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The site ID.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -181,15 +213,27 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"type": {
 			// Property: Type
@@ -201,6 +245,10 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The device type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vendor": {
 			// Property: Vendor
@@ -212,6 +260,10 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The device vendor.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

@@ -46,9 +46,13 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
 				validate.StringMatch(regexp.MustCompile("^.*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"rule_group": {
@@ -573,14 +577,22 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Definition
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringLenAtLeast(1)),
 													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^.*$"), "")),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"port_sets": {
 									// Property: PortSets
@@ -591,18 +603,30 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Definition
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringLenAtLeast(1)),
 													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^.*$"), "")),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"rules_source": {
 						// Property: RulesSource
@@ -642,13 +666,21 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"rules_string": {
 									// Property: RulesString
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1000000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"stateful_rules": {
@@ -767,9 +799,13 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Settings
 															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayForEach(validate.StringLenBetween(1, 8192)),
 																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^.*$"), "")),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
@@ -779,6 +815,10 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"stateless_rules_and_custom_actions": {
 									// Property: StatelessRulesAndCustomActions
@@ -816,6 +856,10 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 																			},
 																		),
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
@@ -833,6 +877,10 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"stateless_rules": {
 												// Property: StatelessRules
@@ -882,6 +930,10 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"destinations": {
 																					// Property: Destinations
@@ -899,13 +951,21 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"protocols": {
 																					// Property: Protocols
 																					Type:     types.ListType{ElemType: types.Int64Type},
 																					Optional: true,
+																					Computed: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.ArrayForEach(validate.IntBetween(0, 255)),
+																					},
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
 																					},
 																				},
 																				"source_ports": {
@@ -931,6 +991,10 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"sources": {
 																					// Property: Sources
@@ -948,6 +1012,10 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"tcp_flags": {
 																					// Property: TCPFlags
@@ -974,6 +1042,7 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 																								// Property: Masks
 																								Type:     types.ListType{ElemType: types.StringType},
 																								Optional: true,
+																								Computed: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayForEach(validate.StringInSlice([]string{
 																										"FIN",
@@ -986,10 +1055,17 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 																										"CWR",
 																									})),
 																								},
+																								PlanModifiers: []tfsdk.AttributePlanModifier{
+																									resource.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					),
 																					Optional: true,
+																					Computed: true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
@@ -1006,6 +1082,10 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -1019,20 +1099,32 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: RuleOrder
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"DEFAULT_ACTION_ORDER",
 											"STRICT_ORDER",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"rule_group_arn": {
 			// Property: RuleGroupArn
@@ -1138,6 +1230,10 @@ func ruleGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"type": {
 			// Property: Type

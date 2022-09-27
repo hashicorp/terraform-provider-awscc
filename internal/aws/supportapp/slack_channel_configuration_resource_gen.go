@@ -57,9 +57,13 @@ func slackChannelConfigurationResourceType(ctx context.Context) (provider.Resour
 			Description: "The channel name in Slack.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 				validate.StringMatch(regexp.MustCompile("^.+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"channel_role_arn": {
@@ -90,6 +94,10 @@ func slackChannelConfigurationResourceType(ctx context.Context) (provider.Resour
 			Description: "Whether to notify when a correspondence is added to a case.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"notify_on_case_severity": {
 			// Property: NotifyOnCaseSeverity
@@ -124,6 +132,10 @@ func slackChannelConfigurationResourceType(ctx context.Context) (provider.Resour
 			Description: "Whether to notify when a case is created or reopened.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"notify_on_resolve_case": {
 			// Property: NotifyOnResolveCase
@@ -135,6 +147,10 @@ func slackChannelConfigurationResourceType(ctx context.Context) (provider.Resour
 			Description: "Whether to notify when a case is resolved.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"team_id": {
 			// Property: TeamId

@@ -181,17 +181,27 @@ func backupSelectionResourceType(ctx context.Context) (provider.ResourceType, er
 												// Property: ConditionKey
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"condition_value": {
 												// Property: ConditionValue
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"string_like": {
@@ -202,17 +212,27 @@ func backupSelectionResourceType(ctx context.Context) (provider.ResourceType, er
 												// Property: ConditionKey
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"condition_value": {
 												// Property: ConditionValue
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"string_not_equals": {
@@ -223,17 +243,27 @@ func backupSelectionResourceType(ctx context.Context) (provider.ResourceType, er
 												// Property: ConditionKey
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"condition_value": {
 												// Property: ConditionValue
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"string_not_like": {
@@ -244,22 +274,36 @@ func backupSelectionResourceType(ctx context.Context) (provider.ResourceType, er
 												// Property: ConditionKey
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"condition_value": {
 												// Property: ConditionValue
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"iam_role_arn": {
 						// Property: IamRoleArn
@@ -288,24 +332,30 @@ func backupSelectionResourceType(ctx context.Context) (provider.ResourceType, er
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"not_resources": {
 						// Property: NotResources
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"resources": {
 						// Property: Resources
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"selection_name": {

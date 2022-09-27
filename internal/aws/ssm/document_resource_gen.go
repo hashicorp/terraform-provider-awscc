@@ -75,6 +75,7 @@ func documentResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The key of a key-value pair that identifies the location of an attachment to a document.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"SourceUrl",
@@ -82,15 +83,22 @@ func documentResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"AttachmentReference",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
 						Description: "The name of the document attachment file.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"values": {
@@ -98,22 +106,26 @@ func documentResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 1),
 							validate.ArrayForEach(validate.StringLenBetween(1, 100000)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 20),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"content": {
@@ -259,9 +271,13 @@ func documentResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(200),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-.:/]{3,200}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"version": {
@@ -269,19 +285,25 @@ func documentResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The document version required by the current document.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(8),
 							validate.StringMatch(regexp.MustCompile("([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -321,9 +343,13 @@ func documentResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The name of the tag.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"value": {
@@ -331,19 +357,25 @@ func documentResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The value of the tag.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(1000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"target_type": {
@@ -357,8 +389,12 @@ func documentResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specify a target type to define the kinds of resources the document can run on.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^\\/[\\w\\.\\-\\:\\/]*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"update_method": {
@@ -399,8 +435,12 @@ func documentResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-.]{1,128}$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

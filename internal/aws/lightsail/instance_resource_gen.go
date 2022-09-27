@@ -94,19 +94,28 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The daily time when an automatic snapshot will be created.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^[0-9]{2}:00$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"status": {
 						// Property: Status
 						Description: "Status of the Addon",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Enabling",
@@ -118,12 +127,17 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"Failed",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"availability_zone": {
@@ -273,12 +287,20 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Instance attached to the disk.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"attachment_state": {
 									// Property: AttachmentState
 									Description: "Attachment state of the disk.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"disk_name": {
 									// Property: DiskName
@@ -295,12 +317,20 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "IOPS of disk.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"is_system_disk": {
 									// Property: IsSystemDisk
 									Description: "Is the Attached disk is the system disk of the Instance.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"path": {
 									// Property: Path
@@ -313,10 +343,18 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Size of the disk attached to the Instance.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ram_size_in_gb": {
 						// Property: RamSizeInGb
@@ -330,6 +368,10 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"instance_arn": {
 			// Property: InstanceArn
@@ -388,6 +430,10 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The name of your key pair.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"location": {
 			// Property: Location
@@ -431,6 +477,10 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"networking": {
 			// Property: Networking
@@ -541,6 +591,10 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ports": {
 						// Property: Ports
@@ -552,26 +606,40 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Access Direction for Protocol of the Instance(inbound/outbound).",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"access_from": {
 									// Property: AccessFrom
 									Description: "Access From Protocol of the Instance.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"access_type": {
 									// Property: AccessType
 									Description: "Access Type Protocol of the Instance.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cidr_list_aliases": {
 									// Property: CidrListAliases
 									Description: "cidr List Aliases",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"cidrs": {
@@ -579,8 +647,10 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "cidrs",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"common_name": {
@@ -588,20 +658,30 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "CommonName for Protocol of the Instance.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"from_port": {
 									// Property: FromPort
 									Description: "From Port of the Instance.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ipv_6_cidrs": {
 									// Property: Ipv6Cidrs
 									Description: "IPv6 Cidrs",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"protocol": {
@@ -609,12 +689,20 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Port Protocol of the Instance.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"to_port": {
 									// Property: ToPort
 									Description: "To Port of the Instance.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -623,6 +711,10 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"private_ip_address": {
 			// Property: PrivateIpAddress
@@ -722,6 +814,10 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"support_code": {
 			// Property: SupportCode
@@ -785,13 +881,21 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"user_data": {
 			// Property: UserData
@@ -803,6 +907,10 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"user_name": {
 			// Property: UserName

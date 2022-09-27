@@ -115,23 +115,35 @@ func suiteDefinitionResourceType(ctx context.Context) (provider.ResourceType, er
 									// Property: CertificateArn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(20, 2048),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"thing_arn": {
 									// Property: ThingArn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(20, 2048),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 2),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"intended_for_qualification": {
@@ -139,6 +151,10 @@ func suiteDefinitionResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "Whether the tests are intended for qualification in a suite.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"root_group": {
 						// Property: RootGroup
@@ -154,8 +170,12 @@ func suiteDefinitionResourceType(ctx context.Context) (provider.ResourceType, er
 						Description: "The Name of the suite definition.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -250,6 +270,10 @@ func suiteDefinitionResourceType(ctx context.Context) (provider.ResourceType, er
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

@@ -86,6 +86,10 @@ func vPCEndpointResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"private_dns_enabled": {
 			// Property: PrivateDnsEnabled
@@ -95,6 +99,10 @@ func vPCEndpointResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"route_table_ids": {
 			// Property: RouteTableIds
@@ -108,8 +116,12 @@ func vPCEndpointResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"security_group_ids": {
@@ -124,8 +136,12 @@ func vPCEndpointResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"service_name": {
@@ -152,8 +168,12 @@ func vPCEndpointResourceType(ctx context.Context) (provider.ResourceType, error)
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"vpc_endpoint_type": {

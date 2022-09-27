@@ -788,11 +788,19 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 						// Property: Aliases
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cnames": {
 						// Property: CNAMEs
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cache_behaviors": {
 						// Property: CacheBehaviors
@@ -815,6 +823,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: CachePolicyId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cached_methods": {
 									// Property: CachedMethods
@@ -876,6 +888,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 															// Property: WhitelistedNames
 															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
@@ -898,6 +914,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: Headers
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"query_string": {
 												// Property: QueryString
@@ -908,10 +928,18 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: QueryStringCacheKeys
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"function_associations": {
 									// Property: FunctionAssociations
@@ -921,15 +949,27 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: EventType
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"function_arn": {
 												// Property: FunctionARN
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"lambda_function_associations": {
 									// Property: LambdaFunctionAssociations
@@ -939,20 +979,36 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: EventType
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"include_body": {
 												// Property: IncludeBody
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"lambda_function_arn": {
 												// Property: LambdaFunctionARN
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"max_ttl": {
 									// Property: MaxTTL
@@ -978,6 +1034,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: OriginRequestPolicyId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"path_pattern": {
 									// Property: PathPattern
@@ -988,11 +1048,19 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: RealtimeLogConfigArn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"response_headers_policy_id": {
 									// Property: ResponseHeadersPolicyId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"smooth_streaming": {
 									// Property: SmoothStreaming
@@ -1013,11 +1081,19 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: TrustedKeyGroups
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"trusted_signers": {
 									// Property: TrustedSigners
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"viewer_protocol_policy": {
 									// Property: ViewerProtocolPolicy
@@ -1027,6 +1103,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"comment": {
 						// Property: Comment
@@ -1061,15 +1141,27 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: ResponseCode
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"response_page_path": {
 									// Property: ResponsePagePath
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"custom_origin": {
 						// Property: CustomOrigin
@@ -1113,6 +1205,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"default_cache_behavior": {
 						// Property: DefaultCacheBehavior
@@ -1201,6 +1297,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 															// Property: WhitelistedNames
 															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
@@ -1223,6 +1323,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: Headers
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"query_string": {
 												// Property: QueryString
@@ -1233,10 +1337,18 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: QueryStringCacheKeys
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"function_associations": {
 									// Property: FunctionAssociations
@@ -1246,15 +1358,27 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: EventType
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"function_arn": {
 												// Property: FunctionARN
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"lambda_function_associations": {
 									// Property: LambdaFunctionAssociations
@@ -1264,20 +1388,36 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: EventType
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"include_body": {
 												// Property: IncludeBody
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"lambda_function_arn": {
 												// Property: LambdaFunctionARN
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"max_ttl": {
 									// Property: MaxTTL
@@ -1348,11 +1488,19 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: TrustedKeyGroups
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"trusted_signers": {
 									// Property: TrustedSigners
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"viewer_protocol_policy": {
 									// Property: ViewerProtocolPolicy
@@ -1392,6 +1540,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 						// Property: IPV6Enabled
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"logging": {
 						// Property: Logging
@@ -1425,6 +1577,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"origin_groups": {
 						// Property: OriginGroups
@@ -1494,6 +1650,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"quantity": {
 									// Property: Quantity
@@ -1503,6 +1663,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"origins": {
 						// Property: Origins
@@ -1512,11 +1676,19 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: ConnectionAttempts
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"connection_timeout": {
 									// Property: ConnectionTimeout
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"custom_origin_config": {
 									// Property: CustomOriginConfig
@@ -1583,6 +1755,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"domain_name": {
 									// Property: DomainName
@@ -1598,6 +1774,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: OriginAccessControlId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"origin_custom_headers": {
 									// Property: OriginCustomHeaders
@@ -1616,6 +1796,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"origin_path": {
 									// Property: OriginPath
@@ -1635,15 +1819,27 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: Enabled
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"origin_shield_region": {
 												// Property: OriginShieldRegion
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"s3_origin_config": {
 									// Property: S3OriginConfig
@@ -1662,10 +1858,18 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"price_class": {
 						// Property: PriceClass
@@ -1689,6 +1893,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 												// Property: Locations
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"restriction_type": {
 												// Property: RestrictionType
@@ -1749,6 +1957,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"viewer_certificate": {
 						// Property: ViewerCertificate
@@ -1758,26 +1970,46 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 									// Property: AcmCertificateArn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cloudfront_default_certificate": {
 									// Property: CloudFrontDefaultCertificate
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iam_certificate_id": {
 									// Property: IamCertificateId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"minimum_protocol_version": {
 									// Property: MinimumProtocolVersion
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"ssl_support_method": {
 									// Property: SslSupportMethod
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -1872,6 +2104,10 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

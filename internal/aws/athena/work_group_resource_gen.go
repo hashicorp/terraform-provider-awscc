@@ -49,8 +49,12 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The workgroup description.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -81,6 +85,10 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The option to delete the workgroup and its contents even if the workgroup contains any named queries.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"state": {
 			// Property: State
@@ -96,11 +104,15 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The state of the workgroup: ENABLED or DISABLED.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENABLED",
 					"DISABLED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -153,8 +165,10 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"work_group_configuration": {
@@ -242,8 +256,12 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(10000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"enforce_work_group_configuration": {
@@ -251,6 +269,10 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"engine_version": {
 						// Property: EngineVersion
@@ -271,22 +293,38 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"publish_cloudwatch_metrics_enabled": {
 						// Property: PublishCloudWatchMetricsEnabled
 						Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"requester_pays_enabled": {
 						// Property: RequesterPaysEnabled
 						Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"result_configuration": {
 						// Property: ResultConfiguration
@@ -316,24 +354,44 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"output_location": {
 									// Property: OutputLocation
 									Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"work_group_configuration_updates": {
 			// Property: WorkGroupConfigurationUpdates
@@ -430,8 +488,12 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(10000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"enforce_work_group_configuration": {
@@ -439,6 +501,10 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"engine_version": {
 						// Property: EngineVersion
@@ -459,28 +525,48 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"publish_cloudwatch_metrics_enabled": {
 						// Property: PublishCloudWatchMetricsEnabled
 						Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"remove_bytes_scanned_cutoff_per_query": {
 						// Property: RemoveBytesScannedCutoffPerQuery
 						Description: "Indicates that the data usage control limit per query is removed.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"requester_pays_enabled": {
 						// Property: RequesterPaysEnabled
 						Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"result_configuration_updates": {
 						// Property: ResultConfigurationUpdates
@@ -510,34 +596,62 @@ func workGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"output_location": {
 									// Property: OutputLocation
 									Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"remove_encryption_configuration": {
 									// Property: RemoveEncryptionConfiguration
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"remove_output_location": {
 									// Property: RemoveOutputLocation
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// WorkGroupConfigurationUpdates is a write-only property.
 		},
 	}

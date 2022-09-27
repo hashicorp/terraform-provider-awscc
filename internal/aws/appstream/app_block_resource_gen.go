@@ -130,6 +130,10 @@ func appBlockResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: ExecutableParameters
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"executable_path": {
 						// Property: ExecutablePath
@@ -243,6 +247,10 @@ func appBlockResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Tags is a write-only property.
 		},
 	}

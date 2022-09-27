@@ -78,8 +78,12 @@ func pricingRuleResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Pricing rule description",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"last_modified_time": {
@@ -225,6 +229,10 @@ func pricingRuleResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"type": {
 			// Property: Type

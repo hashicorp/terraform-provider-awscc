@@ -484,9 +484,13 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 						// Property: Description
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(2048),
 							validate.StringMatch(regexp.MustCompile("[\\w!@#\\-.?,\\s]*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"flow_name": {
@@ -515,9 +519,13 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 									// Property: ConnectorProfileName
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 										validate.StringMatch(regexp.MustCompile("[\\w/!@#+=.-]+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"connector_type": {
@@ -542,13 +550,21 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 												// Property: DatetimeTypeFieldName
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_connector_properties": {
 									// Property: SourceConnectorProperties
@@ -570,6 +586,10 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"s3": {
 												// Property: S3
@@ -588,14 +608,22 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 															// Property: BucketPrefix
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
 																validate.StringMatch(regexp.MustCompile(".*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"salesforce": {
 												// Property: Salesforce
@@ -605,11 +633,19 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 															// Property: EnableDynamicFieldUpdate
 															Type:     types.BoolType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"include_deleted_records": {
 															// Property: IncludeDeletedRecords
 															Type:     types.BoolType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"object": {
 															// Property: Object
@@ -623,6 +659,10 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"service_now": {
 												// Property: ServiceNow
@@ -640,6 +680,10 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"zendesk": {
 												// Property: Zendesk
@@ -657,6 +701,10 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -678,6 +726,7 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 												// Property: Marketo
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"PROJECTION",
@@ -697,12 +746,16 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 														"VALIDATE_NUMERIC",
 														"NO_OP",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"s3": {
 												// Property: S3
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"PROJECTION",
@@ -726,12 +779,16 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 														"VALIDATE_NUMERIC",
 														"NO_OP",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"salesforce": {
 												// Property: Salesforce
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"PROJECTION",
@@ -756,12 +813,16 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 														"VALIDATE_NUMERIC",
 														"NO_OP",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"service_now": {
 												// Property: ServiceNow
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"PROJECTION",
@@ -787,11 +848,15 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 														"NO_OP",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"zendesk": {
 												// Property: Zendesk
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"PROJECTION",
@@ -810,18 +875,29 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 														"NO_OP",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination_field": {
 									// Property: DestinationField
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 										validate.StringMatch(regexp.MustCompile(".*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"source_fields": {
@@ -872,6 +948,10 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"task_type": {
 									// Property: TaskType
@@ -909,22 +989,34 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 															// Property: DataPullMode
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringInSlice([]string{
 																	"Incremental",
 																	"Complete",
 																}),
 															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"first_execution_from": {
 															// Property: FirstExecutionFrom
 															Type:     types.Float64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"schedule_end_time": {
 															// Property: ScheduleEndTime
 															Type:     types.Float64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"schedule_expression": {
 															// Property: ScheduleExpression
@@ -939,31 +1031,51 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 															// Property: ScheduleOffset
 															Type:     types.Int64Type,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntBetween(0, 36000),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 														"schedule_start_time": {
 															// Property: ScheduleStartTime
 															Type:     types.Float64Type,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"timezone": {
 															// Property: Timezone
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
 																validate.StringMatch(regexp.MustCompile(".*"), ""),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"trigger_type": {
 									// Property: TriggerType
@@ -984,6 +1096,10 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// FlowDefinition is a write-only property.
 		},
 		"last_updated_at": {
@@ -1013,9 +1129,13 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The name of the ObjectType defined for the 3rd party data in Profile Service",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z_][a-zA-Z_0-9-]*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"object_type_names": {
@@ -1069,6 +1189,10 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -1122,8 +1246,12 @@ func integrationResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"uri": {

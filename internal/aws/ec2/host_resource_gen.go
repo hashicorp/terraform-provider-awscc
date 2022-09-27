@@ -31,6 +31,10 @@ func hostResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"availability_zone": {
 			// Property: AvailabilityZone
@@ -70,6 +74,10 @@ func hostResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"instance_family": {
 			// Property: InstanceFamily

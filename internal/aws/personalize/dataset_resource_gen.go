@@ -120,23 +120,35 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 										validate.StringMatch(regexp.MustCompile("(s3|http|https)://.+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"dataset_arn": {
 						// Property: DatasetArn
 						Description: "The ARN of the dataset that receives the imported data",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
 							validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"dataset_import_job_arn": {
@@ -144,9 +156,13 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The ARN of the dataset import job",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
 							validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"job_name": {
@@ -154,9 +170,13 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The name for the dataset import job.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 63),
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"role_arn": {
@@ -164,14 +184,22 @@ func datasetResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The ARN of the IAM role that has permissions to read from the Amazon S3 data source.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
 							validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"dataset_type": {
 			// Property: DatasetType

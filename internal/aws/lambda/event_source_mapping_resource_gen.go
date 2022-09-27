@@ -48,9 +48,13 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 						Description: "The identifier for the Kafka Consumer Group to join.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 200),
 							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9-\\/*:_+=.@-]*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -74,8 +78,12 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "The maximum number of items to retrieve in a single batch.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 10000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"bisect_batch_on_function_error": {
@@ -88,6 +96,10 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "(Streams) If the function returns an error, split the batch in two and retry.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"destination_config": {
 			// Property: DestinationConfig
@@ -126,18 +138,30 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 									Description: "The Amazon Resource Name (ARN) of the destination resource.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(12, 1024),
 										validate.StringMatch(regexp.MustCompile("arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"enabled": {
 			// Property: Enabled
@@ -149,6 +173,10 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "Disables the event source mapping to pause polling and invocation.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"event_source_arn": {
 			// Property: EventSourceArn
@@ -217,22 +245,34 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 									Description: "The filter pattern that defines which events should be passed for invocations.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 4096),
 										validate.StringMatch(regexp.MustCompile(".*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 20),
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"function_name": {
 			// Property: FunctionName
@@ -271,11 +311,15 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "(Streams) A list of response types supported by the function.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 				validate.ArrayForEach(validate.StringInSlice([]string{
 					"ReportBatchItemFailures",
 				})),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"id": {
@@ -307,8 +351,12 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "(Streams) The maximum amount of time to gather records before invoking the function, in seconds.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 300),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"maximum_record_age_in_seconds": {
@@ -323,8 +371,12 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "(Streams) The maximum age of a record that Lambda sends to a function for processing.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(-1, 604800),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"maximum_retry_attempts": {
@@ -339,8 +391,12 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "(Streams) The maximum number of times to retry when the function returns an error.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(-1, 10000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"parallelization_factor": {
@@ -355,8 +411,12 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "(Streams) The number of batches to process from each shard concurrently.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 10),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"queues": {
@@ -378,11 +438,15 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "(ActiveMQ) A list of ActiveMQ queues.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 1),
 				validate.UniqueItems(),
 				validate.ArrayForEach(validate.StringLenBetween(1, 1000)),
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\s\\S]*"), "")),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"self_managed_event_source": {
@@ -429,16 +493,24 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 									Description: "A list of Kafka server endpoints.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 10),
 										validate.UniqueItems(),
 										validate.ArrayForEach(validate.StringLenBetween(1, 300)),
 										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}"), "")),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -474,9 +546,13 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 						Description: "The identifier for the Kafka Consumer Group to join.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 200),
 							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9-\\/*:_+=.@-]*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -534,6 +610,7 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 						Description: "The type of source access configuration.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"BASIC_AUTH",
@@ -546,23 +623,34 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 								"SERVER_ROOT_CA_CERTIFICATE",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"uri": {
 						// Property: URI
 						Description: "The URI for the source access configuration resource.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 200),
 							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9-\\/*:_+=.@-]*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 22),
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"starting_position": {
@@ -623,11 +711,15 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "(Kafka) A list of Kafka topics.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 1),
 				validate.UniqueItems(),
 				validate.ArrayForEach(validate.StringLenBetween(1, 249)),
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)"), "")),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tumbling_window_in_seconds": {
@@ -642,8 +734,12 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 			Description: "(Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 900),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

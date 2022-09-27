@@ -45,8 +45,10 @@ func batchScramSecretResourceType(ctx context.Context) (provider.ResourceType, e
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

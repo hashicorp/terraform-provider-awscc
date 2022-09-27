@@ -89,6 +89,10 @@ func instanceStorageConfigResourceType(ctx context.Context) (provider.ResourceTy
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"kinesis_stream_config": {
 			// Property: KinesisStreamConfig
@@ -121,6 +125,10 @@ func instanceStorageConfigResourceType(ctx context.Context) (provider.ResourceTy
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"kinesis_video_stream_config": {
 			// Property: KinesisVideoStreamConfig
@@ -197,6 +205,10 @@ func instanceStorageConfigResourceType(ctx context.Context) (provider.ResourceTy
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"prefix": {
 						// Property: Prefix
@@ -216,6 +228,10 @@ func instanceStorageConfigResourceType(ctx context.Context) (provider.ResourceTy
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"resource_type": {
 			// Property: ResourceType
@@ -344,10 +360,18 @@ func instanceStorageConfigResourceType(ctx context.Context) (provider.ResourceTy
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"storage_type": {
 			// Property: StorageType

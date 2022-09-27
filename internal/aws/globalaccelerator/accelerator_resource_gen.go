@@ -124,8 +124,12 @@ func acceleratorResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The IP addresses from BYOIP Prefix pool.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$"), "")),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"ipv_4_addresses": {
@@ -232,6 +236,10 @@ func acceleratorResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

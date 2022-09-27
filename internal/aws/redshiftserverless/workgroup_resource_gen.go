@@ -31,6 +31,10 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.Int64Type,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// BaseCapacity is a write-only property.
 		},
 		"config_parameters": {
@@ -64,23 +68,35 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: ParameterKey
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"parameter_value": {
 						// Property: ParameterValue
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 15000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// ConfigParameters is a write-only property.
 		},
@@ -92,6 +108,10 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// EnhancedVpcRouting is a write-only property.
 		},
 		"namespace_name": {
@@ -122,6 +142,10 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// PubliclyAccessible is a write-only property.
 		},
 		"security_group_ids": {
@@ -141,6 +165,7 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 32),
 				validate.ArrayForEach(validate.StringLenBetween(0, 255)),
@@ -148,6 +173,7 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 			// SecurityGroupIds is a write-only property.
 		},
@@ -168,6 +194,7 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 32),
 				validate.ArrayForEach(validate.StringLenBetween(0, 255)),
@@ -175,6 +202,7 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 			// SubnetIds is a write-only property.
 		},
@@ -228,11 +256,13 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 			// Tags is a write-only property.
 		},
@@ -381,6 +411,10 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: BaseCapacity
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"config_parameters": {
 						// Property: ConfigParameters
@@ -390,26 +424,42 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: ParameterKey
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 255),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"parameter_value": {
 									// Property: ParameterValue
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 15000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"creation_date": {
 						// Property: CreationDate
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"endpoint": {
 						// Property: Endpoint
@@ -419,11 +469,19 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: Address
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"port": {
 									// Property: Port
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"vpc_endpoints": {
 									// Property: VpcEndpoints
@@ -437,85 +495,132 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: AvailabilityZone
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"network_interface_id": {
 															// Property: NetworkInterfaceId
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"private_ip_address": {
 															// Property: PrivateIpAddress
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"subnet_id": {
 															// Property: SubnetId
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													Multiset(),
+													resource.UseStateForUnknown(),
 												},
 											},
 											"vpc_endpoint_id": {
 												// Property: VpcEndpointId
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"vpc_id": {
 												// Property: VpcId
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"enhanced_vpc_routing": {
 						// Property: EnhancedVpcRouting
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"namespace_name": {
 						// Property: NamespaceName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(3, 64),
 							validate.StringMatch(regexp.MustCompile("^[a-z0-9-]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"publicly_accessible": {
 						// Property: PubliclyAccessible
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"security_group_ids": {
 						// Property: SecurityGroupIds
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(0, 255)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^sg-[0-9a-fA-F]{8,}$"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"status": {
 						// Property: Status
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"CREATING",
@@ -524,36 +629,53 @@ func workgroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"DELETING",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(0, 255)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^subnet-[0-9a-fA-F]{8,}$"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"workgroup_arn": {
 						// Property: WorkgroupArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"workgroup_id": {
 						// Property: WorkgroupId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"workgroup_name": {
 						// Property: WorkgroupName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(3, 64),
 							validate.StringMatch(regexp.MustCompile("^[a-z0-9-]*$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

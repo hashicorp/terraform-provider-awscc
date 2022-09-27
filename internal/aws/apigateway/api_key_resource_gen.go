@@ -46,6 +46,10 @@ func apiKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "An AWS Marketplace customer identifier to use when integrating with the AWS SaaS Marketplace.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -57,6 +61,10 @@ func apiKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description of the purpose of the API key.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"enabled": {
 			// Property: Enabled
@@ -138,18 +146,30 @@ func apiKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The ID of a RestApi resource that includes the stage with which you want to associate the API key.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stage_name": {
 						// Property: StageName
 						Description: "The name of the stage with which to associate the API key. The stage must be included in the RestApi resource that you specified in the RestApiId property. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -205,6 +225,10 @@ func apiKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"value": {
 			// Property: Value

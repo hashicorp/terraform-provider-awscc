@@ -99,11 +99,13 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"instance_access_control_attribute_configuration": {
@@ -207,6 +209,10 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"instance_arn": {
 			// Property: InstanceArn

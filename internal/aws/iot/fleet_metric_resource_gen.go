@@ -32,6 +32,10 @@ func fleetMetricResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The aggregation field to perform aggregation and metric emission",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"aggregation_type": {
 			// Property: AggregationType
@@ -80,6 +84,10 @@ func fleetMetricResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"creation_date": {
 			// Property: CreationDate
@@ -105,6 +113,10 @@ func fleetMetricResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The description of a fleet metric",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"index_name": {
 			// Property: IndexName
@@ -116,6 +128,10 @@ func fleetMetricResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The index name of a fleet metric",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"last_modified_date": {
 			// Property: LastModifiedDate
@@ -169,6 +185,10 @@ func fleetMetricResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The period of metric emission in seconds",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"query_string": {
 			// Property: QueryString
@@ -180,6 +200,10 @@ func fleetMetricResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The Fleet Indexing query used by a fleet metric",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"query_version": {
 			// Property: QueryVersion
@@ -191,6 +215,10 @@ func fleetMetricResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The version of a Fleet Indexing query used by a fleet metric",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -249,8 +277,12 @@ func fleetMetricResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"unit": {
@@ -263,6 +295,10 @@ func fleetMetricResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The unit of data points emitted by a fleet metric",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"version": {
 			// Property: Version

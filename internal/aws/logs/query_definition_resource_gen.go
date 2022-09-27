@@ -41,12 +41,14 @@ func queryDefinitionResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "Optionally define specific log groups as part of your query definition",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenBetween(1, 512)),
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {

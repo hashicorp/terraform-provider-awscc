@@ -46,8 +46,12 @@ func keyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 8192),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"enable_key_rotation": {
@@ -60,6 +64,10 @@ func keyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Enables automatic rotation of the key material for the specified AWS KMS key. By default, automation key rotation is not enabled.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"enabled": {
 			// Property: Enabled
@@ -71,6 +79,10 @@ func keyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"key_id": {
 			// Property: KeyId
@@ -202,8 +214,12 @@ func keyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(7, 30),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// PendingWindowInDays is a write-only property.
 		},
@@ -263,6 +279,10 @@ func keyResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

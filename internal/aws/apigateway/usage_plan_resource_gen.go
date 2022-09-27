@@ -75,12 +75,20 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The ID of an API that is in the specified Stage property that you want to associate with the usage plan.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stage": {
 						// Property: Stage
 						Description: "The name of the stage to associate with the usage plan.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"throttle": {
 						// Property: Throttle
@@ -93,8 +101,12 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(0),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"rate_limit": {
@@ -102,19 +114,31 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The API request steady-state rate limit (average requests per second over an extended period of time).",
 									Type:        types.Float64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatAtLeast(0.000000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"description": {
@@ -127,6 +151,10 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description of the usage plan.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -174,8 +202,12 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The maximum number of requests that users can make within the specified time period.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"offset": {
@@ -183,8 +215,12 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "For the initial time period, the number of requests to subtract from the specified limit. When you first implement a usage plan, the plan might start in the middle of the week or month. With this property, you can decrease the limit for this initial time period.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"period": {
@@ -192,10 +228,18 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The time period for which the maximum limit of requests applies, such as DAY or WEEK. For valid values, see the period property for the UsagePlan resource in the Amazon API Gateway REST API Reference.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -252,8 +296,10 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"throttle": {
@@ -284,8 +330,12 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"rate_limit": {
@@ -293,13 +343,21 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The API request steady-state rate limit (average requests per second over an extended period of time).",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatAtLeast(0.000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"usage_plan_name": {
 			// Property: UsagePlanName
@@ -311,6 +369,10 @@ func usagePlanResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A name for the usage plan.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

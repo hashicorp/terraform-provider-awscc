@@ -155,16 +155,24 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: AvailabilityStatus
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"ENABLED",
 											"DISABLED",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"export_to_csv_option": {
 						// Property: ExportToCSVOption
@@ -175,16 +183,24 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: AvailabilityStatus
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"ENABLED",
 											"DISABLED",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"sheet_controls_option": {
 						// Property: SheetControlsOption
@@ -195,20 +211,32 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: VisibilityState
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"EXPANDED",
 											"COLLAPSED",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// DashboardPublishOptions is a write-only property.
 		},
 		"last_published_time": {
@@ -255,8 +283,12 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "<p>The display name of the dashboard.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"parameters": {
@@ -411,8 +443,12 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"decimal_parameters": {
@@ -438,8 +474,12 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"integer_parameters": {
@@ -465,8 +505,12 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"string_parameters": {
@@ -492,13 +536,21 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Parameters is a write-only property.
 		},
 		"permissions": {
@@ -560,8 +612,12 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 64),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"source_entity": {
@@ -658,6 +714,10 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -720,8 +780,12 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"theme_arn": {
@@ -734,6 +798,10 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "<p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If\n            you add a value for this field, it overrides the value that is used in the source\n            entity. The theme ARN must exist in the same AWS account where you create the\n            dashboard.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// ThemeArn is a write-only property.
 		},
 		"version": {
@@ -860,20 +928,32 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"created_time": {
 						// Property: CreatedTime
 						Description: "<p>The time that this dashboard version was created.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"data_set_arns": {
 						// Property: DataSetArns
 						Description: "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this\n            version of the dashboard.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 100),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"description": {
@@ -881,8 +961,12 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "<p>Description.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"errors": {
@@ -895,14 +979,19 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>Message.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"type": {
 									// Property: Type
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"ACCESS_DENIED",
@@ -917,12 +1006,19 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 											"COLUMN_REPLACEMENT_MISSING",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"sheets": {
@@ -935,8 +1031,12 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"sheet_id": {
@@ -944,16 +1044,24 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "<p>The unique identifier associated with a sheet.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 2048),
 										validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 20),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"source_entity_arn": {
@@ -961,11 +1069,16 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "<p>Source entity ARN.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"status": {
 						// Property: Status
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"CREATION_IN_PROGRESS",
@@ -977,20 +1090,31 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"DELETED",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"theme_arn": {
 						// Property: ThemeArn
 						Description: "<p>The ARN of the theme associated with a version of the dashboard.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"version_number": {
 						// Property: VersionNumber
 						Description: "<p>Version number for this version of the dashboard.</p>",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatAtLeast(1.000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -1013,8 +1137,12 @@ func dashboardResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "<p>A description for the first version of the dashboard being created.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// VersionDescription is a write-only property.
 		},

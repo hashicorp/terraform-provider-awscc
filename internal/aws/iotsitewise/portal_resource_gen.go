@@ -47,16 +47,28 @@ func portalResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"notification_lambda_arn": {
 						// Property: NotificationLambdaArn
 						Description: "The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"notification_sender_email": {
 			// Property: NotificationSenderEmail
@@ -68,6 +80,10 @@ func portalResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The email address that sends alarm notifications.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"portal_arn": {
 			// Property: PortalArn
@@ -134,6 +150,10 @@ func portalResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description for the portal.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"portal_id": {
 			// Property: PortalId
@@ -227,8 +247,10 @@ func portalResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 			// Tags is a write-only property.
 		},

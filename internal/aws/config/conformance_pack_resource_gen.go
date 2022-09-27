@@ -79,8 +79,12 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 60),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"conformance_pack_name": {
@@ -116,8 +120,12 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "AWS Config stores intermediate files while processing conformance pack template.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 63),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"delivery_s3_key_prefix": {
@@ -132,8 +140,12 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "The prefix for delivery S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"template_body": {
@@ -148,8 +160,12 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 51200),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// TemplateBody is a write-only property.
 		},
@@ -166,9 +182,13 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 			Description: "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 				validate.StringMatch(regexp.MustCompile("s3://.*"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 			// TemplateS3Uri is a write-only property.
 		},
@@ -199,21 +219,33 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 						// Property: DocumentName
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(3, 128),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"document_version": {
 						// Property: DocumentVersion
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// TemplateSSMDocumentDetails is a write-only property.
 		},
 	}

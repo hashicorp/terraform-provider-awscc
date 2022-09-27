@@ -72,8 +72,12 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of hours for the data records that are stored in shards to remain accessible.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(24),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"shard_count": {
@@ -87,8 +91,12 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"stream_encryption": {
@@ -144,6 +152,10 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"stream_mode_details": {
 			// Property: StreamModeDetails
@@ -257,8 +269,10 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

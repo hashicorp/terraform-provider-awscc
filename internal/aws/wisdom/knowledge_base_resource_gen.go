@@ -127,13 +127,21 @@ func knowledgeBaseResourceType(ctx context.Context) (provider.ResourceType, erro
 						// Property: TemplateUri
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 4096),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"server_side_encryption_configuration": {
 			// Property: ServerSideEncryptionConfiguration
@@ -155,8 +163,12 @@ func knowledgeBaseResourceType(ctx context.Context) (provider.ResourceType, erro
 						// Property: KmsKeyId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 4096),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -241,6 +253,10 @@ func knowledgeBaseResourceType(ctx context.Context) (provider.ResourceType, erro
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

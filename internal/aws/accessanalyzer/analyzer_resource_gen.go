@@ -114,29 +114,39 @@ func analyzerResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Property: Contains
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"eq": {
 									// Property: Eq
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"exists": {
 									// Property: Exists
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"neq": {
 									// Property: Neq
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 								"property": {
@@ -163,8 +173,10 @@ func analyzerResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"arn": {
@@ -239,8 +251,12 @@ func analyzerResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"type": {

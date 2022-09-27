@@ -35,6 +35,10 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -46,6 +50,10 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A description of the output.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"destination": {
 			// Property: Destination
@@ -57,6 +65,10 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The address where you want to send the output.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"encryption": {
 			// Property: Encryption
@@ -106,12 +118,16 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"aes128",
 								"aes192",
 								"aes256",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"key_type": {
@@ -146,6 +162,10 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"flow_arn": {
 			// Property: FlowArn
@@ -168,6 +188,10 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"min_latency": {
 			// Property: MinLatency
@@ -179,6 +203,10 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The minimum latency in milliseconds.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -220,6 +248,10 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The port to use when content is distributed to this output.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"protocol": {
 			// Property: Protocol
@@ -260,6 +292,10 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The remote ID for the Zixi-pull stream.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"smoothing_latency": {
 			// Property: SmoothingLatency
@@ -271,6 +307,10 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"stream_id": {
 			// Property: StreamId
@@ -282,6 +322,10 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vpc_interface_attachment": {
 			// Property: VpcInterfaceAttachment
@@ -305,10 +349,18 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The name of the VPC interface to use for this output.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

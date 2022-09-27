@@ -33,6 +33,10 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The identifier of the user account in the directory used for identity management.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"hierarchy_group_arn": {
 			// Property: HierarchyGroupArn
@@ -45,8 +49,12 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The identifier of the hierarchy group for the user.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"identity_info": {
@@ -79,22 +87,38 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The email address. If you are using SAML for identity management and include this parameter, an error is returned.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"first_name": {
 						// Property: FirstName
 						Description: "The first name. This is required if you are using Amazon Connect or SAML for identity management.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"last_name": {
 						// Property: LastName
 						Description: "The last name. This is required if you are using Amazon Connect or SAML for identity management.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"instance_arn": {
 			// Property: InstanceArn
@@ -122,6 +146,10 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Password is a write-only property.
 		},
 		"phone_config": {
@@ -166,8 +194,12 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The After Call Work (ACW) timeout setting, in seconds.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"auto_accept": {
@@ -175,12 +207,20 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The Auto accept setting.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"desk_phone_number": {
 						// Property: DeskPhoneNumber
 						Description: "The phone number for the user's desk phone.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"phone_type": {
 						// Property: PhoneType
@@ -294,8 +334,12 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"user_arn": {

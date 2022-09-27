@@ -188,19 +188,29 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (provider
 										},
 									),
 									Optional: true,
+									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										Multiset(),
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"enabled": {
 						// Property: Enabled
 						Description: "Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to true to enable publishing to this destination; set to false to prevent publishing to this destination. The default value is false.   ",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"kinesis_firehose_destination": {
 						// Property: KinesisFirehoseDestination
@@ -222,6 +232,10 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (provider
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"matching_event_types": {
 						// Property: MatchingEventTypes
@@ -237,8 +251,12 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (provider
 						Description: "The name of the event destination set.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{0,64}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"sns_destination": {
@@ -258,6 +276,10 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (provider
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

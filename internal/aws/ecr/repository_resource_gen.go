@@ -125,10 +125,18 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The setting that determines whether images are scanned after being pushed to a repository.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"image_tag_mutability": {
 			// Property: ImageTagMutability
@@ -144,11 +152,15 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The image tag mutability setting for the repository.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"MUTABLE",
 					"IMMUTABLE",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"lifecycle_policy": {
@@ -182,8 +194,12 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The JSON repository policy text to apply to the repository.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(100, 30720),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"registry_id": {
@@ -191,14 +207,22 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(12, 12),
 							validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"repository_name": {
 			// Property: RepositoryName
@@ -232,6 +256,10 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "The JSON repository policy text to apply to the repository. For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html in the Amazon Elastic Container Registry User Guide. ",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"repository_uri": {
 			// Property: RepositoryUri
@@ -302,8 +330,12 @@ func repositoryResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

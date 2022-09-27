@@ -92,6 +92,10 @@ func endpointGroupResourceType(ctx context.Context) (provider.ResourceType, erro
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"endpoint_group_arn": {
 			// Property: EndpointGroupArn
@@ -272,6 +276,10 @@ func endpointGroupResourceType(ctx context.Context) (provider.ResourceType, erro
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"threshold_count": {
 			// Property: ThresholdCount

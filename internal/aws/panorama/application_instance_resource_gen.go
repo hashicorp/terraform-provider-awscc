@@ -151,9 +151,13 @@ func applicationInstanceResourceType(ctx context.Context) (provider.ResourceType
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"health_status": {
@@ -206,9 +210,13 @@ func applicationInstanceResourceType(ctx context.Context) (provider.ResourceType
 						// Property: PayloadData
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 51200),
 							validate.StringMatch(regexp.MustCompile("^.+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -241,9 +249,13 @@ func applicationInstanceResourceType(ctx context.Context) (provider.ResourceType
 						// Property: PayloadData
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 51200),
 							validate.StringMatch(regexp.MustCompile("^.+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -349,6 +361,7 @@ func applicationInstanceResourceType(ctx context.Context) (provider.ResourceType
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"DEPLOYMENT_SUCCEEDED",
@@ -358,6 +371,9 @@ func applicationInstanceResourceType(ctx context.Context) (provider.ResourceType
 					"PROCESSING_DEPLOYMENT",
 					"PROCESSING_REMOVAL",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -419,6 +435,10 @@ func applicationInstanceResourceType(ctx context.Context) (provider.ResourceType
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

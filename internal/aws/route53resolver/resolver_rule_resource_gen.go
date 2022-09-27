@@ -67,8 +67,12 @@ func resolverRuleResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The name for the Resolver rule",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resolver_endpoint_id": {
@@ -83,8 +87,12 @@ func resolverRuleResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The ID of the endpoint that the rule is associated with.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resolver_rule_id": {
@@ -182,8 +190,10 @@ func resolverRuleResourceType(ctx context.Context) (provider.ResourceType, error
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"target_ips": {
@@ -228,15 +238,21 @@ func resolverRuleResourceType(ctx context.Context) (provider.ResourceType, error
 						Description: "The port at Ip that you want to forward DNS queries to. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 65535),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

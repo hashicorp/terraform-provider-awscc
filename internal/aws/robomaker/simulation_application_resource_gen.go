@@ -46,6 +46,10 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 			Description: "The current revision id.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"environment": {
 			// Property: Environment
@@ -57,6 +61,10 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 			Description: "The URI of the Docker image for the robot application.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -133,6 +141,10 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"robot_software_suite": {
 			// Property: RobotSoftwareSuite
@@ -187,6 +199,7 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 						Description: "The version of the robot software suite.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Kinetic",
@@ -194,6 +207,9 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 								"Dashing",
 								"Foxy",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -256,6 +272,7 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 						Description: "The version of the simulation software suite.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"7",
@@ -266,6 +283,9 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 								"Dashing",
 								"Foxy",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -349,8 +369,10 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -373,6 +395,10 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

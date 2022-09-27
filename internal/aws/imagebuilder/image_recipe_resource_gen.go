@@ -60,20 +60,36 @@ func imageRecipeResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "Controls whether the SSM agent is removed from your final build image, prior to creating the new AMI. If this is set to true, then the agent is removed from the final image. If it's set to false, then the agent is left in, so that it is included in the new AMI. The default value is false.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"user_data_override": {
 						// Property: UserDataOverride
 						Description: "Use this property to provide commands or a command script to run when you launch your build instance.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -172,6 +188,10 @@ func imageRecipeResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The device to which these mappings apply.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ebs": {
 						// Property: Ebs
@@ -183,48 +203,77 @@ func imageRecipeResourceType(ctx context.Context) (provider.ResourceType, error)
 									Description: "Use to configure delete on termination of the associated device.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"encrypted": {
 									// Property: Encrypted
 									Description: "Use to configure device encryption.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"iops": {
 									// Property: Iops
 									Description: "Use to configure device IOPS.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"kms_key_id": {
 									// Property: KmsKeyId
 									Description: "Use to configure the KMS key to use when encrypting the device.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"snapshot_id": {
 									// Property: SnapshotId
 									Description: "The snapshot that defines the device contents.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"throughput": {
 									// Property: Throughput
 									Description: "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"volume_size": {
 									// Property: VolumeSize
 									Description: "Use to override the device's volume size.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"volume_type": {
 									// Property: VolumeType
 									Description: "Use to override the device's volume type.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"standard",
@@ -236,22 +285,37 @@ func imageRecipeResourceType(ctx context.Context) (provider.ResourceType, error)
 											"st1",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"no_device": {
 						// Property: NoDevice
 						Description: "Use to remove a mapping from the parent image.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"virtual_name": {
 						// Property: VirtualName
 						Description: "Use to manage instance ephemeral devices.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -318,6 +382,10 @@ func imageRecipeResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The Amazon Resource Name (ARN) of the component.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"parameters": {
 						// Property: Parameters
@@ -339,8 +407,10 @@ func imageRecipeResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

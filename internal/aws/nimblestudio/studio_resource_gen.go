@@ -116,9 +116,13 @@ func studioResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "<p>The ARN for a KMS key that is used to encrypt studio data.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtLeast(4),
 							validate.StringMatch(regexp.MustCompile("^arn:.*"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"key_type": {
@@ -136,6 +140,10 @@ func studioResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"studio_id": {
 			// Property: StudioId

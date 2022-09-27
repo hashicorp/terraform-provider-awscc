@@ -32,6 +32,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Indicates whether the method requires clients to submit a valid API key.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"authorization_scopes": {
 			// Property: AuthorizationScopes
@@ -46,6 +50,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A list of authorization scopes configured on the method.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"authorization_type": {
 			// Property: AuthorizationType
@@ -63,6 +71,7 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The method's authorization type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"NONE",
@@ -70,6 +79,9 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 					"CUSTOM",
 					"COGNITO_USER_POOLS",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"authorizer_id": {
@@ -82,6 +94,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The identifier of the authorizer to use on this method.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"http_method": {
 			// Property: HttpMethod
@@ -258,8 +274,12 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A list of request parameters whose values API Gateway caches.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"cache_namespace": {
@@ -267,23 +287,35 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "An API-specific tag group of related cached parameters.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"connection_id": {
 						// Property: ConnectionId
 						Description: "The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"connection_type": {
 						// Property: ConnectionType
 						Description: "The type of the network connection to the integration endpoint.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"INTERNET",
 								"VPC_LINK",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"content_handling": {
@@ -291,11 +323,15 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Specifies how to handle request payload content type conversions.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"CONVERT_TO_BINARY",
 								"CONVERT_TO_TEXT",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"credentials": {
@@ -303,12 +339,20 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The credentials that are required for the integration.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"integration_http_method": {
 						// Property: IntegrationHttpMethod
 						Description: "The integration's HTTP method type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"integration_responses": {
 						// Property: IntegrationResponses
@@ -320,11 +364,15 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies how to handle request payload content type conversions.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"CONVERT_TO_BINARY",
 											"CONVERT_TO_TEXT",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"response_parameters": {
@@ -333,6 +381,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"response_templates": {
 									// Property: ResponseTemplates
@@ -340,12 +392,20 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"selection_pattern": {
 									// Property: SelectionPattern
 									Description: "A regular expression that specifies which error strings or status codes from the backend map to the integration response.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"status_code": {
 									// Property: StatusCode
@@ -356,8 +416,12 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"passthrough_behavior": {
@@ -365,12 +429,16 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Indicates when API Gateway passes requests to the targeted backend.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"WHEN_NO_MATCH",
 								"WHEN_NO_TEMPLATES",
 								"NEVER",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"request_parameters": {
@@ -379,6 +447,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"request_templates": {
 						// Property: RequestTemplates
@@ -386,14 +458,22 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"timeout_in_millis": {
 						// Property: TimeoutInMillis
 						Description: "Custom timeout between 50 and 29,000 milliseconds.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(50, 29000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"type": {
@@ -416,10 +496,18 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The Uniform Resource Identifier (URI) for the integration.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"method_responses": {
 			// Property: MethodResponses
@@ -471,6 +559,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"response_parameters": {
 						// Property: ResponseParameters
@@ -478,6 +570,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.BoolType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"status_code": {
 						// Property: StatusCode
@@ -488,8 +584,12 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"operation_name": {
@@ -502,6 +602,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A friendly operation name for the method.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"request_models": {
 			// Property: RequestModels
@@ -520,6 +624,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"request_parameters": {
 			// Property: RequestParameters
@@ -538,6 +646,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.BoolType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"request_validator_id": {
 			// Property: RequestValidatorId
@@ -549,6 +661,10 @@ func methodResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The ID of the associated request validator.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"resource_id": {
 			// Property: ResourceId

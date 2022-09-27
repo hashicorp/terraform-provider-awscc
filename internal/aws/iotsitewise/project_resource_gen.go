@@ -37,8 +37,12 @@ func projectResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The IDs of the assets to be associated to the project.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"portal_id": {
@@ -79,6 +83,10 @@ func projectResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description for the project.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"project_id": {
 			// Property: ProjectId
@@ -147,8 +155,10 @@ func projectResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

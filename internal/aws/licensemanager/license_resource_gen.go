@@ -32,6 +32,10 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "Beneficiary of the license.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"consumption_configuration": {
 			// Property: ConsumptionConfiguration
@@ -92,6 +96,10 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"provisional_configuration": {
 						// Property: ProvisionalConfiguration
@@ -105,11 +113,19 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"renew_type": {
 						// Property: RenewType
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -156,11 +172,19 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: AllowCheckIn
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"max_count": {
 						// Property: MaxCount
 						Type:     types.Int64Type,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
@@ -171,6 +195,10 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Overage
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"unit": {
 						// Property: Unit
@@ -181,6 +209,10 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -229,6 +261,10 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: SignKey
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -287,8 +323,12 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"license_name": {
@@ -325,8 +365,12 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "ProductSKU of the license.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -337,6 +381,10 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// Status is a write-only property.
 		},
 		"validity": {

@@ -49,8 +49,12 @@ func costCategoryResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "The default value for the cost category",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"effective_start": {
@@ -125,6 +129,10 @@ func costCategoryResourceType(ctx context.Context) (provider.ResourceType, error
 			Description: "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

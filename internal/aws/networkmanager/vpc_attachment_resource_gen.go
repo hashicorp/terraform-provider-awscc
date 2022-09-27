@@ -153,6 +153,10 @@ func vpcAttachmentResourceType(ctx context.Context) (provider.ResourceType, erro
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"owner_account_id": {
 			// Property: OwnerAccountId
@@ -219,12 +223,20 @@ func vpcAttachmentResourceType(ctx context.Context) (provider.ResourceType, erro
 						Description: "The rule number in the policy document that applies to this change.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"segment_name": {
 						// Property: SegmentName
 						Description: "The name of the segment to change.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -246,8 +258,10 @@ func vpcAttachmentResourceType(ctx context.Context) (provider.ResourceType, erro
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -313,8 +327,10 @@ func vpcAttachmentResourceType(ctx context.Context) (provider.ResourceType, erro
 			Description: "Subnet Arn list",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -363,8 +379,10 @@ func vpcAttachmentResourceType(ctx context.Context) (provider.ResourceType, erro
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"updated_at": {

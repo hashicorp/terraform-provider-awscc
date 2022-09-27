@@ -105,9 +105,13 @@ func hookVersionResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
 							validate.StringMatch(regexp.MustCompile("^[\\.\\-_/#A-Za-z0-9]+$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"log_role_arn": {
@@ -115,8 +119,12 @@ func hookVersionResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},

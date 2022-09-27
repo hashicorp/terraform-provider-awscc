@@ -196,6 +196,10 @@ func loggingConfigurationResourceType(ctx context.Context) (provider.ResourceTyp
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"label_name_condition": {
 												// Property: LabelNameCondition
@@ -211,6 +215,10 @@ func loggingConfigurationResourceType(ctx context.Context) (provider.ResourceTyp
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -241,6 +249,10 @@ func loggingConfigurationResourceType(ctx context.Context) (provider.ResourceTyp
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"managed_by_firewall_manager": {
 			// Property: ManagedByFirewallManager
@@ -359,12 +371,16 @@ func loggingConfigurationResourceType(ctx context.Context) (provider.ResourceTyp
 									Description: "What AWS WAF should do if it fails to completely parse the JSON body.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"MATCH",
 											"NO_MATCH",
 											"EVALUATE_AS_STRING",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"match_pattern": {
@@ -377,14 +393,22 @@ func loggingConfigurationResourceType(ctx context.Context) (provider.ResourceTyp
 												Description: "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
 												Type:        types.MapType{ElemType: types.StringType},
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"included_paths": {
 												// Property: IncludedPaths
 												Description: "Match only the specified include paths. See also MatchScope in JsonBody.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -407,18 +431,30 @@ func loggingConfigurationResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"method": {
 						// Property: Method
 						Description: "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
 						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"query_string": {
 						// Property: QueryString
 						Description: "Inspect the query string. This is the part of a URL that appears after a ? character, if any. ",
 						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"single_header": {
 						// Property: SingleHeader
@@ -434,18 +470,28 @@ func loggingConfigurationResourceType(ctx context.Context) (provider.ResourceTyp
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"uri_path": {
 						// Property: UriPath
 						Description: "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
 						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource_arn": {

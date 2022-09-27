@@ -67,15 +67,27 @@ func configurationAggregatorResourceType(ctx context.Context) (provider.Resource
 						// Property: AllAwsRegions
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"aws_regions": {
 						// Property: AwsRegions
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"configuration_aggregator_arn": {
 			// Property: ConfigurationAggregatorArn
@@ -145,11 +157,19 @@ func configurationAggregatorResourceType(ctx context.Context) (provider.Resource
 						// Property: AllAwsRegions
 						Type:     types.BoolType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"aws_regions": {
 						// Property: AwsRegions
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"role_arn": {
 						// Property: RoleArn
@@ -159,6 +179,10 @@ func configurationAggregatorResourceType(ctx context.Context) (provider.Resource
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -216,9 +240,13 @@ func configurationAggregatorResourceType(ctx context.Context) (provider.Resource
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

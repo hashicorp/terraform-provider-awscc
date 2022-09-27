@@ -79,8 +79,12 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "The version of the runtime engine for the environment.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^\\S{1,10}$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"environment_arn": {
@@ -145,6 +149,10 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"instance_type": {
 			// Property: InstanceType
@@ -190,8 +198,12 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			Description: "Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^\\S{1,50}$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"publicly_accessible": {
@@ -320,6 +332,10 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"fsx": {
 						// Property: Fsx
@@ -347,6 +363,10 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -402,6 +422,10 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

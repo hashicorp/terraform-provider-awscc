@@ -62,6 +62,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"access_control": {
 			// Property: AccessControl
@@ -83,6 +87,7 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A canned access control list (ACL) that grants predefined permissions to the bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"AuthenticatedRead",
@@ -94,6 +99,9 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 					"PublicRead",
 					"PublicReadWrite",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"analytics_configurations": {
@@ -214,6 +222,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The prefix that an object must have to be included in the analytics results.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"storage_class_analysis": {
 						// Property: StorageClassAnalysis
@@ -235,6 +247,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The account ID that owns the destination S3 bucket. ",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"bucket_arn": {
 															// Property: BucketArn
@@ -260,6 +276,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 															Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
 															Type:        types.StringType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
@@ -274,6 +294,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -296,15 +320,23 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"arn": {
@@ -385,6 +417,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"server_side_encryption_by_default": {
 									// Property: ServerSideEncryptionByDefault
@@ -396,6 +432,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"sse_algorithm": {
 												// Property: SSEAlgorithm
@@ -411,6 +451,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -422,6 +466,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"bucket_name": {
 			// Property: BucketName
@@ -540,8 +588,12 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Headers that are specified in the Access-Control-Request-Headers header.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"allowed_methods": {
@@ -574,8 +626,12 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"id": {
@@ -583,8 +639,12 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "A unique identifier for this rule.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(255),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"max_age": {
@@ -592,8 +652,12 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The time in seconds that your browser is to cache the preflight response for the specified resource.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(0),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -606,6 +670,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -742,6 +810,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "An object key name prefix that identifies the subset of objects to which the rule applies.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"status": {
 						// Property: Status
@@ -773,8 +845,12 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"tierings": {
@@ -810,8 +886,12 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"inventory_configurations": {
@@ -932,6 +1012,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The account ID that owns the destination S3 bucket. ",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"bucket_arn": {
 									// Property: BucketArn
@@ -957,6 +1041,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -991,6 +1079,7 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Contains the optional fields that are included in the inventory results.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 							validate.ArrayForEach(validate.StringInSlice([]string{
@@ -1008,12 +1097,19 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"BucketKeyStatus",
 							})),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"prefix": {
 						// Property: Prefix
 						Description: "The prefix that is prepended to all inventory results.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"schedule_frequency": {
 						// Property: ScheduleFrequency
@@ -1030,8 +1126,12 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"lifecycle_configuration": {
@@ -1315,32 +1415,52 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"expiration_date": {
 									// Property: ExpirationDate
 									Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringMatch(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"expiration_in_days": {
 									// Property: ExpirationInDays
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"expired_object_delete_marker": {
 									// Property: ExpiredObjectDeleteMarker
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(255),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"noncurrent_version_expiration": {
@@ -1353,6 +1473,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"noncurrent_days": {
 												// Property: NoncurrentDays
@@ -1363,11 +1487,19 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"noncurrent_version_expiration_in_days": {
 									// Property: NoncurrentVersionExpirationInDays
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"noncurrent_version_transition": {
 									// Property: NoncurrentVersionTransition
@@ -1379,6 +1511,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"storage_class": {
 												// Property: StorageClass
@@ -1406,6 +1542,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"noncurrent_version_transitions": {
 									// Property: NoncurrentVersionTransitions
@@ -1416,6 +1556,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
 												Type:        types.Int64Type,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"storage_class": {
 												// Property: StorageClass
@@ -1443,32 +1587,48 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"object_size_greater_than": {
 									// Property: ObjectSizeGreaterThan
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(20),
 										validate.StringMatch(regexp.MustCompile("[0-9]+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"object_size_less_than": {
 									// Property: ObjectSizeLessThan
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(20),
 										validate.StringMatch(regexp.MustCompile("[0-9]+"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"status": {
 									// Property: Status
@@ -1498,8 +1658,12 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"transition": {
@@ -1528,18 +1692,30 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"transition_in_days": {
 												// Property: TransitionInDays
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"transitions": {
 									// Property: Transitions
@@ -1566,20 +1742,32 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringMatch(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"transition_in_days": {
 												// Property: TransitionInDays
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -1592,6 +1780,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"logging_configuration": {
 			// Property: LoggingConfiguration
@@ -1618,15 +1810,27 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The name of an Amazon S3 bucket where Amazon S3 store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the LoggingConfiguration property is defined.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"log_file_prefix": {
 						// Property: LogFilePrefix
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"metrics_configurations": {
 			// Property: MetricsConfigurations
@@ -1684,6 +1888,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: AccessPointArn
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"id": {
 						// Property: Id
@@ -1694,6 +1902,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Prefix
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tag_filters": {
 						// Property: TagFilters
@@ -1712,15 +1924,23 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"notification_configuration": {
@@ -1971,6 +2191,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"lambda_configurations": {
 						// Property: LambdaConfigurations
@@ -2023,6 +2247,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"function": {
 									// Property: Function
@@ -2033,8 +2261,12 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"queue_configurations": {
@@ -2088,6 +2320,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"queue": {
 									// Property: Queue
@@ -2098,8 +2334,12 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"topic_configurations": {
@@ -2153,6 +2393,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"topic": {
 									// Property: Topic
@@ -2163,13 +2407,21 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"object_lock_configuration": {
 			// Property: ObjectLockConfiguration
@@ -2218,6 +2470,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: ObjectLockEnabled
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"rule": {
 						// Property: Rule
@@ -2233,34 +2489,58 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Days
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"mode": {
 												// Property: Mode
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"COMPLIANCE",
 														"GOVERNANCE",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"years": {
 												// Property: Years
 												Type:     types.Int64Type,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"object_lock_enabled": {
 			// Property: ObjectLockEnabled
@@ -2323,12 +2603,16 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Specifies an object ownership rule.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"ObjectWriter",
 											"BucketOwnerPreferred",
 											"BucketOwnerEnforced",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 							},
@@ -2341,6 +2625,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"public_access_block_configuration": {
 			// Property: PublicAccessBlockConfiguration
@@ -2376,28 +2664,48 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"block_public_policy": {
 						// Property: BlockPublicPolicy
 						Description: "Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.\nEnabling this setting doesn't affect existing bucket policies.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ignore_public_acls": {
 						// Property: IgnorePublicAcls
 						Description: "Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket.\nEnabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"restrict_public_buckets": {
 						// Property: RestrictPublicBuckets
 						Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"regional_domain_name": {
 			// Property: RegionalDomainName
@@ -2721,16 +3029,24 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												// Property: Status
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"Disabled",
 														"Enabled",
 													}),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"destination": {
 									// Property: Destination
@@ -2750,11 +3066,19 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"account": {
 												// Property: Account
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"bucket": {
 												// Property: Bucket
@@ -2775,6 +3099,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"metrics": {
 												// Property: Metrics
@@ -2792,6 +3120,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"status": {
 															// Property: Status
@@ -2807,6 +3139,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"replication_time": {
 												// Property: ReplicationTime
@@ -2839,12 +3175,17 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"storage_class": {
 												// Property: StorageClass
 												Description: "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"DEEP_ARCHIVE",
@@ -2856,6 +3197,9 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 														"STANDARD",
 														"STANDARD_IA",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -2874,6 +3218,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 															// Property: Prefix
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"tag_filters": {
 															// Property: TagFilters
@@ -2892,18 +3240,30 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 																},
 															),
 															Optional: true,
+															Computed: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.UniqueItems(),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
 															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"prefix": {
 												// Property: Prefix
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"tag_filter": {
 												// Property: TagFilter
@@ -2923,18 +3283,30 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"id": {
 									// Property: Id
 									Description: "A unique identifier for the rule.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(255),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"prefix": {
@@ -2942,14 +3314,22 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "An object key name prefix that identifies the object or objects to which the rule applies.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"priority": {
 									// Property: Priority
 									Type:     types.Int64Type,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"source_selection_criteria": {
 									// Property: SourceSelectionCriteria
@@ -2976,6 +3356,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"sse_kms_encrypted_objects": {
 												// Property: SseKmsEncryptedObjects
@@ -2997,10 +3381,18 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"status": {
 									// Property: Status
@@ -3024,6 +3416,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -3075,8 +3471,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"versioning_configuration": {
@@ -3124,6 +3522,10 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"website_configuration": {
 			// Property: WebsiteConfiguration
@@ -3233,12 +3635,20 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The name of the error document for the website.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"index_document": {
 						// Property: IndexDocument
 						Description: "The name of the index document for the website.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"redirect_all_requests_to": {
 						// Property: RedirectAllRequestsTo
@@ -3256,16 +3666,24 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 									Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"http",
 											"https",
 										}),
 									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"routing_rules": {
 						// Property: RoutingRules
@@ -3281,23 +3699,35 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The host name to use in the redirect request.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"http_redirect_code": {
 												// Property: HttpRedirectCode
 												Description: "The HTTP redirect code to use on the response. Not required if one of the siblings is present.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"protocol": {
 												// Property: Protocol
 												Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"http",
 														"https",
 													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"replace_key_prefix_with": {
@@ -3305,12 +3735,20 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The object key prefix to use in the redirect request.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"replace_key_with": {
 												// Property: ReplaceKeyWith
 												Description: "The specific object key to use in the redirect request.d",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -3326,24 +3764,44 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 												Description: "The HTTP error code when the redirect is applied. ",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"key_prefix_equals": {
 												// Property: KeyPrefixEquals
 												Description: "The object key name prefix when the redirect is applied.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"website_url": {
 			// Property: WebsiteURL

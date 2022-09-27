@@ -56,8 +56,12 @@ func apiDestinationResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(512),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"http_method": {
@@ -109,8 +113,12 @@ func apiDestinationResourceType(ctx context.Context) (provider.ResourceType, err
 			// }
 			Type:     types.Int64Type,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {

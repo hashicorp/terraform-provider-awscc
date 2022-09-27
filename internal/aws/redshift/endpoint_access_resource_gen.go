@@ -202,30 +202,48 @@ func endpointAccessResourceType(ctx context.Context) (provider.ResourceType, err
 									Description: "The Availability Zone.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"network_interface_id": {
 									// Property: NetworkInterfaceId
 									Description: "The network interface identifier.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"private_ip_address": {
 									// Property: PrivateIpAddress
 									Description: "The IPv4 address of the network interface within the subnet.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"subnet_id": {
 									// Property: SubnetId
 									Description: "The subnet identifier.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"vpc_endpoint_id": {
@@ -233,12 +251,20 @@ func endpointAccessResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpc_id": {
 						// Property: VpcId
 						Description: "The VPC identifier that the endpoint is associated.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -296,12 +322,20 @@ func endpointAccessResourceType(ctx context.Context) (provider.ResourceType, err
 						Description: "The status of the VPC security group.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"vpc_security_group_id": {
 						// Property: VpcSecurityGroupId
 						Description: "The identifier of the VPC security group.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),

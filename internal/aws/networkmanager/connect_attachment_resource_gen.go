@@ -145,6 +145,10 @@ func connectAttachmentResourceType(ctx context.Context) (provider.ResourceType, 
 						Description: "Tunnel protocol for connect attachment",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -219,12 +223,20 @@ func connectAttachmentResourceType(ctx context.Context) (provider.ResourceType, 
 						Description: "New policy rule number of the attachment",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"segment_name": {
 						// Property: SegmentName
 						Description: "Proposed segment name",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -246,8 +258,10 @@ func connectAttachmentResourceType(ctx context.Context) (provider.ResourceType, 
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -344,8 +358,10 @@ func connectAttachmentResourceType(ctx context.Context) (provider.ResourceType, 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"transport_attachment_id": {

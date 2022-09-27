@@ -57,6 +57,10 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The percentage (0-100) of traffic diverted to a canary deployment.",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"stage_variable_overrides": {
 						// Property: StageVariableOverrides
@@ -64,12 +68,20 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"use_stage_cache": {
 						// Property: UseStageCache
 						Description: "Whether the canary deployment uses the stage cache.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -105,6 +117,10 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A description of the purpose of the API Gateway deployment.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"rest_api_id": {
 			// Property: RestApiId
@@ -325,46 +341,78 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. ",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"format": {
 									// Property: Format
 									Description: "A single line format of the access logs of data, as specified by selected $context variables. The format must include at least $context.requestId. ",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cache_cluster_enabled": {
 						// Property: CacheClusterEnabled
 						Description: "Indicates whether cache clustering is enabled for the stage.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cache_cluster_size": {
 						// Property: CacheClusterSize
 						Description: "The size of the stage's cache cluster.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cache_data_encrypted": {
 						// Property: CacheDataEncrypted
 						Description: "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses. ",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"cache_ttl_in_seconds": {
 						// Property: CacheTtlInSeconds
 						Description: "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses. ",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"caching_enabled": {
 						// Property: CachingEnabled
 						Description: "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"canary_setting": {
 						// Property: CanarySetting
@@ -376,6 +424,10 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The percent (0-100) of traffic diverted to a canary deployment.",
 									Type:        types.Float64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"stage_variable_overrides": {
 									// Property: StageVariableOverrides
@@ -383,46 +435,78 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"use_stage_cache": {
 									// Property: UseStageCache
 									Description: "Whether the canary deployment uses the stage cache or not.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"client_certificate_id": {
 						// Property: ClientCertificateId
 						Description: "The identifier of the client certificate that API Gateway uses to call your integration endpoints in the stage. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"data_trace_enabled": {
 						// Property: DataTraceEnabled
 						Description: "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs. ",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
 						Description: "A description of the purpose of the stage.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"documentation_version": {
 						// Property: DocumentationVersion
 						Description: "The version identifier of the API documentation snapshot.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"logging_level": {
 						// Property: LoggingLevel
 						Description: "The logging level for this method. For valid values, see the loggingLevel property of the Stage resource in the Amazon API Gateway API Reference. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"method_settings": {
 						// Property: MethodSettings
@@ -434,70 +518,118 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "Indicates whether the cached responses are encrypted",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"cache_ttl_in_seconds": {
 									// Property: CacheTtlInSeconds
 									Description: "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses. ",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"caching_enabled": {
 									// Property: CachingEnabled
 									Description: "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"data_trace_enabled": {
 									// Property: DataTraceEnabled
 									Description: "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs. ",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"http_method": {
 									// Property: HttpMethod
 									Description: "The HTTP method.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"logging_level": {
 									// Property: LoggingLevel
 									Description: "The logging level for this method. For valid values, see the loggingLevel property of the Stage resource in the Amazon API Gateway API Reference. ",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"metrics_enabled": {
 									// Property: MetricsEnabled
 									Description: "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.",
 									Type:        types.BoolType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"resource_path": {
 									// Property: ResourcePath
 									Description: "The resource path for this method. Forward slashes (/) are encoded as ~1 and the initial slash must include a forward slash. ",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"throttling_burst_limit": {
 									// Property: ThrottlingBurstLimit
 									Description: "The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
 									Type:        types.Int64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"throttling_rate_limit": {
 									// Property: ThrottlingRateLimit
 									Description: "The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
 									Type:        types.Float64Type,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"metrics_enabled": {
 						// Property: MetricsEnabled
 						Description: "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -519,8 +651,10 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"throttling_burst_limit": {
@@ -528,18 +662,30 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
 						Type:        types.Int64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"throttling_rate_limit": {
 						// Property: ThrottlingRateLimit
 						Description: "The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
 						Type:        types.Float64Type,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"tracing_enabled": {
 						// Property: TracingEnabled
 						Description: "Specifies whether active tracing with X-ray is enabled for this stage.",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"variables": {
 						// Property: Variables
@@ -547,10 +693,18 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// StageDescription is a write-only property.
 		},
 		"stage_name": {
@@ -563,6 +717,10 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A name for the stage that API Gateway creates with this deployment. Use only alphanumeric characters.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// StageName is a write-only property.
 		},
 	}

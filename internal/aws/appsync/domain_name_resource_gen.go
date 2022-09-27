@@ -64,8 +64,12 @@ func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"domain_name": {

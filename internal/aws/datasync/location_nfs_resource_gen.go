@@ -87,6 +87,7 @@ func locationNFSResourceType(ctx context.Context) (provider.ResourceType, error)
 						Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"AUTOMATIC",
@@ -94,6 +95,9 @@ func locationNFSResourceType(ctx context.Context) (provider.ResourceType, error)
 								"NFS4_0",
 								"NFS4_1",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
@@ -259,8 +263,12 @@ func locationNFSResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

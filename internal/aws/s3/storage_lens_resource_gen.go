@@ -299,10 +299,18 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "Specifies whether activity metrics are enabled or disabled.",
 												Type:        types.BoolType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"bucket_level": {
 									// Property: BucketLevel
@@ -319,10 +327,18 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 															Description: "Specifies whether activity metrics are enabled or disabled.",
 															Type:        types.BoolType,
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"prefix_level": {
 												// Property: PrefixLevel
@@ -338,6 +354,10 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 																		Description: "Specifies whether prefix-level storage metrics are enabled or disabled.",
 																		Type:        types.BoolType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																	"selection_criteria": {
 																		// Property: SelectionCriteria
@@ -349,22 +369,38 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 																					Description: "Delimiter to divide S3 key into hierarchy of prefixes.",
 																					Type:        types.StringType,
 																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"max_depth": {
 																					// Property: MaxDepth
 																					Description: "Max depth of prefixes of S3 key that Amazon S3 Storage Lens will analyze.",
 																					Type:        types.Int64Type,
 																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																				"min_storage_bytes_percentage": {
 																					// Property: MinStorageBytesPercentage
 																					Description: "The minimum storage bytes threshold for the prefixes to be included in the analysis.",
 																					Type:        types.Float64Type,
 																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
@@ -373,6 +409,10 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
@@ -396,6 +436,10 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"data_export": {
 						// Property: DataExport
@@ -416,6 +460,10 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"s3_bucket_destination": {
 									// Property: S3BucketDestination
@@ -453,16 +501,28 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 														"sses3": {
 															// Property: SSES3
 															Description: "S3 default server-side encryption.",
 															Type:        types.MapType{ElemType: types.StringType},
 															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"format": {
 												// Property: Format
@@ -492,14 +552,26 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 												Description: "The prefix to use for Amazon S3 Storage Lens export.",
 												Type:        types.StringType,
 												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"exclude": {
 						// Property: Exclude
@@ -510,15 +582,27 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 									// Property: Buckets
 									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"regions": {
 									// Property: Regions
 									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"id": {
 						// Property: Id
@@ -542,15 +626,27 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 									// Property: Buckets
 									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"regions": {
 									// Property: Regions
 									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"is_enabled": {
 						// Property: IsEnabled
@@ -625,8 +721,12 @@ func storageLensResourceType(ctx context.Context) (provider.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

@@ -41,6 +41,7 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 1),
 				validate.UniqueItems(),
@@ -48,6 +49,9 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 					"x86_64",
 					"arm64",
 				})),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"arn": {
@@ -109,14 +113,22 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "ImageUri.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"s3_bucket": {
 						// Property: S3Bucket
 						Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(3, 63),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"s3_key": {
@@ -124,8 +136,12 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The Amazon S3 key of the deployment package.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1024),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"s3_object_version": {
@@ -133,8 +149,12 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "For versioned objects, the version of the deployment package object to use.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1024),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"zip_file": {
@@ -142,6 +162,10 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The source code of your Lambda function. If you include your function source inline with this parameter, AWS CloudFormation places it in a file named index and zips it to create a deployment package..",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -159,8 +183,12 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A unique Arn for CodeSigningConfig resource",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"dead_letter_config": {
@@ -186,13 +214,21 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -205,8 +241,12 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A description of the function.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"environment": {
@@ -238,10 +278,18 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"ephemeral_storage": {
 			// Property: EphemeralStorage
@@ -277,6 +325,10 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"file_system_configs": {
 			// Property: FileSystemConfigs
@@ -334,8 +386,12 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"function_name": {
@@ -370,9 +426,13 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(128),
 				validate.StringMatch(regexp.MustCompile("^[^\\s]+$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"image_config": {
@@ -415,9 +475,13 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Command.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(1500),
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"entry_point": {
@@ -425,9 +489,13 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "EntryPoint.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(1500),
 							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"working_directory": {
@@ -435,10 +503,18 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "WorkingDirectory.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"kms_key_arn": {
 			// Property: KmsKeyArn
@@ -451,8 +527,12 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringMatch(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"layers": {
@@ -469,6 +549,10 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"memory_size": {
 			// Property: MemorySize
@@ -480,6 +564,10 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"package_type": {
 			// Property: PackageType
@@ -495,11 +583,15 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "PackageType.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"Image",
 					"Zip",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"reserved_concurrent_executions": {
@@ -513,8 +605,12 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The number of simultaneous executions to reserve for the function.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(0),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"role": {
@@ -542,6 +638,10 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The identifier of the function's runtime.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -590,13 +690,21 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"timeout": {
 			// Property: Timeout
@@ -609,8 +717,12 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 			Description: "The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.",
 			Type:        types.Int64Type,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tracing_config": {
@@ -639,16 +751,24 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "The tracing mode.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Active",
 								"PassThrough",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"vpc_config": {
 			// Property: VpcConfig
@@ -686,8 +806,12 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A list of VPC security groups IDs.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(5),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"subnet_ids": {
@@ -695,13 +819,21 @@ func functionResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "A list of VPC subnet IDs.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(16),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 

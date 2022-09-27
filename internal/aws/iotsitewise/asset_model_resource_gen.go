@@ -310,10 +310,14 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The data type of the structure for this property.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"AWS/ALARM_STATE",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
 									},
 								},
 								"logical_id": {
@@ -344,10 +348,18 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 															// Property: DefaultValue
 															Type:     types.StringType,
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"metric": {
 												// Property: Metric
@@ -379,8 +391,12 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 																					// Property: HierarchyLogicalId
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.StringLenBetween(1, 256),
+																					},
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
 																					},
 																				},
 																				"property_logical_id": {
@@ -423,10 +439,18 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 																					Description: "The shift or reference point on timeline for the contiguous time intervals.",
 																					Type:        types.StringType,
 																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		),
 																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
@@ -435,6 +459,10 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"transform": {
 												// Property: Transform
@@ -466,8 +494,12 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 																					// Property: HierarchyLogicalId
 																					Type:     types.StringType,
 																					Optional: true,
+																					Computed: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.StringLenBetween(1, 256),
+																					},
+																					PlanModifiers: []tfsdk.AttributePlanModifier{
+																						resource.UseStateForUnknown(),
 																					},
 																				},
 																				"property_logical_id": {
@@ -492,6 +524,10 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 											"type_name": {
 												// Property: TypeName
@@ -515,12 +551,18 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 									Description: "The unit of the asset model property, such as Newtons or RPM.",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
 						},
 					},
 					"description": {
@@ -528,6 +570,10 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "A description for the asset composite model.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
@@ -544,8 +590,10 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"asset_model_description": {
@@ -558,6 +606,10 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 			Description: "A description for the asset model.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"asset_model_hierarchies": {
 			// Property: AssetModelHierarchies
@@ -621,8 +673,10 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"asset_model_id": {
@@ -891,10 +945,14 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The data type of the structure for this property.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"AWS/ALARM_STATE",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"logical_id": {
@@ -925,10 +983,18 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 												// Property: DefaultValue
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
 											},
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"metric": {
 									// Property: Metric
@@ -960,8 +1026,12 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 																		// Property: HierarchyLogicalId
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 256),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"property_logical_id": {
@@ -1004,10 +1074,18 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 																		Description: "The shift or reference point on timeline for the contiguous time intervals.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
 																	},
 																},
 															),
 															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
 														},
 													},
 												),
@@ -1016,6 +1094,10 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"transform": {
 									// Property: Transform
@@ -1047,8 +1129,12 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 																		// Property: HierarchyLogicalId
 																		Type:     types.StringType,
 																		Optional: true,
+																		Computed: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 256),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
 																		},
 																	},
 																	"property_logical_id": {
@@ -1073,6 +1159,10 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"type_name": {
 									// Property: TypeName
@@ -1096,12 +1186,18 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 						Description: "The unit of the asset model property, such as Newtons or RPM.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -1144,8 +1240,10 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 				},
 			),
 			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				resource.UseStateForUnknown(),
 			},
 		},
 	}

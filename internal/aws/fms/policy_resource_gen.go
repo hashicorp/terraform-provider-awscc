@@ -48,6 +48,10 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 			// DeleteAllPolicyResources is a write-only property.
 		},
 		"exclude_map": {
@@ -89,23 +93,35 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: ACCOUNT
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(12, 12)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^([0-9]*)$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"orgunit": {
 						// Property: ORGUNIT
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(16, 68)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"exclude_resource_tags": {
 			// Property: ExcludeResourceTags
@@ -170,23 +186,35 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: ACCOUNT
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(12, 12)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^([0-9]*)$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"orgunit": {
 						// Property: ORGUNIT
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(16, 68)),
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"), "")),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"policy_name": {
 			// Property: PolicyName
@@ -254,15 +282,23 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(8),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resource_type": {
@@ -299,9 +335,13 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenBetween(1, 128)),
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^([^\\s]*)$"), "")),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"resources_clean_up": {
@@ -312,6 +352,10 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 		"security_service_policy_data": {
 			// Property: SecurityServicePolicyData
@@ -410,8 +454,12 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 						Description: "Firewall managed service data.",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 8192),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"policy_option": {
@@ -439,6 +487,10 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 								"third_party_firewall_policy": {
 									// Property: ThirdPartyFirewallPolicy
@@ -460,10 +512,15 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.RequiredAttributes(
 								validate.OneOfRequired(
@@ -475,6 +532,9 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 									),
 								),
 							),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
 						},
 					},
 					"type": {
@@ -552,6 +612,10 @@ func policyResourceType(ctx context.Context) (provider.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
 		},
 	}
 
