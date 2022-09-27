@@ -1,6 +1,6 @@
 ## 0.33.0 (Unreleased)
 
-BUG FIXES:
+NOTES:
 
 * Optional attributes without a default value specified in the resource's CloudFormation schema are now handled as _Computed_, indicating that if no value has been configured then Terraform will not perform drift detection on the attribute ([#667](https://github.com/hashicorp/terraform-provider-awscc/issues/667))
 
