@@ -31,21 +31,24 @@ func TestAccAWSIAMRole_AssumeRolePolicyDocument(t *testing.T) {
 
 func testAccAWSIAMRoleAssumeRolePolicyDocumentConfig(td *acctest.TestData, rName string) string {
 	return fmt.Sprintf(`
-resource %[1]q %[2]q {
-  role_name = %[3]q
-
+locals {
   assume_role_policy_document = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [{
     "Effect": "Allow",
     "Principal": {
-      "Service": ["vpc-flow-logs.amazonaws.com"]
+      "Service": "vpc-flow-logs.amazonaws.com"
     },
     "Action": "sts:AssumeRole"
   }]
 }
 EOF
+}
+
+resource %[1]q %[2]q {
+  role_name                   = %[3]q
+  assume_role_policy_document = jsonencode(jsondecode(local.assume_role_policy_document))
 }
 `, td.TerraformResourceType, td.ResourceLabel, rName)
 }
