@@ -74,14 +74,14 @@
         "DatasetContentVersionValue": {
             "type": "object",
             "additionalProperties": false,
-                "properties": {
-                    "DatasetName": {
-                        "type": "string",
-                        "pattern": "",
-                        "minLength": 1,
-                        "maxLength": 128
-                    }
-                },
+            "properties": {
+                "DatasetName": {
+                    "type": "string",
+                    "pattern": "",
+                    "minLength": 1,
+                    "maxLength": 128
+                }
+            },
             "required": [
                 "DatasetName"
             ]
@@ -220,7 +220,7 @@
                     "insertionOrder": false,
                     "items": {
                         "$ref": "#/definitions/Filter"
-                  }
+                    }
                 },
                 "SqlQuery": {
                     "type": "string"
@@ -235,7 +235,7 @@
             "additionalProperties": false,
             "properties": {
                 "Unlimited": {
-                      "type": "boolean"
+                    "type": "boolean"
                 },
                 "MaxVersions": {
                     "type": "integer",
@@ -270,8 +270,8 @@
                 "ComputeType": {
                     "type": "string",
                     "enum": [
-                      "ACU_1",
-                      "ACU_2"
+                        "ACU_1",
+                        "ACU_2"
                     ]
                 }
             },
@@ -427,7 +427,7 @@
             "properties": {
                 "DeltaTimeSessionWindowConfiguration": {
                     "$ref": "#/definitions/DeltaTimeSessionWindowConfiguration"
-              }
+                }
             }
         },
         "Tag": {

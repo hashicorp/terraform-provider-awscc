@@ -131,7 +131,8 @@
         "/properties/EmailIdentity"
     ],
     "writeOnlyProperties": [
-        "/properties/DkimSigningAttributes"
+        "/properties/DkimSigningAttributes/DomainSigningSelector",
+        "/properties/DkimSigningAttributes/DomainSigningPrivateKey"
     ],
     "handlers": {
         "create": {

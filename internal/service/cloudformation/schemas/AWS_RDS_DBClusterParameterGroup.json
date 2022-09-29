@@ -78,11 +78,15 @@
   "handlers": {
     "create": {
       "permissions": [
+        "rds:AddTagsToResource",
         "rds:CreateDBClusterParameterGroup",
+        "rds:DescribeDBClusterParameterGroups",
         "rds:DescribeDBClusterParameters",
         "rds:DescribeEngineDefaultClusterParameters",
+        "rds:ListTagsForResource",
         "rds:ModifyDBClusterParameterGroup"
-      ]
+      ],
+      "timeoutInMinutes": 180
     },
     "read": {
       "permissions": [
@@ -92,15 +96,17 @@
     },
     "update": {
       "permissions": [
-        "rds:DescribeDBClusters",
+        "rds:AddTagsToResource",
+        "rds:DescribeDBClusterParameterGroups",
         "rds:DescribeDBClusterParameters",
+        "rds:DescribeDBClusters",
         "rds:DescribeEngineDefaultClusterParameters",
         "rds:ListTagsForResource",
-        "rds:AddTagsToResource",
+        "rds:ModifyDBClusterParameterGroup",
         "rds:RemoveTagsFromResource",
-        "rds:ResetDBClusterParameterGroup",
-        "rds:ModifyDBClusterParameterGroup"
-      ]
+        "rds:ResetDBClusterParameterGroup"
+      ],
+      "timeoutInMinutes": 180
     },
     "delete": {
       "permissions": [

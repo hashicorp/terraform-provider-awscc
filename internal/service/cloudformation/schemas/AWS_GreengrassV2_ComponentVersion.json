@@ -295,7 +295,8 @@
     },
     "read": {
       "permissions": [
-        "greengrass:DescribeComponent"
+        "greengrass:DescribeComponent",
+        "greengrass:ListTagsForResource"
       ]
     },
     "update": {

@@ -49,7 +49,8 @@
             "minLength": 1,
             "enum": [
                 "NONE",
-                "OVERWRITE"
+                "OVERWRITE",
+                "PRESERVE"
             ]
         },
         "ServiceAccountRoleArn": {

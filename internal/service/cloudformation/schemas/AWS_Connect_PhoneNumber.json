@@ -29,9 +29,9 @@
     },
     "properties": {
         "TargetArn": {
-            "description": "The ARN of the Amazon Connect instance the phone number is claimed to.",
+            "description": "The ARN of the target the phone number is claimed to.",
             "type": "string",
-            "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance\/[-a-zA-Z0-9]*$"
+            "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:(instance|traffic-distribution-group)\/[-a-zA-Z0-9]*$"
         },
         "PhoneNumberArn": {
             "description": "The phone number ARN",
