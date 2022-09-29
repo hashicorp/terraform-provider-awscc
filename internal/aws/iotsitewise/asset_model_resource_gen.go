@@ -1303,12 +1303,6 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 		"window":                       "Window",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/AssetModelProperties/*/DataTypeSpec",
-		"/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/HierarchyLogicalId",
-		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform",
-		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Metric",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
