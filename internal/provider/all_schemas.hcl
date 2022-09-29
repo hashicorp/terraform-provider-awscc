@@ -1500,6 +1500,11 @@ resource_schema "aws_iotfleetwise_campaign" {
 
 resource_schema "aws_iotfleetwise_decoder_manifest" {
   cloudformation_type_name = "AWS::IoTFleetWise::DecoderManifest"
+
+  # NetworkInterfaces is of unsupported type: list of .
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iotfleetwise_fleet" {
