@@ -209,6 +209,11 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotevents_detector_models -cftype AWS::IoTEvents::DetectorModel -package iotevents ../aws/iotevents/detector_model_plural_data_source_gen.go ../aws/iotevents/detector_model_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotevents_inputs -cftype AWS::IoTEvents::Input -package iotevents ../aws/iotevents/input_plural_data_source_gen.go ../aws/iotevents/input_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotfleethub_applications -cftype AWS::IoTFleetHub::Application -package iotfleethub ../aws/iotfleethub/application_plural_data_source_gen.go ../aws/iotfleethub/application_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_iotfleetwise_campaigns -cftype AWS::IoTFleetWise::Campaign -package iotfleetwise ../aws/iotfleetwise/campaign_plural_data_source_gen.go ../aws/iotfleetwise/campaign_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_iotfleetwise_fleets -cftype AWS::IoTFleetWise::Fleet -package iotfleetwise ../aws/iotfleetwise/fleet_plural_data_source_gen.go ../aws/iotfleetwise/fleet_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_iotfleetwise_model_manifests -cftype AWS::IoTFleetWise::ModelManifest -package iotfleetwise ../aws/iotfleetwise/model_manifest_plural_data_source_gen.go ../aws/iotfleetwise/model_manifest_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_iotfleetwise_signal_catalogs -cftype AWS::IoTFleetWise::SignalCatalog -package iotfleetwise ../aws/iotfleetwise/signal_catalog_plural_data_source_gen.go ../aws/iotfleetwise/signal_catalog_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_iotfleetwise_vehicles -cftype AWS::IoTFleetWise::Vehicle -package iotfleetwise ../aws/iotfleetwise/vehicle_plural_data_source_gen.go ../aws/iotfleetwise/vehicle_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotsitewise_assets -cftype AWS::IoTSiteWise::Asset -package iotsitewise ../aws/iotsitewise/asset_plural_data_source_gen.go ../aws/iotsitewise/asset_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotsitewise_asset_models -cftype AWS::IoTSiteWise::AssetModel -package iotsitewise ../aws/iotsitewise/asset_model_plural_data_source_gen.go ../aws/iotsitewise/asset_model_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotsitewise_gateways -cftype AWS::IoTSiteWise::Gateway -package iotsitewise ../aws/iotsitewise/gateway_plural_data_source_gen.go ../aws/iotsitewise/gateway_plural_data_source_gen_test.go
@@ -261,6 +266,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lookoutmetrics_alerts -cftype AWS::LookoutMetrics::Alert -package lookoutmetrics ../aws/lookoutmetrics/alert_plural_data_source_gen.go ../aws/lookoutmetrics/alert_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lookoutmetrics_anomaly_detectors -cftype AWS::LookoutMetrics::AnomalyDetector -package lookoutmetrics ../aws/lookoutmetrics/anomaly_detector_plural_data_source_gen.go ../aws/lookoutmetrics/anomaly_detector_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lookoutvision_projects -cftype AWS::LookoutVision::Project -package lookoutvision ../aws/lookoutvision/project_plural_data_source_gen.go ../aws/lookoutvision/project_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_m2_applications -cftype AWS::M2::Application -package m2 ../aws/m2/application_plural_data_source_gen.go ../aws/m2/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_m2_environments -cftype AWS::M2::Environment -package m2 ../aws/m2/environment_plural_data_source_gen.go ../aws/m2/environment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_clusters -cftype AWS::MSK::Cluster -package msk ../aws/msk/cluster_plural_data_source_gen.go ../aws/msk/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_configurations -cftype AWS::MSK::Configuration -package msk ../aws/msk/configuration_plural_data_source_gen.go ../aws/msk/configuration_plural_data_source_gen_test.go
@@ -443,6 +449,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotcoredeviceadvisor"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotevents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotfleethub"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotfleetwise"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotsitewise"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iottwinmaker"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotwireless"

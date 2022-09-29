@@ -33,6 +33,7 @@ Read-Only:
 
 - `class_b_timeout` (Number)
 - `class_c_timeout` (Number)
+- `factory_preset_freqs_list` (List of Number)
 - `mac_version` (String)
 - `max_duty_cycle` (Number)
 - `max_eirp` (Number)
@@ -41,6 +42,10 @@ Read-Only:
 - `ping_slot_period` (Number)
 - `reg_params_revision` (String)
 - `rf_region` (String)
+- `rx_data_rate_2` (Number)
+- `rx_delay_1` (Number)
+- `rx_dr_offset_1` (Number)
+- `rx_freq_2` (Number)
 - `supports_32_bit_f_cnt` (Boolean)
 - `supports_class_b` (Boolean)
 - `supports_class_c` (Boolean)

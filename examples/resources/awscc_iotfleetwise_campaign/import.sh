@@ -1,0 +1,1 @@
+$ terraform import awscc_iotfleetwise_campaign.example <resource ID>

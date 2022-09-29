@@ -74,7 +74,8 @@ func addonDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 			//   "description": "Resolve parameter value conflicts",
 			//   "enum": [
 			//     "NONE",
-			//     "OVERWRITE"
+			//     "OVERWRITE",
+			//     "PRESERVE"
 			//   ],
 			//   "minLength": 1,
 			//   "type": "string"

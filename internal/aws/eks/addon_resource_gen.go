@@ -98,7 +98,8 @@ func addonResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//   "description": "Resolve parameter value conflicts",
 			//   "enum": [
 			//     "NONE",
-			//     "OVERWRITE"
+			//     "OVERWRITE",
+			//     "PRESERVE"
 			//   ],
 			//   "minLength": 1,
 			//   "type": "string"
@@ -112,6 +113,7 @@ func addonResourceType(ctx context.Context) (provider.ResourceType, error) {
 				validate.StringInSlice([]string{
 					"NONE",
 					"OVERWRITE",
+					"PRESERVE",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{

@@ -182,15 +182,15 @@ func phoneNumberResourceType(ctx context.Context) (provider.ResourceType, error)
 			// Property: TargetArn
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The ARN of the Amazon Connect instance the phone number is claimed to.",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
+			//   "description": "The ARN of the target the phone number is claimed to.",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:(instance|traffic-distribution-group)/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
-			Description: "The ARN of the Amazon Connect instance the phone number is claimed to.",
+			Description: "The ARN of the target the phone number is claimed to.",
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
+				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:(instance|traffic-distribution-group)/[-a-zA-Z0-9]*$"), ""),
 			},
 		},
 		"type": {

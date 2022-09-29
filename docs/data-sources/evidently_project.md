@@ -21,11 +21,21 @@ Data Source schema for AWS::Evidently::Project
 
 ### Read-Only
 
+- `app_config_resource` (Attributes) (see [below for nested schema](#nestedatt--app_config_resource))
 - `arn` (String)
 - `data_delivery` (Attributes) Destinations for data. (see [below for nested schema](#nestedatt--data_delivery))
 - `description` (String)
 - `name` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--app_config_resource"></a>
+### Nested Schema for `app_config_resource`
+
+Read-Only:
+
+- `application_id` (String)
+- `environment_id` (String)
+
 
 <a id="nestedatt--data_delivery"></a>
 ### Nested Schema for `data_delivery`

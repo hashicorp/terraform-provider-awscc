@@ -20,6 +20,43 @@ func init() {
 // This Terraform data source type corresponds to the CloudFormation AWS::Evidently::Project resource type.
 func projectDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"app_config_resource": {
+			// Property: AppConfigResource
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "ApplicationId": {
+			//       "pattern": "[a-z0-9]{4,7}",
+			//       "type": "string"
+			//     },
+			//     "EnvironmentId": {
+			//       "pattern": "[a-z0-9]{4,7}",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "ApplicationId",
+			//     "EnvironmentId"
+			//   ],
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"application_id": {
+						// Property: ApplicationId
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"environment_id": {
+						// Property: EnvironmentId
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -205,17 +242,20 @@ func projectDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Evidently::Project").WithTerraformTypeName("awscc_evidently_project")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":           "Arn",
-		"bucket_name":   "BucketName",
-		"data_delivery": "DataDelivery",
-		"description":   "Description",
-		"key":           "Key",
-		"log_group":     "LogGroup",
-		"name":          "Name",
-		"prefix":        "Prefix",
-		"s3":            "S3",
-		"tags":          "Tags",
-		"value":         "Value",
+		"app_config_resource": "AppConfigResource",
+		"application_id":      "ApplicationId",
+		"arn":                 "Arn",
+		"bucket_name":         "BucketName",
+		"data_delivery":       "DataDelivery",
+		"description":         "Description",
+		"environment_id":      "EnvironmentId",
+		"key":                 "Key",
+		"log_group":           "LogGroup",
+		"name":                "Name",
+		"prefix":              "Prefix",
+		"s3":                  "S3",
+		"tags":                "Tags",
+		"value":               "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

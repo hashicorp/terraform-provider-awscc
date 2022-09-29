@@ -53,6 +53,7 @@ Optional:
 
 - `alias` (String) The property alias that identifies the property.
 - `notification_state` (String) The MQTT notification state (ENABLED or DISABLED) for this asset property.
+- `unit` (String) The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.
 
 
 <a id="nestedatt--tags"></a>

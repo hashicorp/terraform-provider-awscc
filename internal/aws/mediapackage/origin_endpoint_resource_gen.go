@@ -110,6 +110,14 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 			//           "pattern": "",
 			//           "type": "string"
 			//         },
+			//         "EncryptionMethod": {
+			//           "description": "The encryption method used",
+			//           "enum": [
+			//             "SAMPLE_AES",
+			//             "AES_CTR"
+			//           ],
+			//           "type": "string"
+			//         },
 			//         "KeyRotationIntervalSeconds": {
 			//           "description": "Time (in seconds) between each encryption key rotation.",
 			//           "type": "integer"
@@ -329,6 +337,22 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(32, 32),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"encryption_method": {
+									// Property: EncryptionMethod
+									Description: "The encryption method used",
+									Type:        types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"SAMPLE_AES",
+											"AES_CTR",
+										}),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										resource.UseStateForUnknown(),

@@ -23,6 +23,53 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::Evidently::Project resource type.
 func projectResourceType(ctx context.Context) (provider.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"app_config_resource": {
+			// Property: AppConfigResource
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "ApplicationId": {
+			//       "pattern": "[a-z0-9]{4,7}",
+			//       "type": "string"
+			//     },
+			//     "EnvironmentId": {
+			//       "pattern": "[a-z0-9]{4,7}",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "ApplicationId",
+			//     "EnvironmentId"
+			//   ],
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"application_id": {
+						// Property: ApplicationId
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("[a-z0-9]{4,7}"), ""),
+						},
+					},
+					"environment_id": {
+						// Property: EnvironmentId
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("[a-z0-9]{4,7}"), ""),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -279,17 +326,20 @@ func projectResourceType(ctx context.Context) (provider.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":           "Arn",
-		"bucket_name":   "BucketName",
-		"data_delivery": "DataDelivery",
-		"description":   "Description",
-		"key":           "Key",
-		"log_group":     "LogGroup",
-		"name":          "Name",
-		"prefix":        "Prefix",
-		"s3":            "S3",
-		"tags":          "Tags",
-		"value":         "Value",
+		"app_config_resource": "AppConfigResource",
+		"application_id":      "ApplicationId",
+		"arn":                 "Arn",
+		"bucket_name":         "BucketName",
+		"data_delivery":       "DataDelivery",
+		"description":         "Description",
+		"environment_id":      "EnvironmentId",
+		"key":                 "Key",
+		"log_group":           "LogGroup",
+		"name":                "Name",
+		"prefix":              "Prefix",
+		"s3":                  "S3",
+		"tags":                "Tags",
+		"value":               "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

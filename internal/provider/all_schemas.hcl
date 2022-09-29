@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 590 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 606 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -489,6 +489,15 @@ resource_schema "aws_codeartifact_repository" {
   cloudformation_type_name = "AWS::CodeArtifact::Repository"
 }
 
+resource_schema "aws_codedeploy_deployment_config" {
+  cloudformation_type_name = "AWS::CodeDeploy::DeploymentConfig"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_codeguruprofiler_profiling_group" {
   cloudformation_type_name = "AWS::CodeGuruProfiler::ProfilingGroup"
 }
@@ -905,6 +914,15 @@ resource_schema "aws_ec2_vpc_peering_connection" {
   cloudformation_type_name = "AWS::EC2::VPCPeeringConnection"
 }
 
+resource_schema "aws_ec2_vpn_connection" {
+  cloudformation_type_name = "AWS::EC2::VPNConnection"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_ec2_vpn_gateway" {
   cloudformation_type_name = "AWS::EC2::VPNGateway"
 }
@@ -996,6 +1014,15 @@ resource_schema "aws_eks_nodegroup" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_emr_security_configuration" {
+  cloudformation_type_name = "AWS::EMR::SecurityConfiguration"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_emr_studio" {
   cloudformation_type_name = "AWS::EMR::Studio"
 }
@@ -1012,6 +1039,15 @@ resource_schema "aws_elasticache_global_replication_group" {
   cloudformation_type_name = "AWS::ElastiCache::GlobalReplicationGroup"
 }
 
+resource_schema "aws_elasticache_subnet_group" {
+  cloudformation_type_name = "AWS::ElastiCache::SubnetGroup"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_elasticache_user" {
   cloudformation_type_name = "AWS::ElastiCache::User"
 }
@@ -1022,6 +1058,15 @@ resource_schema "aws_elasticache_user_group" {
 
 resource_schema "aws_elasticbeanstalk_application" {
   cloudformation_type_name = "AWS::ElasticBeanstalk::Application"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_elasticbeanstalk_application_version" {
+  cloudformation_type_name = "AWS::ElasticBeanstalk::ApplicationVersion"
 
   # Suppress until given green light by AWS.
   suppress_resource_generation             = true
@@ -1256,6 +1301,16 @@ resource_schema "aws_ivs_stream_key" {
   cloudformation_type_name = "AWS::IVS::StreamKey"
 }
 
+resource_schema "aws_identitystore_group" {
+  cloudformation_type_name               = "AWS::IdentityStore::Group"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_identitystore_group_membership" {
+  cloudformation_type_name               = "AWS::IdentityStore::GroupMembership"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_inspector_assessment_target" {
   cloudformation_type_name = "AWS::Inspector::AssessmentTarget"
 }
@@ -1437,6 +1492,35 @@ resource_schema "aws_iotevents_input" {
 
 resource_schema "aws_iotfleethub_application" {
   cloudformation_type_name = "AWS::IoTFleetHub::Application"
+}
+
+resource_schema "aws_iotfleetwise_campaign" {
+  cloudformation_type_name = "AWS::IoTFleetWise::Campaign"
+}
+
+resource_schema "aws_iotfleetwise_decoder_manifest" {
+  cloudformation_type_name = "AWS::IoTFleetWise::DecoderManifest"
+
+  # NetworkInterfaces is of unsupported type: list of .
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_iotfleetwise_fleet" {
+  cloudformation_type_name = "AWS::IoTFleetWise::Fleet"
+}
+
+resource_schema "aws_iotfleetwise_model_manifest" {
+  cloudformation_type_name = "AWS::IoTFleetWise::ModelManifest"
+}
+
+resource_schema "aws_iotfleetwise_signal_catalog" {
+  cloudformation_type_name = "AWS::IoTFleetWise::SignalCatalog"
+}
+
+resource_schema "aws_iotfleetwise_vehicle" {
+  cloudformation_type_name = "AWS::IoTFleetWise::Vehicle"
 }
 
 resource_schema "aws_iotsitewise_access_policy" {
@@ -1722,6 +1806,15 @@ resource_schema "aws_location_tracker_consumer" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_logs_destination" {
+  cloudformation_type_name = "AWS::Logs::Destination"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_logs_log_group" {
   cloudformation_type_name = "AWS::Logs::LogGroup"
 }
@@ -1766,6 +1859,10 @@ resource_schema "aws_lookoutmetrics_anomaly_detector" {
 
 resource_schema "aws_lookoutvision_project" {
   cloudformation_type_name = "AWS::LookoutVision::Project"
+}
+
+resource_schema "aws_m2_application" {
+  cloudformation_type_name = "AWS::M2::Application"
 }
 
 resource_schema "aws_m2_environment" {
@@ -2147,6 +2244,15 @@ resource_schema "aws_redshift_cluster" {
 
 resource_schema "aws_redshift_cluster_parameter_group" {
   cloudformation_type_name = "AWS::Redshift::ClusterParameterGroup"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_redshift_cluster_subnet_group" {
+  cloudformation_type_name = "AWS::Redshift::ClusterSubnetGroup"
 
   # Suppress until given green light by AWS.
   suppress_resource_generation             = true

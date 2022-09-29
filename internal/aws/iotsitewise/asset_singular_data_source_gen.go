@@ -129,7 +129,7 @@ func assetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
-			//     "description": "The asset property's definition, alias, and notification state.",
+			//     "description": "The asset property's definition, alias, unit, and notification state.",
 			//     "properties": {
 			//       "Alias": {
 			//         "description": "The property alias that identifies the property.",
@@ -148,6 +148,10 @@ func assetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 			//           "ENABLED",
 			//           "DISABLED"
 			//         ],
+			//         "type": "string"
+			//       },
+			//       "Unit": {
+			//         "description": "The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.",
 			//         "type": "string"
 			//       }
 			//     },
@@ -175,6 +179,12 @@ func assetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 					"notification_state": {
 						// Property: NotificationState
 						Description: "The MQTT notification state (ENABLED or DISABLED) for this asset property.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"unit": {
+						// Property: Unit
+						Description: "The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.",
 						Type:        types.StringType,
 						Computed:    true,
 					},
@@ -256,6 +266,7 @@ func assetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"logical_id":         "LogicalId",
 		"notification_state": "NotificationState",
 		"tags":               "Tags",
+		"unit":               "Unit",
 		"value":              "Value",
 	})
 

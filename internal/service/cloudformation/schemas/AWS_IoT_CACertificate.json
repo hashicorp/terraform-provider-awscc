@@ -88,6 +88,9 @@
                 "DISABLE"
             ]
         },
+        "RemoveAutoRegistration": {
+            "type": "boolean"
+        },
         "RegistrationConfig": {
             "$ref": "#/definitions/RegistrationConfig"
         },

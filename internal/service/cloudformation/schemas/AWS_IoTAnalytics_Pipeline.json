@@ -30,7 +30,7 @@
             "minItems": 1,
             "maxItems": 25,
             "items" : {
-                "$ref" : "#/definitions/Activity"
+                "$ref": "#/definitions/Activity"
             }
         }
     },

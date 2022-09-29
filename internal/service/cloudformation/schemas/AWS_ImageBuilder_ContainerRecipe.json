@@ -95,6 +95,14 @@
                 "ComponentArn": {
                     "description": "The Amazon Resource Name (ARN) of the component.",
                     "type": "string"
+                },
+                "Parameters": {
+                    "description": "A group of parameter settings that are used to configure the component for a specific recipe.",
+                    "type": "array",
+                    "insertionOrder": false,
+                    "items": {
+                        "$ref": "#/definitions/ComponentParameter"
+                    }
                 }
             }
         },
@@ -205,6 +213,26 @@
                     "type": "string"
                 }
             }
+        },
+        "ComponentParameter": {
+            "additionalProperties": false,
+            "description": "Contains a key/value pair that sets the named component parameter.",
+            "type": "object",
+            "properties": {
+                "Name": {
+                    "description": "The name of the component parameter to set.",
+                    "type": "string"
+                },
+                "Value": {
+                    "description": "Sets the value for the named component parameter.",
+                    "type": "array",
+                    "insertionOrder": true,
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": ["Name", "Value"]
         }
     },
     "additionalProperties": false,

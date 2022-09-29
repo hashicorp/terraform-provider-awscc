@@ -149,7 +149,7 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
-			//     "description": "The asset property's definition, alias, and notification state.",
+			//     "description": "The asset property's definition, alias, unit, and notification state.",
 			//     "properties": {
 			//       "Alias": {
 			//         "description": "The property alias that identifies the property.",
@@ -168,6 +168,10 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//           "ENABLED",
 			//           "DISABLED"
 			//         ],
+			//         "type": "string"
+			//       },
+			//       "Unit": {
+			//         "description": "The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.",
 			//         "type": "string"
 			//       }
 			//     },
@@ -211,6 +215,16 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 								"DISABLED",
 							}),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"unit": {
+						// Property: Unit
+						Description: "The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.",
+						Type:        types.StringType,
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
@@ -307,6 +321,7 @@ func assetResourceType(ctx context.Context) (provider.ResourceType, error) {
 		"logical_id":         "LogicalId",
 		"notification_state": "NotificationState",
 		"tags":               "Tags",
+		"unit":               "Unit",
 		"value":              "Value",
 	})
 

@@ -101,6 +101,14 @@ func originEndpointDataSourceType(ctx context.Context) (provider.DataSourceType,
 			//           "pattern": "",
 			//           "type": "string"
 			//         },
+			//         "EncryptionMethod": {
+			//           "description": "The encryption method used",
+			//           "enum": [
+			//             "SAMPLE_AES",
+			//             "AES_CTR"
+			//           ],
+			//           "type": "string"
+			//         },
 			//         "KeyRotationIntervalSeconds": {
 			//           "description": "Time (in seconds) between each encryption key rotation.",
 			//           "type": "integer"
@@ -315,6 +323,12 @@ func originEndpointDataSourceType(ctx context.Context) (provider.DataSourceType,
 								"constant_initialization_vector": {
 									// Property: ConstantInitializationVector
 									Description: "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"encryption_method": {
+									// Property: EncryptionMethod
+									Description: "The encryption method used",
 									Type:        types.StringType,
 									Computed:    true,
 								},

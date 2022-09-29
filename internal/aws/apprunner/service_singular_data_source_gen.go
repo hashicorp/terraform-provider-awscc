@@ -430,7 +430,8 @@ func serviceDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 			//                     "NODEJS_12",
 			//                     "NODEJS_14",
 			//                     "CORRETTO_8",
-			//                     "CORRETTO_11"
+			//                     "CORRETTO_11",
+			//                     "NODEJS_16"
 			//                   ],
 			//                   "type": "string"
 			//                 },

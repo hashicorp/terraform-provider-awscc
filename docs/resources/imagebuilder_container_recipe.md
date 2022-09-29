@@ -44,6 +44,16 @@ Resource schema for AWS::ImageBuilder::ContainerRecipe
 Optional:
 
 - `component_arn` (String) The Amazon Resource Name (ARN) of the component.
+- `parameters` (Attributes List) A group of parameter settings that are used to configure the component for a specific recipe. (see [below for nested schema](#nestedatt--components--parameters))
+
+<a id="nestedatt--components--parameters"></a>
+### Nested Schema for `components.parameters`
+
+Required:
+
+- `name` (String) The name of the component parameter to set.
+- `value` (List of String) Sets the value for the named component parameter.
+
 
 
 <a id="nestedatt--instance_configuration"></a>

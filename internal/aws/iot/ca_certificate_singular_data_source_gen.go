@@ -124,6 +124,15 @@ func cACertificateDataSourceType(ctx context.Context) (provider.DataSourceType, 
 			),
 			Computed: true,
 		},
+		"remove_auto_registration": {
+			// Property: RemoveAutoRegistration
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "boolean"
+			// }
+			Type:     types.BoolType,
+			Computed: true,
+		},
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
@@ -230,6 +239,7 @@ func cACertificateDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		"id":                           "Id",
 		"key":                          "Key",
 		"registration_config":          "RegistrationConfig",
+		"remove_auto_registration":     "RemoveAutoRegistration",
 		"role_arn":                     "RoleArn",
 		"status":                       "Status",
 		"tags":                         "Tags",
