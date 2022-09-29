@@ -4,6 +4,31 @@ NOTES:
 
 * Optional attributes without a default value specified in the resource's CloudFormation schema are now handled as _Computed_, indicating that if no value has been configured then Terraform will not perform drift detection on the attribute ([#667](https://github.com/hashicorp/terraform-provider-awscc/issues/667))
 
+FEATURES:
+
+* **New Data Source:** `awscc_identitystore_group`
+* **New Data Source:** `awscc_identitystore_group_membership`
+* **New Data Source:** `awscc_iotfleetwise_campaign`
+* **New Data Source:** `awscc_iotfleetwise_campaigns`
+* **New Data Source:** `awscc_iotfleetwise_fleet`
+* **New Data Source:** `awscc_iotfleetwise_fleets`
+* **New Data Source:** `awscc_iotfleetwise_model_manifest`
+* **New Data Source:** `awscc_iotfleetwise_model_manifests`
+* **New Data Source:** `awscc_iotfleetwise_signal_catalog`
+* **New Data Source:** `awscc_iotfleetwise_signal_catalogs`
+* **New Data Source:** `awscc_iotfleetwise_vehicle`
+* **New Data Source:** `awscc_iotfleetwise_vehicles`
+* **New Data Source:** `awscc_m2_application`
+* **New Data Source:** `awscc_m2_applications`
+* **New Resource:** `awscc_identitystore_group`
+* **New Resource:** `awscc_identitystore_group_membership`
+* **New Resource:** `awscc_iotfleetwise_campaign`
+* **New Resource:** `awscc_iotfleetwise_fleet`
+* **New Resource:** `awscc_iotfleetwise_model_manifest`
+* **New Resource:** `awscc_iotfleetwise_signal_catalog`
+* **New Resource:** `awscc_iotfleetwise_vehicle`
+* **New Resource:** `awscc_m2_application`
+
 ## [0.32.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.32.0) (September  8, 2022)
 
 FEATURES:
