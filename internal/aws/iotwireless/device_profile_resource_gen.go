@@ -68,6 +68,15 @@ func deviceProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
+			//     "FactoryPresetFreqsList": {
+			//       "items": {
+			//         "maximum": 16700000,
+			//         "minimum": 1000000,
+			//         "type": "integer"
+			//       },
+			//       "maxItems": 20,
+			//       "type": "array"
+			//     },
 			//     "MacVersion": {
 			//       "maxLength": 64,
 			//       "type": "string"
@@ -104,6 +113,26 @@ func deviceProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 			//     "RfRegion": {
 			//       "maxLength": 64,
 			//       "type": "string"
+			//     },
+			//     "RxDataRate2": {
+			//       "maximum": 15,
+			//       "minimum": 0,
+			//       "type": "integer"
+			//     },
+			//     "RxDelay1": {
+			//       "maximum": 15,
+			//       "minimum": 0,
+			//       "type": "integer"
+			//     },
+			//     "RxDrOffset1": {
+			//       "maximum": 7,
+			//       "minimum": 0,
+			//       "type": "integer"
+			//     },
+			//     "RxFreq2": {
+			//       "maximum": 16700000,
+			//       "minimum": 1000000,
+			//       "type": "integer"
 			//     },
 			//     "Supports32BitFCnt": {
 			//       "type": "boolean"
@@ -142,6 +171,19 @@ func deviceProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 1000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"factory_preset_freqs_list": {
+						// Property: FactoryPresetFreqsList
+						Type:     types.ListType{ElemType: types.Int64Type},
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtMost(20),
+							validate.ArrayForEach(validate.IntBetween(1000000, 16700000)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
@@ -238,6 +280,54 @@ func deviceProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"rx_data_rate_2": {
+						// Property: RxDataRate2
+						Type:     types.Int64Type,
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 15),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"rx_delay_1": {
+						// Property: RxDelay1
+						Type:     types.Int64Type,
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 15),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"rx_dr_offset_1": {
+						// Property: RxDrOffset1
+						Type:     types.Int64Type,
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 7),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"rx_freq_2": {
+						// Property: RxFreq2
+						Type:     types.Int64Type,
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1000000, 16700000),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
@@ -384,27 +474,32 @@ func deviceProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                   "Arn",
-		"class_b_timeout":       "ClassBTimeout",
-		"class_c_timeout":       "ClassCTimeout",
-		"id":                    "Id",
-		"key":                   "Key",
-		"lo_ra_wan":             "LoRaWAN",
-		"mac_version":           "MacVersion",
-		"max_duty_cycle":        "MaxDutyCycle",
-		"max_eirp":              "MaxEirp",
-		"name":                  "Name",
-		"ping_slot_dr":          "PingSlotDr",
-		"ping_slot_freq":        "PingSlotFreq",
-		"ping_slot_period":      "PingSlotPeriod",
-		"reg_params_revision":   "RegParamsRevision",
-		"rf_region":             "RfRegion",
-		"supports_32_bit_f_cnt": "Supports32BitFCnt",
-		"supports_class_b":      "SupportsClassB",
-		"supports_class_c":      "SupportsClassC",
-		"supports_join":         "SupportsJoin",
-		"tags":                  "Tags",
-		"value":                 "Value",
+		"arn":                       "Arn",
+		"class_b_timeout":           "ClassBTimeout",
+		"class_c_timeout":           "ClassCTimeout",
+		"factory_preset_freqs_list": "FactoryPresetFreqsList",
+		"id":                        "Id",
+		"key":                       "Key",
+		"lo_ra_wan":                 "LoRaWAN",
+		"mac_version":               "MacVersion",
+		"max_duty_cycle":            "MaxDutyCycle",
+		"max_eirp":                  "MaxEirp",
+		"name":                      "Name",
+		"ping_slot_dr":              "PingSlotDr",
+		"ping_slot_freq":            "PingSlotFreq",
+		"ping_slot_period":          "PingSlotPeriod",
+		"reg_params_revision":       "RegParamsRevision",
+		"rf_region":                 "RfRegion",
+		"rx_data_rate_2":            "RxDataRate2",
+		"rx_delay_1":                "RxDelay1",
+		"rx_dr_offset_1":            "RxDrOffset1",
+		"rx_freq_2":                 "RxFreq2",
+		"supports_32_bit_f_cnt":     "Supports32BitFCnt",
+		"supports_class_b":          "SupportsClassB",
+		"supports_class_c":          "SupportsClassC",
+		"supports_join":             "SupportsJoin",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -44,6 +44,34 @@ func containerRecipeDataSourceType(ctx context.Context) (provider.DataSourceType
 			//       "ComponentArn": {
 			//         "description": "The Amazon Resource Name (ARN) of the component.",
 			//         "type": "string"
+			//       },
+			//       "Parameters": {
+			//         "description": "A group of parameter settings that are used to configure the component for a specific recipe.",
+			//         "insertionOrder": false,
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "description": "Contains a key/value pair that sets the named component parameter.",
+			//           "properties": {
+			//             "Name": {
+			//               "description": "The name of the component parameter to set.",
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "description": "Sets the value for the named component parameter.",
+			//               "insertionOrder": true,
+			//               "items": {
+			//                 "type": "string"
+			//               },
+			//               "type": "array"
+			//             }
+			//           },
+			//           "required": [
+			//             "Name",
+			//             "Value"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array"
 			//       }
 			//     },
 			//     "type": "object"
@@ -58,6 +86,27 @@ func containerRecipeDataSourceType(ctx context.Context) (provider.DataSourceType
 						Description: "The Amazon Resource Name (ARN) of the component.",
 						Type:        types.StringType,
 						Computed:    true,
+					},
+					"parameters": {
+						// Property: Parameters
+						Description: "A group of parameter settings that are used to configure the component for a specific recipe.",
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"name": {
+									// Property: Name
+									Description: "The name of the component parameter to set.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"value": {
+									// Property: Value
+									Description: "Sets the value for the named component parameter.",
+									Type:        types.ListType{ElemType: types.StringType},
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
 					},
 				},
 			),
@@ -470,6 +519,7 @@ func containerRecipeDataSourceType(ctx context.Context) (provider.DataSourceType
 		"kms_key_id":                "KmsKeyId",
 		"name":                      "Name",
 		"no_device":                 "NoDevice",
+		"parameters":                "Parameters",
 		"parent_image":              "ParentImage",
 		"platform_override":         "PlatformOverride",
 		"repository_name":           "RepositoryName",
@@ -478,6 +528,7 @@ func containerRecipeDataSourceType(ctx context.Context) (provider.DataSourceType
 		"tags":                      "Tags",
 		"target_repository":         "TargetRepository",
 		"throughput":                "Throughput",
+		"value":                     "Value",
 		"version":                   "Version",
 		"virtual_name":              "VirtualName",
 		"volume_size":               "VolumeSize",

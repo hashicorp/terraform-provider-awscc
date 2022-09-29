@@ -200,6 +200,7 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
+						// DomainSigningPrivateKey is a write-only property.
 					},
 					"domain_signing_selector": {
 						// Property: DomainSigningSelector
@@ -210,6 +211,7 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
+						// DomainSigningSelector is a write-only property.
 					},
 					"next_signing_key_length": {
 						// Property: NextSigningKeyLength
@@ -231,7 +233,6 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 			},
-			// DkimSigningAttributes is a write-only property.
 		},
 		"email_identity": {
 			// Property: EmailIdentity
@@ -381,7 +382,8 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/DkimSigningAttributes",
+		"/properties/DkimSigningAttributes/DomainSigningSelector",
+		"/properties/DkimSigningAttributes/DomainSigningPrivateKey",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

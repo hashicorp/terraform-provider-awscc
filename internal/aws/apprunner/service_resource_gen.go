@@ -567,7 +567,8 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 			//                     "NODEJS_12",
 			//                     "NODEJS_14",
 			//                     "CORRETTO_8",
-			//                     "CORRETTO_11"
+			//                     "CORRETTO_11",
+			//                     "NODEJS_16"
 			//                   ],
 			//                   "type": "string"
 			//                 },
@@ -802,6 +803,7 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 																	"NODEJS_14",
 																	"CORRETTO_8",
 																	"CORRETTO_11",
+																	"NODEJS_16",
 																}),
 															},
 														},

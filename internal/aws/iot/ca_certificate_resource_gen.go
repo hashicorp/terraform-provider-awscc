@@ -189,6 +189,19 @@ func cACertificateResourceType(ctx context.Context) (provider.ResourceType, erro
 				resource.UseStateForUnknown(),
 			},
 		},
+		"remove_auto_registration": {
+			// Property: RemoveAutoRegistration
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "boolean"
+			// }
+			Type:     types.BoolType,
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
@@ -318,6 +331,7 @@ func cACertificateResourceType(ctx context.Context) (provider.ResourceType, erro
 		"id":                           "Id",
 		"key":                          "Key",
 		"registration_config":          "RegistrationConfig",
+		"remove_auto_registration":     "RemoveAutoRegistration",
 		"role_arn":                     "RoleArn",
 		"status":                       "Status",
 		"tags":                         "Tags",
