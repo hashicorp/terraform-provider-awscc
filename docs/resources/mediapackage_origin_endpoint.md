@@ -70,6 +70,7 @@ Required:
 Optional:
 
 - `constant_initialization_vector` (String) An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+- `encryption_method` (String) The encryption method used
 - `key_rotation_interval_seconds` (Number) Time (in seconds) between each encryption key rotation.
 
 <a id="nestedatt--cmaf_package--encryption--speke_key_provider"></a>

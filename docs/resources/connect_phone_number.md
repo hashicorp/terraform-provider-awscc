@@ -18,7 +18,7 @@ Resource Type definition for AWS::Connect::PhoneNumber
 ### Required
 
 - `country_code` (String) The phone number country code.
-- `target_arn` (String) The ARN of the Amazon Connect instance the phone number is claimed to.
+- `target_arn` (String) The ARN of the target the phone number is claimed to.
 - `type` (String) The phone number type, either TOLL_FREE or DID.
 
 ### Optional

@@ -26,6 +26,7 @@ Data Source schema for AWS::IoT::CACertificate
 - `ca_certificate_pem` (String)
 - `certificate_mode` (String)
 - `registration_config` (Attributes) (see [below for nested schema](#nestedatt--registration_config))
+- `remove_auto_registration` (Boolean)
 - `status` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `verification_certificate_pem` (String) The private key verification certificate.

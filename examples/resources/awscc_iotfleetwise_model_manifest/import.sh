@@ -1,0 +1,1 @@
+$ terraform import awscc_iotfleetwise_model_manifest.example <resource ID>
