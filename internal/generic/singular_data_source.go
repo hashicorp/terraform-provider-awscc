@@ -22,7 +22,7 @@ type singularDataSourceType genericDataSourceType
 
 // NewSingularDataSourceType returns a new singularDataSourceType from the specified variadic list of functional options.
 // It's public as it's called from generated code.
-func NewSingularDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (provider.DataSourceType, error) {
+func NewSingularDataSourceType(_ context.Context, optFns ...DataSourceOptionsFunc) (provider.DataSourceType, error) {
 	dataSourceType := &genericDataSourceType{}
 
 	for _, optFn := range optFns {

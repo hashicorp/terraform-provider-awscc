@@ -22,7 +22,7 @@ type pluralDataSourceType genericDataSourceType
 
 // NewPluralDataSourceType returns a new pluralDataSourceType from the specified variadic list of functional options.
 // It's public as it's called from generated code.
-func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (provider.DataSourceType, error) {
+func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceOptionsFunc) (provider.DataSourceType, error) {
 	dataSourceType := &genericDataSourceType{}
 
 	for _, optFn := range optFns {

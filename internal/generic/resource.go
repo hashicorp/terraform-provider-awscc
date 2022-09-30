@@ -23,14 +23,14 @@ import (
 	"github.com/mattbaird/jsonpatch"
 )
 
-// ResourceTypeOptionsFunc is a type alias for a resource type functional option.
-type ResourceTypeOptionsFunc func(*genericResourceType) error
+// ResourceOptionsFunc is a type alias for a resource type functional option.
+type ResourceOptionsFunc func(*genericResourceType) error
 
 // resourceWithAttributeNameMap is a helper function to construct functional options
 // that set a resource type's attribute name maps.
 // If multiple resourceWithAttributeNameMap calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithAttributeNameMap(v map[string]string) ResourceTypeOptionsFunc {
+func resourceWithAttributeNameMap(v map[string]string) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		if _, ok := v["id"]; !ok {
 			// Synthesize a mapping for the reserved top-level "id" attribute.
@@ -58,7 +58,7 @@ func resourceWithAttributeNameMap(v map[string]string) ResourceTypeOptionsFunc {
 // that set a resource type's CloudFormation type name.
 // If multiple resourceWithCloudFormationTypeName calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithCloudFormationTypeName(v string) ResourceTypeOptionsFunc {
+func resourceWithCloudFormationTypeName(v string) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		o.cfTypeName = v
 
@@ -70,7 +70,7 @@ func resourceWithCloudFormationTypeName(v string) ResourceTypeOptionsFunc {
 // that set a resource type's Terraform schema.
 // If multiple resourceWithTerraformSchema calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithTerraformSchema(v tfsdk.Schema) ResourceTypeOptionsFunc {
+func resourceWithTerraformSchema(v tfsdk.Schema) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		o.tfSchema = v
 
@@ -82,7 +82,7 @@ func resourceWithTerraformSchema(v tfsdk.Schema) ResourceTypeOptionsFunc {
 // that set a resource type's Terraform type name.
 // If multiple resourceWithTerraformTypeName calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithTerraformTypeName(v string) ResourceTypeOptionsFunc {
+func resourceWithTerraformTypeName(v string) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		o.tfTypeName = v
 
@@ -94,7 +94,7 @@ func resourceWithTerraformTypeName(v string) ResourceTypeOptionsFunc {
 // that set a resource type's immutability flag.
 // If multiple resourceIsImmutableType calls are made, the last call overrides
 // the previous calls' values.
-func resourceIsImmutableType(v bool) ResourceTypeOptionsFunc {
+func resourceIsImmutableType(v bool) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		o.isImmutableType = v
 
@@ -106,7 +106,7 @@ func resourceIsImmutableType(v bool) ResourceTypeOptionsFunc {
 // that set a resource type's synthetic ID attribute flag.
 // If multiple resourceWithSyntheticIDAttribute calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithSyntheticIDAttribute(v bool) ResourceTypeOptionsFunc {
+func resourceWithSyntheticIDAttribute(v bool) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		o.syntheticIDAttribute = v
 
@@ -118,7 +118,7 @@ func resourceWithSyntheticIDAttribute(v bool) ResourceTypeOptionsFunc {
 // that set a resource type's write-only property paths (JSON Pointer).
 // If multiple resourceWithWriteOnlyPropertyPaths calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
+func resourceWithWriteOnlyPropertyPaths(v []string) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		writeOnlyAttributePaths := make([]*path.Path, 0)
 
@@ -148,7 +148,7 @@ const (
 // that set a resource type's create timeout (in minutes).
 // If multiple resourceWithCreateTimeoutInMinutes calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithCreateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
+func resourceWithCreateTimeoutInMinutes(v int) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		if v > 0 {
 			o.createTimeout = time.Duration(v) * time.Minute
@@ -164,7 +164,7 @@ func resourceWithCreateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 // that set a resource type's update timeout (in minutes).
 // If multiple resourceWithUpdateTimeoutInMinutes calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithUpdateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
+func resourceWithUpdateTimeoutInMinutes(v int) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		if v > 0 {
 			o.updateTimeout = time.Duration(v) * time.Minute
@@ -180,7 +180,7 @@ func resourceWithUpdateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 // that set a resource type's delete timeout (in minutes).
 // If multiple resourceWithDeleteTimeoutInMinutes calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
+func resourceWithDeleteTimeoutInMinutes(v int) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		if v > 0 {
 			o.deleteTimeout = time.Duration(v) * time.Minute
@@ -196,7 +196,7 @@ func resourceWithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 // that set a resource type's required attributes validators.
 // If multiple resourceWithRequiredAttributesValidators calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithRequiredAttributesValidators(fs ...validate.RequiredAttributesFunc) ResourceTypeOptionsFunc {
+func resourceWithRequiredAttributesValidators(fs ...validate.RequiredAttributesFunc) ResourceOptionsFunc {
 	return func(o *genericResourceType) error {
 		o.requiredAttributesValidators = fs
 
@@ -204,14 +204,14 @@ func resourceWithRequiredAttributesValidators(fs ...validate.RequiredAttributesF
 	}
 }
 
-// ResourceTypeOptions is a type alias for a slice of resource type functional options.
-type ResourceTypeOptions []ResourceTypeOptionsFunc
+// ResourceOptions is a type alias for a slice of resource type functional options.
+type ResourceOptions []ResourceOptionsFunc
 
 // WithAttributeNameMap is a helper function to construct functional options
 // that set a resource type's attribute name map, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithAttributeNameMap(v map[string]string) ResourceTypeOptions {
+func (opts ResourceOptions) WithAttributeNameMap(v map[string]string) ResourceOptions {
 	return append(opts, resourceWithAttributeNameMap(v))
 }
 
@@ -219,7 +219,7 @@ func (opts ResourceTypeOptions) WithAttributeNameMap(v map[string]string) Resour
 // that set a resource type's CloudFormation type name, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithCloudFormationTypeName(v string) ResourceTypeOptions {
+func (opts ResourceOptions) WithCloudFormationTypeName(v string) ResourceOptions {
 	return append(opts, resourceWithCloudFormationTypeName(v))
 }
 
@@ -227,7 +227,7 @@ func (opts ResourceTypeOptions) WithCloudFormationTypeName(v string) ResourceTyp
 // that set a resource type's Terraform schema, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithTerraformSchema(v tfsdk.Schema) ResourceTypeOptions {
+func (opts ResourceOptions) WithTerraformSchema(v tfsdk.Schema) ResourceOptions {
 	return append(opts, resourceWithTerraformSchema(v))
 }
 
@@ -235,7 +235,7 @@ func (opts ResourceTypeOptions) WithTerraformSchema(v tfsdk.Schema) ResourceType
 // that set a resource type's Terraform type name, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithTerraformTypeName(v string) ResourceTypeOptions {
+func (opts ResourceOptions) WithTerraformTypeName(v string) ResourceOptions {
 	return append(opts, resourceWithTerraformTypeName(v))
 }
 
@@ -243,7 +243,7 @@ func (opts ResourceTypeOptions) WithTerraformTypeName(v string) ResourceTypeOpti
 // that set a resource type's Terraform immutability flag, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) IsImmutableType(v bool) ResourceTypeOptions {
+func (opts ResourceOptions) IsImmutableType(v bool) ResourceOptions {
 	return append(opts, resourceIsImmutableType(v))
 }
 
@@ -251,7 +251,7 @@ func (opts ResourceTypeOptions) IsImmutableType(v bool) ResourceTypeOptions {
 // that set a resource type's synthetic ID attribute flag, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithSyntheticIDAttribute(v bool) ResourceTypeOptions {
+func (opts ResourceOptions) WithSyntheticIDAttribute(v bool) ResourceOptions {
 	return append(opts, resourceWithSyntheticIDAttribute(v))
 }
 
@@ -259,7 +259,7 @@ func (opts ResourceTypeOptions) WithSyntheticIDAttribute(v bool) ResourceTypeOpt
 // that set a resource type's write-only property paths, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithWriteOnlyPropertyPaths(v []string) ResourceTypeOptions {
+func (opts ResourceOptions) WithWriteOnlyPropertyPaths(v []string) ResourceOptions {
 	return append(opts, resourceWithWriteOnlyPropertyPaths(v))
 }
 
@@ -267,7 +267,7 @@ func (opts ResourceTypeOptions) WithWriteOnlyPropertyPaths(v []string) ResourceT
 // that set a resource type's create timeout, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithCreateTimeoutInMinutes(v int) ResourceTypeOptions {
+func (opts ResourceOptions) WithCreateTimeoutInMinutes(v int) ResourceOptions {
 	return append(opts, resourceWithCreateTimeoutInMinutes(v))
 }
 
@@ -275,7 +275,7 @@ func (opts ResourceTypeOptions) WithCreateTimeoutInMinutes(v int) ResourceTypeOp
 // that set a resource type's update timeout, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithUpdateTimeoutInMinutes(v int) ResourceTypeOptions {
+func (opts ResourceOptions) WithUpdateTimeoutInMinutes(v int) ResourceOptions {
 	return append(opts, resourceWithUpdateTimeoutInMinutes(v))
 }
 
@@ -283,7 +283,7 @@ func (opts ResourceTypeOptions) WithUpdateTimeoutInMinutes(v int) ResourceTypeOp
 // that set a resource type's delete timeout, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithDeleteTimeoutInMinutes(v int) ResourceTypeOptions {
+func (opts ResourceOptions) WithDeleteTimeoutInMinutes(v int) ResourceOptions {
 	return append(opts, resourceWithDeleteTimeoutInMinutes(v))
 }
 
@@ -291,7 +291,7 @@ func (opts ResourceTypeOptions) WithDeleteTimeoutInMinutes(v int) ResourceTypeOp
 // that set a resource type's required attribyte validator, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithRequiredAttributesValidators(v ...validate.RequiredAttributesFunc) ResourceTypeOptions {
+func (opts ResourceOptions) WithRequiredAttributesValidators(v ...validate.RequiredAttributesFunc) ResourceOptions {
 	return append(opts, resourceWithRequiredAttributesValidators(v...))
 }
 
@@ -313,7 +313,7 @@ type genericResourceType struct {
 
 // NewResourceType returns a new ResourceType from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
-func NewResourceType(_ context.Context, optFns ...ResourceTypeOptionsFunc) (provider.ResourceType, error) {
+func NewResourceType(_ context.Context, optFns ...ResourceOptionsFunc) (provider.ResourceType, error) {
 	resourceType := &genericResourceType{}
 
 	for _, optFn := range optFns {
