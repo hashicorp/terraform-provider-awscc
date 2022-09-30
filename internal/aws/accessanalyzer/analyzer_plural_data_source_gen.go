@@ -5,7 +5,7 @@ package accessanalyzer
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -18,7 +18,7 @@ func init() {
 
 // analyzersDataSourceType returns the Terraform awscc_accessanalyzer_analyzers data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::AccessAnalyzer::Analyzer resource type.
-func analyzersDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+func analyzersDataSourceType(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,11 +43,11 @@ func analyzersDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 	opts = opts.WithCloudFormationTypeName("AWS::AccessAnalyzer::Analyzer").WithTerraformTypeName("awscc_accessanalyzer_analyzers")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

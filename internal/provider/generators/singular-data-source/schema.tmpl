@@ -5,7 +5,7 @@ package {{ .PackageName }}
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
+	registry.AddDataSourceFactory("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
 }
 
 // {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} data source type.
 // This Terraform data source type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
-func {{ .FactoryFunctionName }}(ctx context.Context) (provider.DataSourceType, error) {
+func {{ .FactoryFunctionName }}(ctx context.Context) (datasource.DataSource, error) {
 	attributes := {{ .RootPropertiesSchema }}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -33,7 +33,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-    var opts DataSourceTypeOptions
+    var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
 	opts = opts.WithTerraformSchema(schema)
@@ -43,11 +43,11 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (provider.DataSourceType, e
 {{- end }}
 	})
 
-    singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+    v, err := NewSingularDataSourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

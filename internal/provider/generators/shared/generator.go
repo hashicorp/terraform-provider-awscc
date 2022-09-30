@@ -156,9 +156,6 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	if codeFeatures&codegen.HasIDRootProperty > 0 {
 		templateData.SyntheticIDAttribute = false
 	}
-	if templateData.SyntheticIDAttribute || codeFeatures&codegen.HasFrameworkPlanModifiers > 0 {
-		templateData.ImportFrameworkResource = true
-	}
 
 	if description := resource.CfResource.Description; description != nil {
 		templateData.SchemaDescription = *description
@@ -195,7 +192,6 @@ type TemplateData struct {
 	HasRequiredAttribute         bool
 	HasUpdateMethod              bool
 	ImportFrameworkAttr          bool
-	ImportFrameworkResource      bool
 	ImportRegexp                 bool
 	ImportValidate               bool
 	PackageName                  string
