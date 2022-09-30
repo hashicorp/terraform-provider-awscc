@@ -14,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceFactory("awscc_accessanalyzer_analyzer", analyzerResourceType)
+	registry.AddResourceFactory("awscc_accessanalyzer_analyzer", analyzerResource)
 }
 
-// analyzerResourceType returns the Terraform awscc_accessanalyzer_analyzer resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AccessAnalyzer::Analyzer resource type.
-func analyzerResourceType(ctx context.Context) (resource.Resource, error) {
+// analyzerResource returns the Terraform awscc_accessanalyzer_analyzer resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AccessAnalyzer::Analyzer resource.
+func analyzerResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"analyzer_name": {
 			// Property: AnalyzerName

@@ -19,8 +19,8 @@ func init() {
 	registry.AddResourceFactory("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
 }
 
-// {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
-// This Terraform resource type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
+// {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} resource.
+// This Terraform resource corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource.
 func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) {
 	attributes := {{ .RootPropertiesSchema }}
 

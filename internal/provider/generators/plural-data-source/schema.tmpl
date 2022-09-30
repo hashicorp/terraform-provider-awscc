@@ -16,8 +16,8 @@ func init() {
 	registry.AddDataSourceFactory("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
 }
 
-// {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} data source type.
-// This Terraform data source type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
+// {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} data source.
+// This Terraform data source corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource.
 func {{ .FactoryFunctionName }}(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute {
 		"id": {
