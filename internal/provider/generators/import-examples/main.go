@@ -7,6 +7,7 @@ import (
 	"os"
 	"text/template"
 
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 	"github.com/mitchellh/cli"
@@ -21,15 +22,16 @@ func main() {
 
 	provider := provider.New()
 
-	resources, _ := provider.GetResources(context.Background())
+	resources := provider.Resources(context.Background())
 
-	for resource := range resources {
-		GenerateExample(resource, ui)
+	for _, v := range resources {
+		resp := resource.MetadataResponse{}
+		v().Metadata(context.Background(), resource.MetadataRequest{}, &resp)
+		GenerateExample(resp.TypeName, ui)
 	}
 }
 
 func GenerateExample(resourceName string, ui *cli.BasicUi) {
-
 	templateData := TemplateData{
 		ResourceType: resourceName,
 	}
