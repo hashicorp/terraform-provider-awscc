@@ -20,9 +20,9 @@ import (
 // singularDataSourceType is a type alias for a data source type.
 type singularDataSourceType genericDataSourceType
 
-// NewSingularDataSourceType returns a new singularDataSourceType from the specified variadic list of functional options.
+// NewSingularDataSource returns a new singular DataSource from the specified variadic list of functional options.
 // It's public as it's called from generated code.
-func NewSingularDataSourceType(_ context.Context, optFns ...DataSourceOptionsFunc) (provider.DataSourceType, error) {
+func NewSingularDataSource(_ context.Context, optFns ...DataSourceOptionsFunc) (datasource.DataSource, error) {
 	dataSourceType := &genericDataSourceType{}
 
 	for _, optFn := range optFns {

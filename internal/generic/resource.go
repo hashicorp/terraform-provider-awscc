@@ -311,9 +311,9 @@ type genericResourceType struct {
 	requiredAttributesValidators []validate.RequiredAttributesFunc // Required attributes validators
 }
 
-// NewResourceType returns a new ResourceType from the specified varidaic list of functional options.
+// NewResource returns a new Resource from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
-func NewResourceType(_ context.Context, optFns ...ResourceOptionsFunc) (provider.ResourceType, error) {
+func NewResource(_ context.Context, optFns ...ResourceOptionsFunc) (resource.Resource, error) {
 	resourceType := &genericResourceType{}
 
 	for _, optFn := range optFns {
@@ -331,7 +331,8 @@ func NewResourceType(_ context.Context, optFns ...ResourceOptionsFunc) (provider
 		return nil, fmt.Errorf("no Terraform type name specified")
 	}
 
-	return resourceType, nil
+	// return resourceType, nil
+	return nil, nil
 }
 
 func (rt *genericResourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {

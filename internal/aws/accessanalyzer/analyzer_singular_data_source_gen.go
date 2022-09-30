@@ -251,7 +251,7 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":         "Value",
 	})
 
-	v, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
