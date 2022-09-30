@@ -4,19 +4,20 @@ import (
 	"context"
 	"sync"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 )
 
 var dataSourceRegistrationClosed bool
-var dataSourceRegistry map[string]func(context.Context) (provider.DataSourceType, error)
+var dataSourceRegistry map[string]func(context.Context) (datasource.DataSource, error)
 var dataSourceRegistryMu sync.Mutex
 
 var resourceRegistrationClosed bool
-var resourceRegistry map[string]func(context.Context) (provider.ResourceType, error)
+var resourceRegistry map[string]func(context.Context) (resource.Resource, error)
 var resourceRegistryMu sync.Mutex
 
 // AddDataSourceTypeFactory registers the specified data source type name and factory.
-func AddDataSourceTypeFactory(name string, factory func(context.Context) (provider.DataSourceType, error)) {
+func AddDataSourceTypeFactory(name string, factory func(context.Context) (datasource.DataSource, error)) {
 	dataSourceRegistryMu.Lock()
 	defer dataSourceRegistryMu.Unlock()
 
@@ -25,13 +26,13 @@ func AddDataSourceTypeFactory(name string, factory func(context.Context) (provid
 	}
 
 	if dataSourceRegistry == nil {
-		dataSourceRegistry = make(map[string]func(context.Context) (provider.DataSourceType, error))
+		dataSourceRegistry = make(map[string]func(context.Context) (datasource.DataSource, error))
 	}
 	dataSourceRegistry[name] = factory
 }
 
 // AddResourceTypeFactory registers the specified resource type name and factory.
-func AddResourceTypeFactory(name string, factory func(context.Context) (provider.ResourceType, error)) {
+func AddResourceTypeFactory(name string, factory func(context.Context) (resource.Resource, error)) {
 	resourceRegistryMu.Lock()
 	defer resourceRegistryMu.Unlock()
 
@@ -40,14 +41,14 @@ func AddResourceTypeFactory(name string, factory func(context.Context) (provider
 	}
 
 	if resourceRegistry == nil {
-		resourceRegistry = make(map[string]func(context.Context) (provider.ResourceType, error))
+		resourceRegistry = make(map[string]func(context.Context) (resource.Resource, error))
 	}
 	resourceRegistry[name] = factory
 }
 
 // ResourceFactories returns the registered resource factories.
 // Resource registration is closed.
-func ResourceFactories() map[string]func(context.Context) (provider.ResourceType, error) {
+func ResourceFactories() map[string]func(context.Context) (resource.Resource, error) {
 	resourceRegistryMu.Lock()
 	defer resourceRegistryMu.Unlock()
 
@@ -58,7 +59,7 @@ func ResourceFactories() map[string]func(context.Context) (provider.ResourceType
 
 // DataSourceFactories returns the registered data source factories.
 // Data Source registration is closed.
-func DataSourceFactories() map[string]func(context.Context) (provider.DataSourceType, error) {
+func DataSourceFactories() map[string]func(context.Context) (datasource.DataSource, error) {
 	dataSourceRegistryMu.Lock()
 	defer dataSourceRegistryMu.Unlock()
 
