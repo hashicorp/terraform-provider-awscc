@@ -10,8 +10,10 @@ import (
 	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -418,12 +420,12 @@ func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request prov
 	p.roleARN = config.RoleARN.Value
 }
 
-func (p *AwsCloudControlApiProvider) GetResources(ctx context.Context) (map[string]provider.ResourceType, diag.Diagnostics) {
+func (p *AwsCloudControlApiProvider) Resources(ctx context.Context) []func() resource.Resource {
 	var diags diag.Diagnostics
-	resources := make(map[string]provider.ResourceType)
+	var resources = make([]func() resource.Resource, len(registry.ResourceFactories()))
 
 	for name, factory := range registry.ResourceFactories() {
-		resourceType, err := factory(ctx)
+		v, err := factory(ctx)
 
 		if err != nil {
 			diags.AddError(
@@ -434,18 +436,20 @@ func (p *AwsCloudControlApiProvider) GetResources(ctx context.Context) (map[stri
 			continue
 		}
 
-		resources[name] = resourceType
+		resources = append(resources, func() resource.Resource {
+			return v
+		})
 	}
 
-	return resources, diags
+	return resources
 }
 
-func (p *AwsCloudControlApiProvider) GetDataSources(ctx context.Context) (map[string]provider.DataSourceType, diag.Diagnostics) {
+func (p *AwsCloudControlApiProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	var diags diag.Diagnostics
-	dataSources := make(map[string]provider.DataSourceType)
+	dataSources := make([]func() datasource.DataSource, len(registry.DataSourceFactories()))
 
 	for name, factory := range registry.DataSourceFactories() {
-		dataSourceType, err := factory(ctx)
+		v, err := factory(ctx)
 
 		if err != nil {
 			diags.AddError(
@@ -456,10 +460,12 @@ func (p *AwsCloudControlApiProvider) GetDataSources(ctx context.Context) (map[st
 			continue
 		}
 
-		dataSources[name] = dataSourceType
+		dataSources = append(dataSources, func() datasource.DataSource {
+			return v
+		})
 	}
 
-	return dataSources, diags
+	return dataSources
 }
 
 func (p *AwsCloudControlApiProvider) CloudControlApiClient(_ context.Context) *cloudcontrol.Client {
