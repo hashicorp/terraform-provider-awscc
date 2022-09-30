@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -60,18 +59,10 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema *tfsdk.Schema, 
 		return nil, nil
 	}
 
-	var attributeType attr.Type
+	attributeType, err := schema.TypeAtTerraformPath(ctx, path)
 
-	if len(path.Steps()) == 0 {
-		attributeType = schema.AttributeType()
-	} else {
-		v, err := schema.TypeAtTerraformPath(ctx, path)
-
-		if err != nil {
-			return nil, fmt.Errorf("getting attribute type at %s: %w", path, err)
-		}
-
-		attributeType = v
+	if err != nil {
+		return nil, fmt.Errorf("getting attribute type at %s: %w", path, err)
 	}
 
 	typ := val.Type()
@@ -200,19 +191,13 @@ func (t toTerraform) FromString(ctx context.Context, schema *tfsdk.Schema, resou
 }
 
 func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
-	var typ tftypes.Type
+	attrType, err := schema.TypeAtTerraformPath(ctx, path)
 
-	if len(path.Steps()) == 0 {
-		typ = schema.AttributeType().TerraformType(ctx)
-	} else {
-		attrType, err := schema.TypeAtTerraformPath(ctx, path)
-
-		if err != nil {
-			return tftypes.Value{}, fmt.Errorf("getting attribute type at %s: %w", path, err)
-		}
-
-		typ = attrType.TerraformType(ctx)
+	if err != nil {
+		return tftypes.Value{}, fmt.Errorf("getting attribute type at %s: %w", path, err)
 	}
+
+	typ := attrType.TerraformType(ctx)
 
 	switch v := v.(type) {
 	//
