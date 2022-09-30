@@ -15,7 +15,7 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_accessanalyzer_analyzer", analyzerResourceType)
+	registry.AddResourceFactory("awscc_accessanalyzer_analyzer", analyzerResourceType)
 }
 
 // analyzerResourceType returns the Terraform awscc_accessanalyzer_analyzer resource type.

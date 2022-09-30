@@ -16,8 +16,8 @@ var resourceRegistrationClosed bool
 var resourceRegistry map[string]func(context.Context) (resource.Resource, error)
 var resourceRegistryMu sync.Mutex
 
-// AddDataSourceTypeFactory registers the specified data source type name and factory.
-func AddDataSourceTypeFactory(name string, factory func(context.Context) (datasource.DataSource, error)) {
+// AddDataSourceFactory registers the specified data source type name and factory.
+func AddDataSourceFactory(name string, factory func(context.Context) (datasource.DataSource, error)) {
 	dataSourceRegistryMu.Lock()
 	defer dataSourceRegistryMu.Unlock()
 
@@ -31,8 +31,8 @@ func AddDataSourceTypeFactory(name string, factory func(context.Context) (dataso
 	dataSourceRegistry[name] = factory
 }
 
-// AddResourceTypeFactory registers the specified resource type name and factory.
-func AddResourceTypeFactory(name string, factory func(context.Context) (resource.Resource, error)) {
+// AddResourceFactory registers the specified resource type name and factory.
+func AddResourceFactory(name string, factory func(context.Context) (resource.Resource, error)) {
 	resourceRegistryMu.Lock()
 	defer resourceRegistryMu.Unlock()
 
@@ -46,17 +46,6 @@ func AddResourceTypeFactory(name string, factory func(context.Context) (resource
 	resourceRegistry[name] = factory
 }
 
-// ResourceFactories returns the registered resource factories.
-// Resource registration is closed.
-func ResourceFactories() map[string]func(context.Context) (resource.Resource, error) {
-	resourceRegistryMu.Lock()
-	defer resourceRegistryMu.Unlock()
-
-	resourceRegistrationClosed = true
-
-	return resourceRegistry
-}
-
 // DataSourceFactories returns the registered data source factories.
 // Data Source registration is closed.
 func DataSourceFactories() map[string]func(context.Context) (datasource.DataSource, error) {
@@ -66,4 +55,15 @@ func DataSourceFactories() map[string]func(context.Context) (datasource.DataSour
 	dataSourceRegistrationClosed = true
 
 	return dataSourceRegistry
+}
+
+// ResourceFactories returns the registered resource factories.
+// Resource registration is closed.
+func ResourceFactories() map[string]func(context.Context) (resource.Resource, error) {
+	resourceRegistryMu.Lock()
+	defer resourceRegistryMu.Unlock()
+
+	resourceRegistrationClosed = true
+
+	return resourceRegistry
 }

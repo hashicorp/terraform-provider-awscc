@@ -13,7 +13,7 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_accessanalyzer_analyzer", analyzerDataSourceType)
+	registry.AddDataSourceFactory("awscc_accessanalyzer_analyzer", analyzerDataSourceType)
 }
 
 // analyzerDataSourceType returns the Terraform awscc_accessanalyzer_analyzer data source type.
