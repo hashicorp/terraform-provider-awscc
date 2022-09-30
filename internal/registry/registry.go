@@ -7,11 +7,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 )
 
-var dataSourceRegisrationClosed bool
+var dataSourceRegistrationClosed bool
 var dataSourceRegistry map[string]func(context.Context) (provider.DataSourceType, error)
 var dataSourceRegistryMu sync.Mutex
 
-var resourceRegisrationClosed bool
+var resourceRegistrationClosed bool
 var resourceRegistry map[string]func(context.Context) (provider.ResourceType, error)
 var resourceRegistryMu sync.Mutex
 
@@ -20,7 +20,7 @@ func AddDataSourceTypeFactory(name string, factory func(context.Context) (provid
 	dataSourceRegistryMu.Lock()
 	defer dataSourceRegistryMu.Unlock()
 
-	if dataSourceRegisrationClosed {
+	if dataSourceRegistrationClosed {
 		panic("Data Source registration is closed")
 	}
 
@@ -35,7 +35,7 @@ func AddResourceTypeFactory(name string, factory func(context.Context) (provider
 	resourceRegistryMu.Lock()
 	defer resourceRegistryMu.Unlock()
 
-	if resourceRegisrationClosed {
+	if resourceRegistrationClosed {
 		panic("Resource registration is closed")
 	}
 
@@ -51,7 +51,7 @@ func ResourceFactories() map[string]func(context.Context) (provider.ResourceType
 	resourceRegistryMu.Lock()
 	defer resourceRegistryMu.Unlock()
 
-	resourceRegisrationClosed = true
+	resourceRegistrationClosed = true
 
 	return resourceRegistry
 }
@@ -62,7 +62,7 @@ func DataSourceFactories() map[string]func(context.Context) (provider.DataSource
 	dataSourceRegistryMu.Lock()
 	defer dataSourceRegistryMu.Unlock()
 
-	dataSourceRegisrationClosed = true
+	dataSourceRegistrationClosed = true
 
 	return dataSourceRegistry
 }
