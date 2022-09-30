@@ -43,7 +43,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
 	opts = opts.WithTerraformSchema(schema)
 	
-    v, err := NewPluralDataSourceType(ctx, opts...)
+    v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

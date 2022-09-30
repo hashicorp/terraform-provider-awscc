@@ -43,7 +43,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (datasource.DataSource, err
 {{- end }}
 	})
 
-    v, err := NewSingularDataSourceType(ctx, opts...)
+    v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
