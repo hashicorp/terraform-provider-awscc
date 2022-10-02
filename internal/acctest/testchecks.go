@@ -64,7 +64,7 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 
 		ctx := getTestContext()
 
-		return tfcloudcontrol.DeleteResource(ctx, provider.CloudControlApiClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
+		return tfcloudcontrol.DeleteResource(ctx, provider.CloudControlAPIClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
 	}
 }
 
@@ -79,7 +79,7 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 
 		return existsFunc(shouldExist)(
 			ctx,
-			provider.CloudControlApiClient(ctx),
+			provider.CloudControlAPIClient(ctx),
 			provider.RoleARN(ctx),
 			td.CloudFormationResourceType,
 			td.TerraformResourceType,
