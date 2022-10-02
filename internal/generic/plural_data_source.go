@@ -18,12 +18,12 @@ import (
 )
 
 // pluralDataSourceType is a type alias for a data source type.
-type pluralDataSourceType genericDataSourceType
+type pluralDataSourceType genericDataSource
 
 // NewPluralDataSource returns a new plural DataSource from the specified variadic list of functional options.
 // It's public as it's called from generated code.
 func NewPluralDataSource(_ context.Context, optFns ...DataSourceOptionsFunc) (datasource.DataSource, error) {
-	dataSourceType := &genericDataSourceType{}
+	dataSourceType := &genericDataSource{}
 
 	for _, optFn := range optFns {
 		err := optFn(dataSourceType)
