@@ -47,10 +47,17 @@ func (p *providerData) RoleARN(_ context.Context) string {
 	return p.roleARN
 }
 
-type ccProvider struct{}
+type ccProvider struct {
+	providerData *providerData // Used in acceptance tests.
+}
 
 func New() provider.Provider {
 	return &ccProvider{}
+}
+
+// ProviderData is used in acceptance testing to get access to configured API client etc.
+func (p *ccProvider) ProviderData() any {
+	return p.providerData
 }
 
 func (p *ccProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
@@ -437,13 +444,14 @@ func (p *ccProvider) Configure(ctx context.Context, request provider.ConfigureRe
 		roleARN:     config.RoleARN.Value,
 	}
 
+	p.providerData = providerData
 	response.DataSourceData = providerData
 	response.ResourceData = providerData
 }
 
 func (p *ccProvider) Resources(ctx context.Context) []func() resource.Resource {
 	var diags diag.Diagnostics
-	var resources = make([]func() resource.Resource, len(registry.ResourceFactories()))
+	var resources = make([]func() resource.Resource, 0)
 
 	for name, factory := range registry.ResourceFactories() {
 		v, err := factory(ctx)
@@ -467,7 +475,7 @@ func (p *ccProvider) Resources(ctx context.Context) []func() resource.Resource {
 
 func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	var diags diag.Diagnostics
-	dataSources := make([]func() datasource.DataSource, len(registry.DataSourceFactories()))
+	dataSources := make([]func() datasource.DataSource, 0)
 
 	for name, factory := range registry.DataSourceFactories() {
 		v, err := factory(ctx)

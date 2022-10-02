@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
+	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-plugin-log/tfsdklog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
@@ -57,9 +58,10 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 			return fmt.Errorf("no ID is set")
 		}
 
-		provider, ok := td.provider.(tfcloudcontrol.Provider)
-		if !ok {
-			return fmt.Errorf("unable to convert %T to CloudControlApiProvider", td.provider)
+		provider, err := getCloudControlAPIProvider(td.provider)
+
+		if err != nil {
+			return err
 		}
 
 		ctx := getTestContext()
@@ -70,9 +72,10 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 
 func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 	return func(state *terraform.State) error {
-		provider, ok := td.provider.(tfcloudcontrol.Provider)
-		if !ok {
-			return fmt.Errorf("unable to convert %T to CloudControlApiProvider", td.provider)
+		provider, err := getCloudControlAPIProvider(td.provider)
+
+		if err != nil {
+			return err
 		}
 
 		ctx := getTestContext()
@@ -125,6 +128,16 @@ func existsFunc(shouldExist bool) func(context.Context, *cloudcontrol.Client, st
 			return nil
 		}
 	}
+}
+
+func getCloudControlAPIProvider(provider fwprovider.Provider) (tfcloudcontrol.Provider, error) {
+	if v, ok := provider.(interface{ ProviderData() any }); ok {
+		if v, ok := v.ProviderData().(tfcloudcontrol.Provider); ok {
+			return v, nil
+		}
+	}
+
+	return nil, fmt.Errorf("unable to convert %T to Cloud Control API Provider", provider)
 }
 
 func getTestContext() context.Context {

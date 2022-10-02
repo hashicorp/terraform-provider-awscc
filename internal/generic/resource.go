@@ -349,7 +349,9 @@ func (r *genericResource) GetSchema(_ context.Context) (tfsdk.Schema, diag.Diagn
 }
 
 func (r *genericResource) Configure(ctx context.Context, request resource.ConfigureRequest, response *resource.ConfigureResponse) {
-	r.provider = request.ProviderData.(tfcloudcontrol.Provider)
+	if v := request.ProviderData; v != nil {
+		r.provider = v.(tfcloudcontrol.Provider)
+	}
 }
 
 func (r *genericResource) Create(ctx context.Context, request resource.CreateRequest, response *resource.CreateResponse) {

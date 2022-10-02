@@ -55,7 +55,9 @@ func (sd *genericSingularDataSource) GetSchema(ctx context.Context) (tfsdk.Schem
 }
 
 func (sd *genericSingularDataSource) Configure(ctx context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) {
-	sd.provider = request.ProviderData.(tfcloudcontrol.Provider)
+	if v := request.ProviderData; v != nil {
+		sd.provider = v.(tfcloudcontrol.Provider)
+	}
 }
 
 func (sd *genericSingularDataSource) Read(ctx context.Context, request datasource.ReadRequest, response *datasource.ReadResponse) {

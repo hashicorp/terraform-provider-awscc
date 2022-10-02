@@ -55,7 +55,9 @@ func (pd *genericPluralDataSource) GetSchema(ctx context.Context) (tfsdk.Schema,
 }
 
 func (pd *genericPluralDataSource) Configure(ctx context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) {
-	pd.provider = request.ProviderData.(tfcloudcontrol.Provider)
+	if v := request.ProviderData; v != nil {
+		pd.provider = v.(tfcloudcontrol.Provider)
+	}
 }
 
 func (pd *genericPluralDataSource) Read(ctx context.Context, _ datasource.ReadRequest, response *datasource.ReadResponse) {
