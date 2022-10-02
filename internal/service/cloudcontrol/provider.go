@@ -9,7 +9,7 @@ import (
 // Provider is the interface implemented by AWS Cloud Control API client providers.
 type Provider interface {
 	// CloudControlApiClient returns an AWS Cloud Control API client.
-	CloudControlApiClient(context.Context) *cloudcontrol.Client
+	CloudControlAPIClient(context.Context) *cloudcontrol.Client
 
 	// Region returns and AWS Cloud Control API client's region
 	Region(ctx context.Context) string
