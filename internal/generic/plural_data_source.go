@@ -54,7 +54,7 @@ func (pd *genericPluralDataSource) GetSchema(_ context.Context) (tfsdk.Schema, d
 	return pd.tfSchema, nil
 }
 
-func (pd *genericPluralDataSource) Configure(_ context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) {
+func (pd *genericPluralDataSource) Configure(_ context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) { //nolint:unparam
 	if v := request.ProviderData; v != nil {
 		pd.provider = v.(tfcloudcontrol.Provider)
 	}

@@ -54,7 +54,7 @@ func (sd *genericSingularDataSource) GetSchema(_ context.Context) (tfsdk.Schema,
 	return sd.tfSchema, nil
 }
 
-func (sd *genericSingularDataSource) Configure(_ context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) {
+func (sd *genericSingularDataSource) Configure(_ context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) { //nolint:unparam
 	if v := request.ProviderData; v != nil {
 		sd.provider = v.(tfcloudcontrol.Provider)
 	}

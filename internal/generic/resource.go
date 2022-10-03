@@ -348,7 +348,7 @@ func (r *genericResource) GetSchema(_ context.Context) (tfsdk.Schema, diag.Diagn
 	return r.tfSchema, nil
 }
 
-func (r *genericResource) Configure(_ context.Context, request resource.ConfigureRequest, response *resource.ConfigureResponse) {
+func (r *genericResource) Configure(_ context.Context, request resource.ConfigureRequest, response *resource.ConfigureResponse) { //nolint:unparam
 	if v := request.ProviderData; v != nil {
 		r.provider = v.(tfcloudcontrol.Provider)
 	}
