@@ -46,15 +46,15 @@ type genericSingularDataSource struct {
 	provider tfcloudcontrol.Provider
 }
 
-func (sd *genericSingularDataSource) Metadata(ctx context.Context, request datasource.MetadataRequest, response *datasource.MetadataResponse) {
+func (sd *genericSingularDataSource) Metadata(_ context.Context, request datasource.MetadataRequest, response *datasource.MetadataResponse) {
 	response.TypeName = sd.tfTypeName
 }
 
-func (sd *genericSingularDataSource) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
+func (sd *genericSingularDataSource) GetSchema(_ context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return sd.tfSchema, nil
 }
 
-func (sd *genericSingularDataSource) Configure(ctx context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) {
+func (sd *genericSingularDataSource) Configure(_ context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) {
 	if v := request.ProviderData; v != nil {
 		sd.provider = v.(tfcloudcontrol.Provider)
 	}

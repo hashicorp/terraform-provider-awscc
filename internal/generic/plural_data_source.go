@@ -46,15 +46,15 @@ type genericPluralDataSource struct {
 	provider tfcloudcontrol.Provider
 }
 
-func (pd *genericPluralDataSource) Metadata(ctx context.Context, request datasource.MetadataRequest, response *datasource.MetadataResponse) {
+func (pd *genericPluralDataSource) Metadata(_ context.Context, request datasource.MetadataRequest, response *datasource.MetadataResponse) {
 	response.TypeName = pd.tfTypeName
 }
 
-func (pd *genericPluralDataSource) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
+func (pd *genericPluralDataSource) GetSchema(_ context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return pd.tfSchema, nil
 }
 
-func (pd *genericPluralDataSource) Configure(ctx context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) {
+func (pd *genericPluralDataSource) Configure(_ context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) {
 	if v := request.ProviderData; v != nil {
 		pd.provider = v.(tfcloudcontrol.Provider)
 	}

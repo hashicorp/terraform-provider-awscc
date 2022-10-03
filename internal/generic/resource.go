@@ -340,7 +340,7 @@ var (
 	idAttributePath = path.Root("id")
 )
 
-func (r *genericResource) Metadata(ctx context.Context, request resource.MetadataRequest, response *resource.MetadataResponse) {
+func (r *genericResource) Metadata(_ context.Context, request resource.MetadataRequest, response *resource.MetadataResponse) {
 	response.TypeName = r.tfTypeName
 }
 
@@ -348,7 +348,7 @@ func (r *genericResource) GetSchema(_ context.Context) (tfsdk.Schema, diag.Diagn
 	return r.tfSchema, nil
 }
 
-func (r *genericResource) Configure(ctx context.Context, request resource.ConfigureRequest, response *resource.ConfigureResponse) {
+func (r *genericResource) Configure(_ context.Context, request resource.ConfigureRequest, response *resource.ConfigureResponse) {
 	if v := request.ProviderData; v != nil {
 		r.provider = v.(tfcloudcontrol.Provider)
 	}
