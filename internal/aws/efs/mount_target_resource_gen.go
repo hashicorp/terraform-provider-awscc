@@ -5,7 +5,6 @@ package efs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_efs_mount_target", mountTargetResourceType)
+	registry.AddResourceFactory("awscc_efs_mount_target", mountTargetResource)
 }
 
-// mountTargetResourceType returns the Terraform awscc_efs_mount_target resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EFS::MountTarget resource type.
-func mountTargetResourceType(ctx context.Context) (provider.ResourceType, error) {
+// mountTargetResource returns the Terraform awscc_efs_mount_target resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EFS::MountTarget resource.
+func mountTargetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"file_system_id": {
 			// Property: FileSystemId
@@ -93,7 +92,7 @@ func mountTargetResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EFS::MountTarget").WithTerraformTypeName("awscc_efs_mount_target")
 	opts = opts.WithTerraformSchema(schema)
@@ -110,11 +109,11 @@ func mountTargetResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

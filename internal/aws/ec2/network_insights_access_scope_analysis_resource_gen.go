@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_network_insights_access_scope_analysis", networkInsightsAccessScopeAnalysisResourceType)
+	registry.AddResourceFactory("awscc_ec2_network_insights_access_scope_analysis", networkInsightsAccessScopeAnalysisResource)
 }
 
-// networkInsightsAccessScopeAnalysisResourceType returns the Terraform awscc_ec2_network_insights_access_scope_analysis resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAccessScopeAnalysis resource type.
-func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (provider.ResourceType, error) {
+// networkInsightsAccessScopeAnalysisResource returns the Terraform awscc_ec2_network_insights_access_scope_analysis resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::NetworkInsightsAccessScopeAnalysis resource.
+func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"analyzed_eni_count": {
 			// Property: AnalyzedEniCount
@@ -203,7 +202,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (provid
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsAccessScopeAnalysis").WithTerraformTypeName("awscc_ec2_network_insights_access_scope_analysis")
 	opts = opts.WithTerraformSchema(schema)
@@ -227,11 +226,11 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (provid
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

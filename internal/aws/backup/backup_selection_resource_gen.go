@@ -5,7 +5,6 @@ package backup
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_backup_backup_selection", backupSelectionResourceType)
+	registry.AddResourceFactory("awscc_backup_backup_selection", backupSelectionResource)
 }
 
-// backupSelectionResourceType returns the Terraform awscc_backup_backup_selection resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupSelection resource type.
-func backupSelectionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// backupSelectionResource returns the Terraform awscc_backup_backup_selection resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Backup::BackupSelection resource.
+func backupSelectionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"backup_plan_id": {
 			// Property: BackupPlanId
@@ -402,7 +401,7 @@ func backupSelectionResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupSelection").WithTerraformTypeName("awscc_backup_backup_selection")
 	opts = opts.WithTerraformSchema(schema)
@@ -431,11 +430,11 @@ func backupSelectionResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

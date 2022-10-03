@@ -5,7 +5,6 @@ package imagebuilder
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_imagebuilder_distribution_configuration", distributionConfigurationResourceType)
+	registry.AddResourceFactory("awscc_imagebuilder_distribution_configuration", distributionConfigurationResource)
 }
 
-// distributionConfigurationResourceType returns the Terraform awscc_imagebuilder_distribution_configuration resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::DistributionConfiguration resource type.
-func distributionConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// distributionConfigurationResource returns the Terraform awscc_imagebuilder_distribution_configuration resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ImageBuilder::DistributionConfiguration resource.
+func distributionConfigurationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -693,7 +692,7 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::DistributionConfiguration").WithTerraformTypeName("awscc_imagebuilder_distribution_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -738,11 +737,11 @@ func distributionConfigurationResourceType(ctx context.Context) (provider.Resour
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

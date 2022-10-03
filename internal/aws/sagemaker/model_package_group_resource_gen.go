@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_sagemaker_model_package_group", modelPackageGroupResourceType)
+	registry.AddResourceFactory("awscc_sagemaker_model_package_group", modelPackageGroupResource)
 }
 
-// modelPackageGroupResourceType returns the Terraform awscc_sagemaker_model_package_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelPackageGroup resource type.
-func modelPackageGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// modelPackageGroupResource returns the Terraform awscc_sagemaker_model_package_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SageMaker::ModelPackageGroup resource.
+func modelPackageGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -214,7 +213,7 @@ func modelPackageGroupResourceType(ctx context.Context) (provider.ResourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackageGroup").WithTerraformTypeName("awscc_sagemaker_model_package_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -235,11 +234,11 @@ func modelPackageGroupResourceType(ctx context.Context) (provider.ResourceType, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

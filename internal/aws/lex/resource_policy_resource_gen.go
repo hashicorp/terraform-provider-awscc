@@ -5,7 +5,6 @@ package lex
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lex_resource_policy", resourcePolicyResourceType)
+	registry.AddResourceFactory("awscc_lex_resource_policy", resourcePolicyResource)
 }
 
-// resourcePolicyResourceType returns the Terraform awscc_lex_resource_policy resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Lex::ResourcePolicy resource type.
-func resourcePolicyResourceType(ctx context.Context) (provider.ResourceType, error) {
+// resourcePolicyResource returns the Terraform awscc_lex_resource_policy resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Lex::ResourcePolicy resource.
+func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -88,7 +87,7 @@ func resourcePolicyResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lex::ResourcePolicy").WithTerraformTypeName("awscc_lex_resource_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -104,11 +103,11 @@ func resourcePolicyResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

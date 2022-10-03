@@ -5,7 +5,7 @@ package rds
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_rds_global_cluster", globalClusterDataSourceType)
+	registry.AddDataSourceFactory("awscc_rds_global_cluster", globalClusterDataSource)
 }
 
-// globalClusterDataSourceType returns the Terraform awscc_rds_global_cluster data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::RDS::GlobalCluster resource type.
-func globalClusterDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// globalClusterDataSource returns the Terraform awscc_rds_global_cluster data source.
+// This Terraform data source corresponds to the CloudFormation AWS::RDS::GlobalCluster resource.
+func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"deletion_protection": {
 			// Property: DeletionProtection
@@ -110,7 +110,7 @@ func globalClusterDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::GlobalCluster").WithTerraformTypeName("awscc_rds_global_cluster")
 	opts = opts.WithTerraformSchema(schema)
@@ -123,11 +123,11 @@ func globalClusterDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		"storage_encrypted":            "StorageEncrypted",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

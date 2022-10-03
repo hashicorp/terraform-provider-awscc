@@ -5,7 +5,7 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_networkmanager_core_network", coreNetworkDataSourceType)
+	registry.AddDataSourceFactory("awscc_networkmanager_core_network", coreNetworkDataSource)
 }
 
-// coreNetworkDataSourceType returns the Terraform awscc_networkmanager_core_network data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::NetworkManager::CoreNetwork resource type.
-func coreNetworkDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// coreNetworkDataSource returns the Terraform awscc_networkmanager_core_network data source.
+// This Terraform data source corresponds to the CloudFormation AWS::NetworkManager::CoreNetwork resource.
+func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"core_network_arn": {
 			// Property: CoreNetworkArn
@@ -279,7 +279,7 @@ func coreNetworkDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::CoreNetwork").WithTerraformTypeName("awscc_networkmanager_core_network")
 	opts = opts.WithTerraformSchema(schema)
@@ -305,11 +305,11 @@ func coreNetworkDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		"value":              "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

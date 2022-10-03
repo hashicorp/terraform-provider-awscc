@@ -5,7 +5,7 @@ package location
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_location_place_indices", placeIndicesDataSourceType)
+	registry.AddDataSourceFactory("awscc_location_place_indices", placeIndicesDataSource)
 }
 
-// placeIndicesDataSourceType returns the Terraform awscc_location_place_indices data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Location::PlaceIndex resource type.
-func placeIndicesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// placeIndicesDataSource returns the Terraform awscc_location_place_indices data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Location::PlaceIndex resource.
+func placeIndicesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func placeIndicesDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Location::PlaceIndex").WithTerraformTypeName("awscc_location_place_indices")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

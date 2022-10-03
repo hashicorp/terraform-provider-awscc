@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_vpcs", vPCSDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_vpcs", vPCSDataSource)
 }
 
-// vPCSDataSourceType returns the Terraform awscc_ec2_vpcs data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::VPC resource type.
-func vPCSDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// vPCSDataSource returns the Terraform awscc_ec2_vpcs data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::VPC resource.
+func vPCSDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func vPCSDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPC").WithTerraformTypeName("awscc_ec2_vpcs")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

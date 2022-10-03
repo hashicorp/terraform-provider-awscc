@@ -5,7 +5,7 @@ package route53
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_route53_cidr_collection", cidrCollectionDataSourceType)
+	registry.AddDataSourceFactory("awscc_route53_cidr_collection", cidrCollectionDataSource)
 }
 
-// cidrCollectionDataSourceType returns the Terraform awscc_route53_cidr_collection data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Route53::CidrCollection resource type.
-func cidrCollectionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// cidrCollectionDataSource returns the Terraform awscc_route53_cidr_collection data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Route53::CidrCollection resource.
+func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -123,7 +123,7 @@ func cidrCollectionDataSourceType(ctx context.Context) (provider.DataSourceType,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::CidrCollection").WithTerraformTypeName("awscc_route53_cidr_collection")
 	opts = opts.WithTerraformSchema(schema)
@@ -136,11 +136,11 @@ func cidrCollectionDataSourceType(ctx context.Context) (provider.DataSourceType,
 		"name":          "Name",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

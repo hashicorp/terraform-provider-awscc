@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_connect_user_hierarchy_group", userHierarchyGroupResourceType)
+	registry.AddResourceFactory("awscc_connect_user_hierarchy_group", userHierarchyGroupResource)
 }
 
-// userHierarchyGroupResourceType returns the Terraform awscc_connect_user_hierarchy_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Connect::UserHierarchyGroup resource type.
-func userHierarchyGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// userHierarchyGroupResource returns the Terraform awscc_connect_user_hierarchy_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Connect::UserHierarchyGroup resource.
+func userHierarchyGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"instance_arn": {
 			// Property: InstanceArn
@@ -106,7 +105,7 @@ func userHierarchyGroupResourceType(ctx context.Context) (provider.ResourceType,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::UserHierarchyGroup").WithTerraformTypeName("awscc_connect_user_hierarchy_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -122,11 +121,11 @@ func userHierarchyGroupResourceType(ctx context.Context) (provider.ResourceType,
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

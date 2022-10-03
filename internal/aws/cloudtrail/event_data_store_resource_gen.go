@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudtrail_event_data_store", eventDataStoreResourceType)
+	registry.AddResourceFactory("awscc_cloudtrail_event_data_store", eventDataStoreResource)
 }
 
-// eventDataStoreResourceType returns the Terraform awscc_cloudtrail_event_data_store resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudTrail::EventDataStore resource type.
-func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, error) {
+// eventDataStoreResource returns the Terraform awscc_cloudtrail_event_data_store resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudTrail::EventDataStore resource.
+func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"advanced_event_selectors": {
 			// Property: AdvancedEventSelectors
@@ -484,7 +483,7 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudTrail::EventDataStore").WithTerraformTypeName("awscc_cloudtrail_event_data_store")
 	opts = opts.WithTerraformSchema(schema)
@@ -517,11 +516,11 @@ func eventDataStoreResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

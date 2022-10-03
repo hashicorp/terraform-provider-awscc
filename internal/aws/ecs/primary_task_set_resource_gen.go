@@ -5,7 +5,6 @@ package ecs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ecs_primary_task_set", primaryTaskSetResourceType)
+	registry.AddResourceFactory("awscc_ecs_primary_task_set", primaryTaskSetResource)
 }
 
-// primaryTaskSetResourceType returns the Terraform awscc_ecs_primary_task_set resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ECS::PrimaryTaskSet resource type.
-func primaryTaskSetResourceType(ctx context.Context) (provider.ResourceType, error) {
+// primaryTaskSetResource returns the Terraform awscc_ecs_primary_task_set resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ECS::PrimaryTaskSet resource.
+func primaryTaskSetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cluster": {
 			// Property: Cluster
@@ -77,7 +76,7 @@ func primaryTaskSetResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::PrimaryTaskSet").WithTerraformTypeName("awscc_ecs_primary_task_set")
 	opts = opts.WithTerraformSchema(schema)
@@ -92,11 +91,11 @@ func primaryTaskSetResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

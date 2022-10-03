@@ -5,7 +5,6 @@ package inspector
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_inspector_resource_group", resourceGroupResourceType)
+	registry.AddResourceFactory("awscc_inspector_resource_group", resourceGroupResource)
 }
 
-// resourceGroupResourceType returns the Terraform awscc_inspector_resource_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Inspector::ResourceGroup resource type.
-func resourceGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// resourceGroupResource returns the Terraform awscc_inspector_resource_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Inspector::ResourceGroup resource.
+func resourceGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -92,7 +91,7 @@ func resourceGroupResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Inspector::ResourceGroup").WithTerraformTypeName("awscc_inspector_resource_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -108,11 +107,11 @@ func resourceGroupResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

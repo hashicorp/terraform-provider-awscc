@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_dhcp_options", dHCPOptionsResourceType)
+	registry.AddResourceFactory("awscc_ec2_dhcp_options", dHCPOptionsResource)
 }
 
-// dHCPOptionsResourceType returns the Terraform awscc_ec2_dhcp_options resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::DHCPOptions resource type.
-func dHCPOptionsResourceType(ctx context.Context) (provider.ResourceType, error) {
+// dHCPOptionsResource returns the Terraform awscc_ec2_dhcp_options resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::DHCPOptions resource.
+func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"dhcp_options_id": {
 			// Property: DhcpOptionsId
@@ -206,7 +205,7 @@ func dHCPOptionsResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::DHCPOptions").WithTerraformTypeName("awscc_ec2_dhcp_options")
 	opts = opts.WithTerraformSchema(schema)
@@ -227,11 +226,11 @@ func dHCPOptionsResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

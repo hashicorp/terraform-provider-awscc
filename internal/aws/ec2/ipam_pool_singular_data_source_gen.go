@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_ipam_pool", iPAMPoolDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_ipam_pool", iPAMPoolDataSource)
 }
 
-// iPAMPoolDataSourceType returns the Terraform awscc_ec2_ipam_pool data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::IPAMPool resource type.
-func iPAMPoolDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// iPAMPoolDataSource returns the Terraform awscc_ec2_ipam_pool data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::IPAMPool resource.
+func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"address_family": {
 			// Property: AddressFamily
@@ -394,7 +394,7 @@ func iPAMPoolDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::IPAMPool").WithTerraformTypeName("awscc_ec2_ipam_pool")
 	opts = opts.WithTerraformSchema(schema)
@@ -426,11 +426,11 @@ func iPAMPoolDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		"value":                             "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

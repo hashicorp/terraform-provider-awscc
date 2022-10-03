@@ -5,7 +5,6 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_networkmanager_customer_gateway_association", customerGatewayAssociationResourceType)
+	registry.AddResourceFactory("awscc_networkmanager_customer_gateway_association", customerGatewayAssociationResource)
 }
 
-// customerGatewayAssociationResourceType returns the Terraform awscc_networkmanager_customer_gateway_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::CustomerGatewayAssociation resource type.
-func customerGatewayAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// customerGatewayAssociationResource returns the Terraform awscc_networkmanager_customer_gateway_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::NetworkManager::CustomerGatewayAssociation resource.
+func customerGatewayAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"customer_gateway_arn": {
 			// Property: CustomerGatewayArn
@@ -96,7 +95,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (provider.Resou
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::CustomerGatewayAssociation").WithTerraformTypeName("awscc_networkmanager_customer_gateway_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -112,11 +111,11 @@ func customerGatewayAssociationResourceType(ctx context.Context) (provider.Resou
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

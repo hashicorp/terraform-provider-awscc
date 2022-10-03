@@ -5,7 +5,7 @@ package route53recoverycontrol
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_route53recoverycontrol_safety_rule", safetyRuleDataSourceType)
+	registry.AddDataSourceFactory("awscc_route53recoverycontrol_safety_rule", safetyRuleDataSource)
 }
 
-// safetyRuleDataSourceType returns the Terraform awscc_route53recoverycontrol_safety_rule data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Route53RecoveryControl::SafetyRule resource type.
-func safetyRuleDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// safetyRuleDataSource returns the Terraform awscc_route53recoverycontrol_safety_rule data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Route53RecoveryControl::SafetyRule resource.
+func safetyRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"assertion_rule": {
 			// Property: AssertionRule
@@ -289,7 +289,7 @@ func safetyRuleDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::SafetyRule").WithTerraformTypeName("awscc_route53recoverycontrol_safety_rule")
 	opts = opts.WithTerraformSchema(schema)
@@ -313,11 +313,11 @@ func safetyRuleDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		"wait_period_ms":    "WaitPeriodMs",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

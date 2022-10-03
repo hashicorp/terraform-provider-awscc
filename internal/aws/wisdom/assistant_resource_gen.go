@@ -5,7 +5,6 @@ package wisdom
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_wisdom_assistant", assistantResourceType)
+	registry.AddResourceFactory("awscc_wisdom_assistant", assistantResource)
 }
 
-// assistantResourceType returns the Terraform awscc_wisdom_assistant resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Wisdom::Assistant resource type.
-func assistantResourceType(ctx context.Context) (provider.ResourceType, error) {
+// assistantResource returns the Terraform awscc_wisdom_assistant resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Wisdom::Assistant resource.
+func assistantResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"assistant_arn": {
 			// Property: AssistantArn
@@ -214,7 +213,7 @@ func assistantResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::Assistant").WithTerraformTypeName("awscc_wisdom_assistant")
 	opts = opts.WithTerraformSchema(schema)
@@ -236,11 +235,11 @@ func assistantResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

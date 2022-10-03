@@ -5,7 +5,7 @@ package iam
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iam_saml_provider", sAMLProviderDataSourceType)
+	registry.AddDataSourceFactory("awscc_iam_saml_provider", sAMLProviderDataSource)
 }
 
-// sAMLProviderDataSourceType returns the Terraform awscc_iam_saml_provider data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IAM::SAMLProvider resource type.
-func sAMLProviderDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// sAMLProviderDataSource returns the Terraform awscc_iam_saml_provider data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IAM::SAMLProvider resource.
+func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -119,7 +119,7 @@ func sAMLProviderDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IAM::SAMLProvider").WithTerraformTypeName("awscc_iam_saml_provider")
 	opts = opts.WithTerraformSchema(schema)
@@ -132,11 +132,11 @@ func sAMLProviderDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		"value":                  "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

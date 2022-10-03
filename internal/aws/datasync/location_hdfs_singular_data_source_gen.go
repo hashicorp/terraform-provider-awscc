@@ -5,7 +5,7 @@ package datasync
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_hdfs", locationHDFSDataSourceType)
+	registry.AddDataSourceFactory("awscc_datasync_location_hdfs", locationHDFSDataSource)
 }
 
-// locationHDFSDataSourceType returns the Terraform awscc_datasync_location_hdfs data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationHDFS resource type.
-func locationHDFSDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// locationHDFSDataSource returns the Terraform awscc_datasync_location_hdfs data source.
+// This Terraform data source corresponds to the CloudFormation AWS::DataSync::LocationHDFS resource.
+func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"agent_arns": {
 			// Property: AgentArns
@@ -354,7 +354,7 @@ func locationHDFSDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationHDFS").WithTerraformTypeName("awscc_datasync_location_hdfs")
 	opts = opts.WithTerraformSchema(schema)
@@ -382,11 +382,11 @@ func locationHDFSDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		"value":                    "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

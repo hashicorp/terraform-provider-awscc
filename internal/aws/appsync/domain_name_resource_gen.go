@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_appsync_domain_name", domainNameResourceType)
+	registry.AddResourceFactory("awscc_appsync_domain_name", domainNameResource)
 }
 
-// domainNameResourceType returns the Terraform awscc_appsync_domain_name resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AppSync::DomainName resource type.
-func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) {
+// domainNameResource returns the Terraform awscc_appsync_domain_name resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AppSync::DomainName resource.
+func domainNameResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"app_sync_domain_name": {
 			// Property: AppSyncDomainName
@@ -120,7 +119,7 @@ func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppSync::DomainName").WithTerraformTypeName("awscc_appsync_domain_name")
 	opts = opts.WithTerraformSchema(schema)
@@ -137,11 +136,11 @@ func domainNameResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

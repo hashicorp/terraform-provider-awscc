@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_redshift_endpoint_authorization", endpointAuthorizationResourceType)
+	registry.AddResourceFactory("awscc_redshift_endpoint_authorization", endpointAuthorizationResource)
 }
 
-// endpointAuthorizationResourceType returns the Terraform awscc_redshift_endpoint_authorization resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Redshift::EndpointAuthorization resource type.
-func endpointAuthorizationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// endpointAuthorizationResource returns the Terraform awscc_redshift_endpoint_authorization resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Redshift::EndpointAuthorization resource.
+func endpointAuthorizationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"account": {
 			// Property: Account
@@ -233,7 +232,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (provider.ResourceTy
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::EndpointAuthorization").WithTerraformTypeName("awscc_redshift_endpoint_authorization")
 	opts = opts.WithTerraformSchema(schema)
@@ -260,11 +259,11 @@ func endpointAuthorizationResourceType(ctx context.Context) (provider.ResourceTy
 
 	opts = opts.WithUpdateTimeoutInMinutes(60)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

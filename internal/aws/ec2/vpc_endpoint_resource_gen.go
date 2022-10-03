@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_vpc_endpoint", vPCEndpointResourceType)
+	registry.AddResourceFactory("awscc_ec2_vpc_endpoint", vPCEndpointResource)
 }
 
-// vPCEndpointResourceType returns the Terraform awscc_ec2_vpc_endpoint resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::VPCEndpoint resource type.
-func vPCEndpointResourceType(ctx context.Context) (provider.ResourceType, error) {
+// vPCEndpointResource returns the Terraform awscc_ec2_vpc_endpoint resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::VPCEndpoint resource.
+func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_timestamp": {
 			// Property: CreationTimestamp
@@ -210,7 +209,7 @@ func vPCEndpointResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCEndpoint").WithTerraformTypeName("awscc_ec2_vpc_endpoint")
 	opts = opts.WithTerraformSchema(schema)
@@ -234,11 +233,11 @@ func vPCEndpointResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

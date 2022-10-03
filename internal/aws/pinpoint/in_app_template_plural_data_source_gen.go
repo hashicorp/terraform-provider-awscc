@@ -5,7 +5,7 @@ package pinpoint
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_pinpoint_in_app_templates", inAppTemplatesDataSourceType)
+	registry.AddDataSourceFactory("awscc_pinpoint_in_app_templates", inAppTemplatesDataSource)
 }
 
-// inAppTemplatesDataSourceType returns the Terraform awscc_pinpoint_in_app_templates data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Pinpoint::InAppTemplate resource type.
-func inAppTemplatesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// inAppTemplatesDataSource returns the Terraform awscc_pinpoint_in_app_templates data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Pinpoint::InAppTemplate resource.
+func inAppTemplatesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func inAppTemplatesDataSourceType(ctx context.Context) (provider.DataSourceType,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Pinpoint::InAppTemplate").WithTerraformTypeName("awscc_pinpoint_in_app_templates")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

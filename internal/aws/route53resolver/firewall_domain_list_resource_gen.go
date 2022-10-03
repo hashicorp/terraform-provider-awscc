@@ -5,7 +5,6 @@ package route53resolver
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53resolver_firewall_domain_list", firewallDomainListResourceType)
+	registry.AddResourceFactory("awscc_route53resolver_firewall_domain_list", firewallDomainListResource)
 }
 
-// firewallDomainListResourceType returns the Terraform awscc_route53resolver_firewall_domain_list resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::FirewallDomainList resource type.
-func firewallDomainListResourceType(ctx context.Context) (provider.ResourceType, error) {
+// firewallDomainListResource returns the Terraform awscc_route53resolver_firewall_domain_list resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53Resolver::FirewallDomainList resource.
+func firewallDomainListResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -308,7 +307,7 @@ func firewallDomainListResourceType(ctx context.Context) (provider.ResourceType,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallDomainList").WithTerraformTypeName("awscc_route53resolver_firewall_domain_list")
 	opts = opts.WithTerraformSchema(schema)
@@ -339,11 +338,11 @@ func firewallDomainListResourceType(ctx context.Context) (provider.ResourceType,
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

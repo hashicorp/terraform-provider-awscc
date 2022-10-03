@@ -5,7 +5,7 @@ package appsync
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_appsync_domain_name_api_association", domainNameApiAssociationDataSourceType)
+	registry.AddDataSourceFactory("awscc_appsync_domain_name_api_association", domainNameApiAssociationDataSource)
 }
 
-// domainNameApiAssociationDataSourceType returns the Terraform awscc_appsync_domain_name_api_association data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::AppSync::DomainNameApiAssociation resource type.
-func domainNameApiAssociationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// domainNameApiAssociationDataSource returns the Terraform awscc_appsync_domain_name_api_association data source.
+// This Terraform data source corresponds to the CloudFormation AWS::AppSync::DomainNameApiAssociation resource.
+func domainNameApiAssociationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"api_association_identifier": {
 			// Property: ApiAssociationIdentifier
@@ -64,7 +64,7 @@ func domainNameApiAssociationDataSourceType(ctx context.Context) (provider.DataS
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppSync::DomainNameApiAssociation").WithTerraformTypeName("awscc_appsync_domain_name_api_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -74,11 +74,11 @@ func domainNameApiAssociationDataSourceType(ctx context.Context) (provider.DataS
 		"domain_name":                "DomainName",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

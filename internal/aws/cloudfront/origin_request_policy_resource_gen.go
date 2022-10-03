@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudfront_origin_request_policy", originRequestPolicyResourceType)
+	registry.AddResourceFactory("awscc_cloudfront_origin_request_policy", originRequestPolicyResource)
 }
 
-// originRequestPolicyResourceType returns the Terraform awscc_cloudfront_origin_request_policy resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::OriginRequestPolicy resource type.
-func originRequestPolicyResourceType(ctx context.Context) (provider.ResourceType, error) {
+// originRequestPolicyResource returns the Terraform awscc_cloudfront_origin_request_policy resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudFront::OriginRequestPolicy resource.
+func originRequestPolicyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -231,7 +230,7 @@ func originRequestPolicyResourceType(ctx context.Context) (provider.ResourceType
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::OriginRequestPolicy").WithTerraformTypeName("awscc_cloudfront_origin_request_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -257,11 +256,11 @@ func originRequestPolicyResourceType(ctx context.Context) (provider.ResourceType
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

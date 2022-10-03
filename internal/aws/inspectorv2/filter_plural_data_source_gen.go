@@ -5,7 +5,7 @@ package inspectorv2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_inspectorv2_filters", filtersDataSourceType)
+	registry.AddDataSourceFactory("awscc_inspectorv2_filters", filtersDataSource)
 }
 
-// filtersDataSourceType returns the Terraform awscc_inspectorv2_filters data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::InspectorV2::Filter resource type.
-func filtersDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// filtersDataSource returns the Terraform awscc_inspectorv2_filters data source.
+// This Terraform data source corresponds to the CloudFormation AWS::InspectorV2::Filter resource.
+func filtersDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func filtersDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::InspectorV2::Filter").WithTerraformTypeName("awscc_inspectorv2_filters")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

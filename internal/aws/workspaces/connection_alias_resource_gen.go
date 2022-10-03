@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_workspaces_connection_alias", connectionAliasResourceType)
+	registry.AddResourceFactory("awscc_workspaces_connection_alias", connectionAliasResource)
 }
 
-// connectionAliasResourceType returns the Terraform awscc_workspaces_connection_alias resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::WorkSpaces::ConnectionAlias resource type.
-func connectionAliasResourceType(ctx context.Context) (provider.ResourceType, error) {
+// connectionAliasResource returns the Terraform awscc_workspaces_connection_alias resource.
+// This Terraform resource corresponds to the CloudFormation AWS::WorkSpaces::ConnectionAlias resource.
+func connectionAliasResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alias_id": {
 			// Property: AliasId
@@ -236,7 +235,7 @@ func connectionAliasResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::WorkSpaces::ConnectionAlias").WithTerraformTypeName("awscc_workspaces_connection_alias")
 	opts = opts.WithTerraformSchema(schema)
@@ -259,11 +258,11 @@ func connectionAliasResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

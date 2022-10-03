@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iot_scheduled_audit", scheduledAuditResourceType)
+	registry.AddResourceFactory("awscc_iot_scheduled_audit", scheduledAuditResource)
 }
 
-// scheduledAuditResourceType returns the Terraform awscc_iot_scheduled_audit resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoT::ScheduledAudit resource type.
-func scheduledAuditResourceType(ctx context.Context) (provider.ResourceType, error) {
+// scheduledAuditResource returns the Terraform awscc_iot_scheduled_audit resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoT::ScheduledAudit resource.
+func scheduledAuditResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"day_of_month": {
 			// Property: DayOfMonth
@@ -239,7 +238,7 @@ func scheduledAuditResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::ScheduledAudit").WithTerraformTypeName("awscc_iot_scheduled_audit")
 	opts = opts.WithTerraformSchema(schema)
@@ -260,11 +259,11 @@ func scheduledAuditResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

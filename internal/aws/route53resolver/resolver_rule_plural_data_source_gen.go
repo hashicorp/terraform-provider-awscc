@@ -5,7 +5,7 @@ package route53resolver
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_route53resolver_resolver_rules", resolverRulesDataSourceType)
+	registry.AddDataSourceFactory("awscc_route53resolver_resolver_rules", resolverRulesDataSource)
 }
 
-// resolverRulesDataSourceType returns the Terraform awscc_route53resolver_resolver_rules data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Route53Resolver::ResolverRule resource type.
-func resolverRulesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// resolverRulesDataSource returns the Terraform awscc_route53resolver_resolver_rules data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Route53Resolver::ResolverRule resource.
+func resolverRulesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func resolverRulesDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverRule").WithTerraformTypeName("awscc_route53resolver_resolver_rules")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

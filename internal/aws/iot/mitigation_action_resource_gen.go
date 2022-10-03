@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iot_mitigation_action", mitigationActionResourceType)
+	registry.AddResourceFactory("awscc_iot_mitigation_action", mitigationActionResource)
 }
 
-// mitigationActionResourceType returns the Terraform awscc_iot_mitigation_action resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoT::MitigationAction resource type.
-func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// mitigationActionResource returns the Terraform awscc_iot_mitigation_action resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoT::MitigationAction resource.
+func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"action_name": {
 			// Property: ActionName
@@ -456,7 +455,7 @@ func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::MitigationAction").WithTerraformTypeName("awscc_iot_mitigation_action")
 	opts = opts.WithTerraformSchema(schema)
@@ -489,11 +488,11 @@ func mitigationActionResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

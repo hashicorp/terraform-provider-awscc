@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_appsync_domain_name_api_association", domainNameApiAssociationResourceType)
+	registry.AddResourceFactory("awscc_appsync_domain_name_api_association", domainNameApiAssociationResource)
 }
 
-// domainNameApiAssociationResourceType returns the Terraform awscc_appsync_domain_name_api_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AppSync::DomainNameApiAssociation resource type.
-func domainNameApiAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// domainNameApiAssociationResource returns the Terraform awscc_appsync_domain_name_api_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AppSync::DomainNameApiAssociation resource.
+func domainNameApiAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"api_association_identifier": {
 			// Property: ApiAssociationIdentifier
@@ -80,7 +79,7 @@ func domainNameApiAssociationResourceType(ctx context.Context) (provider.Resourc
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppSync::DomainNameApiAssociation").WithTerraformTypeName("awscc_appsync_domain_name_api_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -95,11 +94,11 @@ func domainNameApiAssociationResourceType(ctx context.Context) (provider.Resourc
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

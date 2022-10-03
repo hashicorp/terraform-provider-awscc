@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lookoutequipment_inference_scheduler", inferenceSchedulerResourceType)
+	registry.AddResourceFactory("awscc_lookoutequipment_inference_scheduler", inferenceSchedulerResource)
 }
 
-// inferenceSchedulerResourceType returns the Terraform awscc_lookoutequipment_inference_scheduler resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::LookoutEquipment::InferenceScheduler resource type.
-func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType, error) {
+// inferenceSchedulerResource returns the Terraform awscc_lookoutequipment_inference_scheduler resource.
+// This Terraform resource corresponds to the CloudFormation AWS::LookoutEquipment::InferenceScheduler resource.
+func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"data_delay_offset_in_minutes": {
 			// Property: DataDelayOffsetInMinutes
@@ -495,7 +494,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LookoutEquipment::InferenceScheduler").WithTerraformTypeName("awscc_lookoutequipment_inference_scheduler")
 	opts = opts.WithTerraformSchema(schema)
@@ -528,11 +527,11 @@ func inferenceSchedulerResourceType(ctx context.Context) (provider.ResourceType,
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

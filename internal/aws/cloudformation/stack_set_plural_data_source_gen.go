@@ -5,7 +5,7 @@ package cloudformation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudformation_stack_sets", stackSetsDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudformation_stack_sets", stackSetsDataSource)
 }
 
-// stackSetsDataSourceType returns the Terraform awscc_cloudformation_stack_sets data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudFormation::StackSet resource type.
-func stackSetsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// stackSetsDataSource returns the Terraform awscc_cloudformation_stack_sets data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudFormation::StackSet resource.
+func stackSetsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func stackSetsDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::StackSet").WithTerraformTypeName("awscc_cloudformation_stack_sets")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

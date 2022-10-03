@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_wisdom_assistant_association", assistantAssociationResourceType)
+	registry.AddResourceFactory("awscc_wisdom_assistant_association", assistantAssociationResource)
 }
 
-// assistantAssociationResourceType returns the Terraform awscc_wisdom_assistant_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Wisdom::AssistantAssociation resource type.
-func assistantAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// assistantAssociationResource returns the Terraform awscc_wisdom_assistant_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Wisdom::AssistantAssociation resource.
+func assistantAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"assistant_arn": {
 			// Property: AssistantArn
@@ -204,7 +203,7 @@ func assistantAssociationResourceType(ctx context.Context) (provider.ResourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::AssistantAssociation").WithTerraformTypeName("awscc_wisdom_assistant_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -226,11 +225,11 @@ func assistantAssociationResourceType(ctx context.Context) (provider.ResourceTyp
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

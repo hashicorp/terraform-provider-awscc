@@ -5,7 +5,7 @@ package rolesanywhere
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_rolesanywhere_profiles", profilesDataSourceType)
+	registry.AddDataSourceFactory("awscc_rolesanywhere_profiles", profilesDataSource)
 }
 
-// profilesDataSourceType returns the Terraform awscc_rolesanywhere_profiles data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::RolesAnywhere::Profile resource type.
-func profilesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// profilesDataSource returns the Terraform awscc_rolesanywhere_profiles data source.
+// This Terraform data source corresponds to the CloudFormation AWS::RolesAnywhere::Profile resource.
+func profilesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func profilesDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RolesAnywhere::Profile").WithTerraformTypeName("awscc_rolesanywhere_profiles")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

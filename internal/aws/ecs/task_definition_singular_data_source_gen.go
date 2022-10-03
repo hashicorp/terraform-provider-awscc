@@ -5,7 +5,7 @@ package ecs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ecs_task_definition", taskDefinitionDataSourceType)
+	registry.AddDataSourceFactory("awscc_ecs_task_definition", taskDefinitionDataSource)
 }
 
-// taskDefinitionDataSourceType returns the Terraform awscc_ecs_task_definition data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::ECS::TaskDefinition resource type.
-func taskDefinitionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// taskDefinitionDataSource returns the Terraform awscc_ecs_task_definition data source.
+// This Terraform data source corresponds to the CloudFormation AWS::ECS::TaskDefinition resource.
+func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"container_definitions": {
 			// Property: ContainerDefinitions
@@ -1620,7 +1620,7 @@ func taskDefinitionDataSourceType(ctx context.Context) (provider.DataSourceType,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskDefinition").WithTerraformTypeName("awscc_ecs_task_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -1743,11 +1743,11 @@ func taskDefinitionDataSourceType(ctx context.Context) (provider.DataSourceType,
 		"working_directory":              "WorkingDirectory",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

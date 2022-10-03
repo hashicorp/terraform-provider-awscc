@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_appintegrations_data_integration", dataIntegrationResourceType)
+	registry.AddResourceFactory("awscc_appintegrations_data_integration", dataIntegrationResource)
 }
 
-// dataIntegrationResourceType returns the Terraform awscc_appintegrations_data_integration resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AppIntegrations::DataIntegration resource type.
-func dataIntegrationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// dataIntegrationResource returns the Terraform awscc_appintegrations_data_integration resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AppIntegrations::DataIntegration resource.
+func dataIntegrationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"data_integration_arn": {
 			// Property: DataIntegrationArn
@@ -286,7 +285,7 @@ func dataIntegrationResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::DataIntegration").WithTerraformTypeName("awscc_appintegrations_data_integration")
 	opts = opts.WithTerraformSchema(schema)
@@ -311,11 +310,11 @@ func dataIntegrationResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

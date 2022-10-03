@@ -5,7 +5,6 @@ package apigateway
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_apigateway_deployment", deploymentResourceType)
+	registry.AddResourceFactory("awscc_apigateway_deployment", deploymentResource)
 }
 
-// deploymentResourceType returns the Terraform awscc_apigateway_deployment resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::Deployment resource type.
-func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) {
+// deploymentResource returns the Terraform awscc_apigateway_deployment resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ApiGateway::Deployment resource.
+func deploymentResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"deployment_canary_settings": {
 			// Property: DeploymentCanarySettings
@@ -740,7 +739,7 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Deployment").WithTerraformTypeName("awscc_apigateway_deployment")
 	opts = opts.WithTerraformSchema(schema)
@@ -790,11 +789,11 @@ func deploymentResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

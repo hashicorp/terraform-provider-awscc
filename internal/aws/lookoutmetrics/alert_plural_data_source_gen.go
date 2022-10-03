@@ -5,7 +5,7 @@ package lookoutmetrics
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_lookoutmetrics_alerts", alertsDataSourceType)
+	registry.AddDataSourceFactory("awscc_lookoutmetrics_alerts", alertsDataSource)
 }
 
-// alertsDataSourceType returns the Terraform awscc_lookoutmetrics_alerts data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::LookoutMetrics::Alert resource type.
-func alertsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// alertsDataSource returns the Terraform awscc_lookoutmetrics_alerts data source.
+// This Terraform data source corresponds to the CloudFormation AWS::LookoutMetrics::Alert resource.
+func alertsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func alertsDataSourceType(ctx context.Context) (provider.DataSourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LookoutMetrics::Alert").WithTerraformTypeName("awscc_lookoutmetrics_alerts")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

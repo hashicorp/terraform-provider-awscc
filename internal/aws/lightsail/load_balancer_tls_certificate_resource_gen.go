@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lightsail_load_balancer_tls_certificate", loadBalancerTlsCertificateResourceType)
+	registry.AddResourceFactory("awscc_lightsail_load_balancer_tls_certificate", loadBalancerTlsCertificateResource)
 }
 
-// loadBalancerTlsCertificateResourceType returns the Terraform awscc_lightsail_load_balancer_tls_certificate resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Lightsail::LoadBalancerTlsCertificate resource type.
-func loadBalancerTlsCertificateResourceType(ctx context.Context) (provider.ResourceType, error) {
+// loadBalancerTlsCertificateResource returns the Terraform awscc_lightsail_load_balancer_tls_certificate resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Lightsail::LoadBalancerTlsCertificate resource.
+func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"certificate_alternative_names": {
 			// Property: CertificateAlternativeNames
@@ -163,7 +162,7 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (provider.Resou
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::LoadBalancerTlsCertificate").WithTerraformTypeName("awscc_lightsail_load_balancer_tls_certificate")
 	opts = opts.WithTerraformSchema(schema)
@@ -183,11 +182,11 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (provider.Resou
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

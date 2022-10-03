@@ -5,7 +5,6 @@ package autoscaling
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_autoscaling_lifecycle_hook", lifecycleHookResourceType)
+	registry.AddResourceFactory("awscc_autoscaling_lifecycle_hook", lifecycleHookResource)
 }
 
-// lifecycleHookResourceType returns the Terraform awscc_autoscaling_lifecycle_hook resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AutoScaling::LifecycleHook resource type.
-func lifecycleHookResourceType(ctx context.Context) (provider.ResourceType, error) {
+// lifecycleHookResource returns the Terraform awscc_autoscaling_lifecycle_hook resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AutoScaling::LifecycleHook resource.
+func lifecycleHookResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"auto_scaling_group_name": {
 			// Property: AutoScalingGroupName
@@ -165,7 +164,7 @@ func lifecycleHookResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::LifecycleHook").WithTerraformTypeName("awscc_autoscaling_lifecycle_hook")
 	opts = opts.WithTerraformSchema(schema)
@@ -185,11 +184,11 @@ func lifecycleHookResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

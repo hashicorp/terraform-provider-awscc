@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_ipam_allocation", iPAMAllocationDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_ipam_allocation", iPAMAllocationDataSource)
 }
 
-// iPAMAllocationDataSourceType returns the Terraform awscc_ec2_ipam_allocation data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::IPAMAllocation resource type.
-func iPAMAllocationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// iPAMAllocationDataSource returns the Terraform awscc_ec2_ipam_allocation data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::IPAMAllocation resource.
+func iPAMAllocationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cidr": {
 			// Property: Cidr
@@ -87,7 +87,7 @@ func iPAMAllocationDataSourceType(ctx context.Context) (provider.DataSourceType,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::IPAMAllocation").WithTerraformTypeName("awscc_ec2_ipam_allocation")
 	opts = opts.WithTerraformSchema(schema)
@@ -99,11 +99,11 @@ func iPAMAllocationDataSourceType(ctx context.Context) (provider.DataSourceType,
 		"netmask_length":          "NetmaskLength",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

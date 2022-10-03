@@ -5,7 +5,7 @@ package sso
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfigurationDataSourceType)
+	registry.AddDataSourceFactory("awscc_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfigurationDataSource)
 }
 
-// instanceAccessControlAttributeConfigurationDataSourceType returns the Terraform awscc_sso_instance_access_control_attribute_configuration data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::SSO::InstanceAccessControlAttributeConfiguration resource type.
-func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// instanceAccessControlAttributeConfigurationDataSource returns the Terraform awscc_sso_instance_access_control_attribute_configuration data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SSO::InstanceAccessControlAttributeConfiguration resource.
+func instanceAccessControlAttributeConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_control_attributes": {
 			// Property: AccessControlAttributes
@@ -203,7 +203,7 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::InstanceAccessControlAttributeConfiguration").WithTerraformTypeName("awscc_sso_instance_access_control_attribute_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -216,11 +216,11 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 		"value":        "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

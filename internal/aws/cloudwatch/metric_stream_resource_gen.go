@@ -5,7 +5,6 @@ package cloudwatch
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudwatch_metric_stream", metricStreamResourceType)
+	registry.AddResourceFactory("awscc_cloudwatch_metric_stream", metricStreamResource)
 }
 
-// metricStreamResourceType returns the Terraform awscc_cloudwatch_metric_stream resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudWatch::MetricStream resource type.
-func metricStreamResourceType(ctx context.Context) (provider.ResourceType, error) {
+// metricStreamResource returns the Terraform awscc_cloudwatch_metric_stream resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudWatch::MetricStream resource.
+func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -451,7 +450,7 @@ func metricStreamResourceType(ctx context.Context) (provider.ResourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("awscc_cloudwatch_metric_stream")
 	opts = opts.WithTerraformSchema(schema)
@@ -508,11 +507,11 @@ func metricStreamResourceType(ctx context.Context) (provider.ResourceType, error
 	),
 	)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

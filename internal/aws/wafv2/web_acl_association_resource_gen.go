@@ -5,7 +5,6 @@ package wafv2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_wafv2_web_acl_association", webACLAssociationResourceType)
+	registry.AddResourceFactory("awscc_wafv2_web_acl_association", webACLAssociationResource)
 }
 
-// webACLAssociationResourceType returns the Terraform awscc_wafv2_web_acl_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::WebACLAssociation resource type.
-func webACLAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// webACLAssociationResource returns the Terraform awscc_wafv2_web_acl_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::WAFv2::WebACLAssociation resource.
+func webACLAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_arn": {
 			// Property: ResourceArn
@@ -73,7 +72,7 @@ func webACLAssociationResourceType(ctx context.Context) (provider.ResourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::WebACLAssociation").WithTerraformTypeName("awscc_wafv2_web_acl_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -87,11 +86,11 @@ func webACLAssociationResourceType(ctx context.Context) (provider.ResourceType, 
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

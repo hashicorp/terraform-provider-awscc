@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_network_insights_path", networkInsightsPathResourceType)
+	registry.AddResourceFactory("awscc_ec2_network_insights_path", networkInsightsPathResource)
 }
 
-// networkInsightsPathResourceType returns the Terraform awscc_ec2_network_insights_path resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsPath resource type.
-func networkInsightsPathResourceType(ctx context.Context) (provider.ResourceType, error) {
+// networkInsightsPathResource returns the Terraform awscc_ec2_network_insights_path resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::NetworkInsightsPath resource.
+func networkInsightsPathResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"created_date": {
 			// Property: CreatedDate
@@ -210,7 +209,7 @@ func networkInsightsPathResourceType(ctx context.Context) (provider.ResourceType
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsPath").WithTerraformTypeName("awscc_ec2_network_insights_path")
 	opts = opts.WithTerraformSchema(schema)
@@ -234,11 +233,11 @@ func networkInsightsPathResourceType(ctx context.Context) (provider.ResourceType
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

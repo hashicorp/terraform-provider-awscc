@@ -5,7 +5,6 @@ package eks
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_eks_fargate_profile", fargateProfileResourceType)
+	registry.AddResourceFactory("awscc_eks_fargate_profile", fargateProfileResource)
 }
 
-// fargateProfileResourceType returns the Terraform awscc_eks_fargate_profile resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EKS::FargateProfile resource type.
-func fargateProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
+// fargateProfileResource returns the Terraform awscc_eks_fargate_profile resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EKS::FargateProfile resource.
+func fargateProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -283,7 +282,7 @@ func fargateProfileResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::FargateProfile").WithTerraformTypeName("awscc_eks_fargate_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -306,11 +305,11 @@ func fargateProfileResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

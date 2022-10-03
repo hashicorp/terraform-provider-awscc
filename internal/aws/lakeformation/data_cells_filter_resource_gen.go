@@ -5,7 +5,6 @@ package lakeformation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lakeformation_data_cells_filter", dataCellsFilterResourceType)
+	registry.AddResourceFactory("awscc_lakeformation_data_cells_filter", dataCellsFilterResource)
 }
 
-// dataCellsFilterResourceType returns the Terraform awscc_lakeformation_data_cells_filter resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::LakeFormation::DataCellsFilter resource type.
-func dataCellsFilterResourceType(ctx context.Context) (provider.ResourceType, error) {
+// dataCellsFilterResource returns the Terraform awscc_lakeformation_data_cells_filter resource.
+// This Terraform resource corresponds to the CloudFormation AWS::LakeFormation::DataCellsFilter resource.
+func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"column_names": {
 			// Property: ColumnNames
@@ -240,7 +239,7 @@ func dataCellsFilterResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LakeFormation::DataCellsFilter").WithTerraformTypeName("awscc_lakeformation_data_cells_filter")
 	opts = opts.WithTerraformSchema(schema)
@@ -262,11 +261,11 @@ func dataCellsFilterResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

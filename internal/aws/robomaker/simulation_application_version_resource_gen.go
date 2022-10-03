@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_robomaker_simulation_application_version", simulationApplicationVersionResourceType)
+	registry.AddResourceFactory("awscc_robomaker_simulation_application_version", simulationApplicationVersionResource)
 }
 
-// simulationApplicationVersionResourceType returns the Terraform awscc_robomaker_simulation_application_version resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RoboMaker::SimulationApplicationVersion resource type.
-func simulationApplicationVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// simulationApplicationVersionResource returns the Terraform awscc_robomaker_simulation_application_version resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RoboMaker::SimulationApplicationVersion resource.
+func simulationApplicationVersionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application": {
 			// Property: Application
@@ -104,7 +103,7 @@ func simulationApplicationVersionResourceType(ctx context.Context) (provider.Res
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RoboMaker::SimulationApplicationVersion").WithTerraformTypeName("awscc_robomaker_simulation_application_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -120,11 +119,11 @@ func simulationApplicationVersionResourceType(ctx context.Context) (provider.Res
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

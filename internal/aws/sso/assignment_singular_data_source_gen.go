@@ -5,7 +5,7 @@ package sso
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_sso_assignment", assignmentDataSourceType)
+	registry.AddDataSourceFactory("awscc_sso_assignment", assignmentDataSource)
 }
 
-// assignmentDataSourceType returns the Terraform awscc_sso_assignment data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::SSO::Assignment resource type.
-func assignmentDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// assignmentDataSource returns the Terraform awscc_sso_assignment data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SSO::Assignment resource.
+func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"instance_arn": {
 			// Property: InstanceArn
@@ -117,7 +117,7 @@ func assignmentDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::Assignment").WithTerraformTypeName("awscc_sso_assignment")
 	opts = opts.WithTerraformSchema(schema)
@@ -130,11 +130,11 @@ func assignmentDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		"target_type":        "TargetType",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

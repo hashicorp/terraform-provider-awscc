@@ -5,7 +5,7 @@ package connect
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_connect_quick_connect", quickConnectDataSourceType)
+	registry.AddDataSourceFactory("awscc_connect_quick_connect", quickConnectDataSource)
 }
 
-// quickConnectDataSourceType returns the Terraform awscc_connect_quick_connect data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Connect::QuickConnect resource type.
-func quickConnectDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// quickConnectDataSource returns the Terraform awscc_connect_quick_connect data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Connect::QuickConnect resource.
+func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
@@ -285,7 +285,7 @@ func quickConnectDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::QuickConnect").WithTerraformTypeName("awscc_connect_quick_connect")
 	opts = opts.WithTerraformSchema(schema)
@@ -308,11 +308,11 @@ func quickConnectDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		"value":                "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

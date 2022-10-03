@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_kinesisfirehose_delivery_stream", deliveryStreamResourceType)
+	registry.AddResourceFactory("awscc_kinesisfirehose_delivery_stream", deliveryStreamResource)
 }
 
-// deliveryStreamResourceType returns the Terraform awscc_kinesisfirehose_delivery_stream resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::KinesisFirehose::DeliveryStream resource type.
-func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, error) {
+// deliveryStreamResource returns the Terraform awscc_kinesisfirehose_delivery_stream resource.
+// This Terraform resource corresponds to the CloudFormation AWS::KinesisFirehose::DeliveryStream resource.
+func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"amazonopensearchservice_destination_configuration": {
 			// Property: AmazonopensearchserviceDestinationConfiguration
@@ -5613,7 +5612,7 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::KinesisFirehose::DeliveryStream").WithTerraformTypeName("awscc_kinesisfirehose_delivery_stream")
 	opts = opts.WithTerraformSchema(schema)
@@ -5732,11 +5731,11 @@ func deliveryStreamResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

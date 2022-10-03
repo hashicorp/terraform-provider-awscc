@@ -5,7 +5,6 @@ package memorydb
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_memorydb_parameter_group", parameterGroupResourceType)
+	registry.AddResourceFactory("awscc_memorydb_parameter_group", parameterGroupResource)
 }
 
-// parameterGroupResourceType returns the Terraform awscc_memorydb_parameter_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::MemoryDB::ParameterGroup resource type.
-func parameterGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// parameterGroupResource returns the Terraform awscc_memorydb_parameter_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::MemoryDB::ParameterGroup resource.
+func parameterGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: ARN
@@ -180,7 +179,7 @@ func parameterGroupResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MemoryDB::ParameterGroup").WithTerraformTypeName("awscc_memorydb_parameter_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -203,11 +202,11 @@ func parameterGroupResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

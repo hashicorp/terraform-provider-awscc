@@ -5,7 +5,7 @@ package iotfleethub
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iotfleethub_application", applicationDataSourceType)
+	registry.AddDataSourceFactory("awscc_iotfleethub_application", applicationDataSource)
 }
 
-// applicationDataSourceType returns the Terraform awscc_iotfleethub_application data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoTFleetHub::Application resource type.
-func applicationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// applicationDataSource returns the Terraform awscc_iotfleethub_application data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoTFleetHub::Application resource.
+func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_arn": {
 			// Property: ApplicationArn
@@ -223,7 +223,7 @@ func applicationDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetHub::Application").WithTerraformTypeName("awscc_iotfleethub_application")
 	opts = opts.WithTerraformSchema(schema)
@@ -244,11 +244,11 @@ func applicationDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		"value":                        "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

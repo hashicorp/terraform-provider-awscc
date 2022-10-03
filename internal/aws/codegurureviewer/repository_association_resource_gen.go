@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_codegurureviewer_repository_association", repositoryAssociationResourceType)
+	registry.AddResourceFactory("awscc_codegurureviewer_repository_association", repositoryAssociationResource)
 }
 
-// repositoryAssociationResourceType returns the Terraform awscc_codegurureviewer_repository_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CodeGuruReviewer::RepositoryAssociation resource type.
-func repositoryAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// repositoryAssociationResource returns the Terraform awscc_codegurureviewer_repository_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CodeGuruReviewer::RepositoryAssociation resource.
+func repositoryAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"association_arn": {
 			// Property: AssociationArn
@@ -240,7 +239,7 @@ func repositoryAssociationResourceType(ctx context.Context) (provider.ResourceTy
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodeGuruReviewer::RepositoryAssociation").WithTerraformTypeName("awscc_codegurureviewer_repository_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -261,11 +260,11 @@ func repositoryAssociationResourceType(ctx context.Context) (provider.ResourceTy
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

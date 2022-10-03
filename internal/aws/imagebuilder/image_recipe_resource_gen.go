@@ -5,7 +5,6 @@ package imagebuilder
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_imagebuilder_image_recipe", imageRecipeResourceType)
+	registry.AddResourceFactory("awscc_imagebuilder_image_recipe", imageRecipeResource)
 }
 
-// imageRecipeResourceType returns the Terraform awscc_imagebuilder_image_recipe resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ImageRecipe resource type.
-func imageRecipeResourceType(ctx context.Context) (provider.ResourceType, error) {
+// imageRecipeResource returns the Terraform awscc_imagebuilder_image_recipe resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ImageBuilder::ImageRecipe resource.
+func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"additional_instance_configuration": {
 			// Property: AdditionalInstanceConfiguration
@@ -534,7 +533,7 @@ func imageRecipeResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ImageRecipe").WithTerraformTypeName("awscc_imagebuilder_image_recipe")
 	opts = opts.WithTerraformSchema(schema)
@@ -574,11 +573,11 @@ func imageRecipeResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

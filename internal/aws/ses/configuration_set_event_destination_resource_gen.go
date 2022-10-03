@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ses_configuration_set_event_destination", configurationSetEventDestinationResourceType)
+	registry.AddResourceFactory("awscc_ses_configuration_set_event_destination", configurationSetEventDestinationResource)
 }
 
-// configurationSetEventDestinationResourceType returns the Terraform awscc_ses_configuration_set_event_destination resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SES::ConfigurationSetEventDestination resource type.
-func configurationSetEventDestinationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// configurationSetEventDestinationResource returns the Terraform awscc_ses_configuration_set_event_destination resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SES::ConfigurationSetEventDestination resource.
+func configurationSetEventDestinationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"configuration_set_name": {
 			// Property: ConfigurationSetName
@@ -305,7 +304,7 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (provider
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSetEventDestination").WithTerraformTypeName("awscc_ses_configuration_set_event_destination")
 	opts = opts.WithTerraformSchema(schema)
@@ -333,11 +332,11 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (provider
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

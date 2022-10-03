@@ -5,7 +5,7 @@ package apigateway
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_apigateway_stage", stageDataSourceType)
+	registry.AddDataSourceFactory("awscc_apigateway_stage", stageDataSource)
 }
 
-// stageDataSourceType returns the Terraform awscc_apigateway_stage data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::ApiGateway::Stage resource type.
-func stageDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// stageDataSource returns the Terraform awscc_apigateway_stage data source.
+// This Terraform data source corresponds to the CloudFormation AWS::ApiGateway::Stage resource.
+func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_log_setting": {
 			// Property: AccessLogSetting
@@ -430,7 +430,7 @@ func stageDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Stage").WithTerraformTypeName("awscc_apigateway_stage")
 	opts = opts.WithTerraformSchema(schema)
@@ -468,11 +468,11 @@ func stageDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"variables":                "Variables",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

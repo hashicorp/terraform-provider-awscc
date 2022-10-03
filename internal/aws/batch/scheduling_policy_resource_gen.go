@@ -5,7 +5,6 @@ package batch
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_batch_scheduling_policy", schedulingPolicyResourceType)
+	registry.AddResourceFactory("awscc_batch_scheduling_policy", schedulingPolicyResource)
 }
 
-// schedulingPolicyResourceType returns the Terraform awscc_batch_scheduling_policy resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Batch::SchedulingPolicy resource type.
-func schedulingPolicyResourceType(ctx context.Context) (provider.ResourceType, error) {
+// schedulingPolicyResource returns the Terraform awscc_batch_scheduling_policy resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Batch::SchedulingPolicy resource.
+func schedulingPolicyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -202,7 +201,7 @@ func schedulingPolicyResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::SchedulingPolicy").WithTerraformTypeName("awscc_batch_scheduling_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -223,11 +222,11 @@ func schedulingPolicyResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

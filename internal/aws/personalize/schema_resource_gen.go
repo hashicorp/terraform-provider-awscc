@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_personalize_schema", schemaResourceType)
+	registry.AddResourceFactory("awscc_personalize_schema", schemaResource)
 }
 
-// schemaResourceType returns the Terraform awscc_personalize_schema resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Personalize::Schema resource type.
-func schemaResourceType(ctx context.Context) (provider.ResourceType, error) {
+// schemaResource returns the Terraform awscc_personalize_schema resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Personalize::Schema resource.
+func schemaResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"domain": {
 			// Property: Domain
@@ -121,7 +120,7 @@ func schemaResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Personalize::Schema").WithTerraformTypeName("awscc_personalize_schema")
 	opts = opts.WithTerraformSchema(schema)
@@ -137,11 +136,11 @@ func schemaResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

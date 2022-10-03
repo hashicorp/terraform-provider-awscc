@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_rolesanywhere_crl", cRLResourceType)
+	registry.AddResourceFactory("awscc_rolesanywhere_crl", cRLResource)
 }
 
-// cRLResourceType returns the Terraform awscc_rolesanywhere_crl resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RolesAnywhere::CRL resource type.
-func cRLResourceType(ctx context.Context) (provider.ResourceType, error) {
+// cRLResource returns the Terraform awscc_rolesanywhere_crl resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RolesAnywhere::CRL resource.
+func cRLResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"crl_data": {
 			// Property: CrlData
@@ -166,7 +165,7 @@ func cRLResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RolesAnywhere::CRL").WithTerraformTypeName("awscc_rolesanywhere_crl")
 	opts = opts.WithTerraformSchema(schema)
@@ -186,11 +185,11 @@ func cRLResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

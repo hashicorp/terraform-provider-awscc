@@ -5,7 +5,7 @@ package apprunner
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_apprunner_observability_configuration", observabilityConfigurationDataSourceType)
+	registry.AddDataSourceFactory("awscc_apprunner_observability_configuration", observabilityConfigurationDataSource)
 }
 
-// observabilityConfigurationDataSourceType returns the Terraform awscc_apprunner_observability_configuration data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::AppRunner::ObservabilityConfiguration resource type.
-func observabilityConfigurationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// observabilityConfigurationDataSource returns the Terraform awscc_apprunner_observability_configuration data source.
+// This Terraform data source corresponds to the CloudFormation AWS::AppRunner::ObservabilityConfiguration resource.
+func observabilityConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"latest": {
 			// Property: Latest
@@ -153,7 +153,7 @@ func observabilityConfigurationDataSourceType(ctx context.Context) (provider.Dat
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::ObservabilityConfiguration").WithTerraformTypeName("awscc_apprunner_observability_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -169,11 +169,11 @@ func observabilityConfigurationDataSourceType(ctx context.Context) (provider.Dat
 		"vendor":                               "Vendor",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

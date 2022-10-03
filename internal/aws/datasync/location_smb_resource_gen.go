@@ -7,7 +7,6 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -17,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_datasync_location_smb", locationSMBResourceType)
+	registry.AddResourceFactory("awscc_datasync_location_smb", locationSMBResource)
 }
 
-// locationSMBResourceType returns the Terraform awscc_datasync_location_smb resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationSMB resource type.
-func locationSMBResourceType(ctx context.Context) (provider.ResourceType, error) {
+// locationSMBResource returns the Terraform awscc_datasync_location_smb resource.
+// This Terraform resource corresponds to the CloudFormation AWS::DataSync::LocationSMB resource.
+func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"agent_arns": {
 			// Property: AgentArns
@@ -323,7 +322,7 @@ func locationSMBResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationSMB").WithTerraformTypeName("awscc_datasync_location_smb")
 	opts = opts.WithTerraformSchema(schema)
@@ -353,11 +352,11 @@ func locationSMBResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

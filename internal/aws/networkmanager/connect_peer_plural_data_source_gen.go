@@ -5,7 +5,7 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_networkmanager_connect_peers", connectPeersDataSourceType)
+	registry.AddDataSourceFactory("awscc_networkmanager_connect_peers", connectPeersDataSource)
 }
 
-// connectPeersDataSourceType returns the Terraform awscc_networkmanager_connect_peers data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::NetworkManager::ConnectPeer resource type.
-func connectPeersDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// connectPeersDataSource returns the Terraform awscc_networkmanager_connect_peers data source.
+// This Terraform data source corresponds to the CloudFormation AWS::NetworkManager::ConnectPeer resource.
+func connectPeersDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func connectPeersDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::ConnectPeer").WithTerraformTypeName("awscc_networkmanager_connect_peers")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

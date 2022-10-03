@@ -5,7 +5,7 @@ package iotfleetwise
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iotfleetwise_signal_catalog", signalCatalogDataSourceType)
+	registry.AddDataSourceFactory("awscc_iotfleetwise_signal_catalog", signalCatalogDataSource)
 }
 
-// signalCatalogDataSourceType returns the Terraform awscc_iotfleetwise_signal_catalog data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoTFleetWise::SignalCatalog resource type.
-func signalCatalogDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// signalCatalogDataSource returns the Terraform awscc_iotfleetwise_signal_catalog data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoTFleetWise::SignalCatalog resource.
+func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -602,7 +602,7 @@ func signalCatalogDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetWise::SignalCatalog").WithTerraformTypeName("awscc_iotfleetwise_signal_catalog")
 	opts = opts.WithTerraformSchema(schema)
@@ -636,11 +636,11 @@ func signalCatalogDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		"value":                  "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

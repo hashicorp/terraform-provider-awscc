@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_config_conformance_pack", conformancePackResourceType)
+	registry.AddResourceFactory("awscc_config_conformance_pack", conformancePackResource)
 }
 
-// conformancePackResourceType returns the Terraform awscc_config_conformance_pack resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Config::ConformancePack resource type.
-func conformancePackResourceType(ctx context.Context) (provider.ResourceType, error) {
+// conformancePackResource returns the Terraform awscc_config_conformance_pack resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Config::ConformancePack resource.
+func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"conformance_pack_input_parameters": {
 			// Property: ConformancePackInputParameters
@@ -265,7 +264,7 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::ConformancePack").WithTerraformTypeName("awscc_config_conformance_pack")
 	opts = opts.WithTerraformSchema(schema)
@@ -293,11 +292,11 @@ func conformancePackResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

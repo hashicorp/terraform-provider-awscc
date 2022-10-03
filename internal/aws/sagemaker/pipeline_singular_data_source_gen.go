@@ -5,7 +5,7 @@ package sagemaker
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_sagemaker_pipeline", pipelineDataSourceType)
+	registry.AddDataSourceFactory("awscc_sagemaker_pipeline", pipelineDataSource)
 }
 
-// pipelineDataSourceType returns the Terraform awscc_sagemaker_pipeline data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::SageMaker::Pipeline resource type.
-func pipelineDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// pipelineDataSource returns the Terraform awscc_sagemaker_pipeline data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SageMaker::Pipeline resource.
+func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"parallelism_configuration": {
 			// Property: ParallelismConfiguration
@@ -239,7 +239,7 @@ func pipelineDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Pipeline").WithTerraformTypeName("awscc_sagemaker_pipeline")
 	opts = opts.WithTerraformSchema(schema)
@@ -261,11 +261,11 @@ func pipelineDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		"version":                         "Version",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

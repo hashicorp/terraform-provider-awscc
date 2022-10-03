@@ -5,7 +5,7 @@ package billingconductor
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_billingconductor_pricing_plan", pricingPlanDataSourceType)
+	registry.AddDataSourceFactory("awscc_billingconductor_pricing_plan", pricingPlanDataSource)
 }
 
-// pricingPlanDataSourceType returns the Terraform awscc_billingconductor_pricing_plan data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::BillingConductor::PricingPlan resource type.
-func pricingPlanDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// pricingPlanDataSource returns the Terraform awscc_billingconductor_pricing_plan data source.
+// This Terraform data source corresponds to the CloudFormation AWS::BillingConductor::PricingPlan resource.
+func pricingPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -160,7 +160,7 @@ func pricingPlanDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::BillingConductor::PricingPlan").WithTerraformTypeName("awscc_billingconductor_pricing_plan")
 	opts = opts.WithTerraformSchema(schema)
@@ -177,11 +177,11 @@ func pricingPlanDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		"value":              "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_devopsguru_notification_channel", notificationChannelResourceType)
+	registry.AddResourceFactory("awscc_devopsguru_notification_channel", notificationChannelResource)
 }
 
-// notificationChannelResourceType returns the Terraform awscc_devopsguru_notification_channel resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::DevOpsGuru::NotificationChannel resource type.
-func notificationChannelResourceType(ctx context.Context) (provider.ResourceType, error) {
+// notificationChannelResource returns the Terraform awscc_devopsguru_notification_channel resource.
+// This Terraform resource corresponds to the CloudFormation AWS::DevOpsGuru::NotificationChannel resource.
+func notificationChannelResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"config": {
 			// Property: Config
@@ -107,7 +106,7 @@ func notificationChannelResourceType(ctx context.Context) (provider.ResourceType
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::NotificationChannel").WithTerraformTypeName("awscc_devopsguru_notification_channel")
 	opts = opts.WithTerraformSchema(schema)
@@ -123,11 +122,11 @@ func notificationChannelResourceType(ctx context.Context) (provider.ResourceType
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

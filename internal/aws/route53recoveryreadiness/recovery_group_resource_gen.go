@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53recoveryreadiness_recovery_group", recoveryGroupResourceType)
+	registry.AddResourceFactory("awscc_route53recoveryreadiness_recovery_group", recoveryGroupResource)
 }
 
-// recoveryGroupResourceType returns the Terraform awscc_route53recoveryreadiness_recovery_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::RecoveryGroup resource type.
-func recoveryGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// recoveryGroupResource returns the Terraform awscc_route53recoveryreadiness_recovery_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53RecoveryReadiness::RecoveryGroup resource.
+func recoveryGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cells": {
 			// Property: Cells
@@ -157,7 +156,7 @@ func recoveryGroupResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::RecoveryGroup").WithTerraformTypeName("awscc_route53recoveryreadiness_recovery_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -175,11 +174,11 @@ func recoveryGroupResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

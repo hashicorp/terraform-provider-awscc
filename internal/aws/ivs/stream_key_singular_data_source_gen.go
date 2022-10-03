@@ -5,7 +5,7 @@ package ivs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ivs_stream_key", streamKeyDataSourceType)
+	registry.AddDataSourceFactory("awscc_ivs_stream_key", streamKeyDataSource)
 }
 
-// streamKeyDataSourceType returns the Terraform awscc_ivs_stream_key data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IVS::StreamKey resource type.
-func streamKeyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// streamKeyDataSource returns the Terraform awscc_ivs_stream_key data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IVS::StreamKey resource.
+func streamKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -118,7 +118,7 @@ func streamKeyDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IVS::StreamKey").WithTerraformTypeName("awscc_ivs_stream_key")
 	opts = opts.WithTerraformSchema(schema)
@@ -130,11 +130,11 @@ func streamKeyDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		"value":       "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

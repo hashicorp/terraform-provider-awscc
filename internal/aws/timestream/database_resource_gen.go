@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_timestream_database", databaseResourceType)
+	registry.AddResourceFactory("awscc_timestream_database", databaseResource)
 }
 
-// databaseResourceType returns the Terraform awscc_timestream_database resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Timestream::Database resource type.
-func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
+// databaseResource returns the Terraform awscc_timestream_database resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Timestream::Database resource.
+func databaseResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -157,7 +156,7 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Timestream::Database").WithTerraformTypeName("awscc_timestream_database")
 	opts = opts.WithTerraformSchema(schema)
@@ -175,11 +174,11 @@ func databaseResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

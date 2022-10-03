@@ -5,7 +5,7 @@ package route53recoveryreadiness
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_route53recoveryreadiness_resource_set", resourceSetDataSourceType)
+	registry.AddDataSourceFactory("awscc_route53recoveryreadiness_resource_set", resourceSetDataSource)
 }
 
-// resourceSetDataSourceType returns the Terraform awscc_route53recoveryreadiness_resource_set data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ResourceSet resource type.
-func resourceSetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// resourceSetDataSource returns the Terraform awscc_route53recoveryreadiness_resource_set data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ResourceSet resource.
+func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_set_arn": {
 			// Property: ResourceSetArn
@@ -320,7 +320,7 @@ func resourceSetDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::ResourceSet").WithTerraformTypeName("awscc_route53recoveryreadiness_resource_set")
 	opts = opts.WithTerraformSchema(schema)
@@ -346,11 +346,11 @@ func resourceSetDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		"value":               "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

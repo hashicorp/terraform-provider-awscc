@@ -5,7 +5,7 @@ package emr
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_emr_studio_session_mapping", studioSessionMappingDataSourceType)
+	registry.AddDataSourceFactory("awscc_emr_studio_session_mapping", studioSessionMappingDataSource)
 }
 
-// studioSessionMappingDataSourceType returns the Terraform awscc_emr_studio_session_mapping data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource type.
-func studioSessionMappingDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// studioSessionMappingDataSource returns the Terraform awscc_emr_studio_session_mapping data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource.
+func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"identity_name": {
 			// Property: IdentityName
@@ -86,7 +86,7 @@ func studioSessionMappingDataSourceType(ctx context.Context) (provider.DataSourc
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::StudioSessionMapping").WithTerraformTypeName("awscc_emr_studio_session_mapping")
 	opts = opts.WithTerraformSchema(schema)
@@ -97,11 +97,11 @@ func studioSessionMappingDataSourceType(ctx context.Context) (provider.DataSourc
 		"studio_id":          "StudioId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

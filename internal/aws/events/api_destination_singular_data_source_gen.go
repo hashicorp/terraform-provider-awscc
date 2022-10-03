@@ -5,7 +5,7 @@ package events
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_events_api_destination", apiDestinationDataSourceType)
+	registry.AddDataSourceFactory("awscc_events_api_destination", apiDestinationDataSource)
 }
 
-// apiDestinationDataSourceType returns the Terraform awscc_events_api_destination data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Events::ApiDestination resource type.
-func apiDestinationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// apiDestinationDataSource returns the Terraform awscc_events_api_destination data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Events::ApiDestination resource.
+func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -118,7 +118,7 @@ func apiDestinationDataSourceType(ctx context.Context) (provider.DataSourceType,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Events::ApiDestination").WithTerraformTypeName("awscc_events_api_destination")
 	opts = opts.WithTerraformSchema(schema)
@@ -132,11 +132,11 @@ func apiDestinationDataSourceType(ctx context.Context) (provider.DataSourceType,
 		"name":                             "Name",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

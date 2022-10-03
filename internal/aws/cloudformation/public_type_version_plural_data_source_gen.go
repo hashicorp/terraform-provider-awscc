@@ -5,7 +5,7 @@ package cloudformation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudformation_public_type_versions", publicTypeVersionsDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudformation_public_type_versions", publicTypeVersionsDataSource)
 }
 
-// publicTypeVersionsDataSourceType returns the Terraform awscc_cloudformation_public_type_versions data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudFormation::PublicTypeVersion resource type.
-func publicTypeVersionsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// publicTypeVersionsDataSource returns the Terraform awscc_cloudformation_public_type_versions data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudFormation::PublicTypeVersion resource.
+func publicTypeVersionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func publicTypeVersionsDataSourceType(ctx context.Context) (provider.DataSourceT
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::PublicTypeVersion").WithTerraformTypeName("awscc_cloudformation_public_type_versions")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

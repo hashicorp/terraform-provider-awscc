@@ -7,7 +7,6 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -17,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cur_report_definition", reportDefinitionResourceType)
+	registry.AddResourceFactory("awscc_cur_report_definition", reportDefinitionResource)
 }
 
-// reportDefinitionResourceType returns the Terraform awscc_cur_report_definition resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CUR::ReportDefinition resource type.
-func reportDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// reportDefinitionResource returns the Terraform awscc_cur_report_definition resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CUR::ReportDefinition resource.
+func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"additional_artifacts": {
 			// Property: AdditionalArtifacts
@@ -300,7 +299,7 @@ func reportDefinitionResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CUR::ReportDefinition").WithTerraformTypeName("awscc_cur_report_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -324,11 +323,11 @@ func reportDefinitionResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

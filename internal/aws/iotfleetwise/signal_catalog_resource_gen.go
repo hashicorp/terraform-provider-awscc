@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iotfleetwise_signal_catalog", signalCatalogResourceType)
+	registry.AddResourceFactory("awscc_iotfleetwise_signal_catalog", signalCatalogResource)
 }
 
-// signalCatalogResourceType returns the Terraform awscc_iotfleetwise_signal_catalog resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoTFleetWise::SignalCatalog resource type.
-func signalCatalogResourceType(ctx context.Context) (provider.ResourceType, error) {
+// signalCatalogResource returns the Terraform awscc_iotfleetwise_signal_catalog resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoTFleetWise::SignalCatalog resource.
+func signalCatalogResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -881,7 +880,7 @@ func signalCatalogResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetWise::SignalCatalog").WithTerraformTypeName("awscc_iotfleetwise_signal_catalog")
 	opts = opts.WithTerraformSchema(schema)
@@ -920,11 +919,11 @@ func signalCatalogResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

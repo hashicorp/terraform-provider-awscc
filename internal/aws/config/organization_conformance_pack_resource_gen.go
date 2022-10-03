@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_config_organization_conformance_pack", organizationConformancePackResourceType)
+	registry.AddResourceFactory("awscc_config_organization_conformance_pack", organizationConformancePackResource)
 }
 
-// organizationConformancePackResourceType returns the Terraform awscc_config_organization_conformance_pack resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Config::OrganizationConformancePack resource type.
-func organizationConformancePackResourceType(ctx context.Context) (provider.ResourceType, error) {
+// organizationConformancePackResource returns the Terraform awscc_config_organization_conformance_pack resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Config::OrganizationConformancePack resource.
+func organizationConformancePackResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"conformance_pack_input_parameters": {
 			// Property: ConformancePackInputParameters
@@ -227,7 +226,7 @@ func organizationConformancePackResourceType(ctx context.Context) (provider.Reso
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::OrganizationConformancePack").WithTerraformTypeName("awscc_config_organization_conformance_pack")
 	opts = opts.WithTerraformSchema(schema)
@@ -252,11 +251,11 @@ func organizationConformancePackResourceType(ctx context.Context) (provider.Reso
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

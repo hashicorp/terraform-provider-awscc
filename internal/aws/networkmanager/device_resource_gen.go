@@ -5,7 +5,6 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_networkmanager_device", deviceResourceType)
+	registry.AddResourceFactory("awscc_networkmanager_device", deviceResource)
 }
 
-// deviceResourceType returns the Terraform awscc_networkmanager_device resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::Device resource type.
-func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
+// deviceResource returns the Terraform awscc_networkmanager_device resource.
+// This Terraform resource corresponds to the CloudFormation AWS::NetworkManager::Device resource.
+func deviceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
@@ -282,7 +281,7 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::Device").WithTerraformTypeName("awscc_networkmanager_device")
 	opts = opts.WithTerraformSchema(schema)
@@ -310,11 +309,11 @@ func deviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

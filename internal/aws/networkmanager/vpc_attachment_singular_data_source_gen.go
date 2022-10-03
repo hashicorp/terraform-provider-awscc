@@ -5,7 +5,7 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_networkmanager_vpc_attachment", vpcAttachmentDataSourceType)
+	registry.AddDataSourceFactory("awscc_networkmanager_vpc_attachment", vpcAttachmentDataSource)
 }
 
-// vpcAttachmentDataSourceType returns the Terraform awscc_networkmanager_vpc_attachment data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::NetworkManager::VpcAttachment resource type.
-func vpcAttachmentDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// vpcAttachmentDataSource returns the Terraform awscc_networkmanager_vpc_attachment data source.
+// This Terraform data source corresponds to the CloudFormation AWS::NetworkManager::VpcAttachment resource.
+func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"attachment_id": {
 			// Property: AttachmentId
@@ -350,7 +350,7 @@ func vpcAttachmentDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::VpcAttachment").WithTerraformTypeName("awscc_networkmanager_vpc_attachment")
 	opts = opts.WithTerraformSchema(schema)
@@ -377,11 +377,11 @@ func vpcAttachmentDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		"vpc_arn":                       "VpcArn",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

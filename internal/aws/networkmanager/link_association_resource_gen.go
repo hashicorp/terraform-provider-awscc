@@ -5,7 +5,6 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_networkmanager_link_association", linkAssociationResourceType)
+	registry.AddResourceFactory("awscc_networkmanager_link_association", linkAssociationResource)
 }
 
-// linkAssociationResourceType returns the Terraform awscc_networkmanager_link_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::LinkAssociation resource type.
-func linkAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// linkAssociationResource returns the Terraform awscc_networkmanager_link_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::NetworkManager::LinkAssociation resource.
+func linkAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"device_id": {
 			// Property: DeviceId
@@ -80,7 +79,7 @@ func linkAssociationResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::LinkAssociation").WithTerraformTypeName("awscc_networkmanager_link_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -95,11 +94,11 @@ func linkAssociationResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

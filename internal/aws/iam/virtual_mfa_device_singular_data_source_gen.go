@@ -5,7 +5,7 @@ package iam
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iam_virtual_mfa_device", virtualMFADeviceDataSourceType)
+	registry.AddDataSourceFactory("awscc_iam_virtual_mfa_device", virtualMFADeviceDataSource)
 }
 
-// virtualMFADeviceDataSourceType returns the Terraform awscc_iam_virtual_mfa_device data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IAM::VirtualMFADevice resource type.
-func virtualMFADeviceDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// virtualMFADeviceDataSource returns the Terraform awscc_iam_virtual_mfa_device data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IAM::VirtualMFADevice resource.
+func virtualMFADeviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"path": {
 			// Property: Path
@@ -131,7 +131,7 @@ func virtualMFADeviceDataSourceType(ctx context.Context) (provider.DataSourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IAM::VirtualMFADevice").WithTerraformTypeName("awscc_iam_virtual_mfa_device")
 	opts = opts.WithTerraformSchema(schema)
@@ -145,11 +145,11 @@ func virtualMFADeviceDataSourceType(ctx context.Context) (provider.DataSourceTyp
 		"virtual_mfa_device_name": "VirtualMfaDeviceName",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

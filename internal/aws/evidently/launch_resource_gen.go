@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_evidently_launch", launchResourceType)
+	registry.AddResourceFactory("awscc_evidently_launch", launchResource)
 }
 
-// launchResourceType returns the Terraform awscc_evidently_launch resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Evidently::Launch resource type.
-func launchResourceType(ctx context.Context) (provider.ResourceType, error) {
+// launchResource returns the Terraform awscc_evidently_launch resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Evidently::Launch resource.
+func launchResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -613,7 +612,7 @@ func launchResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Evidently::Launch").WithTerraformTypeName("awscc_evidently_launch")
 	opts = opts.WithTerraformSchema(schema)
@@ -655,11 +654,11 @@ func launchResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

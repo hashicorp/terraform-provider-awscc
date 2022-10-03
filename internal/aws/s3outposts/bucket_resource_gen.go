@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_s3outposts_bucket", bucketResourceType)
+	registry.AddResourceFactory("awscc_s3outposts_bucket", bucketResource)
 }
 
-// bucketResourceType returns the Terraform awscc_s3outposts_bucket resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::S3Outposts::Bucket resource type.
-func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
+// bucketResource returns the Terraform awscc_s3outposts_bucket resource.
+// This Terraform resource corresponds to the CloudFormation AWS::S3Outposts::Bucket resource.
+func bucketResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -568,7 +567,7 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::Bucket").WithTerraformTypeName("awscc_s3outposts_bucket")
 	opts = opts.WithTerraformSchema(schema)
@@ -598,11 +597,11 @@ func bucketResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

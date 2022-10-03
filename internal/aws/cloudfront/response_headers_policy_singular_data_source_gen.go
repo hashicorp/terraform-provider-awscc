@@ -5,7 +5,7 @@ package cloudfront
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudfront_response_headers_policy", responseHeadersPolicyDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudfront_response_headers_policy", responseHeadersPolicyDataSource)
 }
 
-// responseHeadersPolicyDataSourceType returns the Terraform awscc_cloudfront_response_headers_policy data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::ResponseHeadersPolicy resource type.
-func responseHeadersPolicyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// responseHeadersPolicyDataSource returns the Terraform awscc_cloudfront_response_headers_policy data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudFront::ResponseHeadersPolicy resource.
+func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -590,7 +590,7 @@ func responseHeadersPolicyDataSourceType(ctx context.Context) (provider.DataSour
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::ResponseHeadersPolicy").WithTerraformTypeName("awscc_cloudfront_response_headers_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -631,11 +631,11 @@ func responseHeadersPolicyDataSourceType(ctx context.Context) (provider.DataSour
 		"xss_protection":                   "XSSProtection",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

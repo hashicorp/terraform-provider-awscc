@@ -5,7 +5,7 @@ package rds
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_rds_db_proxy", dBProxyDataSourceType)
+	registry.AddDataSourceFactory("awscc_rds_db_proxy", dBProxyDataSource)
 }
 
-// dBProxyDataSourceType returns the Terraform awscc_rds_db_proxy data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::RDS::DBProxy resource type.
-func dBProxyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// dBProxyDataSource returns the Terraform awscc_rds_db_proxy data source.
+// This Terraform data source corresponds to the CloudFormation AWS::RDS::DBProxy resource.
+func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"auth": {
 			// Property: Auth
@@ -274,7 +274,7 @@ func dBProxyDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxy").WithTerraformTypeName("awscc_rds_db_proxy")
 	opts = opts.WithTerraformSchema(schema)
@@ -300,11 +300,11 @@ func dBProxyDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 		"vpc_subnet_ids":         "VpcSubnetIds",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

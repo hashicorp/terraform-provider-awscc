@@ -5,7 +5,7 @@ package eks
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_eks_nodegroup", nodegroupDataSourceType)
+	registry.AddDataSourceFactory("awscc_eks_nodegroup", nodegroupDataSource)
 }
 
-// nodegroupDataSourceType returns the Terraform awscc_eks_nodegroup data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EKS::Nodegroup resource type.
-func nodegroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// nodegroupDataSource returns the Terraform awscc_eks_nodegroup data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EKS::Nodegroup resource.
+func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"ami_type": {
 			// Property: AmiType
@@ -426,7 +426,7 @@ func nodegroupDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::Nodegroup").WithTerraformTypeName("awscc_eks_nodegroup")
 	opts = opts.WithTerraformSchema(schema)
@@ -464,11 +464,11 @@ func nodegroupDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		"version":                    "Version",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

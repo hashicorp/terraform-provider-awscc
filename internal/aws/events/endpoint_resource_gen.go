@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_events_endpoint", endpointResourceType)
+	registry.AddResourceFactory("awscc_events_endpoint", endpointResource)
 }
 
-// endpointResourceType returns the Terraform awscc_events_endpoint resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Events::Endpoint resource type.
-func endpointResourceType(ctx context.Context) (provider.ResourceType, error) {
+// endpointResource returns the Terraform awscc_events_endpoint resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Events::Endpoint resource.
+func endpointResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -363,7 +362,7 @@ func endpointResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Events::Endpoint").WithTerraformTypeName("awscc_events_endpoint")
 	opts = opts.WithTerraformSchema(schema)
@@ -392,11 +391,11 @@ func endpointResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

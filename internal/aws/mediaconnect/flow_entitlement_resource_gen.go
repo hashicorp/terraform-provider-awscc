@@ -5,7 +5,6 @@ package mediaconnect
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_mediaconnect_flow_entitlement", flowEntitlementResourceType)
+	registry.AddResourceFactory("awscc_mediaconnect_flow_entitlement", flowEntitlementResource)
 }
 
-// flowEntitlementResourceType returns the Terraform awscc_mediaconnect_flow_entitlement resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowEntitlement resource type.
-func flowEntitlementResourceType(ctx context.Context) (provider.ResourceType, error) {
+// flowEntitlementResource returns the Terraform awscc_mediaconnect_flow_entitlement resource.
+// This Terraform resource corresponds to the CloudFormation AWS::MediaConnect::FlowEntitlement resource.
+func flowEntitlementResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"data_transfer_subscriber_fee_percent": {
 			// Property: DataTransferSubscriberFeePercent
@@ -313,7 +312,7 @@ func flowEntitlementResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowEntitlement").WithTerraformTypeName("awscc_mediaconnect_flow_entitlement")
 	opts = opts.WithTerraformSchema(schema)
@@ -342,11 +341,11 @@ func flowEntitlementResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

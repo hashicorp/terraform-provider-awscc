@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_carrier_gateway", carrierGatewayResourceType)
+	registry.AddResourceFactory("awscc_ec2_carrier_gateway", carrierGatewayResource)
 }
 
-// carrierGatewayResourceType returns the Terraform awscc_ec2_carrier_gateway resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::CarrierGateway resource type.
-func carrierGatewayResourceType(ctx context.Context) (provider.ResourceType, error) {
+// carrierGatewayResource returns the Terraform awscc_ec2_carrier_gateway resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::CarrierGateway resource.
+func carrierGatewayResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"carrier_gateway_id": {
 			// Property: CarrierGatewayId
@@ -157,7 +156,7 @@ func carrierGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::CarrierGateway").WithTerraformTypeName("awscc_ec2_carrier_gateway")
 	opts = opts.WithTerraformSchema(schema)
@@ -176,11 +175,11 @@ func carrierGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

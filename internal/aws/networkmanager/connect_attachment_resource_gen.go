@@ -5,7 +5,6 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_networkmanager_connect_attachment", connectAttachmentResourceType)
+	registry.AddResourceFactory("awscc_networkmanager_connect_attachment", connectAttachmentResource)
 }
 
-// connectAttachmentResourceType returns the Terraform awscc_networkmanager_connect_attachment resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::ConnectAttachment resource type.
-func connectAttachmentResourceType(ctx context.Context) (provider.ResourceType, error) {
+// connectAttachmentResource returns the Terraform awscc_networkmanager_connect_attachment resource.
+// This Terraform resource corresponds to the CloudFormation AWS::NetworkManager::ConnectAttachment resource.
+func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"attachment_id": {
 			// Property: AttachmentId
@@ -411,7 +410,7 @@ func connectAttachmentResourceType(ctx context.Context) (provider.ResourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::ConnectAttachment").WithTerraformTypeName("awscc_networkmanager_connect_attachment")
 	opts = opts.WithTerraformSchema(schema)
@@ -442,11 +441,11 @@ func connectAttachmentResourceType(ctx context.Context) (provider.ResourceType, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

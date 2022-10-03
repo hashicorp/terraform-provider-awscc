@@ -5,7 +5,6 @@ package backup
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_backup_backup_plan", backupPlanResourceType)
+	registry.AddResourceFactory("awscc_backup_backup_plan", backupPlanResource)
 }
 
-// backupPlanResourceType returns the Terraform awscc_backup_backup_plan resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupPlan resource type.
-func backupPlanResourceType(ctx context.Context) (provider.ResourceType, error) {
+// backupPlanResource returns the Terraform awscc_backup_backup_plan resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Backup::BackupPlan resource.
+func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"backup_plan": {
 			// Property: BackupPlan
@@ -388,7 +387,7 @@ func backupPlanResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupPlan").WithTerraformTypeName("awscc_backup_backup_plan")
 	opts = opts.WithTerraformSchema(schema)
@@ -422,11 +421,11 @@ func backupPlanResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

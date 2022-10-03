@@ -5,7 +5,7 @@ package imagebuilder
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_imagebuilder_image_pipeline", imagePipelineDataSourceType)
+	registry.AddDataSourceFactory("awscc_imagebuilder_image_pipeline", imagePipelineDataSource)
 }
 
-// imagePipelineDataSourceType returns the Terraform awscc_imagebuilder_image_pipeline data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::ImageBuilder::ImagePipeline resource type.
-func imagePipelineDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// imagePipelineDataSource returns the Terraform awscc_imagebuilder_image_pipeline data source.
+// This Terraform data source corresponds to the CloudFormation AWS::ImageBuilder::ImagePipeline resource.
+func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -235,7 +235,7 @@ func imagePipelineDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ImagePipeline").WithTerraformTypeName("awscc_imagebuilder_image_pipeline")
 	opts = opts.WithTerraformSchema(schema)
@@ -258,11 +258,11 @@ func imagePipelineDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		"timeout_minutes":                    "TimeoutMinutes",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

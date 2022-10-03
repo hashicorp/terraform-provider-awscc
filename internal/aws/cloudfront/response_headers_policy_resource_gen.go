@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudfront_response_headers_policy", responseHeadersPolicyResourceType)
+	registry.AddResourceFactory("awscc_cloudfront_response_headers_policy", responseHeadersPolicyResource)
 }
 
-// responseHeadersPolicyResourceType returns the Terraform awscc_cloudfront_response_headers_policy resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::ResponseHeadersPolicy resource type.
-func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceType, error) {
+// responseHeadersPolicyResource returns the Terraform awscc_cloudfront_response_headers_policy resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudFront::ResponseHeadersPolicy resource.
+func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -689,7 +688,7 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::ResponseHeadersPolicy").WithTerraformTypeName("awscc_cloudfront_response_headers_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -735,11 +734,11 @@ func responseHeadersPolicyResourceType(ctx context.Context) (provider.ResourceTy
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ivs_stream_key", streamKeyResourceType)
+	registry.AddResourceFactory("awscc_ivs_stream_key", streamKeyResource)
 }
 
-// streamKeyResourceType returns the Terraform awscc_ivs_stream_key resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IVS::StreamKey resource type.
-func streamKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
+// streamKeyResource returns the Terraform awscc_ivs_stream_key resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IVS::StreamKey resource.
+func streamKeyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -149,7 +148,7 @@ func streamKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IVS::StreamKey").WithTerraformTypeName("awscc_ivs_stream_key")
 	opts = opts.WithTerraformSchema(schema)
@@ -166,11 +165,11 @@ func streamKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package aps
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_aps_workspace", workspaceResourceType)
+	registry.AddResourceFactory("awscc_aps_workspace", workspaceResource)
 }
 
-// workspaceResourceType returns the Terraform awscc_aps_workspace resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::APS::Workspace resource type.
-func workspaceResourceType(ctx context.Context) (provider.ResourceType, error) {
+// workspaceResource returns the Terraform awscc_aps_workspace resource.
+// This Terraform resource corresponds to the CloudFormation AWS::APS::Workspace resource.
+func workspaceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alert_manager_definition": {
 			// Property: AlertManagerDefinition
@@ -223,7 +222,7 @@ func workspaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::APS::Workspace").WithTerraformTypeName("awscc_aps_workspace")
 	opts = opts.WithTerraformSchema(schema)
@@ -245,11 +244,11 @@ func workspaceResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_s3_multi_region_access_point", multiRegionAccessPointResourceType)
+	registry.AddResourceFactory("awscc_s3_multi_region_access_point", multiRegionAccessPointResource)
 }
 
-// multiRegionAccessPointResourceType returns the Terraform awscc_s3_multi_region_access_point resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::S3::MultiRegionAccessPoint resource type.
-func multiRegionAccessPointResourceType(ctx context.Context) (provider.ResourceType, error) {
+// multiRegionAccessPointResource returns the Terraform awscc_s3_multi_region_access_point resource.
+// This Terraform resource corresponds to the CloudFormation AWS::S3::MultiRegionAccessPoint resource.
+func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alias": {
 			// Property: Alias
@@ -236,7 +235,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (provider.ResourceT
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::MultiRegionAccessPoint").WithTerraformTypeName("awscc_s3_multi_region_access_point")
 	opts = opts.WithTerraformSchema(schema)
@@ -259,11 +258,11 @@ func multiRegionAccessPointResourceType(ctx context.Context) (provider.ResourceT
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

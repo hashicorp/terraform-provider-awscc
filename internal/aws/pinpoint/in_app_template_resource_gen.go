@@ -5,7 +5,6 @@ package pinpoint
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_pinpoint_in_app_template", inAppTemplateResourceType)
+	registry.AddResourceFactory("awscc_pinpoint_in_app_template", inAppTemplateResource)
 }
 
-// inAppTemplateResourceType returns the Terraform awscc_pinpoint_in_app_template resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Pinpoint::InAppTemplate resource type.
-func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, error) {
+// inAppTemplateResource returns the Terraform awscc_pinpoint_in_app_template resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Pinpoint::InAppTemplate resource.
+func inAppTemplateResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -876,7 +875,7 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Pinpoint::InAppTemplate").WithTerraformTypeName("awscc_pinpoint_in_app_template")
 	opts = opts.WithTerraformSchema(schema)
@@ -913,11 +912,11 @@ func inAppTemplateResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

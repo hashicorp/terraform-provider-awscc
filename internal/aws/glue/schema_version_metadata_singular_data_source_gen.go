@@ -5,7 +5,7 @@ package glue
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_glue_schema_version_metadata", schemaVersionMetadataDataSourceType)
+	registry.AddDataSourceFactory("awscc_glue_schema_version_metadata", schemaVersionMetadataDataSource)
 }
 
-// schemaVersionMetadataDataSourceType returns the Terraform awscc_glue_schema_version_metadata data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Glue::SchemaVersionMetadata resource type.
-func schemaVersionMetadataDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// schemaVersionMetadataDataSource returns the Terraform awscc_glue_schema_version_metadata data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Glue::SchemaVersionMetadata resource.
+func schemaVersionMetadataDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"key": {
 			// Property: Key
@@ -72,7 +72,7 @@ func schemaVersionMetadataDataSourceType(ctx context.Context) (provider.DataSour
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::SchemaVersionMetadata").WithTerraformTypeName("awscc_glue_schema_version_metadata")
 	opts = opts.WithTerraformSchema(schema)
@@ -82,11 +82,11 @@ func schemaVersionMetadataDataSourceType(ctx context.Context) (provider.DataSour
 		"value":             "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

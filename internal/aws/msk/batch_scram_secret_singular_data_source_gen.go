@@ -5,7 +5,7 @@ package msk
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_msk_batch_scram_secret", batchScramSecretDataSourceType)
+	registry.AddDataSourceFactory("awscc_msk_batch_scram_secret", batchScramSecretDataSource)
 }
 
-// batchScramSecretDataSourceType returns the Terraform awscc_msk_batch_scram_secret data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::MSK::BatchScramSecret resource type.
-func batchScramSecretDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// batchScramSecretDataSource returns the Terraform awscc_msk_batch_scram_secret data source.
+// This Terraform data source corresponds to the CloudFormation AWS::MSK::BatchScramSecret resource.
+func batchScramSecretDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cluster_arn": {
 			// Property: ClusterArn
@@ -56,7 +56,7 @@ func batchScramSecretDataSourceType(ctx context.Context) (provider.DataSourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MSK::BatchScramSecret").WithTerraformTypeName("awscc_msk_batch_scram_secret")
 	opts = opts.WithTerraformSchema(schema)
@@ -65,11 +65,11 @@ func batchScramSecretDataSourceType(ctx context.Context) (provider.DataSourceTyp
 		"secret_arn_list": "SecretArnList",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package emrcontainers
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_emrcontainers_virtual_clusters", virtualClustersDataSourceType)
+	registry.AddDataSourceFactory("awscc_emrcontainers_virtual_clusters", virtualClustersDataSource)
 }
 
-// virtualClustersDataSourceType returns the Terraform awscc_emrcontainers_virtual_clusters data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EMRContainers::VirtualCluster resource type.
-func virtualClustersDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// virtualClustersDataSource returns the Terraform awscc_emrcontainers_virtual_clusters data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EMRContainers::VirtualCluster resource.
+func virtualClustersDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func virtualClustersDataSourceType(ctx context.Context) (provider.DataSourceType
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("awscc_emrcontainers_virtual_clusters")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

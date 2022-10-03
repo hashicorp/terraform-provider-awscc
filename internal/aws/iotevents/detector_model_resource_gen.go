@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iotevents_detector_model", detectorModelResourceType)
+	registry.AddResourceFactory("awscc_iotevents_detector_model", detectorModelResource)
 }
 
-// detectorModelResourceType returns the Terraform awscc_iotevents_detector_model resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoTEvents::DetectorModel resource type.
-func detectorModelResourceType(ctx context.Context) (provider.ResourceType, error) {
+// detectorModelResource returns the Terraform awscc_iotevents_detector_model resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoTEvents::DetectorModel resource.
+func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"detector_model_definition": {
 			// Property: DetectorModelDefinition
@@ -5674,7 +5673,7 @@ func detectorModelResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTEvents::DetectorModel").WithTerraformTypeName("awscc_iotevents_detector_model")
 	opts = opts.WithTerraformSchema(schema)
@@ -5756,11 +5755,11 @@ func detectorModelResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

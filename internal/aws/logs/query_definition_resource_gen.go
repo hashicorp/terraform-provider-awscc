@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_logs_query_definition", queryDefinitionResourceType)
+	registry.AddResourceFactory("awscc_logs_query_definition", queryDefinitionResource)
 }
 
-// queryDefinitionResourceType returns the Terraform awscc_logs_query_definition resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Logs::QueryDefinition resource type.
-func queryDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// queryDefinitionResource returns the Terraform awscc_logs_query_definition resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Logs::QueryDefinition resource.
+func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"log_group_names": {
 			// Property: LogGroupNames
@@ -118,7 +117,7 @@ func queryDefinitionResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::QueryDefinition").WithTerraformTypeName("awscc_logs_query_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -134,11 +133,11 @@ func queryDefinitionResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

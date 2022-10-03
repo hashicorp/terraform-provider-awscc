@@ -5,7 +5,6 @@ package ecs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ecs_cluster_capacity_provider_associations", clusterCapacityProviderAssociationsResourceType)
+	registry.AddResourceFactory("awscc_ecs_cluster_capacity_provider_associations", clusterCapacityProviderAssociationsResource)
 }
 
-// clusterCapacityProviderAssociationsResourceType returns the Terraform awscc_ecs_cluster_capacity_provider_associations resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource type.
-func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (provider.ResourceType, error) {
+// clusterCapacityProviderAssociationsResource returns the Terraform awscc_ecs_cluster_capacity_provider_associations resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource.
+func clusterCapacityProviderAssociationsResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity_providers": {
 			// Property: CapacityProviders
@@ -152,7 +151,7 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (provi
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::ClusterCapacityProviderAssociations").WithTerraformTypeName("awscc_ecs_cluster_capacity_provider_associations")
 	opts = opts.WithTerraformSchema(schema)
@@ -170,11 +169,11 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (provi
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

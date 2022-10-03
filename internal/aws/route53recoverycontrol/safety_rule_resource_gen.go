@@ -5,7 +5,6 @@ package route53recoverycontrol
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53recoverycontrol_safety_rule", safetyRuleResourceType)
+	registry.AddResourceFactory("awscc_route53recoverycontrol_safety_rule", safetyRuleResource)
 }
 
-// safetyRuleResourceType returns the Terraform awscc_route53recoverycontrol_safety_rule resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryControl::SafetyRule resource type.
-func safetyRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
+// safetyRuleResource returns the Terraform awscc_route53recoverycontrol_safety_rule resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53RecoveryControl::SafetyRule resource.
+func safetyRuleResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"assertion_rule": {
 			// Property: AssertionRule
@@ -351,7 +350,7 @@ func safetyRuleResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::SafetyRule").WithTerraformTypeName("awscc_route53recoverycontrol_safety_rule")
 	opts = opts.WithTerraformSchema(schema)
@@ -399,11 +398,11 @@ func safetyRuleResourceType(ctx context.Context) (provider.ResourceType, error) 
 	),
 	)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

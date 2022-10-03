@@ -5,7 +5,7 @@ package datasync
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_nfs", locationNFSDataSourceType)
+	registry.AddDataSourceFactory("awscc_datasync_location_nfs", locationNFSDataSource)
 }
 
-// locationNFSDataSourceType returns the Terraform awscc_datasync_location_nfs data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationNFS resource type.
-func locationNFSDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// locationNFSDataSource returns the Terraform awscc_datasync_location_nfs data source.
+// This Terraform data source corresponds to the CloudFormation AWS::DataSync::LocationNFS resource.
+func locationNFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"location_arn": {
 			// Property: LocationArn
@@ -214,7 +214,7 @@ func locationNFSDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationNFS").WithTerraformTypeName("awscc_datasync_location_nfs")
 	opts = opts.WithTerraformSchema(schema)
@@ -232,11 +232,11 @@ func locationNFSDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		"version":         "Version",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

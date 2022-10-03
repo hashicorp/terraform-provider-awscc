@@ -5,7 +5,7 @@ package ecs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ecs_cluster_capacity_provider_associations", clusterCapacityProviderAssociationsDataSourceType)
+	registry.AddDataSourceFactory("awscc_ecs_cluster_capacity_provider_associations", clusterCapacityProviderAssociationsDataSource)
 }
 
-// clusterCapacityProviderAssociationsDataSourceType returns the Terraform awscc_ecs_cluster_capacity_provider_associations data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource type.
-func clusterCapacityProviderAssociationsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// clusterCapacityProviderAssociationsDataSource returns the Terraform awscc_ecs_cluster_capacity_provider_associations data source.
+// This Terraform data source corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource.
+func clusterCapacityProviderAssociationsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity_providers": {
 			// Property: CapacityProviders
@@ -124,7 +124,7 @@ func clusterCapacityProviderAssociationsDataSourceType(ctx context.Context) (pro
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::ClusterCapacityProviderAssociations").WithTerraformTypeName("awscc_ecs_cluster_capacity_provider_associations")
 	opts = opts.WithTerraformSchema(schema)
@@ -137,11 +137,11 @@ func clusterCapacityProviderAssociationsDataSourceType(ctx context.Context) (pro
 		"weight":                             "Weight",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

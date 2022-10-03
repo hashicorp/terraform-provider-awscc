@@ -5,7 +5,6 @@ package acmpca
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_acmpca_certificate_authority_activation", certificateAuthorityActivationResourceType)
+	registry.AddResourceFactory("awscc_acmpca_certificate_authority_activation", certificateAuthorityActivationResource)
 }
 
-// certificateAuthorityActivationResourceType returns the Terraform awscc_acmpca_certificate_authority_activation resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthorityActivation resource type.
-func certificateAuthorityActivationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// certificateAuthorityActivationResource returns the Terraform awscc_acmpca_certificate_authority_activation resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthorityActivation resource.
+func certificateAuthorityActivationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"certificate": {
 			// Property: Certificate
@@ -109,7 +108,7 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (provider.R
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthorityActivation").WithTerraformTypeName("awscc_acmpca_certificate_authority_activation")
 	opts = opts.WithTerraformSchema(schema)
@@ -130,11 +129,11 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (provider.R
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

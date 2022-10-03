@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_datasync_location_fsx_ontap", locationFSxONTAPResourceType)
+	registry.AddResourceFactory("awscc_datasync_location_fsx_ontap", locationFSxONTAPResource)
 }
 
-// locationFSxONTAPResourceType returns the Terraform awscc_datasync_location_fsx_ontap resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationFSxONTAP resource type.
-func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, error) {
+// locationFSxONTAPResource returns the Terraform awscc_datasync_location_fsx_ontap resource.
+// This Terraform resource corresponds to the CloudFormation AWS::DataSync::LocationFSxONTAP resource.
+func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"fsx_filesystem_arn": {
 			// Property: FsxFilesystemArn
@@ -435,7 +434,7 @@ func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxONTAP").WithTerraformTypeName("awscc_datasync_location_fsx_ontap")
 	opts = opts.WithTerraformSchema(schema)
@@ -467,11 +466,11 @@ func locationFSxONTAPResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

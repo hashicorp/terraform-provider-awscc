@@ -5,7 +5,7 @@ package route53
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_route53_health_check", healthCheckDataSourceType)
+	registry.AddDataSourceFactory("awscc_route53_health_check", healthCheckDataSource)
 }
 
-// healthCheckDataSourceType returns the Terraform awscc_route53_health_check data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Route53::HealthCheck resource type.
-func healthCheckDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// healthCheckDataSource returns the Terraform awscc_route53_health_check data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Route53::HealthCheck resource.
+func healthCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"health_check_config": {
 			// Property: HealthCheckConfig
@@ -322,7 +322,7 @@ func healthCheckDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::HealthCheck").WithTerraformTypeName("awscc_route53_health_check")
 	opts = opts.WithTerraformSchema(schema)
@@ -353,11 +353,11 @@ func healthCheckDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		"value":                           "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

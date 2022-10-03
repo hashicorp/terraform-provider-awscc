@@ -5,7 +5,6 @@ package appstream
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_appstream_application_entitlement_association", applicationEntitlementAssociationResourceType)
+	registry.AddResourceFactory("awscc_appstream_application_entitlement_association", applicationEntitlementAssociationResource)
 }
 
-// applicationEntitlementAssociationResourceType returns the Terraform awscc_appstream_application_entitlement_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AppStream::ApplicationEntitlementAssociation resource type.
-func applicationEntitlementAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// applicationEntitlementAssociationResource returns the Terraform awscc_appstream_application_entitlement_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AppStream::ApplicationEntitlementAssociation resource.
+func applicationEntitlementAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_identifier": {
 			// Property: ApplicationIdentifier
@@ -74,7 +73,7 @@ func applicationEntitlementAssociationResourceType(ctx context.Context) (provide
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppStream::ApplicationEntitlementAssociation").WithTerraformTypeName("awscc_appstream_application_entitlement_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -89,11 +88,11 @@ func applicationEntitlementAssociationResourceType(ctx context.Context) (provide
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

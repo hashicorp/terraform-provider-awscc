@@ -5,7 +5,6 @@ package mediaconnect
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_mediaconnect_flow_vpc_interface", flowVpcInterfaceResourceType)
+	registry.AddResourceFactory("awscc_mediaconnect_flow_vpc_interface", flowVpcInterfaceResource)
 }
 
-// flowVpcInterfaceResourceType returns the Terraform awscc_mediaconnect_flow_vpc_interface resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowVpcInterface resource type.
-func flowVpcInterfaceResourceType(ctx context.Context) (provider.ResourceType, error) {
+// flowVpcInterfaceResource returns the Terraform awscc_mediaconnect_flow_vpc_interface resource.
+// This Terraform resource corresponds to the CloudFormation AWS::MediaConnect::FlowVpcInterface resource.
+func flowVpcInterfaceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"flow_arn": {
 			// Property: FlowArn
@@ -119,7 +118,7 @@ func flowVpcInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowVpcInterface").WithTerraformTypeName("awscc_mediaconnect_flow_vpc_interface")
 	opts = opts.WithTerraformSchema(schema)
@@ -137,11 +136,11 @@ func flowVpcInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

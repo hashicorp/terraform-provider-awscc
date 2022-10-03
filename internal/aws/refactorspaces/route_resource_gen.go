@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_refactorspaces_route", routeResourceType)
+	registry.AddResourceFactory("awscc_refactorspaces_route", routeResource)
 }
 
-// routeResourceType returns the Terraform awscc_refactorspaces_route resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RefactorSpaces::Route resource type.
-func routeResourceType(ctx context.Context) (provider.ResourceType, error) {
+// routeResource returns the Terraform awscc_refactorspaces_route resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RefactorSpaces::Route resource.
+func routeResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_identifier": {
 			// Property: ApplicationIdentifier
@@ -380,7 +379,7 @@ func routeResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RefactorSpaces::Route").WithTerraformTypeName("awscc_refactorspaces_route")
 	opts = opts.WithTerraformSchema(schema)
@@ -414,11 +413,11 @@ func routeResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

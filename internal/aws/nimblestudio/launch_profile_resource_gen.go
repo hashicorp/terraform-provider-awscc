@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_nimblestudio_launch_profile", launchProfileResourceType)
+	registry.AddResourceFactory("awscc_nimblestudio_launch_profile", launchProfileResource)
 }
 
-// launchProfileResourceType returns the Terraform awscc_nimblestudio_launch_profile resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::NimbleStudio::LaunchProfile resource type.
-func launchProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
+// launchProfileResource returns the Terraform awscc_nimblestudio_launch_profile resource.
+// This Terraform resource corresponds to the CloudFormation AWS::NimbleStudio::LaunchProfile resource.
+func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
@@ -443,7 +442,7 @@ func launchProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::LaunchProfile").WithTerraformTypeName("awscc_nimblestudio_launch_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -474,11 +473,11 @@ func launchProfileResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_networkmanager_connect_attachments", connectAttachmentsDataSourceType)
+	registry.AddDataSourceFactory("awscc_networkmanager_connect_attachments", connectAttachmentsDataSource)
 }
 
-// connectAttachmentsDataSourceType returns the Terraform awscc_networkmanager_connect_attachments data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::NetworkManager::ConnectAttachment resource type.
-func connectAttachmentsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// connectAttachmentsDataSource returns the Terraform awscc_networkmanager_connect_attachments data source.
+// This Terraform data source corresponds to the CloudFormation AWS::NetworkManager::ConnectAttachment resource.
+func connectAttachmentsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func connectAttachmentsDataSourceType(ctx context.Context) (provider.DataSourceT
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::ConnectAttachment").WithTerraformTypeName("awscc_networkmanager_connect_attachments")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

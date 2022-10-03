@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_elasticache_user", userResourceType)
+	registry.AddResourceFactory("awscc_elasticache_user", userResource)
 }
 
-// userResourceType returns the Terraform awscc_elasticache_user resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ElastiCache::User resource type.
-func userResourceType(ctx context.Context) (provider.ResourceType, error) {
+// userResource returns the Terraform awscc_elasticache_user resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ElastiCache::User resource.
+func userResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_string": {
 			// Property: AccessString
@@ -179,7 +178,7 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::User").WithTerraformTypeName("awscc_elasticache_user")
 	opts = opts.WithTerraformSchema(schema)
@@ -204,11 +203,11 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

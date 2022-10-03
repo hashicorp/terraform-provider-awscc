@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudformation_type_activation", typeActivationResourceType)
+	registry.AddResourceFactory("awscc_cloudformation_type_activation", typeActivationResource)
 }
 
-// typeActivationResourceType returns the Terraform awscc_cloudformation_type_activation resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::TypeActivation resource type.
-func typeActivationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// typeActivationResource returns the Terraform awscc_cloudformation_type_activation resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudFormation::TypeActivation resource.
+func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -309,7 +308,7 @@ func typeActivationResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::TypeActivation").WithTerraformTypeName("awscc_cloudformation_type_activation")
 	opts = opts.WithTerraformSchema(schema)
@@ -346,11 +345,11 @@ func typeActivationResourceType(ctx context.Context) (provider.ResourceType, err
 	),
 	)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package iotevents
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iotevents_alarm_model", alarmModelDataSourceType)
+	registry.AddDataSourceFactory("awscc_iotevents_alarm_model", alarmModelDataSource)
 }
 
-// alarmModelDataSourceType returns the Terraform awscc_iotevents_alarm_model data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoTEvents::AlarmModel resource type.
-func alarmModelDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// alarmModelDataSource returns the Terraform awscc_iotevents_alarm_model data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoTEvents::AlarmModel resource.
+func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alarm_capabilities": {
 			// Property: AlarmCapabilities
@@ -1188,7 +1188,7 @@ func alarmModelDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTEvents::AlarmModel").WithTerraformTypeName("awscc_iotevents_alarm_model")
 	opts = opts.WithTerraformSchema(schema)
@@ -1256,11 +1256,11 @@ func alarmModelDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		"value":                        "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

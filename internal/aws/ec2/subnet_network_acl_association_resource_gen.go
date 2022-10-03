@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_subnet_network_acl_association", subnetNetworkAclAssociationResourceType)
+	registry.AddResourceFactory("awscc_ec2_subnet_network_acl_association", subnetNetworkAclAssociationResource)
 }
 
-// subnetNetworkAclAssociationResourceType returns the Terraform awscc_ec2_subnet_network_acl_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::SubnetNetworkAclAssociation resource type.
-func subnetNetworkAclAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// subnetNetworkAclAssociationResource returns the Terraform awscc_ec2_subnet_network_acl_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::SubnetNetworkAclAssociation resource.
+func subnetNetworkAclAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"association_id": {
 			// Property: AssociationId
@@ -78,7 +77,7 @@ func subnetNetworkAclAssociationResourceType(ctx context.Context) (provider.Reso
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SubnetNetworkAclAssociation").WithTerraformTypeName("awscc_ec2_subnet_network_acl_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -93,11 +92,11 @@ func subnetNetworkAclAssociationResourceType(ctx context.Context) (provider.Reso
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

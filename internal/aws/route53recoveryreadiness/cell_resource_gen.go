@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53recoveryreadiness_cell", cellResourceType)
+	registry.AddResourceFactory("awscc_route53recoveryreadiness_cell", cellResource)
 }
 
-// cellResourceType returns the Terraform awscc_route53recoveryreadiness_cell resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::Cell resource type.
-func cellResourceType(ctx context.Context) (provider.ResourceType, error) {
+// cellResource returns the Terraform awscc_route53recoveryreadiness_cell resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53RecoveryReadiness::Cell resource.
+func cellResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cell_arn": {
 			// Property: CellArn
@@ -173,7 +172,7 @@ func cellResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::Cell").WithTerraformTypeName("awscc_route53recoveryreadiness_cell")
 	opts = opts.WithTerraformSchema(schema)
@@ -192,11 +191,11 @@ func cellResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

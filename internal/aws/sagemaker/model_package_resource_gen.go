@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_sagemaker_model_package", modelPackageResourceType)
+	registry.AddResourceFactory("awscc_sagemaker_model_package", modelPackageResource)
 }
 
-// modelPackageResourceType returns the Terraform awscc_sagemaker_model_package resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelPackage resource type.
-func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error) {
+// modelPackageResource returns the Terraform awscc_sagemaker_model_package resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SageMaker::ModelPackage resource.
+func modelPackageResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"additional_inference_specification_definition": {
 			// Property: AdditionalInferenceSpecificationDefinition
@@ -4675,7 +4674,7 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackage").WithTerraformTypeName("awscc_sagemaker_model_package")
 	opts = opts.WithTerraformSchema(schema)
@@ -4788,11 +4787,11 @@ func modelPackageResourceType(ctx context.Context) (provider.ResourceType, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

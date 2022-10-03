@@ -5,7 +5,7 @@ package autoscaling
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_autoscaling_warm_pool", warmPoolDataSourceType)
+	registry.AddDataSourceFactory("awscc_autoscaling_warm_pool", warmPoolDataSource)
 }
 
-// warmPoolDataSourceType returns the Terraform awscc_autoscaling_warm_pool data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::AutoScaling::WarmPool resource type.
-func warmPoolDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// warmPoolDataSource returns the Terraform awscc_autoscaling_warm_pool data source.
+// This Terraform data source corresponds to the CloudFormation AWS::AutoScaling::WarmPool resource.
+func warmPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"auto_scaling_group_name": {
 			// Property: AutoScalingGroupName
@@ -93,7 +93,7 @@ func warmPoolDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::WarmPool").WithTerraformTypeName("awscc_autoscaling_warm_pool")
 	opts = opts.WithTerraformSchema(schema)
@@ -106,11 +106,11 @@ func warmPoolDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		"reuse_on_scale_in":           "ReuseOnScaleIn",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

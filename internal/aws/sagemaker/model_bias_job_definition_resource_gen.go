@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_sagemaker_model_bias_job_definition", modelBiasJobDefinitionResourceType)
+	registry.AddResourceFactory("awscc_sagemaker_model_bias_job_definition", modelBiasJobDefinitionResource)
 }
 
-// modelBiasJobDefinitionResourceType returns the Terraform awscc_sagemaker_model_bias_job_definition resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelBiasJobDefinition resource type.
-func modelBiasJobDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// modelBiasJobDefinitionResource returns the Terraform awscc_sagemaker_model_bias_job_definition resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SageMaker::ModelBiasJobDefinition resource.
+func modelBiasJobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -1038,7 +1037,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (provider.ResourceT
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelBiasJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_bias_job_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -1097,11 +1096,11 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (provider.ResourceT
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

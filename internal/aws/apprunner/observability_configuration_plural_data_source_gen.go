@@ -5,7 +5,7 @@ package apprunner
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_apprunner_observability_configurations", observabilityConfigurationsDataSourceType)
+	registry.AddDataSourceFactory("awscc_apprunner_observability_configurations", observabilityConfigurationsDataSource)
 }
 
-// observabilityConfigurationsDataSourceType returns the Terraform awscc_apprunner_observability_configurations data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::AppRunner::ObservabilityConfiguration resource type.
-func observabilityConfigurationsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// observabilityConfigurationsDataSource returns the Terraform awscc_apprunner_observability_configurations data source.
+// This Terraform data source corresponds to the CloudFormation AWS::AppRunner::ObservabilityConfiguration resource.
+func observabilityConfigurationsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func observabilityConfigurationsDataSourceType(ctx context.Context) (provider.Da
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::ObservabilityConfiguration").WithTerraformTypeName("awscc_apprunner_observability_configurations")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

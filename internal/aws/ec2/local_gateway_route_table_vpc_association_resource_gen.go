@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_local_gateway_route_table_vpc_association", localGatewayRouteTableVPCAssociationResourceType)
+	registry.AddResourceFactory("awscc_ec2_local_gateway_route_table_vpc_association", localGatewayRouteTableVPCAssociationResource)
 }
 
-// localGatewayRouteTableVPCAssociationResourceType returns the Terraform awscc_ec2_local_gateway_route_table_vpc_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::LocalGatewayRouteTableVPCAssociation resource type.
-func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// localGatewayRouteTableVPCAssociationResource returns the Terraform awscc_ec2_local_gateway_route_table_vpc_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::LocalGatewayRouteTableVPCAssociation resource.
+func localGatewayRouteTableVPCAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"local_gateway_id": {
 			// Property: LocalGatewayId
@@ -171,7 +170,7 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (prov
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::LocalGatewayRouteTableVPCAssociation").WithTerraformTypeName("awscc_ec2_local_gateway_route_table_vpc_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -191,11 +190,11 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (prov
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

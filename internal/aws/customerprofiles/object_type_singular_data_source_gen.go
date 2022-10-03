@@ -5,7 +5,7 @@ package customerprofiles
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_customerprofiles_object_type", objectTypeDataSourceType)
+	registry.AddDataSourceFactory("awscc_customerprofiles_object_type", objectTypeDataSource)
 }
 
-// objectTypeDataSourceType returns the Terraform awscc_customerprofiles_object_type data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CustomerProfiles::ObjectType resource type.
-func objectTypeDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// objectTypeDataSource returns the Terraform awscc_customerprofiles_object_type data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CustomerProfiles::ObjectType resource.
+func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"allow_profile_creation": {
 			// Property: AllowProfileCreation
@@ -371,7 +371,7 @@ func objectTypeDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::ObjectType").WithTerraformTypeName("awscc_customerprofiles_object_type")
 	opts = opts.WithTerraformSchema(schema)
@@ -400,11 +400,11 @@ func objectTypeDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		"value":                  "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

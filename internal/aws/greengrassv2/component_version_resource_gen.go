@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_greengrassv2_component_version", componentVersionResourceType)
+	registry.AddResourceFactory("awscc_greengrassv2_component_version", componentVersionResource)
 }
 
-// componentVersionResourceType returns the Terraform awscc_greengrassv2_component_version resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::GreengrassV2::ComponentVersion resource type.
-func componentVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// componentVersionResource returns the Terraform awscc_greengrassv2_component_version resource.
+// This Terraform resource corresponds to the CloudFormation AWS::GreengrassV2::ComponentVersion resource.
+func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -722,7 +721,7 @@ func componentVersionResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GreengrassV2::ComponentVersion").WithTerraformTypeName("awscc_greengrassv2_component_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -776,11 +775,11 @@ func componentVersionResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

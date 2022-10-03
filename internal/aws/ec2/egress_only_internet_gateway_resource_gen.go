@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_egress_only_internet_gateway", egressOnlyInternetGatewayResourceType)
+	registry.AddResourceFactory("awscc_ec2_egress_only_internet_gateway", egressOnlyInternetGatewayResource)
 }
 
-// egressOnlyInternetGatewayResourceType returns the Terraform awscc_ec2_egress_only_internet_gateway resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::EgressOnlyInternetGateway resource type.
-func egressOnlyInternetGatewayResourceType(ctx context.Context) (provider.ResourceType, error) {
+// egressOnlyInternetGatewayResource returns the Terraform awscc_ec2_egress_only_internet_gateway resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::EgressOnlyInternetGateway resource.
+func egressOnlyInternetGatewayResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -57,7 +56,7 @@ func egressOnlyInternetGatewayResourceType(ctx context.Context) (provider.Resour
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EgressOnlyInternetGateway").WithTerraformTypeName("awscc_ec2_egress_only_internet_gateway")
 	opts = opts.WithTerraformSchema(schema)
@@ -71,11 +70,11 @@ func egressOnlyInternetGatewayResourceType(ctx context.Context) (provider.Resour
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

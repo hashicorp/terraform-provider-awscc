@@ -5,7 +5,7 @@ package route53resolver
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_route53resolver_resolver_query_logging_configs", resolverQueryLoggingConfigsDataSourceType)
+	registry.AddDataSourceFactory("awscc_route53resolver_resolver_query_logging_configs", resolverQueryLoggingConfigsDataSource)
 }
 
-// resolverQueryLoggingConfigsDataSourceType returns the Terraform awscc_route53resolver_resolver_query_logging_configs data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfig resource type.
-func resolverQueryLoggingConfigsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// resolverQueryLoggingConfigsDataSource returns the Terraform awscc_route53resolver_resolver_query_logging_configs data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfig resource.
+func resolverQueryLoggingConfigsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func resolverQueryLoggingConfigsDataSourceType(ctx context.Context) (provider.Da
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfig").WithTerraformTypeName("awscc_route53resolver_resolver_query_logging_configs")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

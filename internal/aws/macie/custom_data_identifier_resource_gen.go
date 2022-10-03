@@ -5,7 +5,6 @@ package macie
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_macie_custom_data_identifier", customDataIdentifierResourceType)
+	registry.AddResourceFactory("awscc_macie_custom_data_identifier", customDataIdentifierResource)
 }
 
-// customDataIdentifierResourceType returns the Terraform awscc_macie_custom_data_identifier resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Macie::CustomDataIdentifier resource type.
-func customDataIdentifierResourceType(ctx context.Context) (provider.ResourceType, error) {
+// customDataIdentifierResource returns the Terraform awscc_macie_custom_data_identifier resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Macie::CustomDataIdentifier resource.
+func customDataIdentifierResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -155,7 +154,7 @@ func customDataIdentifierResourceType(ctx context.Context) (provider.ResourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::CustomDataIdentifier").WithTerraformTypeName("awscc_macie_custom_data_identifier")
 	opts = opts.WithTerraformSchema(schema)
@@ -175,11 +174,11 @@ func customDataIdentifierResourceType(ctx context.Context) (provider.ResourceTyp
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

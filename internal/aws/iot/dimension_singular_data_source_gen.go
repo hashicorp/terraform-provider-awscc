@@ -5,7 +5,7 @@ package iot
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iot_dimension", dimensionDataSourceType)
+	registry.AddDataSourceFactory("awscc_iot_dimension", dimensionDataSource)
 }
 
-// dimensionDataSourceType returns the Terraform awscc_iot_dimension data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoT::Dimension resource type.
-func dimensionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// dimensionDataSource returns the Terraform awscc_iot_dimension data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoT::Dimension resource.
+func dimensionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -145,7 +145,7 @@ func dimensionDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::Dimension").WithTerraformTypeName("awscc_iot_dimension")
 	opts = opts.WithTerraformSchema(schema)
@@ -159,11 +159,11 @@ func dimensionDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		"value":         "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package lambda
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_lambda_url", urlDataSourceType)
+	registry.AddDataSourceFactory("awscc_lambda_url", urlDataSource)
 }
 
-// urlDataSourceType returns the Terraform awscc_lambda_url data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Lambda::Url resource type.
-func urlDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// urlDataSource returns the Terraform awscc_lambda_url data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Lambda::Url resource.
+func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"auth_type": {
 			// Property: AuthType
@@ -227,7 +227,7 @@ func urlDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lambda::Url").WithTerraformTypeName("awscc_lambda_url")
 	opts = opts.WithTerraformSchema(schema)
@@ -247,11 +247,11 @@ func urlDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"target_function_arn": "TargetFunctionArn",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

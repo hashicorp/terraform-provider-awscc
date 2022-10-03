@@ -5,7 +5,6 @@ package dynamodb
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_dynamodb_global_table", globalTableResourceType)
+	registry.AddResourceFactory("awscc_dynamodb_global_table", globalTableResource)
 }
 
-// globalTableResourceType returns the Terraform awscc_dynamodb_global_table resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::DynamoDB::GlobalTable resource type.
-func globalTableResourceType(ctx context.Context) (provider.ResourceType, error) {
+// globalTableResource returns the Terraform awscc_dynamodb_global_table resource.
+// This Terraform resource corresponds to the CloudFormation AWS::DynamoDB::GlobalTable resource.
+func globalTableResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -1477,7 +1476,7 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DynamoDB::GlobalTable").WithTerraformTypeName("awscc_dynamodb_global_table")
 	opts = opts.WithTerraformSchema(schema)
@@ -1535,11 +1534,11 @@ func globalTableResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(1200)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lightsail_alarm", alarmResourceType)
+	registry.AddResourceFactory("awscc_lightsail_alarm", alarmResource)
 }
 
-// alarmResourceType returns the Terraform awscc_lightsail_alarm resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Lightsail::Alarm resource type.
-func alarmResourceType(ctx context.Context) (provider.ResourceType, error) {
+// alarmResource returns the Terraform awscc_lightsail_alarm resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Lightsail::Alarm resource.
+func alarmResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alarm_arn": {
 			// Property: AlarmArn
@@ -230,7 +229,7 @@ func alarmResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::Alarm").WithTerraformTypeName("awscc_lightsail_alarm")
 	opts = opts.WithTerraformSchema(schema)
@@ -255,11 +254,11 @@ func alarmResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iot_role_alias", roleAliasResourceType)
+	registry.AddResourceFactory("awscc_iot_role_alias", roleAliasResource)
 }
 
-// roleAliasResourceType returns the Terraform awscc_iot_role_alias resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoT::RoleAlias resource type.
-func roleAliasResourceType(ctx context.Context) (provider.ResourceType, error) {
+// roleAliasResource returns the Terraform awscc_iot_role_alias resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoT::RoleAlias resource.
+func roleAliasResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"credential_duration_seconds": {
 			// Property: CredentialDurationSeconds
@@ -173,7 +172,7 @@ func roleAliasResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::RoleAlias").WithTerraformTypeName("awscc_iot_role_alias")
 	opts = opts.WithTerraformSchema(schema)
@@ -192,11 +191,11 @@ func roleAliasResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

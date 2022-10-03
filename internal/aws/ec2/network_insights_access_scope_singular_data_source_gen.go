@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_network_insights_access_scope", networkInsightsAccessScopeDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_network_insights_access_scope", networkInsightsAccessScopeDataSource)
 }
 
-// networkInsightsAccessScopeDataSourceType returns the Terraform awscc_ec2_network_insights_access_scope data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAccessScope resource type.
-func networkInsightsAccessScopeDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// networkInsightsAccessScopeDataSource returns the Terraform awscc_ec2_network_insights_access_scope data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::NetworkInsightsAccessScope resource.
+func networkInsightsAccessScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"created_date": {
 			// Property: CreatedDate
@@ -874,7 +874,7 @@ func networkInsightsAccessScopeDataSourceType(ctx context.Context) (provider.Dat
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsAccessScope").WithTerraformTypeName("awscc_ec2_network_insights_access_scope")
 	opts = opts.WithTerraformSchema(schema)
@@ -904,11 +904,11 @@ func networkInsightsAccessScopeDataSourceType(ctx context.Context) (provider.Dat
 		"value":                             "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

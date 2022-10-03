@@ -5,7 +5,6 @@ package autoscaling
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_autoscaling_warm_pool", warmPoolResourceType)
+	registry.AddResourceFactory("awscc_autoscaling_warm_pool", warmPoolResource)
 }
 
-// warmPoolResourceType returns the Terraform awscc_autoscaling_warm_pool resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AutoScaling::WarmPool resource type.
-func warmPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
+// warmPoolResource returns the Terraform awscc_autoscaling_warm_pool resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AutoScaling::WarmPool resource.
+func warmPoolResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"auto_scaling_group_name": {
 			// Property: AutoScalingGroupName
@@ -120,7 +119,7 @@ func warmPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::WarmPool").WithTerraformTypeName("awscc_autoscaling_warm_pool")
 	opts = opts.WithTerraformSchema(schema)
@@ -138,11 +137,11 @@ func warmPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

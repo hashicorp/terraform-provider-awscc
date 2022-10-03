@@ -5,7 +5,7 @@ package rds
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_rds_db_parameter_group", dBParameterGroupDataSourceType)
+	registry.AddDataSourceFactory("awscc_rds_db_parameter_group", dBParameterGroupDataSource)
 }
 
-// dBParameterGroupDataSourceType returns the Terraform awscc_rds_db_parameter_group data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::RDS::DBParameterGroup resource type.
-func dBParameterGroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// dBParameterGroupDataSource returns the Terraform awscc_rds_db_parameter_group data source.
+// This Terraform data source corresponds to the CloudFormation AWS::RDS::DBParameterGroup resource.
+func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"db_parameter_group_name": {
 			// Property: DBParameterGroupName
@@ -129,7 +129,7 @@ func dBParameterGroupDataSourceType(ctx context.Context) (provider.DataSourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBParameterGroup").WithTerraformTypeName("awscc_rds_db_parameter_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -143,11 +143,11 @@ func dBParameterGroupDataSourceType(ctx context.Context) (provider.DataSourceTyp
 		"value":                   "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_personalize_dataset_group", datasetGroupResourceType)
+	registry.AddResourceFactory("awscc_personalize_dataset_group", datasetGroupResource)
 }
 
-// datasetGroupResourceType returns the Terraform awscc_personalize_dataset_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Personalize::DatasetGroup resource type.
-func datasetGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// datasetGroupResource returns the Terraform awscc_personalize_dataset_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Personalize::DatasetGroup resource.
+func datasetGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"dataset_group_arn": {
 			// Property: DatasetGroupArn
@@ -148,7 +147,7 @@ func datasetGroupResourceType(ctx context.Context) (provider.ResourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Personalize::DatasetGroup").WithTerraformTypeName("awscc_personalize_dataset_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -165,11 +164,11 @@ func datasetGroupResourceType(ctx context.Context) (provider.ResourceType, error
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

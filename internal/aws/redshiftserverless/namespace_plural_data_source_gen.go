@@ -5,7 +5,7 @@ package redshiftserverless
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_redshiftserverless_namespaces", namespacesDataSourceType)
+	registry.AddDataSourceFactory("awscc_redshiftserverless_namespaces", namespacesDataSource)
 }
 
-// namespacesDataSourceType returns the Terraform awscc_redshiftserverless_namespaces data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::RedshiftServerless::Namespace resource type.
-func namespacesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// namespacesDataSource returns the Terraform awscc_redshiftserverless_namespaces data source.
+// This Terraform data source corresponds to the CloudFormation AWS::RedshiftServerless::Namespace resource.
+func namespacesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func namespacesDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RedshiftServerless::Namespace").WithTerraformTypeName("awscc_redshiftserverless_namespaces")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

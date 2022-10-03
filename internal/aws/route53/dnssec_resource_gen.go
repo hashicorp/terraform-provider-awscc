@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53_dnssec", dNSSECResourceType)
+	registry.AddResourceFactory("awscc_route53_dnssec", dNSSECResource)
 }
 
-// dNSSECResourceType returns the Terraform awscc_route53_dnssec resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53::DNSSEC resource type.
-func dNSSECResourceType(ctx context.Context) (provider.ResourceType, error) {
+// dNSSECResource returns the Terraform awscc_route53_dnssec resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53::DNSSEC resource.
+func dNSSECResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"hosted_zone_id": {
 			// Property: HostedZoneId
@@ -58,7 +57,7 @@ func dNSSECResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::DNSSEC").WithTerraformTypeName("awscc_route53_dnssec")
 	opts = opts.WithTerraformSchema(schema)
@@ -71,11 +70,11 @@ func dNSSECResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

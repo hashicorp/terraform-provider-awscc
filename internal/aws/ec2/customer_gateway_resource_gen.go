@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_customer_gateway", customerGatewayResourceType)
+	registry.AddResourceFactory("awscc_ec2_customer_gateway", customerGatewayResource)
 }
 
-// customerGatewayResourceType returns the Terraform awscc_ec2_customer_gateway resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::CustomerGateway resource type.
-func customerGatewayResourceType(ctx context.Context) (provider.ResourceType, error) {
+// customerGatewayResource returns the Terraform awscc_ec2_customer_gateway resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::CustomerGateway resource.
+func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"bgp_asn": {
 			// Property: BgpAsn
@@ -145,7 +144,7 @@ func customerGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::CustomerGateway").WithTerraformTypeName("awscc_ec2_customer_gateway")
 	opts = opts.WithTerraformSchema(schema)
@@ -164,11 +163,11 @@ func customerGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

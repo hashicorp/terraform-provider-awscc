@@ -5,7 +5,7 @@ package lakeformation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_lakeformation_tag", tagDataSourceType)
+	registry.AddDataSourceFactory("awscc_lakeformation_tag", tagDataSource)
 }
 
-// tagDataSourceType returns the Terraform awscc_lakeformation_tag data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::LakeFormation::Tag resource type.
-func tagDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// tagDataSource returns the Terraform awscc_lakeformation_tag data source.
+// This Terraform data source corresponds to the CloudFormation AWS::LakeFormation::Tag resource.
+func tagDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"catalog_id": {
 			// Property: CatalogId
@@ -81,7 +81,7 @@ func tagDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LakeFormation::Tag").WithTerraformTypeName("awscc_lakeformation_tag")
 	opts = opts.WithTerraformSchema(schema)
@@ -91,11 +91,11 @@ func tagDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"tag_values": "TagValues",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

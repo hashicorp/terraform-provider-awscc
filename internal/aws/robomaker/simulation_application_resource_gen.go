@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_robomaker_simulation_application", simulationApplicationResourceType)
+	registry.AddResourceFactory("awscc_robomaker_simulation_application", simulationApplicationResource)
 }
 
-// simulationApplicationResourceType returns the Terraform awscc_robomaker_simulation_application resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RoboMaker::SimulationApplication resource type.
-func simulationApplicationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// simulationApplicationResource returns the Terraform awscc_robomaker_simulation_application resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RoboMaker::SimulationApplication resource.
+func simulationApplicationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -417,7 +416,7 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RoboMaker::SimulationApplication").WithTerraformTypeName("awscc_robomaker_simulation_application")
 	opts = opts.WithTerraformSchema(schema)
@@ -442,11 +441,11 @@ func simulationApplicationResourceType(ctx context.Context) (provider.ResourceTy
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package panorama
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_panorama_application_instance", applicationInstanceDataSourceType)
+	registry.AddDataSourceFactory("awscc_panorama_application_instance", applicationInstanceDataSource)
 }
 
-// applicationInstanceDataSourceType returns the Terraform awscc_panorama_application_instance data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Panorama::ApplicationInstance resource type.
-func applicationInstanceDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// applicationInstanceDataSource returns the Terraform awscc_panorama_application_instance data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Panorama::ApplicationInstance resource.
+func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_instance_id": {
 			// Property: ApplicationInstanceId
@@ -326,7 +326,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (provider.DataSource
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Panorama::ApplicationInstance").WithTerraformTypeName("awscc_panorama_application_instance")
 	opts = opts.WithTerraformSchema(schema)
@@ -354,11 +354,11 @@ func applicationInstanceDataSourceType(ctx context.Context) (provider.DataSource
 		"value":                               "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

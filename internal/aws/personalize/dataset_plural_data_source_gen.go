@@ -5,7 +5,7 @@ package personalize
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_personalize_datasets", datasetsDataSourceType)
+	registry.AddDataSourceFactory("awscc_personalize_datasets", datasetsDataSource)
 }
 
-// datasetsDataSourceType returns the Terraform awscc_personalize_datasets data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Personalize::Dataset resource type.
-func datasetsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// datasetsDataSource returns the Terraform awscc_personalize_datasets data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Personalize::Dataset resource.
+func datasetsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func datasetsDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Personalize::Dataset").WithTerraformTypeName("awscc_personalize_datasets")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

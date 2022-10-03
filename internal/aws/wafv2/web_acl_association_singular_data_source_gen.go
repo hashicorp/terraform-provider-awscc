@@ -5,7 +5,7 @@ package wafv2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_wafv2_web_acl_association", webACLAssociationDataSourceType)
+	registry.AddDataSourceFactory("awscc_wafv2_web_acl_association", webACLAssociationDataSource)
 }
 
-// webACLAssociationDataSourceType returns the Terraform awscc_wafv2_web_acl_association data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::WAFv2::WebACLAssociation resource type.
-func webACLAssociationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// webACLAssociationDataSource returns the Terraform awscc_wafv2_web_acl_association data source.
+// This Terraform data source corresponds to the CloudFormation AWS::WAFv2::WebACLAssociation resource.
+func webACLAssociationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_arn": {
 			// Property: ResourceArn
@@ -56,7 +56,7 @@ func webACLAssociationDataSourceType(ctx context.Context) (provider.DataSourceTy
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::WebACLAssociation").WithTerraformTypeName("awscc_wafv2_web_acl_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -65,11 +65,11 @@ func webACLAssociationDataSourceType(ctx context.Context) (provider.DataSourceTy
 		"web_acl_arn":  "WebACLArn",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

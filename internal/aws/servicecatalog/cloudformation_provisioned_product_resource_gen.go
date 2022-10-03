@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_servicecatalog_cloudformation_provisioned_product", cloudFormationProvisionedProductResourceType)
+	registry.AddResourceFactory("awscc_servicecatalog_cloudformation_provisioned_product", cloudFormationProvisionedProductResource)
 }
 
-// cloudFormationProvisionedProductResourceType returns the Terraform awscc_servicecatalog_cloudformation_provisioned_product resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalog::CloudFormationProvisionedProduct resource type.
-func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider.ResourceType, error) {
+// cloudFormationProvisionedProductResource returns the Terraform awscc_servicecatalog_cloudformation_provisioned_product resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ServiceCatalog::CloudFormationProvisionedProduct resource.
+func cloudFormationProvisionedProductResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"accept_language": {
 			// Property: AcceptLanguage
@@ -531,7 +530,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::CloudFormationProvisionedProduct").WithTerraformTypeName("awscc_servicecatalog_cloudformation_provisioned_product")
 	opts = opts.WithTerraformSchema(schema)
@@ -568,11 +567,11 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (provider
 
 	opts = opts.WithUpdateTimeoutInMinutes(720)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

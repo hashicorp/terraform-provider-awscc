@@ -5,7 +5,6 @@ package imagebuilder
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_imagebuilder_infrastructure_configuration", infrastructureConfigurationResourceType)
+	registry.AddResourceFactory("awscc_imagebuilder_infrastructure_configuration", infrastructureConfigurationResource)
 }
 
-// infrastructureConfigurationResourceType returns the Terraform awscc_imagebuilder_infrastructure_configuration resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::InfrastructureConfiguration resource type.
-func infrastructureConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// infrastructureConfigurationResource returns the Terraform awscc_imagebuilder_infrastructure_configuration resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ImageBuilder::InfrastructureConfiguration resource.
+func infrastructureConfigurationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -364,7 +363,7 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::InfrastructureConfiguration").WithTerraformTypeName("awscc_imagebuilder_infrastructure_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -395,11 +394,11 @@ func infrastructureConfigurationResourceType(ctx context.Context) (provider.Reso
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

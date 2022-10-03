@@ -5,7 +5,7 @@ package mediapackage
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_mediapackage_origin_endpoints", originEndpointsDataSourceType)
+	registry.AddDataSourceFactory("awscc_mediapackage_origin_endpoints", originEndpointsDataSource)
 }
 
-// originEndpointsDataSourceType returns the Terraform awscc_mediapackage_origin_endpoints data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::MediaPackage::OriginEndpoint resource type.
-func originEndpointsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// originEndpointsDataSource returns the Terraform awscc_mediapackage_origin_endpoints data source.
+// This Terraform data source corresponds to the CloudFormation AWS::MediaPackage::OriginEndpoint resource.
+func originEndpointsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func originEndpointsDataSourceType(ctx context.Context) (provider.DataSourceType
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::OriginEndpoint").WithTerraformTypeName("awscc_mediapackage_origin_endpoints")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

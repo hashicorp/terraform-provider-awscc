@@ -5,7 +5,7 @@ package devopsguru
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_devopsguru_notification_channels", notificationChannelsDataSourceType)
+	registry.AddDataSourceFactory("awscc_devopsguru_notification_channels", notificationChannelsDataSource)
 }
 
-// notificationChannelsDataSourceType returns the Terraform awscc_devopsguru_notification_channels data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::DevOpsGuru::NotificationChannel resource type.
-func notificationChannelsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// notificationChannelsDataSource returns the Terraform awscc_devopsguru_notification_channels data source.
+// This Terraform data source corresponds to the CloudFormation AWS::DevOpsGuru::NotificationChannel resource.
+func notificationChannelsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func notificationChannelsDataSourceType(ctx context.Context) (provider.DataSourc
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::NotificationChannel").WithTerraformTypeName("awscc_devopsguru_notification_channels")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

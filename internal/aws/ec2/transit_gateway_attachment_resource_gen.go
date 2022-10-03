@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_attachment", transitGatewayAttachmentResourceType)
+	registry.AddResourceFactory("awscc_ec2_transit_gateway_attachment", transitGatewayAttachmentResource)
 }
 
-// transitGatewayAttachmentResourceType returns the Terraform awscc_ec2_transit_gateway_attachment resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayAttachment resource type.
-func transitGatewayAttachmentResourceType(ctx context.Context) (provider.ResourceType, error) {
+// transitGatewayAttachmentResource returns the Terraform awscc_ec2_transit_gateway_attachment resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::TransitGatewayAttachment resource.
+func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -190,7 +189,7 @@ func transitGatewayAttachmentResourceType(ctx context.Context) (provider.Resourc
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_attachment")
 	opts = opts.WithTerraformSchema(schema)
@@ -213,11 +212,11 @@ func transitGatewayAttachmentResourceType(ctx context.Context) (provider.Resourc
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_sagemaker_model_quality_job_definition", modelQualityJobDefinitionResourceType)
+	registry.AddResourceFactory("awscc_sagemaker_model_quality_job_definition", modelQualityJobDefinitionResource)
 }
 
-// modelQualityJobDefinitionResourceType returns the Terraform awscc_sagemaker_model_quality_job_definition resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelQualityJobDefinition resource type.
-func modelQualityJobDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// modelQualityJobDefinitionResource returns the Terraform awscc_sagemaker_model_quality_job_definition resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SageMaker::ModelQualityJobDefinition resource.
+func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -1114,7 +1113,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (provider.Resour
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelQualityJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_quality_job_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -1176,11 +1175,11 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (provider.Resour
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

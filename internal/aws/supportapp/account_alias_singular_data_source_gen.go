@@ -5,7 +5,7 @@ package supportapp
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_supportapp_account_alias", accountAliasDataSourceType)
+	registry.AddDataSourceFactory("awscc_supportapp_account_alias", accountAliasDataSource)
 }
 
-// accountAliasDataSourceType returns the Terraform awscc_supportapp_account_alias data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::SupportApp::AccountAlias resource type.
-func accountAliasDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// accountAliasDataSource returns the Terraform awscc_supportapp_account_alias data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SupportApp::AccountAlias resource.
+func accountAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"account_alias": {
 			// Property: AccountAlias
@@ -62,7 +62,7 @@ func accountAliasDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::AccountAlias").WithTerraformTypeName("awscc_supportapp_account_alias")
 	opts = opts.WithTerraformSchema(schema)
@@ -71,11 +71,11 @@ func accountAliasDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		"account_alias_resource_id": "AccountAliasResourceId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

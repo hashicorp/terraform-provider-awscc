@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_vpn_gateway", vPNGatewayDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_vpn_gateway", vPNGatewayDataSource)
 }
 
-// vPNGatewayDataSourceType returns the Terraform awscc_ec2_vpn_gateway data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::VPNGateway resource type.
-func vPNGatewayDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// vPNGatewayDataSource returns the Terraform awscc_ec2_vpn_gateway data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::VPNGateway resource.
+func vPNGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"amazon_side_asn": {
 			// Property: AmazonSideAsn
@@ -110,7 +110,7 @@ func vPNGatewayDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPNGateway").WithTerraformTypeName("awscc_ec2_vpn_gateway")
 	opts = opts.WithTerraformSchema(schema)
@@ -123,11 +123,11 @@ func vPNGatewayDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		"vpn_gateway_id":  "VPNGatewayId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

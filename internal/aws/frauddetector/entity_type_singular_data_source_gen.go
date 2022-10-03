@@ -5,7 +5,7 @@ package frauddetector
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_frauddetector_entity_type", entityTypeDataSourceType)
+	registry.AddDataSourceFactory("awscc_frauddetector_entity_type", entityTypeDataSource)
 }
 
-// entityTypeDataSourceType returns the Terraform awscc_frauddetector_entity_type data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::FraudDetector::EntityType resource type.
-func entityTypeDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// entityTypeDataSource returns the Terraform awscc_frauddetector_entity_type data source.
+// This Terraform data source corresponds to the CloudFormation AWS::FraudDetector::EntityType resource.
+func entityTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -141,7 +141,7 @@ func entityTypeDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::EntityType").WithTerraformTypeName("awscc_frauddetector_entity_type")
 	opts = opts.WithTerraformSchema(schema)
@@ -156,11 +156,11 @@ func entityTypeDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		"value":             "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

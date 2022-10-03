@@ -5,7 +5,7 @@ package cloudfront
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudfront_cache_policy", cachePolicyDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudfront_cache_policy", cachePolicyDataSource)
 }
 
-// cachePolicyDataSourceType returns the Terraform awscc_cloudfront_cache_policy data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::CachePolicy resource type.
-func cachePolicyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// cachePolicyDataSource returns the Terraform awscc_cloudfront_cache_policy data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudFront::CachePolicy resource.
+func cachePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cache_policy_config": {
 			// Property: CachePolicyConfig
@@ -267,7 +267,7 @@ func cachePolicyDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CachePolicy").WithTerraformTypeName("awscc_cloudfront_cache_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -294,11 +294,11 @@ func cachePolicyDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		"query_strings_config":                            "QueryStringsConfig",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

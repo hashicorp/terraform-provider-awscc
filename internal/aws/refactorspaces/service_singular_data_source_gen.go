@@ -5,7 +5,7 @@ package refactorspaces
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_refactorspaces_service", serviceDataSourceType)
+	registry.AddDataSourceFactory("awscc_refactorspaces_service", serviceDataSource)
 }
 
-// serviceDataSourceType returns the Terraform awscc_refactorspaces_service data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::RefactorSpaces::Service resource type.
-func serviceDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// serviceDataSource returns the Terraform awscc_refactorspaces_service data source.
+// This Terraform data source corresponds to the CloudFormation AWS::RefactorSpaces::Service resource.
+func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_identifier": {
 			// Property: ApplicationIdentifier
@@ -251,7 +251,7 @@ func serviceDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RefactorSpaces::Service").WithTerraformTypeName("awscc_refactorspaces_service")
 	opts = opts.WithTerraformSchema(schema)
@@ -273,11 +273,11 @@ func serviceDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 		"vpc_id":                 "VpcId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

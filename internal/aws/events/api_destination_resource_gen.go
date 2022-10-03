@@ -5,7 +5,6 @@ package events
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_events_api_destination", apiDestinationResourceType)
+	registry.AddResourceFactory("awscc_events_api_destination", apiDestinationResource)
 }
 
-// apiDestinationResourceType returns the Terraform awscc_events_api_destination resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Events::ApiDestination resource type.
-func apiDestinationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// apiDestinationResource returns the Terraform awscc_events_api_destination resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Events::ApiDestination resource.
+func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -159,7 +158,7 @@ func apiDestinationResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Events::ApiDestination").WithTerraformTypeName("awscc_events_api_destination")
 	opts = opts.WithTerraformSchema(schema)
@@ -178,11 +177,11 @@ func apiDestinationResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

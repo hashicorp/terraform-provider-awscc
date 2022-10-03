@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ses_contact_list", contactListResourceType)
+	registry.AddResourceFactory("awscc_ses_contact_list", contactListResource)
 }
 
-// contactListResourceType returns the Terraform awscc_ses_contact_list resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SES::ContactList resource type.
-func contactListResourceType(ctx context.Context) (provider.ResourceType, error) {
+// contactListResource returns the Terraform awscc_ses_contact_list resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SES::ContactList resource.
+func contactListResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"contact_list_name": {
 			// Property: ContactListName
@@ -232,7 +231,7 @@ func contactListResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ContactList").WithTerraformTypeName("awscc_ses_contact_list")
 	opts = opts.WithTerraformSchema(schema)
@@ -253,11 +252,11 @@ func contactListResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

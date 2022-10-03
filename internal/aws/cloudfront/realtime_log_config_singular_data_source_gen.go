@@ -5,7 +5,7 @@ package cloudfront
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudfront_realtime_log_config", realtimeLogConfigDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudfront_realtime_log_config", realtimeLogConfigDataSource)
 }
 
-// realtimeLogConfigDataSourceType returns the Terraform awscc_cloudfront_realtime_log_config data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::RealtimeLogConfig resource type.
-func realtimeLogConfigDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// realtimeLogConfigDataSource returns the Terraform awscc_cloudfront_realtime_log_config data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudFront::RealtimeLogConfig resource.
+func realtimeLogConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -143,7 +143,7 @@ func realtimeLogConfigDataSourceType(ctx context.Context) (provider.DataSourceTy
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::RealtimeLogConfig").WithTerraformTypeName("awscc_cloudfront_realtime_log_config")
 	opts = opts.WithTerraformSchema(schema)
@@ -159,11 +159,11 @@ func realtimeLogConfigDataSourceType(ctx context.Context) (provider.DataSourceTy
 		"stream_type":           "StreamType",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

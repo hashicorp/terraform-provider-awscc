@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_vpc_endpoint", vPCEndpointDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_vpc_endpoint", vPCEndpointDataSource)
 }
 
-// vPCEndpointDataSourceType returns the Terraform awscc_ec2_vpc_endpoint data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::VPCEndpoint resource type.
-func vPCEndpointDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// vPCEndpointDataSource returns the Terraform awscc_ec2_vpc_endpoint data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::VPCEndpoint resource.
+func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_timestamp": {
 			// Property: CreationTimestamp
@@ -162,7 +162,7 @@ func vPCEndpointDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCEndpoint").WithTerraformTypeName("awscc_ec2_vpc_endpoint")
 	opts = opts.WithTerraformSchema(schema)
@@ -181,11 +181,11 @@ func vPCEndpointDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		"vpc_id":                "VpcId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

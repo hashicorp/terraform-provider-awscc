@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_sagemaker_project", projectResourceType)
+	registry.AddResourceFactory("awscc_sagemaker_project", projectResource)
 }
 
-// projectResourceType returns the Terraform awscc_sagemaker_project resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::Project resource type.
-func projectResourceType(ctx context.Context) (provider.ResourceType, error) {
+// projectResource returns the Terraform awscc_sagemaker_project resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SageMaker::Project resource.
+func projectResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -414,7 +413,7 @@ func projectResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Project").WithTerraformTypeName("awscc_sagemaker_project")
 	opts = opts.WithTerraformSchema(schema)
@@ -443,11 +442,11 @@ func projectResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

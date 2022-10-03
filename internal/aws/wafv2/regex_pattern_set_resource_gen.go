@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_wafv2_regex_pattern_set", regexPatternSetResourceType)
+	registry.AddResourceFactory("awscc_wafv2_regex_pattern_set", regexPatternSetResource)
 }
 
-// regexPatternSetResourceType returns the Terraform awscc_wafv2_regex_pattern_set resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::RegexPatternSet resource type.
-func regexPatternSetResourceType(ctx context.Context) (provider.ResourceType, error) {
+// regexPatternSetResource returns the Terraform awscc_wafv2_regex_pattern_set resource.
+// This Terraform resource corresponds to the CloudFormation AWS::WAFv2::RegexPatternSet resource.
+func regexPatternSetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -195,7 +194,7 @@ func regexPatternSetResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::RegexPatternSet").WithTerraformTypeName("awscc_wafv2_regex_pattern_set")
 	opts = opts.WithTerraformSchema(schema)
@@ -216,11 +215,11 @@ func regexPatternSetResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

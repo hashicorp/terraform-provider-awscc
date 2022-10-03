@@ -5,7 +5,7 @@ package macie
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_macie_session", sessionDataSourceType)
+	registry.AddDataSourceFactory("awscc_macie_session", sessionDataSource)
 }
 
-// sessionDataSourceType returns the Terraform awscc_macie_session data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Macie::Session resource type.
-func sessionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// sessionDataSource returns the Terraform awscc_macie_session data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Macie::Session resource.
+func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"aws_account_id": {
 			// Property: AwsAccountId
@@ -89,7 +89,7 @@ func sessionDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::Session").WithTerraformTypeName("awscc_macie_session")
 	opts = opts.WithTerraformSchema(schema)
@@ -100,11 +100,11 @@ func sessionDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 		"status":                       "Status",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

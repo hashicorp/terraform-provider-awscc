@@ -5,7 +5,7 @@ package eks
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_eks_addon", addonDataSourceType)
+	registry.AddDataSourceFactory("awscc_eks_addon", addonDataSource)
 }
 
-// addonDataSourceType returns the Terraform awscc_eks_addon data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EKS::Addon resource type.
-func addonDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// addonDataSource returns the Terraform awscc_eks_addon data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EKS::Addon resource.
+func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"addon_name": {
 			// Property: AddonName
@@ -161,7 +161,7 @@ func addonDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::Addon").WithTerraformTypeName("awscc_eks_addon")
 	opts = opts.WithTerraformSchema(schema)
@@ -177,11 +177,11 @@ func addonDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"value":                    "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

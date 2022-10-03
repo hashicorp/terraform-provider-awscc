@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_enclave_certificate_iam_role_association", enclaveCertificateIamRoleAssociationResourceType)
+	registry.AddResourceFactory("awscc_ec2_enclave_certificate_iam_role_association", enclaveCertificateIamRoleAssociationResource)
 }
 
-// enclaveCertificateIamRoleAssociationResourceType returns the Terraform awscc_ec2_enclave_certificate_iam_role_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::EnclaveCertificateIamRoleAssociation resource type.
-func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// enclaveCertificateIamRoleAssociationResource returns the Terraform awscc_ec2_enclave_certificate_iam_role_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::EnclaveCertificateIamRoleAssociation resource.
+func enclaveCertificateIamRoleAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"certificate_arn": {
 			// Property: CertificateArn
@@ -124,7 +123,7 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (prov
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EnclaveCertificateIamRoleAssociation").WithTerraformTypeName("awscc_ec2_enclave_certificate_iam_role_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -141,11 +140,11 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (prov
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

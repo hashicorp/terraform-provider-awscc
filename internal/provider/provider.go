@@ -10,8 +10,10 @@ import (
 	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
@@ -25,17 +27,40 @@ const (
 	defaultAssumeRoleDuration = 1 * time.Hour
 )
 
+// providerData is returned from the provider's Configure method and
+// is passed to each resource and data source in their Configure methods.
+type providerData struct {
+	ccAPIClient *cloudcontrol.Client
+	region      string
+	roleARN     string
+}
+
+func (p *providerData) CloudControlAPIClient(_ context.Context) *cloudcontrol.Client {
+	return p.ccAPIClient
+}
+
+func (p *providerData) Region(_ context.Context) string {
+	return p.region
+}
+
+func (p *providerData) RoleARN(_ context.Context) string {
+	return p.roleARN
+}
+
+type ccProvider struct {
+	providerData *providerData // Used in acceptance tests.
+}
+
 func New() provider.Provider {
-	return &AwsCloudControlApiProvider{}
+	return &ccProvider{}
 }
 
-type AwsCloudControlApiProvider struct {
-	ccClient *cloudcontrol.Client
-	region   string
-	roleARN  string
+// ProviderData is used in acceptance testing to get access to configured API client etc.
+func (p *ccProvider) ProviderData() any {
+	return p.providerData
 }
 
-func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
+func (p *ccProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return tfsdk.Schema{
 		Version: 1,
 		Attributes: map[string]tfsdk.Attribute{
@@ -286,7 +311,7 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 	}, nil
 }
 
-type providerData struct {
+type config struct {
 	AccessKey                 types.String                   `tfsdk:"access_key"`
 	HTTPProxy                 types.String                   `tfsdk:"http_proxy"`
 	Insecure                  types.Bool                     `tfsdk:"insecure"`
@@ -385,8 +410,8 @@ func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdenti
 	return assumeRole
 }
 
-func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request provider.ConfigureRequest, response *provider.ConfigureResponse) {
-	var config providerData
+func (p *ccProvider) Configure(ctx context.Context, request provider.ConfigureRequest, response *provider.ConfigureResponse) {
+	var config config
 
 	diags := request.Config.Get(ctx, &config)
 
@@ -402,7 +427,7 @@ func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request prov
 
 	config.terraformVersion = request.TerraformVersion
 
-	ccClient, region, err := newCloudControlClient(ctx, &config)
+	ccClient, region, err := newCloudControlAPIClient(ctx, &config)
 
 	if err != nil {
 		response.Diagnostics.AddError(
@@ -413,17 +438,23 @@ func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request prov
 		return
 	}
 
-	p.ccClient = ccClient
-	p.region = region
-	p.roleARN = config.RoleARN.Value
+	providerData := &providerData{
+		ccAPIClient: ccClient,
+		region:      region,
+		roleARN:     config.RoleARN.Value,
+	}
+
+	p.providerData = providerData
+	response.DataSourceData = providerData
+	response.ResourceData = providerData
 }
 
-func (p *AwsCloudControlApiProvider) GetResources(ctx context.Context) (map[string]provider.ResourceType, diag.Diagnostics) {
+func (p *ccProvider) Resources(ctx context.Context) []func() resource.Resource {
 	var diags diag.Diagnostics
-	resources := make(map[string]provider.ResourceType)
+	var resources = make([]func() resource.Resource, 0)
 
 	for name, factory := range registry.ResourceFactories() {
-		resourceType, err := factory(ctx)
+		v, err := factory(ctx)
 
 		if err != nil {
 			diags.AddError(
@@ -434,18 +465,20 @@ func (p *AwsCloudControlApiProvider) GetResources(ctx context.Context) (map[stri
 			continue
 		}
 
-		resources[name] = resourceType
+		resources = append(resources, func() resource.Resource {
+			return v
+		})
 	}
 
-	return resources, diags
+	return resources
 }
 
-func (p *AwsCloudControlApiProvider) GetDataSources(ctx context.Context) (map[string]provider.DataSourceType, diag.Diagnostics) {
+func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	var diags diag.Diagnostics
-	dataSources := make(map[string]provider.DataSourceType)
+	dataSources := make([]func() datasource.DataSource, 0)
 
 	for name, factory := range registry.DataSourceFactories() {
-		dataSourceType, err := factory(ctx)
+		v, err := factory(ctx)
 
 		if err != nil {
 			diags.AddError(
@@ -456,26 +489,16 @@ func (p *AwsCloudControlApiProvider) GetDataSources(ctx context.Context) (map[st
 			continue
 		}
 
-		dataSources[name] = dataSourceType
+		dataSources = append(dataSources, func() datasource.DataSource {
+			return v
+		})
 	}
 
-	return dataSources, diags
+	return dataSources
 }
 
-func (p *AwsCloudControlApiProvider) CloudControlApiClient(_ context.Context) *cloudcontrol.Client {
-	return p.ccClient
-}
-
-func (p *AwsCloudControlApiProvider) Region(_ context.Context) string {
-	return p.region
-}
-
-func (p *AwsCloudControlApiProvider) RoleARN(_ context.Context) string {
-	return p.roleARN
-}
-
-// newCloudControlClient configures and returns a fully initialized AWS Cloud Control API client with the configured region.
-func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol.Client, string, error) {
+// newCloudControlAPIClient configures and returns a fully initialized AWS Cloud Control API client with the configured region.
+func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Client, string, error) {
 	config := awsbase.Config{
 		AccessKey:              pd.AccessKey.Value,
 		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",

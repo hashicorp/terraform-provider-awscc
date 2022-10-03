@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ssmcontacts_contact_channel", contactChannelResourceType)
+	registry.AddResourceFactory("awscc_ssmcontacts_contact_channel", contactChannelResource)
 }
 
-// contactChannelResourceType returns the Terraform awscc_ssmcontacts_contact_channel resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SSMContacts::ContactChannel resource type.
-func contactChannelResourceType(ctx context.Context) (provider.ResourceType, error) {
+// contactChannelResource returns the Terraform awscc_ssmcontacts_contact_channel resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SSMContacts::ContactChannel resource.
+func contactChannelResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -156,7 +155,7 @@ func contactChannelResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSMContacts::ContactChannel").WithTerraformTypeName("awscc_ssmcontacts_contact_channel")
 	opts = opts.WithTerraformSchema(schema)
@@ -184,11 +183,11 @@ func contactChannelResourceType(ctx context.Context) (provider.ResourceType, err
 	),
 	)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

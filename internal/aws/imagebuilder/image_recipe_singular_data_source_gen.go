@@ -5,7 +5,7 @@ package imagebuilder
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_imagebuilder_image_recipe", imageRecipeDataSourceType)
+	registry.AddDataSourceFactory("awscc_imagebuilder_image_recipe", imageRecipeDataSource)
 }
 
-// imageRecipeDataSourceType returns the Terraform awscc_imagebuilder_image_recipe data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::ImageBuilder::ImageRecipe resource type.
-func imageRecipeDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// imageRecipeDataSource returns the Terraform awscc_imagebuilder_image_recipe data source.
+// This Terraform data source corresponds to the CloudFormation AWS::ImageBuilder::ImageRecipe resource.
+func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"additional_instance_configuration": {
 			// Property: AdditionalInstanceConfiguration
@@ -409,7 +409,7 @@ func imageRecipeDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ImageRecipe").WithTerraformTypeName("awscc_imagebuilder_image_recipe")
 	opts = opts.WithTerraformSchema(schema)
@@ -444,11 +444,11 @@ func imageRecipeDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		"working_directory":                 "WorkingDirectory",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

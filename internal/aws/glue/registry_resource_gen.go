@@ -5,7 +5,6 @@ package glue
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_glue_registry", registryResourceType)
+	registry.AddResourceFactory("awscc_glue_registry", registryResource)
 }
 
-// registryResourceType returns the Terraform awscc_glue_registry resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Glue::Registry resource type.
-func registryResourceType(ctx context.Context) (provider.ResourceType, error) {
+// registryResource returns the Terraform awscc_glue_registry resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Glue::Registry resource.
+func registryResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -156,7 +155,7 @@ func registryResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::Registry").WithTerraformTypeName("awscc_glue_registry")
 	opts = opts.WithTerraformSchema(schema)
@@ -174,11 +173,11 @@ func registryResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package ecr
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ecr_public_repository", publicRepositoryResourceType)
+	registry.AddResourceFactory("awscc_ecr_public_repository", publicRepositoryResource)
 }
 
-// publicRepositoryResourceType returns the Terraform awscc_ecr_public_repository resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ECR::PublicRepository resource type.
-func publicRepositoryResourceType(ctx context.Context) (provider.ResourceType, error) {
+// publicRepositoryResource returns the Terraform awscc_ecr_public_repository resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ECR::PublicRepository resource.
+func publicRepositoryResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -282,7 +281,7 @@ func publicRepositoryResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::PublicRepository").WithTerraformTypeName("awscc_ecr_public_repository")
 	opts = opts.WithTerraformSchema(schema)
@@ -306,11 +305,11 @@ func publicRepositoryResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

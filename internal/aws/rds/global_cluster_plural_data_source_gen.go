@@ -5,7 +5,7 @@ package rds
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_rds_global_clusters", globalClustersDataSourceType)
+	registry.AddDataSourceFactory("awscc_rds_global_clusters", globalClustersDataSource)
 }
 
-// globalClustersDataSourceType returns the Terraform awscc_rds_global_clusters data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::RDS::GlobalCluster resource type.
-func globalClustersDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// globalClustersDataSource returns the Terraform awscc_rds_global_clusters data source.
+// This Terraform data source corresponds to the CloudFormation AWS::RDS::GlobalCluster resource.
+func globalClustersDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func globalClustersDataSourceType(ctx context.Context) (provider.DataSourceType,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::GlobalCluster").WithTerraformTypeName("awscc_rds_global_clusters")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

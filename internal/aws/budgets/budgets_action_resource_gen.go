@@ -5,7 +5,6 @@ package budgets
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_budgets_budgets_action", budgetsActionResourceType)
+	registry.AddResourceFactory("awscc_budgets_budgets_action", budgetsActionResource)
 }
 
-// budgetsActionResourceType returns the Terraform awscc_budgets_budgets_action resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Budgets::BudgetsAction resource type.
-func budgetsActionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// budgetsActionResource returns the Terraform awscc_budgets_budgets_action resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Budgets::BudgetsAction resource.
+func budgetsActionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"action_id": {
 			// Property: ActionId
@@ -451,7 +450,7 @@ func budgetsActionResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Budgets::BudgetsAction").WithTerraformTypeName("awscc_budgets_budgets_action")
 	opts = opts.WithTerraformSchema(schema)
@@ -487,11 +486,11 @@ func budgetsActionResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53_key_signing_key", keySigningKeyResourceType)
+	registry.AddResourceFactory("awscc_route53_key_signing_key", keySigningKeyResource)
 }
 
-// keySigningKeyResourceType returns the Terraform awscc_route53_key_signing_key resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53::KeySigningKey resource type.
-func keySigningKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
+// keySigningKeyResource returns the Terraform awscc_route53_key_signing_key resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53::KeySigningKey resource.
+func keySigningKeyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"hosted_zone_id": {
 			// Property: HostedZoneId
@@ -116,7 +115,7 @@ func keySigningKeyResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::KeySigningKey").WithTerraformTypeName("awscc_route53_key_signing_key")
 	opts = opts.WithTerraformSchema(schema)
@@ -132,11 +131,11 @@ func keySigningKeyResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

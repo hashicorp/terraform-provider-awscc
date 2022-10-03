@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_kendra_faq", faqResourceType)
+	registry.AddResourceFactory("awscc_kendra_faq", faqResource)
 }
 
-// faqResourceType returns the Terraform awscc_kendra_faq resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Kendra::Faq resource type.
-func faqResourceType(ctx context.Context) (provider.ResourceType, error) {
+// faqResource returns the Terraform awscc_kendra_faq resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Kendra::Faq resource.
+func faqResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -282,7 +281,7 @@ func faqResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Kendra::Faq").WithTerraformTypeName("awscc_kendra_faq")
 	opts = opts.WithTerraformSchema(schema)
@@ -306,11 +305,11 @@ func faqResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package iotsitewise
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iotsitewise_asset_model", assetModelResourceType)
+	registry.AddResourceFactory("awscc_iotsitewise_asset_model", assetModelResource)
 }
 
-// assetModelResourceType returns the Terraform awscc_iotsitewise_asset_model resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::AssetModel resource type.
-func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) {
+// assetModelResource returns the Terraform awscc_iotsitewise_asset_model resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoTSiteWise::AssetModel resource.
+func assetModelResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"asset_model_arn": {
 			// Property: AssetModelArn
@@ -1263,7 +1262,7 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::AssetModel").WithTerraformTypeName("awscc_iotsitewise_asset_model")
 	opts = opts.WithTerraformSchema(schema)
@@ -1307,11 +1306,11 @@ func assetModelResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

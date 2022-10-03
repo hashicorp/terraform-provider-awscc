@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iotwireless_wireless_gateway", wirelessGatewayResourceType)
+	registry.AddResourceFactory("awscc_iotwireless_wireless_gateway", wirelessGatewayResource)
 }
 
-// wirelessGatewayResourceType returns the Terraform awscc_iotwireless_wireless_gateway resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::WirelessGateway resource type.
-func wirelessGatewayResourceType(ctx context.Context) (provider.ResourceType, error) {
+// wirelessGatewayResource returns the Terraform awscc_iotwireless_wireless_gateway resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoTWireless::WirelessGateway resource.
+func wirelessGatewayResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -252,7 +251,7 @@ func wirelessGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessGateway").WithTerraformTypeName("awscc_iotwireless_wireless_gateway")
 	opts = opts.WithTerraformSchema(schema)
@@ -277,11 +276,11 @@ func wirelessGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

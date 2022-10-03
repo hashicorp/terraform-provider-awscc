@@ -5,7 +5,6 @@ package imagebuilder
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_imagebuilder_image_pipeline", imagePipelineResourceType)
+	registry.AddResourceFactory("awscc_imagebuilder_image_pipeline", imagePipelineResource)
 }
 
-// imagePipelineResourceType returns the Terraform awscc_imagebuilder_image_pipeline resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ImagePipeline resource type.
-func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
+// imagePipelineResource returns the Terraform awscc_imagebuilder_image_pipeline resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ImageBuilder::ImagePipeline resource.
+func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -319,7 +318,7 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ImagePipeline").WithTerraformTypeName("awscc_imagebuilder_image_pipeline")
 	opts = opts.WithTerraformSchema(schema)
@@ -361,11 +360,11 @@ func imagePipelineResourceType(ctx context.Context) (provider.ResourceType, erro
 	),
 	)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package efs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_efs_file_system", fileSystemResourceType)
+	registry.AddResourceFactory("awscc_efs_file_system", fileSystemResource)
 }
 
-// fileSystemResourceType returns the Terraform awscc_efs_file_system resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EFS::FileSystem resource type.
-func fileSystemResourceType(ctx context.Context) (provider.ResourceType, error) {
+// fileSystemResource returns the Terraform awscc_efs_file_system resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EFS::FileSystem resource.
+func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -300,7 +299,7 @@ func fileSystemResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EFS::FileSystem").WithTerraformTypeName("awscc_efs_file_system")
 	opts = opts.WithTerraformSchema(schema)
@@ -333,11 +332,11 @@ func fileSystemResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

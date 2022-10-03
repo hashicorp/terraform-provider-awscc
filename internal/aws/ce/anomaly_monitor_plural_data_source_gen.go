@@ -5,7 +5,7 @@ package ce
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ce_anomaly_monitors", anomalyMonitorsDataSourceType)
+	registry.AddDataSourceFactory("awscc_ce_anomaly_monitors", anomalyMonitorsDataSource)
 }
 
-// anomalyMonitorsDataSourceType returns the Terraform awscc_ce_anomaly_monitors data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CE::AnomalyMonitor resource type.
-func anomalyMonitorsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// anomalyMonitorsDataSource returns the Terraform awscc_ce_anomaly_monitors data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CE::AnomalyMonitor resource.
+func anomalyMonitorsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func anomalyMonitorsDataSourceType(ctx context.Context) (provider.DataSourceType
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CE::AnomalyMonitor").WithTerraformTypeName("awscc_ce_anomaly_monitors")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

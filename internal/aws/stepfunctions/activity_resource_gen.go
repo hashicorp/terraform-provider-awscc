@@ -5,7 +5,6 @@ package stepfunctions
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_stepfunctions_activity", activityResourceType)
+	registry.AddResourceFactory("awscc_stepfunctions_activity", activityResource)
 }
 
-// activityResourceType returns the Terraform awscc_stepfunctions_activity resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::StepFunctions::Activity resource type.
-func activityResourceType(ctx context.Context) (provider.ResourceType, error) {
+// activityResource returns the Terraform awscc_stepfunctions_activity resource.
+// This Terraform resource corresponds to the CloudFormation AWS::StepFunctions::Activity resource.
+func activityResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -125,7 +124,7 @@ func activityResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::StepFunctions::Activity").WithTerraformTypeName("awscc_stepfunctions_activity")
 	opts = opts.WithTerraformSchema(schema)
@@ -142,11 +141,11 @@ func activityResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

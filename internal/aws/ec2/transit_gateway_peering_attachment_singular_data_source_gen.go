@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_transit_gateway_peering_attachment", transitGatewayPeeringAttachmentDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_peering_attachment", transitGatewayPeeringAttachmentDataSource)
 }
 
-// transitGatewayPeeringAttachmentDataSourceType returns the Terraform awscc_ec2_transit_gateway_peering_attachment data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::TransitGatewayPeeringAttachment resource type.
-func transitGatewayPeeringAttachmentDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// transitGatewayPeeringAttachmentDataSource returns the Terraform awscc_ec2_transit_gateway_peering_attachment data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::TransitGatewayPeeringAttachment resource.
+func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -189,7 +189,7 @@ func transitGatewayPeeringAttachmentDataSourceType(ctx context.Context) (provide
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayPeeringAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_peering_attachment")
 	opts = opts.WithTerraformSchema(schema)
@@ -209,11 +209,11 @@ func transitGatewayPeeringAttachmentDataSourceType(ctx context.Context) (provide
 		"value":                         "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

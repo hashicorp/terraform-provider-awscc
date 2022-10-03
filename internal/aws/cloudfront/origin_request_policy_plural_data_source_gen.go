@@ -5,7 +5,7 @@ package cloudfront
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudfront_origin_request_policies", originRequestPoliciesDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudfront_origin_request_policies", originRequestPoliciesDataSource)
 }
 
-// originRequestPoliciesDataSourceType returns the Terraform awscc_cloudfront_origin_request_policies data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::OriginRequestPolicy resource type.
-func originRequestPoliciesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// originRequestPoliciesDataSource returns the Terraform awscc_cloudfront_origin_request_policies data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudFront::OriginRequestPolicy resource.
+func originRequestPoliciesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func originRequestPoliciesDataSourceType(ctx context.Context) (provider.DataSour
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::OriginRequestPolicy").WithTerraformTypeName("awscc_cloudfront_origin_request_policies")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

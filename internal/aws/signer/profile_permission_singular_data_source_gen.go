@@ -5,7 +5,7 @@ package signer
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_signer_profile_permission", profilePermissionDataSourceType)
+	registry.AddDataSourceFactory("awscc_signer_profile_permission", profilePermissionDataSource)
 }
 
-// profilePermissionDataSourceType returns the Terraform awscc_signer_profile_permission data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Signer::ProfilePermission resource type.
-func profilePermissionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// profilePermissionDataSource returns the Terraform awscc_signer_profile_permission data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Signer::ProfilePermission resource.
+func profilePermissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"action": {
 			// Property: Action
@@ -80,7 +80,7 @@ func profilePermissionDataSourceType(ctx context.Context) (provider.DataSourceTy
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Signer::ProfilePermission").WithTerraformTypeName("awscc_signer_profile_permission")
 	opts = opts.WithTerraformSchema(schema)
@@ -92,11 +92,11 @@ func profilePermissionDataSourceType(ctx context.Context) (provider.DataSourceTy
 		"statement_id":    "StatementId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

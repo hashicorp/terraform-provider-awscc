@@ -5,7 +5,6 @@ package imagebuilder
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_imagebuilder_container_recipe", containerRecipeResourceType)
+	registry.AddResourceFactory("awscc_imagebuilder_container_recipe", containerRecipeResource)
 }
 
-// containerRecipeResourceType returns the Terraform awscc_imagebuilder_container_recipe resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ContainerRecipe resource type.
-func containerRecipeResourceType(ctx context.Context) (provider.ResourceType, error) {
+// containerRecipeResource returns the Terraform awscc_imagebuilder_container_recipe resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ImageBuilder::ContainerRecipe resource.
+func containerRecipeResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -681,7 +680,7 @@ func containerRecipeResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ContainerRecipe").WithTerraformTypeName("awscc_imagebuilder_container_recipe")
 	opts = opts.WithTerraformSchema(schema)
@@ -753,11 +752,11 @@ func containerRecipeResourceType(ctx context.Context) (provider.ResourceType, er
 	),
 	)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

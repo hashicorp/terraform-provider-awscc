@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_robomaker_robot_application_version", robotApplicationVersionResourceType)
+	registry.AddResourceFactory("awscc_robomaker_robot_application_version", robotApplicationVersionResource)
 }
 
-// robotApplicationVersionResourceType returns the Terraform awscc_robomaker_robot_application_version resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RoboMaker::RobotApplicationVersion resource type.
-func robotApplicationVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// robotApplicationVersionResource returns the Terraform awscc_robomaker_robot_application_version resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RoboMaker::RobotApplicationVersion resource.
+func robotApplicationVersionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application": {
 			// Property: Application
@@ -104,7 +103,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (provider.Resource
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RoboMaker::RobotApplicationVersion").WithTerraformTypeName("awscc_robomaker_robot_application_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -120,11 +119,11 @@ func robotApplicationVersionResourceType(ctx context.Context) (provider.Resource
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

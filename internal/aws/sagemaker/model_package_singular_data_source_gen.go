@@ -5,7 +5,7 @@ package sagemaker
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_sagemaker_model_package", modelPackageDataSourceType)
+	registry.AddDataSourceFactory("awscc_sagemaker_model_package", modelPackageDataSource)
 }
 
-// modelPackageDataSourceType returns the Terraform awscc_sagemaker_model_package data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::SageMaker::ModelPackage resource type.
-func modelPackageDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// modelPackageDataSource returns the Terraform awscc_sagemaker_model_package data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SageMaker::ModelPackage resource.
+func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"additional_inference_specification_definition": {
 			// Property: AdditionalInferenceSpecificationDefinition
@@ -3450,7 +3450,7 @@ func modelPackageDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackage").WithTerraformTypeName("awscc_sagemaker_model_package")
 	opts = opts.WithTerraformSchema(schema)
@@ -3558,11 +3558,11 @@ func modelPackageDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		"volume_kms_key_id":                           "VolumeKmsKeyId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_vpc_peering_connection", vPCPeeringConnectionResourceType)
+	registry.AddResourceFactory("awscc_ec2_vpc_peering_connection", vPCPeeringConnectionResource)
 }
 
-// vPCPeeringConnectionResourceType returns the Terraform awscc_ec2_vpc_peering_connection resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::VPCPeeringConnection resource type.
-func vPCPeeringConnectionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// vPCPeeringConnectionResource returns the Terraform awscc_ec2_vpc_peering_connection resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::VPCPeeringConnection resource.
+func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -167,7 +166,7 @@ func vPCPeeringConnectionResourceType(ctx context.Context) (provider.ResourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCPeeringConnection").WithTerraformTypeName("awscc_ec2_vpc_peering_connection")
 	opts = opts.WithTerraformSchema(schema)
@@ -188,11 +187,11 @@ func vPCPeeringConnectionResourceType(ctx context.Context) (provider.ResourceTyp
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

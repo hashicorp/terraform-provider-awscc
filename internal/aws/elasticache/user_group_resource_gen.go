@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_elasticache_user_group", userGroupResourceType)
+	registry.AddResourceFactory("awscc_elasticache_user_group", userGroupResource)
 }
 
-// userGroupResourceType returns the Terraform awscc_elasticache_user_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ElastiCache::UserGroup resource type.
-func userGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// userGroupResource returns the Terraform awscc_elasticache_user_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ElastiCache::UserGroup resource.
+func userGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -132,7 +131,7 @@ func userGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::UserGroup").WithTerraformTypeName("awscc_elasticache_user_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -149,11 +148,11 @@ func userGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

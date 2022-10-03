@@ -5,7 +5,6 @@ package inspectorv2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_inspectorv2_filter", filterResourceType)
+	registry.AddResourceFactory("awscc_inspectorv2_filter", filterResource)
 }
 
-// filterResourceType returns the Terraform awscc_inspectorv2_filter resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::InspectorV2::Filter resource type.
-func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
+// filterResource returns the Terraform awscc_inspectorv2_filter resource.
+// This Terraform resource corresponds to the CloudFormation AWS::InspectorV2::Filter resource.
+func filterResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -2380,7 +2379,7 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::InspectorV2::Filter").WithTerraformTypeName("awscc_inspectorv2_filter")
 	opts = opts.WithTerraformSchema(schema)
@@ -2441,11 +2440,11 @@ func filterResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

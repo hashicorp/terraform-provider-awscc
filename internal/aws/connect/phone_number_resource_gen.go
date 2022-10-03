@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_connect_phone_number", phoneNumberResourceType)
+	registry.AddResourceFactory("awscc_connect_phone_number", phoneNumberResource)
 }
 
-// phoneNumberResourceType returns the Terraform awscc_connect_phone_number resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Connect::PhoneNumber resource type.
-func phoneNumberResourceType(ctx context.Context) (provider.ResourceType, error) {
+// phoneNumberResource returns the Terraform awscc_connect_phone_number resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Connect::PhoneNumber resource.
+func phoneNumberResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"address": {
 			// Property: Address
@@ -228,7 +227,7 @@ func phoneNumberResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::PhoneNumber").WithTerraformTypeName("awscc_connect_phone_number")
 	opts = opts.WithTerraformSchema(schema)
@@ -253,11 +252,11 @@ func phoneNumberResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

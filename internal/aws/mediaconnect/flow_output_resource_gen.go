@@ -5,7 +5,6 @@ package mediaconnect
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_mediaconnect_flow_output", flowOutputResourceType)
+	registry.AddResourceFactory("awscc_mediaconnect_flow_output", flowOutputResource)
 }
 
-// flowOutputResourceType returns the Terraform awscc_mediaconnect_flow_output resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowOutput resource type.
-func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) {
+// flowOutputResource returns the Terraform awscc_mediaconnect_flow_output resource.
+// This Terraform resource corresponds to the CloudFormation AWS::MediaConnect::FlowOutput resource.
+func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cidr_allow_list": {
 			// Property: CidrAllowList
@@ -379,7 +378,7 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowOutput").WithTerraformTypeName("awscc_mediaconnect_flow_output")
 	opts = opts.WithTerraformSchema(schema)
@@ -411,11 +410,11 @@ func flowOutputResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

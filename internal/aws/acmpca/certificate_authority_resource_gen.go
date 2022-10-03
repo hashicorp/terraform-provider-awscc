@@ -5,7 +5,6 @@ package acmpca
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_acmpca_certificate_authority", certificateAuthorityResourceType)
+	registry.AddResourceFactory("awscc_acmpca_certificate_authority", certificateAuthorityResource)
 }
 
-// certificateAuthorityResourceType returns the Terraform awscc_acmpca_certificate_authority resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthority resource type.
-func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceType, error) {
+// certificateAuthorityResource returns the Terraform awscc_acmpca_certificate_authority resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthority resource.
+func certificateAuthorityResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -1192,7 +1191,7 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthority").WithTerraformTypeName("awscc_acmpca_certificate_authority")
 	opts = opts.WithTerraformSchema(schema)
@@ -1269,11 +1268,11 @@ func certificateAuthorityResourceType(ctx context.Context) (provider.ResourceTyp
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

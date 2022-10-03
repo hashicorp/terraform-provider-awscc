@@ -5,7 +5,7 @@ package kafkaconnect
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_kafkaconnect_connector", connectorDataSourceType)
+	registry.AddDataSourceFactory("awscc_kafkaconnect_connector", connectorDataSource)
 }
 
-// connectorDataSourceType returns the Terraform awscc_kafkaconnect_connector data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::KafkaConnect::Connector resource type.
-func connectorDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// connectorDataSource returns the Terraform awscc_kafkaconnect_connector data source.
+// This Terraform data source corresponds to the CloudFormation AWS::KafkaConnect::Connector resource.
+func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity": {
 			// Property: Capacity
@@ -753,7 +753,7 @@ func connectorDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::KafkaConnect::Connector").WithTerraformTypeName("awscc_kafkaconnect_connector")
 	opts = opts.WithTerraformSchema(schema)
@@ -802,11 +802,11 @@ func connectorDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		"worker_log_delivery":                 "WorkerLogDelivery",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

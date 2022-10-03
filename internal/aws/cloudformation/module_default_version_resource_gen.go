@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudformation_module_default_version", moduleDefaultVersionResourceType)
+	registry.AddResourceFactory("awscc_cloudformation_module_default_version", moduleDefaultVersionResource)
 }
 
-// moduleDefaultVersionResourceType returns the Terraform awscc_cloudformation_module_default_version resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::ModuleDefaultVersion resource type.
-func moduleDefaultVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// moduleDefaultVersionResource returns the Terraform awscc_cloudformation_module_default_version resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudFormation::ModuleDefaultVersion resource.
+func moduleDefaultVersionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -102,7 +101,7 @@ func moduleDefaultVersionResourceType(ctx context.Context) (provider.ResourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ModuleDefaultVersion").WithTerraformTypeName("awscc_cloudformation_module_default_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -132,11 +131,11 @@ func moduleDefaultVersionResourceType(ctx context.Context) (provider.ResourceTyp
 	),
 	)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

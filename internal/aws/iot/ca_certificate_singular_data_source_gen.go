@@ -5,7 +5,7 @@ package iot
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iot_ca_certificate", cACertificateDataSourceType)
+	registry.AddDataSourceFactory("awscc_iot_ca_certificate", cACertificateDataSource)
 }
 
-// cACertificateDataSourceType returns the Terraform awscc_iot_ca_certificate data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoT::CACertificate resource type.
-func cACertificateDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// cACertificateDataSource returns the Terraform awscc_iot_ca_certificate data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoT::CACertificate resource.
+func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -227,7 +227,7 @@ func cACertificateDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::CACertificate").WithTerraformTypeName("awscc_iot_ca_certificate")
 	opts = opts.WithTerraformSchema(schema)
@@ -249,11 +249,11 @@ func cACertificateDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		"verification_certificate_pem": "VerificationCertificatePem",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

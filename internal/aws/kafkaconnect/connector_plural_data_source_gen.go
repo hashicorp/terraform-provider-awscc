@@ -5,7 +5,7 @@ package kafkaconnect
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_kafkaconnect_connectors", connectorsDataSourceType)
+	registry.AddDataSourceFactory("awscc_kafkaconnect_connectors", connectorsDataSource)
 }
 
-// connectorsDataSourceType returns the Terraform awscc_kafkaconnect_connectors data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::KafkaConnect::Connector resource type.
-func connectorsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// connectorsDataSource returns the Terraform awscc_kafkaconnect_connectors data source.
+// This Terraform data source corresponds to the CloudFormation AWS::KafkaConnect::Connector resource.
+func connectorsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func connectorsDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::KafkaConnect::Connector").WithTerraformTypeName("awscc_kafkaconnect_connectors")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

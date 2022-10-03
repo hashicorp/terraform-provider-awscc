@@ -5,7 +5,7 @@ package supportapp
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_supportapp_slack_channel_configurations", slackChannelConfigurationsDataSourceType)
+	registry.AddDataSourceFactory("awscc_supportapp_slack_channel_configurations", slackChannelConfigurationsDataSource)
 }
 
-// slackChannelConfigurationsDataSourceType returns the Terraform awscc_supportapp_slack_channel_configurations data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::SupportApp::SlackChannelConfiguration resource type.
-func slackChannelConfigurationsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// slackChannelConfigurationsDataSource returns the Terraform awscc_supportapp_slack_channel_configurations data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SupportApp::SlackChannelConfiguration resource.
+func slackChannelConfigurationsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func slackChannelConfigurationsDataSourceType(ctx context.Context) (provider.Dat
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::SlackChannelConfiguration").WithTerraformTypeName("awscc_supportapp_slack_channel_configurations")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

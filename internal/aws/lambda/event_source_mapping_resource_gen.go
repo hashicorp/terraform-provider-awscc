@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lambda_event_source_mapping", eventSourceMappingResourceType)
+	registry.AddResourceFactory("awscc_lambda_event_source_mapping", eventSourceMappingResource)
 }
 
-// eventSourceMappingResourceType returns the Terraform awscc_lambda_event_source_mapping resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Lambda::EventSourceMapping resource type.
-func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType, error) {
+// eventSourceMappingResource returns the Terraform awscc_lambda_event_source_mapping resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Lambda::EventSourceMapping resource.
+func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"amazon_managed_kafka_event_source_config": {
 			// Property: AmazonManagedKafkaEventSourceConfig
@@ -750,7 +749,7 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lambda::EventSourceMapping").WithTerraformTypeName("awscc_lambda_event_source_mapping")
 	opts = opts.WithTerraformSchema(schema)
@@ -793,11 +792,11 @@ func eventSourceMappingResourceType(ctx context.Context) (provider.ResourceType,
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

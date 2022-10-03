@@ -5,7 +5,6 @@ package inspector
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_inspector_assessment_template", assessmentTemplateResourceType)
+	registry.AddResourceFactory("awscc_inspector_assessment_template", assessmentTemplateResource)
 }
 
-// assessmentTemplateResourceType returns the Terraform awscc_inspector_assessment_template resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Inspector::AssessmentTemplate resource type.
-func assessmentTemplateResourceType(ctx context.Context) (provider.ResourceType, error) {
+// assessmentTemplateResource returns the Terraform awscc_inspector_assessment_template resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Inspector::AssessmentTemplate resource.
+func assessmentTemplateResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -148,7 +147,7 @@ func assessmentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Inspector::AssessmentTemplate").WithTerraformTypeName("awscc_inspector_assessment_template")
 	opts = opts.WithTerraformSchema(schema)
@@ -168,11 +167,11 @@ func assessmentTemplateResourceType(ctx context.Context) (provider.ResourceType,
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

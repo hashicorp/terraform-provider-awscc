@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ce_anomaly_subscription", anomalySubscriptionResourceType)
+	registry.AddResourceFactory("awscc_ce_anomaly_subscription", anomalySubscriptionResource)
 }
 
-// anomalySubscriptionResourceType returns the Terraform awscc_ce_anomaly_subscription resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CE::AnomalySubscription resource type.
-func anomalySubscriptionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// anomalySubscriptionResource returns the Terraform awscc_ce_anomaly_subscription resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CE::AnomalySubscription resource.
+func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"account_id": {
 			// Property: AccountId
@@ -298,7 +297,7 @@ func anomalySubscriptionResourceType(ctx context.Context) (provider.ResourceType
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CE::AnomalySubscription").WithTerraformTypeName("awscc_ce_anomaly_subscription")
 	opts = opts.WithTerraformSchema(schema)
@@ -323,11 +322,11 @@ func anomalySubscriptionResourceType(ctx context.Context) (provider.ResourceType
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

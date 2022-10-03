@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_codeguruprofiler_profiling_group", profilingGroupResourceType)
+	registry.AddResourceFactory("awscc_codeguruprofiler_profiling_group", profilingGroupResource)
 }
 
-// profilingGroupResourceType returns the Terraform awscc_codeguruprofiler_profiling_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CodeGuruProfiler::ProfilingGroup resource type.
-func profilingGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// profilingGroupResource returns the Terraform awscc_codeguruprofiler_profiling_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CodeGuruProfiler::ProfilingGroup resource.
+func profilingGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"agent_permissions": {
 			// Property: AgentPermissions
@@ -267,7 +266,7 @@ func profilingGroupResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodeGuruProfiler::ProfilingGroup").WithTerraformTypeName("awscc_codeguruprofiler_profiling_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -290,11 +289,11 @@ func profilingGroupResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

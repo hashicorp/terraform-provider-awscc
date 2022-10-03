@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_gamelift_fleet", fleetResourceType)
+	registry.AddResourceFactory("awscc_gamelift_fleet", fleetResource)
 }
 
-// fleetResourceType returns the Terraform awscc_gamelift_fleet resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::GameLift::Fleet resource type.
-func fleetResourceType(ctx context.Context) (provider.ResourceType, error) {
+// fleetResource returns the Terraform awscc_gamelift_fleet resource.
+// This Terraform resource corresponds to the CloudFormation AWS::GameLift::Fleet resource.
+func fleetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"build_id": {
 			// Property: BuildId
@@ -877,7 +876,7 @@ func fleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Fleet").WithTerraformTypeName("awscc_gamelift_fleet")
 	opts = opts.WithTerraformSchema(schema)
@@ -952,11 +951,11 @@ func fleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 	),
 	)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

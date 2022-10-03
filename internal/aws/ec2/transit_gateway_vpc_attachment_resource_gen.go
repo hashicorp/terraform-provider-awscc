@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_vpc_attachment", transitGatewayVpcAttachmentResourceType)
+	registry.AddResourceFactory("awscc_ec2_transit_gateway_vpc_attachment", transitGatewayVpcAttachmentResource)
 }
 
-// transitGatewayVpcAttachmentResourceType returns the Terraform awscc_ec2_transit_gateway_vpc_attachment resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayVpcAttachment resource type.
-func transitGatewayVpcAttachmentResourceType(ctx context.Context) (provider.ResourceType, error) {
+// transitGatewayVpcAttachmentResource returns the Terraform awscc_ec2_transit_gateway_vpc_attachment resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::TransitGatewayVpcAttachment resource.
+func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"add_subnet_ids": {
 			// Property: AddSubnetIds
@@ -229,7 +228,7 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (provider.Reso
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayVpcAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_vpc_attachment")
 	opts = opts.WithTerraformSchema(schema)
@@ -254,11 +253,11 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (provider.Reso
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

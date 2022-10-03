@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ses_dedicated_ip_pool", dedicatedIpPoolResourceType)
+	registry.AddResourceFactory("awscc_ses_dedicated_ip_pool", dedicatedIpPoolResource)
 }
 
-// dedicatedIpPoolResourceType returns the Terraform awscc_ses_dedicated_ip_pool resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SES::DedicatedIpPool resource type.
-func dedicatedIpPoolResourceType(ctx context.Context) (provider.ResourceType, error) {
+// dedicatedIpPoolResource returns the Terraform awscc_ses_dedicated_ip_pool resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SES::DedicatedIpPool resource.
+func dedicatedIpPoolResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"pool_name": {
 			// Property: PoolName
@@ -60,7 +59,7 @@ func dedicatedIpPoolResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::DedicatedIpPool").WithTerraformTypeName("awscc_ses_dedicated_ip_pool")
 	opts = opts.WithTerraformSchema(schema)
@@ -73,11 +72,11 @@ func dedicatedIpPoolResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

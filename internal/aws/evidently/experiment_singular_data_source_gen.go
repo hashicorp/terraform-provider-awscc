@@ -5,7 +5,7 @@ package evidently
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_evidently_experiment", experimentDataSourceType)
+	registry.AddDataSourceFactory("awscc_evidently_experiment", experimentDataSource)
 }
 
-// experimentDataSourceType returns the Terraform awscc_evidently_experiment data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Evidently::Experiment resource type.
-func experimentDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// experimentDataSource returns the Terraform awscc_evidently_experiment data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Evidently::Experiment resource.
+func experimentDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -477,7 +477,7 @@ func experimentDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Evidently::Experiment").WithTerraformTypeName("awscc_evidently_experiment")
 	opts = opts.WithTerraformSchema(schema)
@@ -516,11 +516,11 @@ func experimentDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		"variation":              "Variation",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

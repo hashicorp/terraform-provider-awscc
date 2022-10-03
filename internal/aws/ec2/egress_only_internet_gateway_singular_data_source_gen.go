@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_egress_only_internet_gateway", egressOnlyInternetGatewayDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_egress_only_internet_gateway", egressOnlyInternetGatewayDataSource)
 }
 
-// egressOnlyInternetGatewayDataSourceType returns the Terraform awscc_ec2_egress_only_internet_gateway data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::EgressOnlyInternetGateway resource type.
-func egressOnlyInternetGatewayDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// egressOnlyInternetGatewayDataSource returns the Terraform awscc_ec2_egress_only_internet_gateway data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::EgressOnlyInternetGateway resource.
+func egressOnlyInternetGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -56,7 +56,7 @@ func egressOnlyInternetGatewayDataSourceType(ctx context.Context) (provider.Data
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EgressOnlyInternetGateway").WithTerraformTypeName("awscc_ec2_egress_only_internet_gateway")
 	opts = opts.WithTerraformSchema(schema)
@@ -65,11 +65,11 @@ func egressOnlyInternetGatewayDataSourceType(ctx context.Context) (provider.Data
 		"vpc_id": "VpcId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_m2_application", applicationResourceType)
+	registry.AddResourceFactory("awscc_m2_application", applicationResource)
 }
 
-// applicationResourceType returns the Terraform awscc_m2_application resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::M2::Application resource type.
-func applicationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// applicationResource returns the Terraform awscc_m2_application resource.
+// This Terraform resource corresponds to the CloudFormation AWS::M2::Application resource.
+func applicationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_arn": {
 			// Property: ApplicationArn
@@ -189,7 +188,7 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::M2::Application").WithTerraformTypeName("awscc_m2_application")
 	opts = opts.WithTerraformSchema(schema)
@@ -213,11 +212,11 @@ func applicationResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

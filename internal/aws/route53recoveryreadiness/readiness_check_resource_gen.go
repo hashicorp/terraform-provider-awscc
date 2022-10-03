@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53recoveryreadiness_readiness_check", readinessCheckResourceType)
+	registry.AddResourceFactory("awscc_route53recoveryreadiness_readiness_check", readinessCheckResource)
 }
 
-// readinessCheckResourceType returns the Terraform awscc_route53recoveryreadiness_readiness_check resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ReadinessCheck resource type.
-func readinessCheckResourceType(ctx context.Context) (provider.ResourceType, error) {
+// readinessCheckResource returns the Terraform awscc_route53recoveryreadiness_readiness_check resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ReadinessCheck resource.
+func readinessCheckResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"readiness_check_arn": {
 			// Property: ReadinessCheckArn
@@ -152,7 +151,7 @@ func readinessCheckResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::ReadinessCheck").WithTerraformTypeName("awscc_route53recoveryreadiness_readiness_check")
 	opts = opts.WithTerraformSchema(schema)
@@ -170,11 +169,11 @@ func readinessCheckResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

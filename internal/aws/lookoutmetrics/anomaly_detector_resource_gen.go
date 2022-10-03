@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lookoutmetrics_anomaly_detector", anomalyDetectorResourceType)
+	registry.AddResourceFactory("awscc_lookoutmetrics_anomaly_detector", anomalyDetectorResource)
 }
 
-// anomalyDetectorResourceType returns the Terraform awscc_lookoutmetrics_anomaly_detector resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::LookoutMetrics::AnomalyDetector resource type.
-func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, error) {
+// anomalyDetectorResource returns the Terraform awscc_lookoutmetrics_anomaly_detector resource.
+// This Terraform resource corresponds to the CloudFormation AWS::LookoutMetrics::AnomalyDetector resource.
+func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"anomaly_detector_config": {
 			// Property: AnomalyDetectorConfig
@@ -1217,7 +1216,7 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LookoutMetrics::AnomalyDetector").WithTerraformTypeName("awscc_lookoutmetrics_anomaly_detector")
 	opts = opts.WithTerraformSchema(schema)
@@ -1278,11 +1277,11 @@ func anomalyDetectorResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(15)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_sagemaker_user_profile", userProfileResourceType)
+	registry.AddResourceFactory("awscc_sagemaker_user_profile", userProfileResource)
 }
 
-// userProfileResourceType returns the Terraform awscc_sagemaker_user_profile resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::UserProfile resource type.
-func userProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
+// userProfileResource returns the Terraform awscc_sagemaker_user_profile resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SageMaker::UserProfile resource.
+func userProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"domain_id": {
 			// Property: DomainId
@@ -830,7 +829,7 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::UserProfile").WithTerraformTypeName("awscc_sagemaker_user_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -873,11 +872,11 @@ func userProfileResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

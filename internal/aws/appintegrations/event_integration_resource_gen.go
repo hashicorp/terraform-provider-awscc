@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_appintegrations_event_integration", eventIntegrationResourceType)
+	registry.AddResourceFactory("awscc_appintegrations_event_integration", eventIntegrationResource)
 }
 
-// eventIntegrationResourceType returns the Terraform awscc_appintegrations_event_integration resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AppIntegrations::EventIntegration resource type.
-func eventIntegrationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// eventIntegrationResource returns the Terraform awscc_appintegrations_event_integration resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AppIntegrations::EventIntegration resource.
+func eventIntegrationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"associations": {
 			// Property: Associations
@@ -386,7 +385,7 @@ func eventIntegrationResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::EventIntegration").WithTerraformTypeName("awscc_appintegrations_event_integration")
 	opts = opts.WithTerraformSchema(schema)
@@ -413,11 +412,11 @@ func eventIntegrationResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

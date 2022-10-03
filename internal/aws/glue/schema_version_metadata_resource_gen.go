@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_glue_schema_version_metadata", schemaVersionMetadataResourceType)
+	registry.AddResourceFactory("awscc_glue_schema_version_metadata", schemaVersionMetadataResource)
 }
 
-// schemaVersionMetadataResourceType returns the Terraform awscc_glue_schema_version_metadata resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Glue::SchemaVersionMetadata resource type.
-func schemaVersionMetadataResourceType(ctx context.Context) (provider.ResourceType, error) {
+// schemaVersionMetadataResource returns the Terraform awscc_glue_schema_version_metadata resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Glue::SchemaVersionMetadata resource.
+func schemaVersionMetadataResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"key": {
 			// Property: Key
@@ -96,7 +95,7 @@ func schemaVersionMetadataResourceType(ctx context.Context) (provider.ResourceTy
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::SchemaVersionMetadata").WithTerraformTypeName("awscc_glue_schema_version_metadata")
 	opts = opts.WithTerraformSchema(schema)
@@ -111,11 +110,11 @@ func schemaVersionMetadataResourceType(ctx context.Context) (provider.ResourceTy
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

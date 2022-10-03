@@ -5,7 +5,7 @@ package networkfirewall
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_networkfirewall_rule_group", ruleGroupDataSourceType)
+	registry.AddDataSourceFactory("awscc_networkfirewall_rule_group", ruleGroupDataSource)
 }
 
-// ruleGroupDataSourceType returns the Terraform awscc_networkfirewall_rule_group data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::NetworkFirewall::RuleGroup resource type.
-func ruleGroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// ruleGroupDataSource returns the Terraform awscc_networkfirewall_rule_group data source.
+// This Terraform data source corresponds to the CloudFormation AWS::NetworkFirewall::RuleGroup resource.
+func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity": {
 			// Property: Capacity
@@ -988,7 +988,7 @@ func ruleGroupDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::RuleGroup").WithTerraformTypeName("awscc_networkfirewall_rule_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -1051,11 +1051,11 @@ func ruleGroupDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		"value":                              "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

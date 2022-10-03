@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_connect", transitGatewayConnectResourceType)
+	registry.AddResourceFactory("awscc_ec2_transit_gateway_connect", transitGatewayConnectResource)
 }
 
-// transitGatewayConnectResourceType returns the Terraform awscc_ec2_transit_gateway_connect resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayConnect resource type.
-func transitGatewayConnectResourceType(ctx context.Context) (provider.ResourceType, error) {
+// transitGatewayConnectResource returns the Terraform awscc_ec2_transit_gateway_connect resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::TransitGatewayConnect resource.
+func transitGatewayConnectResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -194,7 +193,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (provider.ResourceTy
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayConnect").WithTerraformTypeName("awscc_ec2_transit_gateway_connect")
 	opts = opts.WithTerraformSchema(schema)
@@ -216,11 +215,11 @@ func transitGatewayConnectResourceType(ctx context.Context) (provider.ResourceTy
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

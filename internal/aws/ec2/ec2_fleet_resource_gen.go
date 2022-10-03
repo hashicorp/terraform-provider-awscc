@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_ec2_fleet", eC2FleetResourceType)
+	registry.AddResourceFactory("awscc_ec2_ec2_fleet", eC2FleetResource)
 }
 
-// eC2FleetResourceType returns the Terraform awscc_ec2_ec2_fleet resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::EC2Fleet resource type.
-func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
+// eC2FleetResource returns the Terraform awscc_ec2_ec2_fleet resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::EC2Fleet resource.
+func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"context": {
 			// Property: Context
@@ -1720,7 +1719,7 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EC2Fleet").WithTerraformTypeName("awscc_ec2_ec2_fleet")
 	opts = opts.WithTerraformSchema(schema)
@@ -1810,11 +1809,11 @@ func eC2FleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

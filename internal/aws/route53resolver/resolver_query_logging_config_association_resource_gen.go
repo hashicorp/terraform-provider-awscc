@@ -5,7 +5,6 @@ package route53resolver
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53resolver_resolver_query_logging_config_association", resolverQueryLoggingConfigAssociationResourceType)
+	registry.AddResourceFactory("awscc_route53resolver_resolver_query_logging_config_association", resolverQueryLoggingConfigAssociationResource)
 }
 
-// resolverQueryLoggingConfigAssociationResourceType returns the Terraform awscc_route53resolver_resolver_query_logging_config_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation resource type.
-func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// resolverQueryLoggingConfigAssociationResource returns the Terraform awscc_route53resolver_resolver_query_logging_config_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation resource.
+func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -159,7 +158,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (pro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation").WithTerraformTypeName("awscc_route53resolver_resolver_query_logging_config_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -178,11 +177,11 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (pro
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

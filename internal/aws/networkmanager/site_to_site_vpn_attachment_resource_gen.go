@@ -5,7 +5,6 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_networkmanager_site_to_site_vpn_attachment", siteToSiteVpnAttachmentResourceType)
+	registry.AddResourceFactory("awscc_networkmanager_site_to_site_vpn_attachment", siteToSiteVpnAttachmentResource)
 }
 
-// siteToSiteVpnAttachmentResourceType returns the Terraform awscc_networkmanager_site_to_site_vpn_attachment resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::SiteToSiteVpnAttachment resource type.
-func siteToSiteVpnAttachmentResourceType(ctx context.Context) (provider.ResourceType, error) {
+// siteToSiteVpnAttachmentResource returns the Terraform awscc_networkmanager_site_to_site_vpn_attachment resource.
+// This Terraform resource corresponds to the CloudFormation AWS::NetworkManager::SiteToSiteVpnAttachment resource.
+func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"attachment_id": {
 			// Property: AttachmentId
@@ -376,7 +375,7 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (provider.Resource
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::SiteToSiteVpnAttachment").WithTerraformTypeName("awscc_networkmanager_site_to_site_vpn_attachment")
 	opts = opts.WithTerraformSchema(schema)
@@ -408,11 +407,11 @@ func siteToSiteVpnAttachmentResourceType(ctx context.Context) (provider.Resource
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

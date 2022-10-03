@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_controltower_enabled_control", enabledControlResourceType)
+	registry.AddResourceFactory("awscc_controltower_enabled_control", enabledControlResource)
 }
 
-// enabledControlResourceType returns the Terraform awscc_controltower_enabled_control resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ControlTower::EnabledControl resource type.
-func enabledControlResourceType(ctx context.Context) (provider.ResourceType, error) {
+// enabledControlResource returns the Terraform awscc_controltower_enabled_control resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ControlTower::EnabledControl resource.
+func enabledControlResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"control_identifier": {
 			// Property: ControlIdentifier
@@ -82,7 +81,7 @@ func enabledControlResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ControlTower::EnabledControl").WithTerraformTypeName("awscc_controltower_enabled_control")
 	opts = opts.WithTerraformSchema(schema)
@@ -96,11 +95,11 @@ func enabledControlResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

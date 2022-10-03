@@ -5,7 +5,7 @@ package route53resolver
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_route53resolver_firewall_domain_list", firewallDomainListDataSourceType)
+	registry.AddDataSourceFactory("awscc_route53resolver_firewall_domain_list", firewallDomainListDataSource)
 }
 
-// firewallDomainListDataSourceType returns the Terraform awscc_route53resolver_firewall_domain_list data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Route53Resolver::FirewallDomainList resource type.
-func firewallDomainListDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// firewallDomainListDataSource returns the Terraform awscc_route53resolver_firewall_domain_list data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Route53Resolver::FirewallDomainList resource.
+func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -250,7 +250,7 @@ func firewallDomainListDataSourceType(ctx context.Context) (provider.DataSourceT
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallDomainList").WithTerraformTypeName("awscc_route53resolver_firewall_domain_list")
 	opts = opts.WithTerraformSchema(schema)
@@ -272,11 +272,11 @@ func firewallDomainListDataSourceType(ctx context.Context) (provider.DataSourceT
 		"value":              "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

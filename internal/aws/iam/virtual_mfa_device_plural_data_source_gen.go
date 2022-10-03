@@ -5,7 +5,7 @@ package iam
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iam_virtual_mfa_devices", virtualMFADevicesDataSourceType)
+	registry.AddDataSourceFactory("awscc_iam_virtual_mfa_devices", virtualMFADevicesDataSource)
 }
 
-// virtualMFADevicesDataSourceType returns the Terraform awscc_iam_virtual_mfa_devices data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IAM::VirtualMFADevice resource type.
-func virtualMFADevicesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// virtualMFADevicesDataSource returns the Terraform awscc_iam_virtual_mfa_devices data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IAM::VirtualMFADevice resource.
+func virtualMFADevicesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func virtualMFADevicesDataSourceType(ctx context.Context) (provider.DataSourceTy
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IAM::VirtualMFADevice").WithTerraformTypeName("awscc_iam_virtual_mfa_devices")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

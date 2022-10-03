@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_servicecatalogappregistry_attribute_group", attributeGroupResourceType)
+	registry.AddResourceFactory("awscc_servicecatalogappregistry_attribute_group", attributeGroupResource)
 }
 
-// attributeGroupResourceType returns the Terraform awscc_servicecatalogappregistry_attribute_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::AttributeGroup resource type.
-func attributeGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// attributeGroupResource returns the Terraform awscc_servicecatalogappregistry_attribute_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::AttributeGroup resource.
+func attributeGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -124,7 +123,7 @@ func attributeGroupResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroup").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -142,11 +141,11 @@ func attributeGroupResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

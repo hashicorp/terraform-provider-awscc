@@ -5,7 +5,6 @@ package route53recoverycontrol
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53recoverycontrol_cluster", clusterResourceType)
+	registry.AddResourceFactory("awscc_route53recoverycontrol_cluster", clusterResource)
 }
 
-// clusterResourceType returns the Terraform awscc_route53recoverycontrol_cluster resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryControl::Cluster resource type.
-func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
+// clusterResource returns the Terraform awscc_route53recoverycontrol_cluster resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53RecoveryControl::Cluster resource.
+func clusterResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cluster_arn": {
 			// Property: ClusterArn
@@ -211,7 +210,7 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::Cluster").WithTerraformTypeName("awscc_route53recoverycontrol_cluster")
 	opts = opts.WithTerraformSchema(schema)
@@ -235,11 +234,11 @@ func clusterResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

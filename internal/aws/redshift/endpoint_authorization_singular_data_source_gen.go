@@ -5,7 +5,7 @@ package redshift
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_redshift_endpoint_authorization", endpointAuthorizationDataSourceType)
+	registry.AddDataSourceFactory("awscc_redshift_endpoint_authorization", endpointAuthorizationDataSource)
 }
 
-// endpointAuthorizationDataSourceType returns the Terraform awscc_redshift_endpoint_authorization data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Redshift::EndpointAuthorization resource type.
-func endpointAuthorizationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// endpointAuthorizationDataSource returns the Terraform awscc_redshift_endpoint_authorization data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Redshift::EndpointAuthorization resource.
+func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"account": {
 			// Property: Account
@@ -180,7 +180,7 @@ func endpointAuthorizationDataSourceType(ctx context.Context) (provider.DataSour
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::EndpointAuthorization").WithTerraformTypeName("awscc_redshift_endpoint_authorization")
 	opts = opts.WithTerraformSchema(schema)
@@ -199,11 +199,11 @@ func endpointAuthorizationDataSourceType(ctx context.Context) (provider.DataSour
 		"vpc_ids":            "VpcIds",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

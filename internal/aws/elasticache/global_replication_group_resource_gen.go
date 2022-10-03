@@ -5,7 +5,6 @@ package elasticache
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_elasticache_global_replication_group", globalReplicationGroupResourceType)
+	registry.AddResourceFactory("awscc_elasticache_global_replication_group", globalReplicationGroupResource)
 }
 
-// globalReplicationGroupResourceType returns the Terraform awscc_elasticache_global_replication_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ElastiCache::GlobalReplicationGroup resource type.
-func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// globalReplicationGroupResource returns the Terraform awscc_elasticache_global_replication_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ElastiCache::GlobalReplicationGroup resource.
+func globalReplicationGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"automatic_failover_enabled": {
 			// Property: AutomaticFailoverEnabled
@@ -372,7 +371,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::GlobalReplicationGroup").WithTerraformTypeName("awscc_elasticache_global_replication_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -410,11 +409,11 @@ func globalReplicationGroupResourceType(ctx context.Context) (provider.ResourceT
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

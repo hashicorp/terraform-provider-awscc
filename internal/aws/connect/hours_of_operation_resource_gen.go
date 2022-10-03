@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_connect_hours_of_operation", hoursOfOperationResourceType)
+	registry.AddResourceFactory("awscc_connect_hours_of_operation", hoursOfOperationResource)
 }
 
-// hoursOfOperationResourceType returns the Terraform awscc_connect_hours_of_operation resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Connect::HoursOfOperation resource type.
-func hoursOfOperationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// hoursOfOperationResource returns the Terraform awscc_connect_hours_of_operation resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Connect::HoursOfOperation resource.
+func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"config": {
 			// Property: Config
@@ -344,7 +343,7 @@ func hoursOfOperationResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::HoursOfOperation").WithTerraformTypeName("awscc_connect_hours_of_operation")
 	opts = opts.WithTerraformSchema(schema)
@@ -370,11 +369,11 @@ func hoursOfOperationResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

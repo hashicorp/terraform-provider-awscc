@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_placement_group", placementGroupResourceType)
+	registry.AddResourceFactory("awscc_ec2_placement_group", placementGroupResource)
 }
 
-// placementGroupResourceType returns the Terraform awscc_ec2_placement_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::PlacementGroup resource type.
-func placementGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// placementGroupResource returns the Terraform awscc_ec2_placement_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::PlacementGroup resource.
+func placementGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"group_name": {
 			// Property: GroupName
@@ -84,7 +83,7 @@ func placementGroupResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::PlacementGroup").WithTerraformTypeName("awscc_ec2_placement_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -99,11 +98,11 @@ func placementGroupResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

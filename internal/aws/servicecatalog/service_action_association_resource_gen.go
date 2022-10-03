@@ -5,7 +5,6 @@ package servicecatalog
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_servicecatalog_service_action_association", serviceActionAssociationResourceType)
+	registry.AddResourceFactory("awscc_servicecatalog_service_action_association", serviceActionAssociationResource)
 }
 
-// serviceActionAssociationResourceType returns the Terraform awscc_servicecatalog_service_action_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalog::ServiceActionAssociation resource type.
-func serviceActionAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// serviceActionAssociationResource returns the Terraform awscc_servicecatalog_service_action_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ServiceCatalog::ServiceActionAssociation resource.
+func serviceActionAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"product_id": {
 			// Property: ProductId
@@ -93,7 +92,7 @@ func serviceActionAssociationResourceType(ctx context.Context) (provider.Resourc
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::ServiceActionAssociation").WithTerraformTypeName("awscc_servicecatalog_service_action_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -108,11 +107,11 @@ func serviceActionAssociationResourceType(ctx context.Context) (provider.Resourc
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

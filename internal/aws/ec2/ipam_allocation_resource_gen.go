@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_ipam_allocation", iPAMAllocationResourceType)
+	registry.AddResourceFactory("awscc_ec2_ipam_allocation", iPAMAllocationResource)
 }
 
-// iPAMAllocationResourceType returns the Terraform awscc_ec2_ipam_allocation resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::IPAMAllocation resource type.
-func iPAMAllocationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// iPAMAllocationResource returns the Terraform awscc_ec2_ipam_allocation resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::IPAMAllocation resource.
+func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cidr": {
 			// Property: Cidr
@@ -113,7 +112,7 @@ func iPAMAllocationResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::IPAMAllocation").WithTerraformTypeName("awscc_ec2_ipam_allocation")
 	opts = opts.WithTerraformSchema(schema)
@@ -133,11 +132,11 @@ func iPAMAllocationResourceType(ctx context.Context) (provider.ResourceType, err
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

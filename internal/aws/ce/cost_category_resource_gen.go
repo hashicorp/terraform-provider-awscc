@@ -5,7 +5,6 @@ package ce
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ce_cost_category", costCategoryResourceType)
+	registry.AddResourceFactory("awscc_ce_cost_category", costCategoryResource)
 }
 
-// costCategoryResourceType returns the Terraform awscc_ce_cost_category resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CE::CostCategory resource type.
-func costCategoryResourceType(ctx context.Context) (provider.ResourceType, error) {
+// costCategoryResource returns the Terraform awscc_ce_cost_category resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CE::CostCategory resource.
+func costCategoryResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -151,7 +150,7 @@ func costCategoryResourceType(ctx context.Context) (provider.ResourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CE::CostCategory").WithTerraformTypeName("awscc_ce_cost_category")
 	opts = opts.WithTerraformSchema(schema)
@@ -170,11 +169,11 @@ func costCategoryResourceType(ctx context.Context) (provider.ResourceType, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

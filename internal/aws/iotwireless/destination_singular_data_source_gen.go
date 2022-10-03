@@ -5,7 +5,7 @@ package iotwireless
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iotwireless_destination", destinationDataSourceType)
+	registry.AddDataSourceFactory("awscc_iotwireless_destination", destinationDataSource)
 }
 
-// destinationDataSourceType returns the Terraform awscc_iotwireless_destination data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoTWireless::Destination resource type.
-func destinationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// destinationDataSource returns the Terraform awscc_iotwireless_destination data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoTWireless::Destination resource.
+func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -152,7 +152,7 @@ func destinationDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::Destination").WithTerraformTypeName("awscc_iotwireless_destination")
 	opts = opts.WithTerraformSchema(schema)
@@ -168,11 +168,11 @@ func destinationDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		"value":           "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

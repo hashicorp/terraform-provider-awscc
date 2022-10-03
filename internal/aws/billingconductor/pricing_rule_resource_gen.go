@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_billingconductor_pricing_rule", pricingRuleResourceType)
+	registry.AddResourceFactory("awscc_billingconductor_pricing_rule", pricingRuleResource)
 }
 
-// pricingRuleResourceType returns the Terraform awscc_billingconductor_pricing_rule resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::BillingConductor::PricingRule resource type.
-func pricingRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
+// pricingRuleResource returns the Terraform awscc_billingconductor_pricing_rule resource.
+// This Terraform resource corresponds to the CloudFormation AWS::BillingConductor::PricingRule resource.
+func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -272,7 +271,7 @@ func pricingRuleResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::BillingConductor::PricingRule").WithTerraformTypeName("awscc_billingconductor_pricing_rule")
 	opts = opts.WithTerraformSchema(schema)
@@ -297,11 +296,11 @@ func pricingRuleResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

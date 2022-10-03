@@ -5,7 +5,7 @@ package elasticache
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_elasticache_user", userDataSourceType)
+	registry.AddDataSourceFactory("awscc_elasticache_user", userDataSource)
 }
 
-// userDataSourceType returns the Terraform awscc_elasticache_user data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::ElastiCache::User resource type.
-func userDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// userDataSource returns the Terraform awscc_elasticache_user data source.
+// This Terraform data source corresponds to the CloudFormation AWS::ElastiCache::User resource.
+func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_string": {
 			// Property: AccessString
@@ -132,7 +132,7 @@ func userDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::User").WithTerraformTypeName("awscc_elasticache_user")
 	opts = opts.WithTerraformSchema(schema)
@@ -147,11 +147,11 @@ func userDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"user_name":            "UserName",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

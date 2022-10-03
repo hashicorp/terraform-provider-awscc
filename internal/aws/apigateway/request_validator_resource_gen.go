@@ -5,7 +5,6 @@ package apigateway
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_apigateway_request_validator", requestValidatorResourceType)
+	registry.AddResourceFactory("awscc_apigateway_request_validator", requestValidatorResource)
 }
 
-// requestValidatorResourceType returns the Terraform awscc_apigateway_request_validator resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::RequestValidator resource type.
-func requestValidatorResourceType(ctx context.Context) (provider.ResourceType, error) {
+// requestValidatorResource returns the Terraform awscc_apigateway_request_validator resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ApiGateway::RequestValidator resource.
+func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"name": {
 			// Property: Name
@@ -112,7 +111,7 @@ func requestValidatorResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::RequestValidator").WithTerraformTypeName("awscc_apigateway_request_validator")
 	opts = opts.WithTerraformSchema(schema)
@@ -129,11 +128,11 @@ func requestValidatorResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

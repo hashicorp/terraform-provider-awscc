@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_memorydb_acl", aCLResourceType)
+	registry.AddResourceFactory("awscc_memorydb_acl", aCLResource)
 }
 
-// aCLResourceType returns the Terraform awscc_memorydb_acl resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::MemoryDB::ACL resource type.
-func aCLResourceType(ctx context.Context) (provider.ResourceType, error) {
+// aCLResource returns the Terraform awscc_memorydb_acl resource.
+// This Terraform resource corresponds to the CloudFormation AWS::MemoryDB::ACL resource.
+func aCLResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"acl_name": {
 			// Property: ACLName
@@ -177,7 +176,7 @@ func aCLResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MemoryDB::ACL").WithTerraformTypeName("awscc_memorydb_acl")
 	opts = opts.WithTerraformSchema(schema)
@@ -196,11 +195,11 @@ func aCLResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

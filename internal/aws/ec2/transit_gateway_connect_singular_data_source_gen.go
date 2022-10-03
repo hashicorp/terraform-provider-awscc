@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_transit_gateway_connect", transitGatewayConnectDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_connect", transitGatewayConnectDataSource)
 }
 
-// transitGatewayConnectDataSourceType returns the Terraform awscc_ec2_transit_gateway_connect data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::TransitGatewayConnect resource type.
-func transitGatewayConnectDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// transitGatewayConnectDataSource returns the Terraform awscc_ec2_transit_gateway_connect data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::TransitGatewayConnect resource.
+func transitGatewayConnectDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -156,7 +156,7 @@ func transitGatewayConnectDataSourceType(ctx context.Context) (provider.DataSour
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayConnect").WithTerraformTypeName("awscc_ec2_transit_gateway_connect")
 	opts = opts.WithTerraformSchema(schema)
@@ -173,11 +173,11 @@ func transitGatewayConnectDataSourceType(ctx context.Context) (provider.DataSour
 		"value": "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

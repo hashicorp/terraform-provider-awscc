@@ -5,7 +5,6 @@ package ecs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ecs_service", serviceResourceType)
+	registry.AddResourceFactory("awscc_ecs_service", serviceResource)
 }
 
-// serviceResourceType returns the Terraform awscc_ecs_service resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ECS::Service resource type.
-func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
+// serviceResource returns the Terraform awscc_ecs_service resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ECS::Service resource.
+func serviceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity_provider_strategy": {
 			// Property: CapacityProviderStrategy
@@ -828,7 +827,7 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::Service").WithTerraformTypeName("awscc_ecs_service")
 	opts = opts.WithTerraformSchema(schema)
@@ -886,11 +885,11 @@ func serviceResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(180)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

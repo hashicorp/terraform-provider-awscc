@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudtrail_trail", trailResourceType)
+	registry.AddResourceFactory("awscc_cloudtrail_trail", trailResource)
 }
 
-// trailResourceType returns the Terraform awscc_cloudtrail_trail resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudTrail::Trail resource type.
-func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
+// trailResource returns the Terraform awscc_cloudtrail_trail resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudTrail::Trail resource.
+func trailResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -487,7 +486,7 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudTrail::Trail").WithTerraformTypeName("awscc_cloudtrail_trail")
 	opts = opts.WithTerraformSchema(schema)
@@ -525,11 +524,11 @@ func trailResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

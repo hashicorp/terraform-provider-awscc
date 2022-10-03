@@ -5,7 +5,6 @@ package batch
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_batch_job_queue", jobQueueResourceType)
+	registry.AddResourceFactory("awscc_batch_job_queue", jobQueueResource)
 }
 
-// jobQueueResourceType returns the Terraform awscc_batch_job_queue resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Batch::JobQueue resource type.
-func jobQueueResourceType(ctx context.Context) (provider.ResourceType, error) {
+// jobQueueResource returns the Terraform awscc_batch_job_queue resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Batch::JobQueue resource.
+func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"compute_environment_order": {
 			// Property: ComputeEnvironmentOrder
@@ -185,7 +184,7 @@ func jobQueueResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::JobQueue").WithTerraformTypeName("awscc_batch_job_queue")
 	opts = opts.WithTerraformSchema(schema)
@@ -206,11 +205,11 @@ func jobQueueResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

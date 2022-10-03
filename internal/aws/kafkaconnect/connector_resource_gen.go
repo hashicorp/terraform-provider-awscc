@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_kafkaconnect_connector", connectorResourceType)
+	registry.AddResourceFactory("awscc_kafkaconnect_connector", connectorResource)
 }
 
-// connectorResourceType returns the Terraform awscc_kafkaconnect_connector resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::KafkaConnect::Connector resource type.
-func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
+// connectorResource returns the Terraform awscc_kafkaconnect_connector resource.
+// This Terraform resource corresponds to the CloudFormation AWS::KafkaConnect::Connector resource.
+func connectorResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"capacity": {
 			// Property: Capacity
@@ -914,7 +913,7 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::KafkaConnect::Connector").WithTerraformTypeName("awscc_kafkaconnect_connector")
 	opts = opts.WithTerraformSchema(schema)
@@ -968,11 +967,11 @@ func connectorResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

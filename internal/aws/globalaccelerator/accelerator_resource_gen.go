@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_globalaccelerator_accelerator", acceleratorResourceType)
+	registry.AddResourceFactory("awscc_globalaccelerator_accelerator", acceleratorResource)
 }
 
-// acceleratorResourceType returns the Terraform awscc_globalaccelerator_accelerator resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::GlobalAccelerator::Accelerator resource type.
-func acceleratorResourceType(ctx context.Context) (provider.ResourceType, error) {
+// acceleratorResource returns the Terraform awscc_globalaccelerator_accelerator resource.
+// This Terraform resource corresponds to the CloudFormation AWS::GlobalAccelerator::Accelerator resource.
+func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"accelerator_arn": {
 			// Property: AcceleratorArn
@@ -258,7 +257,7 @@ func acceleratorResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::Accelerator").WithTerraformTypeName("awscc_globalaccelerator_accelerator")
 	opts = opts.WithTerraformSchema(schema)
@@ -282,11 +281,11 @@ func acceleratorResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

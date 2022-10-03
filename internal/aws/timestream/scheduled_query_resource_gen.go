@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_timestream_scheduled_query", scheduledQueryResourceType)
+	registry.AddResourceFactory("awscc_timestream_scheduled_query", scheduledQueryResource)
 }
 
-// scheduledQueryResourceType returns the Terraform awscc_timestream_scheduled_query resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Timestream::ScheduledQuery resource type.
-func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, error) {
+// scheduledQueryResource returns the Terraform awscc_timestream_scheduled_query resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Timestream::ScheduledQuery resource.
+func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -982,7 +981,7 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Timestream::ScheduledQuery").WithTerraformTypeName("awscc_timestream_scheduled_query")
 	opts = opts.WithTerraformSchema(schema)
@@ -1039,11 +1038,11 @@ func scheduledQueryResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

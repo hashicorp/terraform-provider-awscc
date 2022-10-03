@@ -5,7 +5,6 @@ package route53resolver
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53resolver_resolver_query_logging_config", resolverQueryLoggingConfigResourceType)
+	registry.AddResourceFactory("awscc_route53resolver_resolver_query_logging_config", resolverQueryLoggingConfigResource)
 }
 
-// resolverQueryLoggingConfigResourceType returns the Terraform awscc_route53resolver_resolver_query_logging_config resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfig resource type.
-func resolverQueryLoggingConfigResourceType(ctx context.Context) (provider.ResourceType, error) {
+// resolverQueryLoggingConfigResource returns the Terraform awscc_route53resolver_resolver_query_logging_config resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfig resource.
+func resolverQueryLoggingConfigResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -206,7 +205,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (provider.Resou
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfig").WithTerraformTypeName("awscc_route53resolver_resolver_query_logging_config")
 	opts = opts.WithTerraformSchema(schema)
@@ -228,11 +227,11 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (provider.Resou
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

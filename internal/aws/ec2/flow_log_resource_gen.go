@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_flow_log", flowLogResourceType)
+	registry.AddResourceFactory("awscc_ec2_flow_log", flowLogResource)
 }
 
-// flowLogResourceType returns the Terraform awscc_ec2_flow_log resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::FlowLog resource type.
-func flowLogResourceType(ctx context.Context) (provider.ResourceType, error) {
+// flowLogResource returns the Terraform awscc_ec2_flow_log resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::FlowLog resource.
+func flowLogResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"deliver_logs_permission_arn": {
 			// Property: DeliverLogsPermissionArn
@@ -326,7 +325,7 @@ func flowLogResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::FlowLog").WithTerraformTypeName("awscc_ec2_flow_log")
 	opts = opts.WithTerraformSchema(schema)
@@ -355,11 +354,11 @@ func flowLogResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

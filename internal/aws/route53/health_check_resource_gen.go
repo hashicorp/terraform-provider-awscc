@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53_health_check", healthCheckResourceType)
+	registry.AddResourceFactory("awscc_route53_health_check", healthCheckResource)
 }
 
-// healthCheckResourceType returns the Terraform awscc_route53_health_check resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53::HealthCheck resource type.
-func healthCheckResourceType(ctx context.Context) (provider.ResourceType, error) {
+// healthCheckResource returns the Terraform awscc_route53_health_check resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53::HealthCheck resource.
+func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"health_check_config": {
 			// Property: HealthCheckConfig
@@ -468,7 +467,7 @@ func healthCheckResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::HealthCheck").WithTerraformTypeName("awscc_route53_health_check")
 	opts = opts.WithTerraformSchema(schema)
@@ -504,11 +503,11 @@ func healthCheckResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

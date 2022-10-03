@@ -5,7 +5,7 @@ package s3outposts
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_s3outposts_bucket_policy", bucketPolicyDataSourceType)
+	registry.AddDataSourceFactory("awscc_s3outposts_bucket_policy", bucketPolicyDataSource)
 }
 
-// bucketPolicyDataSourceType returns the Terraform awscc_s3outposts_bucket_policy data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::S3Outposts::BucketPolicy resource type.
-func bucketPolicyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// bucketPolicyDataSource returns the Terraform awscc_s3outposts_bucket_policy data source.
+// This Terraform data source corresponds to the CloudFormation AWS::S3Outposts::BucketPolicy resource.
+func bucketPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"bucket": {
 			// Property: Bucket
@@ -59,7 +59,7 @@ func bucketPolicyDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::BucketPolicy").WithTerraformTypeName("awscc_s3outposts_bucket_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -68,11 +68,11 @@ func bucketPolicyDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		"policy_document": "PolicyDocument",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package iotevents
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iotevents_input", inputDataSourceType)
+	registry.AddDataSourceFactory("awscc_iotevents_input", inputDataSource)
 }
 
-// inputDataSourceType returns the Terraform awscc_iotevents_input data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoTEvents::Input resource type.
-func inputDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// inputDataSource returns the Terraform awscc_iotevents_input data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoTEvents::Input resource.
+func inputDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"input_definition": {
 			// Property: InputDefinition
@@ -168,7 +168,7 @@ func inputDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTEvents::Input").WithTerraformTypeName("awscc_iotevents_input")
 	opts = opts.WithTerraformSchema(schema)
@@ -183,11 +183,11 @@ func inputDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"value":             "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

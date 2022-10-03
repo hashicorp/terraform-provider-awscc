@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_subnet", subnetResourceType)
+	registry.AddResourceFactory("awscc_ec2_subnet", subnetResource)
 }
 
-// subnetResourceType returns the Terraform awscc_ec2_subnet resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::Subnet resource type.
-func subnetResourceType(ctx context.Context) (provider.ResourceType, error) {
+// subnetResource returns the Terraform awscc_ec2_subnet resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::Subnet resource.
+func subnetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"assign_ipv_6_address_on_creation": {
 			// Property: AssignIpv6AddressOnCreation
@@ -310,7 +309,7 @@ func subnetResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::Subnet").WithTerraformTypeName("awscc_ec2_subnet")
 	opts = opts.WithTerraformSchema(schema)
@@ -342,11 +341,11 @@ func subnetResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

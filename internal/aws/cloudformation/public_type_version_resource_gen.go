@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudformation_public_type_version", publicTypeVersionResourceType)
+	registry.AddResourceFactory("awscc_cloudformation_public_type_version", publicTypeVersionResource)
 }
 
-// publicTypeVersionResourceType returns the Terraform awscc_cloudformation_public_type_version resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::PublicTypeVersion resource type.
-func publicTypeVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// publicTypeVersionResource returns the Terraform awscc_cloudformation_public_type_version resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudFormation::PublicTypeVersion resource.
+func publicTypeVersionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -193,7 +192,7 @@ func publicTypeVersionResourceType(ctx context.Context) (provider.ResourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::PublicTypeVersion").WithTerraformTypeName("awscc_cloudformation_public_type_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -224,11 +223,11 @@ func publicTypeVersionResourceType(ctx context.Context) (provider.ResourceType, 
 	),
 	)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

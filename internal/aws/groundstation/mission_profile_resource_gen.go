@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_groundstation_mission_profile", missionProfileResourceType)
+	registry.AddResourceFactory("awscc_groundstation_mission_profile", missionProfileResource)
 }
 
-// missionProfileResourceType returns the Terraform awscc_groundstation_mission_profile resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::GroundStation::MissionProfile resource type.
-func missionProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
+// missionProfileResource returns the Terraform awscc_groundstation_mission_profile resource.
+// This Terraform resource corresponds to the CloudFormation AWS::GroundStation::MissionProfile resource.
+func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -234,7 +233,7 @@ func missionProfileResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::MissionProfile").WithTerraformTypeName("awscc_groundstation_mission_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -260,11 +259,11 @@ func missionProfileResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

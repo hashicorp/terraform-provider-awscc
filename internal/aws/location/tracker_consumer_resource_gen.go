@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_location_tracker_consumer", trackerConsumerResourceType)
+	registry.AddResourceFactory("awscc_location_tracker_consumer", trackerConsumerResource)
 }
 
-// trackerConsumerResourceType returns the Terraform awscc_location_tracker_consumer resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Location::TrackerConsumer resource type.
-func trackerConsumerResourceType(ctx context.Context) (provider.ResourceType, error) {
+// trackerConsumerResource returns the Terraform awscc_location_tracker_consumer resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Location::TrackerConsumer resource.
+func trackerConsumerResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"consumer_arn": {
 			// Property: ConsumerArn
@@ -77,7 +76,7 @@ func trackerConsumerResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Location::TrackerConsumer").WithTerraformTypeName("awscc_location_tracker_consumer")
 	opts = opts.WithTerraformSchema(schema)
@@ -91,11 +90,11 @@ func trackerConsumerResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

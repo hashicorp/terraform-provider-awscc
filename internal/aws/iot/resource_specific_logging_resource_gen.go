@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iot_resource_specific_logging", resourceSpecificLoggingResourceType)
+	registry.AddResourceFactory("awscc_iot_resource_specific_logging", resourceSpecificLoggingResource)
 }
 
-// resourceSpecificLoggingResourceType returns the Terraform awscc_iot_resource_specific_logging resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoT::ResourceSpecificLogging resource type.
-func resourceSpecificLoggingResourceType(ctx context.Context) (provider.ResourceType, error) {
+// resourceSpecificLoggingResource returns the Terraform awscc_iot_resource_specific_logging resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoT::ResourceSpecificLogging resource.
+func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"log_level": {
 			// Property: LogLevel
@@ -133,7 +132,7 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (provider.Resource
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::ResourceSpecificLogging").WithTerraformTypeName("awscc_iot_resource_specific_logging")
 	opts = opts.WithTerraformSchema(schema)
@@ -149,11 +148,11 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (provider.Resource
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package datasync
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_s3", locationS3DataSourceType)
+	registry.AddDataSourceFactory("awscc_datasync_location_s3", locationS3DataSource)
 }
 
-// locationS3DataSourceType returns the Terraform awscc_datasync_location_s3 data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationS3 resource type.
-func locationS3DataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// locationS3DataSource returns the Terraform awscc_datasync_location_s3 data source.
+// This Terraform data source corresponds to the CloudFormation AWS::DataSync::LocationS3 resource.
+func locationS3DataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"location_arn": {
 			// Property: LocationArn
@@ -192,7 +192,7 @@ func locationS3DataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationS3").WithTerraformTypeName("awscc_datasync_location_s3")
 	opts = opts.WithTerraformSchema(schema)
@@ -209,11 +209,11 @@ func locationS3DataSourceType(ctx context.Context) (provider.DataSourceType, err
 		"value":                  "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

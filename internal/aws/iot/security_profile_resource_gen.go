@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iot_security_profile", securityProfileResourceType)
+	registry.AddResourceFactory("awscc_iot_security_profile", securityProfileResource)
 }
 
-// securityProfileResourceType returns the Terraform awscc_iot_security_profile resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoT::SecurityProfile resource type.
-func securityProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
+// securityProfileResource returns the Terraform awscc_iot_security_profile resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoT::SecurityProfile resource.
+func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"additional_metrics_to_retain_v2": {
 			// Property: AdditionalMetricsToRetainV2
@@ -866,7 +865,7 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::SecurityProfile").WithTerraformTypeName("awscc_iot_security_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -911,11 +910,11 @@ func securityProfileResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_healthlake_fhir_datastore", fHIRDatastoreResourceType)
+	registry.AddResourceFactory("awscc_healthlake_fhir_datastore", fHIRDatastoreResource)
 }
 
-// fHIRDatastoreResourceType returns the Terraform awscc_healthlake_fhir_datastore resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::HealthLake::FHIRDatastore resource type.
-func fHIRDatastoreResourceType(ctx context.Context) (provider.ResourceType, error) {
+// fHIRDatastoreResource returns the Terraform awscc_healthlake_fhir_datastore resource.
+// This Terraform resource corresponds to the CloudFormation AWS::HealthLake::FHIRDatastore resource.
+func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"created_at": {
 			// Property: CreatedAt
@@ -380,7 +379,7 @@ func fHIRDatastoreResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::HealthLake::FHIRDatastore").WithTerraformTypeName("awscc_healthlake_fhir_datastore")
 	opts = opts.WithTerraformSchema(schema)
@@ -410,11 +409,11 @@ func fHIRDatastoreResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

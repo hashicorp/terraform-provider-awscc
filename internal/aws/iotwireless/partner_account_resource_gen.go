@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iotwireless_partner_account", partnerAccountResourceType)
+	registry.AddResourceFactory("awscc_iotwireless_partner_account", partnerAccountResource)
 }
 
-// partnerAccountResourceType returns the Terraform awscc_iotwireless_partner_account resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::PartnerAccount resource type.
-func partnerAccountResourceType(ctx context.Context) (provider.ResourceType, error) {
+// partnerAccountResource returns the Terraform awscc_iotwireless_partner_account resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoTWireless::PartnerAccount resource.
+func partnerAccountResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"account_linked": {
 			// Property: AccountLinked
@@ -341,7 +340,7 @@ func partnerAccountResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::PartnerAccount").WithTerraformTypeName("awscc_iotwireless_partner_account")
 	opts = opts.WithTerraformSchema(schema)
@@ -366,11 +365,11 @@ func partnerAccountResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package kms
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_kms_key", keyDataSourceType)
+	registry.AddDataSourceFactory("awscc_kms_key", keyDataSource)
 }
 
-// keyDataSourceType returns the Terraform awscc_kms_key data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::KMS::Key resource type.
-func keyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// keyDataSource returns the Terraform awscc_kms_key data source.
+// This Terraform data source corresponds to the CloudFormation AWS::KMS::Key resource.
+func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -218,7 +218,7 @@ func keyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::KMS::Key").WithTerraformTypeName("awscc_kms_key")
 	opts = opts.WithTerraformSchema(schema)
@@ -238,11 +238,11 @@ func keyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"value":                  "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

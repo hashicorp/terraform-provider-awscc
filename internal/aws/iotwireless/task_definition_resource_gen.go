@@ -5,7 +5,6 @@ package iotwireless
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iotwireless_task_definition", taskDefinitionResourceType)
+	registry.AddResourceFactory("awscc_iotwireless_task_definition", taskDefinitionResource)
 }
 
-// taskDefinitionResourceType returns the Terraform awscc_iotwireless_task_definition resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::TaskDefinition resource type.
-func taskDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// taskDefinitionResource returns the Terraform awscc_iotwireless_task_definition resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoTWireless::TaskDefinition resource.
+func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -577,7 +576,7 @@ func taskDefinitionResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::TaskDefinition").WithTerraformTypeName("awscc_iotwireless_task_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -609,11 +608,11 @@ func taskDefinitionResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package msk
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_msk_batch_scram_secret", batchScramSecretResourceType)
+	registry.AddResourceFactory("awscc_msk_batch_scram_secret", batchScramSecretResource)
 }
 
-// batchScramSecretResourceType returns the Terraform awscc_msk_batch_scram_secret resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::MSK::BatchScramSecret resource type.
-func batchScramSecretResourceType(ctx context.Context) (provider.ResourceType, error) {
+// batchScramSecretResource returns the Terraform awscc_msk_batch_scram_secret resource.
+// This Terraform resource corresponds to the CloudFormation AWS::MSK::BatchScramSecret resource.
+func batchScramSecretResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cluster_arn": {
 			// Property: ClusterArn
@@ -68,7 +67,7 @@ func batchScramSecretResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MSK::BatchScramSecret").WithTerraformTypeName("awscc_msk_batch_scram_secret")
 	opts = opts.WithTerraformSchema(schema)
@@ -82,11 +81,11 @@ func batchScramSecretResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

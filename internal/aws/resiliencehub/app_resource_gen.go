@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_resiliencehub_app", appResourceType)
+	registry.AddResourceFactory("awscc_resiliencehub_app", appResource)
 }
 
-// appResourceType returns the Terraform awscc_resiliencehub_app resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ResilienceHub::App resource type.
-func appResourceType(ctx context.Context) (provider.ResourceType, error) {
+// appResource returns the Terraform awscc_resiliencehub_app resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ResilienceHub::App resource.
+func appResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"app_arn": {
 			// Property: AppArn
@@ -330,7 +329,7 @@ func appResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ResilienceHub::App").WithTerraformTypeName("awscc_resiliencehub_app")
 	opts = opts.WithTerraformSchema(schema)
@@ -359,11 +358,11 @@ func appResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package eks
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_eks_addon", addonResourceType)
+	registry.AddResourceFactory("awscc_eks_addon", addonResource)
 }
 
-// addonResourceType returns the Terraform awscc_eks_addon resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EKS::Addon resource type.
-func addonResourceType(ctx context.Context) (provider.ResourceType, error) {
+// addonResource returns the Terraform awscc_eks_addon resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EKS::Addon resource.
+func addonResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"addon_name": {
 			// Property: AddonName
@@ -218,7 +217,7 @@ func addonResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::Addon").WithTerraformTypeName("awscc_eks_addon")
 	opts = opts.WithTerraformSchema(schema)
@@ -242,11 +241,11 @@ func addonResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

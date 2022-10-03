@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_signer_profile_permission", profilePermissionResourceType)
+	registry.AddResourceFactory("awscc_signer_profile_permission", profilePermissionResource)
 }
 
-// profilePermissionResourceType returns the Terraform awscc_signer_profile_permission resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Signer::ProfilePermission resource type.
-func profilePermissionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// profilePermissionResource returns the Terraform awscc_signer_profile_permission resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Signer::ProfilePermission resource.
+func profilePermissionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"action": {
 			// Property: Action
@@ -106,7 +105,7 @@ func profilePermissionResourceType(ctx context.Context) (provider.ResourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Signer::ProfilePermission").WithTerraformTypeName("awscc_signer_profile_permission")
 	opts = opts.WithTerraformSchema(schema)
@@ -123,11 +122,11 @@ func profilePermissionResourceType(ctx context.Context) (provider.ResourceType, 
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

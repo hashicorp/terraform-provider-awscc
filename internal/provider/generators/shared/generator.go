@@ -15,8 +15,8 @@ import (
 )
 
 const (
-	DataSourceType = "DataSourceType"
-	ResourceType   = "ResourceType"
+	DataSourceType = "DataSource"
+	ResourceType   = "Resource"
 
 	DirPerm = 0755
 )
@@ -81,7 +81,7 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		return nil, fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", cfTypeName)
 	}
 
-	// e.g. "logGroupResourceType" or "logGroupDataSourceType"
+	// e.g. "logGroupResource" or "logGroupDataSource"
 	factoryFunctionName := string(bytes.ToLower([]byte(res[:1]))) + res[1:] + resType
 
 	// e.g. "TestAccAWSLogsLogGroup"
@@ -156,9 +156,6 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	if codeFeatures&codegen.HasIDRootProperty > 0 {
 		templateData.SyntheticIDAttribute = false
 	}
-	if templateData.SyntheticIDAttribute || codeFeatures&codegen.HasFrameworkPlanModifiers > 0 {
-		templateData.ImportFrameworkResource = true
-	}
 
 	if description := resource.CfResource.Description; description != nil {
 		templateData.SchemaDescription = *description
@@ -195,7 +192,6 @@ type TemplateData struct {
 	HasRequiredAttribute         bool
 	HasUpdateMethod              bool
 	ImportFrameworkAttr          bool
-	ImportFrameworkResource      bool
 	ImportRegexp                 bool
 	ImportValidate               bool
 	PackageName                  string

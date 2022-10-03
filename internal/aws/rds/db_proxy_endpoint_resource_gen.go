@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_rds_db_proxy_endpoint", dBProxyEndpointResourceType)
+	registry.AddResourceFactory("awscc_rds_db_proxy_endpoint", dBProxyEndpointResource)
 }
 
-// dBProxyEndpointResourceType returns the Terraform awscc_rds_db_proxy_endpoint resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxyEndpoint resource type.
-func dBProxyEndpointResourceType(ctx context.Context) (provider.ResourceType, error) {
+// dBProxyEndpointResource returns the Terraform awscc_rds_db_proxy_endpoint resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RDS::DBProxyEndpoint resource.
+func dBProxyEndpointResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"db_proxy_endpoint_arn": {
 			// Property: DBProxyEndpointArn
@@ -273,7 +272,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxyEndpoint").WithTerraformTypeName("awscc_rds_db_proxy_endpoint")
 	opts = opts.WithTerraformSchema(schema)
@@ -297,11 +296,11 @@ func dBProxyEndpointResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

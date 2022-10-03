@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_multicast_group_source", transitGatewayMulticastGroupSourceResourceType)
+	registry.AddResourceFactory("awscc_ec2_transit_gateway_multicast_group_source", transitGatewayMulticastGroupSourceResource)
 }
 
-// transitGatewayMulticastGroupSourceResourceType returns the Terraform awscc_ec2_transit_gateway_multicast_group_source resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastGroupSource resource type.
-func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (provider.ResourceType, error) {
+// transitGatewayMulticastGroupSourceResource returns the Terraform awscc_ec2_transit_gateway_multicast_group_source resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastGroupSource resource.
+func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"group_ip_address": {
 			// Property: GroupIpAddress
@@ -192,7 +191,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (provid
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastGroupSource").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_group_source")
 	opts = opts.WithTerraformSchema(schema)
@@ -215,11 +214,11 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (provid
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

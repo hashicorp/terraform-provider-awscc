@@ -5,7 +5,6 @@ package lakeformation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lakeformation_tag_association", tagAssociationResourceType)
+	registry.AddResourceFactory("awscc_lakeformation_tag_association", tagAssociationResource)
 }
 
-// tagAssociationResourceType returns the Terraform awscc_lakeformation_tag_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::LakeFormation::TagAssociation resource type.
-func tagAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// tagAssociationResource returns the Terraform awscc_lakeformation_tag_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::LakeFormation::TagAssociation resource.
+func tagAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"lf_tags": {
 			// Property: LFTags
@@ -388,7 +387,7 @@ func tagAssociationResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LakeFormation::TagAssociation").WithTerraformTypeName("awscc_lakeformation_tag_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -415,11 +414,11 @@ func tagAssociationResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

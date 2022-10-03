@@ -5,7 +5,6 @@ package iot
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iot_topic_rule_destination", topicRuleDestinationResourceType)
+	registry.AddResourceFactory("awscc_iot_topic_rule_destination", topicRuleDestinationResource)
 }
 
-// topicRuleDestinationResourceType returns the Terraform awscc_iot_topic_rule_destination resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoT::TopicRuleDestination resource type.
-func topicRuleDestinationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// topicRuleDestinationResource returns the Terraform awscc_iot_topic_rule_destination resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoT::TopicRuleDestination resource.
+func topicRuleDestinationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -212,7 +211,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (provider.ResourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::TopicRuleDestination").WithTerraformTypeName("awscc_iot_topic_rule_destination")
 	opts = opts.WithTerraformSchema(schema)
@@ -234,11 +233,11 @@ func topicRuleDestinationResourceType(ctx context.Context) (provider.ResourceTyp
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

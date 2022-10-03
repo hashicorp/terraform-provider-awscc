@@ -5,7 +5,7 @@ package healthlake
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_healthlake_fhir_datastores", fHIRDatastoresDataSourceType)
+	registry.AddDataSourceFactory("awscc_healthlake_fhir_datastores", fHIRDatastoresDataSource)
 }
 
-// fHIRDatastoresDataSourceType returns the Terraform awscc_healthlake_fhir_datastores data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::HealthLake::FHIRDatastore resource type.
-func fHIRDatastoresDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// fHIRDatastoresDataSource returns the Terraform awscc_healthlake_fhir_datastores data source.
+// This Terraform data source corresponds to the CloudFormation AWS::HealthLake::FHIRDatastore resource.
+func fHIRDatastoresDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func fHIRDatastoresDataSourceType(ctx context.Context) (provider.DataSourceType,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::HealthLake::FHIRDatastore").WithTerraformTypeName("awscc_healthlake_fhir_datastores")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

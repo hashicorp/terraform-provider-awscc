@@ -5,7 +5,6 @@ package route53
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53_hosted_zone", hostedZoneResourceType)
+	registry.AddResourceFactory("awscc_route53_hosted_zone", hostedZoneResource)
 }
 
-// hostedZoneResourceType returns the Terraform awscc_route53_hosted_zone resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53::HostedZone resource type.
-func hostedZoneResourceType(ctx context.Context) (provider.ResourceType, error) {
+// hostedZoneResource returns the Terraform awscc_route53_hosted_zone resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53::HostedZone resource.
+func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"hosted_zone_config": {
 			// Property: HostedZoneConfig
@@ -261,7 +260,7 @@ func hostedZoneResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::HostedZone").WithTerraformTypeName("awscc_route53_hosted_zone")
 	opts = opts.WithTerraformSchema(schema)
@@ -286,11 +285,11 @@ func hostedZoneResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

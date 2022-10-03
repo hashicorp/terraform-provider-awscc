@@ -5,7 +5,7 @@ package licensemanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_licensemanager_grants", grantsDataSourceType)
+	registry.AddDataSourceFactory("awscc_licensemanager_grants", grantsDataSource)
 }
 
-// grantsDataSourceType returns the Terraform awscc_licensemanager_grants data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::LicenseManager::Grant resource type.
-func grantsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// grantsDataSource returns the Terraform awscc_licensemanager_grants data source.
+// This Terraform data source corresponds to the CloudFormation AWS::LicenseManager::Grant resource.
+func grantsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func grantsDataSourceType(ctx context.Context) (provider.DataSourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LicenseManager::Grant").WithTerraformTypeName("awscc_licensemanager_grants")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

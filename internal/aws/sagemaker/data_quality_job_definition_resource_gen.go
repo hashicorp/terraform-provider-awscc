@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_sagemaker_data_quality_job_definition", dataQualityJobDefinitionResourceType)
+	registry.AddResourceFactory("awscc_sagemaker_data_quality_job_definition", dataQualityJobDefinitionResource)
 }
 
-// dataQualityJobDefinitionResourceType returns the Terraform awscc_sagemaker_data_quality_job_definition resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::DataQualityJobDefinition resource type.
-func dataQualityJobDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// dataQualityJobDefinitionResource returns the Terraform awscc_sagemaker_data_quality_job_definition resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SageMaker::DataQualityJobDefinition resource.
+func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -1004,7 +1003,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (provider.Resourc
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DataQualityJobDefinition").WithTerraformTypeName("awscc_sagemaker_data_quality_job_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -1060,11 +1059,11 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (provider.Resourc
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_network_interface", networkInterfaceResourceType)
+	registry.AddResourceFactory("awscc_ec2_network_interface", networkInterfaceResource)
 }
 
-// networkInterfaceResourceType returns the Terraform awscc_ec2_network_interface resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInterface resource type.
-func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, error) {
+// networkInterfaceResource returns the Terraform awscc_ec2_network_interface resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::NetworkInterface resource.
+func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
@@ -335,7 +334,7 @@ func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInterface").WithTerraformTypeName("awscc_ec2_network_interface")
 	opts = opts.WithTerraformSchema(schema)
@@ -365,11 +364,11 @@ func networkInterfaceResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

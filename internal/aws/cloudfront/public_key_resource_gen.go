@@ -5,7 +5,6 @@ package cloudfront
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudfront_public_key", publicKeyResourceType)
+	registry.AddResourceFactory("awscc_cloudfront_public_key", publicKeyResource)
 }
 
-// publicKeyResourceType returns the Terraform awscc_cloudfront_public_key resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::PublicKey resource type.
-func publicKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
+// publicKeyResource returns the Terraform awscc_cloudfront_public_key resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudFront::PublicKey resource.
+func publicKeyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"created_time": {
 			// Property: CreatedTime
@@ -109,7 +108,7 @@ func publicKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::PublicKey").WithTerraformTypeName("awscc_cloudfront_public_key")
 	opts = opts.WithTerraformSchema(schema)
@@ -128,11 +127,11 @@ func publicKeyResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

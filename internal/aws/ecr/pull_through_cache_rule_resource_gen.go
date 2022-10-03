@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ecr_pull_through_cache_rule", pullThroughCacheRuleResourceType)
+	registry.AddResourceFactory("awscc_ecr_pull_through_cache_rule", pullThroughCacheRuleResource)
 }
 
-// pullThroughCacheRuleResourceType returns the Terraform awscc_ecr_pull_through_cache_rule resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ECR::PullThroughCacheRule resource type.
-func pullThroughCacheRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
+// pullThroughCacheRuleResource returns the Terraform awscc_ecr_pull_through_cache_rule resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ECR::PullThroughCacheRule resource.
+func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"ecr_repository_prefix": {
 			// Property: EcrRepositoryPrefix
@@ -79,7 +78,7 @@ func pullThroughCacheRuleResourceType(ctx context.Context) (provider.ResourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::PullThroughCacheRule").WithTerraformTypeName("awscc_ecr_pull_through_cache_rule")
 	opts = opts.WithTerraformSchema(schema)
@@ -93,11 +92,11 @@ func pullThroughCacheRuleResourceType(ctx context.Context) (provider.ResourceTyp
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

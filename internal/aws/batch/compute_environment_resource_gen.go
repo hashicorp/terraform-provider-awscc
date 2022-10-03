@@ -5,7 +5,6 @@ package batch
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_batch_compute_environment", computeEnvironmentResourceType)
+	registry.AddResourceFactory("awscc_batch_compute_environment", computeEnvironmentResource)
 }
 
-// computeEnvironmentResourceType returns the Terraform awscc_batch_compute_environment resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Batch::ComputeEnvironment resource type.
-func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType, error) {
+// computeEnvironmentResource returns the Terraform awscc_batch_compute_environment resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Batch::ComputeEnvironment resource.
+func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"compute_environment_arn": {
 			// Property: ComputeEnvironmentArn
@@ -539,7 +538,7 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::ComputeEnvironment").WithTerraformTypeName("awscc_batch_compute_environment")
 	opts = opts.WithTerraformSchema(schema)
@@ -588,11 +587,11 @@ func computeEnvironmentResourceType(ctx context.Context) (provider.ResourceType,
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

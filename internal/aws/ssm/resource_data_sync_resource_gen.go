@@ -5,7 +5,6 @@ package ssm
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ssm_resource_data_sync", resourceDataSyncResourceType)
+	registry.AddResourceFactory("awscc_ssm_resource_data_sync", resourceDataSyncResource)
 }
 
-// resourceDataSyncResourceType returns the Terraform awscc_ssm_resource_data_sync resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SSM::ResourceDataSync resource type.
-func resourceDataSyncResourceType(ctx context.Context) (provider.ResourceType, error) {
+// resourceDataSyncResource returns the Terraform awscc_ssm_resource_data_sync resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SSM::ResourceDataSync resource.
+func resourceDataSyncResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"bucket_name": {
 			// Property: BucketName
@@ -378,7 +377,7 @@ func resourceDataSyncResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSM::ResourceDataSync").WithTerraformTypeName("awscc_ssm_resource_data_sync")
 	opts = opts.WithTerraformSchema(schema)
@@ -405,11 +404,11 @@ func resourceDataSyncResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

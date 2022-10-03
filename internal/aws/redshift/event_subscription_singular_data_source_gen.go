@@ -5,7 +5,7 @@ package redshift
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_redshift_event_subscription", eventSubscriptionDataSourceType)
+	registry.AddDataSourceFactory("awscc_redshift_event_subscription", eventSubscriptionDataSource)
 }
 
-// eventSubscriptionDataSourceType returns the Terraform awscc_redshift_event_subscription data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Redshift::EventSubscription resource type.
-func eventSubscriptionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// eventSubscriptionDataSource returns the Terraform awscc_redshift_event_subscription data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Redshift::EventSubscription resource.
+func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"cust_subscription_id": {
 			// Property: CustSubscriptionId
@@ -269,7 +269,7 @@ func eventSubscriptionDataSourceType(ctx context.Context) (provider.DataSourceTy
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::EventSubscription").WithTerraformTypeName("awscc_redshift_event_subscription")
 	opts = opts.WithTerraformSchema(schema)
@@ -292,11 +292,11 @@ func eventSubscriptionDataSourceType(ctx context.Context) (provider.DataSourceTy
 		"value":                      "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iotevents_input", inputResourceType)
+	registry.AddResourceFactory("awscc_iotevents_input", inputResource)
 }
 
-// inputResourceType returns the Terraform awscc_iotevents_input resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoTEvents::Input resource type.
-func inputResourceType(ctx context.Context) (provider.ResourceType, error) {
+// inputResource returns the Terraform awscc_iotevents_input resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoTEvents::Input resource.
+func inputResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"input_definition": {
 			// Property: InputDefinition
@@ -202,7 +201,7 @@ func inputResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTEvents::Input").WithTerraformTypeName("awscc_iotevents_input")
 	opts = opts.WithTerraformSchema(schema)
@@ -222,11 +221,11 @@ func inputResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

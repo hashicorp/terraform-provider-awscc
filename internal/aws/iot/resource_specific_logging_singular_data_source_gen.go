@@ -5,7 +5,7 @@ package iot
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iot_resource_specific_logging", resourceSpecificLoggingDataSourceType)
+	registry.AddDataSourceFactory("awscc_iot_resource_specific_logging", resourceSpecificLoggingDataSource)
 }
 
-// resourceSpecificLoggingDataSourceType returns the Terraform awscc_iot_resource_specific_logging data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoT::ResourceSpecificLogging resource type.
-func resourceSpecificLoggingDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// resourceSpecificLoggingDataSource returns the Terraform awscc_iot_resource_specific_logging data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoT::ResourceSpecificLogging resource.
+func resourceSpecificLoggingDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"log_level": {
 			// Property: LogLevel
@@ -97,7 +97,7 @@ func resourceSpecificLoggingDataSourceType(ctx context.Context) (provider.DataSo
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::ResourceSpecificLogging").WithTerraformTypeName("awscc_iot_resource_specific_logging")
 	opts = opts.WithTerraformSchema(schema)
@@ -108,11 +108,11 @@ func resourceSpecificLoggingDataSourceType(ctx context.Context) (provider.DataSo
 		"target_type": "TargetType",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

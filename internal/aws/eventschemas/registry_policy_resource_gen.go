@@ -5,7 +5,6 @@ package eventschemas
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_eventschemas_registry_policy", registryPolicyResourceType)
+	registry.AddResourceFactory("awscc_eventschemas_registry_policy", registryPolicyResource)
 }
 
-// registryPolicyResourceType returns the Terraform awscc_eventschemas_registry_policy resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EventSchemas::RegistryPolicy resource type.
-func registryPolicyResourceType(ctx context.Context) (provider.ResourceType, error) {
+// registryPolicyResource returns the Terraform awscc_eventschemas_registry_policy resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EventSchemas::RegistryPolicy resource.
+func registryPolicyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -72,7 +71,7 @@ func registryPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EventSchemas::RegistryPolicy").WithTerraformTypeName("awscc_eventschemas_registry_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -88,11 +87,11 @@ func registryPolicyResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

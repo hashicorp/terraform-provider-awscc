@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_identitystore_group_membership", groupMembershipResourceType)
+	registry.AddResourceFactory("awscc_identitystore_group_membership", groupMembershipResource)
 }
 
-// groupMembershipResourceType returns the Terraform awscc_identitystore_group_membership resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IdentityStore::GroupMembership resource type.
-func groupMembershipResourceType(ctx context.Context) (provider.ResourceType, error) {
+// groupMembershipResource returns the Terraform awscc_identitystore_group_membership resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IdentityStore::GroupMembership resource.
+func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"group_id": {
 			// Property: GroupId
@@ -143,7 +142,7 @@ func groupMembershipResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IdentityStore::GroupMembership").WithTerraformTypeName("awscc_identitystore_group_membership")
 	opts = opts.WithTerraformSchema(schema)
@@ -160,11 +159,11 @@ func groupMembershipResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

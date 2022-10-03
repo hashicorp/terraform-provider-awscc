@@ -5,7 +5,7 @@ package sagemaker
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_sagemaker_domain", domainDataSourceType)
+	registry.AddDataSourceFactory("awscc_sagemaker_domain", domainDataSource)
 }
 
-// domainDataSourceType returns the Terraform awscc_sagemaker_domain data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::SageMaker::Domain resource type.
-func domainDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// domainDataSource returns the Terraform awscc_sagemaker_domain data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SageMaker::Domain resource.
+func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"app_network_access_type": {
 			// Property: AppNetworkAccessType
@@ -1050,7 +1050,7 @@ func domainDataSourceType(ctx context.Context) (provider.DataSourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Domain").WithTerraformTypeName("awscc_sagemaker_domain")
 	opts = opts.WithTerraformSchema(schema)
@@ -1101,11 +1101,11 @@ func domainDataSourceType(ctx context.Context) (provider.DataSourceType, error) 
 		"vpc_id":                                         "VpcId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

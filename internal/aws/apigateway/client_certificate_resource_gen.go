@@ -5,7 +5,6 @@ package apigateway
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_apigateway_client_certificate", clientCertificateResourceType)
+	registry.AddResourceFactory("awscc_apigateway_client_certificate", clientCertificateResource)
 }
 
-// clientCertificateResourceType returns the Terraform awscc_apigateway_client_certificate resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::ClientCertificate resource type.
-func clientCertificateResourceType(ctx context.Context) (provider.ResourceType, error) {
+// clientCertificateResource returns the Terraform awscc_apigateway_client_certificate resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ApiGateway::ClientCertificate resource.
+func clientCertificateResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"client_certificate_id": {
 			// Property: ClientCertificateId
@@ -112,7 +111,7 @@ func clientCertificateResourceType(ctx context.Context) (provider.ResourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::ClientCertificate").WithTerraformTypeName("awscc_apigateway_client_certificate")
 	opts = opts.WithTerraformSchema(schema)
@@ -129,11 +128,11 @@ func clientCertificateResourceType(ctx context.Context) (provider.ResourceType, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

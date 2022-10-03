@@ -5,7 +5,7 @@ package rekognition
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_rekognition_collections", collectionsDataSourceType)
+	registry.AddDataSourceFactory("awscc_rekognition_collections", collectionsDataSource)
 }
 
-// collectionsDataSourceType returns the Terraform awscc_rekognition_collections data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Rekognition::Collection resource type.
-func collectionsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// collectionsDataSource returns the Terraform awscc_rekognition_collections data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Rekognition::Collection resource.
+func collectionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func collectionsDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Rekognition::Collection").WithTerraformTypeName("awscc_rekognition_collections")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

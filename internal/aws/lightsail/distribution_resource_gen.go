@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lightsail_distribution", distributionResourceType)
+	registry.AddResourceFactory("awscc_lightsail_distribution", distributionResource)
 }
 
-// distributionResourceType returns the Terraform awscc_lightsail_distribution resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Lightsail::Distribution resource type.
-func distributionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// distributionResource returns the Terraform awscc_lightsail_distribution resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Lightsail::Distribution resource.
+func distributionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"able_to_update_bundle": {
 			// Property: AbleToUpdateBundle
@@ -617,7 +616,7 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::Distribution").WithTerraformTypeName("awscc_lightsail_distribution")
 	opts = opts.WithTerraformSchema(schema)
@@ -661,11 +660,11 @@ func distributionResourceType(ctx context.Context) (provider.ResourceType, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

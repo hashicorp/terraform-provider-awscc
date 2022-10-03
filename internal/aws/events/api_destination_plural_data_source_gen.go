@@ -5,7 +5,7 @@ package events
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_events_api_destinations", apiDestinationsDataSourceType)
+	registry.AddDataSourceFactory("awscc_events_api_destinations", apiDestinationsDataSource)
 }
 
-// apiDestinationsDataSourceType returns the Terraform awscc_events_api_destinations data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Events::ApiDestination resource type.
-func apiDestinationsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// apiDestinationsDataSource returns the Terraform awscc_events_api_destinations data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Events::ApiDestination resource.
+func apiDestinationsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func apiDestinationsDataSourceType(ctx context.Context) (provider.DataSourceType
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Events::ApiDestination").WithTerraformTypeName("awscc_events_api_destinations")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

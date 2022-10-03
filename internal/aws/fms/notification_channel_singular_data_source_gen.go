@@ -5,7 +5,7 @@ package fms
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_fms_notification_channel", notificationChannelDataSourceType)
+	registry.AddDataSourceFactory("awscc_fms_notification_channel", notificationChannelDataSource)
 }
 
-// notificationChannelDataSourceType returns the Terraform awscc_fms_notification_channel data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::FMS::NotificationChannel resource type.
-func notificationChannelDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// notificationChannelDataSource returns the Terraform awscc_fms_notification_channel data source.
+// This Terraform data source corresponds to the CloudFormation AWS::FMS::NotificationChannel resource.
+func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"sns_role_name": {
 			// Property: SnsRoleName
@@ -62,7 +62,7 @@ func notificationChannelDataSourceType(ctx context.Context) (provider.DataSource
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FMS::NotificationChannel").WithTerraformTypeName("awscc_fms_notification_channel")
 	opts = opts.WithTerraformSchema(schema)
@@ -71,11 +71,11 @@ func notificationChannelDataSourceType(ctx context.Context) (provider.DataSource
 		"sns_topic_arn": "SnsTopicArn",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

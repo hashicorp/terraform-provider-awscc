@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_connectcampaigns_campaign", campaignResourceType)
+	registry.AddResourceFactory("awscc_connectcampaigns_campaign", campaignResource)
 }
 
-// campaignResourceType returns the Terraform awscc_connectcampaigns_campaign resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ConnectCampaigns::Campaign resource type.
-func campaignResourceType(ctx context.Context) (provider.ResourceType, error) {
+// campaignResource returns the Terraform awscc_connectcampaigns_campaign resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ConnectCampaigns::Campaign resource.
+func campaignResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -323,7 +322,7 @@ func campaignResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ConnectCampaigns::Campaign").WithTerraformTypeName("awscc_connectcampaigns_campaign")
 	opts = opts.WithTerraformSchema(schema)
@@ -349,11 +348,11 @@ func campaignResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

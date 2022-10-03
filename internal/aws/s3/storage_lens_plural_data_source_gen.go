@@ -5,7 +5,7 @@ package s3
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_s3_storage_lenses", storageLensesDataSourceType)
+	registry.AddDataSourceFactory("awscc_s3_storage_lenses", storageLensesDataSource)
 }
 
-// storageLensesDataSourceType returns the Terraform awscc_s3_storage_lenses data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::S3::StorageLens resource type.
-func storageLensesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// storageLensesDataSource returns the Terraform awscc_s3_storage_lenses data source.
+// This Terraform data source corresponds to the CloudFormation AWS::S3::StorageLens resource.
+func storageLensesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func storageLensesDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::StorageLens").WithTerraformTypeName("awscc_s3_storage_lenses")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

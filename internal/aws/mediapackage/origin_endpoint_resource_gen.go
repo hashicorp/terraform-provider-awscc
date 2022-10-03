@@ -5,7 +5,6 @@ package mediapackage
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_mediapackage_origin_endpoint", originEndpointResourceType)
+	registry.AddResourceFactory("awscc_mediapackage_origin_endpoint", originEndpointResource)
 }
 
-// originEndpointResourceType returns the Terraform awscc_mediapackage_origin_endpoint resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::OriginEndpoint resource type.
-func originEndpointResourceType(ctx context.Context) (provider.ResourceType, error) {
+// originEndpointResource returns the Terraform awscc_mediapackage_origin_endpoint resource.
+// This Terraform resource corresponds to the CloudFormation AWS::MediaPackage::OriginEndpoint resource.
+func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -2326,7 +2325,7 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::OriginEndpoint").WithTerraformTypeName("awscc_mediapackage_origin_endpoint")
 	opts = opts.WithTerraformSchema(schema)
@@ -2396,11 +2395,11 @@ func originEndpointResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

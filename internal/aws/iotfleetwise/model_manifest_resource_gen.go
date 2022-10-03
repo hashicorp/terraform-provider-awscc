@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iotfleetwise_model_manifest", modelManifestResourceType)
+	registry.AddResourceFactory("awscc_iotfleetwise_model_manifest", modelManifestResource)
 }
 
-// modelManifestResourceType returns the Terraform awscc_iotfleetwise_model_manifest resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoTFleetWise::ModelManifest resource type.
-func modelManifestResourceType(ctx context.Context) (provider.ResourceType, error) {
+// modelManifestResource returns the Terraform awscc_iotfleetwise_model_manifest resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoTFleetWise::ModelManifest resource.
+func modelManifestResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -231,7 +230,7 @@ func modelManifestResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetWise::ModelManifest").WithTerraformTypeName("awscc_iotfleetwise_model_manifest")
 	opts = opts.WithTerraformSchema(schema)
@@ -254,11 +253,11 @@ func modelManifestResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

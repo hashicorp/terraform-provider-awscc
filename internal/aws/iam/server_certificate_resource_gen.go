@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iam_server_certificate", serverCertificateResourceType)
+	registry.AddResourceFactory("awscc_iam_server_certificate", serverCertificateResource)
 }
 
-// serverCertificateResourceType returns the Terraform awscc_iam_server_certificate resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IAM::ServerCertificate resource type.
-func serverCertificateResourceType(ctx context.Context) (provider.ResourceType, error) {
+// serverCertificateResource returns the Terraform awscc_iam_server_certificate resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IAM::ServerCertificate resource.
+func serverCertificateResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -219,7 +218,7 @@ func serverCertificateResourceType(ctx context.Context) (provider.ResourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IAM::ServerCertificate").WithTerraformTypeName("awscc_iam_server_certificate")
 	opts = opts.WithTerraformSchema(schema)
@@ -245,11 +244,11 @@ func serverCertificateResourceType(ctx context.Context) (provider.ResourceType, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

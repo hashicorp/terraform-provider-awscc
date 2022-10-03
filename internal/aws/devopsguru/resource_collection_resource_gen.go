@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_devopsguru_resource_collection", resourceCollectionResourceType)
+	registry.AddResourceFactory("awscc_devopsguru_resource_collection", resourceCollectionResource)
 }
 
-// resourceCollectionResourceType returns the Terraform awscc_devopsguru_resource_collection resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::DevOpsGuru::ResourceCollection resource type.
-func resourceCollectionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// resourceCollectionResource returns the Terraform awscc_devopsguru_resource_collection resource.
+// This Terraform resource corresponds to the CloudFormation AWS::DevOpsGuru::ResourceCollection resource.
+func resourceCollectionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_collection_filter": {
 			// Property: ResourceCollectionFilter
@@ -190,7 +189,7 @@ func resourceCollectionResourceType(ctx context.Context) (provider.ResourceType,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::ResourceCollection").WithTerraformTypeName("awscc_devopsguru_resource_collection")
 	opts = opts.WithTerraformSchema(schema)
@@ -209,11 +208,11 @@ func resourceCollectionResourceType(ctx context.Context) (provider.ResourceType,
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

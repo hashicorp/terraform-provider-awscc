@@ -5,7 +5,6 @@ package msk
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_msk_configuration", configurationResourceType)
+	registry.AddResourceFactory("awscc_msk_configuration", configurationResource)
 }
 
-// configurationResourceType returns the Terraform awscc_msk_configuration resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::MSK::Configuration resource type.
-func configurationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// configurationResource returns the Terraform awscc_msk_configuration resource.
+// This Terraform resource corresponds to the CloudFormation AWS::MSK::Configuration resource.
+func configurationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -102,7 +101,7 @@ func configurationResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MSK::Configuration").WithTerraformTypeName("awscc_msk_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -122,11 +121,11 @@ func configurationResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

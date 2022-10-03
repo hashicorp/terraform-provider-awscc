@@ -5,7 +5,6 @@ package redshift
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_redshift_scheduled_action", scheduledActionResourceType)
+	registry.AddResourceFactory("awscc_redshift_scheduled_action", scheduledActionResource)
 }
 
-// scheduledActionResourceType returns the Terraform awscc_redshift_scheduled_action resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Redshift::ScheduledAction resource type.
-func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// scheduledActionResource returns the Terraform awscc_redshift_scheduled_action resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Redshift::ScheduledAction resource.
+func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"enable": {
 			// Property: Enable
@@ -342,7 +341,7 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::ScheduledAction").WithTerraformTypeName("awscc_redshift_scheduled_action")
 	opts = opts.WithTerraformSchema(schema)
@@ -372,11 +371,11 @@ func scheduledActionResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package route53recoveryreadiness
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_route53recoveryreadiness_readiness_check", readinessCheckDataSourceType)
+	registry.AddDataSourceFactory("awscc_route53recoveryreadiness_readiness_check", readinessCheckDataSource)
 }
 
-// readinessCheckDataSourceType returns the Terraform awscc_route53recoveryreadiness_readiness_check data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ReadinessCheck resource type.
-func readinessCheckDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// readinessCheckDataSource returns the Terraform awscc_route53recoveryreadiness_readiness_check data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ReadinessCheck resource.
+func readinessCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"readiness_check_arn": {
 			// Property: ReadinessCheckArn
@@ -120,7 +120,7 @@ func readinessCheckDataSourceType(ctx context.Context) (provider.DataSourceType,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::ReadinessCheck").WithTerraformTypeName("awscc_route53recoveryreadiness_readiness_check")
 	opts = opts.WithTerraformSchema(schema)
@@ -133,11 +133,11 @@ func readinessCheckDataSourceType(ctx context.Context) (provider.DataSourceType,
 		"value":                "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -7,7 +7,6 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -17,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_datasync_location_nfs", locationNFSResourceType)
+	registry.AddResourceFactory("awscc_datasync_location_nfs", locationNFSResource)
 }
 
-// locationNFSResourceType returns the Terraform awscc_datasync_location_nfs resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationNFS resource type.
-func locationNFSResourceType(ctx context.Context) (provider.ResourceType, error) {
+// locationNFSResource returns the Terraform awscc_datasync_location_nfs resource.
+// This Terraform resource corresponds to the CloudFormation AWS::DataSync::LocationNFS resource.
+func locationNFSResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"location_arn": {
 			// Property: LocationArn
@@ -288,7 +287,7 @@ func locationNFSResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationNFS").WithTerraformTypeName("awscc_datasync_location_nfs")
 	opts = opts.WithTerraformSchema(schema)
@@ -315,11 +314,11 @@ func locationNFSResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

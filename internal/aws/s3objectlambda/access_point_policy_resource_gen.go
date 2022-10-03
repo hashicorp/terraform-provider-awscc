@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_s3objectlambda_access_point_policy", accessPointPolicyResourceType)
+	registry.AddResourceFactory("awscc_s3objectlambda_access_point_policy", accessPointPolicyResource)
 }
 
-// accessPointPolicyResourceType returns the Terraform awscc_s3objectlambda_access_point_policy resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::S3ObjectLambda::AccessPointPolicy resource type.
-func accessPointPolicyResourceType(ctx context.Context) (provider.ResourceType, error) {
+// accessPointPolicyResource returns the Terraform awscc_s3objectlambda_access_point_policy resource.
+// This Terraform resource corresponds to the CloudFormation AWS::S3ObjectLambda::AccessPointPolicy resource.
+func accessPointPolicyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"object_lambda_access_point": {
 			// Property: ObjectLambdaAccessPoint
@@ -72,7 +71,7 @@ func accessPointPolicyResourceType(ctx context.Context) (provider.ResourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3ObjectLambda::AccessPointPolicy").WithTerraformTypeName("awscc_s3objectlambda_access_point_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -86,11 +85,11 @@ func accessPointPolicyResourceType(ctx context.Context) (provider.ResourceType, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

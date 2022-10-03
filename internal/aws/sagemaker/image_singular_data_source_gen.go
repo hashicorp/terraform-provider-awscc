@@ -5,7 +5,7 @@ package sagemaker
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_sagemaker_image", imageDataSourceType)
+	registry.AddDataSourceFactory("awscc_sagemaker_image", imageDataSource)
 }
 
-// imageDataSourceType returns the Terraform awscc_sagemaker_image data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::SageMaker::Image resource type.
-func imageDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// imageDataSource returns the Terraform awscc_sagemaker_image data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SageMaker::Image resource.
+func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"image_arn": {
 			// Property: ImageArn
@@ -154,7 +154,7 @@ func imageDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Image").WithTerraformTypeName("awscc_sagemaker_image")
 	opts = opts.WithTerraformSchema(schema)
@@ -169,11 +169,11 @@ func imageDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"value":              "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

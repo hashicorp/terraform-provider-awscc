@@ -5,7 +5,7 @@ package datasync
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_object_storage", locationObjectStorageDataSourceType)
+	registry.AddDataSourceFactory("awscc_datasync_location_object_storage", locationObjectStorageDataSource)
 }
 
-// locationObjectStorageDataSourceType returns the Terraform awscc_datasync_location_object_storage data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationObjectStorage resource type.
-func locationObjectStorageDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// locationObjectStorageDataSource returns the Terraform awscc_datasync_location_object_storage data source.
+// This Terraform data source corresponds to the CloudFormation AWS::DataSync::LocationObjectStorage resource.
+func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_key": {
 			// Property: AccessKey
@@ -229,7 +229,7 @@ func locationObjectStorageDataSourceType(ctx context.Context) (provider.DataSour
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationObjectStorage").WithTerraformTypeName("awscc_datasync_location_object_storage")
 	opts = opts.WithTerraformSchema(schema)
@@ -249,11 +249,11 @@ func locationObjectStorageDataSourceType(ctx context.Context) (provider.DataSour
 		"value":           "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

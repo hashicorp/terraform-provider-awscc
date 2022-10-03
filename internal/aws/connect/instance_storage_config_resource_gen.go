@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_connect_instance_storage_config", instanceStorageConfigResourceType)
+	registry.AddResourceFactory("awscc_connect_instance_storage_config", instanceStorageConfigResource)
 }
 
-// instanceStorageConfigResourceType returns the Terraform awscc_connect_instance_storage_config resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Connect::InstanceStorageConfig resource type.
-func instanceStorageConfigResourceType(ctx context.Context) (provider.ResourceType, error) {
+// instanceStorageConfigResource returns the Terraform awscc_connect_instance_storage_config resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Connect::InstanceStorageConfig resource.
+func instanceStorageConfigResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"association_id": {
 			// Property: AssociationId
@@ -415,7 +414,7 @@ func instanceStorageConfigResourceType(ctx context.Context) (provider.ResourceTy
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::InstanceStorageConfig").WithTerraformTypeName("awscc_connect_instance_storage_config")
 	opts = opts.WithTerraformSchema(schema)
@@ -444,11 +443,11 @@ func instanceStorageConfigResourceType(ctx context.Context) (provider.ResourceTy
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

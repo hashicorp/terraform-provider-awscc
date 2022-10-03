@@ -5,7 +5,7 @@ package frauddetector
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_frauddetector_event_type", eventTypeDataSourceType)
+	registry.AddDataSourceFactory("awscc_frauddetector_event_type", eventTypeDataSource)
 }
 
-// eventTypeDataSourceType returns the Terraform awscc_frauddetector_event_type data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::FraudDetector::EventType resource type.
-func eventTypeDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// eventTypeDataSource returns the Terraform awscc_frauddetector_event_type data source.
+// This Terraform data source corresponds to the CloudFormation AWS::FraudDetector::EventType resource.
+func eventTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -586,7 +586,7 @@ func eventTypeDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::EventType").WithTerraformTypeName("awscc_frauddetector_event_type")
 	opts = opts.WithTerraformSchema(schema)
@@ -609,11 +609,11 @@ func eventTypeDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		"variable_type":     "VariableType",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

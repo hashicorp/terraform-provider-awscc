@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_nat_gateway", natGatewayResourceType)
+	registry.AddResourceFactory("awscc_ec2_nat_gateway", natGatewayResource)
 }
 
-// natGatewayResourceType returns the Terraform awscc_ec2_nat_gateway resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::NatGateway resource type.
-func natGatewayResourceType(ctx context.Context) (provider.ResourceType, error) {
+// natGatewayResource returns the Terraform awscc_ec2_nat_gateway resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::NatGateway resource.
+func natGatewayResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"allocation_id": {
 			// Property: AllocationId
@@ -135,7 +134,7 @@ func natGatewayResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NatGateway").WithTerraformTypeName("awscc_ec2_nat_gateway")
 	opts = opts.WithTerraformSchema(schema)
@@ -154,11 +153,11 @@ func natGatewayResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

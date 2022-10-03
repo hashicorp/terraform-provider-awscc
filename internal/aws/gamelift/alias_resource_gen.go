@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_gamelift_alias", aliasResourceType)
+	registry.AddResourceFactory("awscc_gamelift_alias", aliasResource)
 }
 
-// aliasResourceType returns the Terraform awscc_gamelift_alias resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::GameLift::Alias resource type.
-func aliasResourceType(ctx context.Context) (provider.ResourceType, error) {
+// aliasResource returns the Terraform awscc_gamelift_alias resource.
+// This Terraform resource corresponds to the CloudFormation AWS::GameLift::Alias resource.
+func aliasResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alias_id": {
 			// Property: AliasId
@@ -188,7 +187,7 @@ func aliasResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Alias").WithTerraformTypeName("awscc_gamelift_alias")
 	opts = opts.WithTerraformSchema(schema)
@@ -207,11 +206,11 @@ func aliasResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

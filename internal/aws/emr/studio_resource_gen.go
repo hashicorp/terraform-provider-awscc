@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_emr_studio", studioResourceType)
+	registry.AddResourceFactory("awscc_emr_studio", studioResource)
 }
 
-// studioResourceType returns the Terraform awscc_emr_studio resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EMR::Studio resource type.
-func studioResourceType(ctx context.Context) (provider.ResourceType, error) {
+// studioResource returns the Terraform awscc_emr_studio resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EMR::Studio resource.
+func studioResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -388,7 +387,7 @@ func studioResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::Studio").WithTerraformTypeName("awscc_emr_studio")
 	opts = opts.WithTerraformSchema(schema)
@@ -418,11 +417,11 @@ func studioResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

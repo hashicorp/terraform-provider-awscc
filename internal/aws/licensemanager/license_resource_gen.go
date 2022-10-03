@@ -5,7 +5,6 @@ package licensemanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_licensemanager_license", licenseResourceType)
+	registry.AddResourceFactory("awscc_licensemanager_license", licenseResource)
 }
 
-// licenseResourceType returns the Terraform awscc_licensemanager_license resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::LicenseManager::License resource type.
-func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
+// licenseResource returns the Terraform awscc_licensemanager_license resource.
+// This Terraform resource corresponds to the CloudFormation AWS::LicenseManager::License resource.
+func licenseResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"beneficiary": {
 			// Property: Beneficiary
@@ -465,7 +464,7 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LicenseManager::License").WithTerraformTypeName("awscc_licensemanager_license")
 	opts = opts.WithTerraformSchema(schema)
@@ -507,11 +506,11 @@ func licenseResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ssmcontacts_contact", contactResourceType)
+	registry.AddResourceFactory("awscc_ssmcontacts_contact", contactResource)
 }
 
-// contactResourceType returns the Terraform awscc_ssmcontacts_contact resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SSMContacts::Contact resource type.
-func contactResourceType(ctx context.Context) (provider.ResourceType, error) {
+// contactResource returns the Terraform awscc_ssmcontacts_contact resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SSMContacts::Contact resource.
+func contactResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alias": {
 			// Property: Alias
@@ -292,7 +291,7 @@ func contactResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSMContacts::Contact").WithTerraformTypeName("awscc_ssmcontacts_contact")
 	opts = opts.WithTerraformSchema(schema)
@@ -320,11 +319,11 @@ func contactResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package sagemaker
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_sagemaker_model_explainability_job_definition", modelExplainabilityJobDefinitionDataSourceType)
+	registry.AddDataSourceFactory("awscc_sagemaker_model_explainability_job_definition", modelExplainabilityJobDefinitionDataSource)
 }
 
-// modelExplainabilityJobDefinitionDataSourceType returns the Terraform awscc_sagemaker_model_explainability_job_definition data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::SageMaker::ModelExplainabilityJobDefinition resource type.
-func modelExplainabilityJobDefinitionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// modelExplainabilityJobDefinitionDataSource returns the Terraform awscc_sagemaker_model_explainability_job_definition data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SageMaker::ModelExplainabilityJobDefinition resource.
+func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
@@ -726,7 +726,7 @@ func modelExplainabilityJobDefinitionDataSourceType(ctx context.Context) (provid
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelExplainabilityJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_explainability_job_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -776,11 +776,11 @@ func modelExplainabilityJobDefinitionDataSourceType(ctx context.Context) (provid
 		"vpc_config":                                "VpcConfig",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

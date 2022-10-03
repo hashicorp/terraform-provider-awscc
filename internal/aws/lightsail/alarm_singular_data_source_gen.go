@@ -5,7 +5,7 @@ package lightsail
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_lightsail_alarm", alarmDataSourceType)
+	registry.AddDataSourceFactory("awscc_lightsail_alarm", alarmDataSource)
 }
 
-// alarmDataSourceType returns the Terraform awscc_lightsail_alarm data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Lightsail::Alarm resource type.
-func alarmDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// alarmDataSource returns the Terraform awscc_lightsail_alarm data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Lightsail::Alarm resource.
+func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alarm_arn": {
 			// Property: AlarmArn
@@ -186,7 +186,7 @@ func alarmDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::Alarm").WithTerraformTypeName("awscc_lightsail_alarm")
 	opts = opts.WithTerraformSchema(schema)
@@ -206,11 +206,11 @@ func alarmDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"treat_missing_data":      "TreatMissingData",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_multicast_domain_association", transitGatewayMulticastDomainAssociationResourceType)
+	registry.AddResourceFactory("awscc_ec2_transit_gateway_multicast_domain_association", transitGatewayMulticastDomainAssociationResource)
 }
 
-// transitGatewayMulticastDomainAssociationResourceType returns the Terraform awscc_ec2_transit_gateway_multicast_domain_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastDomainAssociation resource type.
-func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// transitGatewayMulticastDomainAssociationResource returns the Terraform awscc_ec2_transit_gateway_multicast_domain_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastDomainAssociation resource.
+func transitGatewayMulticastDomainAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"resource_id": {
 			// Property: ResourceId
@@ -122,7 +121,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastDomainAssociation").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_domain_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -140,11 +139,11 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_networkmanager_vpc_attachment", vpcAttachmentResourceType)
+	registry.AddResourceFactory("awscc_networkmanager_vpc_attachment", vpcAttachmentResource)
 }
 
-// vpcAttachmentResourceType returns the Terraform awscc_networkmanager_vpc_attachment resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::VpcAttachment resource type.
-func vpcAttachmentResourceType(ctx context.Context) (provider.ResourceType, error) {
+// vpcAttachmentResource returns the Terraform awscc_networkmanager_vpc_attachment resource.
+// This Terraform resource corresponds to the CloudFormation AWS::NetworkManager::VpcAttachment resource.
+func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"attachment_id": {
 			// Property: AttachmentId
@@ -433,7 +432,7 @@ func vpcAttachmentResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::VpcAttachment").WithTerraformTypeName("awscc_networkmanager_vpc_attachment")
 	opts = opts.WithTerraformSchema(schema)
@@ -468,11 +467,11 @@ func vpcAttachmentResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(60)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

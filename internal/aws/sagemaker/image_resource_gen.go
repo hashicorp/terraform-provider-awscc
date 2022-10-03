@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_sagemaker_image", imageResourceType)
+	registry.AddResourceFactory("awscc_sagemaker_image", imageResource)
 }
 
-// imageResourceType returns the Terraform awscc_sagemaker_image resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::Image resource type.
-func imageResourceType(ctx context.Context) (provider.ResourceType, error) {
+// imageResource returns the Terraform awscc_sagemaker_image resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SageMaker::Image resource.
+func imageResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"image_arn": {
 			// Property: ImageArn
@@ -203,7 +202,7 @@ func imageResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Image").WithTerraformTypeName("awscc_sagemaker_image")
 	opts = opts.WithTerraformSchema(schema)
@@ -223,11 +222,11 @@ func imageResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

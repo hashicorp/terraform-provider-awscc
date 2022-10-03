@@ -5,7 +5,6 @@ package signer
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_signer_signing_profile", signingProfileResourceType)
+	registry.AddResourceFactory("awscc_signer_signing_profile", signingProfileResource)
 }
 
-// signingProfileResourceType returns the Terraform awscc_signer_signing_profile resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Signer::SigningProfile resource type.
-func signingProfileResourceType(ctx context.Context) (provider.ResourceType, error) {
+// signingProfileResource returns the Terraform awscc_signer_signing_profile resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Signer::SigningProfile resource.
+func signingProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -237,7 +236,7 @@ func signingProfileResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Signer::SigningProfile").WithTerraformTypeName("awscc_signer_signing_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -259,11 +258,11 @@ func signingProfileResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

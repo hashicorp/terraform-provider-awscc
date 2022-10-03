@@ -5,7 +5,6 @@ package cloudwatch
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudwatch_composite_alarm", compositeAlarmResourceType)
+	registry.AddResourceFactory("awscc_cloudwatch_composite_alarm", compositeAlarmResource)
 }
 
-// compositeAlarmResourceType returns the Terraform awscc_cloudwatch_composite_alarm resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudWatch::CompositeAlarm resource type.
-func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, error) {
+// compositeAlarmResource returns the Terraform awscc_cloudwatch_composite_alarm resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudWatch::CompositeAlarm resource.
+func compositeAlarmResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"actions_enabled": {
 			// Property: ActionsEnabled
@@ -261,7 +260,7 @@ func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::CompositeAlarm").WithTerraformTypeName("awscc_cloudwatch_composite_alarm")
 	opts = opts.WithTerraformSchema(schema)
@@ -284,11 +283,11 @@ func compositeAlarmResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

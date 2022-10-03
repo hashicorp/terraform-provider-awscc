@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfigurationResourceType)
+	registry.AddResourceFactory("awscc_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfigurationResource)
 }
 
-// instanceAccessControlAttributeConfigurationResourceType returns the Terraform awscc_sso_instance_access_control_attribute_configuration resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SSO::InstanceAccessControlAttributeConfiguration resource type.
-func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// instanceAccessControlAttributeConfigurationResource returns the Terraform awscc_sso_instance_access_control_attribute_configuration resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SSO::InstanceAccessControlAttributeConfiguration resource.
+func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_control_attributes": {
 			// Property: AccessControlAttributes
@@ -252,7 +251,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::InstanceAccessControlAttributeConfiguration").WithTerraformTypeName("awscc_sso_instance_access_control_attribute_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -270,11 +269,11 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

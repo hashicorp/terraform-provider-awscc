@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_panorama_package_version", packageVersionResourceType)
+	registry.AddResourceFactory("awscc_panorama_package_version", packageVersionResource)
 }
 
-// packageVersionResourceType returns the Terraform awscc_panorama_package_version resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Panorama::PackageVersion resource type.
-func packageVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// packageVersionResource returns the Terraform awscc_panorama_package_version resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Panorama::PackageVersion resource.
+func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"is_latest_patch": {
 			// Property: IsLatestPatch
@@ -236,7 +235,7 @@ func packageVersionResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Panorama::PackageVersion").WithTerraformTypeName("awscc_panorama_package_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -260,11 +259,11 @@ func packageVersionResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

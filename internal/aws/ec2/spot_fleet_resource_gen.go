@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_spot_fleet", spotFleetResourceType)
+	registry.AddResourceFactory("awscc_ec2_spot_fleet", spotFleetResource)
 }
 
-// spotFleetResourceType returns the Terraform awscc_ec2_spot_fleet resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::SpotFleet resource type.
-func spotFleetResourceType(ctx context.Context) (provider.ResourceType, error) {
+// spotFleetResource returns the Terraform awscc_ec2_spot_fleet resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::SpotFleet resource.
+func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -2937,7 +2936,7 @@ func spotFleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SpotFleet").WithTerraformTypeName("awscc_ec2_spot_fleet")
 	opts = opts.WithTerraformSchema(schema)
@@ -3059,11 +3058,11 @@ func spotFleetResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

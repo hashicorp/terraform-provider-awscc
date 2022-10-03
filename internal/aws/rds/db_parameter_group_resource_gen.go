@@ -5,7 +5,6 @@ package rds
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_rds_db_parameter_group", dBParameterGroupResourceType)
+	registry.AddResourceFactory("awscc_rds_db_parameter_group", dBParameterGroupResource)
 }
 
-// dBParameterGroupResourceType returns the Terraform awscc_rds_db_parameter_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBParameterGroup resource type.
-func dBParameterGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// dBParameterGroupResource returns the Terraform awscc_rds_db_parameter_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RDS::DBParameterGroup resource.
+func dBParameterGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"db_parameter_group_name": {
 			// Property: DBParameterGroupName
@@ -166,7 +165,7 @@ func dBParameterGroupResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBParameterGroup").WithTerraformTypeName("awscc_rds_db_parameter_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -188,11 +187,11 @@ func dBParameterGroupResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package lakeformation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lakeformation_principal_permissions", principalPermissionsResourceType)
+	registry.AddResourceFactory("awscc_lakeformation_principal_permissions", principalPermissionsResource)
 }
 
-// principalPermissionsResourceType returns the Terraform awscc_lakeformation_principal_permissions resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::LakeFormation::PrincipalPermissions resource type.
-func principalPermissionsResourceType(ctx context.Context) (provider.ResourceType, error) {
+// principalPermissionsResource returns the Terraform awscc_lakeformation_principal_permissions resource.
+// This Terraform resource corresponds to the CloudFormation AWS::LakeFormation::PrincipalPermissions resource.
+func principalPermissionsResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"catalog": {
 			// Property: Catalog
@@ -805,7 +804,7 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LakeFormation::PrincipalPermissions").WithTerraformTypeName("awscc_lakeformation_principal_permissions")
 	opts = opts.WithTerraformSchema(schema)
@@ -846,11 +845,11 @@ func principalPermissionsResourceType(ctx context.Context) (provider.ResourceTyp
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

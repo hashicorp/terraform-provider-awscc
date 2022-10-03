@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_kinesisvideo_signaling_channel", signalingChannelResourceType)
+	registry.AddResourceFactory("awscc_kinesisvideo_signaling_channel", signalingChannelResource)
 }
 
-// signalingChannelResourceType returns the Terraform awscc_kinesisvideo_signaling_channel resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::KinesisVideo::SignalingChannel resource type.
-func signalingChannelResourceType(ctx context.Context) (provider.ResourceType, error) {
+// signalingChannelResource returns the Terraform awscc_kinesisvideo_signaling_channel resource.
+// This Terraform resource corresponds to the CloudFormation AWS::KinesisVideo::SignalingChannel resource.
+func signalingChannelResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -187,7 +186,7 @@ func signalingChannelResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::KinesisVideo::SignalingChannel").WithTerraformTypeName("awscc_kinesisvideo_signaling_channel")
 	opts = opts.WithTerraformSchema(schema)
@@ -206,11 +205,11 @@ func signalingChannelResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package route53resolver
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53resolver_firewall_rule_group_association", firewallRuleGroupAssociationResourceType)
+	registry.AddResourceFactory("awscc_route53resolver_firewall_rule_group_association", firewallRuleGroupAssociationResource)
 }
 
-// firewallRuleGroupAssociationResourceType returns the Terraform awscc_route53resolver_firewall_rule_group_association resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::FirewallRuleGroupAssociation resource type.
-func firewallRuleGroupAssociationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// firewallRuleGroupAssociationResource returns the Terraform awscc_route53resolver_firewall_rule_group_association resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53Resolver::FirewallRuleGroupAssociation resource.
+func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -316,7 +315,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (provider.Res
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroupAssociation").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -344,11 +343,11 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (provider.Res
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

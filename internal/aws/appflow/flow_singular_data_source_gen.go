@@ -5,7 +5,7 @@ package appflow
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_appflow_flow", flowDataSourceType)
+	registry.AddDataSourceFactory("awscc_appflow_flow", flowDataSource)
 }
 
-// flowDataSourceType returns the Terraform awscc_appflow_flow data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::AppFlow::Flow resource type.
-func flowDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// flowDataSource returns the Terraform awscc_appflow_flow data source.
+// This Terraform data source corresponds to the CloudFormation AWS::AppFlow::Flow resource.
+func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
@@ -2625,7 +2625,7 @@ func flowDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppFlow::Flow").WithTerraformTypeName("awscc_appflow_flow")
 	opts = opts.WithTerraformSchema(schema)
@@ -2714,11 +2714,11 @@ func flowDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
 		"zendesk":                           "Zendesk",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

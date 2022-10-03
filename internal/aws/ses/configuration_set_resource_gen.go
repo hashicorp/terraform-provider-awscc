@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ses_configuration_set", configurationSetResourceType)
+	registry.AddResourceFactory("awscc_ses_configuration_set", configurationSetResource)
 }
 
-// configurationSetResourceType returns the Terraform awscc_ses_configuration_set resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SES::ConfigurationSet resource type.
-func configurationSetResourceType(ctx context.Context) (provider.ResourceType, error) {
+// configurationSetResource returns the Terraform awscc_ses_configuration_set resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SES::ConfigurationSet resource.
+func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"delivery_options": {
 			// Property: DeliveryOptions
@@ -264,7 +263,7 @@ func configurationSetResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSet").WithTerraformTypeName("awscc_ses_configuration_set")
 	opts = opts.WithTerraformSchema(schema)
@@ -288,11 +287,11 @@ func configurationSetResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

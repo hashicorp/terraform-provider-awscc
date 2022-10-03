@@ -5,7 +5,7 @@ package cloudformation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudformation_type_activation", typeActivationDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudformation_type_activation", typeActivationDataSource)
 }
 
-// typeActivationDataSourceType returns the Terraform awscc_cloudformation_type_activation data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudFormation::TypeActivation resource type.
-func typeActivationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// typeActivationDataSource returns the Terraform awscc_cloudformation_type_activation data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudFormation::TypeActivation resource.
+func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -207,7 +207,7 @@ func typeActivationDataSourceType(ctx context.Context) (provider.DataSourceType,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::TypeActivation").WithTerraformTypeName("awscc_cloudformation_type_activation")
 	opts = opts.WithTerraformSchema(schema)
@@ -227,11 +227,11 @@ func typeActivationDataSourceType(ctx context.Context) (provider.DataSourceType,
 		"version_bump":       "VersionBump",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

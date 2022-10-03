@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_supportapp_slack_channel_configuration", slackChannelConfigurationResourceType)
+	registry.AddResourceFactory("awscc_supportapp_slack_channel_configuration", slackChannelConfigurationResource)
 }
 
-// slackChannelConfigurationResourceType returns the Terraform awscc_supportapp_slack_channel_configuration resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SupportApp::SlackChannelConfiguration resource type.
-func slackChannelConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// slackChannelConfigurationResource returns the Terraform awscc_supportapp_slack_channel_configuration resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SupportApp::SlackChannelConfiguration resource.
+func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"channel_id": {
 			// Property: ChannelId
@@ -190,7 +189,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (provider.Resour
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::SlackChannelConfiguration").WithTerraformTypeName("awscc_supportapp_slack_channel_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -210,11 +209,11 @@ func slackChannelConfigurationResourceType(ctx context.Context) (provider.Resour
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

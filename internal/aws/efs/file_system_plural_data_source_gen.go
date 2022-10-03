@@ -5,7 +5,7 @@ package efs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_efs_file_systems", fileSystemsDataSourceType)
+	registry.AddDataSourceFactory("awscc_efs_file_systems", fileSystemsDataSource)
 }
 
-// fileSystemsDataSourceType returns the Terraform awscc_efs_file_systems data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EFS::FileSystem resource type.
-func fileSystemsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// fileSystemsDataSource returns the Terraform awscc_efs_file_systems data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EFS::FileSystem resource.
+func fileSystemsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func fileSystemsDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EFS::FileSystem").WithTerraformTypeName("awscc_efs_file_systems")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

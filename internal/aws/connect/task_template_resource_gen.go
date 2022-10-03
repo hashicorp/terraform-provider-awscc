@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_connect_task_template", taskTemplateResourceType)
+	registry.AddResourceFactory("awscc_connect_task_template", taskTemplateResource)
 }
 
-// taskTemplateResourceType returns the Terraform awscc_connect_task_template resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Connect::TaskTemplate resource type.
-func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error) {
+// taskTemplateResource returns the Terraform awscc_connect_task_template resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Connect::TaskTemplate resource.
+func taskTemplateResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -689,7 +688,7 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::TaskTemplate").WithTerraformTypeName("awscc_connect_task_template")
 	opts = opts.WithTerraformSchema(schema)
@@ -721,11 +720,11 @@ func taskTemplateResourceType(ctx context.Context) (provider.ResourceType, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

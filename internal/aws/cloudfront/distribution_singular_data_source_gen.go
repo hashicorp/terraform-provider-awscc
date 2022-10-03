@@ -5,7 +5,7 @@ package cloudfront
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudfront_distribution", distributionDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudfront_distribution", distributionDataSource)
 }
 
-// distributionDataSourceType returns the Terraform awscc_cloudfront_distribution data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::Distribution resource type.
-func distributionDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// distributionDataSource returns the Terraform awscc_cloudfront_distribution data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudFront::Distribution resource.
+func distributionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"distribution_config": {
 			// Property: DistributionConfig
@@ -1611,7 +1611,7 @@ func distributionDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::Distribution").WithTerraformTypeName("awscc_cloudfront_distribution")
 	opts = opts.WithTerraformSchema(schema)
@@ -1713,11 +1713,11 @@ func distributionDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		"whitelisted_names":              "WhitelistedNames",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

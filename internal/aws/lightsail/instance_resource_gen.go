@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lightsail_instance", instanceResourceType)
+	registry.AddResourceFactory("awscc_lightsail_instance", instanceResource)
 }
 
-// instanceResourceType returns the Terraform awscc_lightsail_instance resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Lightsail::Instance resource type.
-func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
+// instanceResource returns the Terraform awscc_lightsail_instance resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Lightsail::Instance resource.
+func instanceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"add_ons": {
 			// Property: AddOns
@@ -943,7 +942,7 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::Instance").WithTerraformTypeName("awscc_lightsail_instance")
 	opts = opts.WithTerraformSchema(schema)
@@ -1007,11 +1006,11 @@ func instanceResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package apprunner
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_apprunner_services", servicesDataSourceType)
+	registry.AddDataSourceFactory("awscc_apprunner_services", servicesDataSource)
 }
 
-// servicesDataSourceType returns the Terraform awscc_apprunner_services data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::AppRunner::Service resource type.
-func servicesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// servicesDataSource returns the Terraform awscc_apprunner_services data source.
+// This Terraform data source corresponds to the CloudFormation AWS::AppRunner::Service resource.
+func servicesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func servicesDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::Service").WithTerraformTypeName("awscc_apprunner_services")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

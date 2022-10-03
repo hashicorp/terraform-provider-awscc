@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_capacity_reservation", capacityReservationResourceType)
+	registry.AddResourceFactory("awscc_ec2_capacity_reservation", capacityReservationResource)
 }
 
-// capacityReservationResourceType returns the Terraform awscc_ec2_capacity_reservation resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::CapacityReservation resource type.
-func capacityReservationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// capacityReservationResource returns the Terraform awscc_ec2_capacity_reservation resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::CapacityReservation resource.
+func capacityReservationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"availability_zone": {
 			// Property: AvailabilityZone
@@ -302,7 +301,7 @@ func capacityReservationResourceType(ctx context.Context) (provider.ResourceType
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::CapacityReservation").WithTerraformTypeName("awscc_ec2_capacity_reservation")
 	opts = opts.WithTerraformSchema(schema)
@@ -334,11 +333,11 @@ func capacityReservationResourceType(ctx context.Context) (provider.ResourceType
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

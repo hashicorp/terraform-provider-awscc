@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_network_acl", networkAclDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_network_acl", networkAclDataSource)
 }
 
-// networkAclDataSourceType returns the Terraform awscc_ec2_network_acl data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::NetworkAcl resource type.
-func networkAclDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// networkAclDataSource returns the Terraform awscc_ec2_network_acl data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::NetworkAcl resource.
+func networkAclDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -96,7 +96,7 @@ func networkAclDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkAcl").WithTerraformTypeName("awscc_ec2_network_acl")
 	opts = opts.WithTerraformSchema(schema)
@@ -108,11 +108,11 @@ func networkAclDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		"vpc_id": "VpcId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

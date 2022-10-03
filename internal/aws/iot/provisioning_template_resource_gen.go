@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iot_provisioning_template", provisioningTemplateResourceType)
+	registry.AddResourceFactory("awscc_iot_provisioning_template", provisioningTemplateResource)
 }
 
-// provisioningTemplateResourceType returns the Terraform awscc_iot_provisioning_template resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoT::ProvisioningTemplate resource type.
-func provisioningTemplateResourceType(ctx context.Context) (provider.ResourceType, error) {
+// provisioningTemplateResource returns the Terraform awscc_iot_provisioning_template resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoT::ProvisioningTemplate resource.
+func provisioningTemplateResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
@@ -229,7 +228,7 @@ func provisioningTemplateResourceType(ctx context.Context) (provider.ResourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::ProvisioningTemplate").WithTerraformTypeName("awscc_iot_provisioning_template")
 	opts = opts.WithTerraformSchema(schema)
@@ -254,11 +253,11 @@ func provisioningTemplateResourceType(ctx context.Context) (provider.ResourceTyp
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

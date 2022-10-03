@@ -5,7 +5,6 @@ package servicecatalog
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_servicecatalog_service_action", serviceActionResourceType)
+	registry.AddResourceFactory("awscc_servicecatalog_service_action", serviceActionResource)
 }
 
-// serviceActionResourceType returns the Terraform awscc_servicecatalog_service_action resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalog::ServiceAction resource type.
-func serviceActionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// serviceActionResource returns the Terraform awscc_servicecatalog_service_action resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ServiceCatalog::ServiceAction resource.
+func serviceActionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"accept_language": {
 			// Property: AcceptLanguage
@@ -165,7 +164,7 @@ func serviceActionResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::ServiceAction").WithTerraformTypeName("awscc_servicecatalog_service_action")
 	opts = opts.WithTerraformSchema(schema)
@@ -188,11 +187,11 @@ func serviceActionResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

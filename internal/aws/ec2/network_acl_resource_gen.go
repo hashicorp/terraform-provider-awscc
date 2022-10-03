@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_network_acl", networkAclResourceType)
+	registry.AddResourceFactory("awscc_ec2_network_acl", networkAclResource)
 }
 
-// networkAclResourceType returns the Terraform awscc_ec2_network_acl resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkAcl resource type.
-func networkAclResourceType(ctx context.Context) (provider.ResourceType, error) {
+// networkAclResource returns the Terraform awscc_ec2_network_acl resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::NetworkAcl resource.
+func networkAclResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -102,7 +101,7 @@ func networkAclResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkAcl").WithTerraformTypeName("awscc_ec2_network_acl")
 	opts = opts.WithTerraformSchema(schema)
@@ -119,11 +118,11 @@ func networkAclResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_location_map", mapResourceType)
+	registry.AddResourceFactory("awscc_location_map", mapResource)
 }
 
-// mapResourceType returns the Terraform awscc_location_map resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Location::Map resource type.
-func mapResourceType(ctx context.Context) (provider.ResourceType, error) {
+// mapResource returns the Terraform awscc_location_map resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Location::Map resource.
+func mapResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -206,7 +205,7 @@ func mapResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Location::Map").WithTerraformTypeName("awscc_location_map")
 	opts = opts.WithTerraformSchema(schema)
@@ -228,11 +227,11 @@ func mapResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package iotevents
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iotevents_detector_model", detectorModelDataSourceType)
+	registry.AddDataSourceFactory("awscc_iotevents_detector_model", detectorModelDataSource)
 }
 
-// detectorModelDataSourceType returns the Terraform awscc_iotevents_detector_model data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoTEvents::DetectorModel resource type.
-func detectorModelDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// detectorModelDataSource returns the Terraform awscc_iotevents_detector_model data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoTEvents::DetectorModel resource.
+func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"detector_model_definition": {
 			// Property: DetectorModelDefinition
@@ -4603,7 +4603,7 @@ func detectorModelDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTEvents::DetectorModel").WithTerraformTypeName("awscc_iotevents_detector_model")
 	opts = opts.WithTerraformSchema(schema)
@@ -4680,11 +4680,11 @@ func detectorModelDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		"variable_name":              "VariableName",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

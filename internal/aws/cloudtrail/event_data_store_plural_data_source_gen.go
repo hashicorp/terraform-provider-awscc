@@ -5,7 +5,7 @@ package cloudtrail
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudtrail_event_data_stores", eventDataStoresDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudtrail_event_data_stores", eventDataStoresDataSource)
 }
 
-// eventDataStoresDataSourceType returns the Terraform awscc_cloudtrail_event_data_stores data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudTrail::EventDataStore resource type.
-func eventDataStoresDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// eventDataStoresDataSource returns the Terraform awscc_cloudtrail_event_data_stores data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudTrail::EventDataStore resource.
+func eventDataStoresDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func eventDataStoresDataSourceType(ctx context.Context) (provider.DataSourceType
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudTrail::EventDataStore").WithTerraformTypeName("awscc_cloudtrail_event_data_stores")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

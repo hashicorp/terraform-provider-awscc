@@ -5,7 +5,7 @@ package route53resolver
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_route53resolver_firewall_rule_group", firewallRuleGroupDataSourceType)
+	registry.AddDataSourceFactory("awscc_route53resolver_firewall_rule_group", firewallRuleGroupDataSource)
 }
 
-// firewallRuleGroupDataSourceType returns the Terraform awscc_route53resolver_firewall_rule_group data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Route53Resolver::FirewallRuleGroup resource type.
-func firewallRuleGroupDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// firewallRuleGroupDataSource returns the Terraform awscc_route53resolver_firewall_rule_group data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Route53Resolver::FirewallRuleGroup resource.
+func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -349,7 +349,7 @@ func firewallRuleGroupDataSourceType(ctx context.Context) (provider.DataSourceTy
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroup").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -378,11 +378,11 @@ func firewallRuleGroupDataSourceType(ctx context.Context) (provider.DataSourceTy
 		"value":                   "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_lightsail_disk", diskResourceType)
+	registry.AddResourceFactory("awscc_lightsail_disk", diskResource)
 }
 
-// diskResourceType returns the Terraform awscc_lightsail_disk resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Lightsail::Disk resource type.
-func diskResourceType(ctx context.Context) (provider.ResourceType, error) {
+// diskResource returns the Terraform awscc_lightsail_disk resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Lightsail::Disk resource.
+func diskResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"add_ons": {
 			// Property: AddOns
@@ -449,7 +448,7 @@ func diskResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::Disk").WithTerraformTypeName("awscc_lightsail_disk")
 	opts = opts.WithTerraformSchema(schema)
@@ -483,11 +482,11 @@ func diskResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

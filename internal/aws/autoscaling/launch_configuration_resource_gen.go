@@ -5,7 +5,6 @@ package autoscaling
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_autoscaling_launch_configuration", launchConfigurationResourceType)
+	registry.AddResourceFactory("awscc_autoscaling_launch_configuration", launchConfigurationResource)
 }
 
-// launchConfigurationResourceType returns the Terraform awscc_autoscaling_launch_configuration resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AutoScaling::LaunchConfiguration resource type.
-func launchConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// launchConfigurationResource returns the Terraform awscc_autoscaling_launch_configuration resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AutoScaling::LaunchConfiguration resource.
+func launchConfigurationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"associate_public_ip_address": {
 			// Property: AssociatePublicIpAddress
@@ -577,7 +576,7 @@ func launchConfigurationResourceType(ctx context.Context) (provider.ResourceType
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::LaunchConfiguration").WithTerraformTypeName("awscc_autoscaling_launch_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -622,11 +621,11 @@ func launchConfigurationResourceType(ctx context.Context) (provider.ResourceType
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

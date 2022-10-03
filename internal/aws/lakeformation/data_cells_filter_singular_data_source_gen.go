@@ -5,7 +5,7 @@ package lakeformation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_lakeformation_data_cells_filter", dataCellsFilterDataSourceType)
+	registry.AddDataSourceFactory("awscc_lakeformation_data_cells_filter", dataCellsFilterDataSource)
 }
 
-// dataCellsFilterDataSourceType returns the Terraform awscc_lakeformation_data_cells_filter data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::LakeFormation::DataCellsFilter resource type.
-func dataCellsFilterDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// dataCellsFilterDataSource returns the Terraform awscc_lakeformation_data_cells_filter data source.
+// This Terraform data source corresponds to the CloudFormation AWS::LakeFormation::DataCellsFilter resource.
+func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"column_names": {
 			// Property: ColumnNames
@@ -176,7 +176,7 @@ func dataCellsFilterDataSourceType(ctx context.Context) (provider.DataSourceType
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LakeFormation::DataCellsFilter").WithTerraformTypeName("awscc_lakeformation_data_cells_filter")
 	opts = opts.WithTerraformSchema(schema)
@@ -193,11 +193,11 @@ func dataCellsFilterDataSourceType(ctx context.Context) (provider.DataSourceType
 		"table_name":            "TableName",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

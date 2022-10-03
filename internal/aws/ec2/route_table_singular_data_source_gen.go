@@ -5,7 +5,7 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_route_table", routeTableDataSourceType)
+	registry.AddDataSourceFactory("awscc_ec2_route_table", routeTableDataSource)
 }
 
-// routeTableDataSourceType returns the Terraform awscc_ec2_route_table data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::RouteTable resource type.
-func routeTableDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// routeTableDataSource returns the Terraform awscc_ec2_route_table data source.
+// This Terraform data source corresponds to the CloudFormation AWS::EC2::RouteTable resource.
+func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"route_table_id": {
 			// Property: RouteTableId
@@ -98,7 +98,7 @@ func routeTableDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::RouteTable").WithTerraformTypeName("awscc_ec2_route_table")
 	opts = opts.WithTerraformSchema(schema)
@@ -110,11 +110,11 @@ func routeTableDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		"vpc_id":         "VpcId",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

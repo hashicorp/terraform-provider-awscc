@@ -5,7 +5,6 @@ package cloudfront
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudfront_key_group", keyGroupResourceType)
+	registry.AddResourceFactory("awscc_cloudfront_key_group", keyGroupResource)
 }
 
-// keyGroupResourceType returns the Terraform awscc_cloudfront_key_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::KeyGroup resource type.
-func keyGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// keyGroupResource returns the Terraform awscc_cloudfront_key_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CloudFront::KeyGroup resource.
+func keyGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
@@ -104,7 +103,7 @@ func keyGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::KeyGroup").WithTerraformTypeName("awscc_cloudfront_key_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -122,11 +121,11 @@ func keyGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

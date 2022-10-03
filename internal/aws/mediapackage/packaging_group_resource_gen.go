@@ -5,7 +5,6 @@ package mediapackage
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_mediapackage_packaging_group", packagingGroupResourceType)
+	registry.AddResourceFactory("awscc_mediapackage_packaging_group", packagingGroupResource)
 }
 
-// packagingGroupResourceType returns the Terraform awscc_mediapackage_packaging_group resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::PackagingGroup resource type.
-func packagingGroupResourceType(ctx context.Context) (provider.ResourceType, error) {
+// packagingGroupResource returns the Terraform awscc_mediapackage_packaging_group resource.
+// This Terraform resource corresponds to the CloudFormation AWS::MediaPackage::PackagingGroup resource.
+func packagingGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -213,7 +212,7 @@ func packagingGroupResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingGroup").WithTerraformTypeName("awscc_mediapackage_packaging_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -236,11 +235,11 @@ func packagingGroupResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

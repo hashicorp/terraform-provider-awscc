@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_resiliencehub_resiliency_policy", resiliencyPolicyResourceType)
+	registry.AddResourceFactory("awscc_resiliencehub_resiliency_policy", resiliencyPolicyResource)
 }
 
-// resiliencyPolicyResourceType returns the Terraform awscc_resiliencehub_resiliency_policy resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ResilienceHub::ResiliencyPolicy resource type.
-func resiliencyPolicyResourceType(ctx context.Context) (provider.ResourceType, error) {
+// resiliencyPolicyResource returns the Terraform awscc_resiliencehub_resiliency_policy resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ResilienceHub::ResiliencyPolicy resource.
+func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"data_location_constraint": {
 			// Property: DataLocationConstraint
@@ -219,7 +218,7 @@ func resiliencyPolicyResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ResilienceHub::ResiliencyPolicy").WithTerraformTypeName("awscc_resiliencehub_resiliency_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -240,11 +239,11 @@ func resiliencyPolicyResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

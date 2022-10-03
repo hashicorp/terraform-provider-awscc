@@ -5,7 +5,6 @@ package rds
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_rds_event_subscription", eventSubscriptionResourceType)
+	registry.AddResourceFactory("awscc_rds_event_subscription", eventSubscriptionResource)
 }
 
-// eventSubscriptionResourceType returns the Terraform awscc_rds_event_subscription resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RDS::EventSubscription resource type.
-func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// eventSubscriptionResource returns the Terraform awscc_rds_event_subscription resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RDS::EventSubscription resource.
+func eventSubscriptionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"enabled": {
 			// Property: Enabled
@@ -215,7 +214,7 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::EventSubscription").WithTerraformTypeName("awscc_rds_event_subscription")
 	opts = opts.WithTerraformSchema(schema)
@@ -236,11 +235,11 @@ func eventSubscriptionResourceType(ctx context.Context) (provider.ResourceType, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

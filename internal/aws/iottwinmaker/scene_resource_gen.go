@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iottwinmaker_scene", sceneResourceType)
+	registry.AddResourceFactory("awscc_iottwinmaker_scene", sceneResource)
 }
 
-// sceneResourceType returns the Terraform awscc_iottwinmaker_scene resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoTTwinMaker::Scene resource type.
-func sceneResourceType(ctx context.Context) (provider.ResourceType, error) {
+// sceneResource returns the Terraform awscc_iottwinmaker_scene resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoTTwinMaker::Scene resource.
+func sceneResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -221,7 +220,7 @@ func sceneResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTTwinMaker::Scene").WithTerraformTypeName("awscc_iottwinmaker_scene")
 	opts = opts.WithTerraformSchema(schema)
@@ -242,11 +241,11 @@ func sceneResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

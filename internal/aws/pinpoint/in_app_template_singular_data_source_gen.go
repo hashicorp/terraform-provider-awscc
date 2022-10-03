@@ -5,7 +5,7 @@ package pinpoint
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_pinpoint_in_app_template", inAppTemplateDataSourceType)
+	registry.AddDataSourceFactory("awscc_pinpoint_in_app_template", inAppTemplateDataSource)
 }
 
-// inAppTemplateDataSourceType returns the Terraform awscc_pinpoint_in_app_template data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Pinpoint::InAppTemplate resource type.
-func inAppTemplateDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// inAppTemplateDataSource returns the Terraform awscc_pinpoint_in_app_template data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Pinpoint::InAppTemplate resource.
+func inAppTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -589,7 +589,7 @@ func inAppTemplateDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Pinpoint::InAppTemplate").WithTerraformTypeName("awscc_pinpoint_in_app_template")
 	opts = opts.WithTerraformSchema(schema)
@@ -621,11 +621,11 @@ func inAppTemplateDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		"web":                  "Web",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

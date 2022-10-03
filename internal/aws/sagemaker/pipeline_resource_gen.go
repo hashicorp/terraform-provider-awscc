@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_sagemaker_pipeline", pipelineResourceType)
+	registry.AddResourceFactory("awscc_sagemaker_pipeline", pipelineResource)
 }
 
-// pipelineResourceType returns the Terraform awscc_sagemaker_pipeline resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::Pipeline resource type.
-func pipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
+// pipelineResource returns the Terraform awscc_sagemaker_pipeline resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SageMaker::Pipeline resource.
+func pipelineResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"parallelism_configuration": {
 			// Property: ParallelismConfiguration
@@ -298,7 +297,7 @@ func pipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Pipeline").WithTerraformTypeName("awscc_sagemaker_pipeline")
 	opts = opts.WithTerraformSchema(schema)
@@ -325,11 +324,11 @@ func pipelineResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

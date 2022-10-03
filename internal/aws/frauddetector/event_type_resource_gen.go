@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_frauddetector_event_type", eventTypeResourceType)
+	registry.AddResourceFactory("awscc_frauddetector_event_type", eventTypeResource)
 }
 
-// eventTypeResourceType returns the Terraform awscc_frauddetector_event_type resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::FraudDetector::EventType resource type.
-func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
+// eventTypeResource returns the Terraform awscc_frauddetector_event_type resource.
+// This Terraform resource corresponds to the CloudFormation AWS::FraudDetector::EventType resource.
+func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -836,7 +835,7 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::EventType").WithTerraformTypeName("awscc_frauddetector_event_type")
 	opts = opts.WithTerraformSchema(schema)
@@ -864,11 +863,11 @@ func eventTypeResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

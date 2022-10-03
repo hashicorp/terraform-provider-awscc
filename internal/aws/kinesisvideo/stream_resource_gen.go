@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_kinesisvideo_stream", streamResourceType)
+	registry.AddResourceFactory("awscc_kinesisvideo_stream", streamResource)
 }
 
-// streamResourceType returns the Terraform awscc_kinesisvideo_stream resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::KinesisVideo::Stream resource type.
-func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
+// streamResource returns the Terraform awscc_kinesisvideo_stream resource.
+// This Terraform resource corresponds to the CloudFormation AWS::KinesisVideo::Stream resource.
+func streamResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -230,7 +229,7 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::KinesisVideo::Stream").WithTerraformTypeName("awscc_kinesisvideo_stream")
 	opts = opts.WithTerraformSchema(schema)
@@ -251,11 +250,11 @@ func streamResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

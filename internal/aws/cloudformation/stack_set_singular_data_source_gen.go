@@ -5,7 +5,7 @@ package cloudformation
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudformation_stack_set", stackSetDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudformation_stack_set", stackSetDataSource)
 }
 
-// stackSetDataSourceType returns the Terraform awscc_cloudformation_stack_set data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudFormation::StackSet resource type.
-func stackSetDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// stackSetDataSource returns the Terraform awscc_cloudformation_stack_set data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudFormation::StackSet resource.
+func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"administration_role_arn": {
 			// Property: AdministrationRoleARN
@@ -574,7 +574,7 @@ func stackSetDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::StackSet").WithTerraformTypeName("awscc_cloudformation_stack_set")
 	opts = opts.WithTerraformSchema(schema)
@@ -616,11 +616,11 @@ func stackSetDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		"value":                            "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

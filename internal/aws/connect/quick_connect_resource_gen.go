@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_connect_quick_connect", quickConnectResourceType)
+	registry.AddResourceFactory("awscc_connect_quick_connect", quickConnectResource)
 }
 
-// quickConnectResourceType returns the Terraform awscc_connect_quick_connect resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Connect::QuickConnect resource type.
-func quickConnectResourceType(ctx context.Context) (provider.ResourceType, error) {
+// quickConnectResource returns the Terraform awscc_connect_quick_connect resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Connect::QuickConnect resource.
+func quickConnectResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
@@ -354,7 +353,7 @@ func quickConnectResourceType(ctx context.Context) (provider.ResourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::QuickConnect").WithTerraformTypeName("awscc_connect_quick_connect")
 	opts = opts.WithTerraformSchema(schema)
@@ -382,11 +381,11 @@ func quickConnectResourceType(ctx context.Context) (provider.ResourceType, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

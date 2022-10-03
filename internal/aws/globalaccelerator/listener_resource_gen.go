@@ -5,7 +5,6 @@ package globalaccelerator
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_globalaccelerator_listener", listenerResourceType)
+	registry.AddResourceFactory("awscc_globalaccelerator_listener", listenerResource)
 }
 
-// listenerResourceType returns the Terraform awscc_globalaccelerator_listener resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::GlobalAccelerator::Listener resource type.
-func listenerResourceType(ctx context.Context) (provider.ResourceType, error) {
+// listenerResource returns the Terraform awscc_globalaccelerator_listener resource.
+// This Terraform resource corresponds to the CloudFormation AWS::GlobalAccelerator::Listener resource.
+func listenerResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"accelerator_arn": {
 			// Property: AcceleratorArn
@@ -174,7 +173,7 @@ func listenerResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::Listener").WithTerraformTypeName("awscc_globalaccelerator_listener")
 	opts = opts.WithTerraformSchema(schema)
@@ -193,11 +192,11 @@ func listenerResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

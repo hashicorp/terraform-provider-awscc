@@ -5,7 +5,6 @@ package networkmanager
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_networkmanager_core_network", coreNetworkResourceType)
+	registry.AddResourceFactory("awscc_networkmanager_core_network", coreNetworkResource)
 }
 
-// coreNetworkResourceType returns the Terraform awscc_networkmanager_core_network resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::CoreNetwork resource type.
-func coreNetworkResourceType(ctx context.Context) (provider.ResourceType, error) {
+// coreNetworkResource returns the Terraform awscc_networkmanager_core_network resource.
+// This Terraform resource corresponds to the CloudFormation AWS::NetworkManager::CoreNetwork resource.
+func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"core_network_arn": {
 			// Property: CoreNetworkArn
@@ -350,7 +349,7 @@ func coreNetworkResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::CoreNetwork").WithTerraformTypeName("awscc_networkmanager_core_network")
 	opts = opts.WithTerraformSchema(schema)
@@ -381,11 +380,11 @@ func coreNetworkResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(720)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_panorama_application_instance", applicationInstanceResourceType)
+	registry.AddResourceFactory("awscc_panorama_application_instance", applicationInstanceResource)
 }
 
-// applicationInstanceResourceType returns the Terraform awscc_panorama_application_instance resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Panorama::ApplicationInstance resource type.
-func applicationInstanceResourceType(ctx context.Context) (provider.ResourceType, error) {
+// applicationInstanceResource returns the Terraform awscc_panorama_application_instance resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Panorama::ApplicationInstance resource.
+func applicationInstanceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"application_instance_id": {
 			// Property: ApplicationInstanceId
@@ -457,7 +456,7 @@ func applicationInstanceResourceType(ctx context.Context) (provider.ResourceType
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Panorama::ApplicationInstance").WithTerraformTypeName("awscc_panorama_application_instance")
 	opts = opts.WithTerraformSchema(schema)
@@ -490,11 +489,11 @@ func applicationInstanceResourceType(ctx context.Context) (provider.ResourceType
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

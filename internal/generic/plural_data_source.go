@@ -10,69 +10,62 @@ import (
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 )
 
-// pluralDataSourceType is a type alias for a data source type.
-type pluralDataSourceType genericDataSourceType
-
-// NewPluralDataSourceType returns a new pluralDataSourceType from the specified variadic list of functional options.
+// NewPluralDataSource returns a new plural DataSource from the specified variadic list of functional options.
 // It's public as it's called from generated code.
-func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (provider.DataSourceType, error) {
-	dataSourceType := &genericDataSourceType{}
+func NewPluralDataSource(_ context.Context, optFns ...DataSourceOptionsFunc) (datasource.DataSource, error) {
+	v := &genericPluralDataSource{}
 
 	for _, optFn := range optFns {
-		err := optFn(dataSourceType)
+		err := optFn(&v.genericDataSource)
 
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	if dataSourceType.cfTypeName == "" {
+	if v.cfTypeName == "" {
 		return nil, fmt.Errorf("no CloudFormation type name specified")
 	}
 
-	if dataSourceType.tfTypeName == "" {
+	if v.tfTypeName == "" {
 		return nil, fmt.Errorf("no Terraform type name specified")
 	}
 
-	pluralDataSourceType := pluralDataSourceType(*dataSourceType)
-
-	return &pluralDataSourceType, nil
-}
-
-func (pdt *pluralDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
-	return pdt.tfSchema, nil
-}
-
-func (pdt *pluralDataSourceType) NewDataSource(ctx context.Context, provider provider.Provider) (datasource.DataSource, diag.Diagnostics) {
-	return newGenericPluralDataSource(provider, pdt), nil
+	return v, nil
 }
 
 // Implements datasource.DataSource
-type pluralDataSource struct {
-	provider       tfcloudcontrol.Provider
-	dataSourceType *pluralDataSourceType
+type genericPluralDataSource struct {
+	genericDataSource
+	provider tfcloudcontrol.Provider
 }
 
-func newGenericPluralDataSource(provider provider.Provider, pluralDataSourceType *pluralDataSourceType) datasource.DataSource {
-	return &pluralDataSource{
-		provider:       provider.(tfcloudcontrol.Provider),
-		dataSourceType: pluralDataSourceType,
+func (pd *genericPluralDataSource) Metadata(_ context.Context, request datasource.MetadataRequest, response *datasource.MetadataResponse) {
+	response.TypeName = pd.tfTypeName
+}
+
+func (pd *genericPluralDataSource) GetSchema(_ context.Context) (tfsdk.Schema, diag.Diagnostics) {
+	return pd.tfSchema, nil
+}
+
+func (pd *genericPluralDataSource) Configure(_ context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) { //nolint:unparam
+	if v := request.ProviderData; v != nil {
+		pd.provider = v.(tfcloudcontrol.Provider)
 	}
 }
 
-func (pd *pluralDataSource) Read(ctx context.Context, _ datasource.ReadRequest, response *datasource.ReadResponse) {
+func (pd *genericPluralDataSource) Read(ctx context.Context, _ datasource.ReadRequest, response *datasource.ReadResponse) {
 	ctx = pd.cfnTypeContext(ctx)
 
 	traceEntry(ctx, "PluralDataSource.Read")
 
-	conn := pd.provider.CloudControlApiClient(ctx)
+	conn := pd.provider.CloudControlAPIClient(ctx)
 
 	descriptions, err := pd.list(ctx, conn)
 
@@ -85,7 +78,7 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ datasource.ReadRequest, 
 	val := GetCloudControlResourceDescriptionsValue(pd.provider.Region(ctx), descriptions)
 
 	response.State = tfsdk.State{
-		Schema: pd.dataSourceType.tfSchema,
+		Schema: pd.tfSchema,
 		Raw:    val,
 	}
 
@@ -97,13 +90,13 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ datasource.ReadRequest, 
 }
 
 // list returns the ResourceDescriptions of the specified CloudFormation type.
-func (pd *pluralDataSource) list(ctx context.Context, conn *cloudcontrol.Client) ([]cctypes.ResourceDescription, error) {
-	return tfcloudcontrol.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.dataSourceType.cfTypeName)
+func (pd *genericPluralDataSource) list(ctx context.Context, conn *cloudcontrol.Client) ([]cctypes.ResourceDescription, error) {
+	return tfcloudcontrol.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.cfTypeName)
 }
 
 // cfnTypeContext injects the CloudFormation type name into logger contexts.
-func (pd *pluralDataSource) cfnTypeContext(ctx context.Context) context.Context {
-	ctx = tflog.SetField(ctx, LoggingKeyCFNType, pd.dataSourceType.cfTypeName)
+func (pd *genericPluralDataSource) cfnTypeContext(ctx context.Context) context.Context {
+	ctx = tflog.SetField(ctx, LoggingKeyCFNType, pd.cfTypeName)
 
 	return ctx
 }

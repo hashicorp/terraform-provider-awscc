@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_network_insights_analysis", networkInsightsAnalysisResourceType)
+	registry.AddResourceFactory("awscc_ec2_network_insights_analysis", networkInsightsAnalysisResource)
 }
 
-// networkInsightsAnalysisResourceType returns the Terraform awscc_ec2_network_insights_analysis resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAnalysis resource type.
-func networkInsightsAnalysisResourceType(ctx context.Context) (provider.ResourceType, error) {
+// networkInsightsAnalysisResource returns the Terraform awscc_ec2_network_insights_analysis resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::NetworkInsightsAnalysis resource.
+func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"alternate_path_hints": {
 			// Property: AlternatePathHints
@@ -3894,7 +3893,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsAnalysis").WithTerraformTypeName("awscc_ec2_network_insights_analysis")
 	opts = opts.WithTerraformSchema(schema)
@@ -4001,11 +4000,11 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (provider.Resource
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

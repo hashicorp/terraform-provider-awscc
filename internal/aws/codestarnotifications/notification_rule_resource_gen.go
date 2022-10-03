@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_codestarnotifications_notification_rule", notificationRuleResourceType)
+	registry.AddResourceFactory("awscc_codestarnotifications_notification_rule", notificationRuleResource)
 }
 
-// notificationRuleResourceType returns the Terraform awscc_codestarnotifications_notification_rule resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::CodeStarNotifications::NotificationRule resource type.
-func notificationRuleResourceType(ctx context.Context) (provider.ResourceType, error) {
+// notificationRuleResource returns the Terraform awscc_codestarnotifications_notification_rule resource.
+// This Terraform resource corresponds to the CloudFormation AWS::CodeStarNotifications::NotificationRule resource.
+func notificationRuleResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -258,7 +257,7 @@ func notificationRuleResourceType(ctx context.Context) (provider.ResourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodeStarNotifications::NotificationRule").WithTerraformTypeName("awscc_codestarnotifications_notification_rule")
 	opts = opts.WithTerraformSchema(schema)
@@ -286,11 +285,11 @@ func notificationRuleResourceType(ctx context.Context) (provider.ResourceType, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

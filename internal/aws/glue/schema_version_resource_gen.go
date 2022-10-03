@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_glue_schema_version", schemaVersionResourceType)
+	registry.AddResourceFactory("awscc_glue_schema_version", schemaVersionResource)
 }
 
-// schemaVersionResourceType returns the Terraform awscc_glue_schema_version resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Glue::SchemaVersion resource type.
-func schemaVersionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// schemaVersionResource returns the Terraform awscc_glue_schema_version resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Glue::SchemaVersion resource.
+func schemaVersionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"schema": {
 			// Property: Schema
@@ -150,7 +149,7 @@ func schemaVersionResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::SchemaVersion").WithTerraformTypeName("awscc_glue_schema_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -168,11 +167,11 @@ func schemaVersionResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

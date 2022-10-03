@@ -5,7 +5,7 @@ package cloudwatch
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_cloudwatch_metric_streams", metricStreamsDataSourceType)
+	registry.AddDataSourceFactory("awscc_cloudwatch_metric_streams", metricStreamsDataSource)
 }
 
-// metricStreamsDataSourceType returns the Terraform awscc_cloudwatch_metric_streams data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::CloudWatch::MetricStream resource type.
-func metricStreamsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// metricStreamsDataSource returns the Terraform awscc_cloudwatch_metric_streams data source.
+// This Terraform data source corresponds to the CloudFormation AWS::CloudWatch::MetricStream resource.
+func metricStreamsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func metricStreamsDataSourceType(ctx context.Context) (provider.DataSourceType, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("awscc_cloudwatch_metric_streams")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

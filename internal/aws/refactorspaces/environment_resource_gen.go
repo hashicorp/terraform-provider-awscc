@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_refactorspaces_environment", environmentResourceType)
+	registry.AddResourceFactory("awscc_refactorspaces_environment", environmentResource)
 }
 
-// environmentResourceType returns the Terraform awscc_refactorspaces_environment resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RefactorSpaces::Environment resource type.
-func environmentResourceType(ctx context.Context) (provider.ResourceType, error) {
+// environmentResource returns the Terraform awscc_refactorspaces_environment resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RefactorSpaces::Environment resource.
+func environmentResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -213,7 +212,7 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RefactorSpaces::Environment").WithTerraformTypeName("awscc_refactorspaces_environment")
 	opts = opts.WithTerraformSchema(schema)
@@ -239,11 +238,11 @@ func environmentResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

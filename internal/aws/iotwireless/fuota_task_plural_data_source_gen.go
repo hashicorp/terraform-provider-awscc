@@ -5,7 +5,7 @@ package iotwireless
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iotwireless_fuota_tasks", fuotaTasksDataSourceType)
+	registry.AddDataSourceFactory("awscc_iotwireless_fuota_tasks", fuotaTasksDataSource)
 }
 
-// fuotaTasksDataSourceType returns the Terraform awscc_iotwireless_fuota_tasks data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoTWireless::FuotaTask resource type.
-func fuotaTasksDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// fuotaTasksDataSource returns the Terraform awscc_iotwireless_fuota_tasks data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoTWireless::FuotaTask resource.
+func fuotaTasksDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func fuotaTasksDataSourceType(ctx context.Context) (provider.DataSourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::FuotaTask").WithTerraformTypeName("awscc_iotwireless_fuota_tasks")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

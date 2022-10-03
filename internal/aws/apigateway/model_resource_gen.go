@@ -5,7 +5,6 @@ package apigateway
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_apigateway_model", modelResourceType)
+	registry.AddResourceFactory("awscc_apigateway_model", modelResource)
 }
 
-// modelResourceType returns the Terraform awscc_apigateway_model resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::Model resource type.
-func modelResourceType(ctx context.Context) (provider.ResourceType, error) {
+// modelResource returns the Terraform awscc_apigateway_model resource.
+// This Terraform resource corresponds to the CloudFormation AWS::ApiGateway::Model resource.
+func modelResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"content_type": {
 			// Property: ContentType
@@ -114,7 +113,7 @@ func modelResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Model").WithTerraformTypeName("awscc_apigateway_model")
 	opts = opts.WithTerraformSchema(schema)
@@ -131,11 +130,11 @@ func modelResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

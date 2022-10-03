@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway", transitGatewayResourceType)
+	registry.AddResourceFactory("awscc_ec2_transit_gateway", transitGatewayResource)
 }
 
-// transitGatewayResourceType returns the Terraform awscc_ec2_transit_gateway resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGateway resource type.
-func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, error) {
+// transitGatewayResource returns the Terraform awscc_ec2_transit_gateway resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::TransitGateway resource.
+func transitGatewayResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"amazon_side_asn": {
 			// Property: AmazonSideAsn
@@ -233,7 +232,7 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGateway").WithTerraformTypeName("awscc_ec2_transit_gateway")
 	opts = opts.WithTerraformSchema(schema)
@@ -260,11 +259,11 @@ func transitGatewayResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

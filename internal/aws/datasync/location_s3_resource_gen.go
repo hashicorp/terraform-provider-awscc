@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_datasync_location_s3", locationS3ResourceType)
+	registry.AddResourceFactory("awscc_datasync_location_s3", locationS3Resource)
 }
 
-// locationS3ResourceType returns the Terraform awscc_datasync_location_s3 resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationS3 resource type.
-func locationS3ResourceType(ctx context.Context) (provider.ResourceType, error) {
+// locationS3Resource returns the Terraform awscc_datasync_location_s3 resource.
+// This Terraform resource corresponds to the CloudFormation AWS::DataSync::LocationS3 resource.
+func locationS3Resource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"location_arn": {
 			// Property: LocationArn
@@ -260,7 +259,7 @@ func locationS3ResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationS3").WithTerraformTypeName("awscc_datasync_location_s3")
 	opts = opts.WithTerraformSchema(schema)
@@ -286,11 +285,11 @@ func locationS3ResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

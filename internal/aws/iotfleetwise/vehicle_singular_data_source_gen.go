@@ -5,7 +5,7 @@ package iotfleetwise
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iotfleetwise_vehicle", vehicleDataSourceType)
+	registry.AddDataSourceFactory("awscc_iotfleetwise_vehicle", vehicleDataSource)
 }
 
-// vehicleDataSourceType returns the Terraform awscc_iotfleetwise_vehicle data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoTFleetWise::Vehicle resource type.
-func vehicleDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// vehicleDataSource returns the Terraform awscc_iotfleetwise_vehicle data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoTFleetWise::Vehicle resource.
+func vehicleDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -168,7 +168,7 @@ func vehicleDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetWise::Vehicle").WithTerraformTypeName("awscc_iotfleetwise_vehicle")
 	opts = opts.WithTerraformSchema(schema)
@@ -186,11 +186,11 @@ func vehicleDataSourceType(ctx context.Context) (provider.DataSourceType, error)
 		"value":                  "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

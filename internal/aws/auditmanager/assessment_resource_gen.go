@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_auditmanager_assessment", assessmentResourceType)
+	registry.AddResourceFactory("awscc_auditmanager_assessment", assessmentResource)
 }
 
-// assessmentResourceType returns the Terraform awscc_auditmanager_assessment resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AuditManager::Assessment resource type.
-func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) {
+// assessmentResource returns the Terraform awscc_auditmanager_assessment resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AuditManager::Assessment resource.
+func assessmentResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -832,7 +831,7 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AuditManager::Assessment").WithTerraformTypeName("awscc_auditmanager_assessment")
 	opts = opts.WithTerraformSchema(schema)
@@ -877,11 +876,11 @@ func assessmentResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_backup_backup_vault", backupVaultResourceType)
+	registry.AddResourceFactory("awscc_backup_backup_vault", backupVaultResource)
 }
 
-// backupVaultResourceType returns the Terraform awscc_backup_backup_vault resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupVault resource type.
-func backupVaultResourceType(ctx context.Context) (provider.ResourceType, error) {
+// backupVaultResource returns the Terraform awscc_backup_backup_vault resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Backup::BackupVault resource.
+func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_policy": {
 			// Property: AccessPolicy
@@ -216,7 +215,7 @@ func backupVaultResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupVault").WithTerraformTypeName("awscc_backup_backup_vault")
 	opts = opts.WithTerraformSchema(schema)
@@ -240,11 +239,11 @@ func backupVaultResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

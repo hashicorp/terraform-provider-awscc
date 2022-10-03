@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_rds_global_cluster", globalClusterResourceType)
+	registry.AddResourceFactory("awscc_rds_global_cluster", globalClusterResource)
 }
 
-// globalClusterResourceType returns the Terraform awscc_rds_global_cluster resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RDS::GlobalCluster resource type.
-func globalClusterResourceType(ctx context.Context) (provider.ResourceType, error) {
+// globalClusterResource returns the Terraform awscc_rds_global_cluster resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RDS::GlobalCluster resource.
+func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"deletion_protection": {
 			// Property: DeletionProtection
@@ -155,7 +154,7 @@ func globalClusterResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::GlobalCluster").WithTerraformTypeName("awscc_rds_global_cluster")
 	opts = opts.WithTerraformSchema(schema)
@@ -183,11 +182,11 @@ func globalClusterResourceType(ctx context.Context) (provider.ResourceType, erro
 	),
 	)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package lookoutmetrics
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_lookoutmetrics_anomaly_detectors", anomalyDetectorsDataSourceType)
+	registry.AddDataSourceFactory("awscc_lookoutmetrics_anomaly_detectors", anomalyDetectorsDataSource)
 }
 
-// anomalyDetectorsDataSourceType returns the Terraform awscc_lookoutmetrics_anomaly_detectors data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::LookoutMetrics::AnomalyDetector resource type.
-func anomalyDetectorsDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// anomalyDetectorsDataSource returns the Terraform awscc_lookoutmetrics_anomaly_detectors data source.
+// This Terraform data source corresponds to the CloudFormation AWS::LookoutMetrics::AnomalyDetector resource.
+func anomalyDetectorsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func anomalyDetectorsDataSourceType(ctx context.Context) (provider.DataSourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LookoutMetrics::AnomalyDetector").WithTerraformTypeName("awscc_lookoutmetrics_anomaly_detectors")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_emr_studio_session_mapping", studioSessionMappingResourceType)
+	registry.AddResourceFactory("awscc_emr_studio_session_mapping", studioSessionMappingResource)
 }
 
-// studioSessionMappingResourceType returns the Terraform awscc_emr_studio_session_mapping resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource type.
-func studioSessionMappingResourceType(ctx context.Context) (provider.ResourceType, error) {
+// studioSessionMappingResource returns the Terraform awscc_emr_studio_session_mapping resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource.
+func studioSessionMappingResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"identity_name": {
 			// Property: IdentityName
@@ -114,7 +113,7 @@ func studioSessionMappingResourceType(ctx context.Context) (provider.ResourceTyp
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::StudioSessionMapping").WithTerraformTypeName("awscc_emr_studio_session_mapping")
 	opts = opts.WithTerraformSchema(schema)
@@ -130,11 +129,11 @@ func studioSessionMappingResourceType(ctx context.Context) (provider.ResourceTyp
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

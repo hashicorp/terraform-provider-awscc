@@ -5,7 +5,7 @@ package iot
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iot_role_aliases", roleAliasesDataSourceType)
+	registry.AddDataSourceFactory("awscc_iot_role_aliases", roleAliasesDataSource)
 }
 
-// roleAliasesDataSourceType returns the Terraform awscc_iot_role_aliases data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoT::RoleAlias resource type.
-func roleAliasesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// roleAliasesDataSource returns the Terraform awscc_iot_role_aliases data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoT::RoleAlias resource.
+func roleAliasesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func roleAliasesDataSourceType(ctx context.Context) (provider.DataSourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::RoleAlias").WithTerraformTypeName("awscc_iot_role_aliases")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

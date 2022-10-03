@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_billingconductor_custom_line_item", customLineItemResourceType)
+	registry.AddResourceFactory("awscc_billingconductor_custom_line_item", customLineItemResource)
 }
 
-// customLineItemResourceType returns the Terraform awscc_billingconductor_custom_line_item resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::BillingConductor::CustomLineItem resource type.
-func customLineItemResourceType(ctx context.Context) (provider.ResourceType, error) {
+// customLineItemResource returns the Terraform awscc_billingconductor_custom_line_item resource.
+// This Terraform resource corresponds to the CloudFormation AWS::BillingConductor::CustomLineItem resource.
+func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -417,7 +416,7 @@ func customLineItemResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::BillingConductor::CustomLineItem").WithTerraformTypeName("awscc_billingconductor_custom_line_item")
 	opts = opts.WithTerraformSchema(schema)
@@ -451,11 +450,11 @@ func customLineItemResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package rolesanywhere
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_rolesanywhere_trust_anchor", trustAnchorResourceType)
+	registry.AddResourceFactory("awscc_rolesanywhere_trust_anchor", trustAnchorResource)
 }
 
-// trustAnchorResourceType returns the Terraform awscc_rolesanywhere_trust_anchor resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RolesAnywhere::TrustAnchor resource type.
-func trustAnchorResourceType(ctx context.Context) (provider.ResourceType, error) {
+// trustAnchorResource returns the Terraform awscc_rolesanywhere_trust_anchor resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RolesAnywhere::TrustAnchor resource.
+func trustAnchorResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"enabled": {
 			// Property: Enabled
@@ -232,7 +231,7 @@ func trustAnchorResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RolesAnywhere::TrustAnchor").WithTerraformTypeName("awscc_rolesanywhere_trust_anchor")
 	opts = opts.WithTerraformSchema(schema)
@@ -256,11 +255,11 @@ func trustAnchorResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

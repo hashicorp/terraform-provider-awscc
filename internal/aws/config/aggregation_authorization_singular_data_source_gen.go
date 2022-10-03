@@ -5,7 +5,7 @@ package config
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_config_aggregation_authorization", aggregationAuthorizationDataSourceType)
+	registry.AddDataSourceFactory("awscc_config_aggregation_authorization", aggregationAuthorizationDataSource)
 }
 
-// aggregationAuthorizationDataSourceType returns the Terraform awscc_config_aggregation_authorization data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Config::AggregationAuthorization resource type.
-func aggregationAuthorizationDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// aggregationAuthorizationDataSource returns the Terraform awscc_config_aggregation_authorization data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Config::AggregationAuthorization resource.
+func aggregationAuthorizationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"aggregation_authorization_arn": {
 			// Property: AggregationAuthorizationArn
@@ -121,7 +121,7 @@ func aggregationAuthorizationDataSourceType(ctx context.Context) (provider.DataS
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::AggregationAuthorization").WithTerraformTypeName("awscc_config_aggregation_authorization")
 	opts = opts.WithTerraformSchema(schema)
@@ -134,11 +134,11 @@ func aggregationAuthorizationDataSourceType(ctx context.Context) (provider.DataS
 		"value":                         "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

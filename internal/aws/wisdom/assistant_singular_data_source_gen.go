@@ -5,7 +5,7 @@ package wisdom
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_wisdom_assistant", assistantDataSourceType)
+	registry.AddDataSourceFactory("awscc_wisdom_assistant", assistantDataSource)
 }
 
-// assistantDataSourceType returns the Terraform awscc_wisdom_assistant data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Wisdom::Assistant resource type.
-func assistantDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// assistantDataSource returns the Terraform awscc_wisdom_assistant data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Wisdom::Assistant resource.
+func assistantDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"assistant_arn": {
 			// Property: AssistantArn
@@ -158,7 +158,7 @@ func assistantDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::Assistant").WithTerraformTypeName("awscc_wisdom_assistant")
 	opts = opts.WithTerraformSchema(schema)
@@ -175,11 +175,11 @@ func assistantDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		"value":                                "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

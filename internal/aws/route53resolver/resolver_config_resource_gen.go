@@ -5,7 +5,6 @@ package route53resolver
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_route53resolver_resolver_config", resolverConfigResourceType)
+	registry.AddResourceFactory("awscc_route53resolver_resolver_config", resolverConfigResource)
 }
 
-// resolverConfigResourceType returns the Terraform awscc_route53resolver_resolver_config resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::ResolverConfig resource type.
-func resolverConfigResourceType(ctx context.Context) (provider.ResourceType, error) {
+// resolverConfigResource returns the Terraform awscc_route53resolver_resolver_config resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Route53Resolver::ResolverConfig resource.
+func resolverConfigResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"autodefined_reverse": {
 			// Property: AutodefinedReverse
@@ -123,7 +122,7 @@ func resolverConfigResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverConfig").WithTerraformTypeName("awscc_route53resolver_resolver_config")
 	opts = opts.WithTerraformSchema(schema)
@@ -140,11 +139,11 @@ func resolverConfigResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,6 @@ package iotcoredeviceadvisor
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iotcoredeviceadvisor_suite_definition", suiteDefinitionResourceType)
+	registry.AddResourceFactory("awscc_iotcoredeviceadvisor_suite_definition", suiteDefinitionResource)
 }
 
-// suiteDefinitionResourceType returns the Terraform awscc_iotcoredeviceadvisor_suite_definition resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoTCoreDeviceAdvisor::SuiteDefinition resource type.
-func suiteDefinitionResourceType(ctx context.Context) (provider.ResourceType, error) {
+// suiteDefinitionResource returns the Terraform awscc_iotcoredeviceadvisor_suite_definition resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoTCoreDeviceAdvisor::SuiteDefinition resource.
+func suiteDefinitionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"suite_definition_arn": {
 			// Property: SuiteDefinitionArn
@@ -292,7 +291,7 @@ func suiteDefinitionResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTCoreDeviceAdvisor::SuiteDefinition").WithTerraformTypeName("awscc_iotcoredeviceadvisor_suite_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -318,11 +317,11 @@ func suiteDefinitionResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

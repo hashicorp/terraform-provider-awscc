@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_connect_user", userResourceType)
+	registry.AddResourceFactory("awscc_connect_user", userResource)
 }
 
-// userResourceType returns the Terraform awscc_connect_user resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Connect::User resource type.
-func userResourceType(ctx context.Context) (provider.ResourceType, error) {
+// userResource returns the Terraform awscc_connect_user resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Connect::User resource.
+func userResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"directory_user_id": {
 			// Property: DirectoryUserId
@@ -392,7 +391,7 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::User").WithTerraformTypeName("awscc_connect_user")
 	opts = opts.WithTerraformSchema(schema)
@@ -427,11 +426,11 @@ func userResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

@@ -5,7 +5,7 @@ package sagemaker
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_sagemaker_user_profiles", userProfilesDataSourceType)
+	registry.AddDataSourceFactory("awscc_sagemaker_user_profiles", userProfilesDataSource)
 }
 
-// userProfilesDataSourceType returns the Terraform awscc_sagemaker_user_profiles data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::SageMaker::UserProfile resource type.
-func userProfilesDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// userProfilesDataSource returns the Terraform awscc_sagemaker_user_profiles data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SageMaker::UserProfile resource.
+func userProfilesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func userProfilesDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::UserProfile").WithTerraformTypeName("awscc_sagemaker_user_profiles")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

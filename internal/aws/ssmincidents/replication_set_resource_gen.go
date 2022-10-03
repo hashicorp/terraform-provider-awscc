@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ssmincidents_replication_set", replicationSetResourceType)
+	registry.AddResourceFactory("awscc_ssmincidents_replication_set", replicationSetResource)
 }
 
-// replicationSetResourceType returns the Terraform awscc_ssmincidents_replication_set resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SSMIncidents::ReplicationSet resource type.
-func replicationSetResourceType(ctx context.Context) (provider.ResourceType, error) {
+// replicationSetResource returns the Terraform awscc_ssmincidents_replication_set resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SSMIncidents::ReplicationSet resource.
+func replicationSetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -158,7 +157,7 @@ func replicationSetResourceType(ctx context.Context) (provider.ResourceType, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSMIncidents::ReplicationSet").WithTerraformTypeName("awscc_ssmincidents_replication_set")
 	opts = opts.WithTerraformSchema(schema)
@@ -176,11 +175,11 @@ func replicationSetResourceType(ctx context.Context) (provider.ResourceType, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

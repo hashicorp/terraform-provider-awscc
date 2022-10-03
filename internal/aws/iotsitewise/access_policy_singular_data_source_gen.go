@@ -5,7 +5,7 @@ package iotsitewise
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_iotsitewise_access_policy", accessPolicyDataSourceType)
+	registry.AddDataSourceFactory("awscc_iotsitewise_access_policy", accessPolicyDataSource)
 }
 
-// accessPolicyDataSourceType returns the Terraform awscc_iotsitewise_access_policy data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::IoTSiteWise::AccessPolicy resource type.
-func accessPolicyDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// accessPolicyDataSource returns the Terraform awscc_iotsitewise_access_policy data source.
+// This Terraform data source corresponds to the CloudFormation AWS::IoTSiteWise::AccessPolicy resource.
+func accessPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"access_policy_arn": {
 			// Property: AccessPolicyArn
@@ -231,7 +231,7 @@ func accessPolicyDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::AccessPolicy").WithTerraformTypeName("awscc_iotsitewise_access_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -250,11 +250,11 @@ func accessPolicyDataSourceType(ctx context.Context) (provider.DataSourceType, e
 		"user":                     "User",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

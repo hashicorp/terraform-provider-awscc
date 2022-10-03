@@ -5,7 +5,6 @@ package rolesanywhere
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_rolesanywhere_profile", profileResourceType)
+	registry.AddResourceFactory("awscc_rolesanywhere_profile", profileResource)
 }
 
-// profileResourceType returns the Terraform awscc_rolesanywhere_profile resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::RolesAnywhere::Profile resource type.
-func profileResourceType(ctx context.Context) (provider.ResourceType, error) {
+// profileResource returns the Terraform awscc_rolesanywhere_profile resource.
+// This Terraform resource corresponds to the CloudFormation AWS::RolesAnywhere::Profile resource.
+func profileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"duration_seconds": {
 			// Property: DurationSeconds
@@ -228,7 +227,7 @@ func profileResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RolesAnywhere::Profile").WithTerraformTypeName("awscc_rolesanywhere_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -252,11 +251,11 @@ func profileResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

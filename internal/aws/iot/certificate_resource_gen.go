@@ -5,7 +5,6 @@ package iot
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_iot_certificate", certificateResourceType)
+	registry.AddResourceFactory("awscc_iot_certificate", certificateResource)
 }
 
-// certificateResourceType returns the Terraform awscc_iot_certificate resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::IoT::Certificate resource type.
-func certificateResourceType(ctx context.Context) (provider.ResourceType, error) {
+// certificateResource returns the Terraform awscc_iot_certificate resource.
+// This Terraform resource corresponds to the CloudFormation AWS::IoT::Certificate resource.
+func certificateResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -157,7 +156,7 @@ func certificateResourceType(ctx context.Context) (provider.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::Certificate").WithTerraformTypeName("awscc_iot_certificate")
 	opts = opts.WithTerraformSchema(schema)
@@ -180,11 +179,11 @@ func certificateResourceType(ctx context.Context) (provider.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

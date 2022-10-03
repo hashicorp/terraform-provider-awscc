@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_transfer_workflow", workflowResourceType)
+	registry.AddResourceFactory("awscc_transfer_workflow", workflowResource)
 }
 
-// workflowResourceType returns the Terraform awscc_transfer_workflow resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Transfer::Workflow resource type.
-func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
+// workflowResource returns the Terraform awscc_transfer_workflow resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Transfer::Workflow resource.
+func workflowResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
@@ -1194,7 +1193,7 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Workflow").WithTerraformTypeName("awscc_transfer_workflow")
 	opts = opts.WithTerraformSchema(schema)
@@ -1227,11 +1226,11 @@ func workflowResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

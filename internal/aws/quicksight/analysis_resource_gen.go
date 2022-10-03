@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_quicksight_analysis", analysisResourceType)
+	registry.AddResourceFactory("awscc_quicksight_analysis", analysisResource)
 }
 
-// analysisResourceType returns the Terraform awscc_quicksight_analysis resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::Analysis resource type.
-func analysisResourceType(ctx context.Context) (provider.ResourceType, error) {
+// analysisResource returns the Terraform awscc_quicksight_analysis resource.
+// This Terraform resource corresponds to the CloudFormation AWS::QuickSight::Analysis resource.
+func analysisResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"analysis_id": {
 			// Property: AnalysisId
@@ -848,7 +847,7 @@ func analysisResourceType(ctx context.Context) (provider.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Analysis").WithTerraformTypeName("awscc_quicksight_analysis")
 	opts = opts.WithTerraformSchema(schema)
@@ -898,11 +897,11 @@ func analysisResourceType(ctx context.Context) (provider.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

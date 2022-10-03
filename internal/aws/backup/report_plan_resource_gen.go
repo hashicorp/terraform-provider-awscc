@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_backup_report_plan", reportPlanResourceType)
+	registry.AddResourceFactory("awscc_backup_report_plan", reportPlanResource)
 }
 
-// reportPlanResourceType returns the Terraform awscc_backup_report_plan resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::Backup::ReportPlan resource type.
-func reportPlanResourceType(ctx context.Context) (provider.ResourceType, error) {
+// reportPlanResource returns the Terraform awscc_backup_report_plan resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Backup::ReportPlan resource.
+func reportPlanResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"report_delivery_channel": {
 			// Property: ReportDeliveryChannel
@@ -276,7 +275,7 @@ func reportPlanResourceType(ctx context.Context) (provider.ResourceType, error) 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::ReportPlan").WithTerraformTypeName("awscc_backup_report_plan")
 	opts = opts.WithTerraformSchema(schema)
@@ -301,11 +300,11 @@ func reportPlanResourceType(ctx context.Context) (provider.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

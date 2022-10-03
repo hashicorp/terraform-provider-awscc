@@ -5,7 +5,7 @@ package batch
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_batch_job_queue", jobQueueDataSourceType)
+	registry.AddDataSourceFactory("awscc_batch_job_queue", jobQueueDataSource)
 }
 
-// jobQueueDataSourceType returns the Terraform awscc_batch_job_queue data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::Batch::JobQueue resource type.
-func jobQueueDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// jobQueueDataSource returns the Terraform awscc_batch_job_queue data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Batch::JobQueue resource.
+func jobQueueDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"compute_environment_order": {
 			// Property: ComputeEnvironmentOrder
@@ -147,7 +147,7 @@ func jobQueueDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::JobQueue").WithTerraformTypeName("awscc_batch_job_queue")
 	opts = opts.WithTerraformSchema(schema)
@@ -163,11 +163,11 @@ func jobQueueDataSourceType(ctx context.Context) (provider.DataSourceType, error
 		"tags":                      "Tags",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

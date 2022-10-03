@@ -5,7 +5,6 @@ package appstream
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -14,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_appstream_directory_config", directoryConfigResourceType)
+	registry.AddResourceFactory("awscc_appstream_directory_config", directoryConfigResource)
 }
 
-// directoryConfigResourceType returns the Terraform awscc_appstream_directory_config resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AppStream::DirectoryConfig resource type.
-func directoryConfigResourceType(ctx context.Context) (provider.ResourceType, error) {
+// directoryConfigResource returns the Terraform awscc_appstream_directory_config resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AppStream::DirectoryConfig resource.
+func directoryConfigResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"directory_name": {
 			// Property: DirectoryName
@@ -99,7 +98,7 @@ func directoryConfigResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppStream::DirectoryConfig").WithTerraformTypeName("awscc_appstream_directory_config")
 	opts = opts.WithTerraformSchema(schema)
@@ -119,11 +118,11 @@ func directoryConfigResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

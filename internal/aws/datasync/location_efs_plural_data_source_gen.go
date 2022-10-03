@@ -5,7 +5,7 @@ package datasync
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_efs_plural", locationEFSPluralDataSourceType)
+	registry.AddDataSourceFactory("awscc_datasync_location_efs_plural", locationEFSPluralDataSource)
 }
 
-// locationEFSPluralDataSourceType returns the Terraform awscc_datasync_location_efs_plural data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationEFS resource type.
-func locationEFSPluralDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// locationEFSPluralDataSource returns the Terraform awscc_datasync_location_efs_plural data source.
+// This Terraform data source corresponds to the CloudFormation AWS::DataSync::LocationEFS resource.
+func locationEFSPluralDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -38,16 +38,16 @@ func locationEFSPluralDataSourceType(ctx context.Context) (provider.DataSourceTy
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationEFS").WithTerraformTypeName("awscc_datasync_location_efs_plural")
 	opts = opts.WithTerraformSchema(schema)
 
-	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
+	v, err := NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return pluralDataSourceType, nil
+	return v, nil
 }

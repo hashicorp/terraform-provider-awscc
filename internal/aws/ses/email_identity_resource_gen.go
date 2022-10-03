@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ses_email_identity", emailIdentityResourceType)
+	registry.AddResourceFactory("awscc_ses_email_identity", emailIdentityResource)
 }
 
-// emailIdentityResourceType returns the Terraform awscc_ses_email_identity resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::SES::EmailIdentity resource type.
-func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, error) {
+// emailIdentityResource returns the Terraform awscc_ses_email_identity resource.
+// This Terraform resource corresponds to the CloudFormation AWS::SES::EmailIdentity resource.
+func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"configuration_set_attributes": {
 			// Property: ConfigurationSetAttributes
@@ -353,7 +352,7 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::EmailIdentity").WithTerraformTypeName("awscc_ses_email_identity")
 	opts = opts.WithTerraformSchema(schema)
@@ -389,11 +388,11 @@ func emailIdentityResourceType(ctx context.Context) (provider.ResourceType, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

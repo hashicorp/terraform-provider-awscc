@@ -6,7 +6,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -16,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_apprunner_observability_configuration", observabilityConfigurationResourceType)
+	registry.AddResourceFactory("awscc_apprunner_observability_configuration", observabilityConfigurationResource)
 }
 
-// observabilityConfigurationResourceType returns the Terraform awscc_apprunner_observability_configuration resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::AppRunner::ObservabilityConfiguration resource type.
-func observabilityConfigurationResourceType(ctx context.Context) (provider.ResourceType, error) {
+// observabilityConfigurationResource returns the Terraform awscc_apprunner_observability_configuration resource.
+// This Terraform resource corresponds to the CloudFormation AWS::AppRunner::ObservabilityConfiguration resource.
+func observabilityConfigurationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"latest": {
 			// Property: Latest
@@ -201,7 +200,7 @@ func observabilityConfigurationResourceType(ctx context.Context) (provider.Resou
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::ObservabilityConfiguration").WithTerraformTypeName("awscc_apprunner_observability_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -225,11 +224,11 @@ func observabilityConfigurationResourceType(ctx context.Context) (provider.Resou
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }

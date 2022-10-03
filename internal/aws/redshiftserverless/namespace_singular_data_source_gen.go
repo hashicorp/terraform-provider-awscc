@@ -5,7 +5,7 @@ package redshiftserverless
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -13,12 +13,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_redshiftserverless_namespace", namespaceDataSourceType)
+	registry.AddDataSourceFactory("awscc_redshiftserverless_namespace", namespaceDataSource)
 }
 
-// namespaceDataSourceType returns the Terraform awscc_redshiftserverless_namespace data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::RedshiftServerless::Namespace resource type.
-func namespaceDataSourceType(ctx context.Context) (provider.DataSourceType, error) {
+// namespaceDataSource returns the Terraform awscc_redshiftserverless_namespace data source.
+// This Terraform data source corresponds to the CloudFormation AWS::RedshiftServerless::Namespace resource.
+func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"admin_user_password": {
 			// Property: AdminUserPassword
@@ -348,7 +348,7 @@ func namespaceDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceTypeOptions
+	var opts DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RedshiftServerless::Namespace").WithTerraformTypeName("awscc_redshiftserverless_namespace")
 	opts = opts.WithTerraformSchema(schema)
@@ -373,11 +373,11 @@ func namespaceDataSourceType(ctx context.Context) (provider.DataSourceType, erro
 		"value":                           "Value",
 	})
 
-	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
+	v, err := NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return singularDataSourceType, nil
+	return v, nil
 }

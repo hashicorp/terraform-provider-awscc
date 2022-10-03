@@ -5,7 +5,6 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -15,12 +14,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_ec2_internet_gateway", internetGatewayResourceType)
+	registry.AddResourceFactory("awscc_ec2_internet_gateway", internetGatewayResource)
 }
 
-// internetGatewayResourceType returns the Terraform awscc_ec2_internet_gateway resource type.
-// This Terraform resource type corresponds to the CloudFormation AWS::EC2::InternetGateway resource type.
-func internetGatewayResourceType(ctx context.Context) (provider.ResourceType, error) {
+// internetGatewayResource returns the Terraform awscc_ec2_internet_gateway resource.
+// This Terraform resource corresponds to the CloudFormation AWS::EC2::InternetGateway resource.
+func internetGatewayResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"internet_gateway_id": {
 			// Property: InternetGatewayId
@@ -109,7 +108,7 @@ func internetGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceTypeOptions
+	var opts ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::InternetGateway").WithTerraformTypeName("awscc_ec2_internet_gateway")
 	opts = opts.WithTerraformSchema(schema)
@@ -125,11 +124,11 @@ func internetGatewayResourceType(ctx context.Context) (provider.ResourceType, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	resourceType, err := NewResourceType(ctx, opts...)
+	v, err := NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resourceType, nil
+	return v, nil
 }
