@@ -54,6 +54,10 @@ func (t jsonStringType) ValueFromTerraform(_ context.Context, v tftypes.Value) (
 	return JSONString{Value: s}, nil
 }
 
+func (t jsonStringType) ValueType(context.Context) attr.Value {
+	return JSONString{}
+}
+
 func (t jsonStringType) Equal(o attr.Type) bool {
 	_, ok := o.(jsonStringType)
 
