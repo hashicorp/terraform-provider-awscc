@@ -1,4 +1,22 @@
 ## 0.34.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_greengrassv2_deployment`
+* **New Data Source:** `awscc_greengrassv2_deployments`
+* **New Data Source:** `awscc_transfer_agreement`
+* **New Data Source:** `awscc_transfer_certificate`
+* **New Data Source:** `awscc_transfer_certificates`
+* **New Data Source:** `awscc_transfer_connector`
+* **New Data Source:** `awscc_transfer_connectors`
+* **New Data Source:** `awscc_transfer_profile`
+* **New Data Source:** `awscc_transfer_profiles`
+* **New Resource:** `awscc_greengrassv2_deployment`
+* **New Resource:** `awscc_transfer_agreement`
+* **New Resource:** `awscc_transfer_certificate`
+* **New Resource:** `awscc_transfer_connector`
+* **New Resource:** `awscc_transfer_profile`
+
 ## [0.33.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.33.0) (September 29, 2022)
 
 NOTES:
