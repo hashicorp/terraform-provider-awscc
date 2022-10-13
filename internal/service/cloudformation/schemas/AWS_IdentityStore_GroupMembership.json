@@ -58,6 +58,11 @@
         "tagUpdatable": false,
         "cloudFormationSystemTags": false
     },
+    "required": [
+        "IdentityStoreId",
+        "GroupId",
+        "MemberId"
+    ],
     "readOnlyProperties": [
         "/properties/MembershipId"
     ],

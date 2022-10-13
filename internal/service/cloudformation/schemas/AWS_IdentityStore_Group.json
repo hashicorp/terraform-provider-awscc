@@ -37,6 +37,10 @@
         "tagUpdatable": false,
         "cloudFormationSystemTags": false
     },
+    "required": [
+        "IdentityStoreId",
+        "DisplayName"
+    ],
     "readOnlyProperties": [
         "/properties/GroupId"
     ],

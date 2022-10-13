@@ -65,6 +65,11 @@
             "permissions": [
                 "ec2:ReleaseIpamPoolAllocation"
             ]
+        },
+        "list": {
+            "permissions": [
+                "ec2:GetIpamPoolAllocations"
+            ]
         }
     }
 }
