@@ -32,6 +32,6 @@ Data Source schema for AWS::Route53RecoveryReadiness::RecoveryGroup
 Read-Only:
 
 - `key` (String)
-- `value` (List of String)
+- `value` (String)
 
 

@@ -48,7 +48,6 @@ Enabling this setting doesn't affect previously stored bucket policies, except t
 
 Read-Only:
 
-- `account_id` (String)
 - `bucket` (String)
 
 
