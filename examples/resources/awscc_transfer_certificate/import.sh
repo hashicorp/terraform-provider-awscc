@@ -1,0 +1,1 @@
+$ terraform import awscc_transfer_certificate.example <resource ID>

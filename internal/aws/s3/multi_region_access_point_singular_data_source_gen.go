@@ -122,12 +122,6 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 			//     "additionalProperties": false,
 			//     "description": "The name of the bucket that represents of the region belonging to this Multi Region Access Point.",
 			//     "properties": {
-			//       "AccountId": {
-			//         "maxLength": 12,
-			//         "minLength": 12,
-			//         "pattern": "^[0-9]{12}$",
-			//         "type": "string"
-			//       },
 			//       "Bucket": {
 			//         "maxLength": 63,
 			//         "minLength": 3,
@@ -147,11 +141,6 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 			Description: "The list of buckets that you want to associate this Multi Region Access Point with.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
-					"account_id": {
-						// Property: AccountId
-						Type:     types.StringType,
-						Computed: true,
-					},
 					"bucket": {
 						// Property: Bucket
 						Type:     types.StringType,
@@ -180,7 +169,6 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 	opts = opts.WithCloudFormationTypeName("AWS::S3::MultiRegionAccessPoint").WithTerraformTypeName("awscc_s3_multi_region_access_point")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":                        "AccountId",
 		"alias":                             "Alias",
 		"block_public_acls":                 "BlockPublicAcls",
 		"block_public_policy":               "BlockPublicPolicy",

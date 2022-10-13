@@ -49,12 +49,14 @@ func readinessCheckResource(ctx context.Context) (resource.Resource, error) {
 			// }
 			Description: "Name of the ReadinessCheck to create.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},
@@ -93,12 +95,7 @@ func readinessCheckResource(ctx context.Context) (resource.Resource, error) {
 			//         "type": "string"
 			//       },
 			//       "Value": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "maxItems": 50,
-			//           "type": "string"
-			//         },
-			//         "type": "array"
+			//         "type": "string"
 			//       }
 			//     },
 			//     "required": [
@@ -119,11 +116,8 @@ func readinessCheckResource(ctx context.Context) (resource.Resource, error) {
 					},
 					"value": {
 						// Property: Value
-						Type:     types.ListType{ElemType: types.StringType},
+						Type:     types.StringType,
 						Required: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-						},
 					},
 				},
 			),

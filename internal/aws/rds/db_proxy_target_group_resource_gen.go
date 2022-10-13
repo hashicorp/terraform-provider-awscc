@@ -26,6 +26,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 			// Property: ConnectionPoolConfigurationInfo
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "properties": {
 			//     "ConnectionBorrowTimeout": {
 			//       "description": "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
@@ -49,6 +50,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 			//     },
 			//     "SessionPinningFilters": {
 			//       "description": "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "type": "string"
 			//       },
@@ -112,6 +114,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -127,6 +130,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 			// Property: DBClusterIdentifiers
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -136,6 +140,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -143,6 +148,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 			// Property: DBInstanceIdentifiers
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -152,6 +158,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				resource.UseStateForUnknown(),
 			},
 		},

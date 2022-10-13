@@ -37,10 +37,6 @@ Required:
 
 - `bucket` (String)
 
-Optional:
-
-- `account_id` (String)
-
 
 <a id="nestedatt--public_access_block_configuration"></a>
 ### Nested Schema for `public_access_block_configuration`

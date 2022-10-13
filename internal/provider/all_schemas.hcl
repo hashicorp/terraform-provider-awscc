@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 606 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 616 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -148,10 +148,6 @@ resource_schema "aws_apigateway_stage" {
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_apigatewayv2_vpc_link" {
-  cloudformation_type_name = "AWS::ApiGatewayV2::VpcLink"
-}
-
 resource_schema "aws_apigateway_usage_plan" {
   cloudformation_type_name = "AWS::ApiGateway::UsagePlan"
 }
@@ -159,6 +155,19 @@ resource_schema "aws_apigateway_usage_plan" {
 resource_schema "aws_apigateway_usage_plan_key" {
   cloudformation_type_name               = "AWS::ApiGateway::UsagePlanKey"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_apigatewayv2_model" {
+  cloudformation_type_name               = "AWS::ApiGatewayV2::Model"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_apigatewayv2_vpc_link" {
+  cloudformation_type_name = "AWS::ApiGatewayV2::VpcLink"
 }
 
 resource_schema "aws_appflow_connector_profile" {
@@ -443,6 +452,15 @@ resource_schema "aws_cloudfront_function" {
 
 resource_schema "aws_cloudfront_key_group" {
   cloudformation_type_name = "AWS::CloudFront::KeyGroup"
+}
+
+resource_schema "aws_cloudfront_monitoring_subscription" {
+  cloudformation_type_name               = "AWS::CloudFront::MonitoringSubscription"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_cloudfront_origin_access_control" {
@@ -744,6 +762,15 @@ resource_schema "aws_ec2_dhcp_options" {
 
 resource_schema "aws_ec2_ec2_fleet" {
   cloudformation_type_name = "AWS::EC2::EC2Fleet"
+}
+
+resource_schema "aws_ec2_eip" {
+  cloudformation_type_name = "AWS::EC2::EIP"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ec2_egress_only_internet_gateway" {
@@ -1242,6 +1269,10 @@ resource_schema "aws_glue_schema_version_metadata" {
 
 resource_schema "aws_greengrassv2_component_version" {
   cloudformation_type_name = "AWS::GreengrassV2::ComponentVersion"
+}
+
+resource_schema "aws_greengrassv2_deployment" {
+  cloudformation_type_name = "AWS::GreengrassV2::Deployment"
 }
 
 resource_schema "aws_groundstation_config" {
@@ -2733,6 +2764,14 @@ resource_schema "aws_stepfunctions_state_machine" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_supportapp_account_alias" {
+  cloudformation_type_name = "AWS::SupportApp::AccountAlias"
+}
+
+resource_schema "aws_supportapp_slack_channel_configuration" {
+  cloudformation_type_name = "AWS::SupportApp::SlackChannelConfiguration"
+}
+
 resource_schema "aws_synthetics_canary" {
   cloudformation_type_name = "AWS::Synthetics::Canary"
 
@@ -2759,16 +2798,25 @@ resource_schema "aws_timestream_scheduled_query" {
   cloudformation_type_name = "AWS::Timestream::ScheduledQuery"
 }
 
-resource_schema "aws_supportapp_account_alias" {
-  cloudformation_type_name = "AWS::SupportApp::AccountAlias"
-}
-
-resource_schema "aws_supportapp_slack_channel_configuration" {
-  cloudformation_type_name = "AWS::SupportApp::SlackChannelConfiguration"
-}
-
 resource_schema "aws_timestream_table" {
   cloudformation_type_name = "AWS::Timestream::Table"
+}
+
+resource_schema "aws_transfer_agreement" {
+  cloudformation_type_name               = "AWS::Transfer::Agreement"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_transfer_certificate" {
+  cloudformation_type_name = "AWS::Transfer::Certificate"
+}
+
+resource_schema "aws_transfer_connector" {
+  cloudformation_type_name = "AWS::Transfer::Connector"
+}
+
+resource_schema "aws_transfer_profile" {
+  cloudformation_type_name = "AWS::Transfer::Profile"
 }
 
 resource_schema "aws_transfer_workflow" {

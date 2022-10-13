@@ -46,8 +46,10 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 			// }
 			Description: "The name of the resource set to create.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},
@@ -358,12 +360,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 			//         "type": "string"
 			//       },
 			//       "Value": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "maxItems": 50,
-			//           "type": "string"
-			//         },
-			//         "type": "array"
+			//         "type": "string"
 			//       }
 			//     },
 			//     "required": [
@@ -384,11 +381,8 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 					},
 					"value": {
 						// Property: Value
-						Type:     types.ListType{ElemType: types.StringType},
+						Type:     types.StringType,
 						Required: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-						},
 					},
 				},
 			),

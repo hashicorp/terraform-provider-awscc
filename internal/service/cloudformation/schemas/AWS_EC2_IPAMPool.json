@@ -185,9 +185,6 @@
         "/properties/State",
         "/properties/StateMessage"
     ],
-    "writeOnlyProperties": [
-        "/properties/IpamScopeId"
-    ],
     "createOnlyProperties": [
         "/properties/IpamScopeId",
         "/properties/SourceIpamPoolId",

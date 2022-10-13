@@ -33,6 +33,6 @@ Data Source schema for AWS::Route53RecoveryReadiness::Cell
 Read-Only:
 
 - `key` (String)
-- `value` (List of String)
+- `value` (String)
 
 

@@ -3,7 +3,6 @@
 package route53recoveryreadiness_test
 
 import (
-	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
@@ -15,8 +14,30 @@ func TestAccAWSRoute53RecoveryReadinessReadinessCheck_basic(t *testing.T) {
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config:      td.EmptyConfig(),
-			ExpectError: regexp.MustCompile("Missing required argument"),
+			Config: td.EmptyConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+			),
+		},
+		{
+			ResourceName:      td.ResourceName,
+			ImportState:       true,
+			ImportStateVerify: true,
+		},
+	})
+}
+
+func TestAccAWSRoute53RecoveryReadinessReadinessCheck_disappears(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::Route53RecoveryReadiness::ReadinessCheck", "awscc_route53recoveryreadiness_readiness_check", "test")
+
+	td.ResourceTest(t, []resource.TestStep{
+		{
+			Config: td.EmptyConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+				td.DeleteResource(),
+			),
+			ExpectNonEmptyPlan: true,
 		},
 	})
 }

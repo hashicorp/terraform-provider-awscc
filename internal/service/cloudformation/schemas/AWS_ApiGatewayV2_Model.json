@@ -1,0 +1,60 @@
+{
+    "typeName" : "AWS::ApiGatewayV2::Model",
+    "description" : "Resource Type definition for AWS::ApiGatewayV2::Model",
+    "additionalProperties" : false,
+    "properties" : {
+        "ModelId" : {
+            "type" : "string"
+        },
+        "Description" : {
+            "type" : "string"
+        },
+        "ContentType" : {
+            "type" : "string"
+        },
+        "Schema" : {
+            "type" : "object"
+        },
+        "ApiId" : {
+            "type" : "string"
+        },
+        "Name" : {
+            "type" : "string"
+        }
+    },
+    "required" : [ "ApiId", "Schema", "Name" ],
+    "createOnlyProperties" : [ "/properties/ApiId" ],
+    "primaryIdentifier" : [ "/properties/ApiId", "/properties/ModelId"],
+    "readOnlyProperties" : [ "/properties/ModelId" ],
+    "tagging": {
+        "taggable": false
+    },
+    "handlers": {
+        "create": {
+            "permissions": [
+                "apigatewayv2:createModel"
+            ]
+        },
+        "update": {
+            "permissions": [
+                "apigatewayv2:updateModel"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "apigatewayv2:getModel"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "apigatewayv2:getModel",
+                "apigatewayv2:deleteModel"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "apigatewayv2:getModels"
+            ]
+        }
+    }
+}

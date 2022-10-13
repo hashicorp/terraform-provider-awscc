@@ -84,6 +84,6 @@ Read-Only:
 Read-Only:
 
 - `key` (String)
-- `value` (List of String)
+- `value` (String)
 
 

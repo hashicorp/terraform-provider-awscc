@@ -25,7 +25,9 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The authorization mechanism that the proxy uses.",
+			//   "insertionOrder": false,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "properties": {
 			//       "AuthScheme": {
 			//         "description": "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
@@ -39,10 +41,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//         "type": "string"
 			//       },
 			//       "IAMAuth": {
-			//         "description": "Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. ",
+			//         "description": "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
 			//         "enum": [
 			//           "DISABLED",
-			//           "REQUIRED"
+			//           "REQUIRED",
+			//           "ENABLED"
 			//         ],
 			//         "type": "string"
 			//       },
@@ -77,7 +80,7 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 					},
 					"iam_auth": {
 						// Property: IAMAuth
-						Description: "Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. ",
+						Description: "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
 						Type:        types.StringType,
 						Computed:    true,
 					},
@@ -150,7 +153,8 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//   "description": "The kinds of databases that the proxy can connect to.",
 			//   "enum": [
 			//     "MYSQL",
-			//     "POSTGRESQL"
+			//     "POSTGRESQL",
+			//     "SQLSERVER"
 			//   ],
 			//   "type": "string"
 			// }
@@ -196,7 +200,9 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
+			//   "insertionOrder": false,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
 			//         "maxLength": 128,
@@ -230,11 +236,23 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			),
 			Computed: true,
 		},
+		"vpc_id": {
+			// Property: VpcId
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "VPC ID to associate with the new DB proxy.",
+			//   "type": "string"
+			// }
+			Description: "VPC ID to associate with the new DB proxy.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"vpc_security_group_ids": {
 			// Property: VpcSecurityGroupIds
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "VPC security group IDs to associate with the new proxy.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -250,6 +268,7 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "VPC subnet IDs to associate with the new proxy.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -296,6 +315,7 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                   "Tags",
 		"user_name":              "UserName",
 		"value":                  "Value",
+		"vpc_id":                 "VpcId",
 		"vpc_security_group_ids": "VpcSecurityGroupIds",
 		"vpc_subnet_ids":         "VpcSubnetIds",
 	})

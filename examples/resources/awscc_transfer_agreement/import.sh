@@ -1,0 +1,1 @@
+$ terraform import awscc_transfer_agreement.example <resource ID>

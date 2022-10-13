@@ -34,14 +34,10 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 			// }
 			Description: "The unique identifier for a group in the identity store.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 47),
 				validate.StringMatch(regexp.MustCompile("^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 			},
 		},
 		"identity_store_id": {
@@ -56,14 +52,12 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 			// }
 			Description: "The globally unique identifier for the identity store.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 36),
 				validate.StringMatch(regexp.MustCompile("^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},
@@ -102,11 +96,7 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 					},
 				},
 			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			Required: true,
 		},
 		"membership_id": {
 			// Property: MembershipId

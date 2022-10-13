@@ -271,7 +271,6 @@
     "Steps"
   ],
   "additionalProperties": false,
-  "taggable": true,
   "readOnlyProperties": [
     "/properties/WorkflowId",
     "/properties/Arn"
@@ -284,6 +283,7 @@
   "primaryIdentifier": [
     "/properties/WorkflowId"
   ],
+  "taggable": true,
   "handlers": {
     "create": {
       "permissions": [

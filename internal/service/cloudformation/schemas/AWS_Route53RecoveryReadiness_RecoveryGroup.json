@@ -12,12 +12,7 @@
             "type": "string"
           },
           "Value": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "maxItems": 50
-            },
-            "insertionOrder": false
+            "type": "string"
           }
         },
         "required": [
@@ -69,9 +64,6 @@
     ],
     "primaryIdentifier": [
       "/properties/RecoveryGroupName"
-    ],
-    "required": [
-      "RecoveryGroupName"
     ],
     "handlers": {
       "create": {

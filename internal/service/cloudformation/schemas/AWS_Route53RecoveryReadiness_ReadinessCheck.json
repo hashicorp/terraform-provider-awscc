@@ -12,12 +12,7 @@
             "type": "string"
           },
           "Value": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "maxItems": 50
-            },
-            "insertionOrder": false
+            "type": "string"
           }
         },
         "required": [
@@ -56,9 +51,6 @@
         "insertionOrder": false
       }
     },
-    "required": [
-        "ReadinessCheckName"
-      ],
     "additionalProperties": false,
     "createOnlyProperties": [
       "/properties/ReadinessCheckName"

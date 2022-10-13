@@ -31,6 +31,7 @@ Data Source schema for AWS::RDS::DBProxy
 - `require_tls` (Boolean) A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
 - `tags` (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String) VPC ID to associate with the new DB proxy.
 - `vpc_security_group_ids` (List of String) VPC security group IDs to associate with the new proxy.
 - `vpc_subnet_ids` (List of String) VPC subnet IDs to associate with the new proxy.
 
@@ -41,7 +42,7 @@ Read-Only:
 
 - `auth_scheme` (String) The type of authentication that the proxy uses for connections from the proxy to the underlying database.
 - `description` (String) A user-specified description about the authentication used by a proxy to log in as a specific database user.
-- `iam_auth` (String) Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.
+- `iam_auth` (String) Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.
 - `secret_arn` (String) The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
 - `user_name` (String) The name of the database user to which the proxy connects.
 
