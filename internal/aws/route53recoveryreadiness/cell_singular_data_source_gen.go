@@ -90,12 +90,7 @@ func cellDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//         "type": "string"
 			//       },
 			//       "Value": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "maxItems": 50,
-			//           "type": "string"
-			//         },
-			//         "type": "array"
+			//         "type": "string"
 			//       }
 			//     },
 			//     "required": [
@@ -116,7 +111,7 @@ func cellDataSource(ctx context.Context) (datasource.DataSource, error) {
 					},
 					"value": {
 						// Property: Value
-						Type:     types.ListType{ElemType: types.StringType},
+						Type:     types.StringType,
 						Computed: true,
 					},
 				},

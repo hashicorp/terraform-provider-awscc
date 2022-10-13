@@ -56,14 +56,10 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 			// }
 			Description: "A string containing the name of the group. This value is commonly displayed when the group is referenced.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 				validate.StringMatch(regexp.MustCompile("^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 			},
 		},
 		"group_id": {
@@ -95,14 +91,12 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 			// }
 			Description: "The globally unique identifier for the identity store.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 36),
 				validate.StringMatch(regexp.MustCompile("^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},

@@ -75,7 +75,6 @@ func iPAMScopeResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.RequiresReplace(),
 			},
-			// IpamId is a write-only property.
 		},
 		"ipam_scope_id": {
 			// Property: IpamScopeId
@@ -234,9 +233,6 @@ func iPAMScopeResource(ctx context.Context) (resource.Resource, error) {
 		"value":           "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/IpamId",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

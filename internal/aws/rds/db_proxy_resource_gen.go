@@ -27,7 +27,9 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The authorization mechanism that the proxy uses.",
+			//   "insertionOrder": false,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "properties": {
 			//       "AuthScheme": {
 			//         "description": "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
@@ -41,10 +43,11 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 			//         "type": "string"
 			//       },
 			//       "IAMAuth": {
-			//         "description": "Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. ",
+			//         "description": "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
 			//         "enum": [
 			//           "DISABLED",
-			//           "REQUIRED"
+			//           "REQUIRED",
+			//           "ENABLED"
 			//         ],
 			//         "type": "string"
 			//       },
@@ -92,7 +95,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 					},
 					"iam_auth": {
 						// Property: IAMAuth
-						Description: "Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. ",
+						Description: "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
 						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
@@ -100,6 +103,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 							validate.StringInSlice([]string{
 								"DISABLED",
 								"REQUIRED",
+								"ENABLED",
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -131,6 +135,9 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 			},
 		},
 		"db_proxy_arn": {
@@ -203,7 +210,8 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 			//   "description": "The kinds of databases that the proxy can connect to.",
 			//   "enum": [
 			//     "MYSQL",
-			//     "POSTGRESQL"
+			//     "POSTGRESQL",
+			//     "SQLSERVER"
 			//   ],
 			//   "type": "string"
 			// }
@@ -214,6 +222,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 				validate.StringInSlice([]string{
 					"MYSQL",
 					"POSTGRESQL",
+					"SQLSERVER",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -266,7 +275,9 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
+			//   "insertionOrder": false,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
 			//         "maxLength": 128,
@@ -317,6 +328,21 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+				resource.UseStateForUnknown(),
+			},
+		},
+		"vpc_id": {
+			// Property: VpcId
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "VPC ID to associate with the new DB proxy.",
+			//   "type": "string"
+			// }
+			Description: "VPC ID to associate with the new DB proxy.",
+			Type:        types.StringType,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -325,6 +351,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "VPC security group IDs to associate with the new proxy.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -339,6 +366,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 				validate.ArrayLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -347,6 +375,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "VPC subnet IDs to associate with the new proxy.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -360,6 +389,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 				validate.ArrayLenAtLeast(2),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				resource.RequiresReplace(),
 			},
 		},
@@ -403,6 +433,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                   "Tags",
 		"user_name":              "UserName",
 		"value":                  "Value",
+		"vpc_id":                 "VpcId",
 		"vpc_security_group_ids": "VpcSecurityGroupIds",
 		"vpc_subnet_ids":         "VpcSubnetIds",
 	})

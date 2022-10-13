@@ -72,6 +72,7 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			//   "description": "An array of key-value pairs to apply to this resource.",
 			//   "insertionOrder": false,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "A key-value pair to associate with a resource.",
 			//     "properties": {
 			//       "Key": {
