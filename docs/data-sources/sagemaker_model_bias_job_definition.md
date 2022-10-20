@@ -86,8 +86,53 @@ Read-Only:
 
 Read-Only:
 
+- `batch_transform_input` (Attributes) The batch transform input for a monitoring job. (see [below for nested schema](#nestedatt--model_bias_job_input--batch_transform_input))
 - `endpoint_input` (Attributes) The endpoint for a monitoring job. (see [below for nested schema](#nestedatt--model_bias_job_input--endpoint_input))
 - `ground_truth_s3_input` (Attributes) Ground truth input provided in S3 (see [below for nested schema](#nestedatt--model_bias_job_input--ground_truth_s3_input))
+
+<a id="nestedatt--model_bias_job_input--batch_transform_input"></a>
+### Nested Schema for `model_bias_job_input.batch_transform_input`
+
+Read-Only:
+
+- `data_captured_destination_s3_uri` (String) A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.
+- `dataset_format` (Attributes) The dataset format of the data to monitor (see [below for nested schema](#nestedatt--model_bias_job_input--batch_transform_input--dataset_format))
+- `end_time_offset` (String) Monitoring end time offset, e.g. PT0H
+- `features_attribute` (String) JSONpath to locate features in JSONlines dataset
+- `inference_attribute` (String) Index or JSONpath to locate predicted label(s)
+- `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
+- `probability_attribute` (String) Index or JSONpath to locate probabilities
+- `probability_threshold_attribute` (Number)
+- `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
+- `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
+- `start_time_offset` (String) Monitoring start time offset, e.g. -PT1H
+
+<a id="nestedatt--model_bias_job_input--batch_transform_input--dataset_format"></a>
+### Nested Schema for `model_bias_job_input.batch_transform_input.dataset_format`
+
+Read-Only:
+
+- `csv` (Attributes) The CSV format (see [below for nested schema](#nestedatt--model_bias_job_input--batch_transform_input--dataset_format--csv))
+- `json` (Attributes) The Json format (see [below for nested schema](#nestedatt--model_bias_job_input--batch_transform_input--dataset_format--json))
+- `parquet` (Boolean) A flag indicate if the dataset format is Parquet
+
+<a id="nestedatt--model_bias_job_input--batch_transform_input--dataset_format--csv"></a>
+### Nested Schema for `model_bias_job_input.batch_transform_input.dataset_format.parquet`
+
+Read-Only:
+
+- `header` (Boolean) A boolean flag indicating if given CSV has header
+
+
+<a id="nestedatt--model_bias_job_input--batch_transform_input--dataset_format--json"></a>
+### Nested Schema for `model_bias_job_input.batch_transform_input.dataset_format.parquet`
+
+Read-Only:
+
+- `line` (Boolean) A boolean flag indicating if it is JSON line format
+
+
+
 
 <a id="nestedatt--model_bias_job_input--endpoint_input"></a>
 ### Nested Schema for `model_bias_job_input.endpoint_input`

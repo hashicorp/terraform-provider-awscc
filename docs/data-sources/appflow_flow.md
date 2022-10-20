@@ -190,6 +190,7 @@ Read-Only:
 
 Read-Only:
 
+- `data_transfer_api` (String)
 - `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--salesforce--error_handling_config))
 - `id_field_names` (List of String) List of fields used as ID when performing a write operation.
 - `object` (String)
@@ -439,6 +440,7 @@ Read-Only:
 
 Read-Only:
 
+- `data_transfer_api` (String)
 - `enable_dynamic_field_update` (Boolean)
 - `include_deleted_records` (Boolean)
 - `object` (String)

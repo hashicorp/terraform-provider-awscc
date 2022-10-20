@@ -1187,6 +1187,7 @@ Optional:
 
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 - `message_selection_strategy` (String) Indicates how a message is selected from a message group among retries.
+- `prompt_attempts_specification` (Attributes Map) Specifies the advanced settings on each attempt of the prompt. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list"></a>
 ### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list`
@@ -1316,6 +1317,67 @@ Required:
 
 
 
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification`
+
+Optional:
+
+- `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt attempt from the bot.
+- `allowed_input_types` (Attributes) Specifies the allowed input types. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--allowed_input_types))
+- `audio_and_dtmf_input_specification` (Attributes) Specifies the audio and DTMF input specification. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--audio_and_dtmf_input_specification))
+- `text_input_specification` (Attributes) Specifies the text input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--text_input_specification))
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--allowed_input_types"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.text_input_specification`
+
+Required:
+
+- `allow_audio_input` (Boolean) Indicates whether audio input is allowed.
+- `allow_dtmf_input` (Boolean) Indicates whether DTMF input is allowed.
+
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--audio_and_dtmf_input_specification"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.text_input_specification`
+
+Required:
+
+- `start_timeout_ms` (Number) Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.
+
+Optional:
+
+- `audio_specification` (Attributes) Specifies the audio input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--text_input_specification--audio_specification))
+- `dtmf_specification` (Attributes) Specifies the settings on DTMF input. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--text_input_specification--dtmf_specification))
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--text_input_specification--audio_specification"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.text_input_specification.dtmf_specification`
+
+Required:
+
+- `end_timeout_ms` (Number) Time for which a bot waits after the customer stops speaking to assume the utterance is finished.
+- `max_length_ms` (Number) Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.
+
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--text_input_specification--dtmf_specification"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.text_input_specification.dtmf_specification`
+
+Required:
+
+- `deletion_character` (String) The DTMF character that clears the accumulated DTMF digits and immediately ends the input.
+- `end_character` (String) The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.
+- `end_timeout_ms` (Number) How long the bot should wait after the last DTMF character input before assuming that the input has concluded.
+- `max_length` (Number) The maximum number of DTMF digits allowed in an utterance.
+
+
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--text_input_specification"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.text_input_specification`
+
+Required:
+
+- `start_timeout_ms` (Number) Time for which a bot waits before re-prompting a customer for text input.
+
+
+
 
 
 <a id="nestedatt--bot_locales--intents--kendra_configuration"></a>
@@ -1415,38 +1477,39 @@ Optional:
 
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 - `message_selection_strategy` (String) Indicates how a message is selected from a message group among retries.
+- `prompt_attempts_specification` (Attributes Map) Specifies the advanced settings on each attempt of the prompt. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification`
 
 Required:
 
-- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--message))
+- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--message))
 
 Optional:
 
-- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations))
+- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations))
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--message"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
 
 Required:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
 
 Required:
 
@@ -1454,12 +1517,12 @@ Required:
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message.buttons`
 
 Required:
 
@@ -1468,16 +1531,16 @@ Required:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
 
 Required:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
 
 Required:
 
@@ -1485,26 +1548,26 @@ Required:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
 
 Required:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
 
 Required:
 
@@ -1512,12 +1575,12 @@ Required:
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message.buttons`
 
 Required:
 
@@ -1526,21 +1589,82 @@ Required:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
 
 Required:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_selection_strategy--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_selection_strategy.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
 
 Required:
 
 - `value` (String) The SSML text that defines the prompt.
 
+
+
+
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification`
+
+Optional:
+
+- `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt attempt from the bot.
+- `allowed_input_types` (Attributes) Specifies the allowed input types. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--allowed_input_types))
+- `audio_and_dtmf_input_specification` (Attributes) Specifies the audio and DTMF input specification. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification))
+- `text_input_specification` (Attributes) Specifies the text input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--text_input_specification))
+
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--allowed_input_types"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+
+Required:
+
+- `allow_audio_input` (Boolean) Indicates whether audio input is allowed.
+- `allow_dtmf_input` (Boolean) Indicates whether DTMF input is allowed.
+
+
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+
+Required:
+
+- `start_timeout_ms` (Number) Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.
+
+Optional:
+
+- `audio_specification` (Attributes) Specifies the audio input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--text_input_specification--audio_specification))
+- `dtmf_specification` (Attributes) Specifies the settings on DTMF input. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--text_input_specification--dtmf_specification))
+
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--text_input_specification--audio_specification"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.dtmf_specification`
+
+Required:
+
+- `end_timeout_ms` (Number) Time for which a bot waits after the customer stops speaking to assume the utterance is finished.
+- `max_length_ms` (Number) Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.
+
+
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--text_input_specification--dtmf_specification"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.dtmf_specification`
+
+Required:
+
+- `deletion_character` (String) The DTMF character that clears the accumulated DTMF digits and immediately ends the input.
+- `end_character` (String) The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.
+- `end_timeout_ms` (Number) How long the bot should wait after the last DTMF character input before assuming that the input has concluded.
+- `max_length` (Number) The maximum number of DTMF digits allowed in an utterance.
+
+
+
+<a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--text_input_specification"></a>
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+
+Required:
+
+- `start_timeout_ms` (Number) Time for which a bot waits before re-prompting a customer for text input.
 
 
 
