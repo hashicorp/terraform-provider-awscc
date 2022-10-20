@@ -76,7 +76,9 @@
           "items": {
             "$ref": "#/definitions/SsmParameter"
           },
-          "maxItems": 200
+          "minItems": 1,
+          "maxItems": 200,
+          "default": []
         },
         "DynamicParameters": {
           "description": "The parameters with dynamic values to set when starting the SSM automation document.",
@@ -86,7 +88,8 @@
           "items": {
             "$ref": "#/definitions/DynamicSsmParameter"
           },
-          "maxItems": 200
+          "maxItems": 200,
+          "default": []
         }
       }
     },
@@ -104,7 +107,6 @@
           "uniqueItems": true,
           "insertionOrder": true,
           "maxItems": 10,
-          "minItems": 1,
           "items": {
             "$ref": "#/definitions/SsmParameterValue"
           }
@@ -204,6 +206,7 @@
         "NotificationTargets": {
           "description": "The list of notification targets.",
           "type": "array",
+          "default": [],
           "maxItems": 10,
           "items": {
             "$ref": "#/definitions/NotificationTargetItem"
@@ -224,9 +227,9 @@
         "IncidentTags": {
           "description": "Tags that get applied to incidents created by the StartIncident API action.",
           "type": "array",
-          "default": [],
           "uniqueItems": true,
           "insertionOrder": false,
+          "default": [],
           "maxItems": 50,
           "items": {
             "$ref": "#/definitions/Tag"
@@ -238,6 +241,7 @@
       "type": "array",
       "uniqueItems": true,
       "insertionOrder": true,
+      "default": [],
       "items": {
         "$ref": "#/definitions/SnsArn"
       }
@@ -281,7 +285,6 @@
       "type": "array",
       "default": [],
       "maxItems": 5,
-      "minItems": 1,
       "uniqueItems": true,
       "insertionOrder": false,
       "items": {
@@ -305,7 +308,6 @@
       "default": [],
       "uniqueItems": true,
       "insertionOrder": false,
-      "minItems": 1,
       "maxItems": 50,
       "items": {
         "$ref": "#/definitions/Tag"

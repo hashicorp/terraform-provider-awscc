@@ -7,11 +7,17 @@
             "type": "string",
             "description": "The name of the dedicated IP pool.",
             "pattern": "^[a-z0-9_-]{0,64}$"
+        },
+        "ScalingMode": {
+            "type": "string",
+            "description": "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
+            "pattern": "^(STANDARD|MANAGED)$"
         }
     },
     "additionalProperties": false,
     "createOnlyProperties": [
-        "/properties/PoolName"
+        "/properties/PoolName",
+        "/properties/ScalingMode"
     ],
     "primaryIdentifier": [
         "/properties/PoolName"
@@ -20,11 +26,13 @@
         "create": {
             "permissions": [
                 "ses:CreateDedicatedIpPool",
+                "ses:GetDedicatedIpPool",
                 "ses:GetDedicatedIps"
             ]
         },
         "read": {
             "permissions": [
+                "ses:GetDedicatedIpPool",
                 "ses:GetDedicatedIps"
             ]
         },

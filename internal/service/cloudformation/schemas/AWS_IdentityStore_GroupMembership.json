@@ -3,26 +3,22 @@
     "description": "Resource Type Definition for AWS:IdentityStore::GroupMembership",
     "definitions": {
         "MemberId": {
-            "oneOf": [
-                {
-                    "description": "An object containing the identifier of a group member.",
-                    "type": "object",
-                    "title": "UserId",
-                    "properties": {
-                        "UserId": {
-                            "description": "The identifier for a user in the identity store.",
-                            "type": "string",
-                            "maxLength": 47,
-                            "minLength": 1,
-                            "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
-                        }
-                    },
-                    "required": [
-                        "UserId"
-                    ],
-                    "additionalProperties": false
+            "description": "An object containing the identifier of a group member.",
+            "type": "object",
+            "title": "UserId",
+            "properties": {
+                "UserId": {
+                    "description": "The identifier for a user in the identity store.",
+                    "type": "string",
+                    "maxLength": 47,
+                    "minLength": 1,
+                    "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
                 }
-            ]
+            },
+            "required": [
+                "UserId"
+            ],
+            "additionalProperties": false
         }
     },
     "properties": {

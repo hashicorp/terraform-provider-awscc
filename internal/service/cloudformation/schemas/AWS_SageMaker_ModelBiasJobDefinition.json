@@ -129,11 +129,14 @@
         "EndpointInput": {
           "$ref" : "#/definitions/EndpointInput"
         },
+        "BatchTransformInput": {
+          "$ref": "#/definitions/BatchTransformInput"
+        },
         "GroundTruthS3Input": {
           "$ref" : "#/definitions/MonitoringGroundTruthS3Input"
         }
       },
-      "required": [ "EndpointInput", "GroundTruthS3Input" ]
+      "required": [ "GroundTruthS3Input" ]
     },
     "EndpointInput" : {
       "type" : "object",
@@ -194,6 +197,72 @@
         }
       },
       "required" : [ "EndpointName", "LocalPath" ]
+    },
+    "BatchTransformInput": {
+      "type" : "object",
+      "additionalProperties" : false,
+      "description": "The batch transform input for a monitoring job.",
+      "properties" : {
+        "DataCapturedDestinationS3Uri": {
+          "type" : "string",
+          "description" : "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
+          "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+          "maxLength" : 512
+        },
+        "DatasetFormat": {
+          "$ref" : "#/definitions/DatasetFormat"
+        },
+        "LocalPath": {
+          "type" : "string",
+          "description" : "Path to the filesystem where the endpoint data is available to the container.",
+          "pattern": ".*",
+          "maxLength" : 256
+        },
+        "S3DataDistributionType": {
+          "type" : "string",
+          "description" : "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
+          "enum":[
+            "FullyReplicated",
+            "ShardedByS3Key"
+          ]
+        },
+        "S3InputMode": {
+          "type" : "string",
+          "description" : "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
+          "enum":[
+            "Pipe",
+            "File"
+          ]
+        },
+        "StartTimeOffset": {
+          "description" : "Monitoring start time offset, e.g. -PT1H",
+          "$ref": "#/definitions/MonitoringTimeOffsetString"
+        },
+        "EndTimeOffset": {
+          "description" : "Monitoring end time offset, e.g. PT0H",
+          "$ref": "#/definitions/MonitoringTimeOffsetString"
+        },
+        "FeaturesAttribute": {
+          "type" : "string",
+          "description" : "JSONpath to locate features in JSONlines dataset",
+          "maxLength" : 256
+        },
+        "InferenceAttribute": {
+          "type" : "string",
+          "description" : "Index or JSONpath to locate predicted label(s)",
+          "maxLength" : 256
+        },
+        "ProbabilityAttribute": {
+          "type" : "string",
+          "description" : "Index or JSONpath to locate probabilities",
+          "maxLength" : 256
+        },
+        "ProbabilityThresholdAttribute": {
+          "type" : "number",
+          "format": "double"
+        }
+      },
+      "required" : [ "DataCapturedDestinationS3Uri", "DatasetFormat", "LocalPath" ]
     },
     "MonitoringOutputConfig" : {
       "type" : "object",
@@ -420,6 +489,45 @@
         }
       },
       "required" : [ "S3Uri" ]
+    },
+    "DatasetFormat": {
+      "description": "The dataset format of the data to monitor",
+      "type": "object",
+      "properties": {
+        "Csv": {
+          "$ref" : "#/definitions/Csv"
+        },
+        "Json": {
+          "$ref" : "#/definitions/Json"
+        },
+        "Parquet" : {
+          "$ref" : "#/definitions/Parquet"
+        }
+      }
+    },
+    "Csv": {
+      "description": "The CSV format",
+      "type": "object",
+      "properties": {
+        "Header": {
+          "description": "A boolean flag indicating if given CSV has header",
+          "type" : "boolean"
+        }
+      }
+    },
+    "Json": {
+      "description": "The Json format",
+      "type": "object",
+      "properties": {
+        "Line": {
+          "description": "A boolean flag indicating if it is JSON line format",
+          "type" : "boolean"
+        }
+      }
+    },
+    "Parquet": {
+      "description": "A flag indicate if the dataset format is Parquet",
+      "type": "boolean"
     }
   },
   "required" : [ "ModelBiasAppSpecification", "ModelBiasJobInput", "ModelBiasJobOutputConfig", "JobResources", "RoleArn"],

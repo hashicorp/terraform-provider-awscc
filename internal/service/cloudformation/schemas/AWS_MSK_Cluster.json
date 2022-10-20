@@ -61,6 +61,15 @@
     },
     "ConfigurationInfo": {
       "$ref": "#/definitions/ConfigurationInfo"
+    },
+    "StorageMode": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 6,
+      "enum": [
+        "LOCAL",
+        "TIERED"
+      ]
     }
   },
   "definitions": {
@@ -484,6 +493,7 @@
         "kafka:UpdateBrokerType",
         "kafka:UpdateBrokerCount",
         "kafka:UpdateBrokerStorage",
+        "kafka:UpdateStorage",
         "kafka:UpdateSecurity",
         "kafka:UpdateConnectivity",
         "kafka:DescribeClusterOperation",
