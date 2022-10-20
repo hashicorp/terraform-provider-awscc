@@ -2315,11 +2315,10 @@ resource_schema "aws_redshiftserverless_workgroup" {
   cloudformation_type_name = "AWS::RedshiftServerless::Workgroup"
 }
 
-# Validation error: "minLength cannot be greater than maxLength"
-# resource_schema "aws_refactorspaces_application" {
-#   cloudformation_type_name               = "AWS::RefactorSpaces::Application"
-#   suppress_plural_data_source_generation = true
-# }
+resource_schema "aws_refactorspaces_application" {
+  cloudformation_type_name               = "AWS::RefactorSpaces::Application"
+  suppress_plural_data_source_generation = true
+}
 
 resource_schema "aws_refactorspaces_environment" {
   cloudformation_type_name = "AWS::RefactorSpaces::Environment"
