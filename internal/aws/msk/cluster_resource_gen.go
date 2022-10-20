@@ -932,6 +932,32 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"storage_mode": {
+			// Property: StorageMode
+			// CloudFormation resource type schema:
+			// {
+			//   "enum": [
+			//     "LOCAL",
+			//     "TIERED"
+			//   ],
+			//   "maxLength": 6,
+			//   "minLength": 5,
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(5, 6),
+				validate.StringInSlice([]string{
+					"LOCAL",
+					"TIERED",
+				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -1022,6 +1048,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"scram":                          "Scram",
 		"security_groups":                "SecurityGroups",
 		"storage_info":                   "StorageInfo",
+		"storage_mode":                   "StorageMode",
 		"tags":                           "Tags",
 		"tls":                            "Tls",
 		"type":                           "Type",

@@ -175,7 +175,6 @@ func notificationRuleResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
 			},
 		},
 		"target_address": {

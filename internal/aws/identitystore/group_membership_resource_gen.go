@@ -65,6 +65,7 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 			// Property: MemberId
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "An object containing the identifier of a group member.",
 			//   "properties": {
 			//     "UserId": {
@@ -75,6 +76,9 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 			//       "type": "string"
 			//     }
 			//   },
+			//   "required": [
+			//     "UserId"
+			//   ],
 			//   "type": "object"
 			// }
 			Description: "An object containing the identifier of a group member.",
@@ -84,14 +88,10 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 						// Property: UserId
 						Description: "The identifier for a user in the identity store.",
 						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 47),
 							validate.StringMatch(regexp.MustCompile("^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
 						},
 					},
 				},

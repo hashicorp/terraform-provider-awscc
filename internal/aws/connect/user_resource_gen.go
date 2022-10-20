@@ -74,6 +74,16 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 			//     "LastName": {
 			//       "description": "The last name. This is required if you are using Amazon Connect or SAML for identity management.",
 			//       "type": "string"
+			//     },
+			//     "Mobile": {
+			//       "description": "The mobile phone number.",
+			//       "pattern": "^\\+[1-9]\\d{1,14}$",
+			//       "type": "string"
+			//     },
+			//     "SecondaryEmail": {
+			//       "description": "The secondary email address. If you provide a secondary email, the user receives email notifications -- other than password reset notifications -- to this email address instead of to their primary email address.",
+			//       "pattern": "",
+			//       "type": "string"
 			//     }
 			//   },
 			//   "type": "object"
@@ -104,6 +114,29 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					"last_name": {
 						// Property: LastName
 						Description: "The last name. This is required if you are using Amazon Connect or SAML for identity management.",
+						Type:        types.StringType,
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"mobile": {
+						// Property: Mobile
+						Description: "The mobile phone number.",
+						Type:        types.StringType,
+						Optional:    true,
+						Computed:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^\\+[1-9]\\d{1,14}$"), ""),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"secondary_email": {
+						// Property: SecondaryEmail
+						Description: "The secondary email address. If you provide a secondary email, the user receives email notifications -- other than password reset notifications -- to this email address instead of to their primary email address.",
 						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
@@ -408,10 +441,12 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		"instance_arn":                  "InstanceArn",
 		"key":                           "Key",
 		"last_name":                     "LastName",
+		"mobile":                        "Mobile",
 		"password":                      "Password",
 		"phone_config":                  "PhoneConfig",
 		"phone_type":                    "PhoneType",
 		"routing_profile_arn":           "RoutingProfileArn",
+		"secondary_email":               "SecondaryEmail",
 		"security_profile_arns":         "SecurityProfileArns",
 		"tags":                          "Tags",
 		"user_arn":                      "UserArn",

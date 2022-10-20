@@ -52,6 +52,7 @@ func groupMembershipDataSource(ctx context.Context) (datasource.DataSource, erro
 			// Property: MemberId
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "An object containing the identifier of a group member.",
 			//   "properties": {
 			//     "UserId": {
@@ -62,6 +63,9 @@ func groupMembershipDataSource(ctx context.Context) (datasource.DataSource, erro
 			//       "type": "string"
 			//     }
 			//   },
+			//   "required": [
+			//     "UserId"
+			//   ],
 			//   "type": "object"
 			// }
 			Description: "An object containing the identifier of a group member.",

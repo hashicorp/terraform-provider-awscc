@@ -42,6 +42,26 @@ func dedicatedIpPoolResource(ctx context.Context) (resource.Resource, error) {
 				resource.RequiresReplace(),
 			},
 		},
+		"scaling_mode": {
+			// Property: ScalingMode
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
+			//   "pattern": "^(STANDARD|MANAGED)$",
+			//   "type": "string"
+			// }
+			Description: "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^(STANDARD|MANAGED)$"), ""),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -65,7 +85,8 @@ func dedicatedIpPoolResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"pool_name": "PoolName",
+		"pool_name":    "PoolName",
+		"scaling_mode": "ScalingMode",
 	})
 
 	opts = opts.IsImmutableType(true)
