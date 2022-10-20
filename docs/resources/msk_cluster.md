@@ -31,6 +31,7 @@ Resource Type definition for AWS::MSK::Cluster
 - `enhanced_monitoring` (String)
 - `logging_info` (Attributes) (see [below for nested schema](#nestedatt--logging_info))
 - `open_monitoring` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring))
+- `storage_mode` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
 ### Read-Only

@@ -32,6 +32,18 @@ func dedicatedIpPoolDataSource(ctx context.Context) (datasource.DataSource, erro
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"scaling_mode": {
+			// Property: ScalingMode
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
+			//   "pattern": "^(STANDARD|MANAGED)$",
+			//   "type": "string"
+			// }
+			Description: "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -51,7 +63,8 @@ func dedicatedIpPoolDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::SES::DedicatedIpPool").WithTerraformTypeName("awscc_ses_dedicated_ip_pool")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"pool_name": "PoolName",
+		"pool_name":    "PoolName",
+		"scaling_mode": "ScalingMode",
 	})
 
 	v, err := NewSingularDataSource(ctx, opts...)

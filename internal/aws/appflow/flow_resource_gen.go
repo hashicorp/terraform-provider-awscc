@@ -418,6 +418,14 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			//           "Salesforce": {
 			//             "additionalProperties": false,
 			//             "properties": {
+			//               "DataTransferApi": {
+			//                 "enum": [
+			//                   "AUTOMATIC",
+			//                   "BULKV2",
+			//                   "REST_SYNC"
+			//                 ],
+			//                 "type": "string"
+			//               },
 			//               "ErrorHandlingConfig": {
 			//                 "additionalProperties": false,
 			//                 "properties": {
@@ -1339,6 +1347,22 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Salesforce
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
+											"data_transfer_api": {
+												// Property: DataTransferApi
+												Type:     types.StringType,
+												Optional: true,
+												Computed: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"AUTOMATIC",
+														"BULKV2",
+														"REST_SYNC",
+													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
 												Attributes: tfsdk.SingleNestedAttributes(
@@ -2026,6 +2050,14 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			//         "Salesforce": {
 			//           "additionalProperties": false,
 			//           "properties": {
+			//             "DataTransferApi": {
+			//               "enum": [
+			//                 "AUTOMATIC",
+			//                 "BULKV2",
+			//                 "REST_SYNC"
+			//               ],
+			//               "type": "string"
+			//             },
 			//             "EnableDynamicFieldUpdate": {
 			//               "type": "boolean"
 			//             },
@@ -2483,6 +2515,22 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Salesforce
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
+											"data_transfer_api": {
+												// Property: DataTransferApi
+												Type:     types.StringType,
+												Optional: true,
+												Computed: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"AUTOMATIC",
+														"BULKV2",
+														"REST_SYNC",
+													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
 											"enable_dynamic_field_update": {
 												// Property: EnableDynamicFieldUpdate
 												Type:     types.BoolType,
@@ -3125,7 +3173,8 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			//                 "MATH_OPERATION_FIELDS_ORDER",
 			//                 "CONCAT_FORMAT",
 			//                 "SUBFIELD_CATEGORY_MAP",
-			//                 "EXCLUDE_SOURCE_FIELDS_LIST"
+			//                 "EXCLUDE_SOURCE_FIELDS_LIST",
+			//                 "INCLUDE_NEW_FIELDS"
 			//               ],
 			//               "type": "string"
 			//             },
@@ -3681,6 +3730,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 											"CONCAT_FORMAT",
 											"SUBFIELD_CATEGORY_MAP",
 											"EXCLUDE_SOURCE_FIELDS_LIST",
+											"INCLUDE_NEW_FIELDS",
 										}),
 									},
 								},
@@ -3945,6 +3995,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"custom_connector":                  "CustomConnector",
 		"custom_properties":                 "CustomProperties",
 		"data_pull_mode":                    "DataPullMode",
+		"data_transfer_api":                 "DataTransferApi",
 		"datadog":                           "Datadog",
 		"datetime_type_field_name":          "DatetimeTypeFieldName",
 		"description":                       "Description",

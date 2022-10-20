@@ -47,6 +47,10 @@
         },
         "TopicArn": {
             "type": "string"
+        },
+        "SignatureVersion": {
+            "description": "Version of the Amazon SNS signature used. If the SignatureVersion is 1, Signature is a Base64-encoded SHA1withRSA signature of the Message, MessageId, Type, Timestamp, and TopicArn values. If the SignatureVersion is 2, Signature is a Base64-encoded SHA256withRSA signature of the Message, MessageId, Type, Timestamp, and TopicArn values.",
+            "type": "string"
         }
     },
     "definitions": {

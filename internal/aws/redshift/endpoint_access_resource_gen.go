@@ -249,7 +249,6 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 						// Property: VpcEndpointId
 						Description: "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
 						Type:        types.StringType,
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
@@ -259,7 +258,6 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 						// Property: VpcId
 						Description: "The VPC identifier that the endpoint is associated.",
 						Type:        types.StringType,
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
@@ -267,6 +265,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 					},
 				},
 			),
+			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
@@ -338,6 +337,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 					},
 				},
 			),
+			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),

@@ -37,7 +37,6 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			// Property: DnsEntries
 			// CloudFormation resource type schema:
 			// {
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -47,7 +46,6 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -67,7 +65,6 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			// Property: NetworkInterfaceIds
 			// CloudFormation resource type schema:
 			// {
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -77,7 +74,6 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -85,13 +81,11 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			// Property: PolicyDocument
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "A policy to attach to the endpoint that controls access to the service.",
-			//   "type": "string"
+			//   "type": "object"
 			// }
-			Description: "A policy to attach to the endpoint that controls access to the service.",
-			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Type:     types.MapType{ElemType: types.StringType},
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 			},
@@ -100,13 +94,11 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			// Property: PrivateDnsEnabled
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Indicate whether to associate a private hosted zone with the specified VPC.",
 			//   "type": "boolean"
 			// }
-			Description: "Indicate whether to associate a private hosted zone with the specified VPC.",
-			Type:        types.BoolType,
-			Optional:    true,
-			Computed:    true,
+			Type:     types.BoolType,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 			},
@@ -115,18 +107,18 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			// Property: RouteTableIds
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "One or more route table IDs.",
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Description: "One or more route table IDs.",
-			Type:        types.SetType{ElemType: types.StringType},
-			Optional:    true,
-			Computed:    true,
+			Type:     types.ListType{ElemType: types.StringType},
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 			},
@@ -135,18 +127,18 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			// Property: SecurityGroupIds
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The ID of one or more security groups to associate with the endpoint network interface.",
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Description: "The ID of one or more security groups to associate with the endpoint network interface.",
-			Type:        types.SetType{ElemType: types.StringType},
-			Optional:    true,
-			Computed:    true,
+			Type:     types.ListType{ElemType: types.StringType},
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 			},
@@ -155,12 +147,10 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			// Property: ServiceName
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The service name.",
 			//   "type": "string"
 			// }
-			Description: "The service name.",
-			Type:        types.StringType,
-			Required:    true,
+			Type:     types.StringType,
+			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.RequiresReplace(),
 			},
@@ -169,18 +159,18 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			// Property: SubnetIds
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The ID of one or more subnets in which to create an endpoint network interface.",
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Description: "The ID of one or more subnets in which to create an endpoint network interface.",
-			Type:        types.SetType{ElemType: types.StringType},
-			Optional:    true,
-			Computed:    true,
+			Type:     types.ListType{ElemType: types.StringType},
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 			},
@@ -189,23 +179,11 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			// Property: VpcEndpointType
 			// CloudFormation resource type schema:
 			// {
-			//   "enum": [
-			//     "Interface",
-			//     "Gateway",
-			//     "GatewayLoadBalancer"
-			//   ],
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
-					"Interface",
-					"Gateway",
-					"GatewayLoadBalancer",
-				}),
-			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
@@ -215,12 +193,10 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			// Property: VpcId
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The ID of the VPC in which the endpoint will be used.",
 			//   "type": "string"
 			// }
-			Description: "The ID of the VPC in which the endpoint will be used.",
-			Type:        types.StringType,
-			Required:    true,
+			Type:     types.StringType,
+			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.RequiresReplace(),
 			},

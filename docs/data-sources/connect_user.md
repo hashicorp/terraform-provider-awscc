@@ -41,6 +41,8 @@ Read-Only:
 - `email` (String) The email address. If you are using SAML for identity management and include this parameter, an error is returned.
 - `first_name` (String) The first name. This is required if you are using Amazon Connect or SAML for identity management.
 - `last_name` (String) The last name. This is required if you are using Amazon Connect or SAML for identity management.
+- `mobile` (String) The mobile phone number.
+- `secondary_email` (String) The secondary email address. If you provide a secondary email, the user receives email notifications -- other than password reset notifications -- to this email address instead of to their primary email address.
 
 
 <a id="nestedatt--phone_config"></a>

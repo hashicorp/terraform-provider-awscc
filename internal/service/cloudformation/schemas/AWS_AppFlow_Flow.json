@@ -766,6 +766,9 @@
                 },
                 "IncludeDeletedRecords": {
                     "$ref": "#/definitions/IncludeDeletedRecords"
+                },
+                "DataTransferApi" : {
+                    "$ref": "#/definitions/DataTransferApi"
                 }
             },
             "required": [
@@ -1011,6 +1014,9 @@
                 },
                 "WriteOperationType": {
                     "$ref": "#/definitions/WriteOperationType"
+                },
+                "DataTransferApi" : {
+                    "$ref": "#/definitions/DataTransferApi"
                 }
             },
             "required": [
@@ -1134,7 +1140,8 @@
                 "MATH_OPERATION_FIELDS_ORDER",
                 "CONCAT_FORMAT",
                 "SUBFIELD_CATEGORY_MAP",
-                "EXCLUDE_SOURCE_FIELDS_LIST"
+                "EXCLUDE_SOURCE_FIELDS_LIST",
+                "INCLUDE_NEW_FIELDS"
             ]
         },
         "TaskPropertiesObject": {
@@ -1488,6 +1495,14 @@
                 "Draft",
                 "Errored",
                 "Suspended"
+            ]
+        },
+        "DataTransferApi": {
+            "type": "string",
+            "enum": [
+                "AUTOMATIC",
+                "BULKV2",
+                "REST_SYNC"
             ]
         }
     },

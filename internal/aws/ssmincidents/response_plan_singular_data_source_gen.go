@@ -46,6 +46,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 			//             "type": "string"
 			//           },
 			//           "DynamicParameters": {
+			//             "default": [],
 			//             "description": "The parameters with dynamic values to set when starting the SSM automation document.",
 			//             "insertionOrder": false,
 			//             "items": {
@@ -84,6 +85,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 			//             "uniqueItems": true
 			//           },
 			//           "Parameters": {
+			//             "default": [],
 			//             "description": "The parameters to set when starting the SSM automation document.",
 			//             "insertionOrder": false,
 			//             "items": {
@@ -103,7 +105,6 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 			//                     "type": "string"
 			//                   },
 			//                   "maxItems": 10,
-			//                   "minItems": 1,
 			//                   "type": "array",
 			//                   "uniqueItems": true
 			//                 }
@@ -115,6 +116,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 			//               "type": "object"
 			//             },
 			//             "maxItems": 200,
+			//             "minItems": 1,
 			//             "type": "array",
 			//             "uniqueItems": true
 			//           },
@@ -255,6 +257,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 			//   "description": "The chat channel configuration.",
 			//   "properties": {
 			//     "ChatbotSns": {
+			//       "default": [],
 			//       "insertionOrder": true,
 			//       "items": {
 			//         "description": "The ARN of the Chatbot SNS topic.",
@@ -307,7 +310,6 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 			//     "type": "string"
 			//   },
 			//   "maxItems": 5,
-			//   "minItems": 1,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
@@ -365,6 +367,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 			//       "uniqueItems": true
 			//     },
 			//     "NotificationTargets": {
+			//       "default": [],
 			//       "description": "The list of notification targets.",
 			//       "insertionOrder": false,
 			//       "items": {
@@ -510,7 +513,6 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 			//     "type": "object"
 			//   },
 			//   "maxItems": 50,
-			//   "minItems": 1,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }

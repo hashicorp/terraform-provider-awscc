@@ -48,8 +48,7 @@
     "handlers": {
         "create": {
             "permissions": [
-                "apigateway:createVpcLink",
-                "apigateway:getVpcLink",
+                "apigateway:POST",
                 "iam:CreateServiceLinkedRole",
                 "iam:DeleteServiceLinkedRole",
                 "iam:GetServiceLinkedRoleDeletionStatus"
@@ -57,8 +56,8 @@
         },
         "update": {
             "permissions": [
-                "apigateway:updateVpcLink",
-                "apigateway:getVpcLink",
+                "apigateway:PATCH",
+                "apigateway:GET",
                 "iam:CreateServiceLinkedRole",
                 "iam:DeleteServiceLinkedRole",
                 "iam:GetServiceLinkedRoleDeletionStatus"
@@ -66,7 +65,7 @@
         },
         "read": {
             "permissions": [
-                "apigateway:getVpcLink",
+                "apigateway:GET",
                 "iam:CreateServiceLinkedRole",
                 "iam:DeleteServiceLinkedRole",
                 "iam:GetServiceLinkedRoleDeletionStatus"
@@ -74,8 +73,8 @@
         },
         "delete": {
             "permissions": [
-                "apigateway:deleteVpcLink",
-                "apigateway:getVpcLink",
+                "apigateway:GET",
+                "apigateway:DELETE",
                 "iam:CreateServiceLinkedRole",
                 "iam:DeleteServiceLinkedRole",
                 "iam:GetServiceLinkedRoleDeletionStatus"
@@ -83,7 +82,7 @@
         },
         "list": {
             "permissions": [
-                "apigateway:getVpcLinks",
+                "apigateway:GET",
                 "iam:CreateServiceLinkedRole",
                 "iam:DeleteServiceLinkedRole",
                 "iam:GetServiceLinkedRoleDeletionStatus"

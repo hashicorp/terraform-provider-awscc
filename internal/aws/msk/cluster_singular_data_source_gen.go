@@ -729,6 +729,21 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			),
 			Computed: true,
 		},
+		"storage_mode": {
+			// Property: StorageMode
+			// CloudFormation resource type schema:
+			// {
+			//   "enum": [
+			//     "LOCAL",
+			//     "TIERED"
+			//   ],
+			//   "maxLength": 6,
+			//   "minLength": 5,
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -810,6 +825,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"scram":                          "Scram",
 		"security_groups":                "SecurityGroups",
 		"storage_info":                   "StorageInfo",
+		"storage_mode":                   "StorageMode",
 		"tags":                           "Tags",
 		"tls":                            "Tls",
 		"type":                           "Type",

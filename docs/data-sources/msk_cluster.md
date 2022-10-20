@@ -33,6 +33,7 @@ Data Source schema for AWS::MSK::Cluster
 - `logging_info` (Attributes) (see [below for nested schema](#nestedatt--logging_info))
 - `number_of_broker_nodes` (Number)
 - `open_monitoring` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring))
+- `storage_mode` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
 <a id="nestedatt--broker_node_group_info"></a>

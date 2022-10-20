@@ -701,6 +701,139 @@
         "Ordered"
       ]
     },
+    "AllowedInputTypes": {
+      "description": "Specifies the allowed input types.",
+      "type": "object",
+      "properties": {
+        "AllowAudioInput": {
+          "description": "Indicates whether audio input is allowed.",
+          "type": "boolean"
+        },
+        "AllowDTMFInput": {
+          "description": "Indicates whether DTMF input is allowed.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "AllowAudioInput",
+        "AllowDTMFInput"
+      ],
+      "additionalProperties": false
+    },
+    "DTMFSpecification": {
+      "description": "Specifies the settings on DTMF input.",
+      "type": "object",
+      "properties": {
+        "DeletionCharacter": {
+          "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+          "type": "string",
+          "pattern": "^[A-D0-9#*]{1}$"
+        },
+        "EndCharacter": {
+          "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+          "type": "string",
+          "pattern": "^[A-D0-9#*]{1}$"
+        },
+        "EndTimeoutMs": {
+          "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "MaxLength": {
+          "description": "The maximum number of DTMF digits allowed in an utterance.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        }
+      },
+      "required": [
+        "DeletionCharacter",
+        "EndCharacter",
+        "EndTimeoutMs",
+        "MaxLength"
+      ],
+      "additionalProperties": false
+    },
+    "AudioSpecification": {
+      "description": "Specifies the audio input specifications.",
+      "type": "object",
+      "properties": {
+        "EndTimeoutMs": {
+          "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "MaxLengthMs": {
+          "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "EndTimeoutMs",
+        "MaxLengthMs"
+      ],
+      "additionalProperties": false
+    },
+    "AudioAndDTMFInputSpecification": {
+      "description": "Specifies the audio and DTMF input specification.",
+      "type": "object",
+      "properties": {
+        "StartTimeoutMs": {
+          "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "DTMFSpecification": {
+          "$ref": "#/definitions/DTMFSpecification"
+        },
+        "AudioSpecification": {
+          "$ref": "#/definitions/AudioSpecification"
+        }
+      },
+      "required": [
+        "StartTimeoutMs"
+      ],
+      "additionalProperties": false
+    },
+    "TextInputSpecification": {
+      "description": "Specifies the text input specifications.",
+      "type": "object",
+      "properties": {
+        "StartTimeoutMs": {
+          "description": "Time for which a bot waits before re-prompting a customer for text input.",
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "StartTimeoutMs"
+      ],
+      "additionalProperties": false
+    },
+    "PromptAttemptSpecification": {
+      "description": "Specifies the settings on a prompt attempt.",
+      "type": "object",
+      "properties": {
+        "AllowedInputTypes": {
+          "$ref": "#/definitions/AllowedInputTypes"
+        },
+        "AllowInterrupt": {
+          "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+          "type": "boolean"
+        },
+        "AudioAndDTMFInputSpecification": {
+          "$ref": "#/definitions/AudioAndDTMFInputSpecification"
+        },
+        "TextInputSpecification": {
+          "$ref": "#/definitions/TextInputSpecification"
+        }
+      },
+      "required": [
+        "AllowedInputTypes"
+      ],
+      "additionalProperties": false
+    },
     "PromptSpecification": {
       "description": "Prompts the user to confirm the intent.",
       "type": "object",
@@ -717,6 +850,16 @@
         },
         "MessageSelectionStrategy": {
           "$ref": "#/definitions/MessageSelectionStrategy"
+        },
+        "PromptAttemptsSpecification": {
+          "description": "Specifies the advanced settings on each attempt of the prompt.",
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "$ref": "#/definitions/PromptAttemptSpecification"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "required": [

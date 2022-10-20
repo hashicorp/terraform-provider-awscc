@@ -49,6 +49,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			//             "type": "string"
 			//           },
 			//           "DynamicParameters": {
+			//             "default": [],
 			//             "description": "The parameters with dynamic values to set when starting the SSM automation document.",
 			//             "insertionOrder": false,
 			//             "items": {
@@ -87,6 +88,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			//             "uniqueItems": true
 			//           },
 			//           "Parameters": {
+			//             "default": [],
 			//             "description": "The parameters to set when starting the SSM automation document.",
 			//             "insertionOrder": false,
 			//             "items": {
@@ -106,7 +108,6 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			//                     "type": "string"
 			//                   },
 			//                   "maxItems": 10,
-			//                   "minItems": 1,
 			//                   "type": "array",
 			//                   "uniqueItems": true
 			//                 }
@@ -118,6 +119,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			//               "type": "object"
 			//             },
 			//             "maxItems": 200,
+			//             "minItems": 1,
 			//             "type": "array",
 			//             "uniqueItems": true
 			//           },
@@ -225,6 +227,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 										validate.ArrayLenAtMost(200),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -246,7 +249,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 												Type:     types.ListType{ElemType: types.StringType},
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenBetween(1, 10),
+													validate.ArrayLenAtMost(10),
 													validate.UniqueItems(),
 													validate.ArrayForEach(validate.StringLenAtMost(10000)),
 												},
@@ -256,9 +259,10 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenAtMost(200),
+										validate.ArrayLenBetween(1, 200),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -333,6 +337,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			//   "description": "The chat channel configuration.",
 			//   "properties": {
 			//     "ChatbotSns": {
+			//       "default": [],
 			//       "insertionOrder": true,
 			//       "items": {
 			//         "description": "The ARN of the Chatbot SNS topic.",
@@ -360,6 +365,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -405,7 +411,6 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			//     "type": "string"
 			//   },
 			//   "maxItems": 5,
-			//   "minItems": 1,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
@@ -414,7 +419,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 5),
+				validate.ArrayLenAtMost(5),
 				validate.ArrayForEach(validate.StringLenAtMost(1000)),
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:ssm-contacts:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), "")),
 			},
@@ -473,6 +478,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			//       "uniqueItems": true
 			//     },
 			//     "NotificationTargets": {
+			//       "default": [],
 			//       "description": "The list of notification targets.",
 			//       "insertionOrder": false,
 			//       "items": {
@@ -595,6 +601,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -675,7 +682,6 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			//     "type": "object"
 			//   },
 			//   "maxItems": 50,
-			//   "minItems": 1,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
@@ -703,7 +709,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 50),
+				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),

@@ -76,9 +76,54 @@ Optional:
 <a id="nestedatt--model_explainability_job_input"></a>
 ### Nested Schema for `model_explainability_job_input`
 
+Optional:
+
+- `batch_transform_input` (Attributes) The batch transform input for a monitoring job. (see [below for nested schema](#nestedatt--model_explainability_job_input--batch_transform_input))
+- `endpoint_input` (Attributes) The endpoint for a monitoring job. (see [below for nested schema](#nestedatt--model_explainability_job_input--endpoint_input))
+
+<a id="nestedatt--model_explainability_job_input--batch_transform_input"></a>
+### Nested Schema for `model_explainability_job_input.batch_transform_input`
+
 Required:
 
-- `endpoint_input` (Attributes) The endpoint for a monitoring job. (see [below for nested schema](#nestedatt--model_explainability_job_input--endpoint_input))
+- `data_captured_destination_s3_uri` (String) A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.
+- `dataset_format` (Attributes) The dataset format of the data to monitor (see [below for nested schema](#nestedatt--model_explainability_job_input--batch_transform_input--dataset_format))
+- `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
+
+Optional:
+
+- `features_attribute` (String) JSONpath to locate features in JSONlines dataset
+- `inference_attribute` (String) Index or JSONpath to locate predicted label(s)
+- `probability_attribute` (String) Index or JSONpath to locate probabilities
+- `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
+- `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
+
+<a id="nestedatt--model_explainability_job_input--batch_transform_input--dataset_format"></a>
+### Nested Schema for `model_explainability_job_input.batch_transform_input.dataset_format`
+
+Optional:
+
+- `csv` (Attributes) The CSV format (see [below for nested schema](#nestedatt--model_explainability_job_input--batch_transform_input--dataset_format--csv))
+- `json` (Attributes) The Json format (see [below for nested schema](#nestedatt--model_explainability_job_input--batch_transform_input--dataset_format--json))
+- `parquet` (Boolean) A flag indicating if the dataset format is Parquet
+
+<a id="nestedatt--model_explainability_job_input--batch_transform_input--dataset_format--csv"></a>
+### Nested Schema for `model_explainability_job_input.batch_transform_input.dataset_format.parquet`
+
+Optional:
+
+- `header` (Boolean) A boolean flag indicating if given CSV has header
+
+
+<a id="nestedatt--model_explainability_job_input--batch_transform_input--dataset_format--json"></a>
+### Nested Schema for `model_explainability_job_input.batch_transform_input.dataset_format.parquet`
+
+Optional:
+
+- `line` (Boolean) A boolean flag indicating if it is JSON line format
+
+
+
 
 <a id="nestedatt--model_explainability_job_input--endpoint_input"></a>
 ### Nested Schema for `model_explainability_job_input.endpoint_input`

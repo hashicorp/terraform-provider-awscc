@@ -2372,6 +2372,131 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//                         "Ordered"
 			//                       ],
 			//                       "type": "string"
+			//                     },
+			//                     "PromptAttemptsSpecification": {
+			//                       "additionalProperties": false,
+			//                       "description": "Specifies the advanced settings on each attempt of the prompt.",
+			//                       "patternProperties": {
+			//                         "": {
+			//                           "additionalProperties": false,
+			//                           "description": "Specifies the settings on a prompt attempt.",
+			//                           "properties": {
+			//                             "AllowInterrupt": {
+			//                               "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+			//                               "type": "boolean"
+			//                             },
+			//                             "AllowedInputTypes": {
+			//                               "additionalProperties": false,
+			//                               "description": "Specifies the allowed input types.",
+			//                               "properties": {
+			//                                 "AllowAudioInput": {
+			//                                   "description": "Indicates whether audio input is allowed.",
+			//                                   "type": "boolean"
+			//                                 },
+			//                                 "AllowDTMFInput": {
+			//                                   "description": "Indicates whether DTMF input is allowed.",
+			//                                   "type": "boolean"
+			//                                 }
+			//                               },
+			//                               "required": [
+			//                                 "AllowAudioInput",
+			//                                 "AllowDTMFInput"
+			//                               ],
+			//                               "type": "object"
+			//                             },
+			//                             "AudioAndDTMFInputSpecification": {
+			//                               "additionalProperties": false,
+			//                               "description": "Specifies the audio and DTMF input specification.",
+			//                               "properties": {
+			//                                 "AudioSpecification": {
+			//                                   "additionalProperties": false,
+			//                                   "description": "Specifies the audio input specifications.",
+			//                                   "properties": {
+			//                                     "EndTimeoutMs": {
+			//                                       "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+			//                                       "minimum": 1,
+			//                                       "type": "integer"
+			//                                     },
+			//                                     "MaxLengthMs": {
+			//                                       "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+			//                                       "minimum": 1,
+			//                                       "type": "integer"
+			//                                     }
+			//                                   },
+			//                                   "required": [
+			//                                     "EndTimeoutMs",
+			//                                     "MaxLengthMs"
+			//                                   ],
+			//                                   "type": "object"
+			//                                 },
+			//                                 "DTMFSpecification": {
+			//                                   "additionalProperties": false,
+			//                                   "description": "Specifies the settings on DTMF input.",
+			//                                   "properties": {
+			//                                     "DeletionCharacter": {
+			//                                       "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+			//                                       "pattern": "^[A-D0-9#*]{1}$",
+			//                                       "type": "string"
+			//                                     },
+			//                                     "EndCharacter": {
+			//                                       "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+			//                                       "pattern": "^[A-D0-9#*]{1}$",
+			//                                       "type": "string"
+			//                                     },
+			//                                     "EndTimeoutMs": {
+			//                                       "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+			//                                       "minimum": 1,
+			//                                       "type": "integer"
+			//                                     },
+			//                                     "MaxLength": {
+			//                                       "description": "The maximum number of DTMF digits allowed in an utterance.",
+			//                                       "maximum": 1024,
+			//                                       "minimum": 1,
+			//                                       "type": "integer"
+			//                                     }
+			//                                   },
+			//                                   "required": [
+			//                                     "DeletionCharacter",
+			//                                     "EndCharacter",
+			//                                     "EndTimeoutMs",
+			//                                     "MaxLength"
+			//                                   ],
+			//                                   "type": "object"
+			//                                 },
+			//                                 "StartTimeoutMs": {
+			//                                   "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+			//                                   "minimum": 1,
+			//                                   "type": "integer"
+			//                                 }
+			//                               },
+			//                               "required": [
+			//                                 "StartTimeoutMs"
+			//                               ],
+			//                               "type": "object"
+			//                             },
+			//                             "TextInputSpecification": {
+			//                               "additionalProperties": false,
+			//                               "description": "Specifies the text input specifications.",
+			//                               "properties": {
+			//                                 "StartTimeoutMs": {
+			//                                   "description": "Time for which a bot waits before re-prompting a customer for text input.",
+			//                                   "minimum": 1,
+			//                                   "type": "integer"
+			//                                 }
+			//                               },
+			//                               "required": [
+			//                                 "StartTimeoutMs"
+			//                               ],
+			//                               "type": "object"
+			//                             }
+			//                           },
+			//                           "required": [
+			//                             "AllowedInputTypes"
+			//                           ],
+			//                           "type": "object"
+			//                         }
+			//                       },
+			//                       "type": "object"
 			//                     }
 			//                   },
 			//                   "required": [
@@ -2865,6 +2990,131 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//                               "Ordered"
 			//                             ],
 			//                             "type": "string"
+			//                           },
+			//                           "PromptAttemptsSpecification": {
+			//                             "additionalProperties": false,
+			//                             "description": "Specifies the advanced settings on each attempt of the prompt.",
+			//                             "patternProperties": {
+			//                               "": {
+			//                                 "additionalProperties": false,
+			//                                 "description": "Specifies the settings on a prompt attempt.",
+			//                                 "properties": {
+			//                                   "AllowInterrupt": {
+			//                                     "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+			//                                     "type": "boolean"
+			//                                   },
+			//                                   "AllowedInputTypes": {
+			//                                     "additionalProperties": false,
+			//                                     "description": "Specifies the allowed input types.",
+			//                                     "properties": {
+			//                                       "AllowAudioInput": {
+			//                                         "description": "Indicates whether audio input is allowed.",
+			//                                         "type": "boolean"
+			//                                       },
+			//                                       "AllowDTMFInput": {
+			//                                         "description": "Indicates whether DTMF input is allowed.",
+			//                                         "type": "boolean"
+			//                                       }
+			//                                     },
+			//                                     "required": [
+			//                                       "AllowAudioInput",
+			//                                       "AllowDTMFInput"
+			//                                     ],
+			//                                     "type": "object"
+			//                                   },
+			//                                   "AudioAndDTMFInputSpecification": {
+			//                                     "additionalProperties": false,
+			//                                     "description": "Specifies the audio and DTMF input specification.",
+			//                                     "properties": {
+			//                                       "AudioSpecification": {
+			//                                         "additionalProperties": false,
+			//                                         "description": "Specifies the audio input specifications.",
+			//                                         "properties": {
+			//                                           "EndTimeoutMs": {
+			//                                             "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+			//                                             "minimum": 1,
+			//                                             "type": "integer"
+			//                                           },
+			//                                           "MaxLengthMs": {
+			//                                             "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+			//                                             "minimum": 1,
+			//                                             "type": "integer"
+			//                                           }
+			//                                         },
+			//                                         "required": [
+			//                                           "EndTimeoutMs",
+			//                                           "MaxLengthMs"
+			//                                         ],
+			//                                         "type": "object"
+			//                                       },
+			//                                       "DTMFSpecification": {
+			//                                         "additionalProperties": false,
+			//                                         "description": "Specifies the settings on DTMF input.",
+			//                                         "properties": {
+			//                                           "DeletionCharacter": {
+			//                                             "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+			//                                             "pattern": "^[A-D0-9#*]{1}$",
+			//                                             "type": "string"
+			//                                           },
+			//                                           "EndCharacter": {
+			//                                             "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+			//                                             "pattern": "^[A-D0-9#*]{1}$",
+			//                                             "type": "string"
+			//                                           },
+			//                                           "EndTimeoutMs": {
+			//                                             "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+			//                                             "minimum": 1,
+			//                                             "type": "integer"
+			//                                           },
+			//                                           "MaxLength": {
+			//                                             "description": "The maximum number of DTMF digits allowed in an utterance.",
+			//                                             "maximum": 1024,
+			//                                             "minimum": 1,
+			//                                             "type": "integer"
+			//                                           }
+			//                                         },
+			//                                         "required": [
+			//                                           "DeletionCharacter",
+			//                                           "EndCharacter",
+			//                                           "EndTimeoutMs",
+			//                                           "MaxLength"
+			//                                         ],
+			//                                         "type": "object"
+			//                                       },
+			//                                       "StartTimeoutMs": {
+			//                                         "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+			//                                         "minimum": 1,
+			//                                         "type": "integer"
+			//                                       }
+			//                                     },
+			//                                     "required": [
+			//                                       "StartTimeoutMs"
+			//                                     ],
+			//                                     "type": "object"
+			//                                   },
+			//                                   "TextInputSpecification": {
+			//                                     "additionalProperties": false,
+			//                                     "description": "Specifies the text input specifications.",
+			//                                     "properties": {
+			//                                       "StartTimeoutMs": {
+			//                                         "description": "Time for which a bot waits before re-prompting a customer for text input.",
+			//                                         "minimum": 1,
+			//                                         "type": "integer"
+			//                                       }
+			//                                     },
+			//                                     "required": [
+			//                                       "StartTimeoutMs"
+			//                                     ],
+			//                                     "type": "object"
+			//                                   }
+			//                                 },
+			//                                 "required": [
+			//                                   "AllowedInputTypes"
+			//                                 ],
+			//                                 "type": "object"
+			//                               }
+			//                             },
+			//                             "type": "object"
 			//                           }
 			//                         },
 			//                         "required": [
@@ -5952,6 +6202,127 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 															Type:        types.StringType,
 															Computed:    true,
 														},
+														"prompt_attempts_specification": {
+															// Property: PromptAttemptsSpecification
+															Description: "Specifies the advanced settings on each attempt of the prompt.",
+															// Pattern: ""
+															Attributes: tfsdk.MapNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"allow_interrupt": {
+																		// Property: AllowInterrupt
+																		Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+																		Type:        types.BoolType,
+																		Computed:    true,
+																	},
+																	"allowed_input_types": {
+																		// Property: AllowedInputTypes
+																		Description: "Specifies the allowed input types.",
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
+																				"allow_audio_input": {
+																					// Property: AllowAudioInput
+																					Description: "Indicates whether audio input is allowed.",
+																					Type:        types.BoolType,
+																					Computed:    true,
+																				},
+																				"allow_dtmf_input": {
+																					// Property: AllowDTMFInput
+																					Description: "Indicates whether DTMF input is allowed.",
+																					Type:        types.BoolType,
+																					Computed:    true,
+																				},
+																			},
+																		),
+																		Computed: true,
+																	},
+																	"audio_and_dtmf_input_specification": {
+																		// Property: AudioAndDTMFInputSpecification
+																		Description: "Specifies the audio and DTMF input specification.",
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
+																				"audio_specification": {
+																					// Property: AudioSpecification
+																					Description: "Specifies the audio input specifications.",
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
+																							"end_timeout_ms": {
+																								// Property: EndTimeoutMs
+																								Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+																								Type:        types.Int64Type,
+																								Computed:    true,
+																							},
+																							"max_length_ms": {
+																								// Property: MaxLengthMs
+																								Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+																								Type:        types.Int64Type,
+																								Computed:    true,
+																							},
+																						},
+																					),
+																					Computed: true,
+																				},
+																				"dtmf_specification": {
+																					// Property: DTMFSpecification
+																					Description: "Specifies the settings on DTMF input.",
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
+																							"deletion_character": {
+																								// Property: DeletionCharacter
+																								Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+																								Type:        types.StringType,
+																								Computed:    true,
+																							},
+																							"end_character": {
+																								// Property: EndCharacter
+																								Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+																								Type:        types.StringType,
+																								Computed:    true,
+																							},
+																							"end_timeout_ms": {
+																								// Property: EndTimeoutMs
+																								Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+																								Type:        types.Int64Type,
+																								Computed:    true,
+																							},
+																							"max_length": {
+																								// Property: MaxLength
+																								Description: "The maximum number of DTMF digits allowed in an utterance.",
+																								Type:        types.Int64Type,
+																								Computed:    true,
+																							},
+																						},
+																					),
+																					Computed: true,
+																				},
+																				"start_timeout_ms": {
+																					// Property: StartTimeoutMs
+																					Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+																					Type:        types.Int64Type,
+																					Computed:    true,
+																				},
+																			},
+																		),
+																		Computed: true,
+																	},
+																	"text_input_specification": {
+																		// Property: TextInputSpecification
+																		Description: "Specifies the text input specifications.",
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
+																				"start_timeout_ms": {
+																					// Property: StartTimeoutMs
+																					Description: "Time for which a bot waits before re-prompting a customer for text input.",
+																					Type:        types.Int64Type,
+																					Computed:    true,
+																				},
+																			},
+																		),
+																		Computed: true,
+																	},
+																},
+															),
+															Computed: true,
+														},
 													},
 												),
 												Computed: true,
@@ -6378,6 +6749,127 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 																		Description: "Indicates how a message is selected from a message group among retries.",
 																		Type:        types.StringType,
 																		Computed:    true,
+																	},
+																	"prompt_attempts_specification": {
+																		// Property: PromptAttemptsSpecification
+																		Description: "Specifies the advanced settings on each attempt of the prompt.",
+																		// Pattern: ""
+																		Attributes: tfsdk.MapNestedAttributes(
+																			map[string]tfsdk.Attribute{
+																				"allow_interrupt": {
+																					// Property: AllowInterrupt
+																					Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+																					Type:        types.BoolType,
+																					Computed:    true,
+																				},
+																				"allowed_input_types": {
+																					// Property: AllowedInputTypes
+																					Description: "Specifies the allowed input types.",
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
+																							"allow_audio_input": {
+																								// Property: AllowAudioInput
+																								Description: "Indicates whether audio input is allowed.",
+																								Type:        types.BoolType,
+																								Computed:    true,
+																							},
+																							"allow_dtmf_input": {
+																								// Property: AllowDTMFInput
+																								Description: "Indicates whether DTMF input is allowed.",
+																								Type:        types.BoolType,
+																								Computed:    true,
+																							},
+																						},
+																					),
+																					Computed: true,
+																				},
+																				"audio_and_dtmf_input_specification": {
+																					// Property: AudioAndDTMFInputSpecification
+																					Description: "Specifies the audio and DTMF input specification.",
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
+																							"audio_specification": {
+																								// Property: AudioSpecification
+																								Description: "Specifies the audio input specifications.",
+																								Attributes: tfsdk.SingleNestedAttributes(
+																									map[string]tfsdk.Attribute{
+																										"end_timeout_ms": {
+																											// Property: EndTimeoutMs
+																											Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+																											Type:        types.Int64Type,
+																											Computed:    true,
+																										},
+																										"max_length_ms": {
+																											// Property: MaxLengthMs
+																											Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+																											Type:        types.Int64Type,
+																											Computed:    true,
+																										},
+																									},
+																								),
+																								Computed: true,
+																							},
+																							"dtmf_specification": {
+																								// Property: DTMFSpecification
+																								Description: "Specifies the settings on DTMF input.",
+																								Attributes: tfsdk.SingleNestedAttributes(
+																									map[string]tfsdk.Attribute{
+																										"deletion_character": {
+																											// Property: DeletionCharacter
+																											Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+																											Type:        types.StringType,
+																											Computed:    true,
+																										},
+																										"end_character": {
+																											// Property: EndCharacter
+																											Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+																											Type:        types.StringType,
+																											Computed:    true,
+																										},
+																										"end_timeout_ms": {
+																											// Property: EndTimeoutMs
+																											Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+																											Type:        types.Int64Type,
+																											Computed:    true,
+																										},
+																										"max_length": {
+																											// Property: MaxLength
+																											Description: "The maximum number of DTMF digits allowed in an utterance.",
+																											Type:        types.Int64Type,
+																											Computed:    true,
+																										},
+																									},
+																								),
+																								Computed: true,
+																							},
+																							"start_timeout_ms": {
+																								// Property: StartTimeoutMs
+																								Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+																								Type:        types.Int64Type,
+																								Computed:    true,
+																							},
+																						},
+																					),
+																					Computed: true,
+																				},
+																				"text_input_specification": {
+																					// Property: TextInputSpecification
+																					Description: "Specifies the text input specifications.",
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
+																							"start_timeout_ms": {
+																								// Property: StartTimeoutMs
+																								Description: "Time for which a bot waits before re-prompting a customer for text input.",
+																								Type:        types.Int64Type,
+																								Computed:    true,
+																							},
+																						},
+																					),
+																					Computed: true,
+																				},
+																			},
+																		),
+																		Computed: true,
 																	},
 																},
 															),
@@ -7957,11 +8449,16 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"active":                                "Active",
 		"advanced_recognition_setting":          "AdvancedRecognitionSetting",
+		"allow_audio_input":                     "AllowAudioInput",
+		"allow_dtmf_input":                      "AllowDTMFInput",
 		"allow_interrupt":                       "AllowInterrupt",
 		"allow_multiple_values":                 "AllowMultipleValues",
+		"allowed_input_types":                   "AllowedInputTypes",
 		"arn":                                   "Arn",
+		"audio_and_dtmf_input_specification":    "AudioAndDTMFInputSpecification",
 		"audio_log_settings":                    "AudioLogSettings",
 		"audio_recognition_strategy":            "AudioRecognitionStrategy",
+		"audio_specification":                   "AudioSpecification",
 		"auto_build_bot_locales":                "AutoBuildBotLocales",
 		"bot_alias_locale_setting":              "BotAliasLocaleSetting",
 		"bot_alias_locale_settings":             "BotAliasLocaleSettings",
@@ -7986,11 +8483,15 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"default_value_list":                    "DefaultValueList",
 		"default_value_specification":           "DefaultValueSpecification",
 		"delay_in_seconds":                      "DelayInSeconds",
+		"deletion_character":                    "DeletionCharacter",
 		"description":                           "Description",
 		"destination":                           "Destination",
 		"detect_sentiment":                      "DetectSentiment",
 		"dialog_code_hook":                      "DialogCodeHook",
+		"dtmf_specification":                    "DTMFSpecification",
 		"enabled":                               "Enabled",
+		"end_character":                         "EndCharacter",
+		"end_timeout_ms":                        "EndTimeoutMs",
 		"engine":                                "Engine",
 		"external_source_setting":               "ExternalSourceSetting",
 		"failure_response":                      "FailureResponse",
@@ -8015,6 +8516,8 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"lambda_code_hook":                      "LambdaCodeHook",
 		"locale_id":                             "LocaleId",
 		"log_prefix":                            "LogPrefix",
+		"max_length":                            "MaxLength",
+		"max_length_ms":                         "MaxLengthMs",
 		"max_retries":                           "MaxRetries",
 		"message":                               "Message",
 		"message_groups":                        "MessageGroups",
@@ -8033,6 +8536,7 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"plain_text_message":                    "PlainTextMessage",
 		"post_fulfillment_status_specification": "PostFulfillmentStatusSpecification",
 		"priority":                              "Priority",
+		"prompt_attempts_specification":         "PromptAttemptsSpecification",
 		"prompt_specification":                  "PromptSpecification",
 		"query_filter_string":                   "QueryFilterString",
 		"query_filter_string_enabled":           "QueryFilterStringEnabled",
@@ -8057,6 +8561,7 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source":                                "Source",
 		"ssml_message":                          "SSMLMessage",
 		"start_response":                        "StartResponse",
+		"start_timeout_ms":                      "StartTimeoutMs",
 		"still_waiting_response":                "StillWaitingResponse",
 		"subtitle":                              "Subtitle",
 		"success_response":                      "SuccessResponse",
@@ -8064,6 +8569,7 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"test_bot_alias_settings":               "TestBotAliasSettings",
 		"test_bot_alias_tags":                   "TestBotAliasTags",
 		"text":                                  "Text",
+		"text_input_specification":              "TextInputSpecification",
 		"text_log_settings":                     "TextLogSettings",
 		"time_to_live_in_seconds":               "TimeToLiveInSeconds",
 		"timeout_in_seconds":                    "TimeoutInSeconds",

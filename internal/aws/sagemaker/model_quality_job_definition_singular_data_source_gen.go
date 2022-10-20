@@ -350,6 +350,104 @@ func modelQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSo
 			//   "additionalProperties": false,
 			//   "description": "The inputs for a monitoring job.",
 			//   "properties": {
+			//     "BatchTransformInput": {
+			//       "additionalProperties": false,
+			//       "description": "The batch transform input for a monitoring job.",
+			//       "properties": {
+			//         "DataCapturedDestinationS3Uri": {
+			//           "description": "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
+			//           "maxLength": 512,
+			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+			//           "type": "string"
+			//         },
+			//         "DatasetFormat": {
+			//           "description": "The dataset format of the data to monitor",
+			//           "properties": {
+			//             "Csv": {
+			//               "description": "The CSV format",
+			//               "properties": {
+			//                 "Header": {
+			//                   "description": "A boolean flag indicating if given CSV has header",
+			//                   "type": "boolean"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "Json": {
+			//               "description": "The Json format",
+			//               "properties": {
+			//                 "Line": {
+			//                   "description": "A boolean flag indicating if it is JSON line format",
+			//                   "type": "boolean"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "Parquet": {
+			//               "description": "A flag indicating if the dataset format is Parquet",
+			//               "type": "boolean"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "EndTimeOffset": {
+			//           "description": "Monitoring end time offset, e.g. PT0H",
+			//           "maxLength": 15,
+			//           "minLength": 1,
+			//           "pattern": "^.?P.*",
+			//           "type": "string"
+			//         },
+			//         "InferenceAttribute": {
+			//           "description": "Index or JSONpath to locate predicted label(s)",
+			//           "maxLength": 256,
+			//           "type": "string"
+			//         },
+			//         "LocalPath": {
+			//           "description": "Path to the filesystem where the endpoint data is available to the container.",
+			//           "maxLength": 256,
+			//           "pattern": ".*",
+			//           "type": "string"
+			//         },
+			//         "ProbabilityAttribute": {
+			//           "description": "Index or JSONpath to locate probabilities",
+			//           "maxLength": 256,
+			//           "type": "string"
+			//         },
+			//         "ProbabilityThresholdAttribute": {
+			//           "format": "double",
+			//           "type": "number"
+			//         },
+			//         "S3DataDistributionType": {
+			//           "description": "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
+			//           "enum": [
+			//             "FullyReplicated",
+			//             "ShardedByS3Key"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "S3InputMode": {
+			//           "description": "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
+			//           "enum": [
+			//             "Pipe",
+			//             "File"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "StartTimeOffset": {
+			//           "description": "Monitoring start time offset, e.g. -PT1H",
+			//           "maxLength": 15,
+			//           "minLength": 1,
+			//           "pattern": "^.?P.*",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "DataCapturedDestinationS3Uri",
+			//         "DatasetFormat",
+			//         "LocalPath"
+			//       ],
+			//       "type": "object"
+			//     },
 			//     "EndpointInput": {
 			//       "additionalProperties": false,
 			//       "description": "The endpoint for a monitoring job.",
@@ -435,7 +533,6 @@ func modelQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSo
 			//     }
 			//   },
 			//   "required": [
-			//     "EndpointInput",
 			//     "GroundTruthS3Input"
 			//   ],
 			//   "type": "object"
@@ -443,6 +540,113 @@ func modelQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSo
 			Description: "The inputs for a monitoring job.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"batch_transform_input": {
+						// Property: BatchTransformInput
+						Description: "The batch transform input for a monitoring job.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"data_captured_destination_s3_uri": {
+									// Property: DataCapturedDestinationS3Uri
+									Description: "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"dataset_format": {
+									// Property: DatasetFormat
+									Description: "The dataset format of the data to monitor",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"csv": {
+												// Property: Csv
+												Description: "The CSV format",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"header": {
+															// Property: Header
+															Description: "A boolean flag indicating if given CSV has header",
+															Type:        types.BoolType,
+															Computed:    true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"json": {
+												// Property: Json
+												Description: "The Json format",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"line": {
+															// Property: Line
+															Description: "A boolean flag indicating if it is JSON line format",
+															Type:        types.BoolType,
+															Computed:    true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"parquet": {
+												// Property: Parquet
+												Description: "A flag indicating if the dataset format is Parquet",
+												Type:        types.BoolType,
+												Computed:    true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"end_time_offset": {
+									// Property: EndTimeOffset
+									Description: "Monitoring end time offset, e.g. PT0H",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"inference_attribute": {
+									// Property: InferenceAttribute
+									Description: "Index or JSONpath to locate predicted label(s)",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"local_path": {
+									// Property: LocalPath
+									Description: "Path to the filesystem where the endpoint data is available to the container.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"probability_attribute": {
+									// Property: ProbabilityAttribute
+									Description: "Index or JSONpath to locate probabilities",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"probability_threshold_attribute": {
+									// Property: ProbabilityThresholdAttribute
+									Type:     types.Float64Type,
+									Computed: true,
+								},
+								"s3_data_distribution_type": {
+									// Property: S3DataDistributionType
+									Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"s3_input_mode": {
+									// Property: S3InputMode
+									Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"start_time_offset": {
+									// Property: StartTimeOffset
+									Description: "Monitoring start time offset, e.g. -PT1H",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
 					"endpoint_input": {
 						// Property: EndpointInput
 						Description: "The endpoint for a monitoring job.",
@@ -847,11 +1051,15 @@ func modelQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSo
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"baselining_job_name":                       "BaseliningJobName",
+		"batch_transform_input":                     "BatchTransformInput",
 		"cluster_config":                            "ClusterConfig",
 		"constraints_resource":                      "ConstraintsResource",
 		"container_arguments":                       "ContainerArguments",
 		"container_entrypoint":                      "ContainerEntrypoint",
 		"creation_time":                             "CreationTime",
+		"csv":                                       "Csv",
+		"data_captured_destination_s3_uri":          "DataCapturedDestinationS3Uri",
+		"dataset_format":                            "DatasetFormat",
 		"enable_inter_container_traffic_encryption": "EnableInterContainerTrafficEncryption",
 		"enable_network_isolation":                  "EnableNetworkIsolation",
 		"end_time_offset":                           "EndTimeOffset",
@@ -859,6 +1067,7 @@ func modelQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSo
 		"endpoint_name":                             "EndpointName",
 		"environment":                               "Environment",
 		"ground_truth_s3_input":                     "GroundTruthS3Input",
+		"header":                                    "Header",
 		"image_uri":                                 "ImageUri",
 		"inference_attribute":                       "InferenceAttribute",
 		"instance_count":                            "InstanceCount",
@@ -866,8 +1075,10 @@ func modelQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSo
 		"job_definition_arn":                        "JobDefinitionArn",
 		"job_definition_name":                       "JobDefinitionName",
 		"job_resources":                             "JobResources",
+		"json":                                      "Json",
 		"key":                                       "Key",
 		"kms_key_id":                                "KmsKeyId",
+		"line":                                      "Line",
 		"local_path":                                "LocalPath",
 		"max_runtime_in_seconds":                    "MaxRuntimeInSeconds",
 		"model_quality_app_specification":           "ModelQualityAppSpecification",
@@ -876,6 +1087,7 @@ func modelQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSo
 		"model_quality_job_output_config":           "ModelQualityJobOutputConfig",
 		"monitoring_outputs":                        "MonitoringOutputs",
 		"network_config":                            "NetworkConfig",
+		"parquet":                                   "Parquet",
 		"post_analytics_processor_source_uri":       "PostAnalyticsProcessorSourceUri",
 		"probability_attribute":                     "ProbabilityAttribute",
 		"probability_threshold_attribute":           "ProbabilityThresholdAttribute",

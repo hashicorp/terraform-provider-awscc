@@ -29,7 +29,7 @@ Resource Type Definition for AWS:IdentityStore::GroupMembership
 <a id="nestedatt--member_id"></a>
 ### Nested Schema for `member_id`
 
-Optional:
+Required:
 
 - `user_id` (String) The identifier for a user in the identity store.
 

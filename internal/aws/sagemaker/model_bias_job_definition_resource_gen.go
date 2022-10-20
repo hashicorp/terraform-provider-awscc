@@ -369,6 +369,109 @@ func modelBiasJobDefinitionResource(ctx context.Context) (resource.Resource, err
 			//   "additionalProperties": false,
 			//   "description": "The inputs for a monitoring job.",
 			//   "properties": {
+			//     "BatchTransformInput": {
+			//       "additionalProperties": false,
+			//       "description": "The batch transform input for a monitoring job.",
+			//       "properties": {
+			//         "DataCapturedDestinationS3Uri": {
+			//           "description": "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
+			//           "maxLength": 512,
+			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+			//           "type": "string"
+			//         },
+			//         "DatasetFormat": {
+			//           "description": "The dataset format of the data to monitor",
+			//           "properties": {
+			//             "Csv": {
+			//               "description": "The CSV format",
+			//               "properties": {
+			//                 "Header": {
+			//                   "description": "A boolean flag indicating if given CSV has header",
+			//                   "type": "boolean"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "Json": {
+			//               "description": "The Json format",
+			//               "properties": {
+			//                 "Line": {
+			//                   "description": "A boolean flag indicating if it is JSON line format",
+			//                   "type": "boolean"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "Parquet": {
+			//               "description": "A flag indicate if the dataset format is Parquet",
+			//               "type": "boolean"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "EndTimeOffset": {
+			//           "description": "Monitoring end time offset, e.g. PT0H",
+			//           "maxLength": 15,
+			//           "minLength": 1,
+			//           "pattern": "^.?P.*",
+			//           "type": "string"
+			//         },
+			//         "FeaturesAttribute": {
+			//           "description": "JSONpath to locate features in JSONlines dataset",
+			//           "maxLength": 256,
+			//           "type": "string"
+			//         },
+			//         "InferenceAttribute": {
+			//           "description": "Index or JSONpath to locate predicted label(s)",
+			//           "maxLength": 256,
+			//           "type": "string"
+			//         },
+			//         "LocalPath": {
+			//           "description": "Path to the filesystem where the endpoint data is available to the container.",
+			//           "maxLength": 256,
+			//           "pattern": ".*",
+			//           "type": "string"
+			//         },
+			//         "ProbabilityAttribute": {
+			//           "description": "Index or JSONpath to locate probabilities",
+			//           "maxLength": 256,
+			//           "type": "string"
+			//         },
+			//         "ProbabilityThresholdAttribute": {
+			//           "format": "double",
+			//           "type": "number"
+			//         },
+			//         "S3DataDistributionType": {
+			//           "description": "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
+			//           "enum": [
+			//             "FullyReplicated",
+			//             "ShardedByS3Key"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "S3InputMode": {
+			//           "description": "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
+			//           "enum": [
+			//             "Pipe",
+			//             "File"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "StartTimeOffset": {
+			//           "description": "Monitoring start time offset, e.g. -PT1H",
+			//           "maxLength": 15,
+			//           "minLength": 1,
+			//           "pattern": "^.?P.*",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "DataCapturedDestinationS3Uri",
+			//         "DatasetFormat",
+			//         "LocalPath"
+			//       ],
+			//       "type": "object"
+			//     },
 			//     "EndpointInput": {
 			//       "additionalProperties": false,
 			//       "description": "The endpoint for a monitoring job.",
@@ -459,7 +562,6 @@ func modelBiasJobDefinitionResource(ctx context.Context) (resource.Resource, err
 			//     }
 			//   },
 			//   "required": [
-			//     "EndpointInput",
 			//     "GroundTruthS3Input"
 			//   ],
 			//   "type": "object"
@@ -467,6 +569,212 @@ func modelBiasJobDefinitionResource(ctx context.Context) (resource.Resource, err
 			Description: "The inputs for a monitoring job.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"batch_transform_input": {
+						// Property: BatchTransformInput
+						Description: "The batch transform input for a monitoring job.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"data_captured_destination_s3_uri": {
+									// Property: DataCapturedDestinationS3Uri
+									Description: "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenAtMost(512),
+										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									},
+								},
+								"dataset_format": {
+									// Property: DatasetFormat
+									Description: "The dataset format of the data to monitor",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"csv": {
+												// Property: Csv
+												Description: "The CSV format",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"header": {
+															// Property: Header
+															Description: "A boolean flag indicating if given CSV has header",
+															Type:        types.BoolType,
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+													},
+												),
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"json": {
+												// Property: Json
+												Description: "The Json format",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"line": {
+															// Property: Line
+															Description: "A boolean flag indicating if it is JSON line format",
+															Type:        types.BoolType,
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+													},
+												),
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"parquet": {
+												// Property: Parquet
+												Description: "A flag indicate if the dataset format is Parquet",
+												Type:        types.BoolType,
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+										},
+									),
+									Required: true,
+								},
+								"end_time_offset": {
+									// Property: EndTimeOffset
+									Description: "Monitoring end time offset, e.g. PT0H",
+									Type:        types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 15),
+										validate.StringMatch(regexp.MustCompile("^.?P.*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"features_attribute": {
+									// Property: FeaturesAttribute
+									Description: "JSONpath to locate features in JSONlines dataset",
+									Type:        types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenAtMost(256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"inference_attribute": {
+									// Property: InferenceAttribute
+									Description: "Index or JSONpath to locate predicted label(s)",
+									Type:        types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenAtMost(256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"local_path": {
+									// Property: LocalPath
+									Description: "Path to the filesystem where the endpoint data is available to the container.",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenAtMost(256),
+										validate.StringMatch(regexp.MustCompile(".*"), ""),
+									},
+								},
+								"probability_attribute": {
+									// Property: ProbabilityAttribute
+									Description: "Index or JSONpath to locate probabilities",
+									Type:        types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenAtMost(256),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"probability_threshold_attribute": {
+									// Property: ProbabilityThresholdAttribute
+									Type:     types.Float64Type,
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"s3_data_distribution_type": {
+									// Property: S3DataDistributionType
+									Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
+									Type:        types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"FullyReplicated",
+											"ShardedByS3Key",
+										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"s3_input_mode": {
+									// Property: S3InputMode
+									Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
+									Type:        types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"Pipe",
+											"File",
+										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"start_time_offset": {
+									// Property: StartTimeOffset
+									Description: "Monitoring start time offset, e.g. -PT1H",
+									Type:        types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 15),
+										validate.StringMatch(regexp.MustCompile("^.?P.*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
 					"endpoint_input": {
 						// Property: EndpointInput
 						Description: "The endpoint for a monitoring job.",
@@ -602,7 +910,11 @@ func modelBiasJobDefinitionResource(ctx context.Context) (resource.Resource, err
 								},
 							},
 						),
-						Required: true,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"ground_truth_s3_input": {
 						// Property: GroundTruthS3Input
@@ -1043,11 +1355,15 @@ func modelBiasJobDefinitionResource(ctx context.Context) (resource.Resource, err
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"baselining_job_name":  "BaseliningJobName",
-		"cluster_config":       "ClusterConfig",
-		"config_uri":           "ConfigUri",
-		"constraints_resource": "ConstraintsResource",
-		"creation_time":        "CreationTime",
+		"baselining_job_name":              "BaseliningJobName",
+		"batch_transform_input":            "BatchTransformInput",
+		"cluster_config":                   "ClusterConfig",
+		"config_uri":                       "ConfigUri",
+		"constraints_resource":             "ConstraintsResource",
+		"creation_time":                    "CreationTime",
+		"csv":                              "Csv",
+		"data_captured_destination_s3_uri": "DataCapturedDestinationS3Uri",
+		"dataset_format":                   "DatasetFormat",
 		"enable_inter_container_traffic_encryption": "EnableInterContainerTrafficEncryption",
 		"enable_network_isolation":                  "EnableNetworkIsolation",
 		"end_time_offset":                           "EndTimeOffset",
@@ -1056,6 +1372,7 @@ func modelBiasJobDefinitionResource(ctx context.Context) (resource.Resource, err
 		"environment":                               "Environment",
 		"features_attribute":                        "FeaturesAttribute",
 		"ground_truth_s3_input":                     "GroundTruthS3Input",
+		"header":                                    "Header",
 		"image_uri":                                 "ImageUri",
 		"inference_attribute":                       "InferenceAttribute",
 		"instance_count":                            "InstanceCount",
@@ -1063,8 +1380,10 @@ func modelBiasJobDefinitionResource(ctx context.Context) (resource.Resource, err
 		"job_definition_arn":                        "JobDefinitionArn",
 		"job_definition_name":                       "JobDefinitionName",
 		"job_resources":                             "JobResources",
+		"json":                                      "Json",
 		"key":                                       "Key",
 		"kms_key_id":                                "KmsKeyId",
+		"line":                                      "Line",
 		"local_path":                                "LocalPath",
 		"max_runtime_in_seconds":                    "MaxRuntimeInSeconds",
 		"model_bias_app_specification":              "ModelBiasAppSpecification",
@@ -1073,6 +1392,7 @@ func modelBiasJobDefinitionResource(ctx context.Context) (resource.Resource, err
 		"model_bias_job_output_config":              "ModelBiasJobOutputConfig",
 		"monitoring_outputs":                        "MonitoringOutputs",
 		"network_config":                            "NetworkConfig",
+		"parquet":                                   "Parquet",
 		"probability_attribute":                     "ProbabilityAttribute",
 		"probability_threshold_attribute":           "ProbabilityThresholdAttribute",
 		"role_arn":                                  "RoleArn",

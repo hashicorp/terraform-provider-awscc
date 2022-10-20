@@ -93,8 +93,7 @@
         "Name"
     ],
     "createOnlyProperties": [
-        "/properties/Resource",
-        "/properties/Tags"
+        "/properties/Resource"
     ],
     "primaryIdentifier": [
         "/properties/Arn"
@@ -130,7 +129,10 @@
         },
         "update": {
             "permissions": [
-                "codestar-notifications:updateNotificationRule"
+                "codestar-notifications:updateNotificationRule",
+                "codestar-notifications:TagResource",
+                "codestar-notifications:UntagResource"
+
             ]
         }
     }
