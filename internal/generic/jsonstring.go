@@ -245,7 +245,7 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 
 	if err != nil {
 		response.Diagnostics.AddError(
-			"Invalid JSON string",
+			"Invalid JSON string (planned)",
 			fmt.Sprintf("unable to unmarshal JSON: %s", err.Error()),
 		)
 
@@ -261,21 +261,25 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 		return
 	}
 
-	currentMap, err := expandJSONFromString(current.Value)
-
-	if err != nil {
-		response.Diagnostics.AddError(
-			"Invalid JSON string",
-			fmt.Sprintf("unable to unmarshal JSON: %s", err.Error()),
-		)
-
-		return
-	}
-
-	if reflect.DeepEqual(plannedMap, currentMap) {
-		response.AttributePlan = request.AttributeState
-	} else {
+	if current.IsNull() {
 		response.AttributePlan = request.AttributePlan
+	} else {
+		currentMap, err := expandJSONFromString(current.Value)
+
+		if err != nil {
+			response.Diagnostics.AddError(
+				"Invalid JSON string (current)",
+				fmt.Sprintf("unable to unmarshal JSON: %s", err.Error()),
+			)
+
+			return
+		}
+
+		if reflect.DeepEqual(plannedMap, currentMap) {
+			response.AttributePlan = request.AttributeState
+		} else {
+			response.AttributePlan = request.AttributePlan
+		}
 	}
 }
 
