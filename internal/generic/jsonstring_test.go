@@ -132,6 +132,11 @@ func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 			currentValue: types.Int64{Value: 1},
 			expectError:  true,
 		},
+		"current null": {
+			plannedValue:  JSONString{Value: `{"k1": 42}`},
+			currentValue:  JSONString{Null: true},
+			expectedValue: JSONString{Value: `{"k1": 42}`},
+		},
 		"exactly equal": {
 			plannedValue:  JSONString{Value: `{}`},
 			currentValue:  JSONString{Value: `{}`},

@@ -78,7 +78,7 @@ func (t jsonStringType) Validate(ctx context.Context, v tftypes.Value, p path.Pa
 	if !v.Type().Is(tftypes.String) {
 		diags.AddAttributeError(
 			p,
-			"Duration Type Validation Error",
+			"JSONString Type Validation Error",
 			"An unexpected error was encountered trying to validate an attribute value. This is always an error in the provider. Please report the following to the provider developer:\n\n"+
 				fmt.Sprintf("Expected String value, received %T with value: %v", v, v),
 		)
@@ -96,7 +96,7 @@ func (t jsonStringType) Validate(ctx context.Context, v tftypes.Value, p path.Pa
 	if err != nil {
 		diags.AddAttributeError(
 			p,
-			"Duration Type Validation Error",
+			"JSONString Type Validation Error",
 			"An unexpected error was encountered trying to validate an attribute value. This is always an error in the provider. Please report the following to the provider developer:\n\n"+
 				fmt.Sprintf("Cannot convert value to String: %s", err),
 		)
@@ -245,7 +245,7 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 
 	if err != nil {
 		response.Diagnostics.AddError(
-			"Invalid JSON string",
+			"Invalid JSON string (planned)",
 			fmt.Sprintf("unable to unmarshal JSON: %s", err.Error()),
 		)
 
@@ -261,21 +261,25 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 		return
 	}
 
-	currentMap, err := expandJSONFromString(current.Value)
-
-	if err != nil {
-		response.Diagnostics.AddError(
-			"Invalid JSON string",
-			fmt.Sprintf("unable to unmarshal JSON: %s", err.Error()),
-		)
-
-		return
-	}
-
-	if reflect.DeepEqual(plannedMap, currentMap) {
-		response.AttributePlan = request.AttributeState
-	} else {
+	if current.IsNull() {
 		response.AttributePlan = request.AttributePlan
+	} else {
+		currentMap, err := expandJSONFromString(current.Value)
+
+		if err != nil {
+			response.Diagnostics.AddError(
+				"Invalid JSON string (current)",
+				fmt.Sprintf("unable to unmarshal JSON: %s", err.Error()),
+			)
+
+			return
+		}
+
+		if reflect.DeepEqual(plannedMap, currentMap) {
+			response.AttributePlan = request.AttributeState
+		} else {
+			response.AttributePlan = request.AttributePlan
+		}
 	}
 }
 
