@@ -113,8 +113,7 @@
    },
   "required": [
     "ResourceType",
-    "ResourceId",
-    "TrafficType"
+    "ResourceId"
   ],
   "createOnlyProperties": [
     "/properties/DeliverLogsPermissionArn",
