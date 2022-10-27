@@ -151,6 +151,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_fis_experiment_templates -cftype AWS::FIS::ExperimentTemplate -package fis ../aws/fis/experiment_template_plural_data_source_gen.go ../aws/fis/experiment_template_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_forecast_datasets -cftype AWS::Forecast::Dataset -package forecast ../aws/forecast/dataset_plural_data_source_gen.go ../aws/forecast/dataset_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_forecast_dataset_groups -cftype AWS::Forecast::DatasetGroup -package forecast ../aws/forecast/dataset_group_plural_data_source_gen.go ../aws/forecast/dataset_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_fsx_data_repository_associations -cftype AWS::FSx::DataRepositoryAssociation -package fsx ../aws/fsx/data_repository_association_plural_data_source_gen.go ../aws/fsx/data_repository_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_finspace_environments -cftype AWS::FinSpace::Environment -package finspace ../aws/finspace/environment_plural_data_source_gen.go ../aws/finspace/environment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_frauddetector_detectors -cftype AWS::FraudDetector::Detector -package frauddetector ../aws/frauddetector/detector_plural_data_source_gen.go ../aws/frauddetector/detector_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_frauddetector_entity_types -cftype AWS::FraudDetector::EntityType -package frauddetector ../aws/frauddetector/entity_type_plural_data_source_gen.go ../aws/frauddetector/entity_type_plural_data_source_gen_test.go
@@ -439,6 +440,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/fis"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/forecast"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/frauddetector"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/fsx"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/gamelift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/globalaccelerator"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/glue"
