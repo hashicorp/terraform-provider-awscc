@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.17.9
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.19
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.10.14
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.11
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.12
 	github.com/aws/smithy-go v1.13.4
 	github.com/google/go-cmp v0.5.9
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.18.0
@@ -33,8 +33,8 @@ require (
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
 	github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.12.22 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.24 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.18 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.25 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.19 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.3.25 // indirect
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.4 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.18 // indirect
