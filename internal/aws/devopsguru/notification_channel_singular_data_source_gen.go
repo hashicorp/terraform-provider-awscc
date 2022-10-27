@@ -27,6 +27,47 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 			//   "additionalProperties": false,
 			//   "description": "Information about notification channels you have configured with DevOps Guru.",
 			//   "properties": {
+			//     "Filters": {
+			//       "additionalProperties": false,
+			//       "description": "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
+			//       "properties": {
+			//         "MessageTypes": {
+			//           "description": "DevOps Guru message types to filter for",
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "description": "DevOps Guru NotificationMessageType Enum",
+			//             "enum": [
+			//               "NEW_INSIGHT",
+			//               "CLOSED_INSIGHT",
+			//               "NEW_ASSOCIATION",
+			//               "SEVERITY_UPGRADED",
+			//               "NEW_RECOMMENDATION"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "maxItems": 5,
+			//           "minItems": 1,
+			//           "type": "array"
+			//         },
+			//         "Severities": {
+			//           "description": "DevOps Guru insight severities to filter for",
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "description": "DevOps Guru Insight Severity Enum",
+			//             "enum": [
+			//               "LOW",
+			//               "MEDIUM",
+			//               "HIGH"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "maxItems": 3,
+			//           "minItems": 1,
+			//           "type": "array"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
 			//     "Sns": {
 			//       "additionalProperties": false,
 			//       "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
@@ -46,6 +87,27 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 			Description: "Information about notification channels you have configured with DevOps Guru.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"filters": {
+						// Property: Filters
+						Description: "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"message_types": {
+									// Property: MessageTypes
+									Description: "DevOps Guru message types to filter for",
+									Type:        types.ListType{ElemType: types.StringType},
+									Computed:    true,
+								},
+								"severities": {
+									// Property: Severities
+									Description: "DevOps Guru insight severities to filter for",
+									Type:        types.ListType{ElemType: types.StringType},
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
 					"sns": {
 						// Property: Sns
 						Description: "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
@@ -97,10 +159,13 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::NotificationChannel").WithTerraformTypeName("awscc_devopsguru_notification_channel")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"config":    "Config",
-		"id":        "Id",
-		"sns":       "Sns",
-		"topic_arn": "TopicArn",
+		"config":        "Config",
+		"filters":       "Filters",
+		"id":            "Id",
+		"message_types": "MessageTypes",
+		"severities":    "Severities",
+		"sns":           "Sns",
+		"topic_arn":     "TopicArn",
 	})
 
 	v, err := NewSingularDataSource(ctx, opts...)

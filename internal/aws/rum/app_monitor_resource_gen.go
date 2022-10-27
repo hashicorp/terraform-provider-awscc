@@ -87,6 +87,98 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 			//       "minItems": 0,
 			//       "type": "array"
 			//     },
+			//     "MetricDestinations": {
+			//       "description": "An array of structures which define the destinations and the metrics that you want to send.",
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "An structure which defines the destination and the metrics that you want to send.",
+			//         "properties": {
+			//           "Destination": {
+			//             "description": "Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the Evidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.",
+			//             "enum": [
+			//               "CloudWatch",
+			//               "Evidently"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "DestinationArn": {
+			//             "description": "Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.",
+			//             "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*",
+			//             "type": "string"
+			//           },
+			//           "IamRoleArn": {
+			//             "description": "This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.\n\nThis parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.",
+			//             "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*",
+			//             "type": "string"
+			//           },
+			//           "MetricDefinitions": {
+			//             "description": "An array of structures which define the metrics that you want to send.",
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "description": "A single metric definition",
+			//               "properties": {
+			//                 "DimensionKeys": {
+			//                   "additionalProperties": false,
+			//                   "description": "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. Valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
+			//                   "patternProperties": {
+			//                     "": {
+			//                       "maxLength": 255,
+			//                       "minLength": 1,
+			//                       "pattern": ".*[^\\s].*",
+			//                       "type": "string"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "EventPattern": {
+			//                   "description": "The pattern that defines the metric, specified as a JSON object. RUM checks events that happen in a user's session against the pattern, and events that match the pattern are sent to the metric destination.\n\nWhen you define extended metrics, the metric definition is not valid if EventPattern is omitted.\n\nExample event patterns:\n\n'{ \"event_type\": [\"com.amazon.rum.js_error_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Safari\" ], } }'\n\n'{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Firefox\" ] }, \"event_details\": { \"duration\": [{ \"numeric\": [ \"\u003c\", 2000 ] }] } }'\n\n'{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Safari\" ], \"countryCode\": [ \"US\" ] }, \"event_details\": { \"duration\": [{ \"numeric\": [ \"\u003e=\", 2000, \"\u003c\", 8000 ] }] } }'\n\nIf the metrics destination' is CloudWatch and the event also matches a value in DimensionKeys, then the metric is published with the specified dimensions.",
+			//                   "maxLength": 4000,
+			//                   "minLength": 1,
+			//                   "type": "string"
+			//                 },
+			//                 "Name": {
+			//                   "description": "The name for the metric that is defined in this structure. Valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
+			//                   "maxLength": 255,
+			//                   "minLength": 1,
+			//                   "type": "string"
+			//                 },
+			//                 "UnitLabel": {
+			//                   "description": "The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.",
+			//                   "maxLength": 256,
+			//                   "minLength": 1,
+			//                   "type": "string"
+			//                 },
+			//                 "ValueKey": {
+			//                   "description": "The field within the event object that the metric value is sourced from.\n\nIf you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.\n\nIf this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event.",
+			//                   "maxLength": 256,
+			//                   "minLength": 1,
+			//                   "pattern": ".*",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Name"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "maxItems": 2000,
+			//             "minItems": 0,
+			//             "type": "array",
+			//             "uniqueItems": true
+			//           }
+			//         },
+			//         "required": [
+			//           "Destination"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "maxItems": 20,
+			//       "minItems": 0,
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
 			//     "SessionSampleRate": {
 			//       "description": "Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. If you omit this parameter, the default of 10 is used.",
 			//       "maximum": 1,
@@ -202,6 +294,136 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							resource.UseStateForUnknown(),
+						},
+					},
+					"metric_destinations": {
+						// Property: MetricDestinations
+						Description: "An array of structures which define the destinations and the metrics that you want to send.",
+						Attributes: tfsdk.SetNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"destination": {
+									// Property: Destination
+									Description: "Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the Evidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CloudWatch",
+											"Evidently",
+										}),
+									},
+								},
+								"destination_arn": {
+									// Property: DestinationArn
+									Description: "Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.",
+									Type:        types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("arn:[^:]*:[^:]*:[^:]*:[^:]*:.*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"iam_role_arn": {
+									// Property: IamRoleArn
+									Description: "This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.\n\nThis parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.",
+									Type:        types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("arn:[^:]*:[^:]*:[^:]*:[^:]*:.*"), ""),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"metric_definitions": {
+									// Property: MetricDefinitions
+									Description: "An array of structures which define the metrics that you want to send.",
+									Attributes: tfsdk.SetNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"dimension_keys": {
+												// Property: DimensionKeys
+												Description: "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. Valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
+												// Pattern: ""
+												Type:     types.MapType{ElemType: types.StringType},
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"event_pattern": {
+												// Property: EventPattern
+												Description: "The pattern that defines the metric, specified as a JSON object. RUM checks events that happen in a user's session against the pattern, and events that match the pattern are sent to the metric destination.\n\nWhen you define extended metrics, the metric definition is not valid if EventPattern is omitted.\n\nExample event patterns:\n\n'{ \"event_type\": [\"com.amazon.rum.js_error_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Safari\" ], } }'\n\n'{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Firefox\" ] }, \"event_details\": { \"duration\": [{ \"numeric\": [ \"<\", 2000 ] }] } }'\n\n'{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Safari\" ], \"countryCode\": [ \"US\" ] }, \"event_details\": { \"duration\": [{ \"numeric\": [ \">=\", 2000, \"<\", 8000 ] }] } }'\n\nIf the metrics destination' is CloudWatch and the event also matches a value in DimensionKeys, then the metric is published with the specified dimensions.",
+												Type:        types.StringType,
+												Optional:    true,
+												Computed:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 4000),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"name": {
+												// Property: Name
+												Description: "The name for the metric that is defined in this structure. Valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
+												Type:        types.StringType,
+												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 255),
+												},
+											},
+											"unit_label": {
+												// Property: UnitLabel
+												Description: "The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.",
+												Type:        types.StringType,
+												Optional:    true,
+												Computed:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 256),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"value_key": {
+												// Property: ValueKey
+												Description: "The field within the event object that the metric value is sourced from.\n\nIf you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.\n\nIf this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event.",
+												Type:        types.StringType,
+												Optional:    true,
+												Computed:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 256),
+													validate.StringMatch(regexp.MustCompile(".*"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+										},
+									),
+									Optional: true,
+									Computed: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 2000),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 20),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -385,19 +607,28 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"allow_cookies":             "AllowCookies",
 		"app_monitor_configuration": "AppMonitorConfiguration",
 		"cw_log_enabled":            "CwLogEnabled",
+		"destination":               "Destination",
+		"destination_arn":           "DestinationArn",
+		"dimension_keys":            "DimensionKeys",
 		"domain":                    "Domain",
 		"enable_x_ray":              "EnableXRay",
+		"event_pattern":             "EventPattern",
 		"excluded_pages":            "ExcludedPages",
 		"favorite_pages":            "FavoritePages",
 		"guest_role_arn":            "GuestRoleArn",
+		"iam_role_arn":              "IamRoleArn",
 		"identity_pool_id":          "IdentityPoolId",
 		"included_pages":            "IncludedPages",
 		"key":                       "Key",
+		"metric_definitions":        "MetricDefinitions",
+		"metric_destinations":       "MetricDestinations",
 		"name":                      "Name",
 		"session_sample_rate":       "SessionSampleRate",
 		"tags":                      "Tags",
 		"telemetries":               "Telemetries",
+		"unit_label":                "UnitLabel",
 		"value":                     "Value",
+		"value_key":                 "ValueKey",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -517,6 +517,49 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//             },
 			//             "type": "object"
 			//           },
+			//           "Location": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "DeviceId": {
+			//                 "type": "string"
+			//               },
+			//               "Latitude": {
+			//                 "type": "string"
+			//               },
+			//               "Longitude": {
+			//                 "type": "string"
+			//               },
+			//               "RoleArn": {
+			//                 "type": "string"
+			//               },
+			//               "Timestamp": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "Unit": {
+			//                     "type": "string"
+			//                   },
+			//                   "Value": {
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Value"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "TrackerName": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "RoleArn",
+			//               "TrackerName",
+			//               "DeviceId",
+			//               "Latitude",
+			//               "Longitude"
+			//             ],
+			//             "type": "object"
+			//           },
 			//           "OpenSearch": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -548,6 +591,62 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//           "Republish": {
 			//             "additionalProperties": false,
 			//             "properties": {
+			//               "Headers": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "ContentType": {
+			//                     "maxLength": 1024,
+			//                     "minLength": 0,
+			//                     "type": "string"
+			//                   },
+			//                   "CorrelationData": {
+			//                     "maxLength": 1024,
+			//                     "minLength": 0,
+			//                     "type": "string"
+			//                   },
+			//                   "MessageExpiry": {
+			//                     "maxLength": 1024,
+			//                     "minLength": 0,
+			//                     "type": "string"
+			//                   },
+			//                   "PayloadFormatIndicator": {
+			//                     "maxLength": 1024,
+			//                     "minLength": 0,
+			//                     "type": "string"
+			//                   },
+			//                   "ResponseTopic": {
+			//                     "maxLength": 1024,
+			//                     "minLength": 0,
+			//                     "type": "string"
+			//                   },
+			//                   "UserProperties": {
+			//                     "items": {
+			//                       "additionalProperties": false,
+			//                       "properties": {
+			//                         "Key": {
+			//                           "maxLength": 1024,
+			//                           "minLength": 0,
+			//                           "type": "string"
+			//                         },
+			//                         "Value": {
+			//                           "maxLength": 1024,
+			//                           "minLength": 0,
+			//                           "type": "string"
+			//                         }
+			//                       },
+			//                       "required": [
+			//                         "Key",
+			//                         "Value"
+			//                       ],
+			//                       "type": "object"
+			//                     },
+			//                     "maxItems": 100,
+			//                     "minItems": 1,
+			//                     "type": "array"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
 			//               "Qos": {
 			//                 "type": "integer"
 			//               },
@@ -657,9 +756,6 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//           "Timestream": {
 			//             "additionalProperties": false,
 			//             "properties": {
-			//               "BatchMode": {
-			//                 "type": "boolean"
-			//               },
 			//               "DatabaseName": {
 			//                 "type": "string"
 			//               },
@@ -1160,6 +1256,49 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//           },
 			//           "type": "object"
 			//         },
+			//         "Location": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "DeviceId": {
+			//               "type": "string"
+			//             },
+			//             "Latitude": {
+			//               "type": "string"
+			//             },
+			//             "Longitude": {
+			//               "type": "string"
+			//             },
+			//             "RoleArn": {
+			//               "type": "string"
+			//             },
+			//             "Timestamp": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Unit": {
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Value"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "TrackerName": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "RoleArn",
+			//             "TrackerName",
+			//             "DeviceId",
+			//             "Latitude",
+			//             "Longitude"
+			//           ],
+			//           "type": "object"
+			//         },
 			//         "OpenSearch": {
 			//           "additionalProperties": false,
 			//           "properties": {
@@ -1191,6 +1330,62 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//         "Republish": {
 			//           "additionalProperties": false,
 			//           "properties": {
+			//             "Headers": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "ContentType": {
+			//                   "maxLength": 1024,
+			//                   "minLength": 0,
+			//                   "type": "string"
+			//                 },
+			//                 "CorrelationData": {
+			//                   "maxLength": 1024,
+			//                   "minLength": 0,
+			//                   "type": "string"
+			//                 },
+			//                 "MessageExpiry": {
+			//                   "maxLength": 1024,
+			//                   "minLength": 0,
+			//                   "type": "string"
+			//                 },
+			//                 "PayloadFormatIndicator": {
+			//                   "maxLength": 1024,
+			//                   "minLength": 0,
+			//                   "type": "string"
+			//                 },
+			//                 "ResponseTopic": {
+			//                   "maxLength": 1024,
+			//                   "minLength": 0,
+			//                   "type": "string"
+			//                 },
+			//                 "UserProperties": {
+			//                   "items": {
+			//                     "additionalProperties": false,
+			//                     "properties": {
+			//                       "Key": {
+			//                         "maxLength": 1024,
+			//                         "minLength": 0,
+			//                         "type": "string"
+			//                       },
+			//                       "Value": {
+			//                         "maxLength": 1024,
+			//                         "minLength": 0,
+			//                         "type": "string"
+			//                       }
+			//                     },
+			//                     "required": [
+			//                       "Key",
+			//                       "Value"
+			//                     ],
+			//                     "type": "object"
+			//                   },
+			//                   "maxItems": 100,
+			//                   "minItems": 1,
+			//                   "type": "array"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
 			//             "Qos": {
 			//               "type": "integer"
 			//             },
@@ -1300,9 +1495,6 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//         "Timestream": {
 			//           "additionalProperties": false,
 			//           "properties": {
-			//             "BatchMode": {
-			//               "type": "boolean"
-			//             },
 			//             "DatabaseName": {
 			//               "type": "string"
 			//             },
@@ -1892,6 +2084,57 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 									),
 									Computed: true,
 								},
+								"location": {
+									// Property: Location
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"device_id": {
+												// Property: DeviceId
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"latitude": {
+												// Property: Latitude
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"longitude": {
+												// Property: Longitude
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"role_arn": {
+												// Property: RoleArn
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"timestamp": {
+												// Property: Timestamp
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"unit": {
+															// Property: Unit
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"value": {
+															// Property: Value
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"tracker_name": {
+												// Property: TrackerName
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
 								"open_search": {
 									// Property: OpenSearch
 									Attributes: tfsdk.SingleNestedAttributes(
@@ -1929,6 +2172,57 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 									// Property: Republish
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
+											"headers": {
+												// Property: Headers
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"content_type": {
+															// Property: ContentType
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"correlation_data": {
+															// Property: CorrelationData
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"message_expiry": {
+															// Property: MessageExpiry
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"payload_format_indicator": {
+															// Property: PayloadFormatIndicator
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"response_topic": {
+															// Property: ResponseTopic
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"user_properties": {
+															// Property: UserProperties
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"key": {
+																		// Property: Key
+																		Type:     types.StringType,
+																		Computed: true,
+																	},
+																	"value": {
+																		// Property: Value
+																		Type:     types.StringType,
+																		Computed: true,
+																	},
+																},
+															),
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
 											"qos": {
 												// Property: Qos
 												Type:     types.Int64Type,
@@ -2049,11 +2343,6 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 									// Property: Timestream
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
-											"batch_mode": {
-												// Property: BatchMode
-												Type:     types.BoolType,
-												Computed: true,
-											},
 											"database_name": {
 												// Property: DatabaseName
 												Type:     types.StringType,
@@ -2639,6 +2928,57 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 									),
 									Computed: true,
 								},
+								"location": {
+									// Property: Location
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"device_id": {
+												// Property: DeviceId
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"latitude": {
+												// Property: Latitude
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"longitude": {
+												// Property: Longitude
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"role_arn": {
+												// Property: RoleArn
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"timestamp": {
+												// Property: Timestamp
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"unit": {
+															// Property: Unit
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"value": {
+															// Property: Value
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"tracker_name": {
+												// Property: TrackerName
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
 								"open_search": {
 									// Property: OpenSearch
 									Attributes: tfsdk.SingleNestedAttributes(
@@ -2676,6 +3016,57 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 									// Property: Republish
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
+											"headers": {
+												// Property: Headers
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"content_type": {
+															// Property: ContentType
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"correlation_data": {
+															// Property: CorrelationData
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"message_expiry": {
+															// Property: MessageExpiry
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"payload_format_indicator": {
+															// Property: PayloadFormatIndicator
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"response_topic": {
+															// Property: ResponseTopic
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"user_properties": {
+															// Property: UserProperties
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"key": {
+																		// Property: Key
+																		Type:     types.StringType,
+																		Computed: true,
+																	},
+																	"value": {
+																		// Property: Value
+																		Type:     types.StringType,
+																		Computed: true,
+																	},
+																},
+															),
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
 											"qos": {
 												// Property: Qos
 												Type:     types.Int64Type,
@@ -2796,11 +3187,6 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 									// Property: Timestream
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
-											"batch_mode": {
-												// Property: BatchMode
-												Type:     types.BoolType,
-												Computed: true,
-											},
 											"database_name": {
 												// Property: DatabaseName
 												Type:     types.StringType,
@@ -2909,10 +3295,13 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cloudwatch_logs":                  "CloudwatchLogs",
 		"cloudwatch_metric":                "CloudwatchMetric",
 		"confirmation_url":                 "ConfirmationUrl",
+		"content_type":                     "ContentType",
+		"correlation_data":                 "CorrelationData",
 		"database_name":                    "DatabaseName",
 		"delivery_stream_name":             "DeliveryStreamName",
 		"description":                      "Description",
 		"destination_arn":                  "DestinationArn",
+		"device_id":                        "DeviceId",
 		"dimensions":                       "Dimensions",
 		"double_value":                     "DoubleValue",
 		"dynamo_d_bv_2":                    "DynamoDBv2",
@@ -2940,7 +3329,11 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                              "Key",
 		"kinesis":                          "Kinesis",
 		"lambda":                           "Lambda",
+		"latitude":                         "Latitude",
+		"location":                         "Location",
 		"log_group_name":                   "LogGroupName",
+		"longitude":                        "Longitude",
+		"message_expiry":                   "MessageExpiry",
 		"message_format":                   "MessageFormat",
 		"message_id":                       "MessageId",
 		"metric_name":                      "MetricName",
@@ -2954,6 +3347,7 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"partition":                        "Partition",
 		"partition_key":                    "PartitionKey",
 		"payload_field":                    "PayloadField",
+		"payload_format_indicator":         "PayloadFormatIndicator",
 		"property_alias":                   "PropertyAlias",
 		"property_id":                      "PropertyId",
 		"property_values":                  "PropertyValues",
@@ -2966,6 +3360,7 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"range_key_type":                   "RangeKeyType",
 		"range_key_value":                  "RangeKeyValue",
 		"republish":                        "Republish",
+		"response_topic":                   "ResponseTopic",
 		"role_arn":                         "RoleArn",
 		"rule_disabled":                    "RuleDisabled",
 		"rule_name":                        "RuleName",
@@ -2991,10 +3386,12 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"timestream":                       "Timestream",
 		"topic":                            "Topic",
 		"topic_rule_payload":               "TopicRulePayload",
+		"tracker_name":                     "TrackerName",
 		"type":                             "Type",
 		"unit":                             "Unit",
 		"url":                              "Url",
 		"use_base_64":                      "UseBase64",
+		"user_properties":                  "UserProperties",
 		"value":                            "Value",
 	})
 

@@ -76,7 +76,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//       "DockerLabels": {
 			//         "additionalProperties": false,
 			//         "patternProperties": {
-			//           "": {
+			//           ".{1,}": {
 			//             "type": "string"
 			//           }
 			//         },
@@ -156,7 +156,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//           "Options": {
 			//             "additionalProperties": false,
 			//             "patternProperties": {
-			//               "": {
+			//               ".{1,}": {
 			//                 "type": "string"
 			//               }
 			//             },
@@ -314,7 +314,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//           "Options": {
 			//             "additionalProperties": false,
 			//             "patternProperties": {
-			//               "": {
+			//               ".{1,}": {
 			//                 "type": "string"
 			//               }
 			//             },
@@ -526,6 +526,10 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//         "type": "string"
 			//       }
 			//     },
+			//     "required": [
+			//       "Name",
+			//       "Image"
+			//     ],
 			//     "type": "object"
 			//   },
 			//   "type": "array",
@@ -613,7 +617,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					},
 					"docker_labels": {
 						// Property: DockerLabels
-						// Pattern: ""
+						// Pattern: ".{1,}"
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
 						Computed: true,
@@ -751,7 +755,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 							map[string]tfsdk.Attribute{
 								"options": {
 									// Property: Options
-									// Pattern: ""
+									// Pattern: ".{1,}"
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 									Computed: true,
@@ -852,11 +856,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Image
 						Description: "The image used to start a container. This string is passed directly to the Docker daemon.",
 						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
+						Required:    true,
 					},
 					"interactive": {
 						// Property: Interactive
@@ -1044,7 +1044,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								},
 								"options": {
 									// Property: Options
-									// Pattern: ""
+									// Pattern: ".{1,}"
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 									Computed: true,
@@ -1148,11 +1148,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Name
 						Description: "The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed",
 						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
+						Required:    true,
 					},
 					"port_mappings": {
 						// Property: PortMappings
@@ -1898,7 +1894,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//           "DriverOpts": {
 			//             "additionalProperties": false,
 			//             "patternProperties": {
-			//               "": {
+			//               ".{1,}": {
 			//                 "type": "string"
 			//               }
 			//             },
@@ -1907,7 +1903,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//           "Labels": {
 			//             "additionalProperties": false,
 			//             "patternProperties": {
-			//               "": {
+			//               ".{1,}": {
 			//                 "type": "string"
 			//               }
 			//             },
@@ -2004,7 +2000,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								},
 								"driver_opts": {
 									// Property: DriverOpts
-									// Pattern: ""
+									// Pattern: ".{1,}"
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 									Computed: true,
@@ -2014,7 +2010,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								},
 								"labels": {
 									// Property: Labels
-									// Pattern: ""
+									// Pattern: ".{1,}"
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 									Computed: true,

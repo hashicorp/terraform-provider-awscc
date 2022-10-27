@@ -88,7 +88,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "^arn:(aws[a-zA-Z-]*)?:refactorspaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
+			//   "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
