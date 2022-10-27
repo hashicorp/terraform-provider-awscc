@@ -22,6 +22,7 @@ updates:
     schedule:
       # Check for updates to Go modules every weekday
       interval: "daily"
+    open-pull-requests-limit: 30
 
   - package-ecosystem: "gomod"
     directory: "/tools"
