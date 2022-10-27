@@ -43,6 +43,11 @@ Resource Schema describing various properties for ECS TaskDefinition
 <a id="nestedatt--container_definitions"></a>
 ### Nested Schema for `container_definitions`
 
+Required:
+
+- `image` (String) The image used to start a container. This string is passed directly to the Docker daemon.
+- `name` (String) The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed
+
 Optional:
 
 - `command` (List of String)
@@ -61,7 +66,6 @@ Optional:
 - `firelens_configuration` (Attributes) (see [below for nested schema](#nestedatt--container_definitions--firelens_configuration))
 - `health_check` (Attributes) The health check command and associated configuration parameters for the container. (see [below for nested schema](#nestedatt--container_definitions--health_check))
 - `hostname` (String)
-- `image` (String) The image used to start a container. This string is passed directly to the Docker daemon.
 - `interactive` (Boolean)
 - `links` (Set of String)
 - `linux_parameters` (Attributes) (see [below for nested schema](#nestedatt--container_definitions--linux_parameters))
@@ -69,7 +73,6 @@ Optional:
 - `memory` (Number) The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.
 - `memory_reservation` (Number)
 - `mount_points` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--mount_points))
-- `name` (String) The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed
 - `port_mappings` (Attributes Set) Port mappings allow containers to access ports on the host container instance to send or receive traffic. (see [below for nested schema](#nestedatt--container_definitions--port_mappings))
 - `privileged` (Boolean)
 - `pseudo_terminal` (Boolean)

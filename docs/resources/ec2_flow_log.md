@@ -19,7 +19,6 @@ Specifies a VPC flow log, which enables you to capture IP traffic for a specific
 
 - `resource_id` (String) The ID of the subnet, network interface, or VPC for which you want to create a flow log.
 - `resource_type` (String) The type of resource for which to create the flow log. For example, if you specified a VPC ID for the ResourceId property, specify VPC for this property.
-- `traffic_type` (String) The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.
 
 ### Optional
 
@@ -31,6 +30,7 @@ Specifies a VPC flow log, which enables you to capture IP traffic for a specific
 - `log_group_name` (String) The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.
 - `max_aggregation_interval` (Number) The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes).
 - `tags` (Attributes List) The tags to apply to the flow logs. (see [below for nested schema](#nestedatt--tags))
+- `traffic_type` (String) The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.
 
 ### Read-Only
 

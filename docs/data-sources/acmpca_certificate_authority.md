@@ -31,6 +31,7 @@ Data Source schema for AWS::ACMPCA::CertificateAuthority
 - `subject` (Attributes) Structure that contains X.500 distinguished name information for your CA. (see [below for nested schema](#nestedatt--subject))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The type of the certificate authority.
+- `usage_mode` (String) Usage mode of the ceritificate authority.
 
 <a id="nestedatt--csr_extensions"></a>
 ### Nested Schema for `csr_extensions`

@@ -28,6 +28,7 @@ Private certificate authority.
 - `key_storage_security_standard` (String) KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.
 - `revocation_configuration` (Attributes) Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions. (see [below for nested schema](#nestedatt--revocation_configuration))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `usage_mode` (String) Usage mode of the ceritificate authority.
 
 ### Read-Only
 
