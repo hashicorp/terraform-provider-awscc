@@ -63,6 +63,7 @@ Optional:
 - `kafka` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--kafka))
 - `kinesis` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--kinesis))
 - `lambda` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--lambda))
+- `location` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--location))
 - `open_search` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--open_search))
 - `republish` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--republish))
 - `s3` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--s3))
@@ -333,6 +334,34 @@ Optional:
 - `function_arn` (String)
 
 
+<a id="nestedatt--topic_rule_payload--actions--location"></a>
+### Nested Schema for `topic_rule_payload.actions.location`
+
+Required:
+
+- `device_id` (String)
+- `latitude` (String)
+- `longitude` (String)
+- `role_arn` (String)
+- `tracker_name` (String)
+
+Optional:
+
+- `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--location--timestamp))
+
+<a id="nestedatt--topic_rule_payload--actions--location--timestamp"></a>
+### Nested Schema for `topic_rule_payload.actions.location.timestamp`
+
+Required:
+
+- `value` (String)
+
+Optional:
+
+- `unit` (String)
+
+
+
 <a id="nestedatt--topic_rule_payload--actions--open_search"></a>
 ### Nested Schema for `topic_rule_payload.actions.open_search`
 
@@ -355,7 +384,30 @@ Required:
 
 Optional:
 
+- `headers` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--republish--headers))
 - `qos` (Number)
+
+<a id="nestedatt--topic_rule_payload--actions--republish--headers"></a>
+### Nested Schema for `topic_rule_payload.actions.republish.qos`
+
+Optional:
+
+- `content_type` (String)
+- `correlation_data` (String)
+- `message_expiry` (String)
+- `payload_format_indicator` (String)
+- `response_topic` (String)
+- `user_properties` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--republish--qos--user_properties))
+
+<a id="nestedatt--topic_rule_payload--actions--republish--qos--user_properties"></a>
+### Nested Schema for `topic_rule_payload.actions.republish.qos.user_properties`
+
+Required:
+
+- `key` (String)
+- `value` (String)
+
+
 
 
 <a id="nestedatt--topic_rule_payload--actions--s3"></a>
@@ -423,7 +475,6 @@ Required:
 
 Optional:
 
-- `batch_mode` (Boolean)
 - `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--timestream--timestamp))
 
 <a id="nestedatt--topic_rule_payload--actions--timestream--dimensions"></a>
@@ -465,6 +516,7 @@ Optional:
 - `kafka` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--kafka))
 - `kinesis` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--kinesis))
 - `lambda` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--lambda))
+- `location` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--location))
 - `open_search` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--open_search))
 - `republish` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--republish))
 - `s3` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--s3))
@@ -735,6 +787,34 @@ Optional:
 - `function_arn` (String)
 
 
+<a id="nestedatt--topic_rule_payload--error_action--location"></a>
+### Nested Schema for `topic_rule_payload.error_action.location`
+
+Required:
+
+- `device_id` (String)
+- `latitude` (String)
+- `longitude` (String)
+- `role_arn` (String)
+- `tracker_name` (String)
+
+Optional:
+
+- `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--location--timestamp))
+
+<a id="nestedatt--topic_rule_payload--error_action--location--timestamp"></a>
+### Nested Schema for `topic_rule_payload.error_action.location.timestamp`
+
+Required:
+
+- `value` (String)
+
+Optional:
+
+- `unit` (String)
+
+
+
 <a id="nestedatt--topic_rule_payload--error_action--open_search"></a>
 ### Nested Schema for `topic_rule_payload.error_action.open_search`
 
@@ -757,7 +837,30 @@ Required:
 
 Optional:
 
+- `headers` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--republish--headers))
 - `qos` (Number)
+
+<a id="nestedatt--topic_rule_payload--error_action--republish--headers"></a>
+### Nested Schema for `topic_rule_payload.error_action.republish.qos`
+
+Optional:
+
+- `content_type` (String)
+- `correlation_data` (String)
+- `message_expiry` (String)
+- `payload_format_indicator` (String)
+- `response_topic` (String)
+- `user_properties` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--republish--qos--user_properties))
+
+<a id="nestedatt--topic_rule_payload--error_action--republish--qos--user_properties"></a>
+### Nested Schema for `topic_rule_payload.error_action.republish.qos.user_properties`
+
+Required:
+
+- `key` (String)
+- `value` (String)
+
+
 
 
 <a id="nestedatt--topic_rule_payload--error_action--s3"></a>
@@ -825,7 +928,6 @@ Required:
 
 Optional:
 
-- `batch_mode` (Boolean)
 - `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--timestream--timestamp))
 
 <a id="nestedatt--topic_rule_payload--error_action--timestream--dimensions"></a>

@@ -75,7 +75,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//       "DockerLabels": {
 			//         "additionalProperties": false,
 			//         "patternProperties": {
-			//           "": {
+			//           ".{1,}": {
 			//             "type": "string"
 			//           }
 			//         },
@@ -155,7 +155,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//           "Options": {
 			//             "additionalProperties": false,
 			//             "patternProperties": {
-			//               "": {
+			//               ".{1,}": {
 			//                 "type": "string"
 			//               }
 			//             },
@@ -313,7 +313,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//           "Options": {
 			//             "additionalProperties": false,
 			//             "patternProperties": {
-			//               "": {
+			//               ".{1,}": {
 			//                 "type": "string"
 			//               }
 			//             },
@@ -525,6 +525,10 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//         "type": "string"
 			//       }
 			//     },
+			//     "required": [
+			//       "Name",
+			//       "Image"
+			//     ],
 			//     "type": "object"
 			//   },
 			//   "type": "array",
@@ -577,7 +581,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 					},
 					"docker_labels": {
 						// Property: DockerLabels
-						// Pattern: ""
+						// Pattern: ".{1,}"
 						Type:     types.MapType{ElemType: types.StringType},
 						Computed: true,
 					},
@@ -658,7 +662,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 							map[string]tfsdk.Attribute{
 								"options": {
 									// Property: Options
-									// Pattern: ""
+									// Pattern: ".{1,}"
 									Type:     types.MapType{ElemType: types.StringType},
 									Computed: true,
 								},
@@ -834,7 +838,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 								},
 								"options": {
 									// Property: Options
-									// Pattern: ""
+									// Pattern: ".{1,}"
 									Type:     types.MapType{ElemType: types.StringType},
 									Computed: true,
 								},
@@ -1421,7 +1425,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//           "DriverOpts": {
 			//             "additionalProperties": false,
 			//             "patternProperties": {
-			//               "": {
+			//               ".{1,}": {
 			//                 "type": "string"
 			//               }
 			//             },
@@ -1430,7 +1434,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//           "Labels": {
 			//             "additionalProperties": false,
 			//             "patternProperties": {
-			//               "": {
+			//               ".{1,}": {
 			//                 "type": "string"
 			//               }
 			//             },
@@ -1519,13 +1523,13 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 								},
 								"driver_opts": {
 									// Property: DriverOpts
-									// Pattern: ""
+									// Pattern: ".{1,}"
 									Type:     types.MapType{ElemType: types.StringType},
 									Computed: true,
 								},
 								"labels": {
 									// Property: Labels
-									// Pattern: ""
+									// Pattern: ".{1,}"
 									Type:     types.MapType{ElemType: types.StringType},
 									Computed: true,
 								},

@@ -9,6 +9,9 @@
       "properties": {
         "Sns": {
           "$ref": "#/definitions/SnsChannelConfig"
+        },
+        "Filters": {
+          "$ref": "#/definitions/NotificationFilterConfig"
         }
       },
       "additionalProperties": false
@@ -25,6 +28,49 @@
         }
       },
       "additionalProperties": false
+    },
+    "NotificationFilterConfig": {
+      "description": "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
+      "type": "object",
+      "properties": {
+        "Severities": {
+          "$ref": "#/definitions/InsightSeveritiesFilterList"
+        },
+        "MessageTypes": {
+          "$ref": "#/definitions/NotificationMessageTypesFilterList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "InsightSeverity": {
+      "description": "DevOps Guru Insight Severity Enum",
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH"]
+    },
+    "NotificationMessageType": {
+      "description": "DevOps Guru NotificationMessageType Enum",
+      "type": "string",
+      "enum": ["NEW_INSIGHT", "CLOSED_INSIGHT", "NEW_ASSOCIATION", "SEVERITY_UPGRADED", "NEW_RECOMMENDATION"]
+    },
+    "InsightSeveritiesFilterList": {
+      "description": "DevOps Guru insight severities to filter for",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/InsightSeverity"
+      },
+      "maxItems": 3,
+      "minItems": 1
+    },
+    "NotificationMessageTypesFilterList": {
+      "description": "DevOps Guru message types to filter for",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/NotificationMessageType"
+      },
+      "maxItems": 5,
+      "minItems": 1
     }
   },
   "properties": {

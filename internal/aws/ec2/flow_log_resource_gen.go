@@ -305,7 +305,8 @@ func flowLogResource(ctx context.Context) (resource.Resource, error) {
 			// }
 			Description: "The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ACCEPT",
@@ -314,6 +315,7 @@ func flowLogResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},

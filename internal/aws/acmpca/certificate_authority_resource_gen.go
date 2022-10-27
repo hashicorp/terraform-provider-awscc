@@ -1174,6 +1174,22 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 				resource.RequiresReplace(),
 			},
 		},
+		"usage_mode": {
+			// Property: UsageMode
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Usage mode of the ceritificate authority.",
+			//   "type": "string"
+			// }
+			Description: "Usage mode of the ceritificate authority.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -1258,6 +1274,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		"type":                          "Type",
 		"type_id":                       "TypeId",
 		"uniform_resource_identifier":   "UniformResourceIdentifier",
+		"usage_mode":                    "UsageMode",
 		"value":                         "Value",
 	})
 

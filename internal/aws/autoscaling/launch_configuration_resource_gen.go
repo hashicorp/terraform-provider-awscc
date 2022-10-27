@@ -322,6 +322,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
+			// InstanceId is a write-only property.
 		},
 		"instance_monitoring": {
 			// Property: InstanceMonitoring
@@ -617,6 +618,9 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 		"volume_type":                      "VolumeType",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/InstanceId",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

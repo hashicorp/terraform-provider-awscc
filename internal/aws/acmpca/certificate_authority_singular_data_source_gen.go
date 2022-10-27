@@ -880,6 +880,17 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"usage_mode": {
+			// Property: UsageMode
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Usage mode of the ceritificate authority.",
+			//   "type": "string"
+			// }
+			Description: "Usage mode of the ceritificate authority.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -960,6 +971,7 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"type":                          "Type",
 		"type_id":                       "TypeId",
 		"uniform_resource_identifier":   "UniformResourceIdentifier",
+		"usage_mode":                    "UsageMode",
 		"value":                         "Value",
 	})
 

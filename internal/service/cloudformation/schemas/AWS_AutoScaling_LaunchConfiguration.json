@@ -208,6 +208,9 @@
   "primaryIdentifier": [
     "/properties/LaunchConfigurationName"
   ],
+  "writeOnlyProperties": [
+    "/properties/InstanceId"
+  ],
   "handlers": {
     "create": {
       "permissions": [

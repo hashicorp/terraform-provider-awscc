@@ -227,6 +227,7 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_forecast_dataset_group -cfschema ../service/cloudformation/schemas/AWS_Forecast_DatasetGroup.json -package forecast ../aws/forecast/dataset_group_singular_data_source_gen.go ../aws/forecast/dataset_group_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_fms_notification_channel -cfschema ../service/cloudformation/schemas/AWS_FMS_NotificationChannel.json -package fms ../aws/fms/notification_channel_singular_data_source_gen.go ../aws/fms/notification_channel_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_fms_policy -cfschema ../service/cloudformation/schemas/AWS_FMS_Policy.json -package fms ../aws/fms/policy_singular_data_source_gen.go ../aws/fms/policy_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_fsx_data_repository_association -cfschema ../service/cloudformation/schemas/AWS_FSx_DataRepositoryAssociation.json -package fsx ../aws/fsx/data_repository_association_singular_data_source_gen.go ../aws/fsx/data_repository_association_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_finspace_environment -cfschema ../service/cloudformation/schemas/AWS_FinSpace_Environment.json -package finspace ../aws/finspace/environment_singular_data_source_gen.go ../aws/finspace/environment_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_frauddetector_detector -cfschema ../service/cloudformation/schemas/AWS_FraudDetector_Detector.json -package frauddetector ../aws/frauddetector/detector_singular_data_source_gen.go ../aws/frauddetector/detector_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_frauddetector_entity_type -cfschema ../service/cloudformation/schemas/AWS_FraudDetector_EntityType.json -package frauddetector ../aws/frauddetector/entity_type_singular_data_source_gen.go ../aws/frauddetector/entity_type_singular_data_source_gen_test.go
@@ -623,6 +624,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/fms"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/forecast"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/frauddetector"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/fsx"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/gamelift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/globalaccelerator"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/glue"

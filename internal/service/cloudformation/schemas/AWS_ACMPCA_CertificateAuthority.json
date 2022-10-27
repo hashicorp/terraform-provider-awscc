@@ -319,6 +319,10 @@
         "KeyStorageSecurityStandard": {
             "description": "KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.",
             "type": "string"
+        },
+        "UsageMode": {
+            "description": "Usage mode of the ceritificate authority.",
+            "type": "string"
         }
     },
     "additionalProperties": false,
@@ -341,7 +345,8 @@
         "/properties/SigningAlgorithm",
         "/properties/Subject",
         "/properties/CsrExtensions",
-        "/properties/KeyStorageSecurityStandard"
+        "/properties/KeyStorageSecurityStandard",
+        "/properties/UsageMode"
     ],
     "primaryIdentifier": [
         "/properties/Arn"

@@ -28,7 +28,17 @@ Data Source schema for AWS::DevOpsGuru::NotificationChannel
 
 Read-Only:
 
+- `filters` (Attributes) Information about filters of a notification channel configured in DevOpsGuru to filter for insights. (see [below for nested schema](#nestedatt--config--filters))
 - `sns` (Attributes) Information about a notification channel configured in DevOps Guru to send notifications when insights are created. (see [below for nested schema](#nestedatt--config--sns))
+
+<a id="nestedatt--config--filters"></a>
+### Nested Schema for `config.filters`
+
+Read-Only:
+
+- `message_types` (List of String) DevOps Guru message types to filter for
+- `severities` (List of String) DevOps Guru insight severities to filter for
+
 
 <a id="nestedatt--config--sns"></a>
 ### Nested Schema for `config.sns`
