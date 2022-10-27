@@ -1,4 +1,15 @@
 ## 0.36.0 (Unreleased)
+
+BUG FIXES:
+
+* resource/awscc_networkmanager_core_network: Fix `Invalid JSON string` error on resource Create ([#708](https://github.com/hashicorp/terraform-provider-awscc/issues/708))
+
+FEATURES:
+
+* **New Data Source:** `awscc_fsx_data_repository_association`
+* **New Data Source:** `awscc_fsx_data_repository_associations`
+* **New Resource:** `awscc_fsx_data_repository_association`
+
 ## [0.35.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.35.0) (October 20, 2022)
 
 FEATURES:
