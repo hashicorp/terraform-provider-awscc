@@ -24,7 +24,6 @@
       "description": "The mobile phone number.",
       "type": "string",
       "pattern": "^\\+[1-9]\\d{1,14}$"
-
     },
     "SecurityProfileArn": {
       "description": "The identifier of the security profile for the user.",

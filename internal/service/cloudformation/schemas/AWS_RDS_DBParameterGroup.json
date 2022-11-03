@@ -63,13 +63,11 @@
     "Family",
     "Description"
   ],
-  "readOnlyProperties": [
-    "/properties/DBParameterGroupName"
-  ],
   "primaryIdentifier": [
     "/properties/DBParameterGroupName"
   ],
   "createOnlyProperties": [
+    "/properties/DBParameterGroupName",
     "/properties/Description",
     "/properties/Family"
   ],

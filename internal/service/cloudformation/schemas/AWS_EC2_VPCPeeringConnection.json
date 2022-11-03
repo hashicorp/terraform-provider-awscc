@@ -71,6 +71,9 @@
   "readOnlyProperties": [
     "/properties/Id"
   ],
+  "writeOnlyProperties": [
+    "/properties/PeerRoleArn"
+  ],
   "primaryIdentifier": [
     "/properties/Id"
   ],

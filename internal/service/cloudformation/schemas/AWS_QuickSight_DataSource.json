@@ -159,6 +159,13 @@
         },
         "CredentialPair": {
           "$ref": "#/definitions/CredentialPair"
+        },
+        "SecretArn": {
+          "type": "string",
+          "pattern": "^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+",
+          "maxLength": 2048,
+          "minLength": 1,
+          "description": "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>"
         }
       }
     },
