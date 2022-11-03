@@ -132,13 +132,11 @@
     "MajorEngineVersion",
     "OptionGroupDescription"
   ],
-  "readOnlyProperties": [
-    "/properties/OptionGroupName"
-  ],
   "createOnlyProperties": [
     "/properties/EngineName",
     "/properties/MajorEngineVersion",
-    "/properties/OptionGroupDescription"
+    "/properties/OptionGroupDescription",
+    "/properties/OptionGroupName"
   ],
   "primaryIdentifier": [
     "/properties/OptionGroupName"

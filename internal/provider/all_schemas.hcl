@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 619 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 623 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -166,6 +166,15 @@ resource_schema "aws_apigatewayv2_api" {
   suppress_plural_data_source_generation   = true
 }
 
+resource_schema "aws_apigatewayv2_deployment" {
+  cloudformation_type_name               = "AWS::ApiGatewayV2::Deployment"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_apigatewayv2_model" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::Model"
 
@@ -205,6 +214,10 @@ resource_schema "aws_apprunner_service" {
 
 resource_schema "aws_apprunner_vpc_connector" {
   cloudformation_type_name = "AWS::AppRunner::VpcConnector"
+}
+
+resource_schema "aws_apprunner_vpc_ingress_connection" {
+  cloudformation_type_name = "AWS::AppRunner::VpcIngressConnection"
 }
 
 resource_schema "aws_appstream_app_block" {
@@ -2809,6 +2822,10 @@ resource_schema "aws_supportapp_account_alias" {
 
 resource_schema "aws_supportapp_slack_channel_configuration" {
   cloudformation_type_name = "AWS::SupportApp::SlackChannelConfiguration"
+}
+
+resource_schema "aws_supportapp_slack_workspace_configuration" {
+  cloudformation_type_name = "AWS::SupportApp::SlackWorkspaceConfiguration"
 }
 
 resource_schema "aws_synthetics_canary" {

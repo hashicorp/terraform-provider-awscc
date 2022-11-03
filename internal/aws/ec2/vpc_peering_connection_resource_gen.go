@@ -79,6 +79,7 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
+			// PeerRoleArn is a write-only property.
 		},
 		"peer_vpc_id": {
 			// Property: PeerVpcId
@@ -183,6 +184,9 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		"vpc_id":        "VpcId",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/PeerRoleArn",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

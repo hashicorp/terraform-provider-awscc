@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -31,9 +32,14 @@ func dBParameterGroupResource(ctx context.Context) (resource.Resource, error) {
 			// }
 			Description: "Specifies the name of the DB parameter group",
 			Type:        types.StringType,
+			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
 			},
 		},
 		"description": {

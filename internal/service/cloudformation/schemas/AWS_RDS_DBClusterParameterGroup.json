@@ -63,14 +63,12 @@
     "Parameters"
   ],
   "createOnlyProperties": [
+    "/properties/DBClusterParameterGroupName",
     "/properties/Description",
     "/properties/Family"
   ],
   "writeOnlyProperties": [
     "/properties/Parameters"
-  ],
-  "readOnlyProperties": [
-    "/properties/DBClusterParameterGroupName"
   ],
   "primaryIdentifier": [
     "/properties/DBClusterParameterGroupName"

@@ -1,4 +1,14 @@
 ## 0.37.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apprunner_vpc_ingress_connection`
+* **New Data Source:** `awscc_apprunner_vpc_ingress_connections`
+* **New Data Source:** `awscc_supportapp_slack_workspace_configuration`
+* **New Data Source:** `awscc_supportapp_slack_workspace_configurations`
+* **New Resource:** `awscc_apprunner_vpc_ingress_connection`
+* **New Resource:** `awscc_supportapp_slack_workspace_configuration`
+
 ## [0.36.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.36.0) (October 27, 2022)
 
 BUG FIXES:

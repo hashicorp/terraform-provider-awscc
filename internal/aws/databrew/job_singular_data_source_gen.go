@@ -1191,7 +1191,6 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//     ],
 			//     "type": "object"
 			//   },
-			//   "minItems": 1,
 			//   "type": "array"
 			// }
 			Description: "Data quality rules configuration",

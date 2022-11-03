@@ -45,7 +45,8 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 			//         "capacityOptimized",
 			//         "capacityOptimizedPrioritized",
 			//         "diversified",
-			//         "lowestPrice"
+			//         "lowestPrice",
+			//         "priceCapacityOptimized"
 			//       ],
 			//       "type": "string"
 			//     },
@@ -220,6 +221,16 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 			//                 "type": "array",
 			//                 "uniqueItems": false
 			//               },
+			//               "AllowedInstanceTypes": {
+			//                 "items": {
+			//                   "maxLength": 30,
+			//                   "minLength": 1,
+			//                   "pattern": "[a-zA-Z0-9\\.\\*]+",
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array",
+			//                 "uniqueItems": false
+			//               },
 			//               "BareMetal": {
 			//                 "enum": [
 			//                   "included",
@@ -320,6 +331,18 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 			//                   },
 			//                   "Min": {
 			//                     "type": "integer"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "NetworkBandwidthGbps": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "Max": {
+			//                     "type": "number"
+			//                   },
+			//                   "Min": {
+			//                     "type": "number"
 			//                   }
 			//                 },
 			//                 "type": "object"
@@ -711,6 +734,16 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 			//                       "type": "array",
 			//                       "uniqueItems": false
 			//                     },
+			//                     "AllowedInstanceTypes": {
+			//                       "items": {
+			//                         "maxLength": 30,
+			//                         "minLength": 1,
+			//                         "pattern": "[a-zA-Z0-9\\.\\*]+",
+			//                         "type": "string"
+			//                       },
+			//                       "type": "array",
+			//                       "uniqueItems": false
+			//                     },
 			//                     "BareMetal": {
 			//                       "enum": [
 			//                         "included",
@@ -811,6 +844,18 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 			//                         },
 			//                         "Min": {
 			//                           "type": "integer"
+			//                         }
+			//                       },
+			//                       "type": "object"
+			//                     },
+			//                     "NetworkBandwidthGbps": {
+			//                       "additionalProperties": false,
+			//                       "properties": {
+			//                         "Max": {
+			//                           "type": "number"
+			//                         },
+			//                         "Min": {
+			//                           "type": "number"
 			//                         }
 			//                       },
 			//                       "type": "object"
@@ -986,6 +1031,88 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 			//     "SpotPrice": {
 			//       "type": "string"
 			//     },
+			//     "TagSpecifications": {
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "ResourceType": {
+			//             "enum": [
+			//               "client-vpn-endpoint",
+			//               "customer-gateway",
+			//               "dedicated-host",
+			//               "dhcp-options",
+			//               "egress-only-internet-gateway",
+			//               "elastic-gpu",
+			//               "elastic-ip",
+			//               "export-image-task",
+			//               "export-instance-task",
+			//               "fleet",
+			//               "fpga-image",
+			//               "host-reservation",
+			//               "image",
+			//               "import-image-task",
+			//               "import-snapshot-task",
+			//               "instance",
+			//               "internet-gateway",
+			//               "key-pair",
+			//               "launch-template",
+			//               "local-gateway-route-table-vpc-association",
+			//               "natgateway",
+			//               "network-acl",
+			//               "network-insights-analysis",
+			//               "network-insights-path",
+			//               "network-interface",
+			//               "placement-group",
+			//               "reserved-instances",
+			//               "route-table",
+			//               "security-group",
+			//               "snapshot",
+			//               "spot-fleet-request",
+			//               "spot-instances-request",
+			//               "subnet",
+			//               "traffic-mirror-filter",
+			//               "traffic-mirror-session",
+			//               "traffic-mirror-target",
+			//               "transit-gateway",
+			//               "transit-gateway-attachment",
+			//               "transit-gateway-connect-peer",
+			//               "transit-gateway-multicast-domain",
+			//               "transit-gateway-route-table",
+			//               "volume",
+			//               "vpc",
+			//               "vpc-flow-log",
+			//               "vpc-peering-connection",
+			//               "vpn-connection",
+			//               "vpn-gateway"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "Tags": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Key": {
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Value",
+			//                 "Key"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
 			//     "TargetCapacity": {
 			//       "type": "integer"
 			//     },
@@ -1033,6 +1160,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								"capacityOptimizedPrioritized",
 								"diversified",
 								"lowestPrice",
+								"priceCapacityOptimized",
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1375,6 +1503,19 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													resource.UseStateForUnknown(),
 												},
 											},
+											"allowed_instance_types": {
+												// Property: AllowedInstanceTypes
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
+												Computed: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringLenBetween(1, 30)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), "")),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
 											"bare_metal": {
 												// Property: BareMetal
 												Type:     types.StringType,
@@ -1558,6 +1699,36 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 														"min": {
 															// Property: Min
 															Type:     types.Int64Type,
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+													},
+												),
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"network_bandwidth_gbps": {
+												// Property: NetworkBandwidthGbps
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"max": {
+															// Property: Max
+															Type:     types.Float64Type,
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+														"min": {
+															// Property: Min
+															Type:     types.Float64Type,
 															Optional: true,
 															Computed: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2289,6 +2460,19 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 																resource.UseStateForUnknown(),
 															},
 														},
+														"allowed_instance_types": {
+															// Property: AllowedInstanceTypes
+															Type:     types.ListType{ElemType: types.StringType},
+															Optional: true,
+															Computed: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.ArrayForEach(validate.StringLenBetween(1, 30)),
+																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), "")),
+															},
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
 														"bare_metal": {
 															// Property: BareMetal
 															Type:     types.StringType,
@@ -2472,6 +2656,36 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 																	"min": {
 																		// Property: Min
 																		Type:     types.Int64Type,
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
+																	},
+																},
+															),
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+														"network_bandwidth_gbps": {
+															// Property: NetworkBandwidthGbps
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"max": {
+																		// Property: Max
+																		Type:     types.Float64Type,
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
+																	},
+																	"min": {
+																		// Property: Min
+																		Type:     types.Float64Type,
 																		Optional: true,
 																		Computed: true,
 																		PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2857,6 +3071,104 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 							resource.RequiresReplace(),
 						},
 					},
+					"tag_specifications": {
+						// Property: TagSpecifications
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"resource_type": {
+									// Property: ResourceType
+									Type:     types.StringType,
+									Optional: true,
+									Computed: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"client-vpn-endpoint",
+											"customer-gateway",
+											"dedicated-host",
+											"dhcp-options",
+											"egress-only-internet-gateway",
+											"elastic-gpu",
+											"elastic-ip",
+											"export-image-task",
+											"export-instance-task",
+											"fleet",
+											"fpga-image",
+											"host-reservation",
+											"image",
+											"import-image-task",
+											"import-snapshot-task",
+											"instance",
+											"internet-gateway",
+											"key-pair",
+											"launch-template",
+											"local-gateway-route-table-vpc-association",
+											"natgateway",
+											"network-acl",
+											"network-insights-analysis",
+											"network-insights-path",
+											"network-interface",
+											"placement-group",
+											"reserved-instances",
+											"route-table",
+											"security-group",
+											"snapshot",
+											"spot-fleet-request",
+											"spot-instances-request",
+											"subnet",
+											"traffic-mirror-filter",
+											"traffic-mirror-session",
+											"traffic-mirror-target",
+											"transit-gateway",
+											"transit-gateway-attachment",
+											"transit-gateway-connect-peer",
+											"transit-gateway-multicast-domain",
+											"transit-gateway-route-table",
+											"volume",
+											"vpc",
+											"vpc-flow-log",
+											"vpc-peering-connection",
+											"vpn-connection",
+											"vpn-gateway",
+										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"tags": {
+									// Property: Tags
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"key": {
+												// Property: Key
+												Type:     types.StringType,
+												Required: true,
+											},
+											"value": {
+												// Property: Value
+												Type:     types.StringType,
+												Required: true,
+											},
+										},
+									),
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+							resource.RequiresReplace(),
+						},
+					},
 					"target_capacity": {
 						// Property: TargetCapacity
 						Type:     types.Int64Type,
@@ -2948,6 +3260,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"accelerator_total_memory_mi_b":      "AcceleratorTotalMemoryMiB",
 		"accelerator_types":                  "AcceleratorTypes",
 		"allocation_strategy":                "AllocationStrategy",
+		"allowed_instance_types":             "AllowedInstanceTypes",
 		"arn":                                "Arn",
 		"associate_public_ip_address":        "AssociatePublicIpAddress",
 		"availability_zone":                  "AvailabilityZone",
@@ -3003,6 +3316,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"min":                                "Min",
 		"monitoring":                         "Monitoring",
 		"name":                               "Name",
+		"network_bandwidth_gbps":             "NetworkBandwidthGbps",
 		"network_interface_count":            "NetworkInterfaceCount",
 		"network_interface_id":               "NetworkInterfaceId",
 		"network_interfaces":                 "NetworkInterfaces",

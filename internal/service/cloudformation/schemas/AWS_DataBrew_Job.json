@@ -109,8 +109,7 @@
       "insertionOrder": true,
       "items": {
         "$ref": "#/definitions/ValidationConfiguration"
-      },
-      "minItems": 1
+      }
     }
   },
   "definitions": {

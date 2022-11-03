@@ -20,7 +20,7 @@
                     "type" : "array",
                     "uniqueItems" : false,
                     "insertionOrder": false,
-                    "description" : "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure.",
+                    "description" : "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.",
                     "items" : {
                         "type" : "string"
                     }

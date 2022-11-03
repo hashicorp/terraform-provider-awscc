@@ -110,7 +110,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 			//       "type": "object"
 			//     },
 			//     "MatchingEventTypes": {
-			//       "description": "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure.",
+			//       "description": "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.",
 			//       "insertionOrder": false,
 			//       "items": {
 			//         "type": "string"
@@ -238,7 +238,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 					},
 					"matching_event_types": {
 						// Property: MatchingEventTypes
-						Description: "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure.",
+						Description: "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{

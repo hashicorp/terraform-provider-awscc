@@ -93,6 +93,9 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			//             "type": "string"
 			//           }
 			//         },
+			//         "required": [
+			//           "Version"
+			//         ],
 			//         "type": "object"
 			//       },
 			//       "Overrides": {
@@ -167,6 +170,16 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			//                       "fpga",
 			//                       "inference"
 			//                     ],
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": false
+			//                 },
+			//                 "AllowedInstanceTypes": {
+			//                   "items": {
+			//                     "maxLength": 30,
+			//                     "minLength": 1,
+			//                     "pattern": "[a-zA-Z0-9\\.\\*]+",
 			//                     "type": "string"
 			//                   },
 			//                   "type": "array",
@@ -272,6 +285,18 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			//                     },
 			//                     "Min": {
 			//                       "type": "integer"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "NetworkBandwidthGbps": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Max": {
+			//                       "type": "number"
+			//                     },
+			//                     "Min": {
+			//                       "type": "number"
 			//                     }
 			//                   },
 			//                   "type": "object"
@@ -413,11 +438,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 								"version": {
 									// Property: Version
 									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
+									Required: true,
 								},
 							},
 						),
@@ -554,6 +575,19 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 														"fpga",
 														"inference",
 													})),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"allowed_instance_types": {
+												// Property: AllowedInstanceTypes
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
+												Computed: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringLenBetween(1, 30)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), "")),
 												},
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													resource.UseStateForUnknown(),
@@ -742,6 +776,36 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 														"min": {
 															// Property: Min
 															Type:     types.Int64Type,
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+													},
+												),
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"network_bandwidth_gbps": {
+												// Property: NetworkBandwidthGbps
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"max": {
+															// Property: Max
+															Type:     types.Float64Type,
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+														"min": {
+															// Property: Min
+															Type:     types.Float64Type,
 															Optional: true,
 															Computed: true,
 															PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1168,10 +1232,15 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			//   "properties": {
 			//     "AllocationStrategy": {
 			//       "enum": [
+			//         "lowest-price",
 			//         "lowestPrice",
 			//         "diversified",
 			//         "capacityOptimized",
-			//         "capacityOptimizedPrioritized"
+			//         "capacity-optimized",
+			//         "capacityOptimizedPrioritized",
+			//         "capacity-optimized-prioritized",
+			//         "priceCapacityOptimized",
+			//         "price-capacity-optimized"
 			//       ],
 			//       "type": "string"
 			//     },
@@ -1232,10 +1301,15 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
+								"lowest-price",
 								"lowestPrice",
 								"diversified",
 								"capacityOptimized",
+								"capacity-optimized",
 								"capacityOptimizedPrioritized",
+								"capacity-optimized-prioritized",
+								"priceCapacityOptimized",
+								"price-capacity-optimized",
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1732,6 +1806,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"accelerator_types":                  "AcceleratorTypes",
 		"affinity":                           "Affinity",
 		"allocation_strategy":                "AllocationStrategy",
+		"allowed_instance_types":             "AllowedInstanceTypes",
 		"availability_zone":                  "AvailabilityZone",
 		"bare_metal":                         "BareMetal",
 		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
@@ -1767,6 +1842,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"memory_mi_b":                        "MemoryMiB",
 		"min":                                "Min",
 		"min_target_capacity":                "MinTargetCapacity",
+		"network_bandwidth_gbps":             "NetworkBandwidthGbps",
 		"network_interface_count":            "NetworkInterfaceCount",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"on_demand_options":                           "OnDemandOptions",

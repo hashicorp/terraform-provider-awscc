@@ -260,6 +260,7 @@ Optional:
             data source in the ARN is used as the credentials for the
             <code>DataSourceCredentials</code> structure.</p>
 - `credential_pair` (Attributes) <p>The combination of user name and password that are used as credentials.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair))
+- `secret_arn` (String) <p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>
 
 <a id="nestedatt--credentials--credential_pair"></a>
 ### Nested Schema for `credentials.credential_pair`

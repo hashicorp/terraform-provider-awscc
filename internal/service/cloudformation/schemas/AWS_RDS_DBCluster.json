@@ -53,6 +53,10 @@
       "description": "The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see Naming Constraints in the Amazon RDS User Guide.",
       "type": "string"
     },
+    "DBClusterArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the DB cluster."
+    },
     "DBClusterInstanceClass": {
       "description": "The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.",
       "type": "string"
@@ -329,6 +333,10 @@
         "SecondsUntilAutoPause": {
           "description": "The time, in seconds, before an Aurora DB cluster in serverless mode is paused.",
           "type": "integer"
+        },
+        "TimeoutAction": {
+          "description": "The action to take when the timeout is reached, either ForceApplyCapacityChange or RollbackCapacityChange.\nForceApplyCapacityChange sets the capacity to the specified value as soon as possible.\nRollbackCapacityChange, the default, ignores the capacity change if a scaling point isn't found in the timeout period.\n\nFor more information, see Autoscaling for Aurora Serverless v1 in the Amazon Aurora User Guide.",
+          "type": "string"
         }
       }
     },
@@ -364,6 +372,7 @@
     "/properties/SourceDBClusterIdentifier": "$lowercase(SourceDBClusterIdentifier)"
   },
   "readOnlyProperties": [
+    "/properties/DBClusterArn",
     "/properties/DBClusterResourceId",
     "/properties/Endpoint",
     "/properties/Endpoint/Address",

@@ -105,7 +105,7 @@ func configurationSetEventDestinationDataSource(ctx context.Context) (datasource
 			//       "type": "object"
 			//     },
 			//     "MatchingEventTypes": {
-			//       "description": "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure.",
+			//       "description": "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.",
 			//       "insertionOrder": false,
 			//       "items": {
 			//         "type": "string"
@@ -208,7 +208,7 @@ func configurationSetEventDestinationDataSource(ctx context.Context) (datasource
 					},
 					"matching_event_types": {
 						// Property: MatchingEventTypes
-						Description: "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure.",
+						Description: "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Computed:    true,
 					},
