@@ -77,6 +77,7 @@ Read-Only:
 - `accelerator_names` (List of String)
 - `accelerator_total_memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_total_memory_mi_b))
 - `accelerator_types` (List of String)
+- `allowed_instance_types` (List of String)
 - `bare_metal` (String)
 - `baseline_ebs_bandwidth_mbps` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--baseline_ebs_bandwidth_mbps))
 - `burstable_performance` (String)
@@ -87,6 +88,7 @@ Read-Only:
 - `local_storage_types` (List of String)
 - `memory_gi_b_per_v_cpu` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--memory_gi_b_per_v_cpu))
 - `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--memory_mi_b))
+- `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number)
 - `require_hibernate_support` (Boolean)
@@ -131,6 +133,15 @@ Read-Only:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--memory_mi_b"></a>
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+
+Read-Only:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--launch_template_configs--overrides--instance_requirements--network_bandwidth_gbps"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
 
 Read-Only:

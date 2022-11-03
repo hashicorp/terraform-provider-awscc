@@ -22,12 +22,12 @@ The AWS::RDS::DBParameterGroup resource creates a custom parameter group for an 
 
 ### Optional
 
+- `db_parameter_group_name` (String) Specifies the name of the DB parameter group
 - `parameters` (Map of String) An array of parameter names and values for the parameter update.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `db_parameter_group_name` (String) Specifies the name of the DB parameter group
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>

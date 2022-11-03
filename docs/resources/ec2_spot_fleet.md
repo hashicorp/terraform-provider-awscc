@@ -48,6 +48,7 @@ Optional:
 - `spot_maintenance_strategies` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--spot_maintenance_strategies))
 - `spot_max_total_price` (String)
 - `spot_price` (String)
+- `tag_specifications` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--tag_specifications))
 - `target_capacity_unit_type` (String)
 - `terminate_instances_with_expiration` (Boolean)
 - `type` (String)
@@ -126,6 +127,7 @@ Optional:
 - `accelerator_names` (List of String)
 - `accelerator_total_memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--accelerator_total_memory_mi_b))
 - `accelerator_types` (List of String)
+- `allowed_instance_types` (List of String)
 - `bare_metal` (String)
 - `baseline_ebs_bandwidth_mbps` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--baseline_ebs_bandwidth_mbps))
 - `burstable_performance` (String)
@@ -136,6 +138,7 @@ Optional:
 - `local_storage_types` (List of String)
 - `memory_gi_b_per_v_cpu` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--memory_gi_b_per_v_cpu))
 - `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--memory_mi_b))
+- `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number)
 - `require_hibernate_support` (Boolean)
@@ -180,6 +183,15 @@ Optional:
 
 
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--memory_mi_b"></a>
+### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.v_cpu_count`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--network_bandwidth_gbps"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.v_cpu_count`
 
 Optional:
@@ -343,6 +355,7 @@ Optional:
 - `accelerator_names` (List of String)
 - `accelerator_total_memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--accelerator_total_memory_mi_b))
 - `accelerator_types` (List of String)
+- `allowed_instance_types` (List of String)
 - `bare_metal` (String)
 - `baseline_ebs_bandwidth_mbps` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--baseline_ebs_bandwidth_mbps))
 - `burstable_performance` (String)
@@ -353,6 +366,7 @@ Optional:
 - `local_storage_types` (List of String)
 - `memory_gi_b_per_v_cpu` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--memory_gi_b_per_v_cpu))
 - `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--memory_mi_b))
+- `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number)
 - `require_hibernate_support` (Boolean)
@@ -398,6 +412,15 @@ Optional:
 
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--memory_mi_b"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity.memory_mi_b`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--weighted_capacity--network_bandwidth_gbps"></a>
+### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.weighted_capacity.network_bandwidth_gbps`
 
 Optional:
 
@@ -490,6 +513,24 @@ Optional:
 
 - `replacement_strategy` (String)
 - `termination_delay` (Number)
+
+
+
+<a id="nestedatt--spot_fleet_request_config_data--tag_specifications"></a>
+### Nested Schema for `spot_fleet_request_config_data.tag_specifications`
+
+Optional:
+
+- `resource_type` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--tag_specifications--tags))
+
+<a id="nestedatt--spot_fleet_request_config_data--tag_specifications--tags"></a>
+### Nested Schema for `spot_fleet_request_config_data.tag_specifications.tags`
+
+Required:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 
