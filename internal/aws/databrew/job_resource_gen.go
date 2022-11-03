@@ -1599,7 +1599,6 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 			//     ],
 			//     "type": "object"
 			//   },
-			//   "minItems": 1,
 			//   "type": "array"
 			// }
 			Description: "Data quality rules configuration",
@@ -1632,9 +1631,6 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 			),
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtLeast(1),
-			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 			},

@@ -1646,6 +1646,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			//         "Username"
 			//       ],
 			//       "type": "object"
+			//     },
+			//     "SecretArn": {
+			//       "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.\u003c/p\u003e",
+			//       "maxLength": 2048,
+			//       "minLength": 1,
+			//       "pattern": "^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+",
+			//       "type": "string"
 			//     }
 			//   },
 			//   "type": "object"
@@ -2338,6 +2345,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						),
 						Optional: true,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"secret_arn": {
+						// Property: SecretArn
+						Description: "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>",
+						Type:        types.StringType,
+						Optional:    true,
+						Computed:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+							validate.StringMatch(regexp.MustCompile("^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+"), ""),
+						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
@@ -3902,6 +3923,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"rds_parameters":                   "RdsParameters",
 		"redshift_parameters":              "RedshiftParameters",
 		"s3_parameters":                    "S3Parameters",
+		"secret_arn":                       "SecretArn",
 		"snowflake_parameters":             "SnowflakeParameters",
 		"spark_parameters":                 "SparkParameters",
 		"sql_server_parameters":            "SqlServerParameters",

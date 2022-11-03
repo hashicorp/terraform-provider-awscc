@@ -63,7 +63,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 			//   "description": "Workspace arn.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "^arn:\u0008(aws|aws-us-gov|aws-cn)\u0008:aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
+			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Workspace arn.",
@@ -195,7 +195,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 			//   "description": "Required to identify a specific APS Workspace.",
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{1,99}$",
 			//   "type": "string"
 			// }
 			Description: "Required to identify a specific APS Workspace.",

@@ -1409,6 +1409,13 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//         "Username"
 			//       ],
 			//       "type": "object"
+			//     },
+			//     "SecretArn": {
+			//       "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.\u003c/p\u003e",
+			//       "maxLength": 2048,
+			//       "minLength": 1,
+			//       "pattern": "^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+",
+			//       "type": "string"
 			//     }
 			//   },
 			//   "type": "object"
@@ -1867,6 +1874,12 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							},
 						),
 						Computed: true,
+					},
+					"secret_arn": {
+						// Property: SecretArn
+						Description: "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>",
+						Type:        types.StringType,
+						Computed:    true,
 					},
 				},
 			),
@@ -3089,6 +3102,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rds_parameters":                   "RdsParameters",
 		"redshift_parameters":              "RedshiftParameters",
 		"s3_parameters":                    "S3Parameters",
+		"secret_arn":                       "SecretArn",
 		"snowflake_parameters":             "SnowflakeParameters",
 		"spark_parameters":                 "SparkParameters",
 		"sql_server_parameters":            "SqlServerParameters",
