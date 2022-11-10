@@ -40,6 +40,9 @@
     },
     "UnmanagedvCpus" : {
       "type" : "integer"
+    },
+    "EksConfiguration" : {
+      "$ref" : "#/definitions/EksConfiguration"
     }
   },
   "definitions" : {
@@ -141,6 +144,9 @@
         },
         "ImageType" : {
           "type" : "string"
+        },
+        "ImageKubernetesVersion" : {
+          "type" : "string"
         }
       },
       "required" : [ "ImageType" ]
@@ -173,6 +179,24 @@
           "default" : 30
         }
       }
+    },
+    "EksConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "EksClusterArn" : {
+          "type" : "string",
+          "default" : false
+        },
+        "KubernetesNamespace" : {
+          "type" : "string",
+          "default" : false
+        }
+      },
+      "required" : [
+        "EksClusterArn",
+        "KubernetesNamespace"
+      ]
     }
   },
   "tagging": {
@@ -187,7 +211,8 @@
     "/properties/ComputeResources/SpotIamFleetRole",
     "/properties/ComputeEnvironmentName",
     "/properties/Tags",
-    "/properties/Type"
+    "/properties/Type",
+    "/properties/EksConfiguration"
   ],
   "conditionalCreateOnlyProperties": [
     "/properties/ComputeResources/AllocationStrategy",
@@ -217,7 +242,8 @@
         "Batch:TagResource",
         "Batch:DescribeComputeEnvironments",
         "iam:CreateServiceLinkedRole",
-        "Iam:PassRole"
+        "Iam:PassRole",
+        "Eks:DescribeCluster"
       ]
     },
     "read": {

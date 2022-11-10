@@ -15,6 +15,9 @@
         },
         "DirectoryName" : {
             "type" : "string"
+        },
+        "CertificateBasedAuthProperties" : {
+            "$ref" : "#/definitions/CertificateBasedAuthProperties"
         }
     },
     "definitions" : {
@@ -30,6 +33,18 @@
                 }
             },
             "required" : [ "AccountName", "AccountPassword" ]
+        },
+        "CertificateBasedAuthProperties" : {
+            "type" : "object",
+            "additionalProperties" : false,
+            "properties" : {
+                "Status" : {
+                    "type" : "string"
+                },
+                "CertificateAuthorityArn" : {
+                    "type" : "string"
+                }
+            }
         }
     },
     "required" : [ "DirectoryName", "OrganizationalUnitDistinguishedNames", "ServiceAccountCredentials" ],

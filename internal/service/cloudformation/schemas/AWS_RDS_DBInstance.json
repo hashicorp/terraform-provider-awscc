@@ -328,6 +328,10 @@
       "type": "string",
       "description": "Specifies the storage type to be associated with the DB instance."
     },
+    "StorageThroughput": {
+      "type": "integer",
+      "description": "Specifies the storage throughput for the DB instance."
+    },
     "Tags": {
       "type": "array",
       "insertionOrder": false,
@@ -378,24 +382,22 @@
     "/properties/DBClusterIdentifier",
     "/properties/DBInstanceIdentifier",
     "/properties/DBName",
-    "/properties/DBSnapshotIdentifier",
     "/properties/DBSubnetGroupName",
     "/properties/KmsKeyId",
     "/properties/MasterUsername",
     "/properties/NcharCharacterSetName",
     "/properties/Port",
-    "/properties/PubliclyAccessible",
     "/properties/SourceRegion",
     "/properties/StorageEncrypted",
     "/properties/Timezone"
   ],
   "conditionalCreateOnlyProperties": [
+    "/properties/DBSnapshotIdentifier",
     "/properties/AutoMinorVersionUpgrade",
     "/properties/AvailabilityZone",
     "/properties/BackupRetentionPeriod",
     "/properties/DBParameterGroupName",
     "/properties/Engine",
-    "/properties/MonitoringInterval",
     "/properties/MultiAZ",
     "/properties/PerformanceInsightsKMSKeyId",
     "/properties/PreferredMaintenanceWindow",

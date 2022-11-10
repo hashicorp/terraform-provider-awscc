@@ -162,6 +162,9 @@
         },
         "Priority": {
           "$ref": "#/definitions/Priority"
+        },
+        "Override": {
+          "$ref": "#/definitions/StatefulRuleGroupOverride"
         }
       },
       "required": [
@@ -189,6 +192,21 @@
       "type": "integer",
       "minimum": 1,
       "maximum": 65535
+    },
+    "StatefulRuleGroupOverride": {
+      "type": "object",
+      "properties": {
+        "Action": {
+          "$ref": "#/definitions/OverrideAction"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OverrideAction": {
+      "type": "string",
+      "enum": [
+        "DROP_TO_ALERT"
+      ]
     },
     "StatefulEngineOptions": {
       "type": "object",

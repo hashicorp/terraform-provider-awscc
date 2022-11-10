@@ -50,6 +50,9 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "EncryptionContractConfiguration": {
+          "$ref": "#/definitions/EncryptionContractConfiguration"
+        },
         "RoleArn": {
           "$ref": "#/definitions/RoleArn"
         },
@@ -70,6 +73,44 @@
         "SystemIds",
         "Url"
       ]
+    },
+    "EncryptionContractConfiguration": {
+      "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "PresetSpeke20Audio",
+        "PresetSpeke20Video"
+      ],
+      "properties": {
+        "PresetSpeke20Audio": {
+          "description": "A collection of audio encryption presets.",
+          "type": "string",
+          "enum": [
+            "PRESET-AUDIO-1",
+            "PRESET-AUDIO-2",
+            "PRESET-AUDIO-3",
+            "SHARED",
+            "UNENCRYPTED"
+          ]
+        },
+        "PresetSpeke20Video": {
+          "description": "A collection of video encryption presets.",
+          "type": "string",
+          "enum": [
+            "PRESET-VIDEO-1",
+            "PRESET-VIDEO-2",
+            "PRESET-VIDEO-3",
+            "PRESET-VIDEO-4",
+            "PRESET-VIDEO-5",
+            "PRESET-VIDEO-6",
+            "PRESET-VIDEO-7",
+            "PRESET-VIDEO-8",
+            "SHARED",
+            "UNENCRYPTED"
+          ]
+        }
+      }
     },
     "StreamSelection": {
       "description": "A StreamSelection configuration.",
@@ -329,6 +370,10 @@
           "items": {
             "$ref": "#/definitions/HlsManifest"
           }
+        },
+        "IncludeDvbSubtitles": {
+          "description": "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
+          "type": "boolean"
         },
         "SegmentDurationSeconds": {
           "$ref": "#/definitions/SegmentDurationSeconds"
