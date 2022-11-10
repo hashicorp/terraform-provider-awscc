@@ -1,4 +1,28 @@
 ## 0.38.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_organizations_account`
+* **New Data Source:** `awscc_organizations_policy`
+* **New Data Source:** `awscc_resourceexplorer2_default_view_association`
+* **New Data Source:** `awscc_resourceexplorer2_index`
+* **New Data Source:** `awscc_resourceexplorer2_indices`
+* **New Data Source:** `awscc_resourceexplorer2_view`
+* **New Data Source:** `awscc_resourceexplorer2_views`
+* **New Data Source:** `awscc_scheduler_schedule_group`
+* **New Data Source:** `awscc_scheduler_schedule_groups`
+* **New Data Source:** `awscc_ses_vdm_attributes`
+* **New Data Source:** `awscc_xray_resource_policies`
+* **New Data Source:** `awscc_xray_resource_policy`
+* **New Resource:** `awscc_organizations_account`
+* **New Resource:** `awscc_organizations_policy`
+* **New Resource:** `awscc_resourceexplorer2_default_view_association`
+* **New Resource:** `awscc_resourceexplorer2_index`
+* **New Resource:** `awscc_resourceexplorer2_view`
+* **New Resource:** `awscc_scheduler_schedule_group`
+* **New Resource:** `awscc_ses_vdm_attributes`
+* **New Resource:** `awscc_xray_resource_policy`
+
 ## [0.37.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.37.0) (November  3, 2022)
 
 FEATURES:
