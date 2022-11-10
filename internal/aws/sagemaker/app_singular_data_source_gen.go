@@ -23,13 +23,14 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"app_arn": {
 			// Property: AppArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the app.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app/.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the app.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app/.*",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the app.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,13 +38,14 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"app_name": {
 			// Property: AppName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the app.",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the app.",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the app.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,17 +53,18 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"app_type": {
 			// Property: AppType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of app.",
-			//   "enum": [
-			//     "JupyterServer",
-			//     "KernelGateway",
-			//     "RStudioServerPro",
-			//     "RSessionGateway",
-			//     "Canvas"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of app.",
+			//	  "enum": [
+			//	    "JupyterServer",
+			//	    "KernelGateway",
+			//	    "RStudioServerPro",
+			//	    "RSessionGateway",
+			//	    "Canvas"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The type of app.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -69,12 +72,13 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_id": {
 			// Property: DomainId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The domain ID.",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The domain ID.",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The domain ID.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -82,90 +86,91 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_spec": {
 			// Property: ResourceSpec
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.",
-			//   "properties": {
-			//     "InstanceType": {
-			//       "description": "The instance type that the image version runs on.",
-			//       "enum": [
-			//         "system",
-			//         "ml.t3.micro",
-			//         "ml.t3.small",
-			//         "ml.t3.medium",
-			//         "ml.t3.large",
-			//         "ml.t3.xlarge",
-			//         "ml.t3.2xlarge",
-			//         "ml.m5.large",
-			//         "ml.m5.xlarge",
-			//         "ml.m5.2xlarge",
-			//         "ml.m5.4xlarge",
-			//         "ml.m5.8xlarge",
-			//         "ml.m5.12xlarge",
-			//         "ml.m5.16xlarge",
-			//         "ml.m5.24xlarge",
-			//         "ml.c5.large",
-			//         "ml.c5.xlarge",
-			//         "ml.c5.2xlarge",
-			//         "ml.c5.4xlarge",
-			//         "ml.c5.9xlarge",
-			//         "ml.c5.12xlarge",
-			//         "ml.c5.18xlarge",
-			//         "ml.c5.24xlarge",
-			//         "ml.p3.2xlarge",
-			//         "ml.p3.8xlarge",
-			//         "ml.p3.16xlarge",
-			//         "ml.g4dn.xlarge",
-			//         "ml.g4dn.2xlarge",
-			//         "ml.g4dn.4xlarge",
-			//         "ml.g4dn.8xlarge",
-			//         "ml.g4dn.12xlarge",
-			//         "ml.g4dn.16xlarge",
-			//         "ml.r5.large",
-			//         "ml.r5.xlarge",
-			//         "ml.r5.2xlarge",
-			//         "ml.r5.4xlarge",
-			//         "ml.r5.8xlarge",
-			//         "ml.r5.12xlarge",
-			//         "ml.r5.16xlarge",
-			//         "ml.r5.24xlarge",
-			//         "ml.p3dn.24xlarge",
-			//         "ml.m5d.large",
-			//         "ml.m5d.xlarge",
-			//         "ml.m5d.2xlarge",
-			//         "ml.m5d.4xlarge",
-			//         "ml.m5d.8xlarge",
-			//         "ml.m5d.12xlarge",
-			//         "ml.m5d.16xlarge",
-			//         "ml.m5d.24xlarge",
-			//         "ml.g5.xlarge",
-			//         "ml.g5.2xlarge",
-			//         "ml.g5.4xlarge",
-			//         "ml.g5.8xlarge",
-			//         "ml.g5.12xlarge",
-			//         "ml.g5.16xlarge",
-			//         "ml.g5.24xlarge",
-			//         "ml.g5.48xlarge"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "SageMakerImageArn": {
-			//       "description": "The ARN of the SageMaker image that the image version belongs to.",
-			//       "maxLength": 256,
-			//       "minLength": 1,
-			//       "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
-			//       "type": "string"
-			//     },
-			//     "SageMakerImageVersionArn": {
-			//       "description": "The ARN of the image version created on the instance.",
-			//       "maxLength": 256,
-			//       "minLength": 1,
-			//       "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.",
+			//	  "properties": {
+			//	    "InstanceType": {
+			//	      "description": "The instance type that the image version runs on.",
+			//	      "enum": [
+			//	        "system",
+			//	        "ml.t3.micro",
+			//	        "ml.t3.small",
+			//	        "ml.t3.medium",
+			//	        "ml.t3.large",
+			//	        "ml.t3.xlarge",
+			//	        "ml.t3.2xlarge",
+			//	        "ml.m5.large",
+			//	        "ml.m5.xlarge",
+			//	        "ml.m5.2xlarge",
+			//	        "ml.m5.4xlarge",
+			//	        "ml.m5.8xlarge",
+			//	        "ml.m5.12xlarge",
+			//	        "ml.m5.16xlarge",
+			//	        "ml.m5.24xlarge",
+			//	        "ml.c5.large",
+			//	        "ml.c5.xlarge",
+			//	        "ml.c5.2xlarge",
+			//	        "ml.c5.4xlarge",
+			//	        "ml.c5.9xlarge",
+			//	        "ml.c5.12xlarge",
+			//	        "ml.c5.18xlarge",
+			//	        "ml.c5.24xlarge",
+			//	        "ml.p3.2xlarge",
+			//	        "ml.p3.8xlarge",
+			//	        "ml.p3.16xlarge",
+			//	        "ml.g4dn.xlarge",
+			//	        "ml.g4dn.2xlarge",
+			//	        "ml.g4dn.4xlarge",
+			//	        "ml.g4dn.8xlarge",
+			//	        "ml.g4dn.12xlarge",
+			//	        "ml.g4dn.16xlarge",
+			//	        "ml.r5.large",
+			//	        "ml.r5.xlarge",
+			//	        "ml.r5.2xlarge",
+			//	        "ml.r5.4xlarge",
+			//	        "ml.r5.8xlarge",
+			//	        "ml.r5.12xlarge",
+			//	        "ml.r5.16xlarge",
+			//	        "ml.r5.24xlarge",
+			//	        "ml.p3dn.24xlarge",
+			//	        "ml.m5d.large",
+			//	        "ml.m5d.xlarge",
+			//	        "ml.m5d.2xlarge",
+			//	        "ml.m5d.4xlarge",
+			//	        "ml.m5d.8xlarge",
+			//	        "ml.m5d.12xlarge",
+			//	        "ml.m5d.16xlarge",
+			//	        "ml.m5d.24xlarge",
+			//	        "ml.g5.xlarge",
+			//	        "ml.g5.2xlarge",
+			//	        "ml.g5.4xlarge",
+			//	        "ml.g5.8xlarge",
+			//	        "ml.g5.12xlarge",
+			//	        "ml.g5.16xlarge",
+			//	        "ml.g5.24xlarge",
+			//	        "ml.g5.48xlarge"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "SageMakerImageArn": {
+			//	      "description": "The ARN of the SageMaker image that the image version belongs to.",
+			//	      "maxLength": 256,
+			//	      "minLength": 1,
+			//	      "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+			//	      "type": "string"
+			//	    },
+			//	    "SageMakerImageVersionArn": {
+			//	      "description": "The ARN of the image version created on the instance.",
+			//	      "maxLength": 256,
+			//	      "minLength": 1,
+			//	      "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -194,33 +199,34 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of tags to apply to the app.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 0,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "A list of tags to apply to the app.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 0,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "A list of tags to apply to the app.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -241,13 +247,14 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"user_profile_name": {
 			// Property: UserProfileName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The user profile name.",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The user profile name.",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+			//	  "type": "string"
+			//	}
 			Description: "The user profile name.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -23,47 +23,50 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"public_key_config": {
 			// Property: PublicKeyConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "CallerReference": {
-			//       "type": "string"
-			//     },
-			//     "Comment": {
-			//       "type": "string"
-			//     },
-			//     "EncodedKey": {
-			//       "type": "string"
-			//     },
-			//     "Name": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "CallerReference",
-			//     "Name",
-			//     "EncodedKey"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "CallerReference": {
+			//	      "type": "string"
+			//	    },
+			//	    "Comment": {
+			//	      "type": "string"
+			//	    },
+			//	    "EncodedKey": {
+			//	      "type": "string"
+			//	    },
+			//	    "Name": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "CallerReference",
+			//	    "Name",
+			//	    "EncodedKey"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"caller_reference": {

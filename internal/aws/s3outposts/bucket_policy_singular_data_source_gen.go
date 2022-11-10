@@ -23,13 +23,14 @@ func bucketPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"bucket": {
 			// Property: Bucket
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the specified bucket.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the specified bucket.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,10 +38,11 @@ func bucketPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"policy_document": {
 			// Property: PolicyDocument
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A policy document containing permissions to add to the specified bucket.",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "A policy document containing permissions to add to the specified bucket.",
+			//	  "type": "object"
+			//	}
 			Description: "A policy document containing permissions to add to the specified bucket.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,

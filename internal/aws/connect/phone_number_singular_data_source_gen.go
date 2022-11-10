@@ -23,11 +23,12 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"address": {
 			// Property: Address
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The phone number e164 address.",
-			//   "pattern": "^\\+[0-9]{2,15}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The phone number e164 address.",
+			//	  "pattern": "^\\+[0-9]{2,15}",
+			//	  "type": "string"
+			//	}
 			Description: "The phone number e164 address.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,11 +36,12 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"country_code": {
 			// Property: CountryCode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The phone number country code.",
-			//   "pattern": "^[A-Z]{2}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The phone number country code.",
+			//	  "pattern": "^[A-Z]{2}",
+			//	  "type": "string"
+			//	}
 			Description: "The phone number country code.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -47,12 +49,13 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the phone number.",
-			//   "maxLength": 500,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the phone number.",
+			//	  "maxLength": 500,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the phone number.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,11 +63,12 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"phone_number_arn": {
 			// Property: PhoneNumberArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The phone number ARN",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:phone-number/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The phone number ARN",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:phone-number/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The phone number ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -72,11 +76,12 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"prefix": {
 			// Property: Prefix
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The phone number prefix.",
-			//   "pattern": "^\\+[0-9]{1,15}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The phone number prefix.",
+			//	  "pattern": "^\\+[0-9]{1,15}",
+			//	  "type": "string"
+			//	}
 			Description: "The phone number prefix.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -84,36 +89,37 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "One or more tags.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "One or more tags.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "One or more tags.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -136,11 +142,12 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_arn": {
 			// Property: TargetArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the target the phone number is claimed to.",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:(instance|traffic-distribution-group)/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the target the phone number is claimed to.",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:(instance|traffic-distribution-group)/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the target the phone number is claimed to.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -148,11 +155,12 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The phone number type, either TOLL_FREE or DID.",
-			//   "pattern": "TOLL_FREE|DID",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The phone number type, either TOLL_FREE or DID.",
+			//	  "pattern": "TOLL_FREE|DID",
+			//	  "type": "string"
+			//	}
 			Description: "The phone number type, either TOLL_FREE or DID.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -23,71 +23,73 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"endpoint_details": {
 			// Property: EndpointDetails
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Endpoint": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Address": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Name": {
-			//                 "type": "string"
-			//               },
-			//               "Port": {
-			//                 "type": "integer"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Mtu": {
-			//             "type": "integer"
-			//           },
-			//           "Name": {
-			//             "pattern": "^[ a-zA-Z0-9_:-]{1,256}$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "SecurityDetails": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "RoleArn": {
-			//             "type": "string"
-			//           },
-			//           "SecurityGroupIds": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "SubnetIds": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Endpoint": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Address": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Name": {
+			//	                "type": "string"
+			//	              },
+			//	              "Port": {
+			//	                "type": "integer"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Mtu": {
+			//	            "type": "integer"
+			//	          },
+			//	          "Name": {
+			//	            "pattern": "^[ a-zA-Z0-9_:-]{1,256}$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "SecurityDetails": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "RoleArn": {
+			//	            "type": "string"
+			//	          },
+			//	          "SecurityGroupIds": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "SubnetIds": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"endpoint": {
@@ -156,32 +158,34 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

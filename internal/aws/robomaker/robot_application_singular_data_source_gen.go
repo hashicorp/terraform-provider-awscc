@@ -23,22 +23,24 @@ func robotApplicationDataSource(ctx context.Context) (datasource.DataSource, err
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"current_revision_id": {
 			// Property: CurrentRevisionId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The revision ID of robot application.",
-			//   "maxLength": 40,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The revision ID of robot application.",
+			//	  "maxLength": 40,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The revision ID of robot application.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -46,10 +48,11 @@ func robotApplicationDataSource(ctx context.Context) (datasource.DataSource, err
 		"environment": {
 			// Property: Environment
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The URI of the Docker image for the robot application.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The URI of the Docker image for the robot application.",
+			//	  "type": "string"
+			//	}
 			Description: "The URI of the Docker image for the robot application.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -57,12 +60,13 @@ func robotApplicationDataSource(ctx context.Context) (datasource.DataSource, err
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the robot application.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the robot application.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the robot application.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -70,34 +74,35 @@ func robotApplicationDataSource(ctx context.Context) (datasource.DataSource, err
 		"robot_software_suite": {
 			// Property: RobotSoftwareSuite
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The robot software suite used by the robot application.",
-			//   "properties": {
-			//     "Name": {
-			//       "description": "The name of robot software suite.",
-			//       "enum": [
-			//         "ROS",
-			//         "ROS2",
-			//         "General"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Version": {
-			//       "description": "The version of robot software suite.",
-			//       "enum": [
-			//         "Kinetic",
-			//         "Melodic",
-			//         "Dashing"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The robot software suite used by the robot application.",
+			//	  "properties": {
+			//	    "Name": {
+			//	      "description": "The name of robot software suite.",
+			//	      "enum": [
+			//	        "ROS",
+			//	        "ROS2",
+			//	        "General"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Version": {
+			//	      "description": "The version of robot software suite.",
+			//	      "enum": [
+			//	        "Kinetic",
+			//	        "Melodic",
+			//	        "Dashing"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The robot software suite used by the robot application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -120,41 +125,42 @@ func robotApplicationDataSource(ctx context.Context) (datasource.DataSource, err
 		"sources": {
 			// Property: Sources
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The sources of the robot application.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Architecture": {
-			//         "description": "The architecture of robot application.",
-			//         "enum": [
-			//           "X86_64",
-			//           "ARM64",
-			//           "ARMHF"
-			//         ],
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "S3Bucket": {
-			//         "description": "The Arn of the S3Bucket that stores the robot application source.",
-			//         "type": "string"
-			//       },
-			//       "S3Key": {
-			//         "description": "The s3 key of robot application source.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "S3Bucket",
-			//       "S3Key",
-			//       "Architecture"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The sources of the robot application.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Architecture": {
+			//	        "description": "The architecture of robot application.",
+			//	        "enum": [
+			//	          "X86_64",
+			//	          "ARM64",
+			//	          "ARMHF"
+			//	        ],
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "S3Bucket": {
+			//	        "description": "The Arn of the S3Bucket that stores the robot application source.",
+			//	        "type": "string"
+			//	      },
+			//	      "S3Key": {
+			//	        "description": "The s3 key of robot application source.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "S3Bucket",
+			//	      "S3Key",
+			//	      "Architecture"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The sources of the robot application.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -183,19 +189,20 @@ func robotApplicationDataSource(ctx context.Context) (datasource.DataSource, err
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A key-value pair to associate with a resource.",
-			//   "patternProperties": {
-			//     "": {
-			//       "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//       "maxLength": 256,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A key-value pair to associate with a resource.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	      "maxLength": 256,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A key-value pair to associate with a resource.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

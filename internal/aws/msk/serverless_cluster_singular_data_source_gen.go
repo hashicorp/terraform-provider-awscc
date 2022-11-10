@@ -23,45 +23,47 @@ func serverlessClusterDataSource(ctx context.Context) (datasource.DataSource, er
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"client_authentication": {
 			// Property: ClientAuthentication
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Sasl": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Iam": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "Enabled"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "Iam"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "Sasl"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Sasl": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Iam": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Enabled"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Iam"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Sasl"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"sasl": {
@@ -92,27 +94,29 @@ func serverlessClusterDataSource(ctx context.Context) (datasource.DataSource, er
 		"cluster_name": {
 			// Property: ClusterName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A key-value pair to associate with a resource.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A key-value pair to associate with a resource.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A key-value pair to associate with a resource.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -121,36 +125,37 @@ func serverlessClusterDataSource(ctx context.Context) (datasource.DataSource, er
 		"vpc_configs": {
 			// Property: VpcConfigs
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "SecurityGroups": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "SubnetIds": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       }
-			//     },
-			//     "required": [
-			//       "SubnetIds"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "SecurityGroups": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "SubnetIds": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "SubnetIds"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"security_groups": {

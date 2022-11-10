@@ -23,82 +23,88 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"application_identifier": {
 			// Property: ApplicationIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 14,
-			//   "minLength": 14,
-			//   "pattern": "^app-([0-9A-Za-z]{10}$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 14,
+			//	  "minLength": 14,
+			//	  "pattern": "^app-([0-9A-Za-z]{10}$)",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9-_\\s\\.\\!\\*\\#\\@\\']+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9-_\\s\\.\\!\\*\\#\\@\\']+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"endpoint_type": {
 			// Property: EndpointType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "LAMBDA",
-			//     "URL"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "LAMBDA",
+			//	    "URL"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"environment_identifier": {
 			// Property: EnvironmentIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 14,
-			//   "minLength": 14,
-			//   "pattern": "^env-([0-9A-Za-z]{10}$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 14,
+			//	  "minLength": 14,
+			//	  "pattern": "^env-([0-9A-Za-z]{10}$)",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"lambda_endpoint": {
 			// Property: LambdaEndpoint
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Arn": {
-			//       "maxLength": 2048,
-			//       "minLength": 1,
-			//       "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:\n(\\$LATEST|[a-zA-Z0-9-_]+))?$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Arn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Arn": {
+			//	      "maxLength": 2048,
+			//	      "minLength": 1,
+			//	      "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:\n(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Arn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -113,59 +119,62 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 63,
-			//   "minLength": 3,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 63,
+			//	  "minLength": 3,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"service_identifier": {
 			// Property: ServiceIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 14,
-			//   "minLength": 14,
-			//   "pattern": "^svc-([0-9A-Za-z]{10}$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 14,
+			//	  "minLength": 14,
+			//	  "pattern": "^svc-([0-9A-Za-z]{10}$)",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A label for tagging Environment resource",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "A string used to identify this tag",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "A string containing the value for the tag",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A label for tagging Environment resource",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "A string used to identify this tag",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "A string containing the value for the tag",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -188,27 +197,28 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"url_endpoint": {
 			// Property: UrlEndpoint
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "HealthUrl": {
-			//       "maxLength": 2048,
-			//       "minLength": 1,
-			//       "pattern": "^https?://[-a-zA-Z0-9+\\x38@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\\x38@#/%=~_|]$",
-			//       "type": "string"
-			//     },
-			//     "Url": {
-			//       "maxLength": 2048,
-			//       "minLength": 1,
-			//       "pattern": "^https?://[-a-zA-Z0-9+\\x38@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\\x38@#/%=~_|]$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Url"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "HealthUrl": {
+			//	      "maxLength": 2048,
+			//	      "minLength": 1,
+			//	      "pattern": "^https?://[-a-zA-Z0-9+\\x38@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\\x38@#/%=~_|]$",
+			//	      "type": "string"
+			//	    },
+			//	    "Url": {
+			//	      "maxLength": 2048,
+			//	      "minLength": 1,
+			//	      "pattern": "^https?://[-a-zA-Z0-9+\\x38@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\\x38@#/%=~_|]$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Url"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"health_url": {
@@ -228,12 +238,13 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 21,
-			//   "minLength": 12,
-			//   "pattern": "^vpc-[-a-f0-9]{8}([-a-f0-9]{9})?$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 21,
+			//	  "minLength": 12,
+			//	  "pattern": "^vpc-[-a-f0-9]{8}([-a-f0-9]{9})?$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

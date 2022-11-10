@@ -23,13 +23,14 @@ func enabledControlDataSource(ctx context.Context) (datasource.DataSource, error
 		"control_identifier": {
 			// Property: ControlIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Arn of the control.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Arn of the control.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Arn of the control.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,13 +38,14 @@ func enabledControlDataSource(ctx context.Context) (datasource.DataSource, error
 		"target_identifier": {
 			// Property: TargetIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Arn for Organizational unit to which the control needs to be applied",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Arn for Organizational unit to which the control needs to be applied",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Arn for Organizational unit to which the control needs to be applied",
 			Type:        types.StringType,
 			Computed:    true,

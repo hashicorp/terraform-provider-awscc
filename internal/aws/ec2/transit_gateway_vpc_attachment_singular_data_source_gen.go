@@ -23,48 +23,51 @@ func transitGatewayVpcAttachmentDataSource(ctx context.Context) (datasource.Data
 		"add_subnet_ids": {
 			// Property: AddSubnetIds
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"options": {
 			// Property: Options
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The options for the transit gateway vpc attachment.",
-			//   "properties": {
-			//     "ApplianceModeSupport": {
-			//       "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
-			//       "type": "string"
-			//     },
-			//     "DnsSupport": {
-			//       "description": "Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable",
-			//       "type": "string"
-			//     },
-			//     "Ipv6Support": {
-			//       "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The options for the transit gateway vpc attachment.",
+			//	  "properties": {
+			//	    "ApplianceModeSupport": {
+			//	      "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+			//	      "type": "string"
+			//	    },
+			//	    "DnsSupport": {
+			//	      "description": "Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable",
+			//	      "type": "string"
+			//	    },
+			//	    "Ipv6Support": {
+			//	      "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The options for the transit gateway vpc attachment.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -93,55 +96,58 @@ func transitGatewayVpcAttachmentDataSource(ctx context.Context) (datasource.Data
 		"remove_subnet_ids": {
 			// Property: RemoveSubnetIds
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"subnet_ids": {
 			// Property: SubnetIds
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -161,18 +167,20 @@ func transitGatewayVpcAttachmentDataSource(ctx context.Context) (datasource.Data
 		"transit_gateway_id": {
 			// Property: TransitGatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

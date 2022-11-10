@@ -23,10 +23,11 @@ func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource,
 		"identity_name": {
 			// Property: IdentityName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,14 +35,15 @@ func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource,
 		"identity_type": {
 			// Property: IdentityType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether the identity to map to the Studio is a user or a group.",
-			//   "enum": [
-			//     "USER",
-			//     "GROUP"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether the identity to map to the Studio is a user or a group.",
+			//	  "enum": [
+			//	    "USER",
+			//	    "GROUP"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Specifies whether the identity to map to the Studio is a user or a group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,11 +51,12 @@ func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource,
 		"session_policy_arn": {
 			// Property: SessionPolicyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
-			//   "pattern": "^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
+			//	  "pattern": "^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -61,13 +64,14 @@ func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource,
 		"studio_id": {
 			// Property: StudioId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
-			//   "maxLength": 256,
-			//   "minLength": 4,
-			//   "pattern": "^es-[0-9A-Z]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
+			//	  "maxLength": 256,
+			//	  "minLength": 4,
+			//	  "pattern": "^es-[0-9A-Z]+",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
 			Type:        types.StringType,
 			Computed:    true,

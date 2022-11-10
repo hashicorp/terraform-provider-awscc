@@ -23,11 +23,12 @@ func moduleDefaultVersionDataSource(ctx context.Context) (datasource.DataSource,
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the module version to set as the default version.",
-			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/module/.+/[0-9]{8}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the module version to set as the default version.",
+			//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/module/.+/[0-9]{8}$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the module version to set as the default version.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,11 +36,12 @@ func moduleDefaultVersionDataSource(ctx context.Context) (datasource.DataSource,
 		"module_name": {
 			// Property: ModuleName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of a module existing in the registry.",
-			//   "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::MODULE",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of a module existing in the registry.",
+			//	  "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::MODULE",
+			//	  "type": "string"
+			//	}
 			Description: "The name of a module existing in the registry.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -47,11 +49,12 @@ func moduleDefaultVersionDataSource(ctx context.Context) (datasource.DataSource,
 		"version_id": {
 			// Property: VersionId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of an existing version of the named module to set as the default.",
-			//   "pattern": "^[0-9]{8}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of an existing version of the named module to set as the default.",
+			//	  "pattern": "^[0-9]{8}$",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of an existing version of the named module to set as the default.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -23,74 +23,79 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1600,
-			//   "minLength": 1,
-			//   "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:endpoint\\/[/\\.\\-_A-Za-z0-9]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1600,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:endpoint\\/[/\\.\\-_A-Za-z0-9]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 512,
-			//   "pattern": ".*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 512,
+			//	  "pattern": ".*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"endpoint_id": {
 			// Property: EndpointId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 50,
-			//   "minLength": 1,
-			//   "pattern": "^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 50,
+			//	  "minLength": 1,
+			//	  "pattern": "^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"endpoint_url": {
 			// Property: EndpointUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^(https://)?[\\.\\-a-z0-9]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^(https://)?[\\.\\-a-z0-9]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"event_buses": {
 			// Property: EventBuses
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "EventBusArn": {
-			//         "maxLength": 512,
-			//         "minLength": 1,
-			//         "pattern": "^arn:aws[a-z-]*:events:[a-z]{2}-[a-z-]+-\\d+:\\d{12}:event-bus/[\\w.-]+$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "EventBusArn"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 2,
-			//   "minItems": 2,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "EventBusArn": {
+			//	        "maxLength": 512,
+			//	        "minLength": 1,
+			//	        "pattern": "^arn:aws[a-z-]*:events:[a-z]{2}-[a-z-]+-\\d+:\\d{12}:event-bus/[\\w.-]+$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "EventBusArn"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 2,
+			//	  "minItems": 2,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"event_bus_arn": {
@@ -105,34 +110,36 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[\\.\\-_A-Za-z0-9]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[\\.\\-_A-Za-z0-9]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"replication_config": {
 			// Property: ReplicationConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "State": {
-			//       "enum": [
-			//         "ENABLED",
-			//         "DISABLED"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "State"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "State": {
+			//	      "enum": [
+			//	        "ENABLED",
+			//	        "DISABLED"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "State"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"state": {
@@ -147,67 +154,69 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^arn:aws[a-z-]*:iam::\\d{12}:role\\/[\\w+=,.@/-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:aws[a-z-]*:iam::\\d{12}:role\\/[\\w+=,.@/-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"routing_config": {
 			// Property: RoutingConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "FailoverConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Primary": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "HealthCheck": {
-			//               "maxLength": 1600,
-			//               "minLength": 1,
-			//               "pattern": "^arn:aws([a-z]|\\-)*:route53:::healthcheck/[\\-a-z0-9]+$",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "HealthCheck"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Secondary": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Route": {
-			//               "maxLength": 20,
-			//               "minLength": 9,
-			//               "pattern": "^[\\-a-z0-9]+$",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Route"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "Primary",
-			//         "Secondary"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "FailoverConfig"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "FailoverConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Primary": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "HealthCheck": {
+			//	              "maxLength": 1600,
+			//	              "minLength": 1,
+			//	              "pattern": "^arn:aws([a-z]|\\-)*:route53:::healthcheck/[\\-a-z0-9]+$",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "HealthCheck"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Secondary": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Route": {
+			//	              "maxLength": 20,
+			//	              "minLength": 9,
+			//	              "pattern": "^[\\-a-z0-9]+$",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Route"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Primary",
+			//	        "Secondary"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "FailoverConfig"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"failover_config": {
@@ -251,29 +260,31 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "ACTIVE",
-			//     "CREATING",
-			//     "UPDATING",
-			//     "DELETING",
-			//     "CREATE_FAILED",
-			//     "UPDATE_FAILED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "ACTIVE",
+			//	    "CREATING",
+			//	    "UPDATING",
+			//	    "DELETING",
+			//	    "CREATE_FAILED",
+			//	    "UPDATE_FAILED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"state_reason": {
 			// Property: StateReason
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 512,
-			//   "minLength": 1,
-			//   "pattern": "^.*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 512,
+			//	  "minLength": 1,
+			//	  "pattern": "^.*$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

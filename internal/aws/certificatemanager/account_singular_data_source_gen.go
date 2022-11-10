@@ -23,26 +23,28 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"account_id": {
 			// Property: AccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"expiry_events_configuration": {
 			// Property: ExpiryEventsConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "DaysBeforeExpiry": {
-			//       "maximum": 45,
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "DaysBeforeExpiry": {
+			//	      "maximum": 45,
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"days_before_expiry": {

@@ -23,10 +23,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"attachment_id": {
 			// Property: AttachmentId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"attachment_policy_rule_number": {
 			// Property: AttachmentPolicyRuleNumber
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The policy rule number associated with the attachment.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The policy rule number associated with the attachment.",
+			//	  "type": "integer"
+			//	}
 			Description: "The policy rule number associated with the attachment.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -45,10 +47,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"attachment_type": {
 			// Property: AttachmentType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The type of attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"core_network_arn": {
 			// Property: CoreNetworkArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of a core network for the VPC attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of a core network for the VPC attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of a core network for the VPC attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,10 +71,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"core_network_id": {
 			// Property: CoreNetworkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of a core network where you're creating a site-to-site VPN attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of a core network where you're creating a site-to-site VPN attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of a core network where you're creating a site-to-site VPN attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -78,10 +83,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"created_at": {
 			// Property: CreatedAt
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Creation time of the attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Creation time of the attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "Creation time of the attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -89,10 +95,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"edge_location": {
 			// Property: EdgeLocation
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Region where the edge is located.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Region where the edge is located.",
+			//	  "type": "string"
+			//	}
 			Description: "The Region where the edge is located.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -100,10 +107,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"owner_account_id": {
 			// Property: OwnerAccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Owner account of the attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Owner account of the attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "Owner account of the attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -111,46 +119,47 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"proposed_segment_change": {
 			// Property: ProposedSegmentChange
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The attachment to move from one segment to another.",
-			//   "properties": {
-			//     "AttachmentPolicyRuleNumber": {
-			//       "description": "The rule number in the policy document that applies to this change.",
-			//       "type": "integer"
-			//     },
-			//     "SegmentName": {
-			//       "description": "The name of the segment to change.",
-			//       "type": "string"
-			//     },
-			//     "Tags": {
-			//       "description": "The key-value tags that changed for the segment.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "A key-value pair to associate with a resource.",
-			//         "insertionOrder": false,
-			//         "properties": {
-			//           "Key": {
-			//             "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Key",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The attachment to move from one segment to another.",
+			//	  "properties": {
+			//	    "AttachmentPolicyRuleNumber": {
+			//	      "description": "The rule number in the policy document that applies to this change.",
+			//	      "type": "integer"
+			//	    },
+			//	    "SegmentName": {
+			//	      "description": "The name of the segment to change.",
+			//	      "type": "string"
+			//	    },
+			//	    "Tags": {
+			//	      "description": "The key-value tags that changed for the segment.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "A key-value pair to associate with a resource.",
+			//	        "insertionOrder": false,
+			//	        "properties": {
+			//	          "Key": {
+			//	            "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Key",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The attachment to move from one segment to another.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -194,10 +203,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"resource_arn": {
 			// Property: ResourceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the Resource.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the Resource.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the Resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -205,10 +215,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"segment_name": {
 			// Property: SegmentName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the segment that attachment is in.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the segment that attachment is in.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the segment that attachment is in.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -216,10 +227,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of the attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of the attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The state of the attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -227,31 +239,32 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tags for the attachment.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "insertionOrder": false,
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Tags for the attachment.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "insertionOrder": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Tags for the attachment.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -274,10 +287,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"updated_at": {
 			// Property: UpdatedAt
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Last update time of the attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Last update time of the attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "Last update time of the attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -285,10 +299,11 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"vpn_connection_arn": {
 			// Property: VpnConnectionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the site-to-site VPN attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the site-to-site VPN attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the site-to-site VPN attachment.",
 			Type:        types.StringType,
 			Computed:    true,

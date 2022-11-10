@@ -23,49 +23,53 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_publish": {
 			// Property: AutoPublish
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"function_arn": {
 			// Property: FunctionARN
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"function_code": {
 			// Property: FunctionCode
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"function_config": {
 			// Property: FunctionConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Comment": {
-			//       "type": "string"
-			//     },
-			//     "Runtime": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Comment",
-			//     "Runtime"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Comment": {
+			//	      "type": "string"
+			//	    },
+			//	    "Runtime": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Comment",
+			//	    "Runtime"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"comment": {
@@ -85,15 +89,16 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"function_metadata": {
 			// Property: FunctionMetadata
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "FunctionARN": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "FunctionARN": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"function_arn": {
@@ -108,18 +113,20 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"stage": {
 			// Property: Stage
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

@@ -23,113 +23,114 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"capacity": {
 			// Property: Capacity
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Information about the capacity allocated to the connector.",
-			//   "oneOf": [
-			//     {
-			//       "required": [
-			//         "AutoScaling"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "ProvisionedCapacity"
-			//       ]
-			//     }
-			//   ],
-			//   "properties": {
-			//     "AutoScaling": {
-			//       "additionalProperties": false,
-			//       "description": "Details about auto scaling of a connector. ",
-			//       "properties": {
-			//         "MaxWorkerCount": {
-			//           "description": "The maximum number of workers for a connector.",
-			//           "type": "integer"
-			//         },
-			//         "McuCount": {
-			//           "description": "Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.",
-			//           "enum": [
-			//             1,
-			//             2,
-			//             4,
-			//             8
-			//           ],
-			//           "type": "integer"
-			//         },
-			//         "MinWorkerCount": {
-			//           "description": "The minimum number of workers for a connector.",
-			//           "type": "integer"
-			//         },
-			//         "ScaleInPolicy": {
-			//           "additionalProperties": false,
-			//           "description": "Information about the scale in policy of the connector.",
-			//           "properties": {
-			//             "CpuUtilizationPercentage": {
-			//               "description": "Specifies the CPU utilization percentage threshold at which connector scale in should trigger.",
-			//               "maximum": 100,
-			//               "minimum": 1,
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "required": [
-			//             "CpuUtilizationPercentage"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "ScaleOutPolicy": {
-			//           "additionalProperties": false,
-			//           "description": "Information about the scale out policy of the connector.",
-			//           "properties": {
-			//             "CpuUtilizationPercentage": {
-			//               "description": "Specifies the CPU utilization percentage threshold at which connector scale out should trigger.",
-			//               "maximum": 100,
-			//               "minimum": 1,
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "required": [
-			//             "CpuUtilizationPercentage"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "MaxWorkerCount",
-			//         "MinWorkerCount",
-			//         "ScaleInPolicy",
-			//         "ScaleOutPolicy",
-			//         "McuCount"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ProvisionedCapacity": {
-			//       "additionalProperties": false,
-			//       "description": "Details about a fixed capacity allocated to a connector.",
-			//       "properties": {
-			//         "McuCount": {
-			//           "description": "Specifies how many MSK Connect Units (MCU) are allocated to the connector.",
-			//           "enum": [
-			//             1,
-			//             2,
-			//             4,
-			//             8
-			//           ],
-			//           "type": "integer"
-			//         },
-			//         "WorkerCount": {
-			//           "description": "Number of workers for a connector.",
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "required": [
-			//         "WorkerCount"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Information about the capacity allocated to the connector.",
+			//	  "oneOf": [
+			//	    {
+			//	      "required": [
+			//	        "AutoScaling"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "ProvisionedCapacity"
+			//	      ]
+			//	    }
+			//	  ],
+			//	  "properties": {
+			//	    "AutoScaling": {
+			//	      "additionalProperties": false,
+			//	      "description": "Details about auto scaling of a connector. ",
+			//	      "properties": {
+			//	        "MaxWorkerCount": {
+			//	          "description": "The maximum number of workers for a connector.",
+			//	          "type": "integer"
+			//	        },
+			//	        "McuCount": {
+			//	          "description": "Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.",
+			//	          "enum": [
+			//	            1,
+			//	            2,
+			//	            4,
+			//	            8
+			//	          ],
+			//	          "type": "integer"
+			//	        },
+			//	        "MinWorkerCount": {
+			//	          "description": "The minimum number of workers for a connector.",
+			//	          "type": "integer"
+			//	        },
+			//	        "ScaleInPolicy": {
+			//	          "additionalProperties": false,
+			//	          "description": "Information about the scale in policy of the connector.",
+			//	          "properties": {
+			//	            "CpuUtilizationPercentage": {
+			//	              "description": "Specifies the CPU utilization percentage threshold at which connector scale in should trigger.",
+			//	              "maximum": 100,
+			//	              "minimum": 1,
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "CpuUtilizationPercentage"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "ScaleOutPolicy": {
+			//	          "additionalProperties": false,
+			//	          "description": "Information about the scale out policy of the connector.",
+			//	          "properties": {
+			//	            "CpuUtilizationPercentage": {
+			//	              "description": "Specifies the CPU utilization percentage threshold at which connector scale out should trigger.",
+			//	              "maximum": 100,
+			//	              "minimum": 1,
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "CpuUtilizationPercentage"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "MaxWorkerCount",
+			//	        "MinWorkerCount",
+			//	        "ScaleInPolicy",
+			//	        "ScaleOutPolicy",
+			//	        "McuCount"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ProvisionedCapacity": {
+			//	      "additionalProperties": false,
+			//	      "description": "Details about a fixed capacity allocated to a connector.",
+			//	      "properties": {
+			//	        "McuCount": {
+			//	          "description": "Specifies how many MSK Connect Units (MCU) are allocated to the connector.",
+			//	          "enum": [
+			//	            1,
+			//	            2,
+			//	            4,
+			//	            8
+			//	          ],
+			//	          "type": "integer"
+			//	        },
+			//	        "WorkerCount": {
+			//	          "description": "Number of workers for a connector.",
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "WorkerCount"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Information about the capacity allocated to the connector.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -218,11 +219,12 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connector_arn": {
 			// Property: ConnectorArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name for the created Connector.",
-			//   "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name for the created Connector.",
+			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name for the created Connector.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -230,16 +232,17 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connector_configuration": {
 			// Property: ConnectorConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The configuration for the connector.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The configuration for the connector.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The configuration for the connector.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -248,11 +251,12 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connector_description": {
 			// Property: ConnectorDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A summary description of the connector.",
-			//   "maxLength": 1024,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A summary description of the connector.",
+			//	  "maxLength": 1024,
+			//	  "type": "string"
+			//	}
 			Description: "A summary description of the connector.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -260,12 +264,13 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connector_name": {
 			// Property: ConnectorName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the connector.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the connector.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the connector.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -273,61 +278,62 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kafka_cluster": {
 			// Property: KafkaCluster
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Details of how to connect to the Kafka cluster.",
-			//   "properties": {
-			//     "ApacheKafkaCluster": {
-			//       "additionalProperties": false,
-			//       "description": "Details of how to connect to an Apache Kafka cluster.",
-			//       "properties": {
-			//         "BootstrapServers": {
-			//           "description": "The bootstrap servers string of the Apache Kafka cluster.",
-			//           "type": "string"
-			//         },
-			//         "Vpc": {
-			//           "additionalProperties": false,
-			//           "description": "Information about a VPC used with the connector.",
-			//           "properties": {
-			//             "SecurityGroups": {
-			//               "description": "The AWS security groups to associate with the elastic network interfaces in order to specify what the connector has access to.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             },
-			//             "Subnets": {
-			//               "description": "The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             }
-			//           },
-			//           "required": [
-			//             "SecurityGroups",
-			//             "Subnets"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "BootstrapServers",
-			//         "Vpc"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "ApacheKafkaCluster"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Details of how to connect to the Kafka cluster.",
+			//	  "properties": {
+			//	    "ApacheKafkaCluster": {
+			//	      "additionalProperties": false,
+			//	      "description": "Details of how to connect to an Apache Kafka cluster.",
+			//	      "properties": {
+			//	        "BootstrapServers": {
+			//	          "description": "The bootstrap servers string of the Apache Kafka cluster.",
+			//	          "type": "string"
+			//	        },
+			//	        "Vpc": {
+			//	          "additionalProperties": false,
+			//	          "description": "Information about a VPC used with the connector.",
+			//	          "properties": {
+			//	            "SecurityGroups": {
+			//	              "description": "The AWS security groups to associate with the elastic network interfaces in order to specify what the connector has access to.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            },
+			//	            "Subnets": {
+			//	              "description": "The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "SecurityGroups",
+			//	            "Subnets"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BootstrapServers",
+			//	        "Vpc"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ApacheKafkaCluster"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Details of how to connect to the Kafka cluster.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -374,24 +380,25 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kafka_cluster_client_authentication": {
 			// Property: KafkaClusterClientAuthentication
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Details of the client authentication used by the Kafka cluster.",
-			//   "properties": {
-			//     "AuthenticationType": {
-			//       "description": "The type of client authentication used to connect to the Kafka cluster. Value NONE means that no client authentication is used.",
-			//       "enum": [
-			//         "NONE",
-			//         "IAM"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "AuthenticationType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Details of the client authentication used by the Kafka cluster.",
+			//	  "properties": {
+			//	    "AuthenticationType": {
+			//	      "description": "The type of client authentication used to connect to the Kafka cluster. Value NONE means that no client authentication is used.",
+			//	      "enum": [
+			//	        "NONE",
+			//	        "IAM"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "AuthenticationType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Details of the client authentication used by the Kafka cluster.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -408,24 +415,25 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kafka_cluster_encryption_in_transit": {
 			// Property: KafkaClusterEncryptionInTransit
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Details of encryption in transit to the Kafka cluster.",
-			//   "properties": {
-			//     "EncryptionType": {
-			//       "description": "The type of encryption in transit to the Kafka cluster.",
-			//       "enum": [
-			//         "PLAINTEXT",
-			//         "TLS"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "EncryptionType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Details of encryption in transit to the Kafka cluster.",
+			//	  "properties": {
+			//	    "EncryptionType": {
+			//	      "description": "The type of encryption in transit to the Kafka cluster.",
+			//	      "enum": [
+			//	        "PLAINTEXT",
+			//	        "TLS"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "EncryptionType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Details of encryption in transit to the Kafka cluster.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -442,10 +450,11 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kafka_connect_version": {
 			// Property: KafkaConnectVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version of Kafka Connect. It has to be compatible with both the Kafka cluster's version and the plugins.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version of Kafka Connect. It has to be compatible with both the Kafka cluster's version and the plugins.",
+			//	  "type": "string"
+			//	}
 			Description: "The version of Kafka Connect. It has to be compatible with both the Kafka cluster's version and the plugins.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -453,81 +462,82 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"log_delivery": {
 			// Property: LogDelivery
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Details of what logs are delivered and where they are delivered.",
-			//   "properties": {
-			//     "WorkerLogDelivery": {
-			//       "additionalProperties": false,
-			//       "description": "Specifies where worker logs are delivered.",
-			//       "properties": {
-			//         "CloudWatchLogs": {
-			//           "additionalProperties": false,
-			//           "description": "Details about delivering logs to Amazon CloudWatch Logs.",
-			//           "properties": {
-			//             "Enabled": {
-			//               "description": "Specifies whether the logs get sent to the specified CloudWatch Logs destination.",
-			//               "type": "boolean"
-			//             },
-			//             "LogGroup": {
-			//               "description": "The CloudWatch log group that is the destination for log delivery.",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Enabled"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Firehose": {
-			//           "additionalProperties": false,
-			//           "description": "Details about delivering logs to Amazon Kinesis Data Firehose.",
-			//           "properties": {
-			//             "DeliveryStream": {
-			//               "description": "The Kinesis Data Firehose delivery stream that is the destination for log delivery.",
-			//               "type": "string"
-			//             },
-			//             "Enabled": {
-			//               "description": "Specifies whether the logs get sent to the specified Kinesis Data Firehose delivery stream.",
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "Enabled"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "S3": {
-			//           "additionalProperties": false,
-			//           "description": "Details about delivering logs to Amazon S3.",
-			//           "properties": {
-			//             "Bucket": {
-			//               "description": "The name of the S3 bucket that is the destination for log delivery.",
-			//               "type": "string"
-			//             },
-			//             "Enabled": {
-			//               "description": "Specifies whether the logs get sent to the specified Amazon S3 destination.",
-			//               "type": "boolean"
-			//             },
-			//             "Prefix": {
-			//               "description": "The S3 prefix that is the destination for log delivery.",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Enabled"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "WorkerLogDelivery"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Details of what logs are delivered and where they are delivered.",
+			//	  "properties": {
+			//	    "WorkerLogDelivery": {
+			//	      "additionalProperties": false,
+			//	      "description": "Specifies where worker logs are delivered.",
+			//	      "properties": {
+			//	        "CloudWatchLogs": {
+			//	          "additionalProperties": false,
+			//	          "description": "Details about delivering logs to Amazon CloudWatch Logs.",
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "description": "Specifies whether the logs get sent to the specified CloudWatch Logs destination.",
+			//	              "type": "boolean"
+			//	            },
+			//	            "LogGroup": {
+			//	              "description": "The CloudWatch log group that is the destination for log delivery.",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Enabled"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Firehose": {
+			//	          "additionalProperties": false,
+			//	          "description": "Details about delivering logs to Amazon Kinesis Data Firehose.",
+			//	          "properties": {
+			//	            "DeliveryStream": {
+			//	              "description": "The Kinesis Data Firehose delivery stream that is the destination for log delivery.",
+			//	              "type": "string"
+			//	            },
+			//	            "Enabled": {
+			//	              "description": "Specifies whether the logs get sent to the specified Kinesis Data Firehose delivery stream.",
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Enabled"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "S3": {
+			//	          "additionalProperties": false,
+			//	          "description": "Details about delivering logs to Amazon S3.",
+			//	          "properties": {
+			//	            "Bucket": {
+			//	              "description": "The name of the S3 bucket that is the destination for log delivery.",
+			//	              "type": "string"
+			//	            },
+			//	            "Enabled": {
+			//	              "description": "Specifies whether the logs get sent to the specified Amazon S3 destination.",
+			//	              "type": "boolean"
+			//	            },
+			//	            "Prefix": {
+			//	              "description": "The S3 prefix that is the destination for log delivery.",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Enabled"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "WorkerLogDelivery"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Details of what logs are delivered and where they are delivered.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -616,45 +626,46 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"plugins": {
 			// Property: Plugins
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of plugins to use with the connector.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Details about a Kafka Connect plugin which will be used with the connector.",
-			//     "properties": {
-			//       "CustomPlugin": {
-			//         "additionalProperties": false,
-			//         "description": "Details about a custom plugin.",
-			//         "properties": {
-			//           "CustomPluginArn": {
-			//             "description": "The Amazon Resource Name (ARN) of the custom plugin to use.",
-			//             "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
-			//             "type": "string"
-			//           },
-			//           "Revision": {
-			//             "description": "The revision of the custom plugin to use.",
-			//             "format": "int64",
-			//             "minimum": 1,
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "required": [
-			//           "CustomPluginArn",
-			//           "Revision"
-			//         ],
-			//         "type": "object"
-			//       }
-			//     },
-			//     "required": [
-			//       "CustomPlugin"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "List of plugins to use with the connector.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Details about a Kafka Connect plugin which will be used with the connector.",
+			//	    "properties": {
+			//	      "CustomPlugin": {
+			//	        "additionalProperties": false,
+			//	        "description": "Details about a custom plugin.",
+			//	        "properties": {
+			//	          "CustomPluginArn": {
+			//	            "description": "The Amazon Resource Name (ARN) of the custom plugin to use.",
+			//	            "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+			//	            "type": "string"
+			//	          },
+			//	          "Revision": {
+			//	            "description": "The revision of the custom plugin to use.",
+			//	            "format": "int64",
+			//	            "minimum": 1,
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "CustomPluginArn",
+			//	          "Revision"
+			//	        ],
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "CustomPlugin"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "List of plugins to use with the connector.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -686,11 +697,12 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_execution_role_arn": {
 			// Property: ServiceExecutionRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
-			//   "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
+			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -698,28 +710,29 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"worker_configuration": {
 			// Property: WorkerConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specifies the worker configuration to use with the connector.",
-			//   "properties": {
-			//     "Revision": {
-			//       "description": "The revision of the worker configuration to use.",
-			//       "format": "int64",
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     },
-			//     "WorkerConfigurationArn": {
-			//       "description": "The Amazon Resource Name (ARN) of the worker configuration to use.",
-			//       "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Revision",
-			//     "WorkerConfigurationArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specifies the worker configuration to use with the connector.",
+			//	  "properties": {
+			//	    "Revision": {
+			//	      "description": "The revision of the worker configuration to use.",
+			//	      "format": "int64",
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    },
+			//	    "WorkerConfigurationArn": {
+			//	      "description": "The Amazon Resource Name (ARN) of the worker configuration to use.",
+			//	      "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Revision",
+			//	    "WorkerConfigurationArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Specifies the worker configuration to use with the connector.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

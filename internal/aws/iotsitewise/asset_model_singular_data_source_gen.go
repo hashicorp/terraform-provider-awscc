@@ -23,10 +23,11 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_model_arn": {
 			// Property: AssetModelArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the asset model, which has the following format.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the asset model, which has the following format.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the asset model, which has the following format.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,249 +35,250 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_model_composite_models": {
 			// Property: AssetModelCompositeModels
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.",
-			//     "properties": {
-			//       "CompositeModelProperties": {
-			//         "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "Contains information about an asset model property.",
-			//           "properties": {
-			//             "DataType": {
-			//               "description": "The data type of the asset model property.",
-			//               "enum": [
-			//                 "STRING",
-			//                 "INTEGER",
-			//                 "DOUBLE",
-			//                 "BOOLEAN",
-			//                 "STRUCT"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "DataTypeSpec": {
-			//               "description": "The data type of the structure for this property.",
-			//               "enum": [
-			//                 "AWS/ALARM_STATE"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "LogicalId": {
-			//               "description": "Customer provided ID for property.",
-			//               "maxLength": 256,
-			//               "minLength": 1,
-			//               "pattern": "",
-			//               "type": "string"
-			//             },
-			//             "Name": {
-			//               "description": "The name of the asset model property.",
-			//               "type": "string"
-			//             },
-			//             "Type": {
-			//               "additionalProperties": false,
-			//               "description": "The property type",
-			//               "properties": {
-			//                 "Attribute": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "DefaultValue": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "Metric": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Expression": {
-			//                       "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-			//                       "type": "string"
-			//                     },
-			//                     "Variables": {
-			//                       "description": "The list of variables used in the expression.",
-			//                       "insertionOrder": false,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "properties": {
-			//                           "Name": {
-			//                             "description": "The friendly name of the variable to be used in the expression.",
-			//                             "type": "string"
-			//                           },
-			//                           "Value": {
-			//                             "additionalProperties": false,
-			//                             "description": "The variable that identifies an asset property from which to use values.",
-			//                             "properties": {
-			//                               "HierarchyLogicalId": {
-			//                                 "maxLength": 256,
-			//                                 "minLength": 1,
-			//                                 "pattern": "",
-			//                                 "type": "string"
-			//                               },
-			//                               "PropertyLogicalId": {
-			//                                 "maxLength": 256,
-			//                                 "minLength": 1,
-			//                                 "pattern": "",
-			//                                 "type": "string"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "PropertyLogicalId"
-			//                             ],
-			//                             "type": "object"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "Name",
-			//                           "Value"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "type": "array"
-			//                     },
-			//                     "Window": {
-			//                       "additionalProperties": false,
-			//                       "description": "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-			//                       "properties": {
-			//                         "Tumbling": {
-			//                           "additionalProperties": false,
-			//                           "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-			//                           "properties": {
-			//                             "Interval": {
-			//                               "description": "The time interval for the tumbling window.",
-			//                               "type": "string"
-			//                             },
-			//                             "Offset": {
-			//                               "description": "The shift or reference point on timeline for the contiguous time intervals.",
-			//                               "type": "string"
-			//                             }
-			//                           },
-			//                           "required": [
-			//                             "Interval"
-			//                           ],
-			//                           "type": "object"
-			//                         }
-			//                       },
-			//                       "type": "object"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Expression",
-			//                     "Variables",
-			//                     "Window"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "Transform": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Expression": {
-			//                       "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-			//                       "type": "string"
-			//                     },
-			//                     "Variables": {
-			//                       "description": "The list of variables used in the expression.",
-			//                       "insertionOrder": false,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "properties": {
-			//                           "Name": {
-			//                             "description": "The friendly name of the variable to be used in the expression.",
-			//                             "type": "string"
-			//                           },
-			//                           "Value": {
-			//                             "additionalProperties": false,
-			//                             "description": "The variable that identifies an asset property from which to use values.",
-			//                             "properties": {
-			//                               "HierarchyLogicalId": {
-			//                                 "maxLength": 256,
-			//                                 "minLength": 1,
-			//                                 "pattern": "",
-			//                                 "type": "string"
-			//                               },
-			//                               "PropertyLogicalId": {
-			//                                 "maxLength": 256,
-			//                                 "minLength": 1,
-			//                                 "pattern": "",
-			//                                 "type": "string"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "PropertyLogicalId"
-			//                             ],
-			//                             "type": "object"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "Name",
-			//                           "Value"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "type": "array"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Expression",
-			//                     "Variables"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "TypeName": {
-			//                   "enum": [
-			//                     "Measurement",
-			//                     "Attribute",
-			//                     "Transform",
-			//                     "Metric"
-			//                   ],
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "TypeName"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "Unit": {
-			//               "description": "The unit of the asset model property, such as Newtons or RPM.",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "LogicalId",
-			//             "Name",
-			//             "DataType",
-			//             "Type"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Description": {
-			//         "description": "A description for the asset composite model.",
-			//         "type": "string"
-			//       },
-			//       "Name": {
-			//         "description": "A unique, friendly name for the asset composite model.",
-			//         "type": "string"
-			//       },
-			//       "Type": {
-			//         "description": "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Name",
-			//       "Type"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.",
+			//	    "properties": {
+			//	      "CompositeModelProperties": {
+			//	        "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "Contains information about an asset model property.",
+			//	          "properties": {
+			//	            "DataType": {
+			//	              "description": "The data type of the asset model property.",
+			//	              "enum": [
+			//	                "STRING",
+			//	                "INTEGER",
+			//	                "DOUBLE",
+			//	                "BOOLEAN",
+			//	                "STRUCT"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "DataTypeSpec": {
+			//	              "description": "The data type of the structure for this property.",
+			//	              "enum": [
+			//	                "AWS/ALARM_STATE"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "LogicalId": {
+			//	              "description": "Customer provided ID for property.",
+			//	              "maxLength": 256,
+			//	              "minLength": 1,
+			//	              "pattern": "",
+			//	              "type": "string"
+			//	            },
+			//	            "Name": {
+			//	              "description": "The name of the asset model property.",
+			//	              "type": "string"
+			//	            },
+			//	            "Type": {
+			//	              "additionalProperties": false,
+			//	              "description": "The property type",
+			//	              "properties": {
+			//	                "Attribute": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "DefaultValue": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "Metric": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Expression": {
+			//	                      "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Variables": {
+			//	                      "description": "The list of variables used in the expression.",
+			//	                      "insertionOrder": false,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "properties": {
+			//	                          "Name": {
+			//	                            "description": "The friendly name of the variable to be used in the expression.",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "Value": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "The variable that identifies an asset property from which to use values.",
+			//	                            "properties": {
+			//	                              "HierarchyLogicalId": {
+			//	                                "maxLength": 256,
+			//	                                "minLength": 1,
+			//	                                "pattern": "",
+			//	                                "type": "string"
+			//	                              },
+			//	                              "PropertyLogicalId": {
+			//	                                "maxLength": 256,
+			//	                                "minLength": 1,
+			//	                                "pattern": "",
+			//	                                "type": "string"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "PropertyLogicalId"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "Name",
+			//	                          "Value"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "type": "array"
+			//	                    },
+			//	                    "Window": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
+			//	                      "properties": {
+			//	                        "Tumbling": {
+			//	                          "additionalProperties": false,
+			//	                          "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+			//	                          "properties": {
+			//	                            "Interval": {
+			//	                              "description": "The time interval for the tumbling window.",
+			//	                              "type": "string"
+			//	                            },
+			//	                            "Offset": {
+			//	                              "description": "The shift or reference point on timeline for the contiguous time intervals.",
+			//	                              "type": "string"
+			//	                            }
+			//	                          },
+			//	                          "required": [
+			//	                            "Interval"
+			//	                          ],
+			//	                          "type": "object"
+			//	                        }
+			//	                      },
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Expression",
+			//	                    "Variables",
+			//	                    "Window"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "Transform": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Expression": {
+			//	                      "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Variables": {
+			//	                      "description": "The list of variables used in the expression.",
+			//	                      "insertionOrder": false,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "properties": {
+			//	                          "Name": {
+			//	                            "description": "The friendly name of the variable to be used in the expression.",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "Value": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "The variable that identifies an asset property from which to use values.",
+			//	                            "properties": {
+			//	                              "HierarchyLogicalId": {
+			//	                                "maxLength": 256,
+			//	                                "minLength": 1,
+			//	                                "pattern": "",
+			//	                                "type": "string"
+			//	                              },
+			//	                              "PropertyLogicalId": {
+			//	                                "maxLength": 256,
+			//	                                "minLength": 1,
+			//	                                "pattern": "",
+			//	                                "type": "string"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "PropertyLogicalId"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "Name",
+			//	                          "Value"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "type": "array"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Expression",
+			//	                    "Variables"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "TypeName": {
+			//	                  "enum": [
+			//	                    "Measurement",
+			//	                    "Attribute",
+			//	                    "Transform",
+			//	                    "Metric"
+			//	                  ],
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "TypeName"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "Unit": {
+			//	              "description": "The unit of the asset model property, such as Newtons or RPM.",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "LogicalId",
+			//	            "Name",
+			//	            "DataType",
+			//	            "Type"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Description": {
+			//	        "description": "A description for the asset composite model.",
+			//	        "type": "string"
+			//	      },
+			//	      "Name": {
+			//	        "description": "A unique, friendly name for the asset composite model.",
+			//	        "type": "string"
+			//	      },
+			//	      "Type": {
+			//	        "description": "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Name",
+			//	      "Type"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -497,10 +499,11 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_model_description": {
 			// Property: AssetModelDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description for the asset model.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description for the asset model.",
+			//	  "type": "string"
+			//	}
 			Description: "A description for the asset model.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -508,38 +511,39 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_model_hierarchies": {
 			// Property: AssetModelHierarchies
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Contains information about an asset model hierarchy.",
-			//     "properties": {
-			//       "ChildAssetModelId": {
-			//         "description": "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
-			//         "type": "string"
-			//       },
-			//       "LogicalId": {
-			//         "description": "Customer provided ID for hierarchy.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Name": {
-			//         "description": "The name of the asset model hierarchy.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "LogicalId",
-			//       "Name",
-			//       "ChildAssetModelId"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Contains information about an asset model hierarchy.",
+			//	    "properties": {
+			//	      "ChildAssetModelId": {
+			//	        "description": "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
+			//	        "type": "string"
+			//	      },
+			//	      "LogicalId": {
+			//	        "description": "Customer provided ID for hierarchy.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Name": {
+			//	        "description": "The name of the asset model hierarchy.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "LogicalId",
+			//	      "Name",
+			//	      "ChildAssetModelId"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -568,10 +572,11 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_model_id": {
 			// Property: AssetModelId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the asset model.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the asset model.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the asset model.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -579,10 +584,11 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_model_name": {
 			// Property: AssetModelName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A unique, friendly name for the asset model.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A unique, friendly name for the asset model.",
+			//	  "type": "string"
+			//	}
 			Description: "A unique, friendly name for the asset model.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -590,221 +596,222 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_model_properties": {
 			// Property: AssetModelProperties
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Contains information about an asset model property.",
-			//     "properties": {
-			//       "DataType": {
-			//         "description": "The data type of the asset model property.",
-			//         "enum": [
-			//           "STRING",
-			//           "INTEGER",
-			//           "DOUBLE",
-			//           "BOOLEAN",
-			//           "STRUCT"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "DataTypeSpec": {
-			//         "description": "The data type of the structure for this property.",
-			//         "enum": [
-			//           "AWS/ALARM_STATE"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "LogicalId": {
-			//         "description": "Customer provided ID for property.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Name": {
-			//         "description": "The name of the asset model property.",
-			//         "type": "string"
-			//       },
-			//       "Type": {
-			//         "additionalProperties": false,
-			//         "description": "The property type",
-			//         "properties": {
-			//           "Attribute": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DefaultValue": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Metric": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Expression": {
-			//                 "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-			//                 "type": "string"
-			//               },
-			//               "Variables": {
-			//                 "description": "The list of variables used in the expression.",
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Name": {
-			//                       "description": "The friendly name of the variable to be used in the expression.",
-			//                       "type": "string"
-			//                     },
-			//                     "Value": {
-			//                       "additionalProperties": false,
-			//                       "description": "The variable that identifies an asset property from which to use values.",
-			//                       "properties": {
-			//                         "HierarchyLogicalId": {
-			//                           "maxLength": 256,
-			//                           "minLength": 1,
-			//                           "pattern": "",
-			//                           "type": "string"
-			//                         },
-			//                         "PropertyLogicalId": {
-			//                           "maxLength": 256,
-			//                           "minLength": 1,
-			//                           "pattern": "",
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "PropertyLogicalId"
-			//                       ],
-			//                       "type": "object"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Name",
-			//                     "Value"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Window": {
-			//                 "additionalProperties": false,
-			//                 "description": "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-			//                 "properties": {
-			//                   "Tumbling": {
-			//                     "additionalProperties": false,
-			//                     "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-			//                     "properties": {
-			//                       "Interval": {
-			//                         "description": "The time interval for the tumbling window.",
-			//                         "type": "string"
-			//                       },
-			//                       "Offset": {
-			//                         "description": "The shift or reference point on timeline for the contiguous time intervals.",
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "Interval"
-			//                     ],
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "Expression",
-			//               "Variables",
-			//               "Window"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Transform": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Expression": {
-			//                 "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-			//                 "type": "string"
-			//               },
-			//               "Variables": {
-			//                 "description": "The list of variables used in the expression.",
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Name": {
-			//                       "description": "The friendly name of the variable to be used in the expression.",
-			//                       "type": "string"
-			//                     },
-			//                     "Value": {
-			//                       "additionalProperties": false,
-			//                       "description": "The variable that identifies an asset property from which to use values.",
-			//                       "properties": {
-			//                         "HierarchyLogicalId": {
-			//                           "maxLength": 256,
-			//                           "minLength": 1,
-			//                           "pattern": "",
-			//                           "type": "string"
-			//                         },
-			//                         "PropertyLogicalId": {
-			//                           "maxLength": 256,
-			//                           "minLength": 1,
-			//                           "pattern": "",
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "PropertyLogicalId"
-			//                       ],
-			//                       "type": "object"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Name",
-			//                     "Value"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "required": [
-			//               "Expression",
-			//               "Variables"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "TypeName": {
-			//             "enum": [
-			//               "Measurement",
-			//               "Attribute",
-			//               "Transform",
-			//               "Metric"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "TypeName"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "Unit": {
-			//         "description": "The unit of the asset model property, such as Newtons or RPM.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "LogicalId",
-			//       "Name",
-			//       "DataType",
-			//       "Type"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Contains information about an asset model property.",
+			//	    "properties": {
+			//	      "DataType": {
+			//	        "description": "The data type of the asset model property.",
+			//	        "enum": [
+			//	          "STRING",
+			//	          "INTEGER",
+			//	          "DOUBLE",
+			//	          "BOOLEAN",
+			//	          "STRUCT"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "DataTypeSpec": {
+			//	        "description": "The data type of the structure for this property.",
+			//	        "enum": [
+			//	          "AWS/ALARM_STATE"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "LogicalId": {
+			//	        "description": "Customer provided ID for property.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Name": {
+			//	        "description": "The name of the asset model property.",
+			//	        "type": "string"
+			//	      },
+			//	      "Type": {
+			//	        "additionalProperties": false,
+			//	        "description": "The property type",
+			//	        "properties": {
+			//	          "Attribute": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DefaultValue": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Metric": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Expression": {
+			//	                "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+			//	                "type": "string"
+			//	              },
+			//	              "Variables": {
+			//	                "description": "The list of variables used in the expression.",
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Name": {
+			//	                      "description": "The friendly name of the variable to be used in the expression.",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Value": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "The variable that identifies an asset property from which to use values.",
+			//	                      "properties": {
+			//	                        "HierarchyLogicalId": {
+			//	                          "maxLength": 256,
+			//	                          "minLength": 1,
+			//	                          "pattern": "",
+			//	                          "type": "string"
+			//	                        },
+			//	                        "PropertyLogicalId": {
+			//	                          "maxLength": 256,
+			//	                          "minLength": 1,
+			//	                          "pattern": "",
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "PropertyLogicalId"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Name",
+			//	                    "Value"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Window": {
+			//	                "additionalProperties": false,
+			//	                "description": "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
+			//	                "properties": {
+			//	                  "Tumbling": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+			//	                    "properties": {
+			//	                      "Interval": {
+			//	                        "description": "The time interval for the tumbling window.",
+			//	                        "type": "string"
+			//	                      },
+			//	                      "Offset": {
+			//	                        "description": "The shift or reference point on timeline for the contiguous time intervals.",
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "Interval"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Expression",
+			//	              "Variables",
+			//	              "Window"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Transform": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Expression": {
+			//	                "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+			//	                "type": "string"
+			//	              },
+			//	              "Variables": {
+			//	                "description": "The list of variables used in the expression.",
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Name": {
+			//	                      "description": "The friendly name of the variable to be used in the expression.",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Value": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "The variable that identifies an asset property from which to use values.",
+			//	                      "properties": {
+			//	                        "HierarchyLogicalId": {
+			//	                          "maxLength": 256,
+			//	                          "minLength": 1,
+			//	                          "pattern": "",
+			//	                          "type": "string"
+			//	                        },
+			//	                        "PropertyLogicalId": {
+			//	                          "maxLength": 256,
+			//	                          "minLength": 1,
+			//	                          "pattern": "",
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "PropertyLogicalId"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Name",
+			//	                    "Value"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Expression",
+			//	              "Variables"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "TypeName": {
+			//	            "enum": [
+			//	              "Measurement",
+			//	              "Attribute",
+			//	              "Transform",
+			//	              "Metric"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "TypeName"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "Unit": {
+			//	        "description": "The unit of the asset model property, such as Newtons or RPM.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "LogicalId",
+			//	      "Name",
+			//	      "DataType",
+			//	      "Type"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -998,27 +1005,28 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the asset model.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the asset model.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

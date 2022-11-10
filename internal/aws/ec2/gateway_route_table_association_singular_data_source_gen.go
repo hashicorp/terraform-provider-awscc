@@ -23,10 +23,11 @@ func gatewayRouteTableAssociationDataSource(ctx context.Context) (datasource.Dat
 		"association_id": {
 			// Property: AssociationId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The route table association ID.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The route table association ID.",
+			//	  "type": "string"
+			//	}
 			Description: "The route table association ID.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func gatewayRouteTableAssociationDataSource(ctx context.Context) (datasource.Dat
 		"gateway_id": {
 			// Property: GatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func gatewayRouteTableAssociationDataSource(ctx context.Context) (datasource.Dat
 		"route_table_id": {
 			// Property: RouteTableId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the route table.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the route table.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the route table.",
 			Type:        types.StringType,
 			Computed:    true,

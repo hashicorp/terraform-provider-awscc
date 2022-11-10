@@ -23,14 +23,15 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auth_type": {
 			// Property: AuthType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Can be either AWS_IAM if the requests are authorized via IAM, or NONE if no authorization is configured on the Function URL.",
-			//   "enum": [
-			//     "AWS_IAM",
-			//     "NONE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Can be either AWS_IAM if the requests are authorized via IAM, or NONE if no authorization is configured on the Function URL.",
+			//	  "enum": [
+			//	    "AWS_IAM",
+			//	    "NONE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Can be either AWS_IAM if the requests are authorized via IAM, or NONE if no authorization is configured on the Function URL.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,76 +39,77 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cors": {
 			// Property: Cors
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AllowCredentials": {
-			//       "description": "Specifies whether credentials are included in the CORS request.",
-			//       "type": "boolean"
-			//     },
-			//     "AllowHeaders": {
-			//       "description": "Represents a collection of allowed headers.",
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "maxLength": 1024,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "maxItems": 100,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "AllowMethods": {
-			//       "description": "Represents a collection of allowed HTTP methods.",
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "enum": [
-			//           "GET",
-			//           "PUT",
-			//           "HEAD",
-			//           "POST",
-			//           "PATCH",
-			//           "DELETE",
-			//           "*"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "maxItems": 6,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "AllowOrigins": {
-			//       "description": "Represents a collection of allowed origins.",
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "maxLength": 253,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "maxItems": 100,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "ExposeHeaders": {
-			//       "description": "Represents a collection of exposed headers.",
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "maxLength": 1024,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "maxItems": 100,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "MaxAge": {
-			//       "maximum": 86400,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AllowCredentials": {
+			//	      "description": "Specifies whether credentials are included in the CORS request.",
+			//	      "type": "boolean"
+			//	    },
+			//	    "AllowHeaders": {
+			//	      "description": "Represents a collection of allowed headers.",
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "maxLength": 1024,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 100,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "AllowMethods": {
+			//	      "description": "Represents a collection of allowed HTTP methods.",
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "enum": [
+			//	          "GET",
+			//	          "PUT",
+			//	          "HEAD",
+			//	          "POST",
+			//	          "PATCH",
+			//	          "DELETE",
+			//	          "*"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 6,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "AllowOrigins": {
+			//	      "description": "Represents a collection of allowed origins.",
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "maxLength": 253,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 100,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "ExposeHeaders": {
+			//	      "description": "Represents a collection of exposed headers.",
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "maxLength": 1024,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 100,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "MaxAge": {
+			//	      "maximum": 86400,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"allow_credentials": {
@@ -152,11 +154,12 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"function_arn": {
 			// Property: FunctionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -164,10 +167,11 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"function_url": {
 			// Property: FunctionUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The generated url for this resource.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The generated url for this resource.",
+			//	  "type": "string"
+			//	}
 			Description: "The generated url for this resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -175,14 +179,15 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"invoke_mode": {
 			// Property: InvokeMode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The invocation mode for the function?s URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
-			//   "enum": [
-			//     "BUFFERED",
-			//     "RESPONSE_STREAM"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The invocation mode for the function?s URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
+			//	  "enum": [
+			//	    "BUFFERED",
+			//	    "RESPONSE_STREAM"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The invocation mode for the function?s URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -190,13 +195,14 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"qualifier": {
 			// Property: Qualifier
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The alias qualifier for the target function. If TargetFunctionArn is unqualified then Qualifier must be passed.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The alias qualifier for the target function. If TargetFunctionArn is unqualified then Qualifier must be passed.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The alias qualifier for the target function. If TargetFunctionArn is unqualified then Qualifier must be passed.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -204,11 +210,12 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_function_arn": {
 			// Property: TargetFunctionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the function associated with the Function URL.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the function associated with the Function URL.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the function associated with the Function URL.",
 			Type:        types.StringType,
 			Computed:    true,

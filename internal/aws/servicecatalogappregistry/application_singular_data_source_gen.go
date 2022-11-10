@@ -23,21 +23,23 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the application. ",
-			//   "maxLength": 1024,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the application. ",
+			//	  "maxLength": 1024,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the application. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,23 +47,25 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "[a-z0-9]{26}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "[a-z0-9]{26}",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the application. ",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "\\w+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the application. ",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "\\w+",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the application. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -69,16 +73,18 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "patternProperties": {
-			//     "": {
-			//       "maxLength": 256,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "maxLength": 256,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			//
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,

@@ -23,10 +23,11 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) assigned to the Channel.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) assigned to the Channel.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) assigned to the Channel.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A short text description of the Channel.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A short text description of the Channel.",
+			//	  "type": "string"
+			//	}
 			Description: "A short text description of the Channel.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,20 +47,21 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"egress_access_logs": {
 			// Property: EgressAccessLogs
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The configuration parameters for egress access logging.",
-			//   "properties": {
-			//     "LogGroupName": {
-			//       "description": "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
-			//       "maxLength": 256,
-			//       "minLength": 1,
-			//       "pattern": "",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The configuration parameters for egress access logging.",
+			//	  "properties": {
+			//	    "LogGroupName": {
+			//	      "description": "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
+			//	      "maxLength": 256,
+			//	      "minLength": 1,
+			//	      "pattern": "",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The configuration parameters for egress access logging.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -75,40 +78,41 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"hls_ingest": {
 			// Property: HlsIngest
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A short text description of the Channel.",
-			//   "properties": {
-			//     "ingestEndpoints": {
-			//       "description": "A list of endpoints to which the source stream should be sent.",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "An endpoint for ingesting source content for a Channel.",
-			//         "properties": {
-			//           "Id": {
-			//             "description": "The system generated unique identifier for the IngestEndpoint",
-			//             "type": "string"
-			//           },
-			//           "Password": {
-			//             "description": "The system generated password for ingest authentication.",
-			//             "type": "string"
-			//           },
-			//           "Url": {
-			//             "description": "The ingest URL to which the source stream should be sent.",
-			//             "type": "string"
-			//           },
-			//           "Username": {
-			//             "description": "The system generated username for ingest authentication.",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A short text description of the Channel.",
+			//	  "properties": {
+			//	    "ingestEndpoints": {
+			//	      "description": "A list of endpoints to which the source stream should be sent.",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "An endpoint for ingesting source content for a Channel.",
+			//	        "properties": {
+			//	          "Id": {
+			//	            "description": "The system generated unique identifier for the IngestEndpoint",
+			//	            "type": "string"
+			//	          },
+			//	          "Password": {
+			//	            "description": "The system generated password for ingest authentication.",
+			//	            "type": "string"
+			//	          },
+			//	          "Url": {
+			//	            "description": "The ingest URL to which the source stream should be sent.",
+			//	            "type": "string"
+			//	          },
+			//	          "Username": {
+			//	            "description": "The system generated username for ingest authentication.",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A short text description of the Channel.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -152,13 +156,14 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the Channel.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the Channel.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the Channel.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -166,20 +171,21 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ingress_access_logs": {
 			// Property: IngressAccessLogs
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The configuration parameters for egress access logging.",
-			//   "properties": {
-			//     "LogGroupName": {
-			//       "description": "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
-			//       "maxLength": 256,
-			//       "minLength": 1,
-			//       "pattern": "",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The configuration parameters for egress access logging.",
+			//	  "properties": {
+			//	    "LogGroupName": {
+			//	      "description": "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
+			//	      "maxLength": 256,
+			//	      "minLength": 1,
+			//	      "pattern": "",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The configuration parameters for egress access logging.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -196,27 +202,28 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A collection of tags associated with a resource",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A collection of tags associated with a resource",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A collection of tags associated with a resource",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -23,36 +23,39 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"availability_zone_name": {
 			// Property: AvailabilityZoneName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"backup_policy": {
 			// Property: BackupPolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Status": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Status"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Status": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Status"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"status": {
@@ -67,10 +70,11 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bypass_policy_lockout_safety_check": {
 			// Property: BypassPolicyLockoutSafetyCheck
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Whether to bypass the FileSystemPolicy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request to be locked out from making future PutFileSystemPolicy requests on the file system. Set BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. Defaults to false",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Whether to bypass the FileSystemPolicy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request to be locked out from making future PutFileSystemPolicy requests on the file system. Set BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. Defaults to false",
+			//	  "type": "boolean"
+			//	}
 			Description: "Whether to bypass the FileSystemPolicy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request to be locked out from making future PutFileSystemPolicy requests on the file system. Set BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. Defaults to false",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -78,53 +82,57 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encrypted": {
 			// Property: Encrypted
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"file_system_id": {
 			// Property: FileSystemId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"file_system_policy": {
 			// Property: FileSystemPolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "type": "object"
+			//	}
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"file_system_tags": {
 			// Property: FileSystemTags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -144,31 +152,33 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key_id": {
 			// Property: KmsKeyId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"lifecycle_policies": {
 			// Property: LifecyclePolicies
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "TransitionToIA": {
-			//         "type": "string"
-			//       },
-			//       "TransitionToPrimaryStorageClass": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "TransitionToIA": {
+			//	        "type": "string"
+			//	      },
+			//	      "TransitionToPrimaryStorageClass": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"transition_to_ia": {
@@ -188,27 +198,30 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"performance_mode": {
 			// Property: PerformanceMode
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"provisioned_throughput_in_mibps": {
 			// Property: ProvisionedThroughputInMibps
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "number"
-			// }
+			//
+			//	{
+			//	  "type": "number"
+			//	}
 			Type:     types.Float64Type,
 			Computed: true,
 		},
 		"throughput_mode": {
 			// Property: ThroughputMode
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

@@ -23,10 +23,11 @@ func transitGatewayRegistrationDataSource(ctx context.Context) (datasource.DataS
 		"global_network_id": {
 			// Property: GlobalNetworkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the global network.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the global network.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func transitGatewayRegistrationDataSource(ctx context.Context) (datasource.DataS
 		"transit_gateway_arn": {
 			// Property: TransitGatewayArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the transit gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the transit gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the transit gateway.",
 			Type:        types.StringType,
 			Computed:    true,

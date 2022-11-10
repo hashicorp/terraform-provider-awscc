@@ -23,10 +23,11 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		"certificate": {
 			// Property: Certificate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Certificate Authority certificate that will be installed in the Certificate Authority.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Certificate Authority certificate that will be installed in the Certificate Authority.",
+			//	  "type": "string"
+			//	}
 			Description: "Certificate Authority certificate that will be installed in the Certificate Authority.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		"certificate_authority_arn": {
 			// Property: CertificateAuthorityArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Arn of the Certificate Authority.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Arn of the Certificate Authority.",
+			//	  "type": "string"
+			//	}
 			Description: "Arn of the Certificate Authority.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		"certificate_chain": {
 			// Property: CertificateChain
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Certificate chain for the Certificate Authority certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Certificate chain for the Certificate Authority certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "Certificate chain for the Certificate Authority certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		"complete_certificate_chain": {
 			// Property: CompleteCertificateChain
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The complete certificate chain, including the Certificate Authority certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The complete certificate chain, including the Certificate Authority certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "The complete certificate chain, including the Certificate Authority certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,10 +71,11 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The status of the Certificate Authority.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The status of the Certificate Authority.",
+			//	  "type": "string"
+			//	}
 			Description: "The status of the Certificate Authority.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -23,51 +23,52 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"auto_scaling_group_provider": {
 			// Property: AutoScalingGroupProvider
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AutoScalingGroupArn": {
-			//       "type": "string"
-			//     },
-			//     "ManagedScaling": {
-			//       "additionalProperties": false,
-			//       "description": "The managed scaling settings for the Auto Scaling group capacity provider.",
-			//       "properties": {
-			//         "InstanceWarmupPeriod": {
-			//           "type": "integer"
-			//         },
-			//         "MaximumScalingStepSize": {
-			//           "type": "integer"
-			//         },
-			//         "MinimumScalingStepSize": {
-			//           "type": "integer"
-			//         },
-			//         "Status": {
-			//           "enum": [
-			//             "DISABLED",
-			//             "ENABLED"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "TargetCapacity": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ManagedTerminationProtection": {
-			//       "enum": [
-			//         "DISABLED",
-			//         "ENABLED"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "AutoScalingGroupArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AutoScalingGroupArn": {
+			//	      "type": "string"
+			//	    },
+			//	    "ManagedScaling": {
+			//	      "additionalProperties": false,
+			//	      "description": "The managed scaling settings for the Auto Scaling group capacity provider.",
+			//	      "properties": {
+			//	        "InstanceWarmupPeriod": {
+			//	          "type": "integer"
+			//	        },
+			//	        "MaximumScalingStepSize": {
+			//	          "type": "integer"
+			//	        },
+			//	        "MinimumScalingStepSize": {
+			//	          "type": "integer"
+			//	        },
+			//	        "Status": {
+			//	          "enum": [
+			//	            "DISABLED",
+			//	            "ENABLED"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "TargetCapacity": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ManagedTerminationProtection": {
+			//	      "enum": [
+			//	        "DISABLED",
+			//	        "ENABLED"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "AutoScalingGroupArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"auto_scaling_group_arn": {
@@ -121,32 +122,34 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

@@ -23,37 +23,39 @@ func networkAclDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags to assign to the network ACL.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "The tags to assign to the network ACL.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "The tags to assign to the network ACL.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -74,10 +76,11 @@ func networkAclDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the VPC.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the VPC.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the VPC.",
 			Type:        types.StringType,
 			Computed:    true,

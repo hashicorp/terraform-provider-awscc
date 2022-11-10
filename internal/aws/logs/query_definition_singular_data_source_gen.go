@@ -23,18 +23,19 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"log_group_names": {
 			// Property: LogGroupNames
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Optionally define specific log groups as part of your query definition",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "description": "LogGroup name",
-			//     "maxLength": 512,
-			//     "minLength": 1,
-			//     "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Optionally define specific log groups as part of your query definition",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "description": "LogGroup name",
+			//	    "maxLength": 512,
+			//	    "minLength": 1,
+			//	    "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Optionally define specific log groups as part of your query definition",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -42,13 +43,14 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for the saved query definition",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for the saved query definition",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
+			//	  "type": "string"
+			//	}
 			Description: "A name for the saved query definition",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,12 +58,13 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"query_definition_id": {
 			// Property: QueryDefinitionId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique identifier of a query definition",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique identifier of a query definition",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "Unique identifier of a query definition",
 			Type:        types.StringType,
 			Computed:    true,
@@ -69,12 +72,13 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"query_string": {
 			// Property: QueryString
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The query string to use for this definition",
-			//   "maxLength": 10000,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The query string to use for this definition",
+			//	  "maxLength": 10000,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The query string to use for this definition",
 			Type:        types.StringType,
 			Computed:    true,

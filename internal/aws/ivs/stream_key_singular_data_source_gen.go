@@ -23,13 +23,14 @@ func streamKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stream-key/[a-zA-Z0-9-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stream-key/[a-zA-Z0-9-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,11 +38,12 @@ func streamKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"channel_arn": {
 			// Property: ChannelArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Channel ARN for the stream.",
-			//   "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Channel ARN for the stream.",
+			//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Channel ARN for the stream.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,33 +51,34 @@ func streamKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the asset model.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the asset model.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -96,10 +99,11 @@ func streamKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value": {
 			// Property: Value
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Stream-key value.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Stream-key value.",
+			//	  "type": "string"
+			//	}
 			Description: "Stream-key value.",
 			Type:        types.StringType,
 			Computed:    true,

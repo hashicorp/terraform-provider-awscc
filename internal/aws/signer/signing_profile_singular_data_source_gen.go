@@ -23,11 +23,12 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the specified signing profile.",
-			//   "pattern": "^arn:aws(-(cn|gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the specified signing profile.",
+			//	  "pattern": "^arn:aws(-(cn|gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the specified signing profile.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,13 +36,14 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"platform_id": {
 			// Property: PlatformId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the target signing platform.",
-			//   "enum": [
-			//     "AWSLambda-SHA384-ECDSA"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the target signing platform.",
+			//	  "enum": [
+			//	    "AWSLambda-SHA384-ECDSA"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the target signing platform.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,10 +51,11 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"profile_name": {
 			// Property: ProfileName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name. ",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name. ",
+			//	  "type": "string"
+			//	}
 			Description: "A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,11 +63,12 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"profile_version": {
 			// Property: ProfileVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.",
-			//   "pattern": "^[0-9a-zA-Z]{10}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.",
+			//	  "pattern": "^[0-9a-zA-Z]{10}$",
+			//	  "type": "string"
+			//	}
 			Description: "A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -72,11 +76,12 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"profile_version_arn": {
 			// Property: ProfileVersionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the specified signing profile version.",
-			//   "pattern": "^arn:aws(-(cn|gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the specified signing profile version.",
+			//	  "pattern": "^arn:aws(-(cn|gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the specified signing profile version.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -84,24 +89,25 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"signature_validity_period": {
 			// Property: SignatureValidityPeriod
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Signature validity period of the profile.",
-			//   "properties": {
-			//     "Type": {
-			//       "enum": [
-			//         "DAYS",
-			//         "MONTHS",
-			//         "YEARS"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Value": {
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Signature validity period of the profile.",
+			//	  "properties": {
+			//	    "Type": {
+			//	      "enum": [
+			//	        "DAYS",
+			//	        "MONTHS",
+			//	        "YEARS"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Value": {
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Signature validity period of the profile.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -122,27 +128,28 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of tags associated with the signing profile.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of tags associated with the signing profile.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of tags associated with the signing profile.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -23,10 +23,11 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"allow_profile_creation": {
 			// Property: AllowProfileCreation
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether a profile should be created when data is received.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether a profile should be created when data is received.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether a profile should be created when data is received.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at": {
 			// Property: CreatedAt
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time of this integration got created.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time of this integration got created.",
+			//	  "type": "string"
+			//	}
 			Description: "The time of this integration got created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,12 +47,13 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description of the profile object type.",
-			//   "maxLength": 1000,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description of the profile object type.",
+			//	  "maxLength": 1000,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Description of the profile object type.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -58,13 +61,14 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique name of the domain.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9_-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unique name of the domain.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9_-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The unique name of the domain.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -72,12 +76,13 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encryption_key": {
 			// Property: EncryptionKey
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The default encryption key",
-			//   "maxLength": 255,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The default encryption key",
+			//	  "maxLength": 255,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "The default encryption key",
 			Type:        types.StringType,
 			Computed:    true,
@@ -85,12 +90,13 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"expiration_days": {
 			// Property: ExpirationDays
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The default number of days until the data within the domain expires.",
-			//   "maximum": 1098,
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The default number of days until the data within the domain expires.",
+			//	  "maximum": 1098,
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Description: "The default number of days until the data within the domain expires.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -98,53 +104,54 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"fields": {
 			// Property: Fields
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of the name and ObjectType field.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Name": {
-			//         "maxLength": 64,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9_-]+$",
-			//         "type": "string"
-			//       },
-			//       "ObjectTypeField": {
-			//         "additionalProperties": false,
-			//         "description": "Represents a field in a ProfileObjectType.",
-			//         "properties": {
-			//           "ContentType": {
-			//             "description": "The content type of the field. Used for determining equality when searching.",
-			//             "enum": [
-			//               "STRING",
-			//               "NUMBER",
-			//               "PHONE_NUMBER",
-			//               "EMAIL_ADDRESS",
-			//               "NAME"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Source": {
-			//             "description": "A field of a ProfileObject. For example: _source.FirstName, where \"_source\" is a ProfileObjectType of a Zendesk user and \"FirstName\" is a field in that ObjectType.",
-			//             "maxLength": 1000,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "Target": {
-			//             "description": "The location of the data in the standard ProfileObject model. For example: _profile.Address.PostalCode.",
-			//             "maxLength": 1000,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of the name and ObjectType field.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Name": {
+			//	        "maxLength": 64,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9_-]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "ObjectTypeField": {
+			//	        "additionalProperties": false,
+			//	        "description": "Represents a field in a ProfileObjectType.",
+			//	        "properties": {
+			//	          "ContentType": {
+			//	            "description": "The content type of the field. Used for determining equality when searching.",
+			//	            "enum": [
+			//	              "STRING",
+			//	              "NUMBER",
+			//	              "PHONE_NUMBER",
+			//	              "EMAIL_ADDRESS",
+			//	              "NAME"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Source": {
+			//	            "description": "A field of a ProfileObject. For example: _source.FirstName, where \"_source\" is a ProfileObjectType of a Zendesk user and \"FirstName\" is a field in that ObjectType.",
+			//	            "maxLength": 1000,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "Target": {
+			//	            "description": "The location of the data in the standard ProfileObject model. For example: _profile.Address.PostalCode.",
+			//	            "maxLength": 1000,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of the name and ObjectType field.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -187,58 +194,59 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"keys": {
 			// Property: Keys
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of unique keys that can be used to map data to the profile.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Name": {
-			//         "maxLength": 64,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9_-]+$",
-			//         "type": "string"
-			//       },
-			//       "ObjectTypeKeyList": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "An object that defines the Key element of a ProfileObject. A Key is a special element that can be used to search for a customer profile.",
-			//           "properties": {
-			//             "FieldNames": {
-			//               "description": "The reference for the key name of the fields map. ",
-			//               "items": {
-			//                 "maxLength": 64,
-			//                 "minLength": 1,
-			//                 "pattern": "^[a-zA-Z0-9_-]+$",
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             },
-			//             "StandardIdentifiers": {
-			//               "description": "The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.",
-			//               "items": {
-			//                 "enum": [
-			//                   "PROFILE",
-			//                   "UNIQUE",
-			//                   "SECONDARY",
-			//                   "LOOKUP_ONLY",
-			//                   "NEW_ONLY"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of unique keys that can be used to map data to the profile.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Name": {
+			//	        "maxLength": 64,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9_-]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "ObjectTypeKeyList": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "An object that defines the Key element of a ProfileObject. A Key is a special element that can be used to search for a customer profile.",
+			//	          "properties": {
+			//	            "FieldNames": {
+			//	              "description": "The reference for the key name of the fields map. ",
+			//	              "items": {
+			//	                "maxLength": 64,
+			//	                "minLength": 1,
+			//	                "pattern": "^[a-zA-Z0-9_-]+$",
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            },
+			//	            "StandardIdentifiers": {
+			//	              "description": "The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.",
+			//	              "items": {
+			//	                "enum": [
+			//	                  "PROFILE",
+			//	                  "UNIQUE",
+			//	                  "SECONDARY",
+			//	                  "LOOKUP_ONLY",
+			//	                  "NEW_ONLY"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of unique keys that can be used to map data to the profile.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -274,10 +282,11 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"last_updated_at": {
 			// Property: LastUpdatedAt
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time of this integration got last updated at.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time of this integration got last updated at.",
+			//	  "type": "string"
+			//	}
 			Description: "The time of this integration got last updated at.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -285,13 +294,14 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"object_type_name": {
 			// Property: ObjectTypeName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the profile object type.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the profile object type.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the profile object type.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -299,33 +309,34 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags (keys and values) associated with the integration.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The tags (keys and values) associated with the integration.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "The tags (keys and values) associated with the integration.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -346,13 +357,14 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"template_id": {
 			// Property: TemplateId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A unique identifier for the object template.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9_-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A unique identifier for the object template.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9_-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "A unique identifier for the object template.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -23,22 +23,24 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "FAQ description",
-			//   "maxLength": 1000,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "FAQ description",
+			//	  "maxLength": 1000,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "FAQ description",
 			Type:        types.StringType,
 			Computed:    true,
@@ -46,15 +48,16 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"file_format": {
 			// Property: FileFormat
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "FAQ file format",
-			//   "enum": [
-			//     "CSV",
-			//     "CSV_WITH_HEADER",
-			//     "JSON"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "FAQ file format",
+			//	  "enum": [
+			//	    "CSV",
+			//	    "CSV_WITH_HEADER",
+			//	    "JSON"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "FAQ file format",
 			Type:        types.StringType,
 			Computed:    true,
@@ -62,12 +65,13 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique ID of the FAQ",
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique ID of the FAQ",
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Unique ID of the FAQ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -75,12 +79,13 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"index_id": {
 			// Property: IndexId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Index ID",
-			//   "maxLength": 36,
-			//   "minLength": 36,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Index ID",
+			//	  "maxLength": 36,
+			//	  "minLength": 36,
+			//	  "type": "string"
+			//	}
 			Description: "Index ID",
 			Type:        types.StringType,
 			Computed:    true,
@@ -88,12 +93,13 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "FAQ name",
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "FAQ name",
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "FAQ name",
 			Type:        types.StringType,
 			Computed:    true,
@@ -101,13 +107,14 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "FAQ role ARN",
-			//   "maxLength": 1284,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "FAQ role ARN",
+			//	  "maxLength": 1284,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "FAQ role ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -115,28 +122,29 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"s3_path": {
 			// Property: S3Path
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "FAQ S3 path",
-			//   "properties": {
-			//     "Bucket": {
-			//       "maxLength": 63,
-			//       "minLength": 3,
-			//       "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//       "type": "string"
-			//     },
-			//     "Key": {
-			//       "maxLength": 1024,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Bucket",
-			//     "Key"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "FAQ S3 path",
+			//	  "properties": {
+			//	    "Bucket": {
+			//	      "maxLength": 63,
+			//	      "minLength": 3,
+			//	      "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+			//	      "type": "string"
+			//	    },
+			//	    "Key": {
+			//	      "maxLength": 1024,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Bucket",
+			//	    "Key"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "FAQ S3 path",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -157,34 +165,35 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tags for labeling the FAQ",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A label for tagging Kendra resources",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "A string used to identify this tag",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "A string containing the value for the tag",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Tags for labeling the FAQ",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A label for tagging Kendra resources",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "A string used to identify this tag",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "A string containing the value for the tag",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array"
+			//	}
 			Description: "Tags for labeling the FAQ",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

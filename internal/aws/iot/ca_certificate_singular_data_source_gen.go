@@ -23,86 +23,92 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"auto_registration_status": {
 			// Property: AutoRegistrationStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "ENABLE",
-			//     "DISABLE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "ENABLE",
+			//	    "DISABLE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"ca_certificate_pem": {
 			// Property: CACertificatePem
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 65536,
-			//   "minLength": 1,
-			//   "pattern": "[\\s\\S]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 65536,
+			//	  "minLength": 1,
+			//	  "pattern": "[\\s\\S]*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"certificate_mode": {
 			// Property: CertificateMode
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "DEFAULT",
-			//     "SNI_ONLY"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "DEFAULT",
+			//	    "SNI_ONLY"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"registration_config": {
 			// Property: RegistrationConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "RoleArn": {
-			//       "maxLength": 2048,
-			//       "minLength": 20,
-			//       "pattern": "arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
-			//       "type": "string"
-			//     },
-			//     "TemplateBody": {
-			//       "maxLength": 10240,
-			//       "minLength": 0,
-			//       "pattern": "[\\s\\S]*",
-			//       "type": "string"
-			//     },
-			//     "TemplateName": {
-			//       "maxLength": 36,
-			//       "minLength": 1,
-			//       "pattern": "^[0-9A-Za-z_-]+$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "RoleArn": {
+			//	      "maxLength": 2048,
+			//	      "minLength": 20,
+			//	      "pattern": "arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
+			//	      "type": "string"
+			//	    },
+			//	    "TemplateBody": {
+			//	      "maxLength": 10240,
+			//	      "minLength": 0,
+			//	      "pattern": "[\\s\\S]*",
+			//	      "type": "string"
+			//	    },
+			//	    "TemplateName": {
+			//	      "maxLength": 36,
+			//	      "minLength": 1,
+			//	      "pattern": "^[0-9A-Za-z_-]+$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"role_arn": {
@@ -127,59 +133,62 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		"remove_auto_registration": {
 			// Property: RemoveAutoRegistration
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "ACTIVE",
-			//     "INACTIVE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "ACTIVE",
+			//	    "INACTIVE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -202,13 +211,14 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		"verification_certificate_pem": {
 			// Property: VerificationCertificatePem
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The private key verification certificate.",
-			//   "maxLength": 65536,
-			//   "minLength": 1,
-			//   "pattern": "[\\s\\S]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The private key verification certificate.",
+			//	  "maxLength": 65536,
+			//	  "minLength": 1,
+			//	  "pattern": "[\\s\\S]*",
+			//	  "type": "string"
+			//	}
 			Description: "The private key verification certificate.",
 			Type:        types.StringType,
 			Computed:    true,

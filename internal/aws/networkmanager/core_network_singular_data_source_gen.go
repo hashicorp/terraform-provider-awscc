@@ -23,10 +23,11 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"core_network_arn": {
 			// Property: CoreNetworkArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN (Amazon resource name) of core network",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN (Amazon resource name) of core network",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN (Amazon resource name) of core network",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"core_network_id": {
 			// Property: CoreNetworkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Id of core network",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Id of core network",
+			//	  "type": "string"
+			//	}
 			Description: "The Id of core network",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at": {
 			// Property: CreatedAt
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The creation time of core network",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The creation time of core network",
+			//	  "type": "string"
+			//	}
 			Description: "The creation time of core network",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of core network",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of core network",
+			//	  "type": "string"
+			//	}
 			Description: "The description of core network",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,33 +71,34 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"edges": {
 			// Property: Edges
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The edges within a core network.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Asn": {
-			//         "description": "The ASN of a core network edge.",
-			//         "type": "number"
-			//       },
-			//       "EdgeLocation": {
-			//         "description": "The Region where a core network edge is located.",
-			//         "type": "string"
-			//       },
-			//       "InsideCidrBlocks": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "description": "The inside IP addresses used for core network edges.",
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The edges within a core network.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Asn": {
+			//	        "description": "The ASN of a core network edge.",
+			//	        "type": "number"
+			//	      },
+			//	      "EdgeLocation": {
+			//	        "description": "The Region where a core network edge is located.",
+			//	        "type": "string"
+			//	      },
+			//	      "InsideCidrBlocks": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "description": "The inside IP addresses used for core network edges.",
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The edges within a core network.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -121,10 +126,11 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"global_network_id": {
 			// Property: GlobalNetworkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the global network that your core network is a part of.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the global network that your core network is a part of.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the global network that your core network is a part of.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -132,10 +138,11 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"owner_account": {
 			// Property: OwnerAccount
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Owner of the core network",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Owner of the core network",
+			//	  "type": "string"
+			//	}
 			Description: "Owner of the core network",
 			Type:        types.StringType,
 			Computed:    true,
@@ -143,10 +150,11 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"policy_document": {
 			// Property: PolicyDocument
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Live policy document for the core network, you must provide PolicyDocument in Json Format",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "Live policy document for the core network, you must provide PolicyDocument in Json Format",
+			//	  "type": "object"
+			//	}
 			Description: "Live policy document for the core network, you must provide PolicyDocument in Json Format",
 			Type:        JSONStringType,
 			Computed:    true,
@@ -154,37 +162,38 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"segments": {
 			// Property: Segments
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The segments within a core network.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "EdgeLocations": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "description": "The Regions where the edges are located.",
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Name": {
-			//         "description": "Name of segment",
-			//         "type": "string"
-			//       },
-			//       "SharedSegments": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "description": "The shared segments of a core network.",
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The segments within a core network.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "EdgeLocations": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "description": "The Regions where the edges are located.",
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Name": {
+			//	        "description": "Name of segment",
+			//	        "type": "string"
+			//	      },
+			//	      "SharedSegments": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "description": "The shared segments of a core network.",
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The segments within a core network.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -211,10 +220,11 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of core network",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of core network",
+			//	  "type": "string"
+			//	}
 			Description: "The state of core network",
 			Type:        types.StringType,
 			Computed:    true,
@@ -222,30 +232,31 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags for the global network.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The tags for the global network.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The tags for the global network.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

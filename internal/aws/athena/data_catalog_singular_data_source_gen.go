@@ -23,12 +23,13 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description of the data catalog to be created. ",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description of the data catalog to be created. ",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "A description of the data catalog to be created. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,12 +37,13 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the data catalog to create. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters. ",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the data catalog to create. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters. ",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the data catalog to create. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,17 +51,18 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"parameters": {
 			// Property: Parameters
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. ",
-			//   "patternProperties": {
-			//     "": {
-			//       "maxLength": 51200,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. ",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "maxLength": 51200,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. ",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -68,31 +71,32 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of comma separated tags to add to the data catalog that is created. ",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of comma separated tags to add to the data catalog that is created. ",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of comma separated tags to add to the data catalog that is created. ",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -113,15 +117,16 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. ",
-			//   "enum": [
-			//     "LAMBDA",
-			//     "GLUE",
-			//     "HIVE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. ",
+			//	  "enum": [
+			//	    "LAMBDA",
+			//	    "GLUE",
+			//	    "HIVE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. ",
 			Type:        types.StringType,
 			Computed:    true,

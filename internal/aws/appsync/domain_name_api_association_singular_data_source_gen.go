@@ -23,30 +23,33 @@ func domainNameApiAssociationDataSource(ctx context.Context) (datasource.DataSou
 		"api_association_identifier": {
 			// Property: ApiAssociationIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"api_id": {
 			// Property: ApiId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 253,
-			//   "minLength": 1,
-			//   "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 253,
+			//	  "minLength": 1,
+			//	  "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

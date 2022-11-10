@@ -23,12 +23,13 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Arn",
-			//   "maxLength": 600,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Arn",
+			//	  "maxLength": 600,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Arn",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,10 +37,11 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		"association_count": {
 			// Property: AssociationCount
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Count",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Count",
+			//	  "type": "integer"
+			//	}
 			Description: "Count",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -47,12 +49,13 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Rfc3339TimeString",
-			//   "maxLength": 40,
-			//   "minLength": 20,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Rfc3339TimeString",
+			//	  "maxLength": 40,
+			//	  "minLength": 20,
+			//	  "type": "string"
+			//	}
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,12 +63,13 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		"creator_request_id": {
 			// Property: CreatorRequestId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The id of the creator request.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The id of the creator request.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -73,12 +77,13 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		"destination_arn": {
 			// Property: DestinationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "destination arn",
-			//   "maxLength": 600,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "destination arn",
+			//	  "maxLength": 600,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "destination arn",
 			Type:        types.StringType,
 			Computed:    true,
@@ -86,12 +91,13 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ResourceId",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ResourceId",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,
@@ -99,13 +105,14 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ResolverQueryLogConfigName",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ResolverQueryLogConfigName",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "ResolverQueryLogConfigName",
 			Type:        types.StringType,
 			Computed:    true,
@@ -113,12 +120,13 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		"owner_id": {
 			// Property: OwnerId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AccountId",
-			//   "maxLength": 32,
-			//   "minLength": 12,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AccountId",
+			//	  "maxLength": 32,
+			//	  "minLength": 12,
+			//	  "type": "string"
+			//	}
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
@@ -126,15 +134,16 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		"share_status": {
 			// Property: ShareStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
-			//   "enum": [
-			//     "NOT_SHARED",
-			//     "SHARED_WITH_ME",
-			//     "SHARED_BY_ME"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
+			//	  "enum": [
+			//	    "NOT_SHARED",
+			//	    "SHARED_WITH_ME",
+			//	    "SHARED_BY_ME"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -142,16 +151,17 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ResolverQueryLogConfigStatus, possible values are CREATING, CREATED, DELETED AND FAILED.",
-			//   "enum": [
-			//     "CREATING",
-			//     "CREATED",
-			//     "DELETING",
-			//     "FAILED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ResolverQueryLogConfigStatus, possible values are CREATING, CREATED, DELETED AND FAILED.",
+			//	  "enum": [
+			//	    "CREATING",
+			//	    "CREATED",
+			//	    "DELETING",
+			//	    "FAILED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "ResolverQueryLogConfigStatus, possible values are CREATING, CREATED, DELETED AND FAILED.",
 			Type:        types.StringType,
 			Computed:    true,

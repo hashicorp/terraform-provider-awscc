@@ -23,39 +23,41 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"attribute_definitions": {
 			// Property: AttributeDefinitions
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "AttributeName": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "AttributeType": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "AttributeName",
-			//       "AttributeType"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "AttributeName": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "AttributeType": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "AttributeName",
+			//	      "AttributeType"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"attribute_name": {
@@ -75,131 +77,133 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"billing_mode": {
 			// Property: BillingMode
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"global_secondary_indexes": {
 			// Property: GlobalSecondaryIndexes
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "IndexName": {
-			//         "maxLength": 255,
-			//         "minLength": 3,
-			//         "type": "string"
-			//       },
-			//       "KeySchema": {
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AttributeName": {
-			//               "maxLength": 255,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "KeyType": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "KeyType",
-			//             "AttributeName"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "maxItems": 2,
-			//         "minItems": 1,
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "Projection": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "NonKeyAttributes": {
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "maxItems": 20,
-			//             "type": "array",
-			//             "uniqueItems": true
-			//           },
-			//           "ProjectionType": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "WriteProvisionedThroughputSettings": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "WriteCapacityAutoScalingSettings": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "MaxCapacity": {
-			//                 "minimum": 1,
-			//                 "type": "integer"
-			//               },
-			//               "MinCapacity": {
-			//                 "minimum": 1,
-			//                 "type": "integer"
-			//               },
-			//               "SeedCapacity": {
-			//                 "minimum": 1,
-			//                 "type": "integer"
-			//               },
-			//               "TargetTrackingScalingPolicyConfiguration": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DisableScaleIn": {
-			//                     "type": "boolean"
-			//                   },
-			//                   "ScaleInCooldown": {
-			//                     "minimum": 0,
-			//                     "type": "integer"
-			//                   },
-			//                   "ScaleOutCooldown": {
-			//                     "minimum": 0,
-			//                     "type": "integer"
-			//                   },
-			//                   "TargetValue": {
-			//                     "format": "double",
-			//                     "type": "number"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "TargetValue"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "MinCapacity",
-			//               "MaxCapacity",
-			//               "TargetTrackingScalingPolicyConfiguration"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "required": [
-			//       "IndexName",
-			//       "Projection",
-			//       "KeySchema"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "IndexName": {
+			//	        "maxLength": 255,
+			//	        "minLength": 3,
+			//	        "type": "string"
+			//	      },
+			//	      "KeySchema": {
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AttributeName": {
+			//	              "maxLength": 255,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "KeyType": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "KeyType",
+			//	            "AttributeName"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "maxItems": 2,
+			//	        "minItems": 1,
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "Projection": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "NonKeyAttributes": {
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "maxItems": 20,
+			//	            "type": "array",
+			//	            "uniqueItems": true
+			//	          },
+			//	          "ProjectionType": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "WriteProvisionedThroughputSettings": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "WriteCapacityAutoScalingSettings": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "MaxCapacity": {
+			//	                "minimum": 1,
+			//	                "type": "integer"
+			//	              },
+			//	              "MinCapacity": {
+			//	                "minimum": 1,
+			//	                "type": "integer"
+			//	              },
+			//	              "SeedCapacity": {
+			//	                "minimum": 1,
+			//	                "type": "integer"
+			//	              },
+			//	              "TargetTrackingScalingPolicyConfiguration": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DisableScaleIn": {
+			//	                    "type": "boolean"
+			//	                  },
+			//	                  "ScaleInCooldown": {
+			//	                    "minimum": 0,
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "ScaleOutCooldown": {
+			//	                    "minimum": 0,
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "TargetValue": {
+			//	                    "format": "double",
+			//	                    "type": "number"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "TargetValue"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "MinCapacity",
+			//	              "MaxCapacity",
+			//	              "TargetTrackingScalingPolicyConfiguration"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "IndexName",
+			//	      "Projection",
+			//	      "KeySchema"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"index_name": {
@@ -309,30 +313,31 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key_schema": {
 			// Property: KeySchema
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "AttributeName": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "KeyType": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "KeyType",
-			//       "AttributeName"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 2,
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "AttributeName": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "KeyType": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "KeyType",
+			//	      "AttributeName"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 2,
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"attribute_name": {
@@ -352,68 +357,69 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"local_secondary_indexes": {
 			// Property: LocalSecondaryIndexes
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "IndexName": {
-			//         "maxLength": 255,
-			//         "minLength": 3,
-			//         "type": "string"
-			//       },
-			//       "KeySchema": {
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AttributeName": {
-			//               "maxLength": 255,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "KeyType": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "KeyType",
-			//             "AttributeName"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "maxItems": 2,
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "Projection": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "NonKeyAttributes": {
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "maxItems": 20,
-			//             "type": "array",
-			//             "uniqueItems": true
-			//           },
-			//           "ProjectionType": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "required": [
-			//       "IndexName",
-			//       "Projection",
-			//       "KeySchema"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "IndexName": {
+			//	        "maxLength": 255,
+			//	        "minLength": 3,
+			//	        "type": "string"
+			//	      },
+			//	      "KeySchema": {
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AttributeName": {
+			//	              "maxLength": 255,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "KeyType": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "KeyType",
+			//	            "AttributeName"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "maxItems": 2,
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "Projection": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "NonKeyAttributes": {
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "maxItems": 20,
+			//	            "type": "array",
+			//	            "uniqueItems": true
+			//	          },
+			//	          "ProjectionType": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "IndexName",
+			//	      "Projection",
+			//	      "KeySchema"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"index_name": {
@@ -464,226 +470,227 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"replicas": {
 			// Property: Replicas
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ContributorInsightsSpecification": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Enabled": {
-			//             "type": "boolean"
-			//           }
-			//         },
-			//         "required": [
-			//           "Enabled"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "GlobalSecondaryIndexes": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ContributorInsightsSpecification": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Enabled": {
-			//                   "type": "boolean"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Enabled"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "IndexName": {
-			//               "maxLength": 255,
-			//               "minLength": 3,
-			//               "type": "string"
-			//             },
-			//             "ReadProvisionedThroughputSettings": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "ReadCapacityAutoScalingSettings": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "MaxCapacity": {
-			//                       "minimum": 1,
-			//                       "type": "integer"
-			//                     },
-			//                     "MinCapacity": {
-			//                       "minimum": 1,
-			//                       "type": "integer"
-			//                     },
-			//                     "SeedCapacity": {
-			//                       "minimum": 1,
-			//                       "type": "integer"
-			//                     },
-			//                     "TargetTrackingScalingPolicyConfiguration": {
-			//                       "additionalProperties": false,
-			//                       "properties": {
-			//                         "DisableScaleIn": {
-			//                           "type": "boolean"
-			//                         },
-			//                         "ScaleInCooldown": {
-			//                           "minimum": 0,
-			//                           "type": "integer"
-			//                         },
-			//                         "ScaleOutCooldown": {
-			//                           "minimum": 0,
-			//                           "type": "integer"
-			//                         },
-			//                         "TargetValue": {
-			//                           "format": "double",
-			//                           "type": "number"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "TargetValue"
-			//                       ],
-			//                       "type": "object"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "MinCapacity",
-			//                     "MaxCapacity",
-			//                     "TargetTrackingScalingPolicyConfiguration"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "ReadCapacityUnits": {
-			//                   "minimum": 1,
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "required": [
-			//             "IndexName"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "PointInTimeRecoverySpecification": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "PointInTimeRecoveryEnabled": {
-			//             "type": "boolean"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "ReadProvisionedThroughputSettings": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ReadCapacityAutoScalingSettings": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "MaxCapacity": {
-			//                 "minimum": 1,
-			//                 "type": "integer"
-			//               },
-			//               "MinCapacity": {
-			//                 "minimum": 1,
-			//                 "type": "integer"
-			//               },
-			//               "SeedCapacity": {
-			//                 "minimum": 1,
-			//                 "type": "integer"
-			//               },
-			//               "TargetTrackingScalingPolicyConfiguration": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DisableScaleIn": {
-			//                     "type": "boolean"
-			//                   },
-			//                   "ScaleInCooldown": {
-			//                     "minimum": 0,
-			//                     "type": "integer"
-			//                   },
-			//                   "ScaleOutCooldown": {
-			//                     "minimum": 0,
-			//                     "type": "integer"
-			//                   },
-			//                   "TargetValue": {
-			//                     "format": "double",
-			//                     "type": "number"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "TargetValue"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "MinCapacity",
-			//               "MaxCapacity",
-			//               "TargetTrackingScalingPolicyConfiguration"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "ReadCapacityUnits": {
-			//             "minimum": 1,
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Region": {
-			//         "type": "string"
-			//       },
-			//       "SSESpecification": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "KMSMasterKeyId": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "KMSMasterKeyId"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "TableClass": {
-			//         "type": "string"
-			//       },
-			//       "Tags": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Key": {
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Value",
-			//             "Key"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       }
-			//     },
-			//     "required": [
-			//       "Region"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ContributorInsightsSpecification": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Enabled": {
+			//	            "type": "boolean"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Enabled"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "GlobalSecondaryIndexes": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ContributorInsightsSpecification": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Enabled": {
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Enabled"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "IndexName": {
+			//	              "maxLength": 255,
+			//	              "minLength": 3,
+			//	              "type": "string"
+			//	            },
+			//	            "ReadProvisionedThroughputSettings": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "ReadCapacityAutoScalingSettings": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "MaxCapacity": {
+			//	                      "minimum": 1,
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "MinCapacity": {
+			//	                      "minimum": 1,
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "SeedCapacity": {
+			//	                      "minimum": 1,
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "TargetTrackingScalingPolicyConfiguration": {
+			//	                      "additionalProperties": false,
+			//	                      "properties": {
+			//	                        "DisableScaleIn": {
+			//	                          "type": "boolean"
+			//	                        },
+			//	                        "ScaleInCooldown": {
+			//	                          "minimum": 0,
+			//	                          "type": "integer"
+			//	                        },
+			//	                        "ScaleOutCooldown": {
+			//	                          "minimum": 0,
+			//	                          "type": "integer"
+			//	                        },
+			//	                        "TargetValue": {
+			//	                          "format": "double",
+			//	                          "type": "number"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "TargetValue"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "MinCapacity",
+			//	                    "MaxCapacity",
+			//	                    "TargetTrackingScalingPolicyConfiguration"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "ReadCapacityUnits": {
+			//	                  "minimum": 1,
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "IndexName"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "PointInTimeRecoverySpecification": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "PointInTimeRecoveryEnabled": {
+			//	            "type": "boolean"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "ReadProvisionedThroughputSettings": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ReadCapacityAutoScalingSettings": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "MaxCapacity": {
+			//	                "minimum": 1,
+			//	                "type": "integer"
+			//	              },
+			//	              "MinCapacity": {
+			//	                "minimum": 1,
+			//	                "type": "integer"
+			//	              },
+			//	              "SeedCapacity": {
+			//	                "minimum": 1,
+			//	                "type": "integer"
+			//	              },
+			//	              "TargetTrackingScalingPolicyConfiguration": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DisableScaleIn": {
+			//	                    "type": "boolean"
+			//	                  },
+			//	                  "ScaleInCooldown": {
+			//	                    "minimum": 0,
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "ScaleOutCooldown": {
+			//	                    "minimum": 0,
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "TargetValue": {
+			//	                    "format": "double",
+			//	                    "type": "number"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "TargetValue"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "MinCapacity",
+			//	              "MaxCapacity",
+			//	              "TargetTrackingScalingPolicyConfiguration"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "ReadCapacityUnits": {
+			//	            "minimum": 1,
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Region": {
+			//	        "type": "string"
+			//	      },
+			//	      "SSESpecification": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "KMSMasterKeyId": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "KMSMasterKeyId"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "TableClass": {
+			//	        "type": "string"
+			//	      },
+			//	      "Tags": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Key": {
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Value",
+			//	            "Key"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Region"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"contributor_insights_specification": {
@@ -914,21 +921,22 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"sse_specification": {
 			// Property: SSESpecification
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "SSEEnabled": {
-			//       "type": "boolean"
-			//     },
-			//     "SSEType": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "SSEEnabled"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "SSEEnabled": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "SSEType": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "SSEEnabled"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"sse_enabled": {
@@ -948,27 +956,29 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"stream_arn": {
 			// Property: StreamArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"stream_specification": {
 			// Property: StreamSpecification
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "StreamViewType": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "StreamViewType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "StreamViewType": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "StreamViewType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"stream_view_type": {
@@ -983,39 +993,42 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"table_id": {
 			// Property: TableId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"table_name": {
 			// Property: TableName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"time_to_live_specification": {
 			// Property: TimeToLiveSpecification
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AttributeName": {
-			//       "type": "string"
-			//     },
-			//     "Enabled": {
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "required": [
-			//     "Enabled"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AttributeName": {
+			//	      "type": "string"
+			//	    },
+			//	    "Enabled": {
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Enabled"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"attribute_name": {
@@ -1035,59 +1048,60 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"write_provisioned_throughput_settings": {
 			// Property: WriteProvisionedThroughputSettings
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "WriteCapacityAutoScalingSettings": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "MaxCapacity": {
-			//           "minimum": 1,
-			//           "type": "integer"
-			//         },
-			//         "MinCapacity": {
-			//           "minimum": 1,
-			//           "type": "integer"
-			//         },
-			//         "SeedCapacity": {
-			//           "minimum": 1,
-			//           "type": "integer"
-			//         },
-			//         "TargetTrackingScalingPolicyConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DisableScaleIn": {
-			//               "type": "boolean"
-			//             },
-			//             "ScaleInCooldown": {
-			//               "minimum": 0,
-			//               "type": "integer"
-			//             },
-			//             "ScaleOutCooldown": {
-			//               "minimum": 0,
-			//               "type": "integer"
-			//             },
-			//             "TargetValue": {
-			//               "format": "double",
-			//               "type": "number"
-			//             }
-			//           },
-			//           "required": [
-			//             "TargetValue"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "MinCapacity",
-			//         "MaxCapacity",
-			//         "TargetTrackingScalingPolicyConfiguration"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "WriteCapacityAutoScalingSettings": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "MaxCapacity": {
+			//	          "minimum": 1,
+			//	          "type": "integer"
+			//	        },
+			//	        "MinCapacity": {
+			//	          "minimum": 1,
+			//	          "type": "integer"
+			//	        },
+			//	        "SeedCapacity": {
+			//	          "minimum": 1,
+			//	          "type": "integer"
+			//	        },
+			//	        "TargetTrackingScalingPolicyConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DisableScaleIn": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "ScaleInCooldown": {
+			//	              "minimum": 0,
+			//	              "type": "integer"
+			//	            },
+			//	            "ScaleOutCooldown": {
+			//	              "minimum": 0,
+			//	              "type": "integer"
+			//	            },
+			//	            "TargetValue": {
+			//	              "format": "double",
+			//	              "type": "number"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "TargetValue"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "MinCapacity",
+			//	        "MaxCapacity",
+			//	        "TargetTrackingScalingPolicyConfiguration"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"write_capacity_auto_scaling_settings": {

@@ -23,11 +23,12 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"account": {
 			// Property: Account
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The target AWS account ID to grant or revoke access for.",
-			//   "pattern": "^\\d{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The target AWS account ID to grant or revoke access for.",
+			//	  "pattern": "^\\d{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The target AWS account ID to grant or revoke access for.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,10 +36,11 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"allowed_all_vp_cs": {
 			// Property: AllowedAllVPCs
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -46,15 +48,16 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"allowed_vp_cs": {
 			// Property: AllowedVPCs
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The VPCs allowed access to the cluster.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The VPCs allowed access to the cluster.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The VPCs allowed access to the cluster.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -62,10 +65,11 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"authorize_time": {
 			// Property: AuthorizeTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time (UTC) when the authorization was created.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time (UTC) when the authorization was created.",
+			//	  "type": "string"
+			//	}
 			Description: "The time (UTC) when the authorization was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -73,11 +77,12 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"cluster_identifier": {
 			// Property: ClusterIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The cluster identifier.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The cluster identifier.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The cluster identifier.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -85,10 +90,11 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"cluster_status": {
 			// Property: ClusterStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The status of the cluster.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The status of the cluster.",
+			//	  "type": "string"
+			//	}
 			Description: "The status of the cluster.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -96,10 +102,11 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"endpoint_count": {
 			// Property: EndpointCount
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The number of Redshift-managed VPC endpoints created for the authorization.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The number of Redshift-managed VPC endpoints created for the authorization.",
+			//	  "type": "integer"
+			//	}
 			Description: "The number of Redshift-managed VPC endpoints created for the authorization.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -107,10 +114,11 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"force": {
 			// Property: Force
 			// CloudFormation resource type schema:
-			// {
-			//   "description": " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
+			//	  "type": "boolean"
+			//	}
 			Description: " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -118,11 +126,12 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"grantee": {
 			// Property: Grantee
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AWS account ID of the grantee of the cluster.",
-			//   "pattern": "^\\d{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AWS account ID of the grantee of the cluster.",
+			//	  "pattern": "^\\d{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The AWS account ID of the grantee of the cluster.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -130,11 +139,12 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"grantor": {
 			// Property: Grantor
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AWS account ID of the cluster owner.",
-			//   "pattern": "^\\d{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AWS account ID of the cluster owner.",
+			//	  "pattern": "^\\d{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The AWS account ID of the cluster owner.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -142,10 +152,11 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The status of the authorization action.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The status of the authorization action.",
+			//	  "type": "string"
+			//	}
 			Description: "The status of the authorization action.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -153,15 +164,16 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"vpc_ids": {
 			// Property: VpcIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,

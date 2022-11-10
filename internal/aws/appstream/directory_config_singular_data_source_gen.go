@@ -20,47 +20,82 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::AppStream::DirectoryConfig resource.
 func directoryConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"certificate_based_auth_properties": {
+			// Property: CertificateBasedAuthProperties
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "CertificateAuthorityArn": {
+			//	      "type": "string"
+			//	    },
+			//	    "Status": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"certificate_authority_arn": {
+						// Property: CertificateAuthorityArn
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"status": {
+						// Property: Status
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"directory_name": {
 			// Property: DirectoryName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"organizational_unit_distinguished_names": {
 			// Property: OrganizationalUnitDistinguishedNames
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"service_account_credentials": {
 			// Property: ServiceAccountCredentials
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AccountName": {
-			//       "type": "string"
-			//     },
-			//     "AccountPassword": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "AccountName",
-			//     "AccountPassword"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AccountName": {
+			//	      "type": "string"
+			//	    },
+			//	    "AccountPassword": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "AccountName",
+			//	    "AccountPassword"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"account_name": {
@@ -96,11 +131,14 @@ func directoryConfigDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::AppStream::DirectoryConfig").WithTerraformTypeName("awscc_appstream_directory_config")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_name":     "AccountName",
-		"account_password": "AccountPassword",
-		"directory_name":   "DirectoryName",
+		"account_name":                            "AccountName",
+		"account_password":                        "AccountPassword",
+		"certificate_authority_arn":               "CertificateAuthorityArn",
+		"certificate_based_auth_properties":       "CertificateBasedAuthProperties",
+		"directory_name":                          "DirectoryName",
 		"organizational_unit_distinguished_names": "OrganizationalUnitDistinguishedNames",
 		"service_account_credentials":             "ServiceAccountCredentials",
+		"status":                                  "Status",
 	})
 
 	v, err := NewSingularDataSource(ctx, opts...)

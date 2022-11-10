@@ -23,10 +23,11 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"aws_account_id": {
 			// Property: AwsAccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AWS account ID of customer",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AWS account ID of customer",
+			//	  "type": "string"
+			//	}
 			Description: "AWS account ID of customer",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,16 +35,17 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"finding_publishing_frequency": {
 			// Property: FindingPublishingFrequency
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "SIX_HOURS",
-			//   "description": "A enumeration value that specifies how frequently finding updates are published.",
-			//   "enum": [
-			//     "FIFTEEN_MINUTES",
-			//     "ONE_HOUR",
-			//     "SIX_HOURS"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "SIX_HOURS",
+			//	  "description": "A enumeration value that specifies how frequently finding updates are published.",
+			//	  "enum": [
+			//	    "FIFTEEN_MINUTES",
+			//	    "ONE_HOUR",
+			//	    "SIX_HOURS"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "A enumeration value that specifies how frequently finding updates are published.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,10 +53,11 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_role": {
 			// Property: ServiceRole
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Service role used by Macie",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Service role used by Macie",
+			//	  "type": "string"
+			//	}
 			Description: "Service role used by Macie",
 			Type:        types.StringType,
 			Computed:    true,
@@ -62,15 +65,16 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "ENABLED",
-			//   "description": "A enumeration value that specifies the status of the Macie Session.",
-			//   "enum": [
-			//     "ENABLED",
-			//     "PAUSED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "ENABLED",
+			//	  "description": "A enumeration value that specifies the status of the Macie Session.",
+			//	  "enum": [
+			//	    "ENABLED",
+			//	    "PAUSED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "A enumeration value that specifies the status of the Macie Session.",
 			Type:        types.StringType,
 			Computed:    true,

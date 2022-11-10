@@ -23,12 +23,13 @@ func schemaVersionMetadataDataSource(ctx context.Context) (datasource.DataSource
 		"key": {
 			// Property: Key
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Metadata key",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Metadata key",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Metadata key",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,11 +37,12 @@ func schemaVersionMetadataDataSource(ctx context.Context) (datasource.DataSource
 		"schema_version_id": {
 			// Property: SchemaVersionId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Represents the version ID associated with the schema version.",
-			//   "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Represents the version ID associated with the schema version.",
+			//	  "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "Represents the version ID associated with the schema version.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -48,12 +50,13 @@ func schemaVersionMetadataDataSource(ctx context.Context) (datasource.DataSource
 		"value": {
 			// Property: Value
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Metadata value",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Metadata value",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Metadata value",
 			Type:        types.StringType,
 			Computed:    true,

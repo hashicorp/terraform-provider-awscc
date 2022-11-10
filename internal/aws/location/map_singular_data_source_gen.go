@@ -23,32 +23,34 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1600,
-			//   "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1600,
+			//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"configuration": {
 			// Property: Configuration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Style": {
-			//       "maxLength": 100,
-			//       "minLength": 1,
-			//       "pattern": "^[-._\\w]+$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Style"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Style": {
+			//	      "maxLength": 100,
+			//	      "minLength": 1,
+			//	      "pattern": "^[-._\\w]+$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Style"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"style": {
@@ -63,11 +65,12 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"create_time": {
 			// Property: CreateTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			//   "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+			//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+			//	  "type": "string"
+			//	}
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,
@@ -75,66 +78,72 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"data_source": {
 			// Property: DataSource
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"map_arn": {
 			// Property: MapArn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1600,
-			//   "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1600,
+			//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"map_name": {
 			// Property: MapName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "pattern": "^[-._\\w]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "pattern": "^[-._\\w]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"pricing_plan": {
 			// Property: PricingPlan
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "RequestBasedUsage"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "RequestBasedUsage"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"update_time": {
 			// Property: UpdateTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			//   "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+			//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+			//	  "type": "string"
+			//	}
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,

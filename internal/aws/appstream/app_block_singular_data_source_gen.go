@@ -23,87 +23,93 @@ func appBlockDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"display_name": {
 			// Property: DisplayName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"setup_script_details": {
 			// Property: SetupScriptDetails
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ExecutableParameters": {
-			//       "type": "string"
-			//     },
-			//     "ExecutablePath": {
-			//       "type": "string"
-			//     },
-			//     "ScriptS3Location": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "S3Bucket": {
-			//           "type": "string"
-			//         },
-			//         "S3Key": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "S3Bucket",
-			//         "S3Key"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "TimeoutInSeconds": {
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "required": [
-			//     "ScriptS3Location",
-			//     "ExecutablePath",
-			//     "TimeoutInSeconds"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ExecutableParameters": {
+			//	      "type": "string"
+			//	    },
+			//	    "ExecutablePath": {
+			//	      "type": "string"
+			//	    },
+			//	    "ScriptS3Location": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "S3Bucket": {
+			//	          "type": "string"
+			//	        },
+			//	        "S3Key": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "S3Bucket",
+			//	        "S3Key"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "TimeoutInSeconds": {
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ScriptS3Location",
+			//	    "ExecutablePath",
+			//	    "TimeoutInSeconds"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"executable_parameters": {
@@ -146,22 +152,23 @@ func appBlockDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_s3_location": {
 			// Property: SourceS3Location
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "S3Bucket": {
-			//       "type": "string"
-			//     },
-			//     "S3Key": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3Bucket",
-			//     "S3Key"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "S3Bucket": {
+			//	      "type": "string"
+			//	    },
+			//	    "S3Key": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3Bucket",
+			//	    "S3Key"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"s3_bucket": {
@@ -181,27 +188,28 @@ func appBlockDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "TagKey": {
-			//         "type": "string"
-			//       },
-			//       "TagValue": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "TagKey",
-			//       "TagValue"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "TagKey": {
+			//	        "type": "string"
+			//	      },
+			//	      "TagValue": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "TagKey",
+			//	      "TagValue"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"tag_key": {

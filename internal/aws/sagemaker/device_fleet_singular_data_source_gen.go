@@ -23,13 +23,14 @@ func deviceFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description for the edge device fleet",
-			//   "maxLength": 800,
-			//   "minLength": 0,
-			//   "pattern": "[\\S\\s]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description for the edge device fleet",
+			//	  "maxLength": 800,
+			//	  "minLength": 0,
+			//	  "pattern": "[\\S\\s]+",
+			//	  "type": "string"
+			//	}
 			Description: "Description for the edge device fleet",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,13 +38,14 @@ func deviceFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"device_fleet_name": {
 			// Property: DeviceFleetName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the edge device fleet",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the edge device fleet",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the edge device fleet",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,29 +53,30 @@ func deviceFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"output_config": {
 			// Property: OutputConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "S3 bucket and an ecryption key id (if available) to store outputs for the fleet",
-			//   "properties": {
-			//     "KmsKeyId": {
-			//       "description": "The KMS key id used for encryption on the S3 bucket",
-			//       "maxLength": 2048,
-			//       "minLength": 1,
-			//       "pattern": "[a-zA-Z0-9:_-]+",
-			//       "type": "string"
-			//     },
-			//     "S3OutputLocation": {
-			//       "description": "The Amazon Simple Storage (S3) bucket URI",
-			//       "maxLength": 1024,
-			//       "pattern": "^s3://([^/]+)/?(.*)$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3OutputLocation"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "S3 bucket and an ecryption key id (if available) to store outputs for the fleet",
+			//	  "properties": {
+			//	    "KmsKeyId": {
+			//	      "description": "The KMS key id used for encryption on the S3 bucket",
+			//	      "maxLength": 2048,
+			//	      "minLength": 1,
+			//	      "pattern": "[a-zA-Z0-9:_-]+",
+			//	      "type": "string"
+			//	    },
+			//	    "S3OutputLocation": {
+			//	      "description": "The Amazon Simple Storage (S3) bucket URI",
+			//	      "maxLength": 1024,
+			//	      "pattern": "^s3://([^/]+)/?(.*)$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3OutputLocation"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "S3 bucket and an ecryption key id (if available) to store outputs for the fleet",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -96,13 +99,14 @@ func deviceFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Role associated with the device fleet",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Role associated with the device fleet",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Role associated with the device fleet",
 			Type:        types.StringType,
 			Computed:    true,
@@ -110,35 +114,36 @@ func deviceFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Associate tags with the resource",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Key-value pair to associate as a tag for the resource",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Associate tags with the resource",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Key-value pair to associate as a tag for the resource",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Associate tags with the resource",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

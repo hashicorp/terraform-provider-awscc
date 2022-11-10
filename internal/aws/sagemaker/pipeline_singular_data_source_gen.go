@@ -23,20 +23,21 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"parallelism_configuration": {
 			// Property: ParallelismConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "MaxParallelExecutionSteps": {
-			//       "description": "Maximum parallel execution steps",
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "required": [
-			//     "MaxParallelExecutionSteps"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "MaxParallelExecutionSteps": {
+			//	      "description": "Maximum parallel execution steps",
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "MaxParallelExecutionSteps"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"max_parallel_execution_steps": {
@@ -52,41 +53,42 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"pipeline_definition": {
 			// Property: PipelineDefinition
 			// CloudFormation resource type schema:
-			// {
-			//   "properties": {
-			//     "PipelineDefinitionBody": {
-			//       "description": "A specification that defines the pipeline in JSON format.",
-			//       "type": "string"
-			//     },
-			//     "PipelineDefinitionS3Location": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Bucket": {
-			//           "description": "The name of the S3 bucket where the PipelineDefinition file is stored.",
-			//           "type": "string"
-			//         },
-			//         "ETag": {
-			//           "description": "The Amazon S3 ETag (a file checksum) of the PipelineDefinition file. If you don't specify a value, SageMaker skips ETag validation of your PipelineDefinition file.",
-			//           "type": "string"
-			//         },
-			//         "Key": {
-			//           "description": "The file name of the PipelineDefinition file (Amazon S3 object name).",
-			//           "type": "string"
-			//         },
-			//         "Version": {
-			//           "description": "For versioning-enabled buckets, a specific version of the PipelineDefinition file.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Bucket",
-			//         "Key"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "properties": {
+			//	    "PipelineDefinitionBody": {
+			//	      "description": "A specification that defines the pipeline in JSON format.",
+			//	      "type": "string"
+			//	    },
+			//	    "PipelineDefinitionS3Location": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Bucket": {
+			//	          "description": "The name of the S3 bucket where the PipelineDefinition file is stored.",
+			//	          "type": "string"
+			//	        },
+			//	        "ETag": {
+			//	          "description": "The Amazon S3 ETag (a file checksum) of the PipelineDefinition file. If you don't specify a value, SageMaker skips ETag validation of your PipelineDefinition file.",
+			//	          "type": "string"
+			//	        },
+			//	        "Key": {
+			//	          "description": "The file name of the PipelineDefinition file (Amazon S3 object name).",
+			//	          "type": "string"
+			//	        },
+			//	        "Version": {
+			//	          "description": "For versioning-enabled buckets, a specific version of the PipelineDefinition file.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Bucket",
+			//	        "Key"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"pipeline_definition_body": {
@@ -134,12 +136,13 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"pipeline_description": {
 			// Property: PipelineDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the Pipeline.",
-			//   "maxLength": 3072,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the Pipeline.",
+			//	  "maxLength": 3072,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the Pipeline.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -147,13 +150,14 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"pipeline_display_name": {
 			// Property: PipelineDisplayName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The display name of the Pipeline.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The display name of the Pipeline.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
+			//	  "type": "string"
+			//	}
 			Description: "The display name of the Pipeline.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -161,13 +165,14 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"pipeline_name": {
 			// Property: PipelineName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the Pipeline.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the Pipeline.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the Pipeline.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -175,13 +180,14 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Role Arn",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Role Arn",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Role Arn",
 			Type:        types.StringType,
 			Computed:    true,
@@ -189,26 +195,27 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

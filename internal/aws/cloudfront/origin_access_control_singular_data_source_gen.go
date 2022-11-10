@@ -23,45 +23,47 @@ func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, 
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"origin_access_control_config": {
 			// Property: OriginAccessControlConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Description": {
-			//       "type": "string"
-			//     },
-			//     "Name": {
-			//       "type": "string"
-			//     },
-			//     "OriginAccessControlOriginType": {
-			//       "pattern": "^(s3)$",
-			//       "type": "string"
-			//     },
-			//     "SigningBehavior": {
-			//       "pattern": "^(never|no-override|always)$",
-			//       "type": "string"
-			//     },
-			//     "SigningProtocol": {
-			//       "pattern": "^(sigv4)$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name",
-			//     "SigningProtocol",
-			//     "SigningBehavior",
-			//     "OriginAccessControlOriginType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Description": {
+			//	      "type": "string"
+			//	    },
+			//	    "Name": {
+			//	      "type": "string"
+			//	    },
+			//	    "OriginAccessControlOriginType": {
+			//	      "pattern": "^(s3)$",
+			//	      "type": "string"
+			//	    },
+			//	    "SigningBehavior": {
+			//	      "pattern": "^(never|no-override|always)$",
+			//	      "type": "string"
+			//	    },
+			//	    "SigningProtocol": {
+			//	      "pattern": "^(sigv4)$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name",
+			//	    "SigningProtocol",
+			//	    "SigningBehavior",
+			//	    "OriginAccessControlOriginType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"description": {

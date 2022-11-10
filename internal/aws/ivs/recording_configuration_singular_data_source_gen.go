@@ -23,13 +23,14 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,32 +38,33 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		"destination_configuration": {
 			// Property: DestinationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Recording Destination Configuration.",
-			//   "properties": {
-			//     "S3": {
-			//       "additionalProperties": false,
-			//       "description": "Recording S3 Destination Configuration.",
-			//       "properties": {
-			//         "BucketName": {
-			//           "maxLength": 63,
-			//           "minLength": 3,
-			//           "pattern": "^[a-z0-9-.]+$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketName"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Recording Destination Configuration.",
+			//	  "properties": {
+			//	    "S3": {
+			//	      "additionalProperties": false,
+			//	      "description": "Recording S3 Destination Configuration.",
+			//	      "properties": {
+			//	        "BucketName": {
+			//	          "maxLength": 63,
+			//	          "minLength": 3,
+			//	          "pattern": "^[a-z0-9-.]+$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketName"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Recording Destination Configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -87,13 +89,14 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Recording Configuration Name.",
-			//   "maxLength": 128,
-			//   "minLength": 0,
-			//   "pattern": "^[a-zA-Z0-9-_]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Recording Configuration Name.",
+			//	  "maxLength": 128,
+			//	  "minLength": 0,
+			//	  "pattern": "^[a-zA-Z0-9-_]*$",
+			//	  "type": "string"
+			//	}
 			Description: "Recording Configuration Name.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -101,15 +104,16 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Recording Configuration State.",
-			//   "enum": [
-			//     "CREATING",
-			//     "CREATE_FAILED",
-			//     "ACTIVE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Recording Configuration State.",
+			//	  "enum": [
+			//	    "CREATING",
+			//	    "CREATE_FAILED",
+			//	    "ACTIVE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Recording Configuration State.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -117,33 +121,34 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the asset model.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the asset model.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -164,30 +169,31 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		"thumbnail_configuration": {
 			// Property: ThumbnailConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Recording Thumbnail Configuration.",
-			//   "properties": {
-			//     "RecordingMode": {
-			//       "description": "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
-			//       "enum": [
-			//         "INTERVAL",
-			//         "DISABLED"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "TargetIntervalSeconds": {
-			//       "description": "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
-			//       "maximum": 60,
-			//       "minimum": 5,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "required": [
-			//     "RecordingMode"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Recording Thumbnail Configuration.",
+			//	  "properties": {
+			//	    "RecordingMode": {
+			//	      "description": "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
+			//	      "enum": [
+			//	        "INTERVAL",
+			//	        "DISABLED"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "TargetIntervalSeconds": {
+			//	      "description": "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
+			//	      "maximum": 60,
+			//	      "minimum": 5,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "RecordingMode"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Recording Thumbnail Configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

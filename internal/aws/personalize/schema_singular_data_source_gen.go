@@ -23,14 +23,15 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain": {
 			// Property: Domain
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The domain of a Domain dataset group.",
-			//   "enum": [
-			//     "ECOMMERCE",
-			//     "VIDEO_ON_DEMAND"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The domain of a Domain dataset group.",
+			//	  "enum": [
+			//	    "ECOMMERCE",
+			//	    "VIDEO_ON_DEMAND"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The domain of a Domain dataset group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,13 +39,14 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name for the schema.",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name for the schema.",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	  "type": "string"
+			//	}
 			Description: "Name for the schema.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -52,11 +54,12 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"schema": {
 			// Property: Schema
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A schema in Avro JSON format.",
-			//   "maxLength": 10000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A schema in Avro JSON format.",
+			//	  "maxLength": 10000,
+			//	  "type": "string"
+			//	}
 			Description: "A schema in Avro JSON format.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -64,12 +67,13 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"schema_arn": {
 			// Property: SchemaArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Arn for the schema.",
-			//   "maxLength": 256,
-			//   "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Arn for the schema.",
+			//	  "maxLength": 256,
+			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	  "type": "string"
+			//	}
 			Description: "Arn for the schema.",
 			Type:        types.StringType,
 			Computed:    true,

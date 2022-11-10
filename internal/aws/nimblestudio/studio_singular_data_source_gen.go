@@ -23,10 +23,11 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"admin_role_arn": {
 			// Property: AdminRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.\u003c/p\u003e",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.\u003c/p\u003e",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,12 +35,13 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"display_name": {
 			// Property: DisplayName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eA friendly name for the studio.\u003c/p\u003e",
-			//   "maxLength": 64,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eA friendly name for the studio.\u003c/p\u003e",
+			//	  "maxLength": 64,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "<p>A friendly name for the studio.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -47,13 +49,14 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"home_region": {
 			// Property: HomeRegion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe Amazon Web Services Region where the studio resource is located.\u003c/p\u003e",
-			//   "maxLength": 50,
-			//   "minLength": 0,
-			//   "pattern": "[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe Amazon Web Services Region where the studio resource is located.\u003c/p\u003e",
+			//	  "maxLength": 50,
+			//	  "minLength": 0,
+			//	  "pattern": "[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The Amazon Web Services Region where the studio resource is located.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -61,10 +64,11 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"sso_client_id": {
 			// Property: SsoClientId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble Studio portal.\u003c/p\u003e",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble Studio portal.\u003c/p\u003e",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble Studio portal.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -72,30 +76,31 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"studio_encryption_configuration": {
 			// Property: StudioEncryptionConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "\u003cp\u003eConfiguration of the encryption method that is used for the studio.\u003c/p\u003e",
-			//   "properties": {
-			//     "KeyArn": {
-			//       "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
-			//       "minLength": 4,
-			//       "pattern": "^arn:.*",
-			//       "type": "string"
-			//     },
-			//     "KeyType": {
-			//       "description": "\u003cp\u003eThe type of KMS key that is used to encrypt studio data.\u003c/p\u003e",
-			//       "enum": [
-			//         "AWS_OWNED_KEY",
-			//         "CUSTOMER_MANAGED_KEY"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "KeyType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "\u003cp\u003eConfiguration of the encryption method that is used for the studio.\u003c/p\u003e",
+			//	  "properties": {
+			//	    "KeyArn": {
+			//	      "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
+			//	      "minLength": 4,
+			//	      "pattern": "^arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "KeyType": {
+			//	      "description": "\u003cp\u003eThe type of KMS key that is used to encrypt studio data.\u003c/p\u003e",
+			//	      "enum": [
+			//	        "AWS_OWNED_KEY",
+			//	        "CUSTOMER_MANAGED_KEY"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "KeyType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "<p>Configuration of the encryption method that is used for the studio.</p>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -118,22 +123,24 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"studio_id": {
 			// Property: StudioId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"studio_name": {
 			// Property: StudioName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.\u003c/p\u003e",
-			//   "maxLength": 64,
-			//   "minLength": 3,
-			//   "pattern": "^[a-z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.\u003c/p\u003e",
+			//	  "maxLength": 64,
+			//	  "minLength": 3,
+			//	  "pattern": "^[a-z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -141,10 +148,11 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"studio_url": {
 			// Property: StudioUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe address of the web page for the studio.\u003c/p\u003e",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe address of the web page for the studio.\u003c/p\u003e",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The address of the web page for the studio.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -152,16 +160,17 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -170,10 +179,11 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"user_role_arn": {
 			// Property: UserRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe IAM role that Studio Users will assume when logging in to the Nimble Studio portal.\u003c/p\u003e",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe IAM role that Studio Users will assume when logging in to the Nimble Studio portal.\u003c/p\u003e",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.</p>",
 			Type:        types.StringType,
 			Computed:    true,

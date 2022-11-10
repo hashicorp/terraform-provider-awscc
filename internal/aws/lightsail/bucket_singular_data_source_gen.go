@@ -23,10 +23,11 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"able_to_update_bundle": {
 			// Property: AbleToUpdateBundle
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly AWS billing cycle.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly AWS billing cycle.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly AWS billing cycle.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -34,21 +35,22 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"access_rules": {
 			// Property: AccessRules
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object that sets the public accessibility of objects in the specified bucket.",
-			//   "properties": {
-			//     "AllowPublicOverrides": {
-			//       "description": "A Boolean value that indicates whether the access control list (ACL) permissions that are applied to individual objects override the getObject option that is currently specified.",
-			//       "type": "boolean"
-			//     },
-			//     "GetObject": {
-			//       "description": "Specifies the anonymous access to all objects in a bucket.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object that sets the public accessibility of objects in the specified bucket.",
+			//	  "properties": {
+			//	    "AllowPublicOverrides": {
+			//	      "description": "A Boolean value that indicates whether the access control list (ACL) permissions that are applied to individual objects override the getObject option that is currently specified.",
+			//	      "type": "boolean"
+			//	    },
+			//	    "GetObject": {
+			//	      "description": "Specifies the anonymous access to all objects in a bucket.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object that sets the public accessibility of objects in the specified bucket.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -71,22 +73,24 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bucket_arn": {
 			// Property: BucketArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"bucket_name": {
 			// Property: BucketName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the bucket.",
-			//   "maxLength": 54,
-			//   "minLength": 3,
-			//   "pattern": "^[a-z0-9][a-z0-9-]{1,52}[a-z0-9]$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the bucket.",
+			//	  "maxLength": 54,
+			//	  "minLength": 3,
+			//	  "pattern": "^[a-z0-9][a-z0-9-]{1,52}[a-z0-9]$",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the bucket.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -94,10 +98,11 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bundle_id": {
 			// Property: BundleId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the bundle to use for the bucket.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the bundle to use for the bucket.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the bundle to use for the bucket.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -105,10 +110,11 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"object_versioning": {
 			// Property: ObjectVersioning
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether to enable or disable versioning of objects in the bucket.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether to enable or disable versioning of objects in the bucket.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Specifies whether to enable or disable versioning of objects in the bucket.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -116,15 +122,16 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"read_only_access_accounts": {
 			// Property: ReadOnlyAccessAccounts
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of strings to specify the AWS account IDs that can access the bucket.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of strings to specify the AWS account IDs that can access the bucket.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of strings to specify the AWS account IDs that can access the bucket.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
@@ -132,15 +139,16 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resources_receiving_access": {
 			// Property: ResourcesReceivingAccess
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The names of the Lightsail resources for which to set bucket access.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The names of the Lightsail resources for which to set bucket access.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The names of the Lightsail resources for which to set bucket access.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
@@ -148,34 +156,35 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -198,10 +207,11 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"url": {
 			// Property: Url
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The URL of the bucket.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The URL of the bucket.",
+			//	  "type": "string"
+			//	}
 			Description: "The URL of the bucket.",
 			Type:        types.StringType,
 			Computed:    true,

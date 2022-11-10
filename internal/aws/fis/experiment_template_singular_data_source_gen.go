@@ -23,63 +23,64 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		"actions": {
 			// Property: Actions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The actions for the experiment.",
-			//   "patternProperties": {
-			//     "": {
-			//       "additionalProperties": false,
-			//       "description": "Specifies an action for the experiment template.",
-			//       "properties": {
-			//         "ActionId": {
-			//           "description": "The ID of the action.",
-			//           "maxLength": 64,
-			//           "type": "string"
-			//         },
-			//         "Description": {
-			//           "description": "A description for the action.",
-			//           "maxLength": 512,
-			//           "type": "string"
-			//         },
-			//         "Parameters": {
-			//           "additionalProperties": false,
-			//           "description": "The parameters for the action, if applicable.",
-			//           "patternProperties": {
-			//             "": {
-			//               "maxLength": 1024,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "StartAfter": {
-			//           "description": "The names of the actions that must be completed before the current action starts.",
-			//           "items": {
-			//             "maxLength": 64,
-			//             "type": "string"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "Targets": {
-			//           "additionalProperties": false,
-			//           "description": "One or more targets for the action.",
-			//           "patternProperties": {
-			//             "": {
-			//               "maxLength": 64,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "ActionId"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The actions for the experiment.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "additionalProperties": false,
+			//	      "description": "Specifies an action for the experiment template.",
+			//	      "properties": {
+			//	        "ActionId": {
+			//	          "description": "The ID of the action.",
+			//	          "maxLength": 64,
+			//	          "type": "string"
+			//	        },
+			//	        "Description": {
+			//	          "description": "A description for the action.",
+			//	          "maxLength": 512,
+			//	          "type": "string"
+			//	        },
+			//	        "Parameters": {
+			//	          "additionalProperties": false,
+			//	          "description": "The parameters for the action, if applicable.",
+			//	          "patternProperties": {
+			//	            "": {
+			//	              "maxLength": 1024,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "StartAfter": {
+			//	          "description": "The names of the actions that must be completed before the current action starts.",
+			//	          "items": {
+			//	            "maxLength": 64,
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "Targets": {
+			//	          "additionalProperties": false,
+			//	          "description": "One or more targets for the action.",
+			//	          "patternProperties": {
+			//	            "": {
+			//	              "maxLength": 64,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ActionId"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The actions for the experiment.",
 			// Pattern: ""
 			Attributes: tfsdk.MapNestedAttributes(
@@ -123,11 +124,12 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description for the experiment template.",
-			//   "maxLength": 512,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description for the experiment template.",
+			//	  "maxLength": 512,
+			//	  "type": "string"
+			//	}
 			Description: "A description for the experiment template.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -135,61 +137,63 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"log_configuration": {
 			// Property: LogConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "CloudWatchLogsConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "LogGroupArn": {
-			//           "maxLength": 2048,
-			//           "minLength": 20,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "LogGroupArn"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "LogSchemaVersion": {
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     },
-			//     "S3Configuration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "BucketName": {
-			//           "maxLength": 63,
-			//           "minLength": 3,
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketName"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "LogSchemaVersion"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "CloudWatchLogsConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "LogGroupArn": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 20,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "LogGroupArn"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "LogSchemaVersion": {
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    },
+			//	    "S3Configuration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "BucketName": {
+			//	          "maxLength": 63,
+			//	          "minLength": 3,
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketName"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "LogSchemaVersion"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"cloudwatch_logs_configuration": {
@@ -235,11 +239,12 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.",
-			//   "maxLength": 1224,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.",
+			//	  "maxLength": 1224,
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -247,28 +252,29 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		"stop_conditions": {
 			// Property: StopConditions
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "One or more stop conditions.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Source": {
-			//         "maxLength": 64,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 2048,
-			//         "minLength": 20,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Source"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "One or more stop conditions.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Source": {
+			//	        "maxLength": 64,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 2048,
+			//	        "minLength": 20,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Source"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "One or more stop conditions.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -289,16 +295,18 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "patternProperties": {
-			//     "": {
-			//       "maxLength": 256,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "maxLength": 256,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			//
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,
@@ -306,90 +314,91 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		"targets": {
 			// Property: Targets
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The targets for the experiment.",
-			//   "patternProperties": {
-			//     "": {
-			//       "additionalProperties": false,
-			//       "description": "Specifies a target for an experiment.",
-			//       "properties": {
-			//         "Filters": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "Describes a filter used for the target resource input in an experiment template.",
-			//             "properties": {
-			//               "Path": {
-			//                 "description": "The attribute path for the filter.",
-			//                 "maxLength": 256,
-			//                 "type": "string"
-			//               },
-			//               "Values": {
-			//                 "description": "The attribute values for the filter.",
-			//                 "items": {
-			//                   "maxLength": 128,
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "required": [
-			//               "Path",
-			//               "Values"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "Parameters": {
-			//           "additionalProperties": false,
-			//           "patternProperties": {
-			//             "": {
-			//               "maxLength": 1024,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ResourceArns": {
-			//           "description": "The Amazon Resource Names (ARNs) of the target resources.",
-			//           "items": {
-			//             "maxLength": 2048,
-			//             "minLength": 20,
-			//             "type": "string"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "ResourceTags": {
-			//           "additionalProperties": false,
-			//           "patternProperties": {
-			//             "": {
-			//               "maxLength": 256,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ResourceType": {
-			//           "description": "The AWS resource type. The resource type must be supported for the specified action.",
-			//           "maxLength": 64,
-			//           "type": "string"
-			//         },
-			//         "SelectionMode": {
-			//           "description": "Scopes the identified resources to a specific number of the resources at random, or a percentage of the resources.",
-			//           "maxLength": 64,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "ResourceType",
-			//         "SelectionMode"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The targets for the experiment.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "additionalProperties": false,
+			//	      "description": "Specifies a target for an experiment.",
+			//	      "properties": {
+			//	        "Filters": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "Describes a filter used for the target resource input in an experiment template.",
+			//	            "properties": {
+			//	              "Path": {
+			//	                "description": "The attribute path for the filter.",
+			//	                "maxLength": 256,
+			//	                "type": "string"
+			//	              },
+			//	              "Values": {
+			//	                "description": "The attribute values for the filter.",
+			//	                "items": {
+			//	                  "maxLength": 128,
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Path",
+			//	              "Values"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "Parameters": {
+			//	          "additionalProperties": false,
+			//	          "patternProperties": {
+			//	            "": {
+			//	              "maxLength": 1024,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ResourceArns": {
+			//	          "description": "The Amazon Resource Names (ARNs) of the target resources.",
+			//	          "items": {
+			//	            "maxLength": 2048,
+			//	            "minLength": 20,
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "ResourceTags": {
+			//	          "additionalProperties": false,
+			//	          "patternProperties": {
+			//	            "": {
+			//	              "maxLength": 256,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ResourceType": {
+			//	          "description": "The AWS resource type. The resource type must be supported for the specified action.",
+			//	          "maxLength": 64,
+			//	          "type": "string"
+			//	        },
+			//	        "SelectionMode": {
+			//	          "description": "Scopes the identified resources to a specific number of the resources at random, or a percentage of the resources.",
+			//	          "maxLength": 64,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ResourceType",
+			//	        "SelectionMode"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The targets for the experiment.",
 			// Pattern: ""
 			Attributes: tfsdk.MapNestedAttributes(

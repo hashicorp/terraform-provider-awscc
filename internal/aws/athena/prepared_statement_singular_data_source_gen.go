@@ -23,12 +23,13 @@ func preparedStatementDataSource(ctx context.Context) (datasource.DataSource, er
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the prepared statement.",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the prepared statement.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the prepared statement.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,12 +37,13 @@ func preparedStatementDataSource(ctx context.Context) (datasource.DataSource, er
 		"query_statement": {
 			// Property: QueryStatement
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The query string for the prepared statement.",
-			//   "maxLength": 262144,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The query string for the prepared statement.",
+			//	  "maxLength": 262144,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The query string for the prepared statement.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,12 +51,13 @@ func preparedStatementDataSource(ctx context.Context) (datasource.DataSource, er
 		"statement_name": {
 			// Property: StatementName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the prepared statement.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the prepared statement.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the prepared statement.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -62,12 +65,13 @@ func preparedStatementDataSource(ctx context.Context) (datasource.DataSource, er
 		"work_group": {
 			// Property: WorkGroup
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the workgroup to which the prepared statement belongs.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the workgroup to which the prepared statement belongs.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the workgroup to which the prepared statement belongs.",
 			Type:        types.StringType,
 			Computed:    true,

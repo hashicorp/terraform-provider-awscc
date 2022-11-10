@@ -23,33 +23,34 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"report_delivery_channel": {
 			// Property: ReportDeliveryChannel
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A structure that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.",
-			//   "properties": {
-			//     "Formats": {
-			//       "description": "A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "S3BucketName": {
-			//       "description": "The unique name of the S3 bucket that receives your reports.",
-			//       "type": "string"
-			//     },
-			//     "S3KeyPrefix": {
-			//       "description": "The prefix for where AWS Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3BucketName"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A structure that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.",
+			//	  "properties": {
+			//	    "Formats": {
+			//	      "description": "A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "S3BucketName": {
+			//	      "description": "The unique name of the S3 bucket that receives your reports.",
+			//	      "type": "string"
+			//	    },
+			//	    "S3KeyPrefix": {
+			//	      "description": "The prefix for where AWS Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3BucketName"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "A structure that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -78,10 +79,11 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"report_plan_arn": {
 			// Property: ReportPlanArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.",
+			//	  "type": "string"
+			//	}
 			Description: "An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -89,13 +91,14 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"report_plan_description": {
 			// Property: ReportPlanDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An optional description of the report plan with a maximum of 1,024 characters.",
-			//   "maxLength": 1024,
-			//   "minLength": 0,
-			//   "pattern": ".*\\S.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "An optional description of the report plan with a maximum of 1,024 characters.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 0,
+			//	  "pattern": ".*\\S.*",
+			//	  "type": "string"
+			//	}
 			Description: "An optional description of the report plan with a maximum of 1,024 characters.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -103,13 +106,14 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"report_plan_name": {
 			// Property: ReportPlanName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z][_a-zA-Z0-9]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z][_a-zA-Z0-9]*",
+			//	  "type": "string"
+			//	}
 			Description: "The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
 			Type:        types.StringType,
 			Computed:    true,
@@ -117,30 +121,31 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"report_plan_tags": {
 			// Property: ReportPlanTags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Metadata that you can assign to help organize the report plans that you create. Each tag is a key-value pair.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Metadata that you can assign to help organize the report plans that you create. Each tag is a key-value pair.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Metadata that you can assign to help organize the report plans that you create. Each tag is a key-value pair.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -163,29 +168,30 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"report_setting": {
 			// Property: ReportSetting
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Identifies the report template for the report. Reports are built using a report template.",
-			//   "properties": {
-			//     "FrameworkArns": {
-			//       "description": "The Amazon Resource Names (ARNs) of the frameworks a report covers.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "ReportTemplate": {
-			//       "description": "Identifies the report template for the report. Reports are built using a report template. The report templates are: `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ReportTemplate"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Identifies the report template for the report. Reports are built using a report template.",
+			//	  "properties": {
+			//	    "FrameworkArns": {
+			//	      "description": "The Amazon Resource Names (ARNs) of the frameworks a report covers.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "ReportTemplate": {
+			//	      "description": "Identifies the report template for the report. Reports are built using a report template. The report templates are: `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ReportTemplate"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Identifies the report template for the report. Reports are built using a report template.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

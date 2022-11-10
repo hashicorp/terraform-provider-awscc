@@ -23,531 +23,534 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"capacity": {
 			// Property: Capacity
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 512,
-			//   "minLength": 1,
-			//   "pattern": "^.*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 512,
+			//	  "minLength": 1,
+			//	  "pattern": "^.*$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"rule_group": {
 			// Property: RuleGroup
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "RuleVariables": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "IPSets": {
-			//           "additionalProperties": false,
-			//           "patternProperties": {
-			//             "": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Definition": {
-			//                   "insertionOrder": true,
-			//                   "items": {
-			//                     "minLength": 1,
-			//                     "pattern": "^.*$",
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "PortSets": {
-			//           "additionalProperties": false,
-			//           "patternProperties": {
-			//             "": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Definition": {
-			//                   "insertionOrder": true,
-			//                   "items": {
-			//                     "minLength": 1,
-			//                     "pattern": "^.*$",
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RulesSource": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "RulesSourceList": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "GeneratedRulesType": {
-			//               "enum": [
-			//                 "ALLOWLIST",
-			//                 "DENYLIST"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "TargetTypes": {
-			//               "insertionOrder": true,
-			//               "items": {
-			//                 "enum": [
-			//                   "TLS_SNI",
-			//                   "HTTP_HOST"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             },
-			//             "Targets": {
-			//               "insertionOrder": true,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             }
-			//           },
-			//           "required": [
-			//             "Targets",
-			//             "TargetTypes",
-			//             "GeneratedRulesType"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "RulesString": {
-			//           "maxLength": 1000000,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "StatefulRules": {
-			//           "insertionOrder": true,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Action": {
-			//                 "enum": [
-			//                   "PASS",
-			//                   "DROP",
-			//                   "ALERT"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Header": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Destination": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 1,
-			//                     "pattern": "^.*$",
-			//                     "type": "string"
-			//                   },
-			//                   "DestinationPort": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 1,
-			//                     "pattern": "^.*$",
-			//                     "type": "string"
-			//                   },
-			//                   "Direction": {
-			//                     "enum": [
-			//                       "FORWARD",
-			//                       "ANY"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "Protocol": {
-			//                     "enum": [
-			//                       "IP",
-			//                       "TCP",
-			//                       "UDP",
-			//                       "ICMP",
-			//                       "HTTP",
-			//                       "FTP",
-			//                       "TLS",
-			//                       "SMB",
-			//                       "DNS",
-			//                       "DCERPC",
-			//                       "SSH",
-			//                       "SMTP",
-			//                       "IMAP",
-			//                       "MSN",
-			//                       "KRB5",
-			//                       "IKEV2",
-			//                       "TFTP",
-			//                       "NTP",
-			//                       "DHCP"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "Source": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 1,
-			//                     "pattern": "^.*$",
-			//                     "type": "string"
-			//                   },
-			//                   "SourcePort": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 1,
-			//                     "pattern": "^.*$",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Protocol",
-			//                   "Source",
-			//                   "SourcePort",
-			//                   "Direction",
-			//                   "Destination",
-			//                   "DestinationPort"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "RuleOptions": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Keyword": {
-			//                       "maxLength": 128,
-			//                       "minLength": 1,
-			//                       "pattern": "^.*$",
-			//                       "type": "string"
-			//                     },
-			//                     "Settings": {
-			//                       "insertionOrder": true,
-			//                       "items": {
-			//                         "maxLength": 8192,
-			//                         "minLength": 1,
-			//                         "pattern": "^.*$",
-			//                         "type": "string"
-			//                       },
-			//                       "type": "array",
-			//                       "uniqueItems": false
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Keyword"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": false
-			//               }
-			//             },
-			//             "required": [
-			//               "Action",
-			//               "Header",
-			//               "RuleOptions"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "StatelessRulesAndCustomActions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "CustomActions": {
-			//               "insertionOrder": true,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "ActionDefinition": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "PublishMetricAction": {
-			//                         "additionalProperties": false,
-			//                         "properties": {
-			//                           "Dimensions": {
-			//                             "insertionOrder": true,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "properties": {
-			//                                 "Value": {
-			//                                   "maxLength": 128,
-			//                                   "minLength": 1,
-			//                                   "pattern": "^[a-zA-Z0-9-_ ]+$",
-			//                                   "type": "string"
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "Value"
-			//                               ],
-			//                               "type": "object"
-			//                             },
-			//                             "type": "array",
-			//                             "uniqueItems": false
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "Dimensions"
-			//                         ],
-			//                         "type": "object"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   },
-			//                   "ActionName": {
-			//                     "maxLength": 128,
-			//                     "minLength": 1,
-			//                     "pattern": "^[a-zA-Z0-9]+$",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ActionName",
-			//                   "ActionDefinition"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             },
-			//             "StatelessRules": {
-			//               "insertionOrder": true,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Priority": {
-			//                     "maximum": 65535,
-			//                     "minimum": 1,
-			//                     "type": "integer"
-			//                   },
-			//                   "RuleDefinition": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "Actions": {
-			//                         "insertionOrder": true,
-			//                         "items": {
-			//                           "type": "string"
-			//                         },
-			//                         "type": "array",
-			//                         "uniqueItems": false
-			//                       },
-			//                       "MatchAttributes": {
-			//                         "additionalProperties": false,
-			//                         "properties": {
-			//                           "DestinationPorts": {
-			//                             "insertionOrder": true,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "properties": {
-			//                                 "FromPort": {
-			//                                   "maximum": 65535,
-			//                                   "minimum": 0,
-			//                                   "type": "integer"
-			//                                 },
-			//                                 "ToPort": {
-			//                                   "maximum": 65535,
-			//                                   "minimum": 0,
-			//                                   "type": "integer"
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "FromPort",
-			//                                 "ToPort"
-			//                               ],
-			//                               "type": "object"
-			//                             },
-			//                             "type": "array",
-			//                             "uniqueItems": false
-			//                           },
-			//                           "Destinations": {
-			//                             "insertionOrder": true,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "properties": {
-			//                                 "AddressDefinition": {
-			//                                   "maxLength": 255,
-			//                                   "minLength": 1,
-			//                                   "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
-			//                                   "type": "string"
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "AddressDefinition"
-			//                               ],
-			//                               "type": "object"
-			//                             },
-			//                             "type": "array",
-			//                             "uniqueItems": false
-			//                           },
-			//                           "Protocols": {
-			//                             "insertionOrder": true,
-			//                             "items": {
-			//                               "maximum": 255,
-			//                               "minimum": 0,
-			//                               "type": "integer"
-			//                             },
-			//                             "type": "array",
-			//                             "uniqueItems": false
-			//                           },
-			//                           "SourcePorts": {
-			//                             "insertionOrder": true,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "properties": {
-			//                                 "FromPort": {
-			//                                   "maximum": 65535,
-			//                                   "minimum": 0,
-			//                                   "type": "integer"
-			//                                 },
-			//                                 "ToPort": {
-			//                                   "maximum": 65535,
-			//                                   "minimum": 0,
-			//                                   "type": "integer"
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "FromPort",
-			//                                 "ToPort"
-			//                               ],
-			//                               "type": "object"
-			//                             },
-			//                             "type": "array",
-			//                             "uniqueItems": false
-			//                           },
-			//                           "Sources": {
-			//                             "insertionOrder": true,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "properties": {
-			//                                 "AddressDefinition": {
-			//                                   "maxLength": 255,
-			//                                   "minLength": 1,
-			//                                   "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
-			//                                   "type": "string"
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "AddressDefinition"
-			//                               ],
-			//                               "type": "object"
-			//                             },
-			//                             "type": "array",
-			//                             "uniqueItems": false
-			//                           },
-			//                           "TCPFlags": {
-			//                             "insertionOrder": true,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "properties": {
-			//                                 "Flags": {
-			//                                   "insertionOrder": true,
-			//                                   "items": {
-			//                                     "enum": [
-			//                                       "FIN",
-			//                                       "SYN",
-			//                                       "RST",
-			//                                       "PSH",
-			//                                       "ACK",
-			//                                       "URG",
-			//                                       "ECE",
-			//                                       "CWR"
-			//                                     ],
-			//                                     "type": "string"
-			//                                   },
-			//                                   "type": "array",
-			//                                   "uniqueItems": false
-			//                                 },
-			//                                 "Masks": {
-			//                                   "insertionOrder": true,
-			//                                   "items": {
-			//                                     "enum": [
-			//                                       "FIN",
-			//                                       "SYN",
-			//                                       "RST",
-			//                                       "PSH",
-			//                                       "ACK",
-			//                                       "URG",
-			//                                       "ECE",
-			//                                       "CWR"
-			//                                     ],
-			//                                     "type": "string"
-			//                                   },
-			//                                   "type": "array",
-			//                                   "uniqueItems": false
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "Flags"
-			//                               ],
-			//                               "type": "object"
-			//                             },
-			//                             "type": "array",
-			//                             "uniqueItems": false
-			//                           }
-			//                         },
-			//                         "type": "object"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "MatchAttributes",
-			//                       "Actions"
-			//                     ],
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "RuleDefinition",
-			//                   "Priority"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             }
-			//           },
-			//           "required": [
-			//             "StatelessRules"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "StatefulRuleOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "RuleOrder": {
-			//           "enum": [
-			//             "DEFAULT_ACTION_ORDER",
-			//             "STRICT_ORDER"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "RulesSource"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "RuleVariables": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "IPSets": {
+			//	          "additionalProperties": false,
+			//	          "patternProperties": {
+			//	            "": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Definition": {
+			//	                  "insertionOrder": true,
+			//	                  "items": {
+			//	                    "minLength": 1,
+			//	                    "pattern": "^.*$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "PortSets": {
+			//	          "additionalProperties": false,
+			//	          "patternProperties": {
+			//	            "": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Definition": {
+			//	                  "insertionOrder": true,
+			//	                  "items": {
+			//	                    "minLength": 1,
+			//	                    "pattern": "^.*$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RulesSource": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "RulesSourceList": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "GeneratedRulesType": {
+			//	              "enum": [
+			//	                "ALLOWLIST",
+			//	                "DENYLIST"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "TargetTypes": {
+			//	              "insertionOrder": true,
+			//	              "items": {
+			//	                "enum": [
+			//	                  "TLS_SNI",
+			//	                  "HTTP_HOST"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            },
+			//	            "Targets": {
+			//	              "insertionOrder": true,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Targets",
+			//	            "TargetTypes",
+			//	            "GeneratedRulesType"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "RulesString": {
+			//	          "maxLength": 1000000,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "StatefulRules": {
+			//	          "insertionOrder": true,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Action": {
+			//	                "enum": [
+			//	                  "PASS",
+			//	                  "DROP",
+			//	                  "ALERT"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Header": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Destination": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^.*$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DestinationPort": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^.*$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Direction": {
+			//	                    "enum": [
+			//	                      "FORWARD",
+			//	                      "ANY"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Protocol": {
+			//	                    "enum": [
+			//	                      "IP",
+			//	                      "TCP",
+			//	                      "UDP",
+			//	                      "ICMP",
+			//	                      "HTTP",
+			//	                      "FTP",
+			//	                      "TLS",
+			//	                      "SMB",
+			//	                      "DNS",
+			//	                      "DCERPC",
+			//	                      "SSH",
+			//	                      "SMTP",
+			//	                      "IMAP",
+			//	                      "MSN",
+			//	                      "KRB5",
+			//	                      "IKEV2",
+			//	                      "TFTP",
+			//	                      "NTP",
+			//	                      "DHCP"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Source": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^.*$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "SourcePort": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^.*$",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Protocol",
+			//	                  "Source",
+			//	                  "SourcePort",
+			//	                  "Direction",
+			//	                  "Destination",
+			//	                  "DestinationPort"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "RuleOptions": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Keyword": {
+			//	                      "maxLength": 128,
+			//	                      "minLength": 1,
+			//	                      "pattern": "^.*$",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Settings": {
+			//	                      "insertionOrder": true,
+			//	                      "items": {
+			//	                        "maxLength": 8192,
+			//	                        "minLength": 1,
+			//	                        "pattern": "^.*$",
+			//	                        "type": "string"
+			//	                      },
+			//	                      "type": "array",
+			//	                      "uniqueItems": false
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Keyword"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": false
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Action",
+			//	              "Header",
+			//	              "RuleOptions"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "StatelessRulesAndCustomActions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "CustomActions": {
+			//	              "insertionOrder": true,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "ActionDefinition": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "PublishMetricAction": {
+			//	                        "additionalProperties": false,
+			//	                        "properties": {
+			//	                          "Dimensions": {
+			//	                            "insertionOrder": true,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "properties": {
+			//	                                "Value": {
+			//	                                  "maxLength": 128,
+			//	                                  "minLength": 1,
+			//	                                  "pattern": "^[a-zA-Z0-9-_ ]+$",
+			//	                                  "type": "string"
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "Value"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            },
+			//	                            "type": "array",
+			//	                            "uniqueItems": false
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "Dimensions"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  },
+			//	                  "ActionName": {
+			//	                    "maxLength": 128,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^[a-zA-Z0-9]+$",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ActionName",
+			//	                  "ActionDefinition"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            },
+			//	            "StatelessRules": {
+			//	              "insertionOrder": true,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Priority": {
+			//	                    "maximum": 65535,
+			//	                    "minimum": 1,
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "RuleDefinition": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "Actions": {
+			//	                        "insertionOrder": true,
+			//	                        "items": {
+			//	                          "type": "string"
+			//	                        },
+			//	                        "type": "array",
+			//	                        "uniqueItems": false
+			//	                      },
+			//	                      "MatchAttributes": {
+			//	                        "additionalProperties": false,
+			//	                        "properties": {
+			//	                          "DestinationPorts": {
+			//	                            "insertionOrder": true,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "properties": {
+			//	                                "FromPort": {
+			//	                                  "maximum": 65535,
+			//	                                  "minimum": 0,
+			//	                                  "type": "integer"
+			//	                                },
+			//	                                "ToPort": {
+			//	                                  "maximum": 65535,
+			//	                                  "minimum": 0,
+			//	                                  "type": "integer"
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "FromPort",
+			//	                                "ToPort"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            },
+			//	                            "type": "array",
+			//	                            "uniqueItems": false
+			//	                          },
+			//	                          "Destinations": {
+			//	                            "insertionOrder": true,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "properties": {
+			//	                                "AddressDefinition": {
+			//	                                  "maxLength": 255,
+			//	                                  "minLength": 1,
+			//	                                  "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
+			//	                                  "type": "string"
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "AddressDefinition"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            },
+			//	                            "type": "array",
+			//	                            "uniqueItems": false
+			//	                          },
+			//	                          "Protocols": {
+			//	                            "insertionOrder": true,
+			//	                            "items": {
+			//	                              "maximum": 255,
+			//	                              "minimum": 0,
+			//	                              "type": "integer"
+			//	                            },
+			//	                            "type": "array",
+			//	                            "uniqueItems": false
+			//	                          },
+			//	                          "SourcePorts": {
+			//	                            "insertionOrder": true,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "properties": {
+			//	                                "FromPort": {
+			//	                                  "maximum": 65535,
+			//	                                  "minimum": 0,
+			//	                                  "type": "integer"
+			//	                                },
+			//	                                "ToPort": {
+			//	                                  "maximum": 65535,
+			//	                                  "minimum": 0,
+			//	                                  "type": "integer"
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "FromPort",
+			//	                                "ToPort"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            },
+			//	                            "type": "array",
+			//	                            "uniqueItems": false
+			//	                          },
+			//	                          "Sources": {
+			//	                            "insertionOrder": true,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "properties": {
+			//	                                "AddressDefinition": {
+			//	                                  "maxLength": 255,
+			//	                                  "minLength": 1,
+			//	                                  "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
+			//	                                  "type": "string"
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "AddressDefinition"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            },
+			//	                            "type": "array",
+			//	                            "uniqueItems": false
+			//	                          },
+			//	                          "TCPFlags": {
+			//	                            "insertionOrder": true,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "properties": {
+			//	                                "Flags": {
+			//	                                  "insertionOrder": true,
+			//	                                  "items": {
+			//	                                    "enum": [
+			//	                                      "FIN",
+			//	                                      "SYN",
+			//	                                      "RST",
+			//	                                      "PSH",
+			//	                                      "ACK",
+			//	                                      "URG",
+			//	                                      "ECE",
+			//	                                      "CWR"
+			//	                                    ],
+			//	                                    "type": "string"
+			//	                                  },
+			//	                                  "type": "array",
+			//	                                  "uniqueItems": false
+			//	                                },
+			//	                                "Masks": {
+			//	                                  "insertionOrder": true,
+			//	                                  "items": {
+			//	                                    "enum": [
+			//	                                      "FIN",
+			//	                                      "SYN",
+			//	                                      "RST",
+			//	                                      "PSH",
+			//	                                      "ACK",
+			//	                                      "URG",
+			//	                                      "ECE",
+			//	                                      "CWR"
+			//	                                    ],
+			//	                                    "type": "string"
+			//	                                  },
+			//	                                  "type": "array",
+			//	                                  "uniqueItems": false
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "Flags"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            },
+			//	                            "type": "array",
+			//	                            "uniqueItems": false
+			//	                          }
+			//	                        },
+			//	                        "type": "object"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "MatchAttributes",
+			//	                      "Actions"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "RuleDefinition",
+			//	                  "Priority"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "StatelessRules"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "StatefulRuleOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "RuleOrder": {
+			//	          "enum": [
+			//	            "DEFAULT_ACTION_ORDER",
+			//	            "STRICT_ORDER"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "RulesSource"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"rule_variables": {
@@ -880,13 +883,14 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rule_group_arn": {
 			// Property: RuleGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A resource ARN.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^(arn:aws.*)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A resource ARN.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^(arn:aws.*)$",
+			//	  "type": "string"
+			//	}
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -894,57 +898,60 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rule_group_id": {
 			// Property: RuleGroupId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 36,
-			//   "minLength": 36,
-			//   "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 36,
+			//	  "minLength": 36,
+			//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"rule_group_name": {
 			// Property: RuleGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "^.*$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 255,
-			//         "minLength": 0,
-			//         "pattern": "^.*$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "^.*$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 255,
+			//	        "minLength": 0,
+			//	        "pattern": "^.*$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -964,13 +971,14 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "STATELESS",
-			//     "STATEFUL"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "STATELESS",
+			//	    "STATEFUL"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

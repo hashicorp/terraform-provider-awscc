@@ -23,36 +23,37 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"endpoint_configurations": {
 			// Property: EndpointConfigurations
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The list of endpoint objects.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The configuration for a given endpoint",
-			//     "properties": {
-			//       "ClientIPPreservationEnabled": {
-			//         "default": true,
-			//         "description": "true if client ip should be preserved",
-			//         "type": "boolean"
-			//       },
-			//       "EndpointId": {
-			//         "description": "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
-			//         "type": "string"
-			//       },
-			//       "Weight": {
-			//         "default": 100,
-			//         "description": "The weight for the endpoint.",
-			//         "maximum": 255,
-			//         "minimum": 0,
-			//         "type": "integer"
-			//       }
-			//     },
-			//     "required": [
-			//       "EndpointId"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The list of endpoint objects.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The configuration for a given endpoint",
+			//	    "properties": {
+			//	      "ClientIPPreservationEnabled": {
+			//	        "default": true,
+			//	        "description": "true if client ip should be preserved",
+			//	        "type": "boolean"
+			//	      },
+			//	      "EndpointId": {
+			//	        "description": "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
+			//	        "type": "string"
+			//	      },
+			//	      "Weight": {
+			//	        "default": 100,
+			//	        "description": "The weight for the endpoint.",
+			//	        "maximum": 255,
+			//	        "minimum": 0,
+			//	        "type": "integer"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "EndpointId"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The list of endpoint objects.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -81,10 +82,11 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"endpoint_group_arn": {
 			// Property: EndpointGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the endpoint group",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the endpoint group",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the endpoint group",
 			Type:        types.StringType,
 			Computed:    true,
@@ -92,10 +94,11 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"endpoint_group_region": {
 			// Property: EndpointGroupRegion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the AWS Region where the endpoint group is located",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the AWS Region where the endpoint group is located",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the AWS Region where the endpoint group is located",
 			Type:        types.StringType,
 			Computed:    true,
@@ -103,11 +106,12 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"health_check_interval_seconds": {
 			// Property: HealthCheckIntervalSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "default": 30,
-			//   "description": "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "default": 30,
+			//	  "description": "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
+			//	  "type": "integer"
+			//	}
 			Description: "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -115,11 +119,12 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"health_check_path": {
 			// Property: HealthCheckPath
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "/",
-			//   "description": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "/",
+			//	  "description": "",
+			//	  "type": "string"
+			//	}
 			Description: "",
 			Type:        types.StringType,
 			Computed:    true,
@@ -127,13 +132,14 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"health_check_port": {
 			// Property: HealthCheckPort
 			// CloudFormation resource type schema:
-			// {
-			//   "default": -1,
-			//   "description": "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
-			//   "maximum": 65535,
-			//   "minimum": -1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "default": -1,
+			//	  "description": "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
+			//	  "maximum": 65535,
+			//	  "minimum": -1,
+			//	  "type": "integer"
+			//	}
 			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -141,16 +147,17 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"health_check_protocol": {
 			// Property: HealthCheckProtocol
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "TCP",
-			//   "description": "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
-			//   "enum": [
-			//     "TCP",
-			//     "HTTP",
-			//     "HTTPS"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "TCP",
+			//	  "description": "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
+			//	  "enum": [
+			//	    "TCP",
+			//	    "HTTP",
+			//	    "HTTPS"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -158,10 +165,11 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"listener_arn": {
 			// Property: ListenerArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the listener",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the listener",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the listener",
 			Type:        types.StringType,
 			Computed:    true,
@@ -169,32 +177,33 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"port_overrides": {
 			// Property: PortOverrides
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "listener to endpoint port mapping.",
-			//     "properties": {
-			//       "EndpointPort": {
-			//         "description": "A network port number",
-			//         "maximum": 65535,
-			//         "minimum": 0,
-			//         "type": "integer"
-			//       },
-			//       "ListenerPort": {
-			//         "description": "A network port number",
-			//         "maximum": 65535,
-			//         "minimum": 0,
-			//         "type": "integer"
-			//       }
-			//     },
-			//     "required": [
-			//       "ListenerPort",
-			//       "EndpointPort"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "listener to endpoint port mapping.",
+			//	    "properties": {
+			//	      "EndpointPort": {
+			//	        "description": "A network port number",
+			//	        "maximum": 65535,
+			//	        "minimum": 0,
+			//	        "type": "integer"
+			//	      },
+			//	      "ListenerPort": {
+			//	        "description": "A network port number",
+			//	        "maximum": 65535,
+			//	        "minimum": 0,
+			//	        "type": "integer"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "ListenerPort",
+			//	      "EndpointPort"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"endpoint_port": {
@@ -216,11 +225,12 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"threshold_count": {
 			// Property: ThresholdCount
 			// CloudFormation resource type schema:
-			// {
-			//   "default": 3,
-			//   "description": "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "default": 3,
+			//	  "description": "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
+			//	  "type": "integer"
+			//	}
 			Description: "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -228,13 +238,14 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"traffic_dial_percentage": {
 			// Property: TrafficDialPercentage
 			// CloudFormation resource type schema:
-			// {
-			//   "default": 100,
-			//   "description": "The percentage of traffic to sent to an AWS Region",
-			//   "maximum": 100,
-			//   "minimum": 0,
-			//   "type": "number"
-			// }
+			//
+			//	{
+			//	  "default": 100,
+			//	  "description": "The percentage of traffic to sent to an AWS Region",
+			//	  "maximum": 100,
+			//	  "minimum": 0,
+			//	  "type": "number"
+			//	}
 			Description: "The percentage of traffic to sent to an AWS Region",
 			Type:        types.Float64Type,
 			Computed:    true,

@@ -23,12 +23,13 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name of the scheduled query that is generated upon creation.",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name of the scheduled query that is generated upon creation.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name of the scheduled query that is generated upon creation.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,12 +37,13 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"client_token": {
 			// Property: ClientToken
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making multiple identical CreateScheduledQuery requests has the same effect as making a single request. If CreateScheduledQuery is called without a ClientToken, the Query SDK generates a ClientToken on your behalf. After 8 hours, any request with the same ClientToken is treated as a new request.",
-			//   "maxLength": 128,
-			//   "minLength": 32,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making multiple identical CreateScheduledQuery requests has the same effect as making a single request. If CreateScheduledQuery is called without a ClientToken, the Query SDK generates a ClientToken on your behalf. After 8 hours, any request with the same ClientToken is treated as a new request.",
+			//	  "maxLength": 128,
+			//	  "minLength": 32,
+			//	  "type": "string"
+			//	}
 			Description: "Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making multiple identical CreateScheduledQuery requests has the same effect as making a single request. If CreateScheduledQuery is called without a ClientToken, the Query SDK generates a ClientToken on your behalf. After 8 hours, any request with the same ClientToken is treated as a new request.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,48 +51,49 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"error_report_configuration": {
 			// Property: ErrorReportConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
-			//   "properties": {
-			//     "S3Configuration": {
-			//       "additionalProperties": false,
-			//       "description": "Details on S3 location for error reports that result from running a query.",
-			//       "properties": {
-			//         "BucketName": {
-			//           "description": "Name of the S3 bucket under which error reports will be created.",
-			//           "maxLength": 63,
-			//           "minLength": 3,
-			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//           "type": "string"
-			//         },
-			//         "EncryptionOption": {
-			//           "description": "Encryption at rest options for the error reports. If no encryption option is specified, Timestream will choose SSE_S3 as default.",
-			//           "enum": [
-			//             "SSE_S3",
-			//             "SSE_KMS"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "ObjectKeyPrefix": {
-			//           "description": "Prefix for error report keys.",
-			//           "maxLength": 896,
-			//           "minLength": 1,
-			//           "pattern": "[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketName"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3Configuration"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
+			//	  "properties": {
+			//	    "S3Configuration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Details on S3 location for error reports that result from running a query.",
+			//	      "properties": {
+			//	        "BucketName": {
+			//	          "description": "Name of the S3 bucket under which error reports will be created.",
+			//	          "maxLength": 63,
+			//	          "minLength": 3,
+			//	          "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+			//	          "type": "string"
+			//	        },
+			//	        "EncryptionOption": {
+			//	          "description": "Encryption at rest options for the error reports. If no encryption option is specified, Timestream will choose SSE_S3 as default.",
+			//	          "enum": [
+			//	            "SSE_S3",
+			//	            "SSE_KMS"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "ObjectKeyPrefix": {
+			//	          "description": "Prefix for error report keys.",
+			//	          "maxLength": 896,
+			//	          "minLength": 1,
+			//	          "pattern": "[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketName"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3Configuration"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -128,12 +131,13 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"kms_key_id": {
 			// Property: KmsKeyId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -141,32 +145,33 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"notification_configuration": {
 			// Property: NotificationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
-			//   "properties": {
-			//     "SnsConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "SNS configuration for notification upon scheduled query execution.",
-			//       "properties": {
-			//         "TopicArn": {
-			//           "description": "SNS topic ARN that the scheduled query status notifications will be sent to.",
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "TopicArn"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "SnsConfiguration"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
+			//	  "properties": {
+			//	    "SnsConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "SNS configuration for notification upon scheduled query execution.",
+			//	      "properties": {
+			//	        "TopicArn": {
+			//	          "description": "SNS topic ARN that the scheduled query status notifications will be sent to.",
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "TopicArn"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "SnsConfiguration"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -192,12 +197,13 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"query_string": {
 			// Property: QueryString
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
-			//   "maxLength": 262144,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
+			//	  "maxLength": 262144,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -205,10 +211,11 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"sq_error_report_configuration": {
 			// Property: SQErrorReportConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
+			//	  "type": "string"
+			//	}
 			Description: "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -216,10 +223,11 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"sq_kms_key_id": {
 			// Property: SQKmsKeyId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -227,10 +235,11 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"sq_name": {
 			// Property: SQName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the scheduled query. Scheduled query names must be unique within each Region.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -238,10 +247,11 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"sq_notification_configuration": {
 			// Property: SQNotificationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
+			//	  "type": "string"
+			//	}
 			Description: "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -249,10 +259,11 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"sq_query_string": {
 			// Property: SQQueryString
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
+			//	  "type": "string"
+			//	}
 			Description: "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -260,10 +271,11 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"sq_schedule_configuration": {
 			// Property: SQScheduleConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Configuration for when the scheduled query is executed.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Configuration for when the scheduled query is executed.",
+			//	  "type": "string"
+			//	}
 			Description: "Configuration for when the scheduled query is executed.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -271,10 +283,11 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"sq_scheduled_query_execution_role_arn": {
 			// Property: SQScheduledQueryExecutionRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -282,10 +295,11 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"sq_target_configuration": {
 			// Property: SQTargetConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Configuration of target store where scheduled query results are written to.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Configuration of target store where scheduled query results are written to.",
+			//	  "type": "string"
+			//	}
 			Description: "Configuration of target store where scheduled query results are written to.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -293,22 +307,23 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"schedule_configuration": {
 			// Property: ScheduleConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configuration for when the scheduled query is executed.",
-			//   "properties": {
-			//     "ScheduleExpression": {
-			//       "description": "An expression that denotes when to trigger the scheduled query run. This can be a cron expression or a rate expression.",
-			//       "maxLength": 256,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ScheduleExpression"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration for when the scheduled query is executed.",
+			//	  "properties": {
+			//	    "ScheduleExpression": {
+			//	      "description": "An expression that denotes when to trigger the scheduled query run. This can be a cron expression or a rate expression.",
+			//	      "maxLength": 256,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ScheduleExpression"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Configuration for when the scheduled query is executed.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -325,12 +340,13 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"scheduled_query_execution_role_arn": {
 			// Property: ScheduledQueryExecutionRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -338,13 +354,14 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"scheduled_query_name": {
 			// Property: ScheduledQueryName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_.-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_.-]+",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the scheduled query. Scheduled query names must be unique within each Region.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -352,35 +369,36 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs to label the scheduled query.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to label the scheduled query.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs to label the scheduled query.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to label the scheduled query.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array"
+			//	}
 			Description: "A list of key-value pairs to label the scheduled query.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -403,195 +421,196 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		"target_configuration": {
 			// Property: TargetConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configuration of target store where scheduled query results are written to.",
-			//   "properties": {
-			//     "TimestreamConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Configuration needed to write data into the Timestream database and table.",
-			//       "properties": {
-			//         "DatabaseName": {
-			//           "description": "Name of Timestream database to which the query result will be written.",
-			//           "type": "string"
-			//         },
-			//         "DimensionMappings": {
-			//           "description": "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "This type is used to map column(s) from the query result to a dimension in the destination table.",
-			//             "properties": {
-			//               "DimensionValueType": {
-			//                 "description": "Type for the dimension.",
-			//                 "enum": [
-			//                   "VARCHAR"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Name": {
-			//                 "description": "Column name from query result.",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Name",
-			//               "DimensionValueType"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "MeasureNameColumn": {
-			//           "description": "Name of the measure name column from the query result.",
-			//           "type": "string"
-			//         },
-			//         "MixedMeasureMappings": {
-			//           "description": "Specifies how to map measures to multi-measure records.",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "MixedMeasureMappings are mappings that can be used to ingest data into a mixture of narrow and multi measures in the derived table.",
-			//             "properties": {
-			//               "MeasureName": {
-			//                 "description": "Refers to the value of the measure name in a result row. This field is required if MeasureNameColumn is provided.",
-			//                 "type": "string"
-			//               },
-			//               "MeasureValueType": {
-			//                 "description": "Type of the value that is to be read from SourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.",
-			//                 "enum": [
-			//                   "BIGINT",
-			//                   "BOOLEAN",
-			//                   "DOUBLE",
-			//                   "VARCHAR",
-			//                   "MULTI"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "MultiMeasureAttributeMappings": {
-			//                 "description": "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "An attribute mapping to be used for mapping query results to ingest data for multi-measure attributes.",
-			//                   "properties": {
-			//                     "MeasureValueType": {
-			//                       "description": "Value type of the measure value column to be read from the query result.",
-			//                       "enum": [
-			//                         "BIGINT",
-			//                         "BOOLEAN",
-			//                         "DOUBLE",
-			//                         "VARCHAR"
-			//                       ],
-			//                       "type": "string"
-			//                     },
-			//                     "SourceColumn": {
-			//                       "description": "Source measure value column in the query result where the attribute value is to be read.",
-			//                       "type": "string"
-			//                     },
-			//                     "TargetMultiMeasureAttributeName": {
-			//                       "description": "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "SourceColumn",
-			//                     "MeasureValueType"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "minItems": 1,
-			//                 "type": "array"
-			//               },
-			//               "SourceColumn": {
-			//                 "description": "This field refers to the source column from which the measure value is to be read for result materialization.",
-			//                 "type": "string"
-			//               },
-			//               "TargetMeasureName": {
-			//                 "description": "Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "MeasureValueType"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "minItems": 1,
-			//           "type": "array"
-			//         },
-			//         "MultiMeasureMappings": {
-			//           "additionalProperties": false,
-			//           "description": "Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided. MultiMeasureMappings can be used to ingest data as multi measures in the derived table.",
-			//           "properties": {
-			//             "MultiMeasureAttributeMappings": {
-			//               "description": "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "description": "An attribute mapping to be used for mapping query results to ingest data for multi-measure attributes.",
-			//                 "properties": {
-			//                   "MeasureValueType": {
-			//                     "description": "Value type of the measure value column to be read from the query result.",
-			//                     "enum": [
-			//                       "BIGINT",
-			//                       "BOOLEAN",
-			//                       "DOUBLE",
-			//                       "VARCHAR"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "SourceColumn": {
-			//                     "description": "Source measure value column in the query result where the attribute value is to be read.",
-			//                     "type": "string"
-			//                   },
-			//                   "TargetMultiMeasureAttributeName": {
-			//                     "description": "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "SourceColumn",
-			//                   "MeasureValueType"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array"
-			//             },
-			//             "TargetMultiMeasureName": {
-			//               "description": "Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "MultiMeasureAttributeMappings"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "TableName": {
-			//           "description": "Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.",
-			//           "type": "string"
-			//         },
-			//         "TimeColumn": {
-			//           "description": "Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "DatabaseName",
-			//         "TableName",
-			//         "TimeColumn",
-			//         "DimensionMappings"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "TimestreamConfiguration"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration of target store where scheduled query results are written to.",
+			//	  "properties": {
+			//	    "TimestreamConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Configuration needed to write data into the Timestream database and table.",
+			//	      "properties": {
+			//	        "DatabaseName": {
+			//	          "description": "Name of Timestream database to which the query result will be written.",
+			//	          "type": "string"
+			//	        },
+			//	        "DimensionMappings": {
+			//	          "description": "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "This type is used to map column(s) from the query result to a dimension in the destination table.",
+			//	            "properties": {
+			//	              "DimensionValueType": {
+			//	                "description": "Type for the dimension.",
+			//	                "enum": [
+			//	                  "VARCHAR"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Name": {
+			//	                "description": "Column name from query result.",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Name",
+			//	              "DimensionValueType"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "MeasureNameColumn": {
+			//	          "description": "Name of the measure name column from the query result.",
+			//	          "type": "string"
+			//	        },
+			//	        "MixedMeasureMappings": {
+			//	          "description": "Specifies how to map measures to multi-measure records.",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "MixedMeasureMappings are mappings that can be used to ingest data into a mixture of narrow and multi measures in the derived table.",
+			//	            "properties": {
+			//	              "MeasureName": {
+			//	                "description": "Refers to the value of the measure name in a result row. This field is required if MeasureNameColumn is provided.",
+			//	                "type": "string"
+			//	              },
+			//	              "MeasureValueType": {
+			//	                "description": "Type of the value that is to be read from SourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.",
+			//	                "enum": [
+			//	                  "BIGINT",
+			//	                  "BOOLEAN",
+			//	                  "DOUBLE",
+			//	                  "VARCHAR",
+			//	                  "MULTI"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "MultiMeasureAttributeMappings": {
+			//	                "description": "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "An attribute mapping to be used for mapping query results to ingest data for multi-measure attributes.",
+			//	                  "properties": {
+			//	                    "MeasureValueType": {
+			//	                      "description": "Value type of the measure value column to be read from the query result.",
+			//	                      "enum": [
+			//	                        "BIGINT",
+			//	                        "BOOLEAN",
+			//	                        "DOUBLE",
+			//	                        "VARCHAR"
+			//	                      ],
+			//	                      "type": "string"
+			//	                    },
+			//	                    "SourceColumn": {
+			//	                      "description": "Source measure value column in the query result where the attribute value is to be read.",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "TargetMultiMeasureAttributeName": {
+			//	                      "description": "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "SourceColumn",
+			//	                    "MeasureValueType"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "minItems": 1,
+			//	                "type": "array"
+			//	              },
+			//	              "SourceColumn": {
+			//	                "description": "This field refers to the source column from which the measure value is to be read for result materialization.",
+			//	                "type": "string"
+			//	              },
+			//	              "TargetMeasureName": {
+			//	                "description": "Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "MeasureValueType"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        },
+			//	        "MultiMeasureMappings": {
+			//	          "additionalProperties": false,
+			//	          "description": "Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided. MultiMeasureMappings can be used to ingest data as multi measures in the derived table.",
+			//	          "properties": {
+			//	            "MultiMeasureAttributeMappings": {
+			//	              "description": "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "description": "An attribute mapping to be used for mapping query results to ingest data for multi-measure attributes.",
+			//	                "properties": {
+			//	                  "MeasureValueType": {
+			//	                    "description": "Value type of the measure value column to be read from the query result.",
+			//	                    "enum": [
+			//	                      "BIGINT",
+			//	                      "BOOLEAN",
+			//	                      "DOUBLE",
+			//	                      "VARCHAR"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "SourceColumn": {
+			//	                    "description": "Source measure value column in the query result where the attribute value is to be read.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "TargetMultiMeasureAttributeName": {
+			//	                    "description": "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "SourceColumn",
+			//	                  "MeasureValueType"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            },
+			//	            "TargetMultiMeasureName": {
+			//	              "description": "Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "MultiMeasureAttributeMappings"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "TableName": {
+			//	          "description": "Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.",
+			//	          "type": "string"
+			//	        },
+			//	        "TimeColumn": {
+			//	          "description": "Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "DatabaseName",
+			//	        "TableName",
+			//	        "TimeColumn",
+			//	        "DimensionMappings"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "TimestreamConfiguration"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Configuration of target store where scheduled query results are written to.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

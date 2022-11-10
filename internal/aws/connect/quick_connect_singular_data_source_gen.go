@@ -23,12 +23,13 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the quick connect.",
-			//   "maxLength": 250,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the quick connect.",
+			//	  "maxLength": 250,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the quick connect.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,11 +37,12 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"instance_arn": {
 			// Property: InstanceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier of the Amazon Connect instance.",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier of the Amazon Connect instance.",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The identifier of the Amazon Connect instance.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -48,12 +50,13 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the quick connect.",
-			//   "maxLength": 127,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the quick connect.",
+			//	  "maxLength": 127,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the quick connect.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -61,11 +64,12 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"quick_connect_arn": {
 			// Property: QuickConnectArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the quick connect.",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the quick connect.",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the quick connect.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -73,82 +77,83 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"quick_connect_config": {
 			// Property: QuickConnectConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configuration settings for the quick connect.",
-			//   "properties": {
-			//     "PhoneConfig": {
-			//       "additionalProperties": false,
-			//       "description": "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
-			//       "properties": {
-			//         "PhoneNumber": {
-			//           "description": "The phone number in E.164 format.",
-			//           "pattern": "^\\+[1-9]\\d{1,14}$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "PhoneNumber"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "QueueConfig": {
-			//       "additionalProperties": false,
-			//       "description": "The queue configuration. This is required only if QuickConnectType is QUEUE.",
-			//       "properties": {
-			//         "ContactFlowArn": {
-			//           "description": "The identifier of the contact flow.",
-			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
-			//           "type": "string"
-			//         },
-			//         "QueueArn": {
-			//           "description": "The identifier for the queue.",
-			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "ContactFlowArn",
-			//         "QueueArn"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "QuickConnectType": {
-			//       "description": "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
-			//       "enum": [
-			//         "PHONE_NUMBER",
-			//         "QUEUE",
-			//         "USER"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "UserConfig": {
-			//       "additionalProperties": false,
-			//       "description": "The user configuration. This is required only if QuickConnectType is USER.",
-			//       "properties": {
-			//         "ContactFlowArn": {
-			//           "description": "The identifier of the contact flow.",
-			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
-			//           "type": "string"
-			//         },
-			//         "UserArn": {
-			//           "description": "The identifier of the user.",
-			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "ContactFlowArn",
-			//         "UserArn"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "QuickConnectType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration settings for the quick connect.",
+			//	  "properties": {
+			//	    "PhoneConfig": {
+			//	      "additionalProperties": false,
+			//	      "description": "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
+			//	      "properties": {
+			//	        "PhoneNumber": {
+			//	          "description": "The phone number in E.164 format.",
+			//	          "pattern": "^\\+[1-9]\\d{1,14}$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "PhoneNumber"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "QueueConfig": {
+			//	      "additionalProperties": false,
+			//	      "description": "The queue configuration. This is required only if QuickConnectType is QUEUE.",
+			//	      "properties": {
+			//	        "ContactFlowArn": {
+			//	          "description": "The identifier of the contact flow.",
+			//	          "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+			//	          "type": "string"
+			//	        },
+			//	        "QueueArn": {
+			//	          "description": "The identifier for the queue.",
+			//	          "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ContactFlowArn",
+			//	        "QueueArn"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "QuickConnectType": {
+			//	      "description": "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
+			//	      "enum": [
+			//	        "PHONE_NUMBER",
+			//	        "QUEUE",
+			//	        "USER"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "UserConfig": {
+			//	      "additionalProperties": false,
+			//	      "description": "The user configuration. This is required only if QuickConnectType is USER.",
+			//	      "properties": {
+			//	        "ContactFlowArn": {
+			//	          "description": "The identifier of the contact flow.",
+			//	          "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+			//	          "type": "string"
+			//	        },
+			//	        "UserArn": {
+			//	          "description": "The identifier of the user.",
+			//	          "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ContactFlowArn",
+			//	        "UserArn"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "QuickConnectType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Configuration settings for the quick connect.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -222,36 +227,37 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "One or more tags.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "One or more tags.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "One or more tags.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

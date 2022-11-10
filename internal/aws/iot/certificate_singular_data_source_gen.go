@@ -23,78 +23,85 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"ca_certificate_pem": {
 			// Property: CACertificatePem
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 65536,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 65536,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"certificate_mode": {
 			// Property: CertificateMode
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "DEFAULT",
-			//     "SNI_ONLY"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "DEFAULT",
+			//	    "SNI_ONLY"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"certificate_pem": {
 			// Property: CertificatePem
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 65536,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 65536,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"certificate_signing_request": {
 			// Property: CertificateSigningRequest
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "ACTIVE",
-			//     "INACTIVE",
-			//     "REVOKED",
-			//     "PENDING_TRANSFER",
-			//     "PENDING_ACTIVATION"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "ACTIVE",
+			//	    "INACTIVE",
+			//	    "REVOKED",
+			//	    "PENDING_TRANSFER",
+			//	    "PENDING_ACTIVATION"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

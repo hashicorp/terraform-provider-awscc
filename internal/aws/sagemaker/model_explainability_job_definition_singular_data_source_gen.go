@@ -23,10 +23,11 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time at which the job definition was created.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time at which the job definition was created.",
+			//	  "type": "string"
+			//	}
 			Description: "The time at which the job definition was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,12 +35,13 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"endpoint_name": {
 			// Property: EndpointName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the endpoint used to run the monitoring job.",
-			//   "maxLength": 63,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the endpoint used to run the monitoring job.",
+			//	  "maxLength": 63,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the endpoint used to run the monitoring job.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -47,12 +49,13 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"job_definition_arn": {
 			// Property: JobDefinitionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of job definition.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of job definition.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of job definition.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,12 +63,13 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"job_definition_name": {
 			// Property: JobDefinitionName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the job definition.",
-			//   "maxLength": 63,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the job definition.",
+			//	  "maxLength": 63,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the job definition.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -73,50 +77,51 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"job_resources": {
 			// Property: JobResources
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Identifies the resources to deploy for a monitoring job.",
-			//   "properties": {
-			//     "ClusterConfig": {
-			//       "additionalProperties": false,
-			//       "description": "Configuration for the cluster used to run model monitoring jobs.",
-			//       "properties": {
-			//         "InstanceCount": {
-			//           "description": "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
-			//           "maximum": 100,
-			//           "minimum": 1,
-			//           "type": "integer"
-			//         },
-			//         "InstanceType": {
-			//           "description": "The ML compute instance type for the processing job.",
-			//           "type": "string"
-			//         },
-			//         "VolumeKmsKeyId": {
-			//           "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.",
-			//           "maximum": 2048,
-			//           "minimum": 1,
-			//           "type": "string"
-			//         },
-			//         "VolumeSizeInGB": {
-			//           "description": "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
-			//           "maximum": 16384,
-			//           "minimum": 1,
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "required": [
-			//         "InstanceCount",
-			//         "InstanceType",
-			//         "VolumeSizeInGB"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "ClusterConfig"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Identifies the resources to deploy for a monitoring job.",
+			//	  "properties": {
+			//	    "ClusterConfig": {
+			//	      "additionalProperties": false,
+			//	      "description": "Configuration for the cluster used to run model monitoring jobs.",
+			//	      "properties": {
+			//	        "InstanceCount": {
+			//	          "description": "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
+			//	          "maximum": 100,
+			//	          "minimum": 1,
+			//	          "type": "integer"
+			//	        },
+			//	        "InstanceType": {
+			//	          "description": "The ML compute instance type for the processing job.",
+			//	          "type": "string"
+			//	        },
+			//	        "VolumeKmsKeyId": {
+			//	          "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.",
+			//	          "maximum": 2048,
+			//	          "minimum": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "VolumeSizeInGB": {
+			//	          "description": "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
+			//	          "maximum": 16384,
+			//	          "minimum": 1,
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "InstanceCount",
+			//	        "InstanceType",
+			//	        "VolumeSizeInGB"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ClusterConfig"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Identifies the resources to deploy for a monitoring job.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -160,45 +165,46 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"model_explainability_app_specification": {
 			// Property: ModelExplainabilityAppSpecification
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Container image configuration object for the monitoring job.",
-			//   "properties": {
-			//     "ConfigUri": {
-			//       "description": "The S3 URI to an analysis configuration file",
-			//       "maxLength": 1024,
-			//       "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//       "type": "string"
-			//     },
-			//     "Environment": {
-			//       "additionalProperties": false,
-			//       "description": "Sets the environment variables in the Docker container",
-			//       "patternProperties": {
-			//         "": {
-			//           "maxLength": 256,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "[\\S\\s]*": {
-			//           "maxLength": 256,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ImageUri": {
-			//       "description": "The container image to be run by the monitoring job.",
-			//       "maxLength": 255,
-			//       "pattern": ".*",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ImageUri",
-			//     "ConfigUri"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Container image configuration object for the monitoring job.",
+			//	  "properties": {
+			//	    "ConfigUri": {
+			//	      "description": "The S3 URI to an analysis configuration file",
+			//	      "maxLength": 1024,
+			//	      "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+			//	      "type": "string"
+			//	    },
+			//	    "Environment": {
+			//	      "additionalProperties": false,
+			//	      "description": "Sets the environment variables in the Docker container",
+			//	      "patternProperties": {
+			//	        "": {
+			//	          "maxLength": 256,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "[\\S\\s]*": {
+			//	          "maxLength": 256,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ImageUri": {
+			//	      "description": "The container image to be run by the monitoring job.",
+			//	      "maxLength": 255,
+			//	      "pattern": ".*",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ImageUri",
+			//	    "ConfigUri"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Container image configuration object for the monitoring job.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -229,33 +235,34 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"model_explainability_baseline_config": {
 			// Property: ModelExplainabilityBaselineConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Baseline configuration used to validate that the data conforms to the specified constraints and statistics.",
-			//   "properties": {
-			//     "BaseliningJobName": {
-			//       "description": "The name of a processing job",
-			//       "maxLength": 63,
-			//       "minLength": 1,
-			//       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//       "type": "string"
-			//     },
-			//     "ConstraintsResource": {
-			//       "additionalProperties": false,
-			//       "description": "The baseline constraints resource for a monitoring job.",
-			//       "properties": {
-			//         "S3Uri": {
-			//           "description": "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
-			//           "maxLength": 1024,
-			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Baseline configuration used to validate that the data conforms to the specified constraints and statistics.",
+			//	  "properties": {
+			//	    "BaseliningJobName": {
+			//	      "description": "The name of a processing job",
+			//	      "maxLength": 63,
+			//	      "minLength": 1,
+			//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+			//	      "type": "string"
+			//	    },
+			//	    "ConstraintsResource": {
+			//	      "additionalProperties": false,
+			//	      "description": "The baseline constraints resource for a monitoring job.",
+			//	      "properties": {
+			//	        "S3Uri": {
+			//	          "description": "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
+			//	          "maxLength": 1024,
+			//	          "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Baseline configuration used to validate that the data conforms to the specified constraints and statistics.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -287,152 +294,153 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"model_explainability_job_input": {
 			// Property: ModelExplainabilityJobInput
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The inputs for a monitoring job.",
-			//   "properties": {
-			//     "BatchTransformInput": {
-			//       "additionalProperties": false,
-			//       "description": "The batch transform input for a monitoring job.",
-			//       "properties": {
-			//         "DataCapturedDestinationS3Uri": {
-			//           "description": "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
-			//           "maxLength": 512,
-			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//           "type": "string"
-			//         },
-			//         "DatasetFormat": {
-			//           "description": "The dataset format of the data to monitor",
-			//           "properties": {
-			//             "Csv": {
-			//               "description": "The CSV format",
-			//               "properties": {
-			//                 "Header": {
-			//                   "description": "A boolean flag indicating if given CSV has header",
-			//                   "type": "boolean"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "Json": {
-			//               "description": "The Json format",
-			//               "properties": {
-			//                 "Line": {
-			//                   "description": "A boolean flag indicating if it is JSON line format",
-			//                   "type": "boolean"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "Parquet": {
-			//               "description": "A flag indicating if the dataset format is Parquet",
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "FeaturesAttribute": {
-			//           "description": "JSONpath to locate features in JSONlines dataset",
-			//           "maxLength": 256,
-			//           "type": "string"
-			//         },
-			//         "InferenceAttribute": {
-			//           "description": "Index or JSONpath to locate predicted label(s)",
-			//           "maxLength": 256,
-			//           "type": "string"
-			//         },
-			//         "LocalPath": {
-			//           "description": "Path to the filesystem where the endpoint data is available to the container.",
-			//           "maxLength": 256,
-			//           "pattern": ".*",
-			//           "type": "string"
-			//         },
-			//         "ProbabilityAttribute": {
-			//           "description": "Index or JSONpath to locate probabilities",
-			//           "maxLength": 256,
-			//           "type": "string"
-			//         },
-			//         "S3DataDistributionType": {
-			//           "description": "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
-			//           "enum": [
-			//             "FullyReplicated",
-			//             "ShardedByS3Key"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "S3InputMode": {
-			//           "description": "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
-			//           "enum": [
-			//             "Pipe",
-			//             "File"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "DataCapturedDestinationS3Uri",
-			//         "DatasetFormat",
-			//         "LocalPath"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "EndpointInput": {
-			//       "additionalProperties": false,
-			//       "description": "The endpoint for a monitoring job.",
-			//       "properties": {
-			//         "EndpointName": {
-			//           "description": "The name of the endpoint used to run the monitoring job.",
-			//           "maxLength": 63,
-			//           "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
-			//           "type": "string"
-			//         },
-			//         "FeaturesAttribute": {
-			//           "description": "JSONpath to locate features in JSONlines dataset",
-			//           "maxLength": 256,
-			//           "type": "string"
-			//         },
-			//         "InferenceAttribute": {
-			//           "description": "Index or JSONpath to locate predicted label(s)",
-			//           "maxLength": 256,
-			//           "type": "string"
-			//         },
-			//         "LocalPath": {
-			//           "description": "Path to the filesystem where the endpoint data is available to the container.",
-			//           "maxLength": 256,
-			//           "pattern": ".*",
-			//           "type": "string"
-			//         },
-			//         "ProbabilityAttribute": {
-			//           "description": "Index or JSONpath to locate probabilities",
-			//           "maxLength": 256,
-			//           "type": "string"
-			//         },
-			//         "S3DataDistributionType": {
-			//           "description": "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
-			//           "enum": [
-			//             "FullyReplicated",
-			//             "ShardedByS3Key"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "S3InputMode": {
-			//           "description": "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
-			//           "enum": [
-			//             "Pipe",
-			//             "File"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "EndpointName",
-			//         "LocalPath"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The inputs for a monitoring job.",
+			//	  "properties": {
+			//	    "BatchTransformInput": {
+			//	      "additionalProperties": false,
+			//	      "description": "The batch transform input for a monitoring job.",
+			//	      "properties": {
+			//	        "DataCapturedDestinationS3Uri": {
+			//	          "description": "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
+			//	          "maxLength": 512,
+			//	          "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+			//	          "type": "string"
+			//	        },
+			//	        "DatasetFormat": {
+			//	          "description": "The dataset format of the data to monitor",
+			//	          "properties": {
+			//	            "Csv": {
+			//	              "description": "The CSV format",
+			//	              "properties": {
+			//	                "Header": {
+			//	                  "description": "A boolean flag indicating if given CSV has header",
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "Json": {
+			//	              "description": "The Json format",
+			//	              "properties": {
+			//	                "Line": {
+			//	                  "description": "A boolean flag indicating if it is JSON line format",
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "Parquet": {
+			//	              "description": "A flag indicating if the dataset format is Parquet",
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "FeaturesAttribute": {
+			//	          "description": "JSONpath to locate features in JSONlines dataset",
+			//	          "maxLength": 256,
+			//	          "type": "string"
+			//	        },
+			//	        "InferenceAttribute": {
+			//	          "description": "Index or JSONpath to locate predicted label(s)",
+			//	          "maxLength": 256,
+			//	          "type": "string"
+			//	        },
+			//	        "LocalPath": {
+			//	          "description": "Path to the filesystem where the endpoint data is available to the container.",
+			//	          "maxLength": 256,
+			//	          "pattern": ".*",
+			//	          "type": "string"
+			//	        },
+			//	        "ProbabilityAttribute": {
+			//	          "description": "Index or JSONpath to locate probabilities",
+			//	          "maxLength": 256,
+			//	          "type": "string"
+			//	        },
+			//	        "S3DataDistributionType": {
+			//	          "description": "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
+			//	          "enum": [
+			//	            "FullyReplicated",
+			//	            "ShardedByS3Key"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "S3InputMode": {
+			//	          "description": "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
+			//	          "enum": [
+			//	            "Pipe",
+			//	            "File"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "DataCapturedDestinationS3Uri",
+			//	        "DatasetFormat",
+			//	        "LocalPath"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "EndpointInput": {
+			//	      "additionalProperties": false,
+			//	      "description": "The endpoint for a monitoring job.",
+			//	      "properties": {
+			//	        "EndpointName": {
+			//	          "description": "The name of the endpoint used to run the monitoring job.",
+			//	          "maxLength": 63,
+			//	          "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
+			//	          "type": "string"
+			//	        },
+			//	        "FeaturesAttribute": {
+			//	          "description": "JSONpath to locate features in JSONlines dataset",
+			//	          "maxLength": 256,
+			//	          "type": "string"
+			//	        },
+			//	        "InferenceAttribute": {
+			//	          "description": "Index or JSONpath to locate predicted label(s)",
+			//	          "maxLength": 256,
+			//	          "type": "string"
+			//	        },
+			//	        "LocalPath": {
+			//	          "description": "Path to the filesystem where the endpoint data is available to the container.",
+			//	          "maxLength": 256,
+			//	          "pattern": ".*",
+			//	          "type": "string"
+			//	        },
+			//	        "ProbabilityAttribute": {
+			//	          "description": "Index or JSONpath to locate probabilities",
+			//	          "maxLength": 256,
+			//	          "type": "string"
+			//	        },
+			//	        "S3DataDistributionType": {
+			//	          "description": "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
+			//	          "enum": [
+			//	            "FullyReplicated",
+			//	            "ShardedByS3Key"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "S3InputMode": {
+			//	          "description": "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
+			//	          "enum": [
+			//	            "Pipe",
+			//	            "File"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "EndpointName",
+			//	        "LocalPath"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The inputs for a monitoring job.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -590,69 +598,70 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"model_explainability_job_output_config": {
 			// Property: ModelExplainabilityJobOutputConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The output configuration for monitoring jobs.",
-			//   "properties": {
-			//     "KmsKeyId": {
-			//       "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
-			//       "maxLength": 2048,
-			//       "pattern": ".*",
-			//       "type": "string"
-			//     },
-			//     "MonitoringOutputs": {
-			//       "description": "Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "The output object for a monitoring job.",
-			//         "properties": {
-			//           "S3Output": {
-			//             "additionalProperties": false,
-			//             "description": "Information about where and how to store the results of a monitoring job.",
-			//             "properties": {
-			//               "LocalPath": {
-			//                 "description": "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
-			//                 "maxLength": 256,
-			//                 "pattern": ".*",
-			//                 "type": "string"
-			//               },
-			//               "S3UploadMode": {
-			//                 "description": "Whether to upload the results of the monitoring job continuously or after the job completes.",
-			//                 "enum": [
-			//                   "Continuous",
-			//                   "EndOfJob"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "S3Uri": {
-			//                 "description": "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
-			//                 "maxLength": 512,
-			//                 "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "LocalPath",
-			//               "S3Uri"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "required": [
-			//           "S3Output"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxLength": 1,
-			//       "minLength": 1,
-			//       "type": "array"
-			//     }
-			//   },
-			//   "required": [
-			//     "MonitoringOutputs"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The output configuration for monitoring jobs.",
+			//	  "properties": {
+			//	    "KmsKeyId": {
+			//	      "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
+			//	      "maxLength": 2048,
+			//	      "pattern": ".*",
+			//	      "type": "string"
+			//	    },
+			//	    "MonitoringOutputs": {
+			//	      "description": "Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "The output object for a monitoring job.",
+			//	        "properties": {
+			//	          "S3Output": {
+			//	            "additionalProperties": false,
+			//	            "description": "Information about where and how to store the results of a monitoring job.",
+			//	            "properties": {
+			//	              "LocalPath": {
+			//	                "description": "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
+			//	                "maxLength": 256,
+			//	                "pattern": ".*",
+			//	                "type": "string"
+			//	              },
+			//	              "S3UploadMode": {
+			//	                "description": "Whether to upload the results of the monitoring job continuously or after the job completes.",
+			//	                "enum": [
+			//	                  "Continuous",
+			//	                  "EndOfJob"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "S3Uri": {
+			//	                "description": "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
+			//	                "maxLength": 512,
+			//	                "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "LocalPath",
+			//	              "S3Uri"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "S3Output"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxLength": 1,
+			//	      "minLength": 1,
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "MonitoringOutputs"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The output configuration for monitoring jobs.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -705,54 +714,55 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"network_config": {
 			// Property: NetworkConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.",
-			//   "properties": {
-			//     "EnableInterContainerTrafficEncryption": {
-			//       "description": "Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.",
-			//       "type": "boolean"
-			//     },
-			//     "EnableNetworkIsolation": {
-			//       "description": "Whether to allow inbound and outbound network calls to and from the containers used for the processing job.",
-			//       "type": "boolean"
-			//     },
-			//     "VpcConfig": {
-			//       "additionalProperties": false,
-			//       "description": "Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC.",
-			//       "properties": {
-			//         "SecurityGroupIds": {
-			//           "description": "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
-			//           "items": {
-			//             "maxLength": 32,
-			//             "pattern": "[-0-9a-zA-Z]+",
-			//             "type": "string"
-			//           },
-			//           "maxItems": 5,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         },
-			//         "Subnets": {
-			//           "description": "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
-			//           "items": {
-			//             "maxLength": 32,
-			//             "pattern": "[-0-9a-zA-Z]+",
-			//             "type": "string"
-			//           },
-			//           "maxItems": 16,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "required": [
-			//         "SecurityGroupIds",
-			//         "Subnets"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.",
+			//	  "properties": {
+			//	    "EnableInterContainerTrafficEncryption": {
+			//	      "description": "Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.",
+			//	      "type": "boolean"
+			//	    },
+			//	    "EnableNetworkIsolation": {
+			//	      "description": "Whether to allow inbound and outbound network calls to and from the containers used for the processing job.",
+			//	      "type": "boolean"
+			//	    },
+			//	    "VpcConfig": {
+			//	      "additionalProperties": false,
+			//	      "description": "Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC.",
+			//	      "properties": {
+			//	        "SecurityGroupIds": {
+			//	          "description": "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
+			//	          "items": {
+			//	            "maxLength": 32,
+			//	            "pattern": "[-0-9a-zA-Z]+",
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 5,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        },
+			//	        "Subnets": {
+			//	          "description": "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
+			//	          "items": {
+			//	            "maxLength": 32,
+			//	            "pattern": "[-0-9a-zA-Z]+",
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 16,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "SecurityGroupIds",
+			//	        "Subnets"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -796,13 +806,14 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -810,22 +821,23 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"stopping_condition": {
 			// Property: StoppingCondition
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specifies a time limit for how long the monitoring job is allowed to run.",
-			//   "properties": {
-			//     "MaxRuntimeInSeconds": {
-			//       "description": "The maximum runtime allowed in seconds.",
-			//       "maximum": 86400,
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "required": [
-			//     "MaxRuntimeInSeconds"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specifies a time limit for how long the monitoring job is allowed to run.",
+			//	  "properties": {
+			//	    "MaxRuntimeInSeconds": {
+			//	      "description": "The maximum runtime allowed in seconds.",
+			//	      "maximum": 86400,
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "MaxRuntimeInSeconds"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Specifies a time limit for how long the monitoring job is allowed to run.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -842,35 +854,36 @@ func modelExplainabilityJobDefinitionDataSource(ctx context.Context) (datasource
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array"
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

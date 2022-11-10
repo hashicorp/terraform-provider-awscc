@@ -23,46 +23,51 @@ func profilePermissionDataSource(ctx context.Context) (datasource.DataSource, er
 		"action": {
 			// Property: Action
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"principal": {
 			// Property: Principal
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"profile_name": {
 			// Property: ProfileName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"profile_version": {
 			// Property: ProfileVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "^[0-9a-zA-Z]{10}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "^[0-9a-zA-Z]{10}$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"statement_id": {
 			// Property: StatementId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

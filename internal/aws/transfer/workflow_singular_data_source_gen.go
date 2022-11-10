@@ -23,13 +23,14 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
-			//   "maxLength": 1600,
-			//   "minLength": 20,
-			//   "pattern": "arn:.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
+			//	  "maxLength": 1600,
+			//	  "minLength": 20,
+			//	  "pattern": "arn:.*",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,13 +38,14 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A textual description for the workflow.",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "pattern": "^[\\w\\- ]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A textual description for the workflow.",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "pattern": "^[\\w\\- ]*$",
+			//	  "type": "string"
+			//	}
 			Description: "A textual description for the workflow.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,192 +53,193 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"on_exception_steps": {
 			// Property: OnExceptionSteps
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The basic building block of a workflow.",
-			//     "properties": {
-			//       "CopyStepDetails": {
-			//         "additionalProperties": false,
-			//         "description": "Details for a step that performs a file copy.",
-			//         "properties": {
-			//           "DestinationFileLocation": {
-			//             "additionalProperties": false,
-			//             "description": "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
-			//             "properties": {
-			//               "S3FileLocation": {
-			//                 "additionalProperties": false,
-			//                 "description": "Specifies the details for the S3 file being copied.",
-			//                 "properties": {
-			//                   "Bucket": {
-			//                     "description": "Specifies the S3 bucket that contains the file being copied.",
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//                     "type": "string"
-			//                   },
-			//                   "Key": {
-			//                     "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
-			//                     "maxLength": 1024,
-			//                     "minLength": 0,
-			//                     "pattern": ".*",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Name": {
-			//             "description": "The name of the step, used as an identifier.",
-			//             "maxLength": 30,
-			//             "minLength": 0,
-			//             "pattern": "^[\\w-]*$",
-			//             "type": "string"
-			//           },
-			//           "OverwriteExisting": {
-			//             "description": "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
-			//             "enum": [
-			//               "TRUE",
-			//               "FALSE"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "SourceFileLocation": {
-			//             "description": "Specifies which file to use as input to the workflow step.",
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "CustomStepDetails": {
-			//         "additionalProperties": false,
-			//         "description": "Details for a step that invokes a lambda function.",
-			//         "properties": {
-			//           "Name": {
-			//             "description": "The name of the step, used as an identifier.",
-			//             "maxLength": 30,
-			//             "minLength": 0,
-			//             "pattern": "^[\\w-]*$",
-			//             "type": "string"
-			//           },
-			//           "SourceFileLocation": {
-			//             "description": "Specifies which file to use as input to the workflow step.",
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//             "type": "string"
-			//           },
-			//           "Target": {
-			//             "description": "The ARN for the lambda function that is being called.",
-			//             "maxLength": 170,
-			//             "minLength": 0,
-			//             "pattern": "arn:[a-z-]+:lambda:.*$",
-			//             "type": "string"
-			//           },
-			//           "TimeoutSeconds": {
-			//             "description": "Timeout, in seconds, for the step.",
-			//             "maximum": 1800,
-			//             "minimum": 1,
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "DeleteStepDetails": {
-			//         "additionalProperties": false,
-			//         "description": "Details for a step that deletes the file.",
-			//         "properties": {
-			//           "Name": {
-			//             "description": "The name of the step, used as an identifier.",
-			//             "maxLength": 30,
-			//             "minLength": 0,
-			//             "pattern": "^[\\w-]*$",
-			//             "type": "string"
-			//           },
-			//           "SourceFileLocation": {
-			//             "description": "Specifies which file to use as input to the workflow step.",
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "TagStepDetails": {
-			//         "additionalProperties": false,
-			//         "description": "Details for a step that creates one or more tags.",
-			//         "properties": {
-			//           "Name": {
-			//             "description": "The name of the step, used as an identifier.",
-			//             "maxLength": 30,
-			//             "minLength": 0,
-			//             "pattern": "^[\\w-]*$",
-			//             "type": "string"
-			//           },
-			//           "SourceFileLocation": {
-			//             "description": "Specifies which file to use as input to the workflow step.",
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//             "type": "string"
-			//           },
-			//           "Tags": {
-			//             "description": "Array that contains from 1 to 10 key/value pairs.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.",
-			//               "properties": {
-			//                 "Key": {
-			//                   "description": "The name assigned to the tag that you create.",
-			//                   "maxLength": 128,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "Value": {
-			//                   "description": "The value that corresponds to the key.",
-			//                   "maxLength": 256,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Key",
-			//                 "Value"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "maxItems": 10,
-			//             "type": "array",
-			//             "uniqueItems": true
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Type": {
-			//         "enum": [
-			//           "COPY",
-			//           "CUSTOM",
-			//           "DELETE",
-			//           "TAG"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 8,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The basic building block of a workflow.",
+			//	    "properties": {
+			//	      "CopyStepDetails": {
+			//	        "additionalProperties": false,
+			//	        "description": "Details for a step that performs a file copy.",
+			//	        "properties": {
+			//	          "DestinationFileLocation": {
+			//	            "additionalProperties": false,
+			//	            "description": "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
+			//	            "properties": {
+			//	              "S3FileLocation": {
+			//	                "additionalProperties": false,
+			//	                "description": "Specifies the details for the S3 file being copied.",
+			//	                "properties": {
+			//	                  "Bucket": {
+			//	                    "description": "Specifies the S3 bucket that contains the file being copied.",
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Key": {
+			//	                    "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 0,
+			//	                    "pattern": ".*",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Name": {
+			//	            "description": "The name of the step, used as an identifier.",
+			//	            "maxLength": 30,
+			//	            "minLength": 0,
+			//	            "pattern": "^[\\w-]*$",
+			//	            "type": "string"
+			//	          },
+			//	          "OverwriteExisting": {
+			//	            "description": "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+			//	            "enum": [
+			//	              "TRUE",
+			//	              "FALSE"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "SourceFileLocation": {
+			//	            "description": "Specifies which file to use as input to the workflow step.",
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "CustomStepDetails": {
+			//	        "additionalProperties": false,
+			//	        "description": "Details for a step that invokes a lambda function.",
+			//	        "properties": {
+			//	          "Name": {
+			//	            "description": "The name of the step, used as an identifier.",
+			//	            "maxLength": 30,
+			//	            "minLength": 0,
+			//	            "pattern": "^[\\w-]*$",
+			//	            "type": "string"
+			//	          },
+			//	          "SourceFileLocation": {
+			//	            "description": "Specifies which file to use as input to the workflow step.",
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//	            "type": "string"
+			//	          },
+			//	          "Target": {
+			//	            "description": "The ARN for the lambda function that is being called.",
+			//	            "maxLength": 170,
+			//	            "minLength": 0,
+			//	            "pattern": "arn:[a-z-]+:lambda:.*$",
+			//	            "type": "string"
+			//	          },
+			//	          "TimeoutSeconds": {
+			//	            "description": "Timeout, in seconds, for the step.",
+			//	            "maximum": 1800,
+			//	            "minimum": 1,
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "DeleteStepDetails": {
+			//	        "additionalProperties": false,
+			//	        "description": "Details for a step that deletes the file.",
+			//	        "properties": {
+			//	          "Name": {
+			//	            "description": "The name of the step, used as an identifier.",
+			//	            "maxLength": 30,
+			//	            "minLength": 0,
+			//	            "pattern": "^[\\w-]*$",
+			//	            "type": "string"
+			//	          },
+			//	          "SourceFileLocation": {
+			//	            "description": "Specifies which file to use as input to the workflow step.",
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "TagStepDetails": {
+			//	        "additionalProperties": false,
+			//	        "description": "Details for a step that creates one or more tags.",
+			//	        "properties": {
+			//	          "Name": {
+			//	            "description": "The name of the step, used as an identifier.",
+			//	            "maxLength": 30,
+			//	            "minLength": 0,
+			//	            "pattern": "^[\\w-]*$",
+			//	            "type": "string"
+			//	          },
+			//	          "SourceFileLocation": {
+			//	            "description": "Specifies which file to use as input to the workflow step.",
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//	            "type": "string"
+			//	          },
+			//	          "Tags": {
+			//	            "description": "Array that contains from 1 to 10 key/value pairs.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.",
+			//	              "properties": {
+			//	                "Key": {
+			//	                  "description": "The name assigned to the tag that you create.",
+			//	                  "maxLength": 128,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "Value": {
+			//	                  "description": "The value that corresponds to the key.",
+			//	                  "maxLength": 256,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Key",
+			//	                "Value"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 10,
+			//	            "type": "array",
+			//	            "uniqueItems": true
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Type": {
+			//	        "enum": [
+			//	          "COPY",
+			//	          "CUSTOM",
+			//	          "DELETE",
+			//	          "TAG"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 8,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -405,192 +408,193 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"steps": {
 			// Property: Steps
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the details for the steps that are in the specified workflow.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The basic building block of a workflow.",
-			//     "properties": {
-			//       "CopyStepDetails": {
-			//         "additionalProperties": false,
-			//         "description": "Details for a step that performs a file copy.",
-			//         "properties": {
-			//           "DestinationFileLocation": {
-			//             "additionalProperties": false,
-			//             "description": "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
-			//             "properties": {
-			//               "S3FileLocation": {
-			//                 "additionalProperties": false,
-			//                 "description": "Specifies the details for the S3 file being copied.",
-			//                 "properties": {
-			//                   "Bucket": {
-			//                     "description": "Specifies the S3 bucket that contains the file being copied.",
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//                     "type": "string"
-			//                   },
-			//                   "Key": {
-			//                     "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
-			//                     "maxLength": 1024,
-			//                     "minLength": 0,
-			//                     "pattern": ".*",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Name": {
-			//             "description": "The name of the step, used as an identifier.",
-			//             "maxLength": 30,
-			//             "minLength": 0,
-			//             "pattern": "^[\\w-]*$",
-			//             "type": "string"
-			//           },
-			//           "OverwriteExisting": {
-			//             "description": "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
-			//             "enum": [
-			//               "TRUE",
-			//               "FALSE"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "SourceFileLocation": {
-			//             "description": "Specifies which file to use as input to the workflow step.",
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "CustomStepDetails": {
-			//         "additionalProperties": false,
-			//         "description": "Details for a step that invokes a lambda function.",
-			//         "properties": {
-			//           "Name": {
-			//             "description": "The name of the step, used as an identifier.",
-			//             "maxLength": 30,
-			//             "minLength": 0,
-			//             "pattern": "^[\\w-]*$",
-			//             "type": "string"
-			//           },
-			//           "SourceFileLocation": {
-			//             "description": "Specifies which file to use as input to the workflow step.",
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//             "type": "string"
-			//           },
-			//           "Target": {
-			//             "description": "The ARN for the lambda function that is being called.",
-			//             "maxLength": 170,
-			//             "minLength": 0,
-			//             "pattern": "arn:[a-z-]+:lambda:.*$",
-			//             "type": "string"
-			//           },
-			//           "TimeoutSeconds": {
-			//             "description": "Timeout, in seconds, for the step.",
-			//             "maximum": 1800,
-			//             "minimum": 1,
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "DeleteStepDetails": {
-			//         "additionalProperties": false,
-			//         "description": "Details for a step that deletes the file.",
-			//         "properties": {
-			//           "Name": {
-			//             "description": "The name of the step, used as an identifier.",
-			//             "maxLength": 30,
-			//             "minLength": 0,
-			//             "pattern": "^[\\w-]*$",
-			//             "type": "string"
-			//           },
-			//           "SourceFileLocation": {
-			//             "description": "Specifies which file to use as input to the workflow step.",
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "TagStepDetails": {
-			//         "additionalProperties": false,
-			//         "description": "Details for a step that creates one or more tags.",
-			//         "properties": {
-			//           "Name": {
-			//             "description": "The name of the step, used as an identifier.",
-			//             "maxLength": 30,
-			//             "minLength": 0,
-			//             "pattern": "^[\\w-]*$",
-			//             "type": "string"
-			//           },
-			//           "SourceFileLocation": {
-			//             "description": "Specifies which file to use as input to the workflow step.",
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//             "type": "string"
-			//           },
-			//           "Tags": {
-			//             "description": "Array that contains from 1 to 10 key/value pairs.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.",
-			//               "properties": {
-			//                 "Key": {
-			//                   "description": "The name assigned to the tag that you create.",
-			//                   "maxLength": 128,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "Value": {
-			//                   "description": "The value that corresponds to the key.",
-			//                   "maxLength": 256,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Key",
-			//                 "Value"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "maxItems": 10,
-			//             "type": "array",
-			//             "uniqueItems": true
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Type": {
-			//         "enum": [
-			//           "COPY",
-			//           "CUSTOM",
-			//           "DELETE",
-			//           "TAG"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 8,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the details for the steps that are in the specified workflow.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The basic building block of a workflow.",
+			//	    "properties": {
+			//	      "CopyStepDetails": {
+			//	        "additionalProperties": false,
+			//	        "description": "Details for a step that performs a file copy.",
+			//	        "properties": {
+			//	          "DestinationFileLocation": {
+			//	            "additionalProperties": false,
+			//	            "description": "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
+			//	            "properties": {
+			//	              "S3FileLocation": {
+			//	                "additionalProperties": false,
+			//	                "description": "Specifies the details for the S3 file being copied.",
+			//	                "properties": {
+			//	                  "Bucket": {
+			//	                    "description": "Specifies the S3 bucket that contains the file being copied.",
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Key": {
+			//	                    "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 0,
+			//	                    "pattern": ".*",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Name": {
+			//	            "description": "The name of the step, used as an identifier.",
+			//	            "maxLength": 30,
+			//	            "minLength": 0,
+			//	            "pattern": "^[\\w-]*$",
+			//	            "type": "string"
+			//	          },
+			//	          "OverwriteExisting": {
+			//	            "description": "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+			//	            "enum": [
+			//	              "TRUE",
+			//	              "FALSE"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "SourceFileLocation": {
+			//	            "description": "Specifies which file to use as input to the workflow step.",
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "CustomStepDetails": {
+			//	        "additionalProperties": false,
+			//	        "description": "Details for a step that invokes a lambda function.",
+			//	        "properties": {
+			//	          "Name": {
+			//	            "description": "The name of the step, used as an identifier.",
+			//	            "maxLength": 30,
+			//	            "minLength": 0,
+			//	            "pattern": "^[\\w-]*$",
+			//	            "type": "string"
+			//	          },
+			//	          "SourceFileLocation": {
+			//	            "description": "Specifies which file to use as input to the workflow step.",
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//	            "type": "string"
+			//	          },
+			//	          "Target": {
+			//	            "description": "The ARN for the lambda function that is being called.",
+			//	            "maxLength": 170,
+			//	            "minLength": 0,
+			//	            "pattern": "arn:[a-z-]+:lambda:.*$",
+			//	            "type": "string"
+			//	          },
+			//	          "TimeoutSeconds": {
+			//	            "description": "Timeout, in seconds, for the step.",
+			//	            "maximum": 1800,
+			//	            "minimum": 1,
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "DeleteStepDetails": {
+			//	        "additionalProperties": false,
+			//	        "description": "Details for a step that deletes the file.",
+			//	        "properties": {
+			//	          "Name": {
+			//	            "description": "The name of the step, used as an identifier.",
+			//	            "maxLength": 30,
+			//	            "minLength": 0,
+			//	            "pattern": "^[\\w-]*$",
+			//	            "type": "string"
+			//	          },
+			//	          "SourceFileLocation": {
+			//	            "description": "Specifies which file to use as input to the workflow step.",
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "TagStepDetails": {
+			//	        "additionalProperties": false,
+			//	        "description": "Details for a step that creates one or more tags.",
+			//	        "properties": {
+			//	          "Name": {
+			//	            "description": "The name of the step, used as an identifier.",
+			//	            "maxLength": 30,
+			//	            "minLength": 0,
+			//	            "pattern": "^[\\w-]*$",
+			//	            "type": "string"
+			//	          },
+			//	          "SourceFileLocation": {
+			//	            "description": "Specifies which file to use as input to the workflow step.",
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//	            "type": "string"
+			//	          },
+			//	          "Tags": {
+			//	            "description": "Array that contains from 1 to 10 key/value pairs.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.",
+			//	              "properties": {
+			//	                "Key": {
+			//	                  "description": "The name assigned to the tag that you create.",
+			//	                  "maxLength": 128,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "Value": {
+			//	                  "description": "The value that corresponds to the key.",
+			//	                  "maxLength": 256,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Key",
+			//	                "Value"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 10,
+			//	            "type": "array",
+			//	            "uniqueItems": true
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Type": {
+			//	        "enum": [
+			//	          "COPY",
+			//	          "CUSTOM",
+			//	          "DELETE",
+			//	          "TAG"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 8,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Specifies the details for the steps that are in the specified workflow.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -759,36 +763,37 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Creates a key-value pair for a specific resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The name assigned to the tag that you create.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "Contains one or more values that you assigned to the key name you create.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Creates a key-value pair for a specific resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The name assigned to the tag that you create.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "Contains one or more values that you assigned to the key name you create.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -811,13 +816,14 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"workflow_id": {
 			// Property: WorkflowId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A unique identifier for the workflow.",
-			//   "maxLength": 19,
-			//   "minLength": 19,
-			//   "pattern": "^w-([a-z0-9]{17})$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A unique identifier for the workflow.",
+			//	  "maxLength": 19,
+			//	  "minLength": 19,
+			//	  "pattern": "^w-([a-z0-9]{17})$",
+			//	  "type": "string"
+			//	}
 			Description: "A unique identifier for the workflow.",
 			Type:        types.StringType,
 			Computed:    true,

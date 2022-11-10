@@ -23,134 +23,136 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"container_arn": {
 			// Property: ContainerArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"container_service_deployment": {
 			// Property: ContainerServiceDeployment
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Describes a container deployment configuration of an Amazon Lightsail container service.",
-			//   "properties": {
-			//     "Containers": {
-			//       "description": "An object that describes the configuration for the containers of the deployment.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "Describes the settings of a container that will be launched, or that is launched, to an Amazon Lightsail container service.",
-			//         "properties": {
-			//           "Command": {
-			//             "description": "The launch command for the container.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array",
-			//             "uniqueItems": true
-			//           },
-			//           "ContainerName": {
-			//             "description": "The name of the container.",
-			//             "type": "string"
-			//           },
-			//           "Environment": {
-			//             "description": "The environment variables of the container.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Value": {
-			//                   "type": "string"
-			//                 },
-			//                 "Variable": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array",
-			//             "uniqueItems": true
-			//           },
-			//           "Image": {
-			//             "description": "The name of the image used for the container.",
-			//             "type": "string"
-			//           },
-			//           "Ports": {
-			//             "description": "The open firewall ports of the container.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Port": {
-			//                   "type": "string"
-			//                 },
-			//                 "Protocol": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array",
-			//             "uniqueItems": true
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "PublicEndpoint": {
-			//       "additionalProperties": false,
-			//       "description": "An object that describes the endpoint of the deployment.",
-			//       "properties": {
-			//         "ContainerName": {
-			//           "description": "The name of the container for the endpoint.",
-			//           "type": "string"
-			//         },
-			//         "ContainerPort": {
-			//           "description": "The port of the container to which traffic is forwarded to.",
-			//           "type": "integer"
-			//         },
-			//         "HealthCheckConfig": {
-			//           "additionalProperties": false,
-			//           "description": "An object that describes the health check configuration of the container.",
-			//           "properties": {
-			//             "HealthyThreshold": {
-			//               "description": "The number of consecutive health checks successes required before moving the container to the Healthy state. The default value is 2.",
-			//               "type": "integer"
-			//             },
-			//             "IntervalSeconds": {
-			//               "description": "The approximate interval, in seconds, between health checks of an individual container. You can specify between 5 and 300 seconds. The default value is 5.",
-			//               "type": "integer"
-			//             },
-			//             "Path": {
-			//               "description": "The path on the container on which to perform the health check. The default value is /.",
-			//               "type": "string"
-			//             },
-			//             "SuccessCodes": {
-			//               "description": "The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499. You can specify multiple values (for example, 200,202) or a range of values (for example, 200-299).",
-			//               "type": "string"
-			//             },
-			//             "TimeoutSeconds": {
-			//               "description": "The amount of time, in seconds, during which no response means a failed health check. You can specify between 2 and 60 seconds. The default value is 2.",
-			//               "type": "integer"
-			//             },
-			//             "UnhealthyThreshold": {
-			//               "description": "The number of consecutive health check failures required before moving the container to the Unhealthy state. The default value is 2.",
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Describes a container deployment configuration of an Amazon Lightsail container service.",
+			//	  "properties": {
+			//	    "Containers": {
+			//	      "description": "An object that describes the configuration for the containers of the deployment.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "Describes the settings of a container that will be launched, or that is launched, to an Amazon Lightsail container service.",
+			//	        "properties": {
+			//	          "Command": {
+			//	            "description": "The launch command for the container.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array",
+			//	            "uniqueItems": true
+			//	          },
+			//	          "ContainerName": {
+			//	            "description": "The name of the container.",
+			//	            "type": "string"
+			//	          },
+			//	          "Environment": {
+			//	            "description": "The environment variables of the container.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Value": {
+			//	                  "type": "string"
+			//	                },
+			//	                "Variable": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array",
+			//	            "uniqueItems": true
+			//	          },
+			//	          "Image": {
+			//	            "description": "The name of the image used for the container.",
+			//	            "type": "string"
+			//	          },
+			//	          "Ports": {
+			//	            "description": "The open firewall ports of the container.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Port": {
+			//	                  "type": "string"
+			//	                },
+			//	                "Protocol": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array",
+			//	            "uniqueItems": true
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "PublicEndpoint": {
+			//	      "additionalProperties": false,
+			//	      "description": "An object that describes the endpoint of the deployment.",
+			//	      "properties": {
+			//	        "ContainerName": {
+			//	          "description": "The name of the container for the endpoint.",
+			//	          "type": "string"
+			//	        },
+			//	        "ContainerPort": {
+			//	          "description": "The port of the container to which traffic is forwarded to.",
+			//	          "type": "integer"
+			//	        },
+			//	        "HealthCheckConfig": {
+			//	          "additionalProperties": false,
+			//	          "description": "An object that describes the health check configuration of the container.",
+			//	          "properties": {
+			//	            "HealthyThreshold": {
+			//	              "description": "The number of consecutive health checks successes required before moving the container to the Healthy state. The default value is 2.",
+			//	              "type": "integer"
+			//	            },
+			//	            "IntervalSeconds": {
+			//	              "description": "The approximate interval, in seconds, between health checks of an individual container. You can specify between 5 and 300 seconds. The default value is 5.",
+			//	              "type": "integer"
+			//	            },
+			//	            "Path": {
+			//	              "description": "The path on the container on which to perform the health check. The default value is /.",
+			//	              "type": "string"
+			//	            },
+			//	            "SuccessCodes": {
+			//	              "description": "The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499. You can specify multiple values (for example, 200,202) or a range of values (for example, 200-299).",
+			//	              "type": "string"
+			//	            },
+			//	            "TimeoutSeconds": {
+			//	              "description": "The amount of time, in seconds, during which no response means a failed health check. You can specify between 2 and 60 seconds. The default value is 2.",
+			//	              "type": "integer"
+			//	            },
+			//	            "UnhealthyThreshold": {
+			//	              "description": "The number of consecutive health check failures required before moving the container to the Unhealthy state. The default value is 2.",
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Describes a container deployment configuration of an Amazon Lightsail container service.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -292,10 +294,11 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"is_disabled": {
 			// Property: IsDisabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A Boolean value to indicate whether the container service is disabled.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "A Boolean value to indicate whether the container service is disabled.",
+			//	  "type": "boolean"
+			//	}
 			Description: "A Boolean value to indicate whether the container service is disabled.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -303,10 +306,11 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"power": {
 			// Property: Power
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The power specification for the container service.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The power specification for the container service.",
+			//	  "type": "string"
+			//	}
 			Description: "The power specification for the container service.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -314,31 +318,32 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"public_domain_names": {
 			// Property: PublicDomainNames
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The public domain names to use with the container service, such as example.com and www.example.com.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The public domain name to use with the container service, such as example.com and www.example.com.",
-			//     "properties": {
-			//       "CertificateName": {
-			//         "type": "string"
-			//       },
-			//       "DomainNames": {
-			//         "description": "An object that describes the configuration for the containers of the deployment.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The public domain names to use with the container service, such as example.com and www.example.com.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The public domain name to use with the container service, such as example.com and www.example.com.",
+			//	    "properties": {
+			//	      "CertificateName": {
+			//	        "type": "string"
+			//	      },
+			//	      "DomainNames": {
+			//	        "description": "An object that describes the configuration for the containers of the deployment.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The public domain names to use with the container service, such as example.com and www.example.com.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -360,12 +365,13 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"scale": {
 			// Property: Scale
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The scale specification for the container service.",
-			//   "maximum": 20,
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The scale specification for the container service.",
+			//	  "maximum": 20,
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Description: "The scale specification for the container service.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -373,13 +379,14 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_name": {
 			// Property: ServiceName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the container service.",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-z0-9]{1,2}|[a-z0-9][a-z0-9-]+[a-z0-9]$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the container service.",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-z0-9]{1,2}|[a-z0-9][a-z0-9-]+[a-z0-9]$",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the container service.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -387,34 +394,35 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -437,10 +445,11 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"url": {
 			// Property: Url
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The publicly accessible URL of the container service.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The publicly accessible URL of the container service.",
+			//	  "type": "string"
+			//	}
 			Description: "The publicly accessible URL of the container service.",
 			Type:        types.StringType,
 			Computed:    true,

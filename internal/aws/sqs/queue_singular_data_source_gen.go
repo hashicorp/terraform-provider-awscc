@@ -23,10 +23,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name (ARN) of the queue.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name (ARN) of the queue.",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name (ARN) of the queue.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"content_based_deduplication": {
 			// Property: ContentBasedDeduplication
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "For first-in-first-out (FIFO) queues, specifies whether to enable content-based deduplication. During the deduplication interval, Amazon SQS treats messages that are sent with identical content as duplicates and delivers only one copy of the message.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "For first-in-first-out (FIFO) queues, specifies whether to enable content-based deduplication. During the deduplication interval, Amazon SQS treats messages that are sent with identical content as duplicates and delivers only one copy of the message.",
+			//	  "type": "boolean"
+			//	}
 			Description: "For first-in-first-out (FIFO) queues, specifies whether to enable content-based deduplication. During the deduplication interval, Amazon SQS treats messages that are sent with identical content as duplicates and delivers only one copy of the message.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"deduplication_scope": {
 			// Property: DeduplicationScope
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether message deduplication occurs at the message group or queue level. Valid values are messageGroup and queue.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether message deduplication occurs at the message group or queue level. Valid values are messageGroup and queue.",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies whether message deduplication occurs at the message group or queue level. Valid values are messageGroup and queue.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"delay_seconds": {
 			// Property: DelaySeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time in seconds for which the delivery of all messages in the queue is delayed. You can specify an integer value of 0 to 900 (15 minutes). The default value is 0.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The time in seconds for which the delivery of all messages in the queue is delayed. You can specify an integer value of 0 to 900 (15 minutes). The default value is 0.",
+			//	  "type": "integer"
+			//	}
 			Description: "The time in seconds for which the delivery of all messages in the queue is delayed. You can specify an integer value of 0 to 900 (15 minutes). The default value is 0.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -67,10 +71,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"fifo_queue": {
 			// Property: FifoQueue
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "If set to true, creates a FIFO queue. If you don't specify this property, Amazon SQS creates a standard queue.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "If set to true, creates a FIFO queue. If you don't specify this property, Amazon SQS creates a standard queue.",
+			//	  "type": "boolean"
+			//	}
 			Description: "If set to true, creates a FIFO queue. If you don't specify this property, Amazon SQS creates a standard queue.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -78,10 +83,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"fifo_throughput_limit": {
 			// Property: FifoThroughputLimit
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether the FIFO queue throughput quota applies to the entire queue or per message group. Valid values are perQueue and perMessageGroupId. The perMessageGroupId value is allowed only when the value for DeduplicationScope is messageGroup.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether the FIFO queue throughput quota applies to the entire queue or per message group. Valid values are perQueue and perMessageGroupId. The perMessageGroupId value is allowed only when the value for DeduplicationScope is messageGroup.",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies whether the FIFO queue throughput quota applies to the entire queue or per message group. Valid values are perQueue and perMessageGroupId. The perMessageGroupId value is allowed only when the value for DeduplicationScope is messageGroup.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -89,10 +95,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_data_key_reuse_period_seconds": {
 			// Property: KmsDataKeyReusePeriodSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The length of time in seconds for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again. The value must be an integer between 60 (1 minute) and 86,400 (24 hours). The default is 300 (5 minutes).",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The length of time in seconds for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again. The value must be an integer between 60 (1 minute) and 86,400 (24 hours). The default is 300 (5 minutes).",
+			//	  "type": "integer"
+			//	}
 			Description: "The length of time in seconds for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again. The value must be an integer between 60 (1 minute) and 86,400 (24 hours). The default is 300 (5 minutes).",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -100,10 +107,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_master_key_id": {
 			// Property: KmsMasterKeyId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom CMK. To use the AWS managed CMK for Amazon SQS, specify the (default) alias alias/aws/sqs.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom CMK. To use the AWS managed CMK for Amazon SQS, specify the (default) alias alias/aws/sqs.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom CMK. To use the AWS managed CMK for Amazon SQS, specify the (default) alias alias/aws/sqs.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -111,10 +119,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"maximum_message_size": {
 			// Property: MaximumMessageSize
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The limit of how many bytes that a message can contain before Amazon SQS rejects it. You can specify an integer value from 1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). The default value is 262,144 (256 KiB).",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The limit of how many bytes that a message can contain before Amazon SQS rejects it. You can specify an integer value from 1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). The default value is 262,144 (256 KiB).",
+			//	  "type": "integer"
+			//	}
 			Description: "The limit of how many bytes that a message can contain before Amazon SQS rejects it. You can specify an integer value from 1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). The default value is 262,144 (256 KiB).",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -122,10 +131,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"message_retention_period": {
 			// Property: MessageRetentionPeriod
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The number of seconds that Amazon SQS retains a message. You can specify an integer value from 60 seconds (1 minute) to 1,209,600 seconds (14 days). The default value is 345,600 seconds (4 days).",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The number of seconds that Amazon SQS retains a message. You can specify an integer value from 60 seconds (1 minute) to 1,209,600 seconds (14 days). The default value is 345,600 seconds (4 days).",
+			//	  "type": "integer"
+			//	}
 			Description: "The number of seconds that Amazon SQS retains a message. You can specify an integer value from 60 seconds (1 minute) to 1,209,600 seconds (14 days). The default value is 345,600 seconds (4 days).",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -133,10 +143,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"queue_name": {
 			// Property: QueueName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for the queue. To create a FIFO queue, the name of your FIFO queue must end with the .fifo suffix.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for the queue. To create a FIFO queue, the name of your FIFO queue must end with the .fifo suffix.",
+			//	  "type": "string"
+			//	}
 			Description: "A name for the queue. To create a FIFO queue, the name of your FIFO queue must end with the .fifo suffix.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -144,10 +155,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"queue_url": {
 			// Property: QueueUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "URL of the source queue.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "URL of the source queue.",
+			//	  "type": "string"
+			//	}
 			Description: "URL of the source queue.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -155,10 +167,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"receive_message_wait_time_seconds": {
 			// Property: ReceiveMessageWaitTimeSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the duration, in seconds, that the ReceiveMessage action call waits until a message is in the queue in order to include it in the response, rather than returning an empty response if a message isn't yet available. You can specify an integer from 1 to 20. Short polling is used as the default or when you specify 0 for this property.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the duration, in seconds, that the ReceiveMessage action call waits until a message is in the queue in order to include it in the response, rather than returning an empty response if a message isn't yet available. You can specify an integer from 1 to 20. Short polling is used as the default or when you specify 0 for this property.",
+			//	  "type": "integer"
+			//	}
 			Description: "Specifies the duration, in seconds, that the ReceiveMessage action call waits until a message is in the queue in order to include it in the response, rather than returning an empty response if a message isn't yet available. You can specify an integer from 1 to 20. Short polling is used as the default or when you specify 0 for this property.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -166,10 +179,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"redrive_allow_policy": {
 			// Property: RedriveAllowPolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The string that includes the parameters for the permissions for the dead-letter queue redrive permission and which source queues can specify dead-letter queues as a JSON object.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The string that includes the parameters for the permissions for the dead-letter queue redrive permission and which source queues can specify dead-letter queues as a JSON object.",
+			//	  "type": "string"
+			//	}
 			Description: "The string that includes the parameters for the permissions for the dead-letter queue redrive permission and which source queues can specify dead-letter queues as a JSON object.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -177,10 +191,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"redrive_policy": {
 			// Property: RedrivePolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A string that includes the parameters for the dead-letter queue functionality (redrive policy) of the source queue.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A string that includes the parameters for the dead-letter queue functionality (redrive policy) of the source queue.",
+			//	  "type": "string"
+			//	}
 			Description: "A string that includes the parameters for the dead-letter queue functionality (redrive policy) of the source queue.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -188,10 +203,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"sqs_managed_sse_enabled": {
 			// Property: SqsManagedSseEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (e.g. SSE-KMS or SSE-SQS ).",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (e.g. SSE-KMS or SSE-SQS ).",
+			//	  "type": "boolean"
+			//	}
 			Description: "Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (e.g. SSE-KMS or SSE-SQS ).",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -199,30 +215,31 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags that you attach to this queue.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "The tags that you attach to this queue.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "The tags that you attach to this queue.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -245,10 +262,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"visibility_timeout": {
 			// Property: VisibilityTimeout
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The length of time during which a message will be unavailable after a message is delivered from the queue. This blocks other components from receiving the same message and gives the initial component time to process and delete the message from the queue. Values must be from 0 to 43,200 seconds (12 hours). If you don't specify a value, AWS CloudFormation uses the default value of 30 seconds.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The length of time during which a message will be unavailable after a message is delivered from the queue. This blocks other components from receiving the same message and gives the initial component time to process and delete the message from the queue. Values must be from 0 to 43,200 seconds (12 hours). If you don't specify a value, AWS CloudFormation uses the default value of 30 seconds.",
+			//	  "type": "integer"
+			//	}
 			Description: "The length of time during which a message will be unavailable after a message is delivered from the queue. This blocks other components from receiving the same message and gives the initial component time to process and delete the message from the queue. Values must be from 0 to 43,200 seconds (12 hours). If you don't specify a value, AWS CloudFormation uses the default value of 30 seconds.",
 			Type:        types.Int64Type,
 			Computed:    true,

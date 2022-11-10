@@ -23,10 +23,11 @@ func transitGatewayConnectDataSource(ctx context.Context) (datasource.DataSource
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The creation time.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The creation time.",
+			//	  "type": "string"
+			//	}
 			Description: "The creation time.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,17 +35,18 @@ func transitGatewayConnectDataSource(ctx context.Context) (datasource.DataSource
 		"options": {
 			// Property: Options
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The Connect attachment options.",
-			//   "properties": {
-			//     "Protocol": {
-			//       "description": "The tunnel protocol.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The Connect attachment options.",
+			//	  "properties": {
+			//	    "Protocol": {
+			//	      "description": "The tunnel protocol.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The Connect attachment options.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -61,10 +63,11 @@ func transitGatewayConnectDataSource(ctx context.Context) (datasource.DataSource
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of the attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of the attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The state of the attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -72,24 +75,25 @@ func transitGatewayConnectDataSource(ctx context.Context) (datasource.DataSource
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags for the attachment.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The tags for the attachment.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The tags for the attachment.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -112,10 +116,11 @@ func transitGatewayConnectDataSource(ctx context.Context) (datasource.DataSource
 		"transit_gateway_attachment_id": {
 			// Property: TransitGatewayAttachmentId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the Connect attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the Connect attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the Connect attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -123,10 +128,11 @@ func transitGatewayConnectDataSource(ctx context.Context) (datasource.DataSource
 		"transit_gateway_id": {
 			// Property: TransitGatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the transit gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the transit gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the transit gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -134,10 +140,11 @@ func transitGatewayConnectDataSource(ctx context.Context) (datasource.DataSource
 		"transport_transit_gateway_attachment_id": {
 			// Property: TransportTransitGatewayAttachmentId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the attachment from which the Connect attachment was created.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the attachment from which the Connect attachment was created.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the attachment from which the Connect attachment was created.",
 			Type:        types.StringType,
 			Computed:    true,

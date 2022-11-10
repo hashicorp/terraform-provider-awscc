@@ -23,80 +23,85 @@ func capacityReservationFleetDataSource(ctx context.Context) (datasource.DataSou
 		"allocation_strategy": {
 			// Property: AllocationStrategy
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"capacity_reservation_fleet_id": {
 			// Property: CapacityReservationFleetId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"end_date": {
 			// Property: EndDate
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"instance_match_criteria": {
 			// Property: InstanceMatchCriteria
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "open"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "open"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"instance_type_specifications": {
 			// Property: InstanceTypeSpecifications
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "AvailabilityZone": {
-			//         "type": "string"
-			//       },
-			//       "AvailabilityZoneId": {
-			//         "type": "string"
-			//       },
-			//       "EbsOptimized": {
-			//         "type": "boolean"
-			//       },
-			//       "InstancePlatform": {
-			//         "type": "string"
-			//       },
-			//       "InstanceType": {
-			//         "type": "string"
-			//       },
-			//       "Priority": {
-			//         "maximum": 999,
-			//         "minimum": 0,
-			//         "type": "integer"
-			//       },
-			//       "Weight": {
-			//         "type": "number"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "AvailabilityZone": {
+			//	        "type": "string"
+			//	      },
+			//	      "AvailabilityZoneId": {
+			//	        "type": "string"
+			//	      },
+			//	      "EbsOptimized": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "InstancePlatform": {
+			//	        "type": "string"
+			//	      },
+			//	      "InstanceType": {
+			//	        "type": "string"
+			//	      },
+			//	      "Priority": {
+			//	        "maximum": 999,
+			//	        "minimum": 0,
+			//	        "type": "integer"
+			//	      },
+			//	      "Weight": {
+			//	        "type": "number"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"availability_zone": {
@@ -141,59 +146,62 @@ func capacityReservationFleetDataSource(ctx context.Context) (datasource.DataSou
 		"no_remove_end_date": {
 			// Property: NoRemoveEndDate
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"remove_end_date": {
 			// Property: RemoveEndDate
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"tag_specifications": {
 			// Property: TagSpecifications
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ResourceType": {
-			//         "type": "string"
-			//       },
-			//       "Tags": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Key": {
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Value",
-			//             "Key"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ResourceType": {
+			//	        "type": "string"
+			//	      },
+			//	      "Tags": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Key": {
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Value",
+			//	            "Key"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"resource_type": {
@@ -226,23 +234,25 @@ func capacityReservationFleetDataSource(ctx context.Context) (datasource.DataSou
 		"tenancy": {
 			// Property: Tenancy
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "default"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "default"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"total_target_capacity": {
 			// Property: TotalTargetCapacity
 			// CloudFormation resource type schema:
-			// {
-			//   "maximum": 25000,
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "maximum": 25000,
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},

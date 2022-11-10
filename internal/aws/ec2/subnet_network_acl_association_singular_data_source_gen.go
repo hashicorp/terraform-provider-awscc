@@ -23,19 +23,21 @@ func subnetNetworkAclAssociationDataSource(ctx context.Context) (datasource.Data
 		"association_id": {
 			// Property: AssociationId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"network_acl_id": {
 			// Property: NetworkAclId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the network ACL",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the network ACL",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the network ACL",
 			Type:        types.StringType,
 			Computed:    true,
@@ -43,10 +45,11 @@ func subnetNetworkAclAssociationDataSource(ctx context.Context) (datasource.Data
 		"subnet_id": {
 			// Property: SubnetId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the subnet",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the subnet",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the subnet",
 			Type:        types.StringType,
 			Computed:    true,

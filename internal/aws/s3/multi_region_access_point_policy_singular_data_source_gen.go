@@ -23,13 +23,14 @@ func multiRegionAccessPointPolicyDataSource(ctx context.Context) (datasource.Dat
 		"mrap_name": {
 			// Property: MrapName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the Multi Region Access Point to apply policy",
-			//   "maxLength": 50,
-			//   "minLength": 3,
-			//   "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the Multi Region Access Point to apply policy",
+			//	  "maxLength": 50,
+			//	  "minLength": 3,
+			//	  "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the Multi Region Access Point to apply policy",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,10 +38,11 @@ func multiRegionAccessPointPolicyDataSource(ctx context.Context) (datasource.Dat
 		"policy": {
 			// Property: Policy
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Policy document to apply to a Multi Region Access Point",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "Policy document to apply to a Multi Region Access Point",
+			//	  "type": "object"
+			//	}
 			Description: "Policy document to apply to a Multi Region Access Point",
 			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
@@ -48,24 +50,25 @@ func multiRegionAccessPointPolicyDataSource(ctx context.Context) (datasource.Dat
 		"policy_status": {
 			// Property: PolicyStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The Policy Status associated with this Multi Region Access Point",
-			//   "properties": {
-			//     "IsPublic": {
-			//       "description": "Specifies whether the policy is public or not.",
-			//       "enum": [
-			//         "true",
-			//         "false"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "IsPublic"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The Policy Status associated with this Multi Region Access Point",
+			//	  "properties": {
+			//	    "IsPublic": {
+			//	      "description": "Specifies whether the policy is public or not.",
+			//	      "enum": [
+			//	        "true",
+			//	        "false"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "IsPublic"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The Policy Status associated with this Multi Region Access Point",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

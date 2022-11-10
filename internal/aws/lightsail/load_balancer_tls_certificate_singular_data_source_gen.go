@@ -23,15 +23,16 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		"certificate_alternative_names": {
 			// Property: CertificateAlternativeNames
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
@@ -39,10 +40,11 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		"certificate_domain_name": {
 			// Property: CertificateDomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -50,10 +52,11 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		"certificate_name": {
 			// Property: CertificateName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The SSL/TLS certificate name.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The SSL/TLS certificate name.",
+			//	  "type": "string"
+			//	}
 			Description: "The SSL/TLS certificate name.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -61,10 +64,11 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		"https_redirection_enabled": {
 			// Property: HttpsRedirectionEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
+			//	  "type": "boolean"
+			//	}
 			Description: "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -72,10 +76,11 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		"is_attached": {
 			// Property: IsAttached
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
+			//	  "type": "boolean"
+			//	}
 			Description: "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -83,11 +88,12 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		"load_balancer_name": {
 			// Property: LoadBalancerName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of your load balancer.",
-			//   "pattern": "\\w[\\w\\-]*\\w",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of your load balancer.",
+			//	  "pattern": "\\w[\\w\\-]*\\w",
+			//	  "type": "string"
+			//	}
 			Description: "The name of your load balancer.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -95,19 +101,21 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		"load_balancer_tls_certificate_arn": {
 			// Property: LoadBalancerTlsCertificateArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The validation status of the SSL/TLS certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The validation status of the SSL/TLS certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "The validation status of the SSL/TLS certificate.",
 			Type:        types.StringType,
 			Computed:    true,

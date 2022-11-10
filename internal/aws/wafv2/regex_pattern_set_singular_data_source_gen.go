@@ -23,10 +23,11 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARN of the WAF entity.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ARN of the WAF entity.",
+			//	  "type": "string"
+			//	}
 			Description: "ARN of the WAF entity.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,11 +35,12 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description of the entity.",
-			//   "pattern": "^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description of the entity.",
+			//	  "pattern": "^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$",
+			//	  "type": "string"
+			//	}
 			Description: "Description of the entity.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -46,11 +48,12 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Id of the RegexPatternSet",
-			//   "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Id of the RegexPatternSet",
+			//	  "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "Id of the RegexPatternSet",
 			Type:        types.StringType,
 			Computed:    true,
@@ -58,11 +61,12 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the RegexPatternSet.",
-			//   "pattern": "^[0-9A-Za-z_-]{1,128}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the RegexPatternSet.",
+			//	  "pattern": "^[0-9A-Za-z_-]{1,128}$",
+			//	  "type": "string"
+			//	}
 			Description: "Name of the RegexPatternSet.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -70,26 +74,28 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		"regular_expression_list": {
 			// Property: RegularExpressionList
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"scope": {
 			// Property: Scope
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.",
-			//   "enum": [
-			//     "CLOUDFRONT",
-			//     "REGIONAL"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.",
+			//	  "enum": [
+			//	    "CLOUDFRONT",
+			//	    "REGIONAL"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -97,26 +103,27 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

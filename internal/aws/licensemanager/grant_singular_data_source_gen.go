@@ -23,24 +23,26 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"allowed_operations": {
 			// Property: AllowedOperations
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"grant_arn": {
 			// Property: GrantArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Arn of the grant.",
-			//   "maxLength": 2048,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Arn of the grant.",
+			//	  "maxLength": 2048,
+			//	  "type": "string"
+			//	}
 			Description: "Arn of the grant.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -48,10 +50,11 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"grant_name": {
 			// Property: GrantName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name for the created Grant.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name for the created Grant.",
+			//	  "type": "string"
+			//	}
 			Description: "Name for the created Grant.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -59,10 +62,11 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"home_region": {
 			// Property: HomeRegion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Home region for the created grant.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Home region for the created grant.",
+			//	  "type": "string"
+			//	}
 			Description: "Home region for the created grant.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -70,11 +74,12 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"license_arn": {
 			// Property: LicenseArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "License Arn for the grant.",
-			//   "maxLength": 2048,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "License Arn for the grant.",
+			//	  "maxLength": 2048,
+			//	  "type": "string"
+			//	}
 			Description: "License Arn for the grant.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -82,33 +87,36 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"principals": {
 			// Property: Principals
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "maxLength": 2048,
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "maxLength": 2048,
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version of the grant.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version of the grant.",
+			//	  "type": "string"
+			//	}
 			Description: "The version of the grant.",
 			Type:        types.StringType,
 			Computed:    true,

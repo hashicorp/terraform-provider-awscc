@@ -23,10 +23,11 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the image pipeline.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the image pipeline.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the image pipeline.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"container_recipe_arn": {
 			// Property: ContainerRecipeArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the image pipeline.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the image pipeline.",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the image pipeline.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"distribution_configuration_arn": {
 			// Property: DistributionConfigurationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,10 +71,11 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"enhanced_image_metadata_enabled": {
 			// Property: EnhancedImageMetadataEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Collects additional information about the image being created, including the operating system (OS) version and package list.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Collects additional information about the image being created, including the operating system (OS) version and package list.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Collects additional information about the image being created, including the operating system (OS) version and package list.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -78,10 +83,11 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"image_recipe_arn": {
 			// Property: ImageRecipeArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -89,23 +95,24 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"image_tests_configuration": {
 			// Property: ImageTestsConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The image tests configuration of the image pipeline.",
-			//   "properties": {
-			//     "ImageTestsEnabled": {
-			//       "description": "Defines if tests should be executed when building this image.",
-			//       "type": "boolean"
-			//     },
-			//     "TimeoutMinutes": {
-			//       "description": "The maximum time in minutes that tests are permitted to run.",
-			//       "maximum": 1440,
-			//       "minimum": 60,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The image tests configuration of the image pipeline.",
+			//	  "properties": {
+			//	    "ImageTestsEnabled": {
+			//	      "description": "Defines if tests should be executed when building this image.",
+			//	      "type": "boolean"
+			//	    },
+			//	    "TimeoutMinutes": {
+			//	      "description": "The maximum time in minutes that tests are permitted to run.",
+			//	      "maximum": 1440,
+			//	      "minimum": 60,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The image tests configuration of the image pipeline.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -128,10 +135,11 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"infrastructure_configuration_arn": {
 			// Property: InfrastructureConfigurationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -139,10 +147,11 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the image pipeline.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the image pipeline.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the image pipeline.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -150,25 +159,26 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"schedule": {
 			// Property: Schedule
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The schedule of the image pipeline.",
-			//   "properties": {
-			//     "PipelineExecutionStartCondition": {
-			//       "description": "The condition configures when the pipeline should trigger a new image build.",
-			//       "enum": [
-			//         "EXPRESSION_MATCH_ONLY",
-			//         "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "ScheduleExpression": {
-			//       "description": "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The schedule of the image pipeline.",
+			//	  "properties": {
+			//	    "PipelineExecutionStartCondition": {
+			//	      "description": "The condition configures when the pipeline should trigger a new image build.",
+			//	      "enum": [
+			//	        "EXPRESSION_MATCH_ONLY",
+			//	        "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "ScheduleExpression": {
+			//	      "description": "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The schedule of the image pipeline.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -191,14 +201,15 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The status of the image pipeline.",
-			//   "enum": [
-			//     "DISABLED",
-			//     "ENABLED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The status of the image pipeline.",
+			//	  "enum": [
+			//	    "DISABLED",
+			//	    "ENABLED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The status of the image pipeline.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -206,16 +217,17 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The tags of this image pipeline.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The tags of this image pipeline.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The tags of this image pipeline.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

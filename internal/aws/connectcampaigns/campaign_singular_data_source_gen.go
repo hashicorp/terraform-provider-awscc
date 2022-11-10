@@ -23,13 +23,14 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Connect Campaign Arn",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect-campaigns:[-a-z0-9]*:[0-9]{12}:campaign/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Connect Campaign Arn",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect-campaigns:[-a-z0-9]*:[0-9]{12}:campaign/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Connect Campaign Arn",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,13 +38,14 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connect_instance_arn": {
 			// Property: ConnectInstanceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Connect Instance Arn",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Connect Instance Arn",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Connect Instance Arn",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,44 +53,45 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dialer_config": {
 			// Property: DialerConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The possible types of dialer config parameters",
-			//   "properties": {
-			//     "PredictiveDialerConfig": {
-			//       "additionalProperties": false,
-			//       "description": "Predictive Dialer config",
-			//       "properties": {
-			//         "BandwidthAllocation": {
-			//           "description": "The bandwidth allocation of a queue resource.",
-			//           "maximum": 1,
-			//           "minimum": 0,
-			//           "type": "number"
-			//         }
-			//       },
-			//       "required": [
-			//         "BandwidthAllocation"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ProgressiveDialerConfig": {
-			//       "additionalProperties": false,
-			//       "description": "Progressive Dialer config",
-			//       "properties": {
-			//         "BandwidthAllocation": {
-			//           "description": "The bandwidth allocation of a queue resource.",
-			//           "maximum": 1,
-			//           "minimum": 0,
-			//           "type": "number"
-			//         }
-			//       },
-			//       "required": [
-			//         "BandwidthAllocation"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "The possible types of dialer config parameters",
+			//	  "properties": {
+			//	    "PredictiveDialerConfig": {
+			//	      "additionalProperties": false,
+			//	      "description": "Predictive Dialer config",
+			//	      "properties": {
+			//	        "BandwidthAllocation": {
+			//	          "description": "The bandwidth allocation of a queue resource.",
+			//	          "maximum": 1,
+			//	          "minimum": 0,
+			//	          "type": "number"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BandwidthAllocation"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ProgressiveDialerConfig": {
+			//	      "additionalProperties": false,
+			//	      "description": "Progressive Dialer config",
+			//	      "properties": {
+			//	        "BandwidthAllocation": {
+			//	          "description": "The bandwidth allocation of a queue resource.",
+			//	          "maximum": 1,
+			//	          "minimum": 0,
+			//	          "type": "number"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BandwidthAllocation"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The possible types of dialer config parameters",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -129,12 +132,13 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Connect Campaign Name",
-			//   "maxLength": 127,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Connect Campaign Name",
+			//	  "maxLength": 127,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Connect Campaign Name",
 			Type:        types.StringType,
 			Computed:    true,
@@ -142,34 +146,35 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"outbound_call_config": {
 			// Property: OutboundCallConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The configuration used for outbound calls.",
-			//   "properties": {
-			//     "ConnectContactFlowArn": {
-			//       "description": "The identifier of the contact flow for the outbound call.",
-			//       "maxLength": 500,
-			//       "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
-			//       "type": "string"
-			//     },
-			//     "ConnectQueueArn": {
-			//       "description": "The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.",
-			//       "maxLength": 500,
-			//       "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$",
-			//       "type": "string"
-			//     },
-			//     "ConnectSourcePhoneNumber": {
-			//       "description": "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
-			//       "maxLength": 100,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ConnectContactFlowArn",
-			//     "ConnectQueueArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The configuration used for outbound calls.",
+			//	  "properties": {
+			//	    "ConnectContactFlowArn": {
+			//	      "description": "The identifier of the contact flow for the outbound call.",
+			//	      "maxLength": 500,
+			//	      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+			//	      "type": "string"
+			//	    },
+			//	    "ConnectQueueArn": {
+			//	      "description": "The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.",
+			//	      "maxLength": 500,
+			//	      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$",
+			//	      "type": "string"
+			//	    },
+			//	    "ConnectSourcePhoneNumber": {
+			//	      "description": "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
+			//	      "maxLength": 100,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ConnectContactFlowArn",
+			//	    "ConnectQueueArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The configuration used for outbound calls.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -198,37 +203,38 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "One or more tags.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that's 1 to 256 characters in length.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "One or more tags.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that's 1 to 256 characters in length.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "One or more tags.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

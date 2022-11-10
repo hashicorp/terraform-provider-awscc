@@ -23,517 +23,518 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"container_definitions": {
 			// Property: ContainerDefinitions
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "List of container definitions that are passed to the Docker daemon on a container instance",
-			//     "properties": {
-			//       "Command": {
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Cpu": {
-			//         "type": "integer"
-			//       },
-			//       "DependsOn": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Condition": {
-			//               "type": "string"
-			//             },
-			//             "ContainerName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "DisableNetworking": {
-			//         "type": "boolean"
-			//       },
-			//       "DnsSearchDomains": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "DnsServers": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "DockerLabels": {
-			//         "additionalProperties": false,
-			//         "patternProperties": {
-			//           ".{1,}": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "DockerSecurityOptions": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "EntryPoint": {
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Environment": {
-			//         "description": "The environment variables to pass to a container",
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Name": {
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "EnvironmentFiles": {
-			//         "description": "The list of one or more files that contain the environment variables to pass to a container",
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Type": {
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Essential": {
-			//         "type": "boolean"
-			//       },
-			//       "ExtraHosts": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Hostname": {
-			//               "type": "string"
-			//             },
-			//             "IpAddress": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "FirelensConfiguration": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Options": {
-			//             "additionalProperties": false,
-			//             "patternProperties": {
-			//               ".{1,}": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Type": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "HealthCheck": {
-			//         "additionalProperties": false,
-			//         "description": "The health check command and associated configuration parameters for the container.",
-			//         "properties": {
-			//           "Command": {
-			//             "description": "A string array representing the command that the container runs to determine if it is healthy.",
-			//             "insertionOrder": true,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "Interval": {
-			//             "description": "The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.",
-			//             "type": "integer"
-			//           },
-			//           "Retries": {
-			//             "description": "The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.",
-			//             "type": "integer"
-			//           },
-			//           "StartPeriod": {
-			//             "description": "The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.",
-			//             "type": "integer"
-			//           },
-			//           "Timeout": {
-			//             "description": "The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.",
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Hostname": {
-			//         "type": "string"
-			//       },
-			//       "Image": {
-			//         "description": "The image used to start a container. This string is passed directly to the Docker daemon.",
-			//         "type": "string"
-			//       },
-			//       "Interactive": {
-			//         "type": "boolean"
-			//       },
-			//       "Links": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "LinuxParameters": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Capabilities": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Add": {
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Drop": {
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Devices": {
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "ContainerPath": {
-			//                   "type": "string"
-			//                 },
-			//                 "HostPath": {
-			//                   "type": "string"
-			//                 },
-			//                 "Permissions": {
-			//                   "insertionOrder": false,
-			//                   "items": {
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": true
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "InitProcessEnabled": {
-			//             "type": "boolean"
-			//           },
-			//           "MaxSwap": {
-			//             "type": "integer"
-			//           },
-			//           "SharedMemorySize": {
-			//             "type": "integer"
-			//           },
-			//           "Swappiness": {
-			//             "type": "integer"
-			//           },
-			//           "Tmpfs": {
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "ContainerPath": {
-			//                   "type": "string"
-			//                 },
-			//                 "MountOptions": {
-			//                   "insertionOrder": false,
-			//                   "items": {
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array"
-			//                 },
-			//                 "Size": {
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Size"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "LogConfiguration": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "LogDriver": {
-			//             "type": "string"
-			//           },
-			//           "Options": {
-			//             "additionalProperties": false,
-			//             "patternProperties": {
-			//               ".{1,}": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "SecretOptions": {
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Name": {
-			//                   "type": "string"
-			//                 },
-			//                 "ValueFrom": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Name",
-			//                 "ValueFrom"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           }
-			//         },
-			//         "required": [
-			//           "LogDriver"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "Memory": {
-			//         "description": "The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.",
-			//         "type": "integer"
-			//       },
-			//       "MemoryReservation": {
-			//         "type": "integer"
-			//       },
-			//       "MountPoints": {
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ContainerPath": {
-			//               "type": "string"
-			//             },
-			//             "ReadOnly": {
-			//               "type": "boolean"
-			//             },
-			//             "SourceVolume": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "Name": {
-			//         "description": "The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed",
-			//         "type": "string"
-			//       },
-			//       "PortMappings": {
-			//         "description": "Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ContainerPort": {
-			//               "type": "integer"
-			//             },
-			//             "HostPort": {
-			//               "type": "integer"
-			//             },
-			//             "Protocol": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "Privileged": {
-			//         "type": "boolean"
-			//       },
-			//       "PseudoTerminal": {
-			//         "type": "boolean"
-			//       },
-			//       "ReadonlyRootFilesystem": {
-			//         "type": "boolean"
-			//       },
-			//       "RepositoryCredentials": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "CredentialsParameter": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "ResourceRequirements": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Type": {
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Type",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Secrets": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Name": {
-			//               "type": "string"
-			//             },
-			//             "ValueFrom": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Name",
-			//             "ValueFrom"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "StartTimeout": {
-			//         "type": "integer"
-			//       },
-			//       "StopTimeout": {
-			//         "type": "integer"
-			//       },
-			//       "SystemControls": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Namespace": {
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Ulimits": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "HardLimit": {
-			//               "type": "integer"
-			//             },
-			//             "Name": {
-			//               "type": "string"
-			//             },
-			//             "SoftLimit": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "required": [
-			//             "HardLimit",
-			//             "Name",
-			//             "SoftLimit"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "User": {
-			//         "type": "string"
-			//       },
-			//       "VolumesFrom": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ReadOnly": {
-			//               "type": "boolean"
-			//             },
-			//             "SourceContainer": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "WorkingDirectory": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Name",
-			//       "Image"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "List of container definitions that are passed to the Docker daemon on a container instance",
+			//	    "properties": {
+			//	      "Command": {
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Cpu": {
+			//	        "type": "integer"
+			//	      },
+			//	      "DependsOn": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Condition": {
+			//	              "type": "string"
+			//	            },
+			//	            "ContainerName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "DisableNetworking": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "DnsSearchDomains": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "DnsServers": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "DockerLabels": {
+			//	        "additionalProperties": false,
+			//	        "patternProperties": {
+			//	          ".{1,}": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "DockerSecurityOptions": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "EntryPoint": {
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Environment": {
+			//	        "description": "The environment variables to pass to a container",
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Name": {
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "EnvironmentFiles": {
+			//	        "description": "The list of one or more files that contain the environment variables to pass to a container",
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Type": {
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Essential": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "ExtraHosts": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Hostname": {
+			//	              "type": "string"
+			//	            },
+			//	            "IpAddress": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "FirelensConfiguration": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Options": {
+			//	            "additionalProperties": false,
+			//	            "patternProperties": {
+			//	              ".{1,}": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Type": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "HealthCheck": {
+			//	        "additionalProperties": false,
+			//	        "description": "The health check command and associated configuration parameters for the container.",
+			//	        "properties": {
+			//	          "Command": {
+			//	            "description": "A string array representing the command that the container runs to determine if it is healthy.",
+			//	            "insertionOrder": true,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "Interval": {
+			//	            "description": "The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.",
+			//	            "type": "integer"
+			//	          },
+			//	          "Retries": {
+			//	            "description": "The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.",
+			//	            "type": "integer"
+			//	          },
+			//	          "StartPeriod": {
+			//	            "description": "The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.",
+			//	            "type": "integer"
+			//	          },
+			//	          "Timeout": {
+			//	            "description": "The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.",
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Hostname": {
+			//	        "type": "string"
+			//	      },
+			//	      "Image": {
+			//	        "description": "The image used to start a container. This string is passed directly to the Docker daemon.",
+			//	        "type": "string"
+			//	      },
+			//	      "Interactive": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "Links": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "LinuxParameters": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Capabilities": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Add": {
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Drop": {
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Devices": {
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "ContainerPath": {
+			//	                  "type": "string"
+			//	                },
+			//	                "HostPath": {
+			//	                  "type": "string"
+			//	                },
+			//	                "Permissions": {
+			//	                  "insertionOrder": false,
+			//	                  "items": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": true
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "InitProcessEnabled": {
+			//	            "type": "boolean"
+			//	          },
+			//	          "MaxSwap": {
+			//	            "type": "integer"
+			//	          },
+			//	          "SharedMemorySize": {
+			//	            "type": "integer"
+			//	          },
+			//	          "Swappiness": {
+			//	            "type": "integer"
+			//	          },
+			//	          "Tmpfs": {
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "ContainerPath": {
+			//	                  "type": "string"
+			//	                },
+			//	                "MountOptions": {
+			//	                  "insertionOrder": false,
+			//	                  "items": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array"
+			//	                },
+			//	                "Size": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Size"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "LogConfiguration": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "LogDriver": {
+			//	            "type": "string"
+			//	          },
+			//	          "Options": {
+			//	            "additionalProperties": false,
+			//	            "patternProperties": {
+			//	              ".{1,}": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "SecretOptions": {
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Name": {
+			//	                  "type": "string"
+			//	                },
+			//	                "ValueFrom": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Name",
+			//	                "ValueFrom"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "LogDriver"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "Memory": {
+			//	        "description": "The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.",
+			//	        "type": "integer"
+			//	      },
+			//	      "MemoryReservation": {
+			//	        "type": "integer"
+			//	      },
+			//	      "MountPoints": {
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ContainerPath": {
+			//	              "type": "string"
+			//	            },
+			//	            "ReadOnly": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "SourceVolume": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "Name": {
+			//	        "description": "The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed",
+			//	        "type": "string"
+			//	      },
+			//	      "PortMappings": {
+			//	        "description": "Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ContainerPort": {
+			//	              "type": "integer"
+			//	            },
+			//	            "HostPort": {
+			//	              "type": "integer"
+			//	            },
+			//	            "Protocol": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "Privileged": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "PseudoTerminal": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "ReadonlyRootFilesystem": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "RepositoryCredentials": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "CredentialsParameter": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "ResourceRequirements": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Type": {
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Type",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Secrets": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Name": {
+			//	              "type": "string"
+			//	            },
+			//	            "ValueFrom": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Name",
+			//	            "ValueFrom"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "StartTimeout": {
+			//	        "type": "integer"
+			//	      },
+			//	      "StopTimeout": {
+			//	        "type": "integer"
+			//	      },
+			//	      "SystemControls": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Namespace": {
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Ulimits": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "HardLimit": {
+			//	              "type": "integer"
+			//	            },
+			//	            "Name": {
+			//	              "type": "string"
+			//	            },
+			//	            "SoftLimit": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "HardLimit",
+			//	            "Name",
+			//	            "SoftLimit"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "User": {
+			//	        "type": "string"
+			//	      },
+			//	      "VolumesFrom": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ReadOnly": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "SourceContainer": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "WorkingDirectory": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Name",
+			//	      "Image"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"command": {
@@ -1078,24 +1079,26 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"cpu": {
 			// Property: Cpu
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"ephemeral_storage": {
 			// Property: EphemeralStorage
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "SizeInGiB": {
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "SizeInGiB": {
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"size_in_gi_b": {
@@ -1110,41 +1113,44 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"execution_role_arn": {
 			// Property: ExecutionRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"family": {
 			// Property: Family
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"inference_accelerators": {
 			// Property: InferenceAccelerators
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "DeviceName": {
-			//         "type": "string"
-			//       },
-			//       "DeviceType": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "DeviceName": {
+			//	        "type": "string"
+			//	      },
+			//	      "DeviceType": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"device_name": {
@@ -1164,62 +1170,67 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"ipc_mode": {
 			// Property: IpcMode
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"memory": {
 			// Property: Memory
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"network_mode": {
 			// Property: NetworkMode
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"pid_mode": {
 			// Property: PidMode
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"placement_constraints": {
 			// Property: PlacementConstraints
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Expression": {
-			//         "type": "string"
-			//       },
-			//       "Type": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Type"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Expression": {
+			//	        "type": "string"
+			//	      },
+			//	      "Type": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Type"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"expression": {
@@ -1239,38 +1250,39 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"proxy_configuration": {
 			// Property: ProxyConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ContainerName": {
-			//       "type": "string"
-			//     },
-			//     "ProxyConfigurationProperties": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Name": {
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "Type": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ContainerName"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ContainerName": {
+			//	      "type": "string"
+			//	    },
+			//	    "ProxyConfigurationProperties": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Name": {
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "Type": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ContainerName"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"container_name": {
@@ -1308,32 +1320,34 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"requires_compatibilities": {
 			// Property: RequiresCompatibilities
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Type:     types.SetType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"runtime_platform": {
 			// Property: RuntimePlatform
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "CpuArchitecture": {
-			//       "type": "string"
-			//     },
-			//     "OperatingSystemFamily": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "CpuArchitecture": {
+			//	      "type": "string"
+			//	    },
+			//	    "OperatingSystemFamily": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"cpu_architecture": {
@@ -1353,22 +1367,23 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -1388,10 +1403,11 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"task_definition_arn": {
 			// Property: TaskDefinitionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the Amazon ECS task definition",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the Amazon ECS task definition",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the Amazon ECS task definition",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1399,112 +1415,114 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"task_role_arn": {
 			// Property: TaskRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"volumes": {
 			// Property: Volumes
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "DockerVolumeConfiguration": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Autoprovision": {
-			//             "type": "boolean"
-			//           },
-			//           "Driver": {
-			//             "type": "string"
-			//           },
-			//           "DriverOpts": {
-			//             "additionalProperties": false,
-			//             "patternProperties": {
-			//               ".{1,}": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Labels": {
-			//             "additionalProperties": false,
-			//             "patternProperties": {
-			//               ".{1,}": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Scope": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "EFSVolumeConfiguration": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "AuthorizationConfig": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "AccessPointId": {
-			//                 "type": "string"
-			//               },
-			//               "IAM": {
-			//                 "enum": [
-			//                   "ENABLED",
-			//                   "DISABLED"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "FilesystemId": {
-			//             "type": "string"
-			//           },
-			//           "RootDirectory": {
-			//             "type": "string"
-			//           },
-			//           "TransitEncryption": {
-			//             "enum": [
-			//               "ENABLED",
-			//               "DISABLED"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "TransitEncryptionPort": {
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "required": [
-			//           "FilesystemId"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "Host": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "SourcePath": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Name": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "DockerVolumeConfiguration": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Autoprovision": {
+			//	            "type": "boolean"
+			//	          },
+			//	          "Driver": {
+			//	            "type": "string"
+			//	          },
+			//	          "DriverOpts": {
+			//	            "additionalProperties": false,
+			//	            "patternProperties": {
+			//	              ".{1,}": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Labels": {
+			//	            "additionalProperties": false,
+			//	            "patternProperties": {
+			//	              ".{1,}": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Scope": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "EFSVolumeConfiguration": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "AuthorizationConfig": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "AccessPointId": {
+			//	                "type": "string"
+			//	              },
+			//	              "IAM": {
+			//	                "enum": [
+			//	                  "ENABLED",
+			//	                  "DISABLED"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "FilesystemId": {
+			//	            "type": "string"
+			//	          },
+			//	          "RootDirectory": {
+			//	            "type": "string"
+			//	          },
+			//	          "TransitEncryption": {
+			//	            "enum": [
+			//	              "ENABLED",
+			//	              "DISABLED"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "TransitEncryptionPort": {
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "FilesystemId"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "Host": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "SourcePath": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Name": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"docker_volume_configuration": {

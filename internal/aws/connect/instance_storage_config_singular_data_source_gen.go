@@ -23,13 +23,14 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		"association_id": {
 			// Property: AssociationId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An associationID is automatically generated when a storage config is associated with an instance",
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "pattern": "^[-a-z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "An associationID is automatically generated when a storage config is associated with an instance",
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "pattern": "^[-a-z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "An associationID is automatically generated when a storage config is associated with an instance",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,11 +38,12 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		"instance_arn": {
 			// Property: InstanceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Connect Instance ID with which the storage config will be associated",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Connect Instance ID with which the storage config will be associated",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "Connect Instance ID with which the storage config will be associated",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,20 +51,21 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		"kinesis_firehose_config": {
 			// Property: KinesisFirehoseConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "FirehoseArn": {
-			//       "description": "An ARN is a unique AWS resource identifier.",
-			//       "pattern": "^arn:aws[-a-z0-9]*:firehose:[-a-z0-9]*:[0-9]{12}:deliverystream/[-a-zA-Z0-9_.]*$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "FirehoseArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "FirehoseArn": {
+			//	      "description": "An ARN is a unique AWS resource identifier.",
+			//	      "pattern": "^arn:aws[-a-z0-9]*:firehose:[-a-z0-9]*:[0-9]{12}:deliverystream/[-a-zA-Z0-9_.]*$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "FirehoseArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"firehose_arn": {
@@ -78,20 +81,21 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		"kinesis_stream_config": {
 			// Property: KinesisStreamConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "StreamArn": {
-			//       "description": "An ARN is a unique AWS resource identifier.",
-			//       "pattern": "^arn:aws[-a-z0-9]*:kinesis:[-a-z0-9]*:[0-9]{12}:stream/[-a-zA-Z0-9_.]*$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "StreamArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "StreamArn": {
+			//	      "description": "An ARN is a unique AWS resource identifier.",
+			//	      "pattern": "^arn:aws[-a-z0-9]*:kinesis:[-a-z0-9]*:[0-9]{12}:stream/[-a-zA-Z0-9_.]*$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "StreamArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"stream_arn": {
@@ -107,49 +111,50 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		"kinesis_video_stream_config": {
 			// Property: KinesisVideoStreamConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "EncryptionConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "EncryptionType": {
-			//           "description": "Specifies default encryption using AWS KMS-Managed Keys",
-			//           "enum": [
-			//             "KMS"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "KeyId": {
-			//           "description": "Specifies the encryption key id",
-			//           "maxLength": 128,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "EncryptionType",
-			//         "KeyId"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Prefix": {
-			//       "description": "Prefixes are used to infer logical hierarchy",
-			//       "maxLength": 128,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "RetentionPeriodHours": {
-			//       "description": "Number of hours",
-			//       "type": "number"
-			//     }
-			//   },
-			//   "required": [
-			//     "Prefix",
-			//     "RetentionPeriodHours"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "EncryptionConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "EncryptionType": {
+			//	          "description": "Specifies default encryption using AWS KMS-Managed Keys",
+			//	          "enum": [
+			//	            "KMS"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "KeyId": {
+			//	          "description": "Specifies the encryption key id",
+			//	          "maxLength": 128,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "EncryptionType",
+			//	        "KeyId"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Prefix": {
+			//	      "description": "Prefixes are used to infer logical hierarchy",
+			//	      "maxLength": 128,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "RetentionPeriodHours": {
+			//	      "description": "Number of hours",
+			//	      "type": "number"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Prefix",
+			//	    "RetentionPeriodHours"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"encryption_config": {
@@ -191,18 +196,19 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		"resource_type": {
 			// Property: ResourceType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the type of storage resource available for the instance",
-			//   "enum": [
-			//     "CHAT_TRANSCRIPTS",
-			//     "CALL_RECORDINGS",
-			//     "SCHEDULED_REPORTS",
-			//     "MEDIA_STREAMS",
-			//     "CONTACT_TRACE_RECORDS",
-			//     "AGENT_EVENTS"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the type of storage resource available for the instance",
+			//	  "enum": [
+			//	    "CHAT_TRANSCRIPTS",
+			//	    "CALL_RECORDINGS",
+			//	    "SCHEDULED_REPORTS",
+			//	    "MEDIA_STREAMS",
+			//	    "CONTACT_TRACE_RECORDS",
+			//	    "AGENT_EVENTS"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the type of storage resource available for the instance",
 			Type:        types.StringType,
 			Computed:    true,
@@ -210,51 +216,52 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		"s3_config": {
 			// Property: S3Config
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BucketName": {
-			//       "description": "A name for the S3 Bucket",
-			//       "maxLength": 128,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "BucketPrefix": {
-			//       "description": "Prefixes are used to infer logical hierarchy",
-			//       "maxLength": 128,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "EncryptionConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "EncryptionType": {
-			//           "description": "Specifies default encryption using AWS KMS-Managed Keys",
-			//           "enum": [
-			//             "KMS"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "KeyId": {
-			//           "description": "Specifies the encryption key id",
-			//           "maxLength": 128,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "EncryptionType",
-			//         "KeyId"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "BucketName",
-			//     "BucketPrefix"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BucketName": {
+			//	      "description": "A name for the S3 Bucket",
+			//	      "maxLength": 128,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "BucketPrefix": {
+			//	      "description": "Prefixes are used to infer logical hierarchy",
+			//	      "maxLength": 128,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "EncryptionConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "EncryptionType": {
+			//	          "description": "Specifies default encryption using AWS KMS-Managed Keys",
+			//	          "enum": [
+			//	            "KMS"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "KeyId": {
+			//	          "description": "Specifies the encryption key id",
+			//	          "maxLength": 128,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "EncryptionType",
+			//	        "KeyId"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "BucketName",
+			//	    "BucketPrefix"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"bucket_name": {
@@ -296,16 +303,17 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		"storage_type": {
 			// Property: StorageType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the storage type to be associated with the instance",
-			//   "enum": [
-			//     "S3",
-			//     "KINESIS_VIDEO_STREAM",
-			//     "KINESIS_STREAM",
-			//     "KINESIS_FIREHOSE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the storage type to be associated with the instance",
+			//	  "enum": [
+			//	    "S3",
+			//	    "KINESIS_VIDEO_STREAM",
+			//	    "KINESIS_STREAM",
+			//	    "KINESIS_FIREHOSE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the storage type to be associated with the instance",
 			Type:        types.StringType,
 			Computed:    true,

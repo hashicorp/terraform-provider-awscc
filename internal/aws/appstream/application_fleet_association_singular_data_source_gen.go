@@ -23,18 +23,20 @@ func applicationFleetAssociationDataSource(ctx context.Context) (datasource.Data
 		"application_arn": {
 			// Property: ApplicationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"fleet_name": {
 			// Property: FleetName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

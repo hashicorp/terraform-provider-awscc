@@ -23,10 +23,11 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon resource name (ARN) to uniquely identify the AWS resource.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon resource name (ARN) to uniquely identify the AWS resource.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon resource name (ARN) to uniquely identify the AWS resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "UUID of the CIDR collection.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "UUID of the CIDR collection.",
+			//	  "type": "string"
+			//	}
 			Description: "UUID of the CIDR collection.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,37 +47,38 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		"locations": {
 			// Property: Locations
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A complex type that contains information about the list of CIDR locations.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "CidrList": {
-			//         "description": "A list of CIDR blocks.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "LocationName": {
-			//         "description": "The name of the location that is associated with the CIDR collection.",
-			//         "maxLength": 16,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "LocationName",
-			//       "CidrList"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A complex type that contains information about the list of CIDR locations.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "CidrList": {
+			//	        "description": "A list of CIDR blocks.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "LocationName": {
+			//	        "description": "The name of the location that is associated with the CIDR collection.",
+			//	        "maxLength": 16,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "LocationName",
+			//	      "CidrList"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A complex type that contains information about the list of CIDR locations.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -98,13 +101,14 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A unique name for the CIDR collection.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9A-Za-z_\\-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A unique name for the CIDR collection.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9A-Za-z_\\-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "A unique name for the CIDR collection.",
 			Type:        types.StringType,
 			Computed:    true,

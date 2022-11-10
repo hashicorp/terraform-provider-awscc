@@ -23,10 +23,11 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"application_arn": {
 			// Property: ApplicationARN
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the ApplicationInsights application.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the ApplicationInsights application.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the ApplicationInsights application.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_configuration_enabled": {
 			// Property: AutoConfigurationEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "If set to true, application will be configured with recommended monitoring configuration.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "If set to true, application will be configured with recommended monitoring configuration.",
+			//	  "type": "boolean"
+			//	}
 			Description: "If set to true, application will be configured with recommended monitoring configuration.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cwe_monitor_enabled": {
 			// Property: CWEMonitorEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether Application Insights can listen to CloudWatch events for the application resources.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether Application Insights can listen to CloudWatch events for the application resources.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether Application Insights can listen to CloudWatch events for the application resources.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -56,837 +59,838 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"component_monitoring_settings": {
 			// Property: ComponentMonitoringSettings
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The monitoring settings of the components.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The monitoring setting of the component.",
-			//     "oneOf": [
-			//       {
-			//         "required": [
-			//           "ComponentName"
-			//         ]
-			//       },
-			//       {
-			//         "required": [
-			//           "ComponentARN"
-			//         ]
-			//       }
-			//     ],
-			//     "properties": {
-			//       "ComponentARN": {
-			//         "description": "The ARN of the compnonent.",
-			//         "maxLength": 300,
-			//         "minLength": 20,
-			//         "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
-			//         "type": "string"
-			//       },
-			//       "ComponentConfigurationMode": {
-			//         "description": "The component monitoring configuration mode.",
-			//         "enum": [
-			//           "DEFAULT",
-			//           "DEFAULT_WITH_OVERWRITE",
-			//           "CUSTOM"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "ComponentName": {
-			//         "description": "The name of the component.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "^[\\d\\w\\-_.+]*$",
-			//         "type": "string"
-			//       },
-			//       "CustomComponentConfiguration": {
-			//         "additionalProperties": false,
-			//         "description": "The monitoring configuration of the component.",
-			//         "properties": {
-			//           "ConfigurationDetails": {
-			//             "additionalProperties": false,
-			//             "description": "The configuration settings",
-			//             "properties": {
-			//               "AlarmMetrics": {
-			//                 "description": "A list of metrics to monitor for the component.",
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "A metric to be monitored for the component.",
-			//                   "properties": {
-			//                     "AlarmMetricName": {
-			//                       "description": "The name of the metric to be monitored for the component.",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "AlarmMetricName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Alarms": {
-			//                 "description": "A list of alarms to monitor for the component.",
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "A CloudWatch alarm to be monitored for the component.",
-			//                   "properties": {
-			//                     "AlarmName": {
-			//                       "description": "The name of the CloudWatch alarm to be monitored for the component.",
-			//                       "maxLength": 255,
-			//                       "minLength": 1,
-			//                       "type": "string"
-			//                     },
-			//                     "Severity": {
-			//                       "description": "Indicates the degree of outage when the alarm goes off.",
-			//                       "enum": [
-			//                         "HIGH",
-			//                         "MEDIUM",
-			//                         "LOW"
-			//                       ],
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "AlarmName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "HAClusterPrometheusExporter": {
-			//                 "additionalProperties": false,
-			//                 "description": "The HA cluster Prometheus Exporter settings.",
-			//                 "properties": {
-			//                   "PrometheusPort": {
-			//                     "description": "Prometheus exporter port.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "HANAPrometheusExporter": {
-			//                 "additionalProperties": false,
-			//                 "description": "The HANA DB Prometheus Exporter settings.",
-			//                 "properties": {
-			//                   "AgreeToInstallHANADBClient": {
-			//                     "description": "A flag which indicates agreeing to install SAP HANA DB client.",
-			//                     "type": "boolean"
-			//                   },
-			//                   "HANAPort": {
-			//                     "description": "The HANA DB port.",
-			//                     "type": "string"
-			//                   },
-			//                   "HANASID": {
-			//                     "description": "HANA DB SID.",
-			//                     "type": "string"
-			//                   },
-			//                   "HANASecretName": {
-			//                     "description": "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"\u003c\u003e\",\n  \"password\": \"\u003c\u003e\"\n}.",
-			//                     "type": "string"
-			//                   },
-			//                   "PrometheusPort": {
-			//                     "description": "Prometheus exporter port.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "HANASID",
-			//                   "HANAPort",
-			//                   "HANASecretName",
-			//                   "AgreeToInstallHANADBClient"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "JMXPrometheusExporter": {
-			//                 "additionalProperties": false,
-			//                 "description": "The JMX Prometheus Exporter settings.",
-			//                 "properties": {
-			//                   "HostPort": {
-			//                     "description": "Java agent host port",
-			//                     "type": "string"
-			//                   },
-			//                   "JMXURL": {
-			//                     "description": "JMX service URL.",
-			//                     "type": "string"
-			//                   },
-			//                   "PrometheusPort": {
-			//                     "description": "Prometheus exporter port.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "Logs": {
-			//                 "description": "A list of logs to monitor for the component.",
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "A log to be monitored for the component.",
-			//                   "properties": {
-			//                     "Encoding": {
-			//                       "description": "The type of encoding of the logs to be monitored.",
-			//                       "enum": [
-			//                         "utf-8",
-			//                         "utf-16",
-			//                         "ascii"
-			//                       ],
-			//                       "type": "string"
-			//                     },
-			//                     "LogGroupName": {
-			//                       "description": "The CloudWatch log group name to be associated to the monitored log.",
-			//                       "maxLength": 512,
-			//                       "minLength": 1,
-			//                       "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//                       "type": "string"
-			//                     },
-			//                     "LogPath": {
-			//                       "description": "The path of the logs to be monitored.",
-			//                       "maxLength": 260,
-			//                       "minLength": 1,
-			//                       "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
-			//                       "type": "string"
-			//                     },
-			//                     "LogType": {
-			//                       "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-			//                       "pattern": "^[A-Z][[A-Z]_]*$",
-			//                       "type": "string"
-			//                     },
-			//                     "PatternSet": {
-			//                       "description": "The name of the log pattern set.",
-			//                       "maxLength": 30,
-			//                       "minLength": 1,
-			//                       "pattern": "[a-zA-Z0-9.-_]*",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "LogType"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "WindowsEvents": {
-			//                 "description": "A list of Windows Events to log.",
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "A Windows Event to be monitored for the component.",
-			//                   "properties": {
-			//                     "EventLevels": {
-			//                       "description": "The levels of event to log. ",
-			//                       "insertionOrder": true,
-			//                       "items": {
-			//                         "description": "The level of event to log.",
-			//                         "enum": [
-			//                           "INFORMATION",
-			//                           "WARNING",
-			//                           "ERROR",
-			//                           "CRITICAL",
-			//                           "VERBOSE"
-			//                         ],
-			//                         "type": "string"
-			//                       },
-			//                       "minItems": 1,
-			//                       "type": "array"
-			//                     },
-			//                     "EventName": {
-			//                       "description": "The type of Windows Events to log.",
-			//                       "maxLength": 260,
-			//                       "minLength": 1,
-			//                       "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
-			//                       "type": "string"
-			//                     },
-			//                     "LogGroupName": {
-			//                       "description": "The CloudWatch log group name to be associated to the monitored log.",
-			//                       "maxLength": 512,
-			//                       "minLength": 1,
-			//                       "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//                       "type": "string"
-			//                     },
-			//                     "PatternSet": {
-			//                       "description": "The name of the log pattern set.",
-			//                       "maxLength": 30,
-			//                       "minLength": 1,
-			//                       "pattern": "[a-zA-Z0-9.-_]*",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "LogGroupName",
-			//                     "EventName",
-			//                     "EventLevels"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "SubComponentTypeConfigurations": {
-			//             "description": "Sub component configurations of the component.",
-			//             "insertionOrder": true,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "One type sub component configurations for the component.",
-			//               "properties": {
-			//                 "SubComponentConfigurationDetails": {
-			//                   "additionalProperties": false,
-			//                   "description": "The configuration settings of sub components.",
-			//                   "properties": {
-			//                     "AlarmMetrics": {
-			//                       "description": "A list of metrics to monitor for the component.",
-			//                       "insertionOrder": true,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "description": "A metric to be monitored for the component.",
-			//                         "properties": {
-			//                           "AlarmMetricName": {
-			//                             "description": "The name of the metric to be monitored for the component.",
-			//                             "type": "string"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "AlarmMetricName"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "type": "array"
-			//                     },
-			//                     "Logs": {
-			//                       "description": "A list of logs to monitor for the component.",
-			//                       "insertionOrder": true,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "description": "A log to be monitored for the component.",
-			//                         "properties": {
-			//                           "Encoding": {
-			//                             "description": "The type of encoding of the logs to be monitored.",
-			//                             "enum": [
-			//                               "utf-8",
-			//                               "utf-16",
-			//                               "ascii"
-			//                             ],
-			//                             "type": "string"
-			//                           },
-			//                           "LogGroupName": {
-			//                             "description": "The CloudWatch log group name to be associated to the monitored log.",
-			//                             "maxLength": 512,
-			//                             "minLength": 1,
-			//                             "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//                             "type": "string"
-			//                           },
-			//                           "LogPath": {
-			//                             "description": "The path of the logs to be monitored.",
-			//                             "maxLength": 260,
-			//                             "minLength": 1,
-			//                             "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
-			//                             "type": "string"
-			//                           },
-			//                           "LogType": {
-			//                             "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-			//                             "pattern": "^[A-Z][[A-Z]_]*$",
-			//                             "type": "string"
-			//                           },
-			//                           "PatternSet": {
-			//                             "description": "The name of the log pattern set.",
-			//                             "maxLength": 30,
-			//                             "minLength": 1,
-			//                             "pattern": "[a-zA-Z0-9.-_]*",
-			//                             "type": "string"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "LogType"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "type": "array"
-			//                     },
-			//                     "WindowsEvents": {
-			//                       "description": "A list of Windows Events to log.",
-			//                       "insertionOrder": true,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "description": "A Windows Event to be monitored for the component.",
-			//                         "properties": {
-			//                           "EventLevels": {
-			//                             "description": "The levels of event to log. ",
-			//                             "insertionOrder": true,
-			//                             "items": {
-			//                               "description": "The level of event to log.",
-			//                               "enum": [
-			//                                 "INFORMATION",
-			//                                 "WARNING",
-			//                                 "ERROR",
-			//                                 "CRITICAL",
-			//                                 "VERBOSE"
-			//                               ],
-			//                               "type": "string"
-			//                             },
-			//                             "minItems": 1,
-			//                             "type": "array"
-			//                           },
-			//                           "EventName": {
-			//                             "description": "The type of Windows Events to log.",
-			//                             "maxLength": 260,
-			//                             "minLength": 1,
-			//                             "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
-			//                             "type": "string"
-			//                           },
-			//                           "LogGroupName": {
-			//                             "description": "The CloudWatch log group name to be associated to the monitored log.",
-			//                             "maxLength": 512,
-			//                             "minLength": 1,
-			//                             "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//                             "type": "string"
-			//                           },
-			//                           "PatternSet": {
-			//                             "description": "The name of the log pattern set.",
-			//                             "maxLength": 30,
-			//                             "minLength": 1,
-			//                             "pattern": "[a-zA-Z0-9.-_]*",
-			//                             "type": "string"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "LogGroupName",
-			//                           "EventName",
-			//                           "EventLevels"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "type": "array"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "SubComponentType": {
-			//                   "description": "The sub component type.",
-			//                   "enum": [
-			//                     "AWS::EC2::Instance",
-			//                     "AWS::EC2::Volume"
-			//                   ],
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "SubComponentType",
-			//                 "SubComponentConfigurationDetails"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "minItems": 1,
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "DefaultOverwriteComponentConfiguration": {
-			//         "additionalProperties": false,
-			//         "description": "The overwritten settings on default component monitoring configuration.",
-			//         "properties": {
-			//           "ConfigurationDetails": {
-			//             "additionalProperties": false,
-			//             "description": "The configuration settings",
-			//             "properties": {
-			//               "AlarmMetrics": {
-			//                 "description": "A list of metrics to monitor for the component.",
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "A metric to be monitored for the component.",
-			//                   "properties": {
-			//                     "AlarmMetricName": {
-			//                       "description": "The name of the metric to be monitored for the component.",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "AlarmMetricName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Alarms": {
-			//                 "description": "A list of alarms to monitor for the component.",
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "A CloudWatch alarm to be monitored for the component.",
-			//                   "properties": {
-			//                     "AlarmName": {
-			//                       "description": "The name of the CloudWatch alarm to be monitored for the component.",
-			//                       "maxLength": 255,
-			//                       "minLength": 1,
-			//                       "type": "string"
-			//                     },
-			//                     "Severity": {
-			//                       "description": "Indicates the degree of outage when the alarm goes off.",
-			//                       "enum": [
-			//                         "HIGH",
-			//                         "MEDIUM",
-			//                         "LOW"
-			//                       ],
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "AlarmName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "HAClusterPrometheusExporter": {
-			//                 "additionalProperties": false,
-			//                 "description": "The HA cluster Prometheus Exporter settings.",
-			//                 "properties": {
-			//                   "PrometheusPort": {
-			//                     "description": "Prometheus exporter port.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "HANAPrometheusExporter": {
-			//                 "additionalProperties": false,
-			//                 "description": "The HANA DB Prometheus Exporter settings.",
-			//                 "properties": {
-			//                   "AgreeToInstallHANADBClient": {
-			//                     "description": "A flag which indicates agreeing to install SAP HANA DB client.",
-			//                     "type": "boolean"
-			//                   },
-			//                   "HANAPort": {
-			//                     "description": "The HANA DB port.",
-			//                     "type": "string"
-			//                   },
-			//                   "HANASID": {
-			//                     "description": "HANA DB SID.",
-			//                     "type": "string"
-			//                   },
-			//                   "HANASecretName": {
-			//                     "description": "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"\u003c\u003e\",\n  \"password\": \"\u003c\u003e\"\n}.",
-			//                     "type": "string"
-			//                   },
-			//                   "PrometheusPort": {
-			//                     "description": "Prometheus exporter port.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "HANASID",
-			//                   "HANAPort",
-			//                   "HANASecretName",
-			//                   "AgreeToInstallHANADBClient"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "JMXPrometheusExporter": {
-			//                 "additionalProperties": false,
-			//                 "description": "The JMX Prometheus Exporter settings.",
-			//                 "properties": {
-			//                   "HostPort": {
-			//                     "description": "Java agent host port",
-			//                     "type": "string"
-			//                   },
-			//                   "JMXURL": {
-			//                     "description": "JMX service URL.",
-			//                     "type": "string"
-			//                   },
-			//                   "PrometheusPort": {
-			//                     "description": "Prometheus exporter port.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "Logs": {
-			//                 "description": "A list of logs to monitor for the component.",
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "A log to be monitored for the component.",
-			//                   "properties": {
-			//                     "Encoding": {
-			//                       "description": "The type of encoding of the logs to be monitored.",
-			//                       "enum": [
-			//                         "utf-8",
-			//                         "utf-16",
-			//                         "ascii"
-			//                       ],
-			//                       "type": "string"
-			//                     },
-			//                     "LogGroupName": {
-			//                       "description": "The CloudWatch log group name to be associated to the monitored log.",
-			//                       "maxLength": 512,
-			//                       "minLength": 1,
-			//                       "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//                       "type": "string"
-			//                     },
-			//                     "LogPath": {
-			//                       "description": "The path of the logs to be monitored.",
-			//                       "maxLength": 260,
-			//                       "minLength": 1,
-			//                       "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
-			//                       "type": "string"
-			//                     },
-			//                     "LogType": {
-			//                       "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-			//                       "pattern": "^[A-Z][[A-Z]_]*$",
-			//                       "type": "string"
-			//                     },
-			//                     "PatternSet": {
-			//                       "description": "The name of the log pattern set.",
-			//                       "maxLength": 30,
-			//                       "minLength": 1,
-			//                       "pattern": "[a-zA-Z0-9.-_]*",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "LogType"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "WindowsEvents": {
-			//                 "description": "A list of Windows Events to log.",
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "A Windows Event to be monitored for the component.",
-			//                   "properties": {
-			//                     "EventLevels": {
-			//                       "description": "The levels of event to log. ",
-			//                       "insertionOrder": true,
-			//                       "items": {
-			//                         "description": "The level of event to log.",
-			//                         "enum": [
-			//                           "INFORMATION",
-			//                           "WARNING",
-			//                           "ERROR",
-			//                           "CRITICAL",
-			//                           "VERBOSE"
-			//                         ],
-			//                         "type": "string"
-			//                       },
-			//                       "minItems": 1,
-			//                       "type": "array"
-			//                     },
-			//                     "EventName": {
-			//                       "description": "The type of Windows Events to log.",
-			//                       "maxLength": 260,
-			//                       "minLength": 1,
-			//                       "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
-			//                       "type": "string"
-			//                     },
-			//                     "LogGroupName": {
-			//                       "description": "The CloudWatch log group name to be associated to the monitored log.",
-			//                       "maxLength": 512,
-			//                       "minLength": 1,
-			//                       "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//                       "type": "string"
-			//                     },
-			//                     "PatternSet": {
-			//                       "description": "The name of the log pattern set.",
-			//                       "maxLength": 30,
-			//                       "minLength": 1,
-			//                       "pattern": "[a-zA-Z0-9.-_]*",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "LogGroupName",
-			//                     "EventName",
-			//                     "EventLevels"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "SubComponentTypeConfigurations": {
-			//             "description": "Sub component configurations of the component.",
-			//             "insertionOrder": true,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "One type sub component configurations for the component.",
-			//               "properties": {
-			//                 "SubComponentConfigurationDetails": {
-			//                   "additionalProperties": false,
-			//                   "description": "The configuration settings of sub components.",
-			//                   "properties": {
-			//                     "AlarmMetrics": {
-			//                       "description": "A list of metrics to monitor for the component.",
-			//                       "insertionOrder": true,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "description": "A metric to be monitored for the component.",
-			//                         "properties": {
-			//                           "AlarmMetricName": {
-			//                             "description": "The name of the metric to be monitored for the component.",
-			//                             "type": "string"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "AlarmMetricName"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "type": "array"
-			//                     },
-			//                     "Logs": {
-			//                       "description": "A list of logs to monitor for the component.",
-			//                       "insertionOrder": true,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "description": "A log to be monitored for the component.",
-			//                         "properties": {
-			//                           "Encoding": {
-			//                             "description": "The type of encoding of the logs to be monitored.",
-			//                             "enum": [
-			//                               "utf-8",
-			//                               "utf-16",
-			//                               "ascii"
-			//                             ],
-			//                             "type": "string"
-			//                           },
-			//                           "LogGroupName": {
-			//                             "description": "The CloudWatch log group name to be associated to the monitored log.",
-			//                             "maxLength": 512,
-			//                             "minLength": 1,
-			//                             "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//                             "type": "string"
-			//                           },
-			//                           "LogPath": {
-			//                             "description": "The path of the logs to be monitored.",
-			//                             "maxLength": 260,
-			//                             "minLength": 1,
-			//                             "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
-			//                             "type": "string"
-			//                           },
-			//                           "LogType": {
-			//                             "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-			//                             "pattern": "^[A-Z][[A-Z]_]*$",
-			//                             "type": "string"
-			//                           },
-			//                           "PatternSet": {
-			//                             "description": "The name of the log pattern set.",
-			//                             "maxLength": 30,
-			//                             "minLength": 1,
-			//                             "pattern": "[a-zA-Z0-9.-_]*",
-			//                             "type": "string"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "LogType"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "type": "array"
-			//                     },
-			//                     "WindowsEvents": {
-			//                       "description": "A list of Windows Events to log.",
-			//                       "insertionOrder": true,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "description": "A Windows Event to be monitored for the component.",
-			//                         "properties": {
-			//                           "EventLevels": {
-			//                             "description": "The levels of event to log. ",
-			//                             "insertionOrder": true,
-			//                             "items": {
-			//                               "description": "The level of event to log.",
-			//                               "enum": [
-			//                                 "INFORMATION",
-			//                                 "WARNING",
-			//                                 "ERROR",
-			//                                 "CRITICAL",
-			//                                 "VERBOSE"
-			//                               ],
-			//                               "type": "string"
-			//                             },
-			//                             "minItems": 1,
-			//                             "type": "array"
-			//                           },
-			//                           "EventName": {
-			//                             "description": "The type of Windows Events to log.",
-			//                             "maxLength": 260,
-			//                             "minLength": 1,
-			//                             "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
-			//                             "type": "string"
-			//                           },
-			//                           "LogGroupName": {
-			//                             "description": "The CloudWatch log group name to be associated to the monitored log.",
-			//                             "maxLength": 512,
-			//                             "minLength": 1,
-			//                             "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//                             "type": "string"
-			//                           },
-			//                           "PatternSet": {
-			//                             "description": "The name of the log pattern set.",
-			//                             "maxLength": 30,
-			//                             "minLength": 1,
-			//                             "pattern": "[a-zA-Z0-9.-_]*",
-			//                             "type": "string"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "LogGroupName",
-			//                           "EventName",
-			//                           "EventLevels"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "type": "array"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "SubComponentType": {
-			//                   "description": "The sub component type.",
-			//                   "enum": [
-			//                     "AWS::EC2::Instance",
-			//                     "AWS::EC2::Volume"
-			//                   ],
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "SubComponentType",
-			//                 "SubComponentConfigurationDetails"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "minItems": 1,
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Tier": {
-			//         "description": "The tier of the application component.",
-			//         "pattern": "^[A-Z][[A-Z]_]*$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Tier",
-			//       "ComponentConfigurationMode"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The monitoring settings of the components.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The monitoring setting of the component.",
+			//	    "oneOf": [
+			//	      {
+			//	        "required": [
+			//	          "ComponentName"
+			//	        ]
+			//	      },
+			//	      {
+			//	        "required": [
+			//	          "ComponentARN"
+			//	        ]
+			//	      }
+			//	    ],
+			//	    "properties": {
+			//	      "ComponentARN": {
+			//	        "description": "The ARN of the compnonent.",
+			//	        "maxLength": 300,
+			//	        "minLength": 20,
+			//	        "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
+			//	        "type": "string"
+			//	      },
+			//	      "ComponentConfigurationMode": {
+			//	        "description": "The component monitoring configuration mode.",
+			//	        "enum": [
+			//	          "DEFAULT",
+			//	          "DEFAULT_WITH_OVERWRITE",
+			//	          "CUSTOM"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "ComponentName": {
+			//	        "description": "The name of the component.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "^[\\d\\w\\-_.+]*$",
+			//	        "type": "string"
+			//	      },
+			//	      "CustomComponentConfiguration": {
+			//	        "additionalProperties": false,
+			//	        "description": "The monitoring configuration of the component.",
+			//	        "properties": {
+			//	          "ConfigurationDetails": {
+			//	            "additionalProperties": false,
+			//	            "description": "The configuration settings",
+			//	            "properties": {
+			//	              "AlarmMetrics": {
+			//	                "description": "A list of metrics to monitor for the component.",
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A metric to be monitored for the component.",
+			//	                  "properties": {
+			//	                    "AlarmMetricName": {
+			//	                      "description": "The name of the metric to be monitored for the component.",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "AlarmMetricName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Alarms": {
+			//	                "description": "A list of alarms to monitor for the component.",
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A CloudWatch alarm to be monitored for the component.",
+			//	                  "properties": {
+			//	                    "AlarmName": {
+			//	                      "description": "The name of the CloudWatch alarm to be monitored for the component.",
+			//	                      "maxLength": 255,
+			//	                      "minLength": 1,
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Severity": {
+			//	                      "description": "Indicates the degree of outage when the alarm goes off.",
+			//	                      "enum": [
+			//	                        "HIGH",
+			//	                        "MEDIUM",
+			//	                        "LOW"
+			//	                      ],
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "AlarmName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "HAClusterPrometheusExporter": {
+			//	                "additionalProperties": false,
+			//	                "description": "The HA cluster Prometheus Exporter settings.",
+			//	                "properties": {
+			//	                  "PrometheusPort": {
+			//	                    "description": "Prometheus exporter port.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "HANAPrometheusExporter": {
+			//	                "additionalProperties": false,
+			//	                "description": "The HANA DB Prometheus Exporter settings.",
+			//	                "properties": {
+			//	                  "AgreeToInstallHANADBClient": {
+			//	                    "description": "A flag which indicates agreeing to install SAP HANA DB client.",
+			//	                    "type": "boolean"
+			//	                  },
+			//	                  "HANAPort": {
+			//	                    "description": "The HANA DB port.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "HANASID": {
+			//	                    "description": "HANA DB SID.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "HANASecretName": {
+			//	                    "description": "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"\u003c\u003e\",\n  \"password\": \"\u003c\u003e\"\n}.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PrometheusPort": {
+			//	                    "description": "Prometheus exporter port.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "HANASID",
+			//	                  "HANAPort",
+			//	                  "HANASecretName",
+			//	                  "AgreeToInstallHANADBClient"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "JMXPrometheusExporter": {
+			//	                "additionalProperties": false,
+			//	                "description": "The JMX Prometheus Exporter settings.",
+			//	                "properties": {
+			//	                  "HostPort": {
+			//	                    "description": "Java agent host port",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "JMXURL": {
+			//	                    "description": "JMX service URL.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PrometheusPort": {
+			//	                    "description": "Prometheus exporter port.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "Logs": {
+			//	                "description": "A list of logs to monitor for the component.",
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A log to be monitored for the component.",
+			//	                  "properties": {
+			//	                    "Encoding": {
+			//	                      "description": "The type of encoding of the logs to be monitored.",
+			//	                      "enum": [
+			//	                        "utf-8",
+			//	                        "utf-16",
+			//	                        "ascii"
+			//	                      ],
+			//	                      "type": "string"
+			//	                    },
+			//	                    "LogGroupName": {
+			//	                      "description": "The CloudWatch log group name to be associated to the monitored log.",
+			//	                      "maxLength": 512,
+			//	                      "minLength": 1,
+			//	                      "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "LogPath": {
+			//	                      "description": "The path of the logs to be monitored.",
+			//	                      "maxLength": 260,
+			//	                      "minLength": 1,
+			//	                      "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "LogType": {
+			//	                      "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
+			//	                      "pattern": "^[A-Z][[A-Z]_]*$",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "PatternSet": {
+			//	                      "description": "The name of the log pattern set.",
+			//	                      "maxLength": 30,
+			//	                      "minLength": 1,
+			//	                      "pattern": "[a-zA-Z0-9.-_]*",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "LogType"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "WindowsEvents": {
+			//	                "description": "A list of Windows Events to log.",
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A Windows Event to be monitored for the component.",
+			//	                  "properties": {
+			//	                    "EventLevels": {
+			//	                      "description": "The levels of event to log. ",
+			//	                      "insertionOrder": true,
+			//	                      "items": {
+			//	                        "description": "The level of event to log.",
+			//	                        "enum": [
+			//	                          "INFORMATION",
+			//	                          "WARNING",
+			//	                          "ERROR",
+			//	                          "CRITICAL",
+			//	                          "VERBOSE"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      },
+			//	                      "minItems": 1,
+			//	                      "type": "array"
+			//	                    },
+			//	                    "EventName": {
+			//	                      "description": "The type of Windows Events to log.",
+			//	                      "maxLength": 260,
+			//	                      "minLength": 1,
+			//	                      "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "LogGroupName": {
+			//	                      "description": "The CloudWatch log group name to be associated to the monitored log.",
+			//	                      "maxLength": 512,
+			//	                      "minLength": 1,
+			//	                      "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "PatternSet": {
+			//	                      "description": "The name of the log pattern set.",
+			//	                      "maxLength": 30,
+			//	                      "minLength": 1,
+			//	                      "pattern": "[a-zA-Z0-9.-_]*",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "LogGroupName",
+			//	                    "EventName",
+			//	                    "EventLevels"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "SubComponentTypeConfigurations": {
+			//	            "description": "Sub component configurations of the component.",
+			//	            "insertionOrder": true,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "One type sub component configurations for the component.",
+			//	              "properties": {
+			//	                "SubComponentConfigurationDetails": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "The configuration settings of sub components.",
+			//	                  "properties": {
+			//	                    "AlarmMetrics": {
+			//	                      "description": "A list of metrics to monitor for the component.",
+			//	                      "insertionOrder": true,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "A metric to be monitored for the component.",
+			//	                        "properties": {
+			//	                          "AlarmMetricName": {
+			//	                            "description": "The name of the metric to be monitored for the component.",
+			//	                            "type": "string"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "AlarmMetricName"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "type": "array"
+			//	                    },
+			//	                    "Logs": {
+			//	                      "description": "A list of logs to monitor for the component.",
+			//	                      "insertionOrder": true,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "A log to be monitored for the component.",
+			//	                        "properties": {
+			//	                          "Encoding": {
+			//	                            "description": "The type of encoding of the logs to be monitored.",
+			//	                            "enum": [
+			//	                              "utf-8",
+			//	                              "utf-16",
+			//	                              "ascii"
+			//	                            ],
+			//	                            "type": "string"
+			//	                          },
+			//	                          "LogGroupName": {
+			//	                            "description": "The CloudWatch log group name to be associated to the monitored log.",
+			//	                            "maxLength": 512,
+			//	                            "minLength": 1,
+			//	                            "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "LogPath": {
+			//	                            "description": "The path of the logs to be monitored.",
+			//	                            "maxLength": 260,
+			//	                            "minLength": 1,
+			//	                            "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "LogType": {
+			//	                            "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
+			//	                            "pattern": "^[A-Z][[A-Z]_]*$",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "PatternSet": {
+			//	                            "description": "The name of the log pattern set.",
+			//	                            "maxLength": 30,
+			//	                            "minLength": 1,
+			//	                            "pattern": "[a-zA-Z0-9.-_]*",
+			//	                            "type": "string"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "LogType"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "type": "array"
+			//	                    },
+			//	                    "WindowsEvents": {
+			//	                      "description": "A list of Windows Events to log.",
+			//	                      "insertionOrder": true,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "A Windows Event to be monitored for the component.",
+			//	                        "properties": {
+			//	                          "EventLevels": {
+			//	                            "description": "The levels of event to log. ",
+			//	                            "insertionOrder": true,
+			//	                            "items": {
+			//	                              "description": "The level of event to log.",
+			//	                              "enum": [
+			//	                                "INFORMATION",
+			//	                                "WARNING",
+			//	                                "ERROR",
+			//	                                "CRITICAL",
+			//	                                "VERBOSE"
+			//	                              ],
+			//	                              "type": "string"
+			//	                            },
+			//	                            "minItems": 1,
+			//	                            "type": "array"
+			//	                          },
+			//	                          "EventName": {
+			//	                            "description": "The type of Windows Events to log.",
+			//	                            "maxLength": 260,
+			//	                            "minLength": 1,
+			//	                            "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "LogGroupName": {
+			//	                            "description": "The CloudWatch log group name to be associated to the monitored log.",
+			//	                            "maxLength": 512,
+			//	                            "minLength": 1,
+			//	                            "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "PatternSet": {
+			//	                            "description": "The name of the log pattern set.",
+			//	                            "maxLength": 30,
+			//	                            "minLength": 1,
+			//	                            "pattern": "[a-zA-Z0-9.-_]*",
+			//	                            "type": "string"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "LogGroupName",
+			//	                          "EventName",
+			//	                          "EventLevels"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "type": "array"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "SubComponentType": {
+			//	                  "description": "The sub component type.",
+			//	                  "enum": [
+			//	                    "AWS::EC2::Instance",
+			//	                    "AWS::EC2::Volume"
+			//	                  ],
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "SubComponentType",
+			//	                "SubComponentConfigurationDetails"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "minItems": 1,
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "DefaultOverwriteComponentConfiguration": {
+			//	        "additionalProperties": false,
+			//	        "description": "The overwritten settings on default component monitoring configuration.",
+			//	        "properties": {
+			//	          "ConfigurationDetails": {
+			//	            "additionalProperties": false,
+			//	            "description": "The configuration settings",
+			//	            "properties": {
+			//	              "AlarmMetrics": {
+			//	                "description": "A list of metrics to monitor for the component.",
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A metric to be monitored for the component.",
+			//	                  "properties": {
+			//	                    "AlarmMetricName": {
+			//	                      "description": "The name of the metric to be monitored for the component.",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "AlarmMetricName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Alarms": {
+			//	                "description": "A list of alarms to monitor for the component.",
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A CloudWatch alarm to be monitored for the component.",
+			//	                  "properties": {
+			//	                    "AlarmName": {
+			//	                      "description": "The name of the CloudWatch alarm to be monitored for the component.",
+			//	                      "maxLength": 255,
+			//	                      "minLength": 1,
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Severity": {
+			//	                      "description": "Indicates the degree of outage when the alarm goes off.",
+			//	                      "enum": [
+			//	                        "HIGH",
+			//	                        "MEDIUM",
+			//	                        "LOW"
+			//	                      ],
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "AlarmName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "HAClusterPrometheusExporter": {
+			//	                "additionalProperties": false,
+			//	                "description": "The HA cluster Prometheus Exporter settings.",
+			//	                "properties": {
+			//	                  "PrometheusPort": {
+			//	                    "description": "Prometheus exporter port.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "HANAPrometheusExporter": {
+			//	                "additionalProperties": false,
+			//	                "description": "The HANA DB Prometheus Exporter settings.",
+			//	                "properties": {
+			//	                  "AgreeToInstallHANADBClient": {
+			//	                    "description": "A flag which indicates agreeing to install SAP HANA DB client.",
+			//	                    "type": "boolean"
+			//	                  },
+			//	                  "HANAPort": {
+			//	                    "description": "The HANA DB port.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "HANASID": {
+			//	                    "description": "HANA DB SID.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "HANASecretName": {
+			//	                    "description": "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"\u003c\u003e\",\n  \"password\": \"\u003c\u003e\"\n}.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PrometheusPort": {
+			//	                    "description": "Prometheus exporter port.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "HANASID",
+			//	                  "HANAPort",
+			//	                  "HANASecretName",
+			//	                  "AgreeToInstallHANADBClient"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "JMXPrometheusExporter": {
+			//	                "additionalProperties": false,
+			//	                "description": "The JMX Prometheus Exporter settings.",
+			//	                "properties": {
+			//	                  "HostPort": {
+			//	                    "description": "Java agent host port",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "JMXURL": {
+			//	                    "description": "JMX service URL.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PrometheusPort": {
+			//	                    "description": "Prometheus exporter port.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "Logs": {
+			//	                "description": "A list of logs to monitor for the component.",
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A log to be monitored for the component.",
+			//	                  "properties": {
+			//	                    "Encoding": {
+			//	                      "description": "The type of encoding of the logs to be monitored.",
+			//	                      "enum": [
+			//	                        "utf-8",
+			//	                        "utf-16",
+			//	                        "ascii"
+			//	                      ],
+			//	                      "type": "string"
+			//	                    },
+			//	                    "LogGroupName": {
+			//	                      "description": "The CloudWatch log group name to be associated to the monitored log.",
+			//	                      "maxLength": 512,
+			//	                      "minLength": 1,
+			//	                      "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "LogPath": {
+			//	                      "description": "The path of the logs to be monitored.",
+			//	                      "maxLength": 260,
+			//	                      "minLength": 1,
+			//	                      "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "LogType": {
+			//	                      "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
+			//	                      "pattern": "^[A-Z][[A-Z]_]*$",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "PatternSet": {
+			//	                      "description": "The name of the log pattern set.",
+			//	                      "maxLength": 30,
+			//	                      "minLength": 1,
+			//	                      "pattern": "[a-zA-Z0-9.-_]*",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "LogType"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "WindowsEvents": {
+			//	                "description": "A list of Windows Events to log.",
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A Windows Event to be monitored for the component.",
+			//	                  "properties": {
+			//	                    "EventLevels": {
+			//	                      "description": "The levels of event to log. ",
+			//	                      "insertionOrder": true,
+			//	                      "items": {
+			//	                        "description": "The level of event to log.",
+			//	                        "enum": [
+			//	                          "INFORMATION",
+			//	                          "WARNING",
+			//	                          "ERROR",
+			//	                          "CRITICAL",
+			//	                          "VERBOSE"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      },
+			//	                      "minItems": 1,
+			//	                      "type": "array"
+			//	                    },
+			//	                    "EventName": {
+			//	                      "description": "The type of Windows Events to log.",
+			//	                      "maxLength": 260,
+			//	                      "minLength": 1,
+			//	                      "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "LogGroupName": {
+			//	                      "description": "The CloudWatch log group name to be associated to the monitored log.",
+			//	                      "maxLength": 512,
+			//	                      "minLength": 1,
+			//	                      "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "PatternSet": {
+			//	                      "description": "The name of the log pattern set.",
+			//	                      "maxLength": 30,
+			//	                      "minLength": 1,
+			//	                      "pattern": "[a-zA-Z0-9.-_]*",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "LogGroupName",
+			//	                    "EventName",
+			//	                    "EventLevels"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "SubComponentTypeConfigurations": {
+			//	            "description": "Sub component configurations of the component.",
+			//	            "insertionOrder": true,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "One type sub component configurations for the component.",
+			//	              "properties": {
+			//	                "SubComponentConfigurationDetails": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "The configuration settings of sub components.",
+			//	                  "properties": {
+			//	                    "AlarmMetrics": {
+			//	                      "description": "A list of metrics to monitor for the component.",
+			//	                      "insertionOrder": true,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "A metric to be monitored for the component.",
+			//	                        "properties": {
+			//	                          "AlarmMetricName": {
+			//	                            "description": "The name of the metric to be monitored for the component.",
+			//	                            "type": "string"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "AlarmMetricName"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "type": "array"
+			//	                    },
+			//	                    "Logs": {
+			//	                      "description": "A list of logs to monitor for the component.",
+			//	                      "insertionOrder": true,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "A log to be monitored for the component.",
+			//	                        "properties": {
+			//	                          "Encoding": {
+			//	                            "description": "The type of encoding of the logs to be monitored.",
+			//	                            "enum": [
+			//	                              "utf-8",
+			//	                              "utf-16",
+			//	                              "ascii"
+			//	                            ],
+			//	                            "type": "string"
+			//	                          },
+			//	                          "LogGroupName": {
+			//	                            "description": "The CloudWatch log group name to be associated to the monitored log.",
+			//	                            "maxLength": 512,
+			//	                            "minLength": 1,
+			//	                            "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "LogPath": {
+			//	                            "description": "The path of the logs to be monitored.",
+			//	                            "maxLength": 260,
+			//	                            "minLength": 1,
+			//	                            "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "LogType": {
+			//	                            "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
+			//	                            "pattern": "^[A-Z][[A-Z]_]*$",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "PatternSet": {
+			//	                            "description": "The name of the log pattern set.",
+			//	                            "maxLength": 30,
+			//	                            "minLength": 1,
+			//	                            "pattern": "[a-zA-Z0-9.-_]*",
+			//	                            "type": "string"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "LogType"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "type": "array"
+			//	                    },
+			//	                    "WindowsEvents": {
+			//	                      "description": "A list of Windows Events to log.",
+			//	                      "insertionOrder": true,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "A Windows Event to be monitored for the component.",
+			//	                        "properties": {
+			//	                          "EventLevels": {
+			//	                            "description": "The levels of event to log. ",
+			//	                            "insertionOrder": true,
+			//	                            "items": {
+			//	                              "description": "The level of event to log.",
+			//	                              "enum": [
+			//	                                "INFORMATION",
+			//	                                "WARNING",
+			//	                                "ERROR",
+			//	                                "CRITICAL",
+			//	                                "VERBOSE"
+			//	                              ],
+			//	                              "type": "string"
+			//	                            },
+			//	                            "minItems": 1,
+			//	                            "type": "array"
+			//	                          },
+			//	                          "EventName": {
+			//	                            "description": "The type of Windows Events to log.",
+			//	                            "maxLength": 260,
+			//	                            "minLength": 1,
+			//	                            "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "LogGroupName": {
+			//	                            "description": "The CloudWatch log group name to be associated to the monitored log.",
+			//	                            "maxLength": 512,
+			//	                            "minLength": 1,
+			//	                            "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+			//	                            "type": "string"
+			//	                          },
+			//	                          "PatternSet": {
+			//	                            "description": "The name of the log pattern set.",
+			//	                            "maxLength": 30,
+			//	                            "minLength": 1,
+			//	                            "pattern": "[a-zA-Z0-9.-_]*",
+			//	                            "type": "string"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "LogGroupName",
+			//	                          "EventName",
+			//	                          "EventLevels"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "type": "array"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "SubComponentType": {
+			//	                  "description": "The sub component type.",
+			//	                  "enum": [
+			//	                    "AWS::EC2::Instance",
+			//	                    "AWS::EC2::Volume"
+			//	                  ],
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "SubComponentType",
+			//	                "SubComponentConfigurationDetails"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "minItems": 1,
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Tier": {
+			//	        "description": "The tier of the application component.",
+			//	        "pattern": "^[A-Z][[A-Z]_]*$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Tier",
+			//	      "ComponentConfigurationMode"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "The monitoring settings of the components.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1557,42 +1561,43 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"custom_components": {
 			// Property: CustomComponents
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The custom grouped components.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The custom grouped component.",
-			//     "properties": {
-			//       "ComponentName": {
-			//         "description": "The name of the component.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "^[\\d\\w\\-_.+]*$",
-			//         "type": "string"
-			//       },
-			//       "ResourceList": {
-			//         "description": "The list of resource ARNs that belong to the component.",
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "maxLength": 300,
-			//           "minLength": 20,
-			//           "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
-			//           "type": "string"
-			//         },
-			//         "minItems": 1,
-			//         "type": "array"
-			//       }
-			//     },
-			//     "required": [
-			//       "ComponentName",
-			//       "ResourceList"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The custom grouped components.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The custom grouped component.",
+			//	    "properties": {
+			//	      "ComponentName": {
+			//	        "description": "The name of the component.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "^[\\d\\w\\-_.+]*$",
+			//	        "type": "string"
+			//	      },
+			//	      "ResourceList": {
+			//	        "description": "The list of resource ARNs that belong to the component.",
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "maxLength": 300,
+			//	          "minLength": 20,
+			//	          "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
+			//	          "type": "string"
+			//	        },
+			//	        "minItems": 1,
+			//	        "type": "array"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "ComponentName",
+			//	      "ResourceList"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "The custom grouped components.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1615,13 +1620,14 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"grouping_type": {
 			// Property: GroupingType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The grouping type of the application",
-			//   "enum": [
-			//     "ACCOUNT_BASED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The grouping type of the application",
+			//	  "enum": [
+			//	    "ACCOUNT_BASED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The grouping type of the application",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1629,65 +1635,66 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"log_pattern_sets": {
 			// Property: LogPatternSets
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The log pattern sets.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The log pattern set.",
-			//     "properties": {
-			//       "LogPatterns": {
-			//         "description": "The log patterns of a set.",
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "The log pattern.",
-			//           "properties": {
-			//             "Pattern": {
-			//               "description": "The log pattern.",
-			//               "maxLength": 50,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "PatternName": {
-			//               "description": "The name of the log pattern.",
-			//               "maxLength": 50,
-			//               "minLength": 1,
-			//               "pattern": "[a-zA-Z0-9.-_]*",
-			//               "type": "string"
-			//             },
-			//             "Rank": {
-			//               "description": "Rank of the log pattern.",
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "required": [
-			//             "PatternName",
-			//             "Pattern",
-			//             "Rank"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "minItems": 1,
-			//         "type": "array"
-			//       },
-			//       "PatternSetName": {
-			//         "description": "The name of the log pattern set.",
-			//         "maxLength": 30,
-			//         "minLength": 1,
-			//         "pattern": "[a-zA-Z0-9.-_]*",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "PatternSetName",
-			//       "LogPatterns"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The log pattern sets.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The log pattern set.",
+			//	    "properties": {
+			//	      "LogPatterns": {
+			//	        "description": "The log patterns of a set.",
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "The log pattern.",
+			//	          "properties": {
+			//	            "Pattern": {
+			//	              "description": "The log pattern.",
+			//	              "maxLength": 50,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "PatternName": {
+			//	              "description": "The name of the log pattern.",
+			//	              "maxLength": 50,
+			//	              "minLength": 1,
+			//	              "pattern": "[a-zA-Z0-9.-_]*",
+			//	              "type": "string"
+			//	            },
+			//	            "Rank": {
+			//	              "description": "Rank of the log pattern.",
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "PatternName",
+			//	            "Pattern",
+			//	            "Rank"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "minItems": 1,
+			//	        "type": "array"
+			//	      },
+			//	      "PatternSetName": {
+			//	        "description": "The name of the log pattern set.",
+			//	        "maxLength": 30,
+			//	        "minLength": 1,
+			//	        "pattern": "[a-zA-Z0-9.-_]*",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "PatternSetName",
+			//	      "LogPatterns"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "The log pattern sets.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1731,10 +1738,11 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ops_center_enabled": {
 			// Property: OpsCenterEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "When set to true, creates opsItems for any problems detected on an application.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "When set to true, creates opsItems for any problems detected on an application.",
+			//	  "type": "boolean"
+			//	}
 			Description: "When set to true, creates opsItems for any problems detected on an application.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -1742,13 +1750,14 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ops_item_sns_topic_arn": {
 			// Property: OpsItemSNSTopicArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The SNS topic provided to Application Insights that is associated to the created opsItem.",
-			//   "maxLength": 300,
-			//   "minLength": 20,
-			//   "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The SNS topic provided to Application Insights that is associated to the created opsItem.",
+			//	  "maxLength": 300,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
+			//	  "type": "string"
+			//	}
 			Description: "The SNS topic provided to Application Insights that is associated to the created opsItem.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1756,13 +1765,14 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_group_name": {
 			// Property: ResourceGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the resource group.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9.-_]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the resource group.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9.-_]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the resource group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1770,35 +1780,36 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags of Application Insights application.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The tags of Application Insights application.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "The tags of Application Insights application.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

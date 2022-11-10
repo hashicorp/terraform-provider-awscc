@@ -23,10 +23,11 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the template.\u003c/p\u003e",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the template.\u003c/p\u003e",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The Amazon Resource Name (ARN) of the template.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,23 +35,25 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"aws_account_id": {
 			// Property: AwsAccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 12,
-			//   "minLength": 12,
-			//   "pattern": "^[0-9]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 12,
+			//	  "minLength": 12,
+			//	  "pattern": "^[0-9]{12}$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eTime when this was created.\u003c/p\u003e",
-			//   "format": "string",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eTime when this was created.\u003c/p\u003e",
+			//	  "format": "string",
+			//	  "type": "string"
+			//	}
 			Description: "<p>Time when this was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -58,11 +61,12 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"last_updated_time": {
 			// Property: LastUpdatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eTime when this was last updated.\u003c/p\u003e",
-			//   "format": "string",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eTime when this was last updated.\u003c/p\u003e",
+			//	  "format": "string",
+			//	  "type": "string"
+			//	}
 			Description: "<p>Time when this was last updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -70,13 +74,14 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eA display name for the template.\u003c/p\u003e",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eA display name for the template.\u003c/p\u003e",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "<p>A display name for the template.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -84,38 +89,39 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"permissions": {
 			// Property: Permissions
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eA list of resource permissions to be set on the template. \u003c/p\u003e",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
-			//     "properties": {
-			//       "Actions": {
-			//         "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "maxItems": 16,
-			//         "minItems": 1,
-			//         "type": "array"
-			//       },
-			//       "Principal": {
-			//         "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Actions",
-			//       "Principal"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 64,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eA list of resource permissions to be set on the template. \u003c/p\u003e",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
+			//	    "properties": {
+			//	      "Actions": {
+			//	        "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "maxItems": 16,
+			//	        "minItems": 1,
+			//	        "type": "array"
+			//	      },
+			//	      "Principal": {
+			//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Actions",
+			//	      "Principal"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 64,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "<p>A list of resource permissions to be set on the template. </p>",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -138,67 +144,68 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_entity": {
 			// Property: SourceEntity
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "\u003cp\u003eThe source entity of the template.\u003c/p\u003e",
-			//   "properties": {
-			//     "SourceAnalysis": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe source analysis of the template.\u003c/p\u003e",
-			//       "properties": {
-			//         "Arn": {
-			//           "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-			//           "type": "string"
-			//         },
-			//         "DataSetReferences": {
-			//           "description": "\u003cp\u003eA structure containing information about the dataset references used as placeholders\n            in the template.\u003c/p\u003e",
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "\u003cp\u003eDataset reference.\u003c/p\u003e",
-			//             "properties": {
-			//               "DataSetArn": {
-			//                 "description": "\u003cp\u003eDataset Amazon Resource Name (ARN).\u003c/p\u003e",
-			//                 "type": "string"
-			//               },
-			//               "DataSetPlaceholder": {
-			//                 "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
-			//                 "pattern": ".*\\S.*",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "DataSetArn",
-			//               "DataSetPlaceholder"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "required": [
-			//         "Arn",
-			//         "DataSetReferences"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "SourceTemplate": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe source template of the template.\u003c/p\u003e",
-			//       "properties": {
-			//         "Arn": {
-			//           "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Arn"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "\u003cp\u003eThe source entity of the template.\u003c/p\u003e",
+			//	  "properties": {
+			//	    "SourceAnalysis": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe source analysis of the template.\u003c/p\u003e",
+			//	      "properties": {
+			//	        "Arn": {
+			//	          "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
+			//	          "type": "string"
+			//	        },
+			//	        "DataSetReferences": {
+			//	          "description": "\u003cp\u003eA structure containing information about the dataset references used as placeholders\n            in the template.\u003c/p\u003e",
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "\u003cp\u003eDataset reference.\u003c/p\u003e",
+			//	            "properties": {
+			//	              "DataSetArn": {
+			//	                "description": "\u003cp\u003eDataset Amazon Resource Name (ARN).\u003c/p\u003e",
+			//	                "type": "string"
+			//	              },
+			//	              "DataSetPlaceholder": {
+			//	                "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
+			//	                "pattern": ".*\\S.*",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "DataSetArn",
+			//	              "DataSetPlaceholder"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Arn",
+			//	        "DataSetReferences"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "SourceTemplate": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe source template of the template.\u003c/p\u003e",
+			//	      "properties": {
+			//	        "Arn": {
+			//	          "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Arn"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "<p>The source entity of the template.</p>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -260,35 +267,36 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eContains a map of the key-value pairs for the resource tag or tags assigned to the resource.\u003c/p\u003e",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "\u003cp\u003eTag key.\u003c/p\u003e",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "\u003cp\u003eTag value.\u003c/p\u003e",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eContains a map of the key-value pairs for the resource tag or tags assigned to the resource.\u003c/p\u003e",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "\u003cp\u003eTag key.\u003c/p\u003e",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "\u003cp\u003eTag value.\u003c/p\u003e",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -311,195 +319,197 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"template_id": {
 			// Property: TemplateId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": "[\\w\\-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": "[\\w\\-]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "\u003cp\u003eA version of a template.\u003c/p\u003e",
-			//   "properties": {
-			//     "CreatedTime": {
-			//       "description": "\u003cp\u003eThe time that this template version was created.\u003c/p\u003e",
-			//       "format": "string",
-			//       "type": "string"
-			//     },
-			//     "DataSetConfigurations": {
-			//       "description": "\u003cp\u003eSchema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.\u003c/p\u003e",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "\u003cp\u003eDataset configuration.\u003c/p\u003e",
-			//         "properties": {
-			//           "ColumnGroupSchemaList": {
-			//             "description": "\u003cp\u003eA structure containing the list of column group schemas.\u003c/p\u003e",
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "\u003cp\u003eThe column group schema.\u003c/p\u003e",
-			//               "properties": {
-			//                 "ColumnGroupColumnSchemaList": {
-			//                   "description": "\u003cp\u003eA structure containing the list of schemas for column group columns.\u003c/p\u003e",
-			//                   "items": {
-			//                     "additionalProperties": false,
-			//                     "description": "\u003cp\u003eA structure describing the name, data type, and geographic role of the columns.\u003c/p\u003e",
-			//                     "properties": {
-			//                       "Name": {
-			//                         "description": "\u003cp\u003eThe name of the column group's column schema.\u003c/p\u003e",
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   },
-			//                   "maxItems": 500,
-			//                   "minItems": 0,
-			//                   "type": "array"
-			//                 },
-			//                 "Name": {
-			//                   "description": "\u003cp\u003eThe name of the column group schema.\u003c/p\u003e",
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "maxItems": 500,
-			//             "minItems": 0,
-			//             "type": "array"
-			//           },
-			//           "DataSetSchema": {
-			//             "additionalProperties": false,
-			//             "description": "\u003cp\u003eDataset schema.\u003c/p\u003e",
-			//             "properties": {
-			//               "ColumnSchemaList": {
-			//                 "description": "\u003cp\u003eA structure containing the list of column schemas.\u003c/p\u003e",
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "\u003cp\u003eThe column schema.\u003c/p\u003e",
-			//                   "properties": {
-			//                     "DataType": {
-			//                       "description": "\u003cp\u003eThe data type of the column schema.\u003c/p\u003e",
-			//                       "type": "string"
-			//                     },
-			//                     "GeographicRole": {
-			//                       "description": "\u003cp\u003eThe geographic role of the column schema.\u003c/p\u003e",
-			//                       "type": "string"
-			//                     },
-			//                     "Name": {
-			//                       "description": "\u003cp\u003eThe name of the column schema.\u003c/p\u003e",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "maxItems": 500,
-			//                 "minItems": 0,
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Placeholder": {
-			//             "description": "\u003cp\u003ePlaceholder.\u003c/p\u003e",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 30,
-			//       "minItems": 0,
-			//       "type": "array"
-			//     },
-			//     "Description": {
-			//       "description": "\u003cp\u003eThe description of the template.\u003c/p\u003e",
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "Errors": {
-			//       "description": "\u003cp\u003eErrors associated with this template version.\u003c/p\u003e",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "\u003cp\u003eList of errors that occurred when the template version creation failed.\u003c/p\u003e",
-			//         "properties": {
-			//           "Message": {
-			//             "description": "\u003cp\u003eDescription of the error type.\u003c/p\u003e",
-			//             "pattern": ".*\\S.*",
-			//             "type": "string"
-			//           },
-			//           "Type": {
-			//             "enum": [
-			//               "SOURCE_NOT_FOUND",
-			//               "DATA_SET_NOT_FOUND",
-			//               "INTERNAL_FAILURE",
-			//               "ACCESS_DENIED"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "Sheets": {
-			//       "description": "\u003cp\u003eA list of the associated sheets with the unique identifier and name of each sheet.\u003c/p\u003e",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "\u003cp\u003eA \u003ci\u003esheet\u003c/i\u003e, which is an object that contains a set of visuals that\n            are viewed together on one page in the Amazon QuickSight console. Every analysis and dashboard\n            contains at least one sheet. Each sheet contains at least one visualization widget, for\n            example a chart, pivot table, or narrative insight. Sheets can be associated with other\n            components, such as controls, filters, and so on.\u003c/p\u003e",
-			//         "properties": {
-			//           "Name": {
-			//             "description": "\u003cp\u003eThe name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.\u003c/p\u003e",
-			//             "pattern": ".*\\S.*",
-			//             "type": "string"
-			//           },
-			//           "SheetId": {
-			//             "description": "\u003cp\u003eThe unique identifier associated with a sheet.\u003c/p\u003e",
-			//             "maxLength": 2048,
-			//             "minLength": 1,
-			//             "pattern": "[\\w\\-]+",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 20,
-			//       "minItems": 0,
-			//       "type": "array"
-			//     },
-			//     "SourceEntityArn": {
-			//       "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of an analysis or template that was used to create this\n            template.\u003c/p\u003e",
-			//       "type": "string"
-			//     },
-			//     "Status": {
-			//       "enum": [
-			//         "CREATION_IN_PROGRESS",
-			//         "CREATION_SUCCESSFUL",
-			//         "CREATION_FAILED",
-			//         "UPDATE_IN_PROGRESS",
-			//         "UPDATE_SUCCESSFUL",
-			//         "UPDATE_FAILED",
-			//         "DELETED"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "ThemeArn": {
-			//       "description": "\u003cp\u003eThe ARN of the theme associated with this version of the template.\u003c/p\u003e",
-			//       "type": "string"
-			//     },
-			//     "VersionNumber": {
-			//       "description": "\u003cp\u003eThe version number of the template version.\u003c/p\u003e",
-			//       "minimum": 1,
-			//       "type": "number"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "\u003cp\u003eA version of a template.\u003c/p\u003e",
+			//	  "properties": {
+			//	    "CreatedTime": {
+			//	      "description": "\u003cp\u003eThe time that this template version was created.\u003c/p\u003e",
+			//	      "format": "string",
+			//	      "type": "string"
+			//	    },
+			//	    "DataSetConfigurations": {
+			//	      "description": "\u003cp\u003eSchema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.\u003c/p\u003e",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "\u003cp\u003eDataset configuration.\u003c/p\u003e",
+			//	        "properties": {
+			//	          "ColumnGroupSchemaList": {
+			//	            "description": "\u003cp\u003eA structure containing the list of column group schemas.\u003c/p\u003e",
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "\u003cp\u003eThe column group schema.\u003c/p\u003e",
+			//	              "properties": {
+			//	                "ColumnGroupColumnSchemaList": {
+			//	                  "description": "\u003cp\u003eA structure containing the list of schemas for column group columns.\u003c/p\u003e",
+			//	                  "items": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "\u003cp\u003eA structure describing the name, data type, and geographic role of the columns.\u003c/p\u003e",
+			//	                    "properties": {
+			//	                      "Name": {
+			//	                        "description": "\u003cp\u003eThe name of the column group's column schema.\u003c/p\u003e",
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  },
+			//	                  "maxItems": 500,
+			//	                  "minItems": 0,
+			//	                  "type": "array"
+			//	                },
+			//	                "Name": {
+			//	                  "description": "\u003cp\u003eThe name of the column group schema.\u003c/p\u003e",
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 500,
+			//	            "minItems": 0,
+			//	            "type": "array"
+			//	          },
+			//	          "DataSetSchema": {
+			//	            "additionalProperties": false,
+			//	            "description": "\u003cp\u003eDataset schema.\u003c/p\u003e",
+			//	            "properties": {
+			//	              "ColumnSchemaList": {
+			//	                "description": "\u003cp\u003eA structure containing the list of column schemas.\u003c/p\u003e",
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "\u003cp\u003eThe column schema.\u003c/p\u003e",
+			//	                  "properties": {
+			//	                    "DataType": {
+			//	                      "description": "\u003cp\u003eThe data type of the column schema.\u003c/p\u003e",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "GeographicRole": {
+			//	                      "description": "\u003cp\u003eThe geographic role of the column schema.\u003c/p\u003e",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Name": {
+			//	                      "description": "\u003cp\u003eThe name of the column schema.\u003c/p\u003e",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "maxItems": 500,
+			//	                "minItems": 0,
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Placeholder": {
+			//	            "description": "\u003cp\u003ePlaceholder.\u003c/p\u003e",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 30,
+			//	      "minItems": 0,
+			//	      "type": "array"
+			//	    },
+			//	    "Description": {
+			//	      "description": "\u003cp\u003eThe description of the template.\u003c/p\u003e",
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "Errors": {
+			//	      "description": "\u003cp\u003eErrors associated with this template version.\u003c/p\u003e",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "\u003cp\u003eList of errors that occurred when the template version creation failed.\u003c/p\u003e",
+			//	        "properties": {
+			//	          "Message": {
+			//	            "description": "\u003cp\u003eDescription of the error type.\u003c/p\u003e",
+			//	            "pattern": ".*\\S.*",
+			//	            "type": "string"
+			//	          },
+			//	          "Type": {
+			//	            "enum": [
+			//	              "SOURCE_NOT_FOUND",
+			//	              "DATA_SET_NOT_FOUND",
+			//	              "INTERNAL_FAILURE",
+			//	              "ACCESS_DENIED"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "Sheets": {
+			//	      "description": "\u003cp\u003eA list of the associated sheets with the unique identifier and name of each sheet.\u003c/p\u003e",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "\u003cp\u003eA \u003ci\u003esheet\u003c/i\u003e, which is an object that contains a set of visuals that\n            are viewed together on one page in the Amazon QuickSight console. Every analysis and dashboard\n            contains at least one sheet. Each sheet contains at least one visualization widget, for\n            example a chart, pivot table, or narrative insight. Sheets can be associated with other\n            components, such as controls, filters, and so on.\u003c/p\u003e",
+			//	        "properties": {
+			//	          "Name": {
+			//	            "description": "\u003cp\u003eThe name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.\u003c/p\u003e",
+			//	            "pattern": ".*\\S.*",
+			//	            "type": "string"
+			//	          },
+			//	          "SheetId": {
+			//	            "description": "\u003cp\u003eThe unique identifier associated with a sheet.\u003c/p\u003e",
+			//	            "maxLength": 2048,
+			//	            "minLength": 1,
+			//	            "pattern": "[\\w\\-]+",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 20,
+			//	      "minItems": 0,
+			//	      "type": "array"
+			//	    },
+			//	    "SourceEntityArn": {
+			//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of an analysis or template that was used to create this\n            template.\u003c/p\u003e",
+			//	      "type": "string"
+			//	    },
+			//	    "Status": {
+			//	      "enum": [
+			//	        "CREATION_IN_PROGRESS",
+			//	        "CREATION_SUCCESSFUL",
+			//	        "CREATION_FAILED",
+			//	        "UPDATE_IN_PROGRESS",
+			//	        "UPDATE_SUCCESSFUL",
+			//	        "UPDATE_FAILED",
+			//	        "DELETED"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "ThemeArn": {
+			//	      "description": "\u003cp\u003eThe ARN of the theme associated with this version of the template.\u003c/p\u003e",
+			//	      "type": "string"
+			//	    },
+			//	    "VersionNumber": {
+			//	      "description": "\u003cp\u003eThe version number of the template version.\u003c/p\u003e",
+			//	      "minimum": 1,
+			//	      "type": "number"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "<p>A version of a template.</p>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -667,12 +677,13 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version_description": {
 			// Property: VersionDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eA description of the current template version being created. This API operation creates the\n\t\t\tfirst version of the template. Every time \u003ccode\u003eUpdateTemplate\u003c/code\u003e is called, a new\n\t\t\tversion is created. Each version of the template maintains a description of the version\n\t\t\tin the \u003ccode\u003eVersionDescription\u003c/code\u003e field.\u003c/p\u003e",
-			//   "maxLength": 512,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eA description of the current template version being created. This API operation creates the\n\t\t\tfirst version of the template. Every time \u003ccode\u003eUpdateTemplate\u003c/code\u003e is called, a new\n\t\t\tversion is created. Each version of the template maintains a description of the version\n\t\t\tin the \u003ccode\u003eVersionDescription\u003c/code\u003e field.\u003c/p\u003e",
+			//	  "maxLength": 512,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "<p>A description of the current template version being created. This API operation creates the\n\t\t\tfirst version of the template. Every time <code>UpdateTemplate</code> is called, a new\n\t\t\tversion is created. Each version of the template maintains a description of the version\n\t\t\tin the <code>VersionDescription</code> field.</p>",
 			Type:        types.StringType,
 			Computed:    true,

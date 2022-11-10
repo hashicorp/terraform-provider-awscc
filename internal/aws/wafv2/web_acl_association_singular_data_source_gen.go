@@ -23,22 +23,24 @@ func webACLAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		"resource_arn": {
 			// Property: ResourceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"web_acl_arn": {
 			// Property: WebACLArn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

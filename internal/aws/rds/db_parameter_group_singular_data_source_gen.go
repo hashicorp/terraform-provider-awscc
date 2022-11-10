@@ -23,11 +23,12 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"db_parameter_group_name": {
 			// Property: DBParameterGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the name of the DB parameter group",
-			//   "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the name of the DB parameter group",
+			//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the name of the DB parameter group",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,10 +36,11 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Provides the customer-specified description for this DB parameter group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Provides the customer-specified description for this DB parameter group.",
+			//	  "type": "string"
+			//	}
 			Description: "Provides the customer-specified description for this DB parameter group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -46,10 +48,11 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"family": {
 			// Property: Family
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The DB parameter group family name.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The DB parameter group family name.",
+			//	  "type": "string"
+			//	}
 			Description: "The DB parameter group family name.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -57,10 +60,11 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"parameters": {
 			// Property: Parameters
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of parameter names and values for the parameter update.",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "An array of parameter names and values for the parameter update.",
+			//	  "type": "object"
+			//	}
 			Description: "An array of parameter names and values for the parameter update.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
@@ -68,35 +72,36 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

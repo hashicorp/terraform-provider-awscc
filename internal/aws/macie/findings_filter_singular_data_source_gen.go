@@ -23,14 +23,15 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		"action": {
 			// Property: Action
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter action.",
-			//   "enum": [
-			//     "ARCHIVE",
-			//     "NOOP"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter action.",
+			//	  "enum": [
+			//	    "ARCHIVE",
+			//	    "NOOP"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Findings filter action.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,10 +39,11 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter ARN.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter ARN.",
+			//	  "type": "string"
+			//	}
 			Description: "Findings filter ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,10 +51,11 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter description",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter description",
+			//	  "type": "string"
+			//	}
 			Description: "Findings filter description",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,51 +63,52 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		"finding_criteria": {
 			// Property: FindingCriteria
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter criteria.",
-			//   "properties": {
-			//     "Criterion": {
-			//       "description": "Map of filter criteria.",
-			//       "patternProperties": {
-			//         "": {
-			//           "properties": {
-			//             "eq": {
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             },
-			//             "gt": {
-			//               "format": "int64",
-			//               "type": "integer"
-			//             },
-			//             "gte": {
-			//               "format": "int64",
-			//               "type": "integer"
-			//             },
-			//             "lt": {
-			//               "format": "int64",
-			//               "type": "integer"
-			//             },
-			//             "lte": {
-			//               "format": "int64",
-			//               "type": "integer"
-			//             },
-			//             "neq": {
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter criteria.",
+			//	  "properties": {
+			//	    "Criterion": {
+			//	      "description": "Map of filter criteria.",
+			//	      "patternProperties": {
+			//	        "": {
+			//	          "properties": {
+			//	            "eq": {
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            },
+			//	            "gt": {
+			//	              "format": "int64",
+			//	              "type": "integer"
+			//	            },
+			//	            "gte": {
+			//	              "format": "int64",
+			//	              "type": "integer"
+			//	            },
+			//	            "lt": {
+			//	              "format": "int64",
+			//	              "type": "integer"
+			//	            },
+			//	            "lte": {
+			//	              "format": "int64",
+			//	              "type": "integer"
+			//	            },
+			//	            "neq": {
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Findings filter criteria.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -155,22 +159,23 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		"findings_filter_list_items": {
 			// Property: FindingsFilterListItems
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filters list.",
-			//   "items": {
-			//     "description": "Returned by ListHandler representing filter name and ID.",
-			//     "properties": {
-			//       "Id": {
-			//         "type": "string"
-			//       },
-			//       "Name": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filters list.",
+			//	  "items": {
+			//	    "description": "Returned by ListHandler representing filter name and ID.",
+			//	    "properties": {
+			//	      "Id": {
+			//	        "type": "string"
+			//	      },
+			//	      "Name": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Findings filters list.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -191,10 +196,11 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter ID.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter ID.",
+			//	  "type": "string"
+			//	}
 			Description: "Findings filter ID.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -202,10 +208,11 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter name",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter name",
+			//	  "type": "string"
+			//	}
 			Description: "Findings filter name",
 			Type:        types.StringType,
 			Computed:    true,
@@ -213,10 +220,11 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		"position": {
 			// Property: Position
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter position.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter position.",
+			//	  "type": "integer"
+			//	}
 			Description: "Findings filter position.",
 			Type:        types.Int64Type,
 			Computed:    true,

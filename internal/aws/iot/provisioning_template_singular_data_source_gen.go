@@ -23,36 +23,39 @@ func provisioningTemplateDataSource(ctx context.Context) (datasource.DataSource,
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 500,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 500,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"enabled": {
 			// Property: Enabled
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"pre_provisioning_hook": {
 			// Property: PreProvisioningHook
 			// CloudFormation resource type schema:
-			// {
-			//   "properties": {
-			//     "PayloadVersion": {
-			//       "type": "string"
-			//     },
-			//     "TargetArn": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "properties": {
+			//	    "PayloadVersion": {
+			//	      "type": "string"
+			//	    },
+			//	    "TargetArn": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"payload_version": {
@@ -72,34 +75,36 @@ func provisioningTemplateDataSource(ctx context.Context) (datasource.DataSource,
 		"provisioning_role_arn": {
 			// Property: ProvisioningRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -119,43 +124,47 @@ func provisioningTemplateDataSource(ctx context.Context) (datasource.DataSource,
 		"template_arn": {
 			// Property: TemplateArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"template_body": {
 			// Property: TemplateBody
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"template_name": {
 			// Property: TemplateName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 36,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9A-Za-z_-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 36,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9A-Za-z_-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"template_type": {
 			// Property: TemplateType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "FLEET_PROVISIONING",
-			//     "JITP"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "FLEET_PROVISIONING",
+			//	    "JITP"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

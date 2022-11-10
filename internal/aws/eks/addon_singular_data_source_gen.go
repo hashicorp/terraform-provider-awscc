@@ -23,11 +23,12 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"addon_name": {
 			// Property: AddonName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of Addon",
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of Addon",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Name of Addon",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,11 +36,12 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"addon_version": {
 			// Property: AddonVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Version of Addon",
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Version of Addon",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Version of Addon",
 			Type:        types.StringType,
 			Computed:    true,
@@ -47,10 +49,11 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name (ARN) of the add-on",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name (ARN) of the add-on",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name (ARN) of the add-on",
 			Type:        types.StringType,
 			Computed:    true,
@@ -58,11 +61,12 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cluster_name": {
 			// Property: ClusterName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of Cluster",
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of Cluster",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Name of Cluster",
 			Type:        types.StringType,
 			Computed:    true,
@@ -70,16 +74,17 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resolve_conflicts": {
 			// Property: ResolveConflicts
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Resolve parameter value conflicts",
-			//   "enum": [
-			//     "NONE",
-			//     "OVERWRITE",
-			//     "PRESERVE"
-			//   ],
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Resolve parameter value conflicts",
+			//	  "enum": [
+			//	    "NONE",
+			//	    "OVERWRITE",
+			//	    "PRESERVE"
+			//	  ],
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Resolve parameter value conflicts",
 			Type:        types.StringType,
 			Computed:    true,
@@ -87,11 +92,12 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_account_role_arn": {
 			// Property: ServiceAccountRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "IAM role to bind to the add-on's service account",
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "IAM role to bind to the add-on's service account",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "IAM role to bind to the add-on's service account",
 			Type:        types.StringType,
 			Computed:    true,
@@ -99,35 +105,36 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

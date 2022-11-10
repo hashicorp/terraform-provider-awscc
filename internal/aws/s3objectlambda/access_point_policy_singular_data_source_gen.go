@@ -23,13 +23,14 @@ func accessPointPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		"object_lambda_access_point": {
 			// Property: ObjectLambdaAccessPoint
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
-			//   "maxLength": 45,
-			//   "minLength": 3,
-			//   "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
+			//	  "maxLength": 45,
+			//	  "minLength": 3,
+			//	  "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,10 +38,11 @@ func accessPointPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		"policy_document": {
 			// Property: PolicyDocument
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A policy document containing permissions to add to the specified ObjectLambdaAccessPoint. For more information, see Access Policy Language Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the Amazon Simple Storage Service Developer Guide. ",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "A policy document containing permissions to add to the specified ObjectLambdaAccessPoint. For more information, see Access Policy Language Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the Amazon Simple Storage Service Developer Guide. ",
+			//	  "type": "object"
+			//	}
 			Description: "A policy document containing permissions to add to the specified ObjectLambdaAccessPoint. For more information, see Access Policy Language Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the Amazon Simple Storage Service Developer Guide. ",
 			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,

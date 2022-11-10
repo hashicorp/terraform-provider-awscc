@@ -23,10 +23,11 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		"account_linked": {
 			// Property: AccountLinked
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Whether the partner account is linked to the AWS account.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Whether the partner account is linked to the AWS account.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Whether the partner account is linked to the AWS account.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "PartnerAccount arn. Returned after successful create.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "PartnerAccount arn. Returned after successful create.",
+			//	  "type": "string"
+			//	}
 			Description: "PartnerAccount arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,11 +47,12 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		"fingerprint": {
 			// Property: Fingerprint
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The fingerprint of the Sidewalk application server private key.",
-			//   "pattern": "[a-fA-F0-9]{64}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The fingerprint of the Sidewalk application server private key.",
+			//	  "pattern": "[a-fA-F0-9]{64}",
+			//	  "type": "string"
+			//	}
 			Description: "The fingerprint of the Sidewalk application server private key.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -57,11 +60,12 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		"partner_account_id": {
 			// Property: PartnerAccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The partner account ID to disassociate from the AWS account",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The partner account ID to disassociate from the AWS account",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "The partner account ID to disassociate from the AWS account",
 			Type:        types.StringType,
 			Computed:    true,
@@ -69,13 +73,14 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		"partner_type": {
 			// Property: PartnerType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The partner type",
-			//   "enum": [
-			//     "Sidewalk"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The partner type",
+			//	  "enum": [
+			//	    "Sidewalk"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The partner type",
 			Type:        types.StringType,
 			Computed:    true,
@@ -83,22 +88,23 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		"sidewalk": {
 			// Property: Sidewalk
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The Sidewalk account credentials.",
-			//   "properties": {
-			//     "AppServerPrivateKey": {
-			//       "maxLength": 4096,
-			//       "minLength": 1,
-			//       "pattern": "[a-fA-F0-9]{64}",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "AppServerPrivateKey"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The Sidewalk account credentials.",
+			//	  "properties": {
+			//	    "AppServerPrivateKey": {
+			//	      "maxLength": 4096,
+			//	      "minLength": 1,
+			//	      "pattern": "[a-fA-F0-9]{64}",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "AppServerPrivateKey"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The Sidewalk account credentials.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -114,26 +120,27 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		"sidewalk_response": {
 			// Property: SidewalkResponse
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The Sidewalk account credentials.",
-			//   "properties": {
-			//     "AmazonId": {
-			//       "maxLength": 2048,
-			//       "type": "string"
-			//     },
-			//     "Arn": {
-			//       "type": "string"
-			//     },
-			//     "Fingerprint": {
-			//       "maxLength": 64,
-			//       "minLength": 64,
-			//       "pattern": "[a-fA-F0-9]{64}",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The Sidewalk account credentials.",
+			//	  "properties": {
+			//	    "AmazonId": {
+			//	      "maxLength": 2048,
+			//	      "type": "string"
+			//	    },
+			//	    "Arn": {
+			//	      "type": "string"
+			//	    },
+			//	    "Fingerprint": {
+			//	      "maxLength": 64,
+			//	      "minLength": 64,
+			//	      "pattern": "[a-fA-F0-9]{64}",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The Sidewalk account credentials.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -159,19 +166,20 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		"sidewalk_update": {
 			// Property: SidewalkUpdate
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The Sidewalk account credentials.",
-			//   "properties": {
-			//     "AppServerPrivateKey": {
-			//       "maxLength": 4096,
-			//       "minLength": 1,
-			//       "pattern": "[a-fA-F0-9]{64}",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The Sidewalk account credentials.",
+			//	  "properties": {
+			//	    "AppServerPrivateKey": {
+			//	      "maxLength": 4096,
+			//	      "minLength": 1,
+			//	      "pattern": "[a-fA-F0-9]{64}",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The Sidewalk account credentials.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -187,29 +195,30 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the destination.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the destination.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the destination.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

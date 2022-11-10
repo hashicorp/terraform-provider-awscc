@@ -23,10 +23,11 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the container recipe.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the container recipe.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the container recipe.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,50 +35,51 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"components": {
 			// Property: Components
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Components for build and test that are included in the container recipe.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Configuration details of the component.",
-			//     "properties": {
-			//       "ComponentArn": {
-			//         "description": "The Amazon Resource Name (ARN) of the component.",
-			//         "type": "string"
-			//       },
-			//       "Parameters": {
-			//         "description": "A group of parameter settings that are used to configure the component for a specific recipe.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "Contains a key/value pair that sets the named component parameter.",
-			//           "properties": {
-			//             "Name": {
-			//               "description": "The name of the component parameter to set.",
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "description": "Sets the value for the named component parameter.",
-			//               "insertionOrder": true,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "Name",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Components for build and test that are included in the container recipe.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Configuration details of the component.",
+			//	    "properties": {
+			//	      "ComponentArn": {
+			//	        "description": "The Amazon Resource Name (ARN) of the component.",
+			//	        "type": "string"
+			//	      },
+			//	      "Parameters": {
+			//	        "description": "A group of parameter settings that are used to configure the component for a specific recipe.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "Contains a key/value pair that sets the named component parameter.",
+			//	          "properties": {
+			//	            "Name": {
+			//	              "description": "The name of the component parameter to set.",
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "description": "Sets the value for the named component parameter.",
+			//	              "insertionOrder": true,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Name",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Components for build and test that are included in the container recipe.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -115,13 +117,14 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"container_type": {
 			// Property: ContainerType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the type of container, such as Docker.",
-			//   "enum": [
-			//     "DOCKER"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the type of container, such as Docker.",
+			//	  "enum": [
+			//	    "DOCKER"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the type of container, such as Docker.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -129,10 +132,11 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the container recipe.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the container recipe.",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the container recipe.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -140,10 +144,11 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"dockerfile_template_data": {
 			// Property: DockerfileTemplateData
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.",
+			//	  "type": "string"
+			//	}
 			Description: "Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -151,10 +156,11 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"dockerfile_template_uri": {
 			// Property: DockerfileTemplateUri
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The S3 URI for the Dockerfile that will be used to build your container image.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The S3 URI for the Dockerfile that will be used to build your container image.",
+			//	  "type": "string"
+			//	}
 			Description: "The S3 URI for the Dockerfile that will be used to build your container image.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -162,10 +168,11 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"image_os_version_override": {
 			// Property: ImageOsVersionOverride
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the operating system version for the source image.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the operating system version for the source image.",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the operating system version for the source image.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -173,89 +180,90 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"instance_configuration": {
 			// Property: InstanceConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A group of options that can be used to configure an instance for building and testing container images.",
-			//   "properties": {
-			//     "BlockDeviceMappings": {
-			//       "description": "Defines the block devices to attach for building an instance from this Image Builder AMI.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "Defines block device mappings for the instance used to configure your image. ",
-			//         "properties": {
-			//           "DeviceName": {
-			//             "description": "The device to which these mappings apply.",
-			//             "type": "string"
-			//           },
-			//           "Ebs": {
-			//             "additionalProperties": false,
-			//             "description": "Use to manage Amazon EBS-specific configuration for this mapping.",
-			//             "properties": {
-			//               "DeleteOnTermination": {
-			//                 "description": "Use to configure delete on termination of the associated device.",
-			//                 "type": "boolean"
-			//               },
-			//               "Encrypted": {
-			//                 "description": "Use to configure device encryption.",
-			//                 "type": "boolean"
-			//               },
-			//               "Iops": {
-			//                 "description": "Use to configure device IOPS.",
-			//                 "type": "integer"
-			//               },
-			//               "KmsKeyId": {
-			//                 "description": "Use to configure the KMS key to use when encrypting the device.",
-			//                 "type": "string"
-			//               },
-			//               "SnapshotId": {
-			//                 "description": "The snapshot that defines the device contents.",
-			//                 "type": "string"
-			//               },
-			//               "Throughput": {
-			//                 "description": "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
-			//                 "type": "integer"
-			//               },
-			//               "VolumeSize": {
-			//                 "description": "Use to override the device's volume size.",
-			//                 "type": "integer"
-			//               },
-			//               "VolumeType": {
-			//                 "description": "Use to override the device's volume type.",
-			//                 "enum": [
-			//                   "standard",
-			//                   "io1",
-			//                   "io2",
-			//                   "gp2",
-			//                   "gp3",
-			//                   "sc1",
-			//                   "st1"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "NoDevice": {
-			//             "description": "Use to remove a mapping from the parent image.",
-			//             "type": "string"
-			//           },
-			//           "VirtualName": {
-			//             "description": "Use to manage instance ephemeral devices.",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "Image": {
-			//       "description": "The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A group of options that can be used to configure an instance for building and testing container images.",
+			//	  "properties": {
+			//	    "BlockDeviceMappings": {
+			//	      "description": "Defines the block devices to attach for building an instance from this Image Builder AMI.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "Defines block device mappings for the instance used to configure your image. ",
+			//	        "properties": {
+			//	          "DeviceName": {
+			//	            "description": "The device to which these mappings apply.",
+			//	            "type": "string"
+			//	          },
+			//	          "Ebs": {
+			//	            "additionalProperties": false,
+			//	            "description": "Use to manage Amazon EBS-specific configuration for this mapping.",
+			//	            "properties": {
+			//	              "DeleteOnTermination": {
+			//	                "description": "Use to configure delete on termination of the associated device.",
+			//	                "type": "boolean"
+			//	              },
+			//	              "Encrypted": {
+			//	                "description": "Use to configure device encryption.",
+			//	                "type": "boolean"
+			//	              },
+			//	              "Iops": {
+			//	                "description": "Use to configure device IOPS.",
+			//	                "type": "integer"
+			//	              },
+			//	              "KmsKeyId": {
+			//	                "description": "Use to configure the KMS key to use when encrypting the device.",
+			//	                "type": "string"
+			//	              },
+			//	              "SnapshotId": {
+			//	                "description": "The snapshot that defines the device contents.",
+			//	                "type": "string"
+			//	              },
+			//	              "Throughput": {
+			//	                "description": "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
+			//	                "type": "integer"
+			//	              },
+			//	              "VolumeSize": {
+			//	                "description": "Use to override the device's volume size.",
+			//	                "type": "integer"
+			//	              },
+			//	              "VolumeType": {
+			//	                "description": "Use to override the device's volume type.",
+			//	                "enum": [
+			//	                  "standard",
+			//	                  "io1",
+			//	                  "io2",
+			//	                  "gp2",
+			//	                  "gp3",
+			//	                  "sc1",
+			//	                  "st1"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "NoDevice": {
+			//	            "description": "Use to remove a mapping from the parent image.",
+			//	            "type": "string"
+			//	          },
+			//	          "VirtualName": {
+			//	            "description": "Use to manage instance ephemeral devices.",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "Image": {
+			//	      "description": "The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A group of options that can be used to configure an instance for building and testing container images.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -356,10 +364,11 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"kms_key_id": {
 			// Property: KmsKeyId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Identifies which KMS key is used to encrypt the container image.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Identifies which KMS key is used to encrypt the container image.",
+			//	  "type": "string"
+			//	}
 			Description: "Identifies which KMS key is used to encrypt the container image.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -367,10 +376,11 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the container recipe.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the container recipe.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the container recipe.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -378,10 +388,11 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"parent_image": {
 			// Property: ParentImage
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The source image for the container recipe.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The source image for the container recipe.",
+			//	  "type": "string"
+			//	}
 			Description: "The source image for the container recipe.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -389,14 +400,15 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"platform_override": {
 			// Property: PlatformOverride
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the operating system platform when you use a custom source image.",
-			//   "enum": [
-			//     "Windows",
-			//     "Linux"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the operating system platform when you use a custom source image.",
+			//	  "enum": [
+			//	    "Windows",
+			//	    "Linux"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the operating system platform when you use a custom source image.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -404,16 +416,17 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Tags that are attached to the container recipe.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Tags that are attached to the container recipe.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Tags that are attached to the container recipe.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -422,24 +435,25 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"target_repository": {
 			// Property: TargetRepository
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The destination repository for the container image.",
-			//   "properties": {
-			//     "RepositoryName": {
-			//       "description": "The name of the container repository where the output container image is stored. This name is prefixed by the repository location.",
-			//       "type": "string"
-			//     },
-			//     "Service": {
-			//       "description": "Specifies the service in which this image was registered.",
-			//       "enum": [
-			//         "ECR"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The destination repository for the container image.",
+			//	  "properties": {
+			//	    "RepositoryName": {
+			//	      "description": "The name of the container repository where the output container image is stored. This name is prefixed by the repository location.",
+			//	      "type": "string"
+			//	    },
+			//	    "Service": {
+			//	      "description": "Specifies the service in which this image was registered.",
+			//	      "enum": [
+			//	        "ECR"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The destination repository for the container image.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -462,10 +476,11 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The semantic version of the container recipe (\u003cmajor\u003e.\u003cminor\u003e.\u003cpatch\u003e).",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The semantic version of the container recipe (\u003cmajor\u003e.\u003cminor\u003e.\u003cpatch\u003e).",
+			//	  "type": "string"
+			//	}
 			Description: "The semantic version of the container recipe (<major>.<minor>.<patch>).",
 			Type:        types.StringType,
 			Computed:    true,
@@ -473,10 +488,11 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		"working_directory": {
 			// Property: WorkingDirectory
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The working directory to be used during build and test workflows.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The working directory to be used during build and test workflows.",
+			//	  "type": "string"
+			//	}
 			Description: "The working directory to be used during build and test workflows.",
 			Type:        types.StringType,
 			Computed:    true,

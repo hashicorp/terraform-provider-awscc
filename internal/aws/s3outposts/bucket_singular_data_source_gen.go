@@ -23,13 +23,14 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the specified bucket.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the specified bucket.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,13 +38,14 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bucket_name": {
 			// Property: BucketName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for the bucket.",
-			//   "maxLength": 63,
-			//   "minLength": 3,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for the bucket.",
+			//	  "maxLength": 63,
+			//	  "minLength": 3,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "A name for the bucket.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,177 +53,178 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"lifecycle_configuration": {
 			// Property: LifecycleConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Rules that define how Amazon S3Outposts manages objects during their lifetime.",
-			//   "properties": {
-			//     "Rules": {
-			//       "description": "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "anyOf": [
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "AbortIncompleteMultipartUpload"
-			//             ]
-			//           },
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "ExpirationDate"
-			//             ]
-			//           },
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "ExpirationInDays"
-			//             ]
-			//           }
-			//         ],
-			//         "description": "Specifies lifecycle rules for an Amazon S3Outposts bucket. You must specify at least one of the following: AbortIncompleteMultipartUpload, ExpirationDate, ExpirationInDays.",
-			//         "properties": {
-			//           "AbortIncompleteMultipartUpload": {
-			//             "additionalProperties": false,
-			//             "description": "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3Outposts bucket.",
-			//             "properties": {
-			//               "DaysAfterInitiation": {
-			//                 "description": "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
-			//                 "minimum": 0,
-			//                 "type": "integer"
-			//               }
-			//             },
-			//             "required": [
-			//               "DaysAfterInitiation"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "ExpirationDate": {
-			//             "description": "Indicates when objects are deleted from Amazon S3Outposts. The date value must be in ISO 8601 format. The time is always midnight UTC.",
-			//             "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
-			//             "type": "string"
-			//           },
-			//           "ExpirationInDays": {
-			//             "description": "Indicates the number of days after creation when objects are deleted from Amazon S3Outposts.",
-			//             "minimum": 1,
-			//             "type": "integer"
-			//           },
-			//           "Filter": {
-			//             "additionalProperties": false,
-			//             "description": "The container for the filter of the lifecycle rule.",
-			//             "oneOf": [
-			//               {
-			//                 "required": [
-			//                   "Prefix"
-			//                 ]
-			//               },
-			//               {
-			//                 "required": [
-			//                   "Tag"
-			//                 ]
-			//               },
-			//               {
-			//                 "required": [
-			//                   "AndOperator"
-			//                 ]
-			//               }
-			//             ],
-			//             "properties": {
-			//               "AndOperator": {
-			//                 "description": "The container for the AND condition for the lifecycle rule. A combination of Prefix and 1 or more Tags OR a minimum of 2 or more tags.",
-			//                 "properties": {
-			//                   "Prefix": {
-			//                     "description": "Prefix identifies one or more objects to which the rule applies.",
-			//                     "type": "string"
-			//                   },
-			//                   "Tags": {
-			//                     "description": "All of these tags must exist in the object's tag set in order for the rule to apply.",
-			//                     "insertionOrder": false,
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "description": "Tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
-			//                       "properties": {
-			//                         "Key": {
-			//                           "maxLength": 1024,
-			//                           "minLength": 1,
-			//                           "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
-			//                           "type": "string"
-			//                         },
-			//                         "Value": {
-			//                           "maxLength": 1024,
-			//                           "minLength": 1,
-			//                           "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "Key",
-			//                         "Value"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "minItems": 1,
-			//                     "type": "array",
-			//                     "uniqueItems": true
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "Prefix": {
-			//                 "description": "Object key prefix that identifies one or more objects to which this rule applies.",
-			//                 "type": "string"
-			//               },
-			//               "Tag": {
-			//                 "additionalProperties": false,
-			//                 "description": "Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
-			//                 "properties": {
-			//                   "Key": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 1,
-			//                     "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
-			//                     "type": "string"
-			//                   },
-			//                   "Value": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 1,
-			//                     "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Key",
-			//                   "Value"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Id": {
-			//             "description": "Unique identifier for the lifecycle rule. The value can't be longer than 255 characters.",
-			//             "maxLength": 255,
-			//             "type": "string"
-			//           },
-			//           "Status": {
-			//             "enum": [
-			//               "Enabled",
-			//               "Disabled"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     }
-			//   },
-			//   "required": [
-			//     "Rules"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Rules that define how Amazon S3Outposts manages objects during their lifetime.",
+			//	  "properties": {
+			//	    "Rules": {
+			//	      "description": "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "anyOf": [
+			//	          {
+			//	            "required": [
+			//	              "Status",
+			//	              "AbortIncompleteMultipartUpload"
+			//	            ]
+			//	          },
+			//	          {
+			//	            "required": [
+			//	              "Status",
+			//	              "ExpirationDate"
+			//	            ]
+			//	          },
+			//	          {
+			//	            "required": [
+			//	              "Status",
+			//	              "ExpirationInDays"
+			//	            ]
+			//	          }
+			//	        ],
+			//	        "description": "Specifies lifecycle rules for an Amazon S3Outposts bucket. You must specify at least one of the following: AbortIncompleteMultipartUpload, ExpirationDate, ExpirationInDays.",
+			//	        "properties": {
+			//	          "AbortIncompleteMultipartUpload": {
+			//	            "additionalProperties": false,
+			//	            "description": "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3Outposts bucket.",
+			//	            "properties": {
+			//	              "DaysAfterInitiation": {
+			//	                "description": "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
+			//	                "minimum": 0,
+			//	                "type": "integer"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "DaysAfterInitiation"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "ExpirationDate": {
+			//	            "description": "Indicates when objects are deleted from Amazon S3Outposts. The date value must be in ISO 8601 format. The time is always midnight UTC.",
+			//	            "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+			//	            "type": "string"
+			//	          },
+			//	          "ExpirationInDays": {
+			//	            "description": "Indicates the number of days after creation when objects are deleted from Amazon S3Outposts.",
+			//	            "minimum": 1,
+			//	            "type": "integer"
+			//	          },
+			//	          "Filter": {
+			//	            "additionalProperties": false,
+			//	            "description": "The container for the filter of the lifecycle rule.",
+			//	            "oneOf": [
+			//	              {
+			//	                "required": [
+			//	                  "Prefix"
+			//	                ]
+			//	              },
+			//	              {
+			//	                "required": [
+			//	                  "Tag"
+			//	                ]
+			//	              },
+			//	              {
+			//	                "required": [
+			//	                  "AndOperator"
+			//	                ]
+			//	              }
+			//	            ],
+			//	            "properties": {
+			//	              "AndOperator": {
+			//	                "description": "The container for the AND condition for the lifecycle rule. A combination of Prefix and 1 or more Tags OR a minimum of 2 or more tags.",
+			//	                "properties": {
+			//	                  "Prefix": {
+			//	                    "description": "Prefix identifies one or more objects to which the rule applies.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Tags": {
+			//	                    "description": "All of these tags must exist in the object's tag set in order for the rule to apply.",
+			//	                    "insertionOrder": false,
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "Tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
+			//	                      "properties": {
+			//	                        "Key": {
+			//	                          "maxLength": 1024,
+			//	                          "minLength": 1,
+			//	                          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+			//	                          "type": "string"
+			//	                        },
+			//	                        "Value": {
+			//	                          "maxLength": 1024,
+			//	                          "minLength": 1,
+			//	                          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "Key",
+			//	                        "Value"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "minItems": 1,
+			//	                    "type": "array",
+			//	                    "uniqueItems": true
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "Prefix": {
+			//	                "description": "Object key prefix that identifies one or more objects to which this rule applies.",
+			//	                "type": "string"
+			//	              },
+			//	              "Tag": {
+			//	                "additionalProperties": false,
+			//	                "description": "Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
+			//	                "properties": {
+			//	                  "Key": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Value": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Key",
+			//	                  "Value"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Id": {
+			//	            "description": "Unique identifier for the lifecycle rule. The value can't be longer than 255 characters.",
+			//	            "maxLength": 255,
+			//	            "type": "string"
+			//	          },
+			//	          "Status": {
+			//	            "enum": [
+			//	              "Enabled",
+			//	              "Disabled"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Rules"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Rules that define how Amazon S3Outposts manages objects during their lifetime.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -347,11 +350,12 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"outpost_id": {
 			// Property: OutpostId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The id of the customer outpost on which the bucket resides.",
-			//   "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The id of the customer outpost on which the bucket resides.",
+			//	  "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$",
+			//	  "type": "string"
+			//	}
 			Description: "The id of the customer outpost on which the bucket resides.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -359,34 +363,35 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An arbitrary set of tags (key-value pairs) for this S3Outposts bucket.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 1024,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 1024,
-			//         "minLength": 1,
-			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An arbitrary set of tags (key-value pairs) for this S3Outposts bucket.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 1024,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 1024,
+			//	        "minLength": 1,
+			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An arbitrary set of tags (key-value pairs) for this S3Outposts bucket.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

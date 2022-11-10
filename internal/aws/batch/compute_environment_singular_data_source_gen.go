@@ -23,141 +23,147 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"compute_environment_arn": {
 			// Property: ComputeEnvironmentArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"compute_environment_name": {
 			// Property: ComputeEnvironmentName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"compute_resources": {
 			// Property: ComputeResources
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AllocationStrategy": {
-			//       "type": "string"
-			//     },
-			//     "BidPercentage": {
-			//       "type": "integer"
-			//     },
-			//     "DesiredvCpus": {
-			//       "type": "integer"
-			//     },
-			//     "Ec2Configuration": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ImageIdOverride": {
-			//             "type": "string"
-			//           },
-			//           "ImageType": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "ImageType"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "Ec2KeyPair": {
-			//       "type": "string"
-			//     },
-			//     "ImageId": {
-			//       "type": "string"
-			//     },
-			//     "InstanceRole": {
-			//       "type": "string"
-			//     },
-			//     "InstanceTypes": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "LaunchTemplate": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "LaunchTemplateId": {
-			//           "type": "string"
-			//         },
-			//         "LaunchTemplateName": {
-			//           "type": "string"
-			//         },
-			//         "Version": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "MaxvCpus": {
-			//       "type": "integer"
-			//     },
-			//     "MinvCpus": {
-			//       "type": "integer"
-			//     },
-			//     "PlacementGroup": {
-			//       "type": "string"
-			//     },
-			//     "SecurityGroupIds": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "SpotIamFleetRole": {
-			//       "type": "string"
-			//     },
-			//     "Subnets": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "Tags": {
-			//       "additionalProperties": false,
-			//       "description": "A key-value pair to associate with a resource.",
-			//       "patternProperties": {
-			//         "": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Type": {
-			//       "type": "string"
-			//     },
-			//     "UpdateToLatestImageVersion": {
-			//       "default": false,
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "required": [
-			//     "Subnets",
-			//     "Type",
-			//     "MaxvCpus"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AllocationStrategy": {
+			//	      "type": "string"
+			//	    },
+			//	    "BidPercentage": {
+			//	      "type": "integer"
+			//	    },
+			//	    "DesiredvCpus": {
+			//	      "type": "integer"
+			//	    },
+			//	    "Ec2Configuration": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ImageIdOverride": {
+			//	            "type": "string"
+			//	          },
+			//	          "ImageKubernetesVersion": {
+			//	            "type": "string"
+			//	          },
+			//	          "ImageType": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "ImageType"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "Ec2KeyPair": {
+			//	      "type": "string"
+			//	    },
+			//	    "ImageId": {
+			//	      "type": "string"
+			//	    },
+			//	    "InstanceRole": {
+			//	      "type": "string"
+			//	    },
+			//	    "InstanceTypes": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "LaunchTemplate": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "LaunchTemplateId": {
+			//	          "type": "string"
+			//	        },
+			//	        "LaunchTemplateName": {
+			//	          "type": "string"
+			//	        },
+			//	        "Version": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "MaxvCpus": {
+			//	      "type": "integer"
+			//	    },
+			//	    "MinvCpus": {
+			//	      "type": "integer"
+			//	    },
+			//	    "PlacementGroup": {
+			//	      "type": "string"
+			//	    },
+			//	    "SecurityGroupIds": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "SpotIamFleetRole": {
+			//	      "type": "string"
+			//	    },
+			//	    "Subnets": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "Tags": {
+			//	      "additionalProperties": false,
+			//	      "description": "A key-value pair to associate with a resource.",
+			//	      "patternProperties": {
+			//	        "": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Type": {
+			//	      "type": "string"
+			//	    },
+			//	    "UpdateToLatestImageVersion": {
+			//	      "default": false,
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Subnets",
+			//	    "Type",
+			//	    "MaxvCpus"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"allocation_strategy": {
@@ -181,6 +187,11 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 							map[string]tfsdk.Attribute{
 								"image_id_override": {
 									// Property: ImageIdOverride
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"image_kubernetes_version": {
+									// Property: ImageKubernetesVersion
 									Type:     types.StringType,
 									Computed: true,
 								},
@@ -287,47 +298,89 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 			),
 			Computed: true,
 		},
+		"eks_configuration": {
+			// Property: EksConfiguration
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "EksClusterArn": {
+			//	      "default": false,
+			//	      "type": "string"
+			//	    },
+			//	    "KubernetesNamespace": {
+			//	      "default": false,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "EksClusterArn",
+			//	    "KubernetesNamespace"
+			//	  ],
+			//	  "type": "object"
+			//	}
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"eks_cluster_arn": {
+						// Property: EksClusterArn
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"kubernetes_namespace": {
+						// Property: KubernetesNamespace
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"replace_compute_environment": {
 			// Property: ReplaceComputeEnvironment
 			// CloudFormation resource type schema:
-			// {
-			//   "default": true,
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "default": true,
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"service_role": {
 			// Property: ServiceRole
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A key-value pair to associate with a resource.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A key-value pair to associate with a resource.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A key-value pair to associate with a resource.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -336,38 +389,41 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"unmanagedv_cpus": {
 			// Property: UnmanagedvCpus
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"update_policy": {
 			// Property: UpdatePolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "JobExecutionTimeoutMinutes": {
-			//       "default": 30,
-			//       "type": "integer"
-			//     },
-			//     "TerminateJobsOnUpdate": {
-			//       "default": false,
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "JobExecutionTimeoutMinutes": {
+			//	      "default": 30,
+			//	      "type": "integer"
+			//	    },
+			//	    "TerminateJobsOnUpdate": {
+			//	      "default": false,
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"job_execution_timeout_minutes": {
@@ -411,12 +467,16 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"desiredv_cpus":                  "DesiredvCpus",
 		"ec_2_configuration":             "Ec2Configuration",
 		"ec_2_key_pair":                  "Ec2KeyPair",
+		"eks_cluster_arn":                "EksClusterArn",
+		"eks_configuration":              "EksConfiguration",
 		"image_id":                       "ImageId",
 		"image_id_override":              "ImageIdOverride",
+		"image_kubernetes_version":       "ImageKubernetesVersion",
 		"image_type":                     "ImageType",
 		"instance_role":                  "InstanceRole",
 		"instance_types":                 "InstanceTypes",
 		"job_execution_timeout_minutes":  "JobExecutionTimeoutMinutes",
+		"kubernetes_namespace":           "KubernetesNamespace",
 		"launch_template":                "LaunchTemplate",
 		"launch_template_id":             "LaunchTemplateId",
 		"launch_template_name":           "LaunchTemplateName",

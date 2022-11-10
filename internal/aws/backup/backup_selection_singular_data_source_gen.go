@@ -23,146 +23,148 @@ func backupSelectionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"backup_plan_id": {
 			// Property: BackupPlanId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"backup_selection": {
 			// Property: BackupSelection
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Conditions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "StringEquals": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ConditionKey": {
-			//                 "type": "string"
-			//               },
-			//               "ConditionValue": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "StringLike": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ConditionKey": {
-			//                 "type": "string"
-			//               },
-			//               "ConditionValue": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "StringNotEquals": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ConditionKey": {
-			//                 "type": "string"
-			//               },
-			//               "ConditionValue": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "StringNotLike": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ConditionKey": {
-			//                 "type": "string"
-			//               },
-			//               "ConditionValue": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "IamRoleArn": {
-			//       "type": "string"
-			//     },
-			//     "ListOfTags": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ConditionKey": {
-			//             "type": "string"
-			//           },
-			//           "ConditionType": {
-			//             "type": "string"
-			//           },
-			//           "ConditionValue": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "ConditionValue",
-			//           "ConditionKey",
-			//           "ConditionType"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "NotResources": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "Resources": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "SelectionName": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "SelectionName",
-			//     "IamRoleArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Conditions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "StringEquals": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ConditionKey": {
+			//	                "type": "string"
+			//	              },
+			//	              "ConditionValue": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "StringLike": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ConditionKey": {
+			//	                "type": "string"
+			//	              },
+			//	              "ConditionValue": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "StringNotEquals": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ConditionKey": {
+			//	                "type": "string"
+			//	              },
+			//	              "ConditionValue": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "StringNotLike": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ConditionKey": {
+			//	                "type": "string"
+			//	              },
+			//	              "ConditionValue": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "IamRoleArn": {
+			//	      "type": "string"
+			//	    },
+			//	    "ListOfTags": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ConditionKey": {
+			//	            "type": "string"
+			//	          },
+			//	          "ConditionType": {
+			//	            "type": "string"
+			//	          },
+			//	          "ConditionValue": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "ConditionValue",
+			//	          "ConditionKey",
+			//	          "ConditionType"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "NotResources": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "Resources": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "SelectionName": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "SelectionName",
+			//	    "IamRoleArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"conditions": {
@@ -295,18 +297,20 @@ func backupSelectionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"selection_id": {
 			// Property: SelectionId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

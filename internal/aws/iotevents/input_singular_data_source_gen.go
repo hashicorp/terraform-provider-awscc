@@ -23,41 +23,42 @@ func inputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"input_definition": {
 			// Property: InputDefinition
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The definition of the input.",
-			//   "properties": {
-			//     "Attributes": {
-			//       "description": "The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using `BatchPutMessage`. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the `condition` expressions used by detectors that monitor this input.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using `BatchPutMessage`. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the `condition` expressions used by detectors that monitor this input.",
-			//         "properties": {
-			//           "JsonPath": {
-			//             "description": "An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (`BatchPutMessage`). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the `condition` expressions used by detectors.\n\n_Syntax_: `\u003cfield-name\u003e.\u003cfield-name\u003e...`",
-			//             "maxLength": 128,
-			//             "minLength": 1,
-			//             "pattern": "^((`[a-zA-Z0-9_\\- ]+`)|([a-zA-Z0-9_\\-]+))(\\.((`[a-zA-Z0-9_\\- ]+`)|([a-zA-Z0-9_\\-]+)))*$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "JsonPath"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 200,
-			//       "minItems": 1,
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     }
-			//   },
-			//   "required": [
-			//     "Attributes"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The definition of the input.",
+			//	  "properties": {
+			//	    "Attributes": {
+			//	      "description": "The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using `BatchPutMessage`. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the `condition` expressions used by detectors that monitor this input.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using `BatchPutMessage`. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the `condition` expressions used by detectors that monitor this input.",
+			//	        "properties": {
+			//	          "JsonPath": {
+			//	            "description": "An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (`BatchPutMessage`). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the `condition` expressions used by detectors.\n\n_Syntax_: `\u003cfield-name\u003e.\u003cfield-name\u003e...`",
+			//	            "maxLength": 128,
+			//	            "minLength": 1,
+			//	            "pattern": "^((`[a-zA-Z0-9_\\- ]+`)|([a-zA-Z0-9_\\-]+))(\\.((`[a-zA-Z0-9_\\- ]+`)|([a-zA-Z0-9_\\-]+)))*$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "JsonPath"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 200,
+			//	      "minItems": 1,
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Attributes"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The definition of the input.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -83,12 +84,13 @@ func inputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"input_description": {
 			// Property: InputDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A brief description of the input.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A brief description of the input.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "A brief description of the input.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -96,13 +98,14 @@ func inputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"input_name": {
 			// Property: InputName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the input.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the input.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the input.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -110,31 +113,32 @@ func inputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Tags to be applied to Input.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "Key of the Tag.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "Value of the Tag.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Tags to be applied to Input.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "Key of the Tag.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "Value of the Tag.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

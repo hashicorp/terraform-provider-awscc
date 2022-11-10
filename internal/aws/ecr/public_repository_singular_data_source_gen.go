@@ -23,63 +23,65 @@ func publicRepositoryDataSource(ctx context.Context) (datasource.DataSource, err
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"repository_catalog_data": {
 			// Property: RepositoryCatalogData
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The CatalogData property type specifies Catalog data for ECR Public Repository. For information about Catalog Data, see \u003clink\u003e",
-			//   "properties": {
-			//     "AboutText": {
-			//       "description": "Provide a detailed description of the repository. Identify what is included in the repository, any licensing details, or other relevant information.",
-			//       "maxLength": 10240,
-			//       "type": "string"
-			//     },
-			//     "Architectures": {
-			//       "description": "Select the system architectures that the images in your repository are compatible with.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "description": "The name of the architecture.",
-			//         "maxLength": 50,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "maxItems": 50,
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "OperatingSystems": {
-			//       "description": "Select the operating systems that the images in your repository are compatible with.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "description": "The name of the operating system.",
-			//         "maxLength": 50,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "maxItems": 50,
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "RepositoryDescription": {
-			//       "description": "The description of the public repository.",
-			//       "maxLength": 1024,
-			//       "type": "string"
-			//     },
-			//     "UsageText": {
-			//       "description": "Provide detailed information about how to use the images in the repository. This provides context, support information, and additional usage details for users of the repository.",
-			//       "maxLength": 10240,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The CatalogData property type specifies Catalog data for ECR Public Repository. For information about Catalog Data, see \u003clink\u003e",
+			//	  "properties": {
+			//	    "AboutText": {
+			//	      "description": "Provide a detailed description of the repository. Identify what is included in the repository, any licensing details, or other relevant information.",
+			//	      "maxLength": 10240,
+			//	      "type": "string"
+			//	    },
+			//	    "Architectures": {
+			//	      "description": "Select the system architectures that the images in your repository are compatible with.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "description": "The name of the architecture.",
+			//	        "maxLength": 50,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 50,
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "OperatingSystems": {
+			//	      "description": "Select the operating systems that the images in your repository are compatible with.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "description": "The name of the operating system.",
+			//	        "maxLength": 50,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 50,
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "RepositoryDescription": {
+			//	      "description": "The description of the public repository.",
+			//	      "maxLength": 1024,
+			//	      "type": "string"
+			//	    },
+			//	    "UsageText": {
+			//	      "description": "Provide detailed information about how to use the images in the repository. This provides context, support information, and additional usage details for users of the repository.",
+			//	      "maxLength": 10240,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The CatalogData property type specifies Catalog data for ECR Public Repository. For information about Catalog Data, see <link>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -120,13 +122,14 @@ func publicRepositoryDataSource(ctx context.Context) (datasource.DataSource, err
 		"repository_name": {
 			// Property: RepositoryName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the repository name. For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html.",
-			//   "maxLength": 256,
-			//   "minLength": 2,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the repository name. For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html.",
+			//	  "maxLength": 256,
+			//	  "minLength": 2,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the repository name. For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -134,10 +137,11 @@ func publicRepositoryDataSource(ctx context.Context) (datasource.DataSource, err
 		"repository_policy_text": {
 			// Property: RepositoryPolicyText
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The JSON repository policy text to apply to the repository. For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html in the Amazon Elastic Container Registry User Guide. ",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The JSON repository policy text to apply to the repository. For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html in the Amazon Elastic Container Registry User Guide. ",
+			//	  "type": "string"
+			//	}
 			Description: "The JSON repository policy text to apply to the repository. For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html in the Amazon Elastic Container Registry User Guide. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -145,36 +149,37 @@ func publicRepositoryDataSource(ctx context.Context) (datasource.DataSource, err
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

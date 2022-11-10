@@ -23,52 +23,53 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"add_ons": {
 			// Property: AddOns
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of objects representing the add-ons to enable for the new instance.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A addon associate with a resource.",
-			//     "properties": {
-			//       "AddOnType": {
-			//         "description": "The add-on type",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "AutoSnapshotAddOnRequest": {
-			//         "additionalProperties": false,
-			//         "description": "An object that represents additional parameters when enabling or modifying the automatic snapshot add-on",
-			//         "properties": {
-			//           "SnapshotTimeOfDay": {
-			//             "description": "The daily time when an automatic snapshot will be created.",
-			//             "pattern": "^[0-9]{2}:00$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Status": {
-			//         "description": "Status of the Addon",
-			//         "enum": [
-			//           "Enabling",
-			//           "Disabling",
-			//           "Enabled",
-			//           "Terminating",
-			//           "Terminated",
-			//           "Disabled",
-			//           "Failed"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "AddOnType"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "An array of objects representing the add-ons to enable for the new instance.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A addon associate with a resource.",
+			//	    "properties": {
+			//	      "AddOnType": {
+			//	        "description": "The add-on type",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "AutoSnapshotAddOnRequest": {
+			//	        "additionalProperties": false,
+			//	        "description": "An object that represents additional parameters when enabling or modifying the automatic snapshot add-on",
+			//	        "properties": {
+			//	          "SnapshotTimeOfDay": {
+			//	            "description": "The daily time when an automatic snapshot will be created.",
+			//	            "pattern": "^[0-9]{2}:00$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Status": {
+			//	        "description": "Status of the Addon",
+			//	        "enum": [
+			//	          "Enabling",
+			//	          "Disabling",
+			//	          "Enabled",
+			//	          "Terminating",
+			//	          "Terminated",
+			//	          "Disabled",
+			//	          "Failed"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "AddOnType"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "An array of objects representing the add-ons to enable for the new instance.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -106,12 +107,13 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"availability_zone": {
 			// Property: AvailabilityZone
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -119,12 +121,13 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"blueprint_id": {
 			// Property: BlueprintId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0 ). Use the get blueprints operation to return a list of available images (or blueprints ).",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0 ). Use the get blueprints operation to return a list of available images (or blueprints ).",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0 ). Use the get blueprints operation to return a list of available images (or blueprints ).",
 			Type:        types.StringType,
 			Computed:    true,
@@ -132,12 +135,13 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bundle_id": {
 			// Property: BundleId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The bundle of specification information for your virtual private server (or instance ), including the pricing plan (e.g., micro_1_0 ).",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The bundle of specification information for your virtual private server (or instance ), including the pricing plan (e.g., micro_1_0 ).",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The bundle of specification information for your virtual private server (or instance ), including the pricing plan (e.g., micro_1_0 ).",
 			Type:        types.StringType,
 			Computed:    true,
@@ -145,69 +149,70 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"hardware": {
 			// Property: Hardware
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Hardware of the Instance.",
-			//   "properties": {
-			//     "CpuCount": {
-			//       "description": "CPU count of the Instance.",
-			//       "type": "integer"
-			//     },
-			//     "Disks": {
-			//       "description": "Disks attached to the Instance.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "Disk associated with the Instance.",
-			//         "properties": {
-			//           "AttachedTo": {
-			//             "description": "Instance attached to the disk.",
-			//             "type": "string"
-			//           },
-			//           "AttachmentState": {
-			//             "description": "Attachment state of the disk.",
-			//             "type": "string"
-			//           },
-			//           "DiskName": {
-			//             "description": "The names to use for your new Lightsail disk.",
-			//             "maxLength": 254,
-			//             "minLength": 1,
-			//             "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
-			//             "type": "string"
-			//           },
-			//           "IOPS": {
-			//             "description": "IOPS of disk.",
-			//             "type": "integer"
-			//           },
-			//           "IsSystemDisk": {
-			//             "description": "Is the Attached disk is the system disk of the Instance.",
-			//             "type": "boolean"
-			//           },
-			//           "Path": {
-			//             "description": "Path of the disk attached to the instance.",
-			//             "type": "string"
-			//           },
-			//           "SizeInGb": {
-			//             "description": "Size of the disk attached to the Instance.",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "DiskName",
-			//           "Path"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "RamSizeInGb": {
-			//       "description": "RAM Size of the Instance.",
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Hardware of the Instance.",
+			//	  "properties": {
+			//	    "CpuCount": {
+			//	      "description": "CPU count of the Instance.",
+			//	      "type": "integer"
+			//	    },
+			//	    "Disks": {
+			//	      "description": "Disks attached to the Instance.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "Disk associated with the Instance.",
+			//	        "properties": {
+			//	          "AttachedTo": {
+			//	            "description": "Instance attached to the disk.",
+			//	            "type": "string"
+			//	          },
+			//	          "AttachmentState": {
+			//	            "description": "Attachment state of the disk.",
+			//	            "type": "string"
+			//	          },
+			//	          "DiskName": {
+			//	            "description": "The names to use for your new Lightsail disk.",
+			//	            "maxLength": 254,
+			//	            "minLength": 1,
+			//	            "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
+			//	            "type": "string"
+			//	          },
+			//	          "IOPS": {
+			//	            "description": "IOPS of disk.",
+			//	            "type": "integer"
+			//	          },
+			//	          "IsSystemDisk": {
+			//	            "description": "Is the Attached disk is the system disk of the Instance.",
+			//	            "type": "boolean"
+			//	          },
+			//	          "Path": {
+			//	            "description": "Path of the disk attached to the instance.",
+			//	            "type": "string"
+			//	          },
+			//	          "SizeInGb": {
+			//	            "description": "Size of the disk attached to the Instance.",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "DiskName",
+			//	          "Path"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "RamSizeInGb": {
+			//	      "description": "RAM Size of the Instance.",
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Hardware of the Instance.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -281,22 +286,24 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_arn": {
 			// Property: InstanceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"instance_name": {
 			// Property: InstanceName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The names to use for your new Lightsail instance.",
-			//   "maxLength": 254,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The names to use for your new Lightsail instance.",
+			//	  "maxLength": 254,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
+			//	  "type": "string"
+			//	}
 			Description: "The names to use for your new Lightsail instance.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -304,10 +311,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"is_static_ip": {
 			// Property: IsStaticIp
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Is the IP Address of the Instance is the static IP",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Is the IP Address of the Instance is the static IP",
+			//	  "type": "boolean"
+			//	}
 			Description: "Is the IP Address of the Instance is the static IP",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -315,10 +323,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key_pair_name": {
 			// Property: KeyPairName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of your key pair.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of your key pair.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of your key pair.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -326,21 +335,22 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"location": {
 			// Property: Location
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Location of a resource.",
-			//   "properties": {
-			//     "AvailabilityZone": {
-			//       "description": "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
-			//       "type": "string"
-			//     },
-			//     "RegionName": {
-			//       "description": "The Region Name in which to create your instance.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Location of a resource.",
+			//	  "properties": {
+			//	    "AvailabilityZone": {
+			//	      "description": "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
+			//	      "type": "string"
+			//	    },
+			//	    "RegionName": {
+			//	      "description": "The Region Name in which to create your instance.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Location of a resource.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -363,92 +373,93 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"networking": {
 			// Property: Networking
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Networking of the Instance.",
-			//   "properties": {
-			//     "MonthlyTransfer": {
-			//       "additionalProperties": false,
-			//       "description": "Monthly Transfer of the Instance.",
-			//       "properties": {
-			//         "GbPerMonthAllocated": {
-			//           "description": "GbPerMonthAllocated of the Instance.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Ports": {
-			//       "description": "Ports to the Instance.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "Port of the Instance.",
-			//         "properties": {
-			//           "AccessDirection": {
-			//             "description": "Access Direction for Protocol of the Instance(inbound/outbound).",
-			//             "type": "string"
-			//           },
-			//           "AccessFrom": {
-			//             "description": "Access From Protocol of the Instance.",
-			//             "type": "string"
-			//           },
-			//           "AccessType": {
-			//             "description": "Access Type Protocol of the Instance.",
-			//             "type": "string"
-			//           },
-			//           "CidrListAliases": {
-			//             "description": "cidr List Aliases",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "Cidrs": {
-			//             "description": "cidrs",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "CommonName": {
-			//             "description": "CommonName for Protocol of the Instance.",
-			//             "type": "string"
-			//           },
-			//           "FromPort": {
-			//             "description": "From Port of the Instance.",
-			//             "type": "integer"
-			//           },
-			//           "Ipv6Cidrs": {
-			//             "description": "IPv6 Cidrs",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "Protocol": {
-			//             "description": "Port Protocol of the Instance.",
-			//             "type": "string"
-			//           },
-			//           "ToPort": {
-			//             "description": "To Port of the Instance.",
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     }
-			//   },
-			//   "required": [
-			//     "Ports"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Networking of the Instance.",
+			//	  "properties": {
+			//	    "MonthlyTransfer": {
+			//	      "additionalProperties": false,
+			//	      "description": "Monthly Transfer of the Instance.",
+			//	      "properties": {
+			//	        "GbPerMonthAllocated": {
+			//	          "description": "GbPerMonthAllocated of the Instance.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Ports": {
+			//	      "description": "Ports to the Instance.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "Port of the Instance.",
+			//	        "properties": {
+			//	          "AccessDirection": {
+			//	            "description": "Access Direction for Protocol of the Instance(inbound/outbound).",
+			//	            "type": "string"
+			//	          },
+			//	          "AccessFrom": {
+			//	            "description": "Access From Protocol of the Instance.",
+			//	            "type": "string"
+			//	          },
+			//	          "AccessType": {
+			//	            "description": "Access Type Protocol of the Instance.",
+			//	            "type": "string"
+			//	          },
+			//	          "CidrListAliases": {
+			//	            "description": "cidr List Aliases",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "Cidrs": {
+			//	            "description": "cidrs",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "CommonName": {
+			//	            "description": "CommonName for Protocol of the Instance.",
+			//	            "type": "string"
+			//	          },
+			//	          "FromPort": {
+			//	            "description": "From Port of the Instance.",
+			//	            "type": "integer"
+			//	          },
+			//	          "Ipv6Cidrs": {
+			//	            "description": "IPv6 Cidrs",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "Protocol": {
+			//	            "description": "Port Protocol of the Instance.",
+			//	            "type": "string"
+			//	          },
+			//	          "ToPort": {
+			//	            "description": "To Port of the Instance.",
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Ports"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Networking of the Instance.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -543,10 +554,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"private_ip_address": {
 			// Property: PrivateIpAddress
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Private IP Address of the Instance",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Private IP Address of the Instance",
+			//	  "type": "string"
+			//	}
 			Description: "Private IP Address of the Instance",
 			Type:        types.StringType,
 			Computed:    true,
@@ -554,10 +566,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"public_ip_address": {
 			// Property: PublicIpAddress
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Public IP Address of the Instance",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Public IP Address of the Instance",
+			//	  "type": "string"
+			//	}
 			Description: "Public IP Address of the Instance",
 			Type:        types.StringType,
 			Computed:    true,
@@ -565,10 +578,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_type": {
 			// Property: ResourceType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Resource type of Lightsail instance.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Resource type of Lightsail instance.",
+			//	  "type": "string"
+			//	}
 			Description: "Resource type of Lightsail instance.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -576,10 +590,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ssh_key_name": {
 			// Property: SshKeyName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "SSH Key Name of the  Lightsail instance.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "SSH Key Name of the  Lightsail instance.",
+			//	  "type": "string"
+			//	}
 			Description: "SSH Key Name of the  Lightsail instance.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -587,21 +602,22 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Current State of the Instance.",
-			//   "properties": {
-			//     "Code": {
-			//       "description": "Status code of the Instance.",
-			//       "type": "integer"
-			//     },
-			//     "Name": {
-			//       "description": "Status code of the Instance.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Current State of the Instance.",
+			//	  "properties": {
+			//	    "Code": {
+			//	      "description": "Status code of the Instance.",
+			//	      "type": "integer"
+			//	    },
+			//	    "Name": {
+			//	      "description": "Status code of the Instance.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Current State of the Instance.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -624,10 +640,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"support_code": {
 			// Property: SupportCode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Support code to help identify any issues",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Support code to help identify any issues",
+			//	  "type": "string"
+			//	}
 			Description: "Support code to help identify any issues",
 			Type:        types.StringType,
 			Computed:    true,
@@ -635,34 +652,35 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -685,10 +703,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"user_data": {
 			// Property: UserData
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.",
+			//	  "type": "string"
+			//	}
 			Description: "A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -696,10 +715,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"user_name": {
 			// Property: UserName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Username of the  Lightsail instance.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Username of the  Lightsail instance.",
+			//	  "type": "string"
+			//	}
 			Description: "Username of the  Lightsail instance.",
 			Type:        types.StringType,
 			Computed:    true,

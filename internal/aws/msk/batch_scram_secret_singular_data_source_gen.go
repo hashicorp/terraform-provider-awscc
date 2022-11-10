@@ -23,22 +23,24 @@ func batchScramSecretDataSource(ctx context.Context) (datasource.DataSource, err
 		"cluster_arn": {
 			// Property: ClusterArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"secret_arn_list": {
 			// Property: SecretArnList
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},

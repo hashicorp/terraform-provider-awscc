@@ -23,46 +23,47 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auth": {
 			// Property: Auth
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The authorization mechanism that the proxy uses.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "AuthScheme": {
-			//         "description": "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
-			//         "enum": [
-			//           "SECRETS"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "Description": {
-			//         "description": "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
-			//         "type": "string"
-			//       },
-			//       "IAMAuth": {
-			//         "description": "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
-			//         "enum": [
-			//           "DISABLED",
-			//           "REQUIRED",
-			//           "ENABLED"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "SecretArn": {
-			//         "description": "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
-			//         "type": "string"
-			//       },
-			//       "UserName": {
-			//         "description": "The name of the database user to which the proxy connects.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The authorization mechanism that the proxy uses.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "AuthScheme": {
+			//	        "description": "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
+			//	        "enum": [
+			//	          "SECRETS"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "Description": {
+			//	        "description": "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
+			//	        "type": "string"
+			//	      },
+			//	      "IAMAuth": {
+			//	        "description": "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
+			//	        "enum": [
+			//	          "DISABLED",
+			//	          "REQUIRED",
+			//	          "ENABLED"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "SecretArn": {
+			//	        "description": "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
+			//	        "type": "string"
+			//	      },
+			//	      "UserName": {
+			//	        "description": "The name of the database user to which the proxy connects.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "The authorization mechanism that the proxy uses.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -103,10 +104,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"db_proxy_arn": {
 			// Property: DBProxyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the proxy.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the proxy.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the proxy.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -114,12 +116,13 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"db_proxy_name": {
 			// Property: DBProxyName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
-			//   "maxLength": 64,
-			//   "pattern": "[0-z]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
+			//	  "maxLength": 64,
+			//	  "pattern": "[0-z]*",
+			//	  "type": "string"
+			//	}
 			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -127,10 +130,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"debug_logging": {
 			// Property: DebugLogging
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Whether the proxy includes detailed information about SQL statements in its logs.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Whether the proxy includes detailed information about SQL statements in its logs.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Whether the proxy includes detailed information about SQL statements in its logs.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -138,10 +142,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"endpoint": {
 			// Property: Endpoint
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
+			//	  "type": "string"
+			//	}
 			Description: "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -149,15 +154,16 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"engine_family": {
 			// Property: EngineFamily
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The kinds of databases that the proxy can connect to.",
-			//   "enum": [
-			//     "MYSQL",
-			//     "POSTGRESQL",
-			//     "SQLSERVER"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The kinds of databases that the proxy can connect to.",
+			//	  "enum": [
+			//	    "MYSQL",
+			//	    "POSTGRESQL",
+			//	    "SQLSERVER"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The kinds of databases that the proxy can connect to.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -165,10 +171,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"idle_client_timeout": {
 			// Property: IdleClientTimeout
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
+			//	  "type": "integer"
+			//	}
 			Description: "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -176,10 +183,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"require_tls": {
 			// Property: RequireTLS
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.",
+			//	  "type": "boolean"
+			//	}
 			Description: "A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -187,10 +195,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -198,27 +207,28 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 128,
-			//         "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 128,
+			//	        "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -239,10 +249,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "VPC ID to associate with the new DB proxy.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "VPC ID to associate with the new DB proxy.",
+			//	  "type": "string"
+			//	}
 			Description: "VPC ID to associate with the new DB proxy.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -250,15 +261,16 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_security_group_ids": {
 			// Property: VpcSecurityGroupIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "VPC security group IDs to associate with the new proxy.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "VPC security group IDs to associate with the new proxy.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "VPC security group IDs to associate with the new proxy.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -266,15 +278,16 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_subnet_ids": {
 			// Property: VpcSubnetIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "VPC subnet IDs to associate with the new proxy.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "minItems": 2,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "VPC subnet IDs to associate with the new proxy.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "minItems": 2,
+			//	  "type": "array"
+			//	}
 			Description: "VPC subnet IDs to associate with the new proxy.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,

@@ -23,16 +23,17 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		"autodefined_reverse": {
 			// Property: AutodefinedReverse
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ResolverAutodefinedReverseStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
-			//   "enum": [
-			//     "ENABLING",
-			//     "ENABLED",
-			//     "DISABLING",
-			//     "DISABLED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ResolverAutodefinedReverseStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
+			//	  "enum": [
+			//	    "ENABLING",
+			//	    "ENABLED",
+			//	    "DISABLING",
+			//	    "DISABLED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "ResolverAutodefinedReverseStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,13 +41,14 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		"autodefined_reverse_flag": {
 			// Property: AutodefinedReverseFlag
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Represents the desired status of AutodefinedReverse. The only supported value on creation is DISABLE. Deletion of this resource will return AutodefinedReverse to its default value (ENABLED).",
-			//   "enum": [
-			//     "DISABLE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Represents the desired status of AutodefinedReverse. The only supported value on creation is DISABLE. Deletion of this resource will return AutodefinedReverse to its default value (ENABLED).",
+			//	  "enum": [
+			//	    "DISABLE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Represents the desired status of AutodefinedReverse. The only supported value on creation is DISABLE. Deletion of this resource will return AutodefinedReverse to its default value (ENABLED).",
 			Type:        types.StringType,
 			Computed:    true,
@@ -54,12 +56,13 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Id",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Id",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Id",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,12 +70,13 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		"owner_id": {
 			// Property: OwnerId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AccountId",
-			//   "maxLength": 32,
-			//   "minLength": 12,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AccountId",
+			//	  "maxLength": 32,
+			//	  "minLength": 12,
+			//	  "type": "string"
+			//	}
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
@@ -80,12 +84,13 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		"resource_id": {
 			// Property: ResourceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ResourceId",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ResourceId",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,

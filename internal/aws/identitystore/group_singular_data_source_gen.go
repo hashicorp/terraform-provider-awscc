@@ -23,13 +23,14 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A string containing the description of the group.",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  　]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A string containing the description of the group.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  　]+$",
+			//	  "type": "string"
+			//	}
 			Description: "A string containing the description of the group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,13 +38,14 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"display_name": {
 			// Property: DisplayName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A string containing the name of the group. This value is commonly displayed when the group is referenced.",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A string containing the name of the group. This value is commonly displayed when the group is referenced.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$",
+			//	  "type": "string"
+			//	}
 			Description: "A string containing the name of the group. This value is commonly displayed when the group is referenced.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,13 +53,14 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"group_id": {
 			// Property: GroupId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique identifier for a group in the identity store.",
-			//   "maxLength": 47,
-			//   "minLength": 1,
-			//   "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unique identifier for a group in the identity store.",
+			//	  "maxLength": 47,
+			//	  "minLength": 1,
+			//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The unique identifier for a group in the identity store.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -65,13 +68,14 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"identity_store_id": {
 			// Property: IdentityStoreId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The globally unique identifier for the identity store.",
-			//   "maxLength": 36,
-			//   "minLength": 1,
-			//   "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The globally unique identifier for the identity store.",
+			//	  "maxLength": 36,
+			//	  "minLength": 1,
+			//	  "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The globally unique identifier for the identity store.",
 			Type:        types.StringType,
 			Computed:    true,

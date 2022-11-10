@@ -23,11 +23,12 @@ func rulesetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description of the Ruleset",
-			//   "maxLength": 1024,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description of the Ruleset",
+			//	  "maxLength": 1024,
+			//	  "type": "string"
+			//	}
 			Description: "Description of the Ruleset",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,12 +36,13 @@ func rulesetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the Ruleset",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the Ruleset",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Name of the Ruleset",
 			Type:        types.StringType,
 			Computed:    true,
@@ -48,123 +50,124 @@ func rulesetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rules": {
 			// Property: Rules
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of the data quality rules in the ruleset",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Data quality rule for a target resource (dataset)",
-			//     "properties": {
-			//       "CheckExpression": {
-			//         "description": "Expression with rule conditions",
-			//         "maxLength": 1024,
-			//         "minLength": 4,
-			//         "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
-			//         "type": "string"
-			//       },
-			//       "ColumnSelectors": {
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "Selector of a column from a dataset for profile job configuration. One selector includes either a column name or a regular expression",
-			//           "properties": {
-			//             "Name": {
-			//               "description": "The name of a column from a dataset",
-			//               "maxLength": 255,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "Regex": {
-			//               "description": "A regular expression for selecting a column from a dataset",
-			//               "maxLength": 255,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "minItems": 1,
-			//         "type": "array"
-			//       },
-			//       "Disabled": {
-			//         "description": "Boolean value to disable/enable a rule",
-			//         "type": "boolean"
-			//       },
-			//       "Name": {
-			//         "description": "Name of the rule",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "SubstitutionMap": {
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "A key-value pair to associate expression's substitution variable names with their values",
-			//           "properties": {
-			//             "Value": {
-			//               "description": "Value or column name",
-			//               "maxLength": 1024,
-			//               "minLength": 0,
-			//               "type": "string"
-			//             },
-			//             "ValueReference": {
-			//               "description": "Variable name",
-			//               "maxLength": 128,
-			//               "minLength": 2,
-			//               "pattern": "^:[A-Za-z0-9_]+$",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "ValueReference",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Threshold": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Type": {
-			//             "description": "Threshold type for a rule",
-			//             "enum": [
-			//               "GREATER_THAN_OR_EQUAL",
-			//               "LESS_THAN_OR_EQUAL",
-			//               "GREATER_THAN",
-			//               "LESS_THAN"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Unit": {
-			//             "description": "Threshold unit for a rule",
-			//             "enum": [
-			//               "COUNT",
-			//               "PERCENTAGE"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "description": "Threshold value for a rule",
-			//             "type": "number"
-			//           }
-			//         },
-			//         "required": [
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       }
-			//     },
-			//     "required": [
-			//       "Name",
-			//       "CheckExpression"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of the data quality rules in the ruleset",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Data quality rule for a target resource (dataset)",
+			//	    "properties": {
+			//	      "CheckExpression": {
+			//	        "description": "Expression with rule conditions",
+			//	        "maxLength": 1024,
+			//	        "minLength": 4,
+			//	        "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "ColumnSelectors": {
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "Selector of a column from a dataset for profile job configuration. One selector includes either a column name or a regular expression",
+			//	          "properties": {
+			//	            "Name": {
+			//	              "description": "The name of a column from a dataset",
+			//	              "maxLength": 255,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "Regex": {
+			//	              "description": "A regular expression for selecting a column from a dataset",
+			//	              "maxLength": 255,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "minItems": 1,
+			//	        "type": "array"
+			//	      },
+			//	      "Disabled": {
+			//	        "description": "Boolean value to disable/enable a rule",
+			//	        "type": "boolean"
+			//	      },
+			//	      "Name": {
+			//	        "description": "Name of the rule",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "SubstitutionMap": {
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "A key-value pair to associate expression's substitution variable names with their values",
+			//	          "properties": {
+			//	            "Value": {
+			//	              "description": "Value or column name",
+			//	              "maxLength": 1024,
+			//	              "minLength": 0,
+			//	              "type": "string"
+			//	            },
+			//	            "ValueReference": {
+			//	              "description": "Variable name",
+			//	              "maxLength": 128,
+			//	              "minLength": 2,
+			//	              "pattern": "^:[A-Za-z0-9_]+$",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "ValueReference",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Threshold": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Type": {
+			//	            "description": "Threshold type for a rule",
+			//	            "enum": [
+			//	              "GREATER_THAN_OR_EQUAL",
+			//	              "LESS_THAN_OR_EQUAL",
+			//	              "GREATER_THAN",
+			//	              "LESS_THAN"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Unit": {
+			//	            "description": "Threshold unit for a rule",
+			//	            "enum": [
+			//	              "COUNT",
+			//	              "PERCENTAGE"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "description": "Threshold value for a rule",
+			//	            "type": "number"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Name",
+			//	      "CheckExpression"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "List of the data quality rules in the ruleset",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -259,32 +262,33 @@ func rulesetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource",
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -304,12 +308,13 @@ func rulesetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_arn": {
 			// Property: TargetArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Arn of the target resource (dataset) to apply the ruleset to",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Arn of the target resource (dataset) to apply the ruleset to",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "type": "string"
+			//	}
 			Description: "Arn of the target resource (dataset) to apply the ruleset to",
 			Type:        types.StringType,
 			Computed:    true,

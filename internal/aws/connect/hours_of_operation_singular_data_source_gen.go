@@ -23,84 +23,85 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		"config": {
 			// Property: Config
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Configuration information for the hours of operation: day, start time, and end time.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Contains information about the hours of operation.",
-			//     "properties": {
-			//       "Day": {
-			//         "description": "The day that the hours of operation applies to.",
-			//         "enum": [
-			//           "SUNDAY",
-			//           "MONDAY",
-			//           "TUESDAY",
-			//           "WEDNESDAY",
-			//           "THURSDAY",
-			//           "FRIDAY",
-			//           "SATURDAY"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "EndTime": {
-			//         "additionalProperties": false,
-			//         "description": "The end time that your contact center closes.",
-			//         "properties": {
-			//           "Hours": {
-			//             "description": "The hours.",
-			//             "maximum": 23,
-			//             "minimum": 0,
-			//             "type": "integer"
-			//           },
-			//           "Minutes": {
-			//             "description": "The minutes.",
-			//             "maximum": 59,
-			//             "minimum": 0,
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "required": [
-			//           "Hours",
-			//           "Minutes"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "StartTime": {
-			//         "additionalProperties": false,
-			//         "description": "The start time that your contact center opens.",
-			//         "properties": {
-			//           "Hours": {
-			//             "description": "The hours.",
-			//             "maximum": 23,
-			//             "minimum": 0,
-			//             "type": "integer"
-			//           },
-			//           "Minutes": {
-			//             "description": "The minutes.",
-			//             "maximum": 59,
-			//             "minimum": 0,
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "required": [
-			//           "Hours",
-			//           "Minutes"
-			//         ],
-			//         "type": "object"
-			//       }
-			//     },
-			//     "required": [
-			//       "Day",
-			//       "StartTime",
-			//       "EndTime"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 100,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Configuration information for the hours of operation: day, start time, and end time.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Contains information about the hours of operation.",
+			//	    "properties": {
+			//	      "Day": {
+			//	        "description": "The day that the hours of operation applies to.",
+			//	        "enum": [
+			//	          "SUNDAY",
+			//	          "MONDAY",
+			//	          "TUESDAY",
+			//	          "WEDNESDAY",
+			//	          "THURSDAY",
+			//	          "FRIDAY",
+			//	          "SATURDAY"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "EndTime": {
+			//	        "additionalProperties": false,
+			//	        "description": "The end time that your contact center closes.",
+			//	        "properties": {
+			//	          "Hours": {
+			//	            "description": "The hours.",
+			//	            "maximum": 23,
+			//	            "minimum": 0,
+			//	            "type": "integer"
+			//	          },
+			//	          "Minutes": {
+			//	            "description": "The minutes.",
+			//	            "maximum": 59,
+			//	            "minimum": 0,
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Hours",
+			//	          "Minutes"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "StartTime": {
+			//	        "additionalProperties": false,
+			//	        "description": "The start time that your contact center opens.",
+			//	        "properties": {
+			//	          "Hours": {
+			//	            "description": "The hours.",
+			//	            "maximum": 23,
+			//	            "minimum": 0,
+			//	            "type": "integer"
+			//	          },
+			//	          "Minutes": {
+			//	            "description": "The minutes.",
+			//	            "maximum": 59,
+			//	            "minimum": 0,
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Hours",
+			//	          "Minutes"
+			//	        ],
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Day",
+			//	      "StartTime",
+			//	      "EndTime"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 100,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Configuration information for the hours of operation: day, start time, and end time.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -159,12 +160,13 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the hours of operation.",
-			//   "maxLength": 250,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the hours of operation.",
+			//	  "maxLength": 250,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the hours of operation.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -172,11 +174,12 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		"hours_of_operation_arn": {
 			// Property: HoursOfOperationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the hours of operation.",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/operating-hours/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the hours of operation.",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/operating-hours/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the hours of operation.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -184,11 +187,12 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		"instance_arn": {
 			// Property: InstanceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier of the Amazon Connect instance.",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier of the Amazon Connect instance.",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The identifier of the Amazon Connect instance.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -196,12 +200,13 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the hours of operation.",
-			//   "maxLength": 127,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the hours of operation.",
+			//	  "maxLength": 127,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the hours of operation.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -209,36 +214,37 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "One or more tags.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "One or more tags.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "One or more tags.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -261,10 +267,11 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		"time_zone": {
 			// Property: TimeZone
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time zone of the hours of operation.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time zone of the hours of operation.",
+			//	  "type": "string"
+			//	}
 			Description: "The time zone of the hours of operation.",
 			Type:        types.StringType,
 			Computed:    true,

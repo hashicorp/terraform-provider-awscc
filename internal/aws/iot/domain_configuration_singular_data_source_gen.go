@@ -23,30 +23,32 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"authorizer_config": {
 			// Property: AuthorizerConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AllowAuthorizerOverride": {
-			//       "type": "boolean"
-			//     },
-			//     "DefaultAuthorizerName": {
-			//       "maxLength": 128,
-			//       "minLength": 1,
-			//       "pattern": "^[\\w=,@-]+$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AllowAuthorizerOverride": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "DefaultAuthorizerName": {
+			//	      "maxLength": 128,
+			//	      "minLength": 1,
+			//	      "pattern": "^[\\w=,@-]+$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"allow_authorizer_override": {
@@ -66,98 +68,104 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"domain_configuration_name": {
 			// Property: DomainConfigurationName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[\\w.-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[\\w.-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"domain_configuration_status": {
 			// Property: DomainConfigurationStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "ENABLED",
-			//     "DISABLED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "ENABLED",
+			//	    "DISABLED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 253,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 253,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"domain_type": {
 			// Property: DomainType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "ENDPOINT",
-			//     "AWS_MANAGED",
-			//     "CUSTOMER_MANAGED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "ENDPOINT",
+			//	    "AWS_MANAGED",
+			//	    "CUSTOMER_MANAGED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"server_certificate_arns": {
 			// Property: ServerCertificateArns
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "maxLength": 2048,
-			//     "minLength": 1,
-			//     "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
-			//     "type": "string"
-			//   },
-			//   "maxItems": 1,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "maxLength": 2048,
+			//	    "minLength": 1,
+			//	    "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 1,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"server_certificates": {
 			// Property: ServerCertificates
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ServerCertificateArn": {
-			//         "maxLength": 2048,
-			//         "minLength": 1,
-			//         "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
-			//         "type": "string"
-			//       },
-			//       "ServerCertificateStatus": {
-			//         "enum": [
-			//           "INVALID",
-			//           "VALID"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "ServerCertificateStatusDetail": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ServerCertificateArn": {
+			//	        "maxLength": 2048,
+			//	        "minLength": 1,
+			//	        "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "ServerCertificateStatus": {
+			//	        "enum": [
+			//	          "INVALID",
+			//	          "VALID"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "ServerCertificateStatusDetail": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"server_certificate_arn": {
@@ -182,39 +190,41 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"service_type": {
 			// Property: ServiceType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "DATA",
-			//     "CREDENTIAL_PROVIDER",
-			//     "JOBS"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "DATA",
+			//	    "CREDENTIAL_PROVIDER",
+			//	    "JOBS"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -234,10 +244,11 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"validation_certificate_arn": {
 			// Property: ValidationCertificateArn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

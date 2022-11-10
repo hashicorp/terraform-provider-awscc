@@ -23,14 +23,15 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"address_family": {
 			// Property: AddressFamily
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Ip Version of Prefix List.",
-			//   "enum": [
-			//     "IPv4",
-			//     "IPv6"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Ip Version of Prefix List.",
+			//	  "enum": [
+			//	    "IPv4",
+			//	    "IPv6"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Ip Version of Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,10 +39,11 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the Prefix List.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the Prefix List.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,29 +51,30 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"entries": {
 			// Property: Entries
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Entries of Prefix List.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Cidr": {
-			//         "maxLength": 46,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Description": {
-			//         "maxLength": 255,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Cidr"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Entries of Prefix List.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Cidr": {
+			//	        "maxLength": 46,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Description": {
+			//	        "maxLength": 255,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Cidr"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Entries of Prefix List.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -92,11 +95,12 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_entries": {
 			// Property: MaxEntries
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Max Entries of Prefix List.",
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Max Entries of Prefix List.",
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Description: "Max Entries of Prefix List.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -104,10 +108,11 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"owner_id": {
 			// Property: OwnerId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Owner Id of Prefix List.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Owner Id of Prefix List.",
+			//	  "type": "string"
+			//	}
 			Description: "Owner Id of Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -115,10 +120,11 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"prefix_list_id": {
 			// Property: PrefixListId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Id of Prefix List.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Id of Prefix List.",
+			//	  "type": "string"
+			//	}
 			Description: "Id of Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -126,12 +132,13 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"prefix_list_name": {
 			// Property: PrefixListName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of Prefix List.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of Prefix List.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Name of Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -139,28 +146,29 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tags for Prefix List",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Tags for Prefix List",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Tags for Prefix List",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -181,10 +189,11 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Version of Prefix List.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Version of Prefix List.",
+			//	  "type": "integer"
+			//	}
 			Description: "Version of Prefix List.",
 			Type:        types.Int64Type,
 			Computed:    true,

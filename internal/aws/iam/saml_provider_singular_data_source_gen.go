@@ -23,12 +23,13 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name (ARN) of the SAML provider",
-			//   "maxLength": 1600,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name (ARN) of the SAML provider",
+			//	  "maxLength": 1600,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name (ARN) of the SAML provider",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,57 +37,60 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[\\w._-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[\\w._-]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"saml_metadata_document": {
 			// Property: SamlMetadataDocument
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 10000000,
-			//   "minLength": 1000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 10000000,
+			//	  "minLength": 1000,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

@@ -23,11 +23,12 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARN",
-			//   "pattern": "(arn:aws(-cn)?:billingconductor::[0-9]{12}:customlineitem/)?[a-zA-Z0-9]{10}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ARN",
+			//	  "pattern": "(arn:aws(-cn)?:billingconductor::[0-9]{12}:customlineitem/)?[a-zA-Z0-9]{10}",
+			//	  "type": "string"
+			//	}
 			Description: "ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,10 +36,11 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"association_size": {
 			// Property: AssociationSize
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Number of source values associated to this custom line item",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Number of source values associated to this custom line item",
+			//	  "type": "integer"
+			//	}
 			Description: "Number of source values associated to this custom line item",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -46,11 +48,12 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"billing_group_arn": {
 			// Property: BillingGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Billing Group ARN",
-			//   "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Billing Group ARN",
+			//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "Billing Group ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -58,20 +61,21 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"billing_period_range": {
 			// Property: BillingPeriodRange
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ExclusiveEndBillingPeriod": {
-			//       "pattern": "\\d{4}-(0?[1-9]|1[012])",
-			//       "type": "string"
-			//     },
-			//     "InclusiveStartBillingPeriod": {
-			//       "pattern": "\\d{4}-(0?[1-9]|1[012])",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ExclusiveEndBillingPeriod": {
+			//	      "pattern": "\\d{4}-(0?[1-9]|1[012])",
+			//	      "type": "string"
+			//	    },
+			//	    "InclusiveStartBillingPeriod": {
+			//	      "pattern": "\\d{4}-(0?[1-9]|1[012])",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"exclusive_end_billing_period": {
@@ -91,10 +95,11 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Creation timestamp in UNIX epoch time format",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Creation timestamp in UNIX epoch time format",
+			//	  "type": "integer"
+			//	}
 			Description: "Creation timestamp in UNIX epoch time format",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -102,72 +107,74 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"currency_code": {
 			// Property: CurrencyCode
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "USD",
-			//     "CNY"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "USD",
+			//	    "CNY"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"custom_line_item_charge_details": {
 			// Property: CustomLineItemChargeDetails
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Flat": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "ChargeValue": {
-			//           "maximum": 1000000,
-			//           "minimum": 0,
-			//           "type": "number"
-			//         }
-			//       },
-			//       "required": [
-			//         "ChargeValue"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Percentage": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "ChildAssociatedResources": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "pattern": "(arn:aws(-cn)?:billingconductor::[0-9]{12}:(customlineitem|billinggroup)/)?[a-zA-Z0-9]{10,12}",
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         },
-			//         "PercentageValue": {
-			//           "maximum": 10000,
-			//           "minimum": 0,
-			//           "type": "number"
-			//         }
-			//       },
-			//       "required": [
-			//         "PercentageValue"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Type": {
-			//       "enum": [
-			//         "FEE",
-			//         "CREDIT"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Type"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Flat": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "ChargeValue": {
+			//	          "maximum": 1000000,
+			//	          "minimum": 0,
+			//	          "type": "number"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ChargeValue"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Percentage": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "ChildAssociatedResources": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "pattern": "(arn:aws(-cn)?:billingconductor::[0-9]{12}:(customlineitem|billinggroup)/)?[a-zA-Z0-9]{10,12}",
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        },
+			//	        "PercentageValue": {
+			//	          "maximum": 10000,
+			//	          "minimum": 0,
+			//	          "type": "number"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "PercentageValue"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Type": {
+			//	      "enum": [
+			//	        "FEE",
+			//	        "CREDIT"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Type"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"flat": {
@@ -213,20 +220,22 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"last_modified_time": {
 			// Property: LastModifiedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Latest modified timestamp in UNIX epoch time format",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Latest modified timestamp in UNIX epoch time format",
+			//	  "type": "integer"
+			//	}
 			Description: "Latest modified timestamp in UNIX epoch time format",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -234,54 +243,57 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"product_code": {
 			// Property: ProductCode
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 29,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 29,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

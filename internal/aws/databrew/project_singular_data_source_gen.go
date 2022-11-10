@@ -23,12 +23,13 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dataset_name": {
 			// Property: DatasetName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Dataset name",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Dataset name",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Dataset name",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,12 +37,13 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Project name",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Project name",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Project name",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,12 +51,13 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"recipe_name": {
 			// Property: RecipeName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Recipe name",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Recipe name",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Recipe name",
 			Type:        types.StringType,
 			Computed:    true,
@@ -62,10 +65,11 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Role arn",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Role arn",
+			//	  "type": "string"
+			//	}
 			Description: "Role arn",
 			Type:        types.StringType,
 			Computed:    true,
@@ -73,30 +77,31 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"sample": {
 			// Property: Sample
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Sample",
-			//   "properties": {
-			//     "Size": {
-			//       "description": "Sample size",
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     },
-			//     "Type": {
-			//       "description": "Sample type",
-			//       "enum": [
-			//         "FIRST_N",
-			//         "LAST_N",
-			//         "RANDOM"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Type"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Sample",
+			//	  "properties": {
+			//	    "Size": {
+			//	      "description": "Sample size",
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    },
+			//	    "Type": {
+			//	      "description": "Sample type",
+			//	      "enum": [
+			//	        "FIRST_N",
+			//	        "LAST_N",
+			//	        "RANDOM"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Type"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Sample",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -119,32 +124,33 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

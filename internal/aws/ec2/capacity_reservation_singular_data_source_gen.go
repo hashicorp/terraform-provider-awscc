@@ -23,158 +23,172 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		"availability_zone": {
 			// Property: AvailabilityZone
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"available_instance_count": {
 			// Property: AvailableInstanceCount
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"ebs_optimized": {
 			// Property: EbsOptimized
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"end_date": {
 			// Property: EndDate
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"end_date_type": {
 			// Property: EndDateType
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"ephemeral_storage": {
 			// Property: EphemeralStorage
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"instance_count": {
 			// Property: InstanceCount
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"instance_match_criteria": {
 			// Property: InstanceMatchCriteria
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"instance_platform": {
 			// Property: InstancePlatform
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"instance_type": {
 			// Property: InstanceType
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"out_post_arn": {
 			// Property: OutPostArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"placement_group_arn": {
 			// Property: PlacementGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tag_specifications": {
 			// Property: TagSpecifications
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ResourceType": {
-			//         "type": "string"
-			//       },
-			//       "Tags": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Key": {
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Value",
-			//             "Key"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ResourceType": {
+			//	        "type": "string"
+			//	      },
+			//	      "Tags": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Key": {
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Value",
+			//	            "Key"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"resource_type": {
@@ -207,18 +221,20 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		"tenancy": {
 			// Property: Tenancy
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"total_instance_count": {
 			// Property: TotalInstanceCount
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},

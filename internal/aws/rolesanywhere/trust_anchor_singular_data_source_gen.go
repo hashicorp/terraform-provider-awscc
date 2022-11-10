@@ -23,49 +23,52 @@ func trustAnchorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enabled": {
 			// Property: Enabled
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"source": {
 			// Property: Source
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "SourceData": {
-			//       "properties": {
-			//         "AcmPcaArn": {
-			//           "type": "string"
-			//         },
-			//         "X509CertificateData": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "SourceType": {
-			//       "enum": [
-			//         "AWS_ACM_PCA",
-			//         "CERTIFICATE_BUNDLE",
-			//         "SELF_SIGNED_REPOSITORY"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "SourceData": {
+			//	      "properties": {
+			//	        "AcmPcaArn": {
+			//	          "type": "string"
+			//	        },
+			//	        "X509CertificateData": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "SourceType": {
+			//	      "enum": [
+			//	        "AWS_ACM_PCA",
+			//	        "CERTIFICATE_BUNDLE",
+			//	        "SELF_SIGNED_REPOSITORY"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"source_data": {
@@ -98,31 +101,32 @@ func trustAnchorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -142,20 +146,22 @@ func trustAnchorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"trust_anchor_arn": {
 			// Property: TrustAnchorArn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"trust_anchor_id": {
 			// Property: TrustAnchorId
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

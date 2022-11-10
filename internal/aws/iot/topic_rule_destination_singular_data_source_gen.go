@@ -23,10 +23,11 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name (ARN).",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name (ARN).",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name (ARN).",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,16 +35,17 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		"http_url_properties": {
 			// Property: HttpUrlProperties
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "HTTP URL destination properties.",
-			//   "properties": {
-			//     "ConfirmationUrl": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "HTTP URL destination properties.",
+			//	  "properties": {
+			//	    "ConfirmationUrl": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "HTTP URL destination properties.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -59,15 +61,16 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The status of the TopicRuleDestination.",
-			//   "enum": [
-			//     "ENABLED",
-			//     "IN_PROGRESS",
-			//     "DISABLED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The status of the TopicRuleDestination.",
+			//	  "enum": [
+			//	    "ENABLED",
+			//	    "IN_PROGRESS",
+			//	    "DISABLED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The status of the TopicRuleDestination.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -75,10 +78,11 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		"status_reason": {
 			// Property: StatusReason
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The reasoning for the current status of the TopicRuleDestination.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The reasoning for the current status of the TopicRuleDestination.",
+			//	  "type": "string"
+			//	}
 			Description: "The reasoning for the current status of the TopicRuleDestination.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -86,33 +90,34 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		"vpc_properties": {
 			// Property: VpcProperties
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "VPC destination properties.",
-			//   "properties": {
-			//     "RoleArn": {
-			//       "type": "string"
-			//     },
-			//     "SecurityGroups": {
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "SubnetIds": {
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "VpcId": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "VPC destination properties.",
+			//	  "properties": {
+			//	    "RoleArn": {
+			//	      "type": "string"
+			//	    },
+			//	    "SecurityGroups": {
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "SubnetIds": {
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "VpcId": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "VPC destination properties.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

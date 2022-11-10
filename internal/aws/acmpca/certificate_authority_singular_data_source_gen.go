@@ -23,10 +23,11 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the certificate authority.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the certificate authority.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the certificate authority.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"certificate_signing_request": {
 			// Property: CertificateSigningRequest
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,219 +47,220 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"csr_extensions": {
 			// Property: CsrExtensions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
-			//   "properties": {
-			//     "KeyUsage": {
-			//       "additionalProperties": false,
-			//       "description": "Structure that contains X.509 KeyUsage information.",
-			//       "properties": {
-			//         "CRLSign": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "DataEncipherment": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "DecipherOnly": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "DigitalSignature": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "EncipherOnly": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "KeyAgreement": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "KeyCertSign": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "KeyEncipherment": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "NonRepudiation": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "SubjectInformationAccess": {
-			//       "description": "Array of X.509 AccessDescription.",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "Structure that contains X.509 AccessDescription information.",
-			//         "properties": {
-			//           "AccessLocation": {
-			//             "additionalProperties": false,
-			//             "description": "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
-			//             "properties": {
-			//               "DirectoryName": {
-			//                 "additionalProperties": false,
-			//                 "description": "Structure that contains X.500 distinguished name information for your CA.",
-			//                 "properties": {
-			//                   "CommonName": {
-			//                     "type": "string"
-			//                   },
-			//                   "Country": {
-			//                     "type": "string"
-			//                   },
-			//                   "CustomAttributes": {
-			//                     "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "description": "Structure that contains X.500 attribute type and value.",
-			//                       "properties": {
-			//                         "ObjectIdentifier": {
-			//                           "description": "String that contains X.509 ObjectIdentifier information.",
-			//                           "type": "string"
-			//                         },
-			//                         "Value": {
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "ObjectIdentifier",
-			//                         "Value"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "type": "array"
-			//                   },
-			//                   "DistinguishedNameQualifier": {
-			//                     "type": "string"
-			//                   },
-			//                   "GenerationQualifier": {
-			//                     "type": "string"
-			//                   },
-			//                   "GivenName": {
-			//                     "type": "string"
-			//                   },
-			//                   "Initials": {
-			//                     "type": "string"
-			//                   },
-			//                   "Locality": {
-			//                     "type": "string"
-			//                   },
-			//                   "Organization": {
-			//                     "type": "string"
-			//                   },
-			//                   "OrganizationalUnit": {
-			//                     "type": "string"
-			//                   },
-			//                   "Pseudonym": {
-			//                     "type": "string"
-			//                   },
-			//                   "SerialNumber": {
-			//                     "type": "string"
-			//                   },
-			//                   "State": {
-			//                     "type": "string"
-			//                   },
-			//                   "Surname": {
-			//                     "type": "string"
-			//                   },
-			//                   "Title": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "DnsName": {
-			//                 "description": "String that contains X.509 DnsName information.",
-			//                 "type": "string"
-			//               },
-			//               "EdiPartyName": {
-			//                 "additionalProperties": false,
-			//                 "description": "Structure that contains X.509 EdiPartyName information.",
-			//                 "properties": {
-			//                   "NameAssigner": {
-			//                     "type": "string"
-			//                   },
-			//                   "PartyName": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "PartyName",
-			//                   "NameAssigner"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "IpAddress": {
-			//                 "description": "String that contains X.509 IpAddress information.",
-			//                 "type": "string"
-			//               },
-			//               "OtherName": {
-			//                 "additionalProperties": false,
-			//                 "description": "Structure that contains X.509 OtherName information.",
-			//                 "properties": {
-			//                   "TypeId": {
-			//                     "description": "String that contains X.509 ObjectIdentifier information.",
-			//                     "type": "string"
-			//                   },
-			//                   "Value": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "TypeId",
-			//                   "Value"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "RegisteredId": {
-			//                 "description": "String that contains X.509 ObjectIdentifier information.",
-			//                 "type": "string"
-			//               },
-			//               "Rfc822Name": {
-			//                 "description": "String that contains X.509 Rfc822Name information.",
-			//                 "type": "string"
-			//               },
-			//               "UniformResourceIdentifier": {
-			//                 "description": "String that contains X.509 UniformResourceIdentifier information.",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "AccessMethod": {
-			//             "additionalProperties": false,
-			//             "description": "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
-			//             "properties": {
-			//               "AccessMethodType": {
-			//                 "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-			//                 "type": "string"
-			//               },
-			//               "CustomObjectIdentifier": {
-			//                 "description": "String that contains X.509 ObjectIdentifier information.",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "required": [
-			//           "AccessMethod",
-			//           "AccessLocation"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
+			//	  "properties": {
+			//	    "KeyUsage": {
+			//	      "additionalProperties": false,
+			//	      "description": "Structure that contains X.509 KeyUsage information.",
+			//	      "properties": {
+			//	        "CRLSign": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "DataEncipherment": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "DecipherOnly": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "DigitalSignature": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "EncipherOnly": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "KeyAgreement": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "KeyCertSign": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "KeyEncipherment": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "NonRepudiation": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "SubjectInformationAccess": {
+			//	      "description": "Array of X.509 AccessDescription.",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "Structure that contains X.509 AccessDescription information.",
+			//	        "properties": {
+			//	          "AccessLocation": {
+			//	            "additionalProperties": false,
+			//	            "description": "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
+			//	            "properties": {
+			//	              "DirectoryName": {
+			//	                "additionalProperties": false,
+			//	                "description": "Structure that contains X.500 distinguished name information for your CA.",
+			//	                "properties": {
+			//	                  "CommonName": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Country": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "CustomAttributes": {
+			//	                    "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "Structure that contains X.500 attribute type and value.",
+			//	                      "properties": {
+			//	                        "ObjectIdentifier": {
+			//	                          "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                          "type": "string"
+			//	                        },
+			//	                        "Value": {
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "ObjectIdentifier",
+			//	                        "Value"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "type": "array"
+			//	                  },
+			//	                  "DistinguishedNameQualifier": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "GenerationQualifier": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "GivenName": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Initials": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Locality": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Organization": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "OrganizationalUnit": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Pseudonym": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "SerialNumber": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "State": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Surname": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Title": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "DnsName": {
+			//	                "description": "String that contains X.509 DnsName information.",
+			//	                "type": "string"
+			//	              },
+			//	              "EdiPartyName": {
+			//	                "additionalProperties": false,
+			//	                "description": "Structure that contains X.509 EdiPartyName information.",
+			//	                "properties": {
+			//	                  "NameAssigner": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PartyName": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "PartyName",
+			//	                  "NameAssigner"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "IpAddress": {
+			//	                "description": "String that contains X.509 IpAddress information.",
+			//	                "type": "string"
+			//	              },
+			//	              "OtherName": {
+			//	                "additionalProperties": false,
+			//	                "description": "Structure that contains X.509 OtherName information.",
+			//	                "properties": {
+			//	                  "TypeId": {
+			//	                    "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Value": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "TypeId",
+			//	                  "Value"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "RegisteredId": {
+			//	                "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                "type": "string"
+			//	              },
+			//	              "Rfc822Name": {
+			//	                "description": "String that contains X.509 Rfc822Name information.",
+			//	                "type": "string"
+			//	              },
+			//	              "UniformResourceIdentifier": {
+			//	                "description": "String that contains X.509 UniformResourceIdentifier information.",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "AccessMethod": {
+			//	            "additionalProperties": false,
+			//	            "description": "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
+			//	            "properties": {
+			//	              "AccessMethodType": {
+			//	                "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
+			//	                "type": "string"
+			//	              },
+			//	              "CustomObjectIdentifier": {
+			//	                "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "AccessMethod",
+			//	          "AccessLocation"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -529,10 +532,11 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"key_algorithm": {
 			// Property: KeyAlgorithm
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -540,10 +544,11 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"key_storage_security_standard": {
 			// Property: KeyStorageSecurityStandard
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.",
+			//	  "type": "string"
+			//	}
 			Description: "KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -551,48 +556,49 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"revocation_configuration": {
 			// Property: RevocationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
-			//   "properties": {
-			//     "CrlConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
-			//       "properties": {
-			//         "CustomCname": {
-			//           "type": "string"
-			//         },
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "ExpirationInDays": {
-			//           "type": "integer"
-			//         },
-			//         "S3BucketName": {
-			//           "type": "string"
-			//         },
-			//         "S3ObjectAcl": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "OcspConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "OcspCustomCname": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
+			//	  "properties": {
+			//	    "CrlConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
+			//	      "properties": {
+			//	        "CustomCname": {
+			//	          "type": "string"
+			//	        },
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "ExpirationInDays": {
+			//	          "type": "integer"
+			//	        },
+			//	        "S3BucketName": {
+			//	          "type": "string"
+			//	        },
+			//	        "S3ObjectAcl": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "OcspConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "OcspCustomCname": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -656,10 +662,11 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"signing_algorithm": {
 			// Property: SigningAlgorithm
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Algorithm your CA uses to sign certificate requests.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Algorithm your CA uses to sign certificate requests.",
+			//	  "type": "string"
+			//	}
 			Description: "Algorithm your CA uses to sign certificate requests.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -667,77 +674,78 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"subject": {
 			// Property: Subject
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Structure that contains X.500 distinguished name information for your CA.",
-			//   "properties": {
-			//     "CommonName": {
-			//       "type": "string"
-			//     },
-			//     "Country": {
-			//       "type": "string"
-			//     },
-			//     "CustomAttributes": {
-			//       "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "Structure that contains X.500 attribute type and value.",
-			//         "properties": {
-			//           "ObjectIdentifier": {
-			//             "description": "String that contains X.509 ObjectIdentifier information.",
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "ObjectIdentifier",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "DistinguishedNameQualifier": {
-			//       "type": "string"
-			//     },
-			//     "GenerationQualifier": {
-			//       "type": "string"
-			//     },
-			//     "GivenName": {
-			//       "type": "string"
-			//     },
-			//     "Initials": {
-			//       "type": "string"
-			//     },
-			//     "Locality": {
-			//       "type": "string"
-			//     },
-			//     "Organization": {
-			//       "type": "string"
-			//     },
-			//     "OrganizationalUnit": {
-			//       "type": "string"
-			//     },
-			//     "Pseudonym": {
-			//       "type": "string"
-			//     },
-			//     "SerialNumber": {
-			//       "type": "string"
-			//     },
-			//     "State": {
-			//       "type": "string"
-			//     },
-			//     "Surname": {
-			//       "type": "string"
-			//     },
-			//     "Title": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Structure that contains X.500 distinguished name information for your CA.",
+			//	  "properties": {
+			//	    "CommonName": {
+			//	      "type": "string"
+			//	    },
+			//	    "Country": {
+			//	      "type": "string"
+			//	    },
+			//	    "CustomAttributes": {
+			//	      "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "Structure that contains X.500 attribute type and value.",
+			//	        "properties": {
+			//	          "ObjectIdentifier": {
+			//	            "description": "String that contains X.509 ObjectIdentifier information.",
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "ObjectIdentifier",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "DistinguishedNameQualifier": {
+			//	      "type": "string"
+			//	    },
+			//	    "GenerationQualifier": {
+			//	      "type": "string"
+			//	    },
+			//	    "GivenName": {
+			//	      "type": "string"
+			//	    },
+			//	    "Initials": {
+			//	      "type": "string"
+			//	    },
+			//	    "Locality": {
+			//	      "type": "string"
+			//	    },
+			//	    "Organization": {
+			//	      "type": "string"
+			//	    },
+			//	    "OrganizationalUnit": {
+			//	      "type": "string"
+			//	    },
+			//	    "Pseudonym": {
+			//	      "type": "string"
+			//	    },
+			//	    "SerialNumber": {
+			//	      "type": "string"
+			//	    },
+			//	    "State": {
+			//	      "type": "string"
+			//	    },
+			//	    "Surname": {
+			//	      "type": "string"
+			//	    },
+			//	    "Title": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Structure that contains X.500 distinguished name information for your CA.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -838,21 +846,22 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -872,10 +881,11 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of the certificate authority.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of the certificate authority.",
+			//	  "type": "string"
+			//	}
 			Description: "The type of the certificate authority.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -883,10 +893,11 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"usage_mode": {
 			// Property: UsageMode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Usage mode of the ceritificate authority.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Usage mode of the ceritificate authority.",
+			//	  "type": "string"
+			//	}
 			Description: "Usage mode of the ceritificate authority.",
 			Type:        types.StringType,
 			Computed:    true,

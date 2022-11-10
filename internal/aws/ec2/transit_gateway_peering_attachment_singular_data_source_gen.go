@@ -23,11 +23,12 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time the transit gateway peering attachment was created.",
-			//   "format": "date-time",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time the transit gateway peering attachment was created.",
+			//	  "format": "date-time",
+			//	  "type": "string"
+			//	}
 			Description: "The time the transit gateway peering attachment was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,10 +36,11 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		"peer_account_id": {
 			// Property: PeerAccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the peer account",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the peer account",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the peer account",
 			Type:        types.StringType,
 			Computed:    true,
@@ -46,10 +48,11 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		"peer_region": {
 			// Property: PeerRegion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Peer Region",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Peer Region",
+			//	  "type": "string"
+			//	}
 			Description: "Peer Region",
 			Type:        types.StringType,
 			Computed:    true,
@@ -57,10 +60,11 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		"peer_transit_gateway_id": {
 			// Property: PeerTransitGatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the peer transit gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the peer transit gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the peer transit gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -68,10 +72,11 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.",
+			//	  "type": "string"
+			//	}
 			Description: "The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -79,21 +84,22 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The status of the transit gateway peering attachment.",
-			//   "properties": {
-			//     "Code": {
-			//       "description": "The status code.",
-			//       "type": "string"
-			//     },
-			//     "Message": {
-			//       "description": "The status message, if applicable.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The status of the transit gateway peering attachment.",
+			//	  "properties": {
+			//	    "Code": {
+			//	      "description": "The status code.",
+			//	      "type": "string"
+			//	    },
+			//	    "Message": {
+			//	      "description": "The status message, if applicable.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The status of the transit gateway peering attachment.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -116,24 +122,25 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags for the transit gateway peering attachment.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The tags for the transit gateway peering attachment.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The tags for the transit gateway peering attachment.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -156,10 +163,11 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		"transit_gateway_attachment_id": {
 			// Property: TransitGatewayAttachmentId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the transit gateway peering attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the transit gateway peering attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the transit gateway peering attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -167,10 +175,11 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		"transit_gateway_id": {
 			// Property: TransitGatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the transit gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the transit gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the transit gateway.",
 			Type:        types.StringType,
 			Computed:    true,

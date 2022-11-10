@@ -23,10 +23,11 @@ func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the IPAM scope.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the IPAM scope.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the IPAM scope.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,19 +35,21 @@ func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"ipam_arn": {
 			// Property: IpamArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the IPAM this scope is a part of.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the IPAM this scope is a part of.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the IPAM this scope is a part of.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -54,10 +57,11 @@ func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ipam_id": {
 			// Property: IpamId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Id of the IPAM this scope is a part of.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Id of the IPAM this scope is a part of.",
+			//	  "type": "string"
+			//	}
 			Description: "The Id of the IPAM this scope is a part of.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -65,10 +69,11 @@ func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ipam_scope_id": {
 			// Property: IpamScopeId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Id of the IPAM scope.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Id of the IPAM scope.",
+			//	  "type": "string"
+			//	}
 			Description: "Id of the IPAM scope.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -76,14 +81,15 @@ func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ipam_scope_type": {
 			// Property: IpamScopeType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Determines whether this scope contains publicly routable space or space for a private network",
-			//   "enum": [
-			//     "public",
-			//     "private"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Determines whether this scope contains publicly routable space or space for a private network",
+			//	  "enum": [
+			//	    "public",
+			//	    "private"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Determines whether this scope contains publicly routable space or space for a private network",
 			Type:        types.StringType,
 			Computed:    true,
@@ -91,10 +97,11 @@ func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"is_default": {
 			// Property: IsDefault
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Is this one of the default scopes created with the IPAM.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Is this one of the default scopes created with the IPAM.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Is this one of the default scopes created with the IPAM.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -102,10 +109,11 @@ func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"pool_count": {
 			// Property: PoolCount
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The number of pools that currently exist in this scope.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The number of pools that currently exist in this scope.",
+			//	  "type": "integer"
+			//	}
 			Description: "The number of pools that currently exist in this scope.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -113,35 +121,36 @@ func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

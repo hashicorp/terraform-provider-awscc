@@ -23,10 +23,11 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Destination arn. Returned after successful create.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Destination arn. Returned after successful create.",
+			//	  "type": "string"
+			//	}
 			Description: "Destination arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,11 +35,12 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Destination description",
-			//   "maxLength": 2048,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Destination description",
+			//	  "maxLength": 2048,
+			//	  "type": "string"
+			//	}
 			Description: "Destination description",
 			Type:        types.StringType,
 			Computed:    true,
@@ -46,10 +48,11 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"expression": {
 			// Property: Expression
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Destination expression",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Destination expression",
+			//	  "type": "string"
+			//	}
 			Description: "Destination expression",
 			Type:        types.StringType,
 			Computed:    true,
@@ -57,14 +60,15 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"expression_type": {
 			// Property: ExpressionType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Must be RuleName",
-			//   "enum": [
-			//     "RuleName",
-			//     "MqttTopic"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Must be RuleName",
+			//	  "enum": [
+			//	    "RuleName",
+			//	    "MqttTopic"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Must be RuleName",
 			Type:        types.StringType,
 			Computed:    true,
@@ -72,12 +76,13 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique name of destination",
-			//   "maxLength": 128,
-			//   "pattern": "[a-zA-Z0-9:_-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique name of destination",
+			//	  "maxLength": 128,
+			//	  "pattern": "[a-zA-Z0-9:_-]+",
+			//	  "type": "string"
+			//	}
 			Description: "Unique name of destination",
 			Type:        types.StringType,
 			Computed:    true,
@@ -85,12 +90,13 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AWS role ARN that grants access",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AWS role ARN that grants access",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "type": "string"
+			//	}
 			Description: "AWS role ARN that grants access",
 			Type:        types.StringType,
 			Computed:    true,
@@ -98,29 +104,30 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the destination.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the destination.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the destination.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

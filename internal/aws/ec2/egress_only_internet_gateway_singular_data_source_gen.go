@@ -23,10 +23,11 @@ func egressOnlyInternetGatewayDataSource(ctx context.Context) (datasource.DataSo
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Service Generated ID of the EgressOnlyInternetGateway",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Service Generated ID of the EgressOnlyInternetGateway",
+			//	  "type": "string"
+			//	}
 			Description: "Service Generated ID of the EgressOnlyInternetGateway",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func egressOnlyInternetGatewayDataSource(ctx context.Context) (datasource.DataSo
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the VPC for which to create the egress-only internet gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the VPC for which to create the egress-only internet gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the VPC for which to create the egress-only internet gateway.",
 			Type:        types.StringType,
 			Computed:    true,

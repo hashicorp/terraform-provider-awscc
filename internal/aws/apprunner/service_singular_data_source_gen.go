@@ -23,13 +23,14 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_scaling_configuration_arn": {
 			// Property: AutoScalingConfigurationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Autoscaling configuration ARN",
-			//   "maxLength": 1011,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Autoscaling configuration ARN",
+			//	  "maxLength": 1011,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "Autoscaling configuration ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,23 +38,24 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encryption_configuration": {
 			// Property: EncryptionConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Encryption configuration (KMS key)",
-			//   "properties": {
-			//     "KmsKey": {
-			//       "description": "The KMS Key",
-			//       "maxLength": 256,
-			//       "minLength": 0,
-			//       "pattern": "arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "KmsKey"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Encryption configuration (KMS key)",
+			//	  "properties": {
+			//	    "KmsKey": {
+			//	      "description": "The KMS Key",
+			//	      "maxLength": 256,
+			//	      "minLength": 0,
+			//	      "pattern": "arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "KmsKey"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Encryption configuration (KMS key)",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -70,47 +72,48 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"health_check_configuration": {
 			// Property: HealthCheckConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Health check configuration",
-			//   "properties": {
-			//     "HealthyThreshold": {
-			//       "description": "Health check Healthy Threshold",
-			//       "maximum": 20,
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     },
-			//     "Interval": {
-			//       "description": "Health check Interval",
-			//       "type": "integer"
-			//     },
-			//     "Path": {
-			//       "description": "Health check Path",
-			//       "type": "string"
-			//     },
-			//     "Protocol": {
-			//       "description": "Health Check Protocol",
-			//       "enum": [
-			//         "TCP",
-			//         "HTTP"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Timeout": {
-			//       "description": "Health check Timeout",
-			//       "maximum": 20,
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     },
-			//     "UnhealthyThreshold": {
-			//       "description": "Health check Unhealthy Threshold",
-			//       "maximum": 20,
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Health check configuration",
+			//	  "properties": {
+			//	    "HealthyThreshold": {
+			//	      "description": "Health check Healthy Threshold",
+			//	      "maximum": 20,
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    },
+			//	    "Interval": {
+			//	      "description": "Health check Interval",
+			//	      "type": "integer"
+			//	    },
+			//	    "Path": {
+			//	      "description": "Health check Path",
+			//	      "type": "string"
+			//	    },
+			//	    "Protocol": {
+			//	      "description": "Health Check Protocol",
+			//	      "enum": [
+			//	        "TCP",
+			//	        "HTTP"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Timeout": {
+			//	      "description": "Health check Timeout",
+			//	      "maximum": 20,
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    },
+			//	    "UnhealthyThreshold": {
+			//	      "description": "Health check Unhealthy Threshold",
+			//	      "maximum": 20,
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Health check configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -157,34 +160,35 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_configuration": {
 			// Property: InstanceConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Instance Configuration",
-			//   "properties": {
-			//     "Cpu": {
-			//       "description": "CPU",
-			//       "maxLength": 6,
-			//       "minLength": 4,
-			//       "pattern": "1024|2048|(1|2) vCPU",
-			//       "type": "string"
-			//     },
-			//     "InstanceRoleArn": {
-			//       "description": "Instance Role Arn",
-			//       "maxLength": 102,
-			//       "minLength": 29,
-			//       "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
-			//       "type": "string"
-			//     },
-			//     "Memory": {
-			//       "description": "Memory",
-			//       "maxLength": 4,
-			//       "minLength": 4,
-			//       "pattern": "2048|3072|4096|(2|3|4) GB",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Instance Configuration",
+			//	  "properties": {
+			//	    "Cpu": {
+			//	      "description": "CPU",
+			//	      "maxLength": 6,
+			//	      "minLength": 4,
+			//	      "pattern": "1024|2048|(1|2) vCPU",
+			//	      "type": "string"
+			//	    },
+			//	    "InstanceRoleArn": {
+			//	      "description": "Instance Role Arn",
+			//	      "maxLength": 102,
+			//	      "minLength": 29,
+			//	      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
+			//	      "type": "string"
+			//	    },
+			//	    "Memory": {
+			//	      "description": "Memory",
+			//	      "maxLength": 4,
+			//	      "minLength": 4,
+			//	      "pattern": "2048|3072|4096|(2|3|4) GB",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Instance Configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -213,41 +217,42 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"network_configuration": {
 			// Property: NetworkConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Network configuration",
-			//   "properties": {
-			//     "EgressConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Network egress configuration",
-			//       "properties": {
-			//         "EgressType": {
-			//           "description": "Network egress type.",
-			//           "enum": [
-			//             "DEFAULT",
-			//             "VPC"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "VpcConnectorArn": {
-			//           "description": "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
-			//           "maxLength": 1011,
-			//           "minLength": 44,
-			//           "pattern": "",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "EgressType"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "EgressConfiguration"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Network configuration",
+			//	  "properties": {
+			//	    "EgressConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Network egress configuration",
+			//	      "properties": {
+			//	        "EgressType": {
+			//	          "description": "Network egress type.",
+			//	          "enum": [
+			//	            "DEFAULT",
+			//	            "VPC"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "VpcConnectorArn": {
+			//	          "description": "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
+			//	          "maxLength": 1011,
+			//	          "minLength": 44,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "EgressType"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "EgressConfiguration"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Network configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -279,27 +284,28 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"observability_configuration": {
 			// Property: ObservabilityConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Service observability configuration",
-			//   "properties": {
-			//     "ObservabilityConfigurationArn": {
-			//       "description": "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
-			//       "maxLength": 1011,
-			//       "minLength": 1,
-			//       "pattern": "",
-			//       "type": "string"
-			//     },
-			//     "ObservabilityEnabled": {
-			//       "description": "Observability enabled",
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "required": [
-			//     "ObservabilityEnabled"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Service observability configuration",
+			//	  "properties": {
+			//	    "ObservabilityConfigurationArn": {
+			//	      "description": "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
+			//	      "maxLength": 1011,
+			//	      "minLength": 1,
+			//	      "pattern": "",
+			//	      "type": "string"
+			//	    },
+			//	    "ObservabilityEnabled": {
+			//	      "description": "Observability enabled",
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ObservabilityEnabled"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Service observability configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -322,13 +328,14 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_arn": {
 			// Property: ServiceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the AppRunner Service.",
-			//   "maxLength": 1011,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the AppRunner Service.",
+			//	  "maxLength": 1011,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the AppRunner Service.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -336,12 +343,13 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_id": {
 			// Property: ServiceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AppRunner Service Id",
-			//   "maxLength": 32,
-			//   "minLength": 32,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AppRunner Service Id",
+			//	  "maxLength": 32,
+			//	  "minLength": 32,
+			//	  "type": "string"
+			//	}
 			Description: "The AppRunner Service Id",
 			Type:        types.StringType,
 			Computed:    true,
@@ -349,13 +357,14 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_name": {
 			// Property: ServiceName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AppRunner Service Name.",
-			//   "maxLength": 40,
-			//   "minLength": 4,
-			//   "pattern": "[A-Za-z0-9][A-Za-z0-9-_]{3,39}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AppRunner Service Name.",
+			//	  "maxLength": 40,
+			//	  "minLength": 4,
+			//	  "pattern": "[A-Za-z0-9][A-Za-z0-9-_]{3,39}",
+			//	  "type": "string"
+			//	}
 			Description: "The AppRunner Service Name.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -363,10 +372,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_url": {
 			// Property: ServiceUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Service Url of the AppRunner Service.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Service Url of the AppRunner Service.",
+			//	  "type": "string"
+			//	}
 			Description: "The Service Url of the AppRunner Service.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -374,198 +384,199 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_configuration": {
 			// Property: SourceConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Source Code configuration",
-			//   "properties": {
-			//     "AuthenticationConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Authentication Configuration",
-			//       "properties": {
-			//         "AccessRoleArn": {
-			//           "description": "Access Role Arn",
-			//           "maxLength": 102,
-			//           "minLength": 29,
-			//           "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
-			//           "type": "string"
-			//         },
-			//         "ConnectionArn": {
-			//           "description": "Connection Arn",
-			//           "maxLength": 1011,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "AutoDeploymentsEnabled": {
-			//       "description": "Auto Deployment enabled",
-			//       "type": "boolean"
-			//     },
-			//     "CodeRepository": {
-			//       "additionalProperties": false,
-			//       "description": "Source Code Repository",
-			//       "properties": {
-			//         "CodeConfiguration": {
-			//           "additionalProperties": false,
-			//           "description": "Code Configuration",
-			//           "properties": {
-			//             "CodeConfigurationValues": {
-			//               "additionalProperties": false,
-			//               "description": "Code Configuration Values",
-			//               "properties": {
-			//                 "BuildCommand": {
-			//                   "description": "Build Command",
-			//                   "type": "string"
-			//                 },
-			//                 "Port": {
-			//                   "description": "Port",
-			//                   "type": "string"
-			//                 },
-			//                 "Runtime": {
-			//                   "description": "Runtime",
-			//                   "enum": [
-			//                     "PYTHON_3",
-			//                     "NODEJS_12",
-			//                     "NODEJS_14",
-			//                     "CORRETTO_8",
-			//                     "CORRETTO_11",
-			//                     "NODEJS_16"
-			//                   ],
-			//                   "type": "string"
-			//                 },
-			//                 "RuntimeEnvironmentVariables": {
-			//                   "items": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "Name": {
-			//                         "type": "string"
-			//                       },
-			//                       "Value": {
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   },
-			//                   "type": "array"
-			//                 },
-			//                 "StartCommand": {
-			//                   "description": "Start Command",
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Runtime"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "ConfigurationSource": {
-			//               "description": "Configuration Source",
-			//               "enum": [
-			//                 "REPOSITORY",
-			//                 "API"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "ConfigurationSource"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "RepositoryUrl": {
-			//           "description": "Repository Url",
-			//           "type": "string"
-			//         },
-			//         "SourceCodeVersion": {
-			//           "additionalProperties": false,
-			//           "description": "Source Code Version",
-			//           "properties": {
-			//             "Type": {
-			//               "description": "Source Code Version Type",
-			//               "enum": [
-			//                 "BRANCH"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "description": "Source Code Version Value",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Type",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "RepositoryUrl",
-			//         "SourceCodeVersion"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ImageRepository": {
-			//       "additionalProperties": false,
-			//       "description": "Image Repository",
-			//       "properties": {
-			//         "ImageConfiguration": {
-			//           "additionalProperties": false,
-			//           "description": "Image Configuration",
-			//           "properties": {
-			//             "Port": {
-			//               "description": "Port",
-			//               "type": "string"
-			//             },
-			//             "RuntimeEnvironmentVariables": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Name": {
-			//                     "type": "string"
-			//                   },
-			//                   "Value": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "type": "array"
-			//             },
-			//             "StartCommand": {
-			//               "description": "Start Command",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ImageIdentifier": {
-			//           "description": "Image Identifier",
-			//           "maxLength": 1024,
-			//           "minLength": 1,
-			//           "pattern": "([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)",
-			//           "type": "string"
-			//         },
-			//         "ImageRepositoryType": {
-			//           "description": "Image Repository Type",
-			//           "enum": [
-			//             "ECR",
-			//             "ECR_PUBLIC"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "ImageIdentifier",
-			//         "ImageRepositoryType"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Source Code configuration",
+			//	  "properties": {
+			//	    "AuthenticationConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Authentication Configuration",
+			//	      "properties": {
+			//	        "AccessRoleArn": {
+			//	          "description": "Access Role Arn",
+			//	          "maxLength": 102,
+			//	          "minLength": 29,
+			//	          "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
+			//	          "type": "string"
+			//	        },
+			//	        "ConnectionArn": {
+			//	          "description": "Connection Arn",
+			//	          "maxLength": 1011,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "AutoDeploymentsEnabled": {
+			//	      "description": "Auto Deployment enabled",
+			//	      "type": "boolean"
+			//	    },
+			//	    "CodeRepository": {
+			//	      "additionalProperties": false,
+			//	      "description": "Source Code Repository",
+			//	      "properties": {
+			//	        "CodeConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "description": "Code Configuration",
+			//	          "properties": {
+			//	            "CodeConfigurationValues": {
+			//	              "additionalProperties": false,
+			//	              "description": "Code Configuration Values",
+			//	              "properties": {
+			//	                "BuildCommand": {
+			//	                  "description": "Build Command",
+			//	                  "type": "string"
+			//	                },
+			//	                "Port": {
+			//	                  "description": "Port",
+			//	                  "type": "string"
+			//	                },
+			//	                "Runtime": {
+			//	                  "description": "Runtime",
+			//	                  "enum": [
+			//	                    "PYTHON_3",
+			//	                    "NODEJS_12",
+			//	                    "NODEJS_14",
+			//	                    "CORRETTO_8",
+			//	                    "CORRETTO_11",
+			//	                    "NODEJS_16"
+			//	                  ],
+			//	                  "type": "string"
+			//	                },
+			//	                "RuntimeEnvironmentVariables": {
+			//	                  "items": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "Name": {
+			//	                        "type": "string"
+			//	                      },
+			//	                      "Value": {
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  },
+			//	                  "type": "array"
+			//	                },
+			//	                "StartCommand": {
+			//	                  "description": "Start Command",
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Runtime"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "ConfigurationSource": {
+			//	              "description": "Configuration Source",
+			//	              "enum": [
+			//	                "REPOSITORY",
+			//	                "API"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "ConfigurationSource"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "RepositoryUrl": {
+			//	          "description": "Repository Url",
+			//	          "type": "string"
+			//	        },
+			//	        "SourceCodeVersion": {
+			//	          "additionalProperties": false,
+			//	          "description": "Source Code Version",
+			//	          "properties": {
+			//	            "Type": {
+			//	              "description": "Source Code Version Type",
+			//	              "enum": [
+			//	                "BRANCH"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "description": "Source Code Version Value",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Type",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "RepositoryUrl",
+			//	        "SourceCodeVersion"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ImageRepository": {
+			//	      "additionalProperties": false,
+			//	      "description": "Image Repository",
+			//	      "properties": {
+			//	        "ImageConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "description": "Image Configuration",
+			//	          "properties": {
+			//	            "Port": {
+			//	              "description": "Port",
+			//	              "type": "string"
+			//	            },
+			//	            "RuntimeEnvironmentVariables": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Name": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Value": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "type": "array"
+			//	            },
+			//	            "StartCommand": {
+			//	              "description": "Start Command",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ImageIdentifier": {
+			//	          "description": "Image Identifier",
+			//	          "maxLength": 1024,
+			//	          "minLength": 1,
+			//	          "pattern": "([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)",
+			//	          "type": "string"
+			//	        },
+			//	        "ImageRepositoryType": {
+			//	          "description": "Image Repository Type",
+			//	          "enum": [
+			//	            "ECR",
+			//	            "ECR_PUBLIC"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ImageIdentifier",
+			//	        "ImageRepositoryType"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Source Code configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -765,10 +776,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AppRunner Service status.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AppRunner Service status.",
+			//	  "type": "string"
+			//	}
 			Description: "AppRunner Service status.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -776,21 +788,22 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

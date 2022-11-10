@@ -23,37 +23,39 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"base_capacity": {
 			// Property: BaseCapacity
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"config_parameters": {
 			// Property: ConfigParameters
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ParameterKey": {
-			//         "maxLength": 255,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       },
-			//       "ParameterValue": {
-			//         "maxLength": 15000,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ParameterKey": {
+			//	        "maxLength": 255,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      },
+			//	      "ParameterValue": {
+			//	        "maxLength": 15000,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"parameter_key": {
@@ -73,98 +75,104 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enhanced_vpc_routing": {
 			// Property: EnhancedVpcRouting
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"namespace_name": {
 			// Property: NamespaceName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 64,
-			//   "minLength": 3,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 64,
+			//	  "minLength": 3,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"publicly_accessible": {
 			// Property: PubliclyAccessible
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"security_group_ids": {
 			// Property: SecurityGroupIds
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "maxLength": 255,
-			//     "minLength": 0,
-			//     "pattern": "^sg-[0-9a-fA-F]{8,}$",
-			//     "type": "string"
-			//   },
-			//   "maxItems": 32,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "maxLength": 255,
+			//	    "minLength": 0,
+			//	    "pattern": "^sg-[0-9a-fA-F]{8,}$",
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 32,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"subnet_ids": {
 			// Property: SubnetIds
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "maxLength": 255,
-			//     "minLength": 0,
-			//     "pattern": "^subnet-[0-9a-fA-F]{8,}$",
-			//     "type": "string"
-			//   },
-			//   "maxItems": 32,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "maxLength": 255,
+			//	    "minLength": 0,
+			//	    "pattern": "^subnet-[0-9a-fA-F]{8,}$",
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 32,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -184,142 +192,143 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"workgroup": {
 			// Property: Workgroup
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BaseCapacity": {
-			//       "type": "integer"
-			//     },
-			//     "ConfigParameters": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ParameterKey": {
-			//             "maxLength": 255,
-			//             "minLength": 0,
-			//             "type": "string"
-			//           },
-			//           "ParameterValue": {
-			//             "maxLength": 15000,
-			//             "minLength": 0,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "CreationDate": {
-			//       "type": "string"
-			//     },
-			//     "Endpoint": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Address": {
-			//           "type": "string"
-			//         },
-			//         "Port": {
-			//           "type": "integer"
-			//         },
-			//         "VpcEndpoints": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "NetworkInterfaces": {
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "AvailabilityZone": {
-			//                       "type": "string"
-			//                     },
-			//                     "NetworkInterfaceId": {
-			//                       "type": "string"
-			//                     },
-			//                     "PrivateIpAddress": {
-			//                       "type": "string"
-			//                     },
-			//                     "SubnetId": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "VpcEndpointId": {
-			//                 "type": "string"
-			//               },
-			//               "VpcId": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "EnhancedVpcRouting": {
-			//       "type": "boolean"
-			//     },
-			//     "NamespaceName": {
-			//       "maxLength": 64,
-			//       "minLength": 3,
-			//       "pattern": "^[a-z0-9-]+$",
-			//       "type": "string"
-			//     },
-			//     "PubliclyAccessible": {
-			//       "type": "boolean"
-			//     },
-			//     "SecurityGroupIds": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "maxLength": 255,
-			//         "minLength": 0,
-			//         "pattern": "^sg-[0-9a-fA-F]{8,}$",
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "Status": {
-			//       "enum": [
-			//         "CREATING",
-			//         "AVAILABLE",
-			//         "MODIFYING",
-			//         "DELETING"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "SubnetIds": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "maxLength": 255,
-			//         "minLength": 0,
-			//         "pattern": "^subnet-[0-9a-fA-F]{8,}$",
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "WorkgroupArn": {
-			//       "type": "string"
-			//     },
-			//     "WorkgroupId": {
-			//       "type": "string"
-			//     },
-			//     "WorkgroupName": {
-			//       "maxLength": 64,
-			//       "minLength": 3,
-			//       "pattern": "^[a-z0-9-]*$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BaseCapacity": {
+			//	      "type": "integer"
+			//	    },
+			//	    "ConfigParameters": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ParameterKey": {
+			//	            "maxLength": 255,
+			//	            "minLength": 0,
+			//	            "type": "string"
+			//	          },
+			//	          "ParameterValue": {
+			//	            "maxLength": 15000,
+			//	            "minLength": 0,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "CreationDate": {
+			//	      "type": "string"
+			//	    },
+			//	    "Endpoint": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Address": {
+			//	          "type": "string"
+			//	        },
+			//	        "Port": {
+			//	          "type": "integer"
+			//	        },
+			//	        "VpcEndpoints": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "NetworkInterfaces": {
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "AvailabilityZone": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "NetworkInterfaceId": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "PrivateIpAddress": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "SubnetId": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "VpcEndpointId": {
+			//	                "type": "string"
+			//	              },
+			//	              "VpcId": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "EnhancedVpcRouting": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "NamespaceName": {
+			//	      "maxLength": 64,
+			//	      "minLength": 3,
+			//	      "pattern": "^[a-z0-9-]+$",
+			//	      "type": "string"
+			//	    },
+			//	    "PubliclyAccessible": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "SecurityGroupIds": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "maxLength": 255,
+			//	        "minLength": 0,
+			//	        "pattern": "^sg-[0-9a-fA-F]{8,}$",
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "Status": {
+			//	      "enum": [
+			//	        "CREATING",
+			//	        "AVAILABLE",
+			//	        "MODIFYING",
+			//	        "DELETING"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "SubnetIds": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "maxLength": 255,
+			//	        "minLength": 0,
+			//	        "pattern": "^subnet-[0-9a-fA-F]{8,}$",
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "WorkgroupArn": {
+			//	      "type": "string"
+			//	    },
+			//	    "WorkgroupId": {
+			//	      "type": "string"
+			//	    },
+			//	    "WorkgroupName": {
+			//	      "maxLength": 64,
+			//	      "minLength": 3,
+			//	      "pattern": "^[a-z0-9-]*$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"base_capacity": {
@@ -466,12 +475,13 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"workgroup_name": {
 			// Property: WorkgroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 64,
-			//   "minLength": 3,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 64,
+			//	  "minLength": 3,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

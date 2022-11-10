@@ -23,30 +23,31 @@ func schemaVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"schema": {
 			// Property: Schema
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Identifier for the schema where the schema version will be created.",
-			//   "properties": {
-			//     "RegistryName": {
-			//       "description": "Name of the registry to identify where the Schema is located.",
-			//       "maxLength": 255,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "SchemaArn": {
-			//       "description": "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
-			//       "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
-			//       "type": "string"
-			//     },
-			//     "SchemaName": {
-			//       "description": "Name of the schema. This parameter requires RegistryName to be provided.",
-			//       "maxLength": 255,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Identifier for the schema where the schema version will be created.",
+			//	  "properties": {
+			//	    "RegistryName": {
+			//	      "description": "Name of the registry to identify where the Schema is located.",
+			//	      "maxLength": 255,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "SchemaArn": {
+			//	      "description": "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
+			//	      "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "SchemaName": {
+			//	      "description": "Name of the schema. This parameter requires RegistryName to be provided.",
+			//	      "maxLength": 255,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Identifier for the schema where the schema version will be created.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -75,12 +76,13 @@ func schemaVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"schema_definition": {
 			// Property: SchemaDefinition
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Complete definition of the schema in plain-text.",
-			//   "maxLength": 170000,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Complete definition of the schema in plain-text.",
+			//	  "maxLength": 170000,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Complete definition of the schema in plain-text.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -88,11 +90,12 @@ func schemaVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"version_id": {
 			// Property: VersionId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Represents the version ID associated with the schema version.",
-			//   "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Represents the version ID associated with the schema version.",
+			//	  "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "Represents the version ID associated with the schema version.",
 			Type:        types.StringType,
 			Computed:    true,

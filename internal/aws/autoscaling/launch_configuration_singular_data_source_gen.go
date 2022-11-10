@@ -23,10 +23,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"associate_public_ip_address": {
 			// Property: AssociatePublicIpAddress
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies whether to assign a public IP address to the group's instances.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies whether to assign a public IP address to the group's instances.",
+			//	  "type": "boolean"
+			//	}
 			Description: "For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies whether to assign a public IP address to the group's instances.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -34,69 +35,70 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"block_device_mappings": {
 			// Property: BlockDeviceMappings
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "BlockDeviceMapping is a property of AWS::AutoScaling::LaunchConfiguration that describes a block device mapping for an Auto Scaling group.",
-			//     "properties": {
-			//       "DeviceName": {
-			//         "description": "The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh). ",
-			//         "type": "string"
-			//       },
-			//       "Ebs": {
-			//         "additionalProperties": false,
-			//         "description": "Parameters used to automatically set up EBS volumes when an instance is launched.",
-			//         "properties": {
-			//           "DeleteOnTermination": {
-			//             "description": "Indicates whether the volume is deleted on instance termination. ",
-			//             "type": "boolean"
-			//           },
-			//           "Encrypted": {
-			//             "description": "Specifies whether the volume should be encrypted. ",
-			//             "type": "boolean"
-			//           },
-			//           "Iops": {
-			//             "description": "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
-			//             "type": "integer"
-			//           },
-			//           "SnapshotId": {
-			//             "description": "The snapshot ID of the volume to use.",
-			//             "type": "string"
-			//           },
-			//           "Throughput": {
-			//             "description": "The throughput (MiBps) to provision for a gp3 volume.",
-			//             "type": "integer"
-			//           },
-			//           "VolumeSize": {
-			//             "description": "The volume size, in GiBs.",
-			//             "type": "integer"
-			//           },
-			//           "VolumeType": {
-			//             "description": "The volume type.",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "NoDevice": {
-			//         "description": "Setting this value to true suppresses the specified device included in the block device mapping of the AMI.",
-			//         "type": "boolean"
-			//       },
-			//       "VirtualName": {
-			//         "description": "The name of the virtual device.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "DeviceName"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "BlockDeviceMapping is a property of AWS::AutoScaling::LaunchConfiguration that describes a block device mapping for an Auto Scaling group.",
+			//	    "properties": {
+			//	      "DeviceName": {
+			//	        "description": "The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh). ",
+			//	        "type": "string"
+			//	      },
+			//	      "Ebs": {
+			//	        "additionalProperties": false,
+			//	        "description": "Parameters used to automatically set up EBS volumes when an instance is launched.",
+			//	        "properties": {
+			//	          "DeleteOnTermination": {
+			//	            "description": "Indicates whether the volume is deleted on instance termination. ",
+			//	            "type": "boolean"
+			//	          },
+			//	          "Encrypted": {
+			//	            "description": "Specifies whether the volume should be encrypted. ",
+			//	            "type": "boolean"
+			//	          },
+			//	          "Iops": {
+			//	            "description": "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
+			//	            "type": "integer"
+			//	          },
+			//	          "SnapshotId": {
+			//	            "description": "The snapshot ID of the volume to use.",
+			//	            "type": "string"
+			//	          },
+			//	          "Throughput": {
+			//	            "description": "The throughput (MiBps) to provision for a gp3 volume.",
+			//	            "type": "integer"
+			//	          },
+			//	          "VolumeSize": {
+			//	            "description": "The volume size, in GiBs.",
+			//	            "type": "integer"
+			//	          },
+			//	          "VolumeType": {
+			//	            "description": "The volume type.",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "NoDevice": {
+			//	        "description": "Setting this value to true suppresses the specified device included in the block device mapping of the AMI.",
+			//	        "type": "boolean"
+			//	      },
+			//	      "VirtualName": {
+			//	        "description": "The name of the virtual device.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "DeviceName"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -176,10 +178,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"classic_link_vpc_id": {
 			// Property: ClassicLinkVPCId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -187,14 +190,15 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"classic_link_vpc_security_groups": {
 			// Property: ClassicLinkVPCSecurityGroups
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -202,10 +206,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"ebs_optimized": {
 			// Property: EbsOptimized
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether the launch configuration is optimized for EBS I/O (true) or not (false).",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether the launch configuration is optimized for EBS I/O (true) or not (false).",
+			//	  "type": "boolean"
+			//	}
 			Description: "Specifies whether the launch configuration is optimized for EBS I/O (true) or not (false).",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -213,10 +218,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"iam_instance_profile": {
 			// Property: IamInstanceProfile
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.",
+			//	  "type": "string"
+			//	}
 			Description: "Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -224,10 +230,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"image_id": {
 			// Property: ImageId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.",
+			//	  "type": "string"
+			//	}
 			Description: "Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -235,10 +242,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"instance_id": {
 			// Property: InstanceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the Amazon EC2 instance you want to use to create the launch configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the Amazon EC2 instance you want to use to create the launch configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the Amazon EC2 instance you want to use to create the launch configuration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -246,10 +254,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"instance_monitoring": {
 			// Property: InstanceMonitoring
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Controls whether instances in this group are launched with detailed (true) or basic (false) monitoring.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Controls whether instances in this group are launched with detailed (true) or basic (false) monitoring.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Controls whether instances in this group are launched with detailed (true) or basic (false) monitoring.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -257,10 +266,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"instance_type": {
 			// Property: InstanceType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the instance type of the EC2 instance.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the instance type of the EC2 instance.",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the instance type of the EC2 instance.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -268,10 +278,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"kernel_id": {
 			// Property: KernelId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Provides the ID of the kernel associated with the EC2 AMI.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Provides the ID of the kernel associated with the EC2 AMI.",
+			//	  "type": "string"
+			//	}
 			Description: "Provides the ID of the kernel associated with the EC2 AMI.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -279,10 +290,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"key_name": {
 			// Property: KeyName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Provides the name of the EC2 key pair.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Provides the name of the EC2 key pair.",
+			//	  "type": "string"
+			//	}
 			Description: "Provides the name of the EC2 key pair.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -290,12 +302,13 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"launch_configuration_name": {
 			// Property: LaunchConfigurationName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the launch configuration. This name must be unique per Region per account.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the launch configuration. This name must be unique per Region per account.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the launch configuration. This name must be unique per Region per account.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -303,25 +316,26 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"metadata_options": {
 			// Property: MetadataOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The metadata options for the instances.",
-			//   "properties": {
-			//     "HttpEndpoint": {
-			//       "description": "This parameter enables or disables the HTTP metadata endpoint on your instances.",
-			//       "type": "string"
-			//     },
-			//     "HttpPutResponseHopLimit": {
-			//       "description": "The desired HTTP PUT response hop limit for instance metadata requests.",
-			//       "type": "integer"
-			//     },
-			//     "HttpTokens": {
-			//       "description": "The state of token usage for your instance metadata requests.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The metadata options for the instances.",
+			//	  "properties": {
+			//	    "HttpEndpoint": {
+			//	      "description": "This parameter enables or disables the HTTP metadata endpoint on your instances.",
+			//	      "type": "string"
+			//	    },
+			//	    "HttpPutResponseHopLimit": {
+			//	      "description": "The desired HTTP PUT response hop limit for instance metadata requests.",
+			//	      "type": "integer"
+			//	    },
+			//	    "HttpTokens": {
+			//	      "description": "The state of token usage for your instance metadata requests.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The metadata options for the instances.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -350,10 +364,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"placement_tenancy": {
 			// Property: PlacementTenancy
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tenancy of the instance, either default or dedicated.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The tenancy of the instance, either default or dedicated.",
+			//	  "type": "string"
+			//	}
 			Description: "The tenancy of the instance, either default or dedicated.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -361,10 +376,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"ram_disk_id": {
 			// Property: RamDiskId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the RAM disk to select.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the RAM disk to select.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the RAM disk to select.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -372,14 +388,15 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"security_groups": {
 			// Property: SecurityGroups
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -387,10 +404,11 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"spot_price": {
 			// Property: SpotPrice
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The maximum hourly price you are willing to pay for any Spot Instances launched to fulfill the request.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The maximum hourly price you are willing to pay for any Spot Instances launched to fulfill the request.",
+			//	  "type": "string"
+			//	}
 			Description: "The maximum hourly price you are willing to pay for any Spot Instances launched to fulfill the request.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -398,11 +416,12 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"user_data": {
 			// Property: UserData
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Base64-encoded user data to make available to the launched EC2 instances.",
-			//   "maxLength": 21847,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Base64-encoded user data to make available to the launched EC2 instances.",
+			//	  "maxLength": 21847,
+			//	  "type": "string"
+			//	}
 			Description: "The Base64-encoded user data to make available to the launched EC2 instances.",
 			Type:        types.StringType,
 			Computed:    true,

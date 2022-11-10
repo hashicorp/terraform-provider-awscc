@@ -23,12 +23,13 @@ func resolverDNSSECConfigDataSource(ctx context.Context) (datasource.DataSource,
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Id",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Id",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Id",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,12 +37,13 @@ func resolverDNSSECConfigDataSource(ctx context.Context) (datasource.DataSource,
 		"owner_id": {
 			// Property: OwnerId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AccountId",
-			//   "maxLength": 32,
-			//   "minLength": 12,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AccountId",
+			//	  "maxLength": 32,
+			//	  "minLength": 12,
+			//	  "type": "string"
+			//	}
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,12 +51,13 @@ func resolverDNSSECConfigDataSource(ctx context.Context) (datasource.DataSource,
 		"resource_id": {
 			// Property: ResourceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ResourceId",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ResourceId",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,
@@ -62,16 +65,17 @@ func resolverDNSSECConfigDataSource(ctx context.Context) (datasource.DataSource,
 		"validation_status": {
 			// Property: ValidationStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
-			//   "enum": [
-			//     "ENABLING",
-			//     "ENABLED",
-			//     "DISABLING",
-			//     "DISABLED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
+			//	  "enum": [
+			//	    "ENABLING",
+			//	    "ENABLED",
+			//	    "DISABLING",
+			//	    "DISABLED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
 			Type:        types.StringType,
 			Computed:    true,

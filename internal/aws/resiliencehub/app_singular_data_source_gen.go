@@ -23,11 +23,12 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"app_arn": {
 			// Property: AppArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name (ARN) of the App.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name (ARN) of the App.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name (ARN) of the App.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,14 +36,15 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"app_assessment_schedule": {
 			// Property: AppAssessmentSchedule
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Assessment execution schedule.",
-			//   "enum": [
-			//     "Disabled",
-			//     "Daily"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Assessment execution schedule.",
+			//	  "enum": [
+			//	    "Disabled",
+			//	    "Daily"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Assessment execution schedule.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -50,13 +52,14 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"app_template_body": {
 			// Property: AppTemplateBody
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A string containing full ResilienceHub app template body.",
-			//   "maxLength": 5000,
-			//   "minLength": 0,
-			//   "pattern": "^[\\w\\s:,-\\.'{}\\[\\]:\"]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A string containing full ResilienceHub app template body.",
+			//	  "maxLength": 5000,
+			//	  "minLength": 0,
+			//	  "pattern": "^[\\w\\s:,-\\.'{}\\[\\]:\"]+$",
+			//	  "type": "string"
+			//	}
 			Description: "A string containing full ResilienceHub app template body.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -64,12 +67,13 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "App description.",
-			//   "maxLength": 500,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "App description.",
+			//	  "maxLength": 500,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "App description.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -77,11 +81,12 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the app.",
-			//   "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the app.",
+			//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
+			//	  "type": "string"
+			//	}
 			Description: "Name of the app.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -89,11 +94,12 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resiliency_policy_arn": {
 			// Property: ResiliencyPolicyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name (ARN) of the Resiliency Policy.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name (ARN) of the Resiliency Policy.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -101,64 +107,65 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_mappings": {
 			// Property: ResourceMappings
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of ResourceMapping objects.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Resource mapping is used to map logical resources from template to physical resource",
-			//     "properties": {
-			//       "LogicalStackName": {
-			//         "type": "string"
-			//       },
-			//       "MappingType": {
-			//         "pattern": "CfnStack|Resource|Terraform",
-			//         "type": "string"
-			//       },
-			//       "PhysicalResourceId": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "AwsAccountId": {
-			//             "pattern": "^[0-9]{12}$",
-			//             "type": "string"
-			//           },
-			//           "AwsRegion": {
-			//             "pattern": "^[a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]$",
-			//             "type": "string"
-			//           },
-			//           "Identifier": {
-			//             "maxLength": 255,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "Type": {
-			//             "pattern": "Arn|Native",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Identifier",
-			//           "Type"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "ResourceName": {
-			//         "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
-			//         "type": "string"
-			//       },
-			//       "TerraformSourceName": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "MappingType",
-			//       "PhysicalResourceId"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "An array of ResourceMapping objects.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Resource mapping is used to map logical resources from template to physical resource",
+			//	    "properties": {
+			//	      "LogicalStackName": {
+			//	        "type": "string"
+			//	      },
+			//	      "MappingType": {
+			//	        "pattern": "CfnStack|Resource|Terraform",
+			//	        "type": "string"
+			//	      },
+			//	      "PhysicalResourceId": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "AwsAccountId": {
+			//	            "pattern": "^[0-9]{12}$",
+			//	            "type": "string"
+			//	          },
+			//	          "AwsRegion": {
+			//	            "pattern": "^[a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]$",
+			//	            "type": "string"
+			//	          },
+			//	          "Identifier": {
+			//	            "maxLength": 255,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "Type": {
+			//	            "pattern": "Arn|Native",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Identifier",
+			//	          "Type"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "ResourceName": {
+			//	        "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
+			//	        "type": "string"
+			//	      },
+			//	      "TerraformSourceName": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "MappingType",
+			//	      "PhysicalResourceId"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "An array of ResourceMapping objects.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -217,16 +224,18 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "patternProperties": {
-			//     "": {
-			//       "maxLength": 256,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "maxLength": 256,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			//
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,

@@ -23,10 +23,11 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"access_string": {
 			// Property: AccessString
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Access permissions string used for this user account.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Access permissions string used for this user account.",
+			//	  "type": "string"
+			//	}
 			Description: "Access permissions string used for this user account.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the user account.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the user account.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the user account.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,31 +47,32 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"authentication_mode": {
 			// Property: AuthenticationMode
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Passwords": {
-			//       "$comment": "List of passwords.",
-			//       "description": "Passwords used for this user account. You can create up to two passwords for each user.",
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "maxItems": 2,
-			//       "minItems": 1,
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "Type": {
-			//       "description": "Type of authentication strategy for this user.",
-			//       "enum": [
-			//         "password"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Passwords": {
+			//	      "$comment": "List of passwords.",
+			//	      "description": "Passwords used for this user account. You can create up to two passwords for each user.",
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 2,
+			//	      "minItems": 1,
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "Type": {
+			//	      "description": "Type of authentication strategy for this user.",
+			//	      "enum": [
+			//	        "password"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"passwords": {
@@ -91,10 +94,11 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".",
+			//	  "type": "string"
+			//	}
 			Description: "Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".",
 			Type:        types.StringType,
 			Computed:    true,
@@ -102,38 +106,39 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this user.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this user.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this user.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -156,11 +161,12 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"user_name": {
 			// Property: UserName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the user.",
-			//   "pattern": "[a-z][a-z0-9\\\\-]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the user.",
+			//	  "pattern": "[a-z][a-z0-9\\\\-]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the user.",
 			Type:        types.StringType,
 			Computed:    true,

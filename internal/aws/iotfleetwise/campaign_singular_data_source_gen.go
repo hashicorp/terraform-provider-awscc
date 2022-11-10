@@ -23,79 +23,82 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"action": {
 			// Property: Action
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "APPROVE",
-			//     "SUSPEND",
-			//     "RESUME",
-			//     "UPDATE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "APPROVE",
+			//	    "SUSPEND",
+			//	    "RESUME",
+			//	    "UPDATE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"collection_scheme": {
 			// Property: CollectionScheme
 			// CloudFormation resource type schema:
-			// {
-			//   "properties": {
-			//     "ConditionBasedCollectionScheme": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "ConditionLanguageVersion": {
-			//           "minimum": 1,
-			//           "type": "integer"
-			//         },
-			//         "Expression": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "MinimumTriggerIntervalMs": {
-			//           "maximum": 4294967295,
-			//           "minimum": 0,
-			//           "type": "number"
-			//         },
-			//         "TriggerMode": {
-			//           "enum": [
-			//             "ALWAYS",
-			//             "RISING_EDGE"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Expression"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "TimeBasedCollectionScheme": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "PeriodMs": {
-			//           "maximum": 60000,
-			//           "minimum": 10000,
-			//           "type": "number"
-			//         }
-			//       },
-			//       "required": [
-			//         "PeriodMs"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "properties": {
+			//	    "ConditionBasedCollectionScheme": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "ConditionLanguageVersion": {
+			//	          "minimum": 1,
+			//	          "type": "integer"
+			//	        },
+			//	        "Expression": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "MinimumTriggerIntervalMs": {
+			//	          "maximum": 4294967295,
+			//	          "minimum": 0,
+			//	          "type": "number"
+			//	        },
+			//	        "TriggerMode": {
+			//	          "enum": [
+			//	            "ALWAYS",
+			//	            "RISING_EDGE"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Expression"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "TimeBasedCollectionScheme": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "PeriodMs": {
+			//	          "maximum": 60000,
+			//	          "minimum": 10000,
+			//	          "type": "number"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "PeriodMs"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"condition_based_collection_scheme": {
@@ -146,170 +149,182 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"compression": {
 			// Property: Compression
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "OFF",
-			//   "enum": [
-			//     "OFF",
-			//     "SNAPPY"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "OFF",
+			//	  "enum": [
+			//	    "OFF",
+			//	    "SNAPPY"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "format": "date-time",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "format": "date-time",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"data_extra_dimensions": {
 			// Property: DataExtraDimensions
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "maxLength": 150,
-			//     "minLength": 1,
-			//     "pattern": "^[a-zA-Z0-9_.]+$",
-			//     "type": "string"
-			//   },
-			//   "maxItems": 5,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "maxLength": 150,
+			//	    "minLength": 1,
+			//	    "pattern": "^[a-zA-Z0-9_.]+$",
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 5,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"diagnostics_mode": {
 			// Property: DiagnosticsMode
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "OFF",
-			//   "enum": [
-			//     "OFF",
-			//     "SEND_ACTIVE_DTCS"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "OFF",
+			//	  "enum": [
+			//	    "OFF",
+			//	    "SEND_ACTIVE_DTCS"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"expiry_time": {
 			// Property: ExpiryTime
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "253402243200",
-			//   "format": "date-time",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "253402243200",
+			//	  "format": "date-time",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"last_modification_time": {
 			// Property: LastModificationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "format": "date-time",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "format": "date-time",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z\\d\\-_:]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z\\d\\-_:]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"post_trigger_collection_duration": {
 			// Property: PostTriggerCollectionDuration
 			// CloudFormation resource type schema:
-			// {
-			//   "default": 0,
-			//   "maximum": 4294967295,
-			//   "minimum": 0,
-			//   "type": "number"
-			// }
+			//
+			//	{
+			//	  "default": 0,
+			//	  "maximum": 4294967295,
+			//	  "minimum": 0,
+			//	  "type": "number"
+			//	}
 			Type:     types.Float64Type,
 			Computed: true,
 		},
 		"priority": {
 			// Property: Priority
 			// CloudFormation resource type schema:
-			// {
-			//   "default": 0,
-			//   "minimum": 0,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "default": 0,
+			//	  "minimum": 0,
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"signal_catalog_arn": {
 			// Property: SignalCatalogArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"signals_to_collect": {
 			// Property: SignalsToCollect
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "MaxSampleCount": {
-			//         "maximum": 4294967295,
-			//         "minimum": 1,
-			//         "type": "number"
-			//       },
-			//       "MinimumSamplingIntervalMs": {
-			//         "maximum": 4294967295,
-			//         "minimum": 0,
-			//         "type": "number"
-			//       },
-			//       "Name": {
-			//         "maxLength": 150,
-			//         "minLength": 1,
-			//         "pattern": "^[\\w|*|-]+(\\.[\\w|*|-]+)*$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Name"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 1000,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "MaxSampleCount": {
+			//	        "maximum": 4294967295,
+			//	        "minimum": 1,
+			//	        "type": "number"
+			//	      },
+			//	      "MinimumSamplingIntervalMs": {
+			//	        "maximum": 4294967295,
+			//	        "minimum": 0,
+			//	        "type": "number"
+			//	      },
+			//	      "Name": {
+			//	        "maxLength": 150,
+			//	        "minLength": 1,
+			//	        "pattern": "^[\\w|*|-]+(\\.[\\w|*|-]+)*$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Name"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 1000,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"max_sample_count": {
@@ -334,73 +349,77 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"spooling_mode": {
 			// Property: SpoolingMode
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "OFF",
-			//   "enum": [
-			//     "OFF",
-			//     "TO_DISK"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "OFF",
+			//	  "enum": [
+			//	    "OFF",
+			//	    "TO_DISK"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"start_time": {
 			// Property: StartTime
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "0",
-			//   "format": "date-time",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "0",
+			//	  "format": "date-time",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "CREATING",
-			//     "WAITING_FOR_APPROVAL",
-			//     "RUNNING",
-			//     "SUSPENDED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "CREATING",
+			//	    "WAITING_FOR_APPROVAL",
+			//	    "RUNNING",
+			//	    "SUSPENDED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 0,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 0,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -420,9 +439,10 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_arn": {
 			// Property: TargetArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
