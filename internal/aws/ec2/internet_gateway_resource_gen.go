@@ -24,10 +24,11 @@ func internetGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"internet_gateway_id": {
 			// Property: InternetGatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ID of internet gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ID of internet gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "ID of internet gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,31 +39,32 @@ func internetGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Any tags to assign to the internet gateway.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "Any tags to assign to the internet gateway.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "Any tags to assign to the internet gateway.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

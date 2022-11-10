@@ -25,10 +25,11 @@ func provisioningTemplateResource(ctx context.Context) (resource.Resource, error
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 500,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 500,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -42,9 +43,10 @@ func provisioningTemplateResource(ctx context.Context) (resource.Resource, error
 		"enabled": {
 			// Property: Enabled
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
@@ -55,17 +57,18 @@ func provisioningTemplateResource(ctx context.Context) (resource.Resource, error
 		"pre_provisioning_hook": {
 			// Property: PreProvisioningHook
 			// CloudFormation resource type schema:
-			// {
-			//   "properties": {
-			//     "PayloadVersion": {
-			//       "type": "string"
-			//     },
-			//     "TargetArn": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "properties": {
+			//	    "PayloadVersion": {
+			//	      "type": "string"
+			//	    },
+			//	    "TargetArn": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"payload_version": {
@@ -97,34 +100,36 @@ func provisioningTemplateResource(ctx context.Context) (resource.Resource, error
 		"provisioning_role_arn": {
 			// Property: ProvisioningRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -148,9 +153,10 @@ func provisioningTemplateResource(ctx context.Context) (resource.Resource, error
 		"template_arn": {
 			// Property: TemplateArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -160,21 +166,23 @@ func provisioningTemplateResource(ctx context.Context) (resource.Resource, error
 		"template_body": {
 			// Property: TemplateBody
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 		},
 		"template_name": {
 			// Property: TemplateName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 36,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9A-Za-z_-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 36,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9A-Za-z_-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -190,13 +198,14 @@ func provisioningTemplateResource(ctx context.Context) (resource.Resource, error
 		"template_type": {
 			// Property: TemplateType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "FLEET_PROVISIONING",
-			//     "JITP"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "FLEET_PROVISIONING",
+			//	    "JITP"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,

@@ -25,13 +25,14 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		"application": {
 			// Property: Application
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name or the Id of the Application.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "\\w+|[a-z0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name or the Id of the Application.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "\\w+|[a-z0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "The name or the Id of the Application.",
 			Type:        types.StringType,
 			Required:    true,
@@ -43,10 +44,11 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		"application_arn": {
 			// Property: ApplicationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -56,13 +58,14 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		"attribute_group": {
 			// Property: AttributeGroup
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name or the Id of the AttributeGroup.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "\\w+|[a-z0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name or the Id of the AttributeGroup.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "\\w+|[a-z0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "The name or the Id of the AttributeGroup.",
 			Type:        types.StringType,
 			Required:    true,
@@ -74,10 +77,11 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		"attribute_group_arn": {
 			// Property: AttributeGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -87,9 +91,10 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

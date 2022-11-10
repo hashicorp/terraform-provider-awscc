@@ -25,9 +25,10 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 		"access_policy": {
 			// Property: AccessPolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -38,9 +39,10 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 		"backup_vault_arn": {
 			// Property: BackupVaultArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -50,10 +52,11 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 		"backup_vault_name": {
 			// Property: BackupVaultName
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "^[a-zA-Z0-9\\-\\_]{2,50}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "^[a-zA-Z0-9\\-\\_]{2,50}$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -66,15 +69,17 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 		"backup_vault_tags": {
 			// Property: BackupVaultTags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			//
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
@@ -86,9 +91,10 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_key_arn": {
 			// Property: EncryptionKeyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -100,24 +106,25 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 		"lock_configuration": {
 			// Property: LockConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ChangeableForDays": {
-			//       "type": "number"
-			//     },
-			//     "MaxRetentionDays": {
-			//       "type": "number"
-			//     },
-			//     "MinRetentionDays": {
-			//       "type": "number"
-			//     }
-			//   },
-			//   "required": [
-			//     "MinRetentionDays"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ChangeableForDays": {
+			//	      "type": "number"
+			//	    },
+			//	    "MaxRetentionDays": {
+			//	      "type": "number"
+			//	    },
+			//	    "MinRetentionDays": {
+			//	      "type": "number"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "MinRetentionDays"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"changeable_for_days": {
@@ -154,27 +161,28 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 		"notifications": {
 			// Property: Notifications
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BackupVaultEvents": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "SNSTopicArn": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "SNSTopicArn",
-			//     "BackupVaultEvents"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BackupVaultEvents": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "SNSTopicArn": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "SNSTopicArn",
+			//	    "BackupVaultEvents"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"backup_vault_events": {

@@ -25,10 +25,11 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"address": {
 			// Property: Address
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The DNS address of the endpoint.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The DNS address of the endpoint.",
+			//	  "type": "string"
+			//	}
 			Description: "The DNS address of the endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,10 +40,11 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_identifier": {
 			// Property: ClusterIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
+			//	  "type": "string"
+			//	}
 			Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
 			Type:        types.StringType,
 			Required:    true,
@@ -53,10 +55,11 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_create_time": {
 			// Property: EndpointCreateTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time (UTC) that the endpoint was created.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time (UTC) that the endpoint was created.",
+			//	  "type": "string"
+			//	}
 			Description: "The time (UTC) that the endpoint was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,11 +70,12 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_name": {
 			// Property: EndpointName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the endpoint.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the endpoint.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the endpoint.",
 			Type:        types.StringType,
 			Required:    true,
@@ -82,10 +86,11 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_status": {
 			// Property: EndpointStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The status of the endpoint.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The status of the endpoint.",
+			//	  "type": "string"
+			//	}
 			Description: "The status of the endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -96,10 +101,11 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"port": {
 			// Property: Port
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The port number on which the cluster accepts incoming connections.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The port number on which the cluster accepts incoming connections.",
+			//	  "type": "integer"
+			//	}
 			Description: "The port number on which the cluster accepts incoming connections.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -110,11 +116,12 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"resource_owner": {
 			// Property: ResourceOwner
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AWS account ID of the owner of the cluster.",
-			//   "pattern": "^\\d{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AWS account ID of the owner of the cluster.",
+			//	  "pattern": "^\\d{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The AWS account ID of the owner of the cluster.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -130,11 +137,12 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_group_name": {
 			// Property: SubnetGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The subnet group name where Amazon Redshift chooses to deploy the endpoint.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The subnet group name where Amazon Redshift chooses to deploy the endpoint.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The subnet group name where Amazon Redshift chooses to deploy the endpoint.",
 			Type:        types.StringType,
 			Required:    true,
@@ -145,49 +153,50 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_endpoint": {
 			// Property: VpcEndpoint
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.",
-			//   "properties": {
-			//     "NetworkInterfaces": {
-			//       "description": "One or more network interfaces of the endpoint. Also known as an interface endpoint.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "Describes a network interface.",
-			//         "properties": {
-			//           "AvailabilityZone": {
-			//             "description": "The Availability Zone.",
-			//             "type": "string"
-			//           },
-			//           "NetworkInterfaceId": {
-			//             "description": "The network interface identifier.",
-			//             "type": "string"
-			//           },
-			//           "PrivateIpAddress": {
-			//             "description": "The IPv4 address of the network interface within the subnet.",
-			//             "type": "string"
-			//           },
-			//           "SubnetId": {
-			//             "description": "The subnet identifier.",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "VpcEndpointId": {
-			//       "description": "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
-			//       "type": "string"
-			//     },
-			//     "VpcId": {
-			//       "description": "The VPC identifier that the endpoint is associated.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.",
+			//	  "properties": {
+			//	    "NetworkInterfaces": {
+			//	      "description": "One or more network interfaces of the endpoint. Also known as an interface endpoint.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "Describes a network interface.",
+			//	        "properties": {
+			//	          "AvailabilityZone": {
+			//	            "description": "The Availability Zone.",
+			//	            "type": "string"
+			//	          },
+			//	          "NetworkInterfaceId": {
+			//	            "description": "The network interface identifier.",
+			//	            "type": "string"
+			//	          },
+			//	          "PrivateIpAddress": {
+			//	            "description": "The IPv4 address of the network interface within the subnet.",
+			//	            "type": "string"
+			//	          },
+			//	          "SubnetId": {
+			//	            "description": "The subnet identifier.",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "VpcEndpointId": {
+			//	      "description": "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
+			//	      "type": "string"
+			//	    },
+			//	    "VpcId": {
+			//	      "description": "The VPC identifier that the endpoint is associated.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -274,14 +283,15 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_security_group_ids": {
 			// Property: VpcSecurityGroupIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of vpc security group ids to apply to the created endpoint access.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of vpc security group ids to apply to the created endpoint access.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of vpc security group ids to apply to the created endpoint access.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
@@ -292,26 +302,27 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_security_groups": {
 			// Property: VpcSecurityGroups
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Describes the members of a VPC security group.",
-			//     "properties": {
-			//       "Status": {
-			//         "description": "The status of the VPC security group.",
-			//         "type": "string"
-			//       },
-			//       "VpcSecurityGroupId": {
-			//         "description": "The identifier of the VPC security group.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Describes the members of a VPC security group.",
+			//	    "properties": {
+			//	      "Status": {
+			//	        "description": "The status of the VPC security group.",
+			//	        "type": "string"
+			//	      },
+			//	      "VpcSecurityGroupId": {
+			//	        "description": "The identifier of the VPC security group.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

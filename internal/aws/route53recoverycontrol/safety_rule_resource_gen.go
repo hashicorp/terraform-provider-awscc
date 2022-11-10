@@ -24,29 +24,30 @@ func safetyRuleResource(ctx context.Context) (resource.Resource, error) {
 		"assertion_rule": {
 			// Property: AssertionRule
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An assertion rule enforces that, when a routing control state is changed, that the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.",
-			//   "properties": {
-			//     "AssertedControls": {
-			//       "description": "The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three AWS Regions.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "WaitPeriodMs": {
-			//       "description": "An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.",
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "required": [
-			//     "AssertedControls",
-			//     "WaitPeriodMs"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An assertion rule enforces that, when a routing control state is changed, that the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.",
+			//	  "properties": {
+			//	    "AssertedControls": {
+			//	      "description": "The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three AWS Regions.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "WaitPeriodMs": {
+			//	      "description": "An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.",
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "AssertedControls",
+			//	    "WaitPeriodMs"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "An assertion rule enforces that, when a routing control state is changed, that the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -76,10 +77,11 @@ func safetyRuleResource(ctx context.Context) (resource.Resource, error) {
 		"control_panel_arn": {
 			// Property: ControlPanelArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the control panel.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the control panel.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the control panel.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -92,38 +94,39 @@ func safetyRuleResource(ctx context.Context) (resource.Resource, error) {
 		"gating_rule": {
 			// Property: GatingRule
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.",
-			//   "properties": {
-			//     "GatingControls": {
-			//       "description": "The gating controls for the gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "TargetControls": {
-			//       "description": "Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three AWS Regions. Now you specify AtLeast 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true. \nIn other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "WaitPeriodMs": {
-			//       "description": "An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.",
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "required": [
-			//     "WaitPeriodMs",
-			//     "TargetControls",
-			//     "GatingControls"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.",
+			//	  "properties": {
+			//	    "GatingControls": {
+			//	      "description": "The gating controls for the gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "TargetControls": {
+			//	      "description": "Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three AWS Regions. Now you specify AtLeast 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true. \nIn other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "WaitPeriodMs": {
+			//	      "description": "An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.",
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "WaitPeriodMs",
+			//	    "TargetControls",
+			//	    "GatingControls"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -162,10 +165,11 @@ func safetyRuleResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the safety rule.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the safety rule.",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the safety rule.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -177,35 +181,36 @@ func safetyRuleResource(ctx context.Context) (resource.Resource, error) {
 		"rule_config": {
 			// Property: RuleConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The rule configuration for an assertion rule or gating rule. This is the criteria that you set for specific assertion controls (routing controls) or gating controls. This configuration specifies how many controls must be enabled after a transaction completes.",
-			//   "properties": {
-			//     "Inverted": {
-			//       "description": "Logical negation of the rule. If the rule would usually evaluate true, it's evaluated as false, and vice versa.",
-			//       "type": "boolean"
-			//     },
-			//     "Threshold": {
-			//       "description": "The value of N, when you specify an ATLEAST rule type. That is, Threshold is the number of controls that must be set when you specify an ATLEAST type.",
-			//       "type": "integer"
-			//     },
-			//     "Type": {
-			//       "description": "A rule can be one of the following: ATLEAST, AND, or OR.",
-			//       "enum": [
-			//         "AND",
-			//         "OR",
-			//         "ATLEAST"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Type",
-			//     "Threshold",
-			//     "Inverted"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The rule configuration for an assertion rule or gating rule. This is the criteria that you set for specific assertion controls (routing controls) or gating controls. This configuration specifies how many controls must be enabled after a transaction completes.",
+			//	  "properties": {
+			//	    "Inverted": {
+			//	      "description": "Logical negation of the rule. If the rule would usually evaluate true, it's evaluated as false, and vice versa.",
+			//	      "type": "boolean"
+			//	    },
+			//	    "Threshold": {
+			//	      "description": "The value of N, when you specify an ATLEAST rule type. That is, Threshold is the number of controls that must be set when you specify an ATLEAST type.",
+			//	      "type": "integer"
+			//	    },
+			//	    "Type": {
+			//	      "description": "A rule can be one of the following: ATLEAST, AND, or OR.",
+			//	      "enum": [
+			//	        "AND",
+			//	        "OR",
+			//	        "ATLEAST"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Type",
+			//	    "Threshold",
+			//	    "Inverted"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The rule configuration for an assertion rule or gating rule. This is the criteria that you set for specific assertion controls (routing controls) or gating controls. This configuration specifies how many controls must be enabled after a transaction completes.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -246,10 +251,11 @@ func safetyRuleResource(ctx context.Context) (resource.Resource, error) {
 		"safety_rule_arn": {
 			// Property: SafetyRuleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the safety rule.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the safety rule.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the safety rule.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -260,15 +266,16 @@ func safetyRuleResource(ctx context.Context) (resource.Resource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
-			//   "enum": [
-			//     "PENDING",
-			//     "DEPLOYED",
-			//     "PENDING_DELETION"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
+			//	  "enum": [
+			//	    "PENDING",
+			//	    "DEPLOYED",
+			//	    "PENDING_DELETION"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -279,30 +286,31 @@ func safetyRuleResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A collection of tags associated with a resource",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A collection of tags associated with a resource",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A collection of tags associated with a resource",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

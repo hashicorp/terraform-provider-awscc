@@ -25,9 +25,10 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -37,9 +38,10 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 		"component_name": {
 			// Property: ComponentName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -49,9 +51,10 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 		"component_version": {
 			// Property: ComponentVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -61,9 +64,10 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 		"inline_recipe": {
 			// Property: InlineRecipe
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -76,207 +80,208 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 		"lambda_function": {
 			// Property: LambdaFunction
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ComponentDependencies": {
-			//       "additionalProperties": false,
-			//       "patternProperties": {
-			//         "": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DependencyType": {
-			//               "enum": [
-			//                 "SOFT",
-			//                 "HARD"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "VersionRequirement": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ComponentLambdaParameters": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "EnvironmentVariables": {
-			//           "additionalProperties": false,
-			//           "patternProperties": {
-			//             "": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "EventSources": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Topic": {
-			//                 "type": "string"
-			//               },
-			//               "Type": {
-			//                 "enum": [
-			//                   "PUB_SUB",
-			//                   "IOT_CORE"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "ExecArgs": {
-			//           "insertionOrder": true,
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "InputPayloadEncodingType": {
-			//           "enum": [
-			//             "json",
-			//             "binary"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "LinuxProcessParams": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ContainerParams": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Devices": {
-			//                   "insertionOrder": false,
-			//                   "items": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "AddGroupOwner": {
-			//                         "type": "boolean"
-			//                       },
-			//                       "Path": {
-			//                         "type": "string"
-			//                       },
-			//                       "Permission": {
-			//                         "enum": [
-			//                           "ro",
-			//                           "rw"
-			//                         ],
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   },
-			//                   "type": "array"
-			//                 },
-			//                 "MemorySizeInKB": {
-			//                   "type": "integer"
-			//                 },
-			//                 "MountROSysfs": {
-			//                   "type": "boolean"
-			//                 },
-			//                 "Volumes": {
-			//                   "insertionOrder": false,
-			//                   "items": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "AddGroupOwner": {
-			//                         "type": "boolean"
-			//                       },
-			//                       "DestinationPath": {
-			//                         "type": "string"
-			//                       },
-			//                       "Permission": {
-			//                         "enum": [
-			//                           "ro",
-			//                           "rw"
-			//                         ],
-			//                         "type": "string"
-			//                       },
-			//                       "SourcePath": {
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   },
-			//                   "type": "array"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "IsolationMode": {
-			//               "enum": [
-			//                 "GreengrassContainer",
-			//                 "NoContainer"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "MaxIdleTimeInSeconds": {
-			//           "type": "integer"
-			//         },
-			//         "MaxInstancesCount": {
-			//           "type": "integer"
-			//         },
-			//         "MaxQueueSize": {
-			//           "type": "integer"
-			//         },
-			//         "Pinned": {
-			//           "type": "boolean"
-			//         },
-			//         "StatusTimeoutInSeconds": {
-			//           "type": "integer"
-			//         },
-			//         "TimeoutInSeconds": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ComponentName": {
-			//       "type": "string"
-			//     },
-			//     "ComponentPlatforms": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Attributes": {
-			//             "additionalProperties": false,
-			//             "patternProperties": {
-			//               "": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Name": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "ComponentVersion": {
-			//       "type": "string"
-			//     },
-			//     "LambdaArn": {
-			//       "pattern": "^arn:aws(-(cn|us-gov))?:lambda:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ComponentDependencies": {
+			//	      "additionalProperties": false,
+			//	      "patternProperties": {
+			//	        "": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DependencyType": {
+			//	              "enum": [
+			//	                "SOFT",
+			//	                "HARD"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "VersionRequirement": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ComponentLambdaParameters": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "EnvironmentVariables": {
+			//	          "additionalProperties": false,
+			//	          "patternProperties": {
+			//	            "": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "EventSources": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Topic": {
+			//	                "type": "string"
+			//	              },
+			//	              "Type": {
+			//	                "enum": [
+			//	                  "PUB_SUB",
+			//	                  "IOT_CORE"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "ExecArgs": {
+			//	          "insertionOrder": true,
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "InputPayloadEncodingType": {
+			//	          "enum": [
+			//	            "json",
+			//	            "binary"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "LinuxProcessParams": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ContainerParams": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Devices": {
+			//	                  "insertionOrder": false,
+			//	                  "items": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "AddGroupOwner": {
+			//	                        "type": "boolean"
+			//	                      },
+			//	                      "Path": {
+			//	                        "type": "string"
+			//	                      },
+			//	                      "Permission": {
+			//	                        "enum": [
+			//	                          "ro",
+			//	                          "rw"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  },
+			//	                  "type": "array"
+			//	                },
+			//	                "MemorySizeInKB": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "MountROSysfs": {
+			//	                  "type": "boolean"
+			//	                },
+			//	                "Volumes": {
+			//	                  "insertionOrder": false,
+			//	                  "items": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "AddGroupOwner": {
+			//	                        "type": "boolean"
+			//	                      },
+			//	                      "DestinationPath": {
+			//	                        "type": "string"
+			//	                      },
+			//	                      "Permission": {
+			//	                        "enum": [
+			//	                          "ro",
+			//	                          "rw"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      },
+			//	                      "SourcePath": {
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  },
+			//	                  "type": "array"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "IsolationMode": {
+			//	              "enum": [
+			//	                "GreengrassContainer",
+			//	                "NoContainer"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "MaxIdleTimeInSeconds": {
+			//	          "type": "integer"
+			//	        },
+			//	        "MaxInstancesCount": {
+			//	          "type": "integer"
+			//	        },
+			//	        "MaxQueueSize": {
+			//	          "type": "integer"
+			//	        },
+			//	        "Pinned": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "StatusTimeoutInSeconds": {
+			//	          "type": "integer"
+			//	        },
+			//	        "TimeoutInSeconds": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ComponentName": {
+			//	      "type": "string"
+			//	    },
+			//	    "ComponentPlatforms": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Attributes": {
+			//	            "additionalProperties": false,
+			//	            "patternProperties": {
+			//	              "": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Name": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "ComponentVersion": {
+			//	      "type": "string"
+			//	    },
+			//	    "LambdaArn": {
+			//	      "pattern": "^arn:aws(-(cn|us-gov))?:lambda:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"component_dependencies": {
@@ -686,16 +691,18 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "patternProperties": {
-			//     "": {
-			//       "maxLength": 256,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "maxLength": 256,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			//
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,

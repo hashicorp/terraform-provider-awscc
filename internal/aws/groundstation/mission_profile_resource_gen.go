@@ -25,9 +25,10 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -37,10 +38,11 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"contact_post_pass_duration_seconds": {
 			// Property: ContactPostPassDurationSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Post-pass time needed after the contact.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Post-pass time needed after the contact.",
+			//	  "type": "integer"
+			//	}
 			Description: "Post-pass time needed after the contact.",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -52,10 +54,11 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"contact_pre_pass_duration_seconds": {
 			// Property: ContactPrePassDurationSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Pre-pass time needed before the contact.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Pre-pass time needed before the contact.",
+			//	  "type": "integer"
+			//	}
 			Description: "Pre-pass time needed before the contact.",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -67,23 +70,24 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"dataflow_edges": {
 			// Property: DataflowEdges
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Destination": {
-			//         "type": "string"
-			//       },
-			//       "Source": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Destination": {
+			//	        "type": "string"
+			//	      },
+			//	      "Source": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -115,9 +119,10 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -127,10 +132,11 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"minimum_viable_contact_duration_seconds": {
 			// Property: MinimumViableContactDurationSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
+			//	  "type": "integer"
+			//	}
 			Description: "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
 			Type:        types.Int64Type,
 			Required:    true,
@@ -138,11 +144,12 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name used to identify a mission profile.",
-			//   "pattern": "^[ a-zA-Z0-9_:-]{1,256}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name used to identify a mission profile.",
+			//	  "pattern": "^[ a-zA-Z0-9_:-]{1,256}$",
+			//	  "type": "string"
+			//	}
 			Description: "A name used to identify a mission profile.",
 			Type:        types.StringType,
 			Required:    true,
@@ -153,9 +160,10 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"region": {
 			// Property: Region
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -165,23 +173,24 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -219,9 +228,10 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"tracking_config_arn": {
 			// Property: TrackingConfigArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 		},

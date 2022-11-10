@@ -24,27 +24,28 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 		"compute_environment_order": {
 			// Property: ComputeEnvironmentOrder
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ComputeEnvironment": {
-			//         "type": "string"
-			//       },
-			//       "Order": {
-			//         "type": "integer"
-			//       }
-			//     },
-			//     "required": [
-			//       "ComputeEnvironment",
-			//       "Order"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ComputeEnvironment": {
+			//	        "type": "string"
+			//	      },
+			//	      "Order": {
+			//	        "type": "integer"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "ComputeEnvironment",
+			//	      "Order"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"compute_environment": {
@@ -64,10 +65,11 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 		"job_queue_arn": {
 			// Property: JobQueueArn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -77,11 +79,12 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 		"job_queue_name": {
 			// Property: JobQueueName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -96,11 +99,12 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 		"priority": {
 			// Property: Priority
 			// CloudFormation resource type schema:
-			// {
-			//   "maximum": 1000,
-			//   "minimum": 0,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "maximum": 1000,
+			//	  "minimum": 0,
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -110,10 +114,11 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 		"scheduling_policy_arn": {
 			// Property: SchedulingPolicyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -124,13 +129,14 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "DISABLED",
-			//     "ENABLED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "DISABLED",
+			//	    "ENABLED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -147,16 +153,17 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A key-value pair to associate with a resource.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A key-value pair to associate with a resource.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A key-value pair to associate with a resource.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

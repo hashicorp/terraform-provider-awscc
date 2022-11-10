@@ -25,52 +25,53 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"add_ons": {
 			// Property: AddOns
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of objects representing the add-ons to enable for the new instance.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A addon associate with a resource.",
-			//     "properties": {
-			//       "AddOnType": {
-			//         "description": "The add-on type",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "AutoSnapshotAddOnRequest": {
-			//         "additionalProperties": false,
-			//         "description": "An object that represents additional parameters when enabling or modifying the automatic snapshot add-on",
-			//         "properties": {
-			//           "SnapshotTimeOfDay": {
-			//             "description": "The daily time when an automatic snapshot will be created.",
-			//             "pattern": "^[0-9]{2}:00$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Status": {
-			//         "description": "Status of the Addon",
-			//         "enum": [
-			//           "Enabling",
-			//           "Disabling",
-			//           "Enabled",
-			//           "Terminating",
-			//           "Terminated",
-			//           "Disabled",
-			//           "Failed"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "AddOnType"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "An array of objects representing the add-ons to enable for the new instance.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A addon associate with a resource.",
+			//	    "properties": {
+			//	      "AddOnType": {
+			//	        "description": "The add-on type",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "AutoSnapshotAddOnRequest": {
+			//	        "additionalProperties": false,
+			//	        "description": "An object that represents additional parameters when enabling or modifying the automatic snapshot add-on",
+			//	        "properties": {
+			//	          "SnapshotTimeOfDay": {
+			//	            "description": "The daily time when an automatic snapshot will be created.",
+			//	            "pattern": "^[0-9]{2}:00$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Status": {
+			//	        "description": "Status of the Addon",
+			//	        "enum": [
+			//	          "Enabling",
+			//	          "Disabling",
+			//	          "Enabled",
+			//	          "Terminating",
+			//	          "Terminated",
+			//	          "Disabled",
+			//	          "Failed"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "AddOnType"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "An array of objects representing the add-ons to enable for the new instance.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -142,10 +143,11 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"attached_to": {
 			// Property: AttachedTo
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the attached Lightsail Instance",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the attached Lightsail Instance",
+			//	  "type": "string"
+			//	}
 			Description: "Name of the attached Lightsail Instance",
 			Type:        types.StringType,
 			Computed:    true,
@@ -156,10 +158,11 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"attachment_state": {
 			// Property: AttachmentState
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Attachment State of the Lightsail disk",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Attachment State of the Lightsail disk",
+			//	  "type": "string"
+			//	}
 			Description: "Attachment State of the Lightsail disk",
 			Type:        types.StringType,
 			Computed:    true,
@@ -170,12 +173,13 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"availability_zone": {
 			// Property: AvailabilityZone
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -191,9 +195,10 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"disk_arn": {
 			// Property: DiskArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -203,13 +208,14 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"disk_name": {
 			// Property: DiskName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The names to use for your new Lightsail disk.",
-			//   "maxLength": 254,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The names to use for your new Lightsail disk.",
+			//	  "maxLength": 254,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
+			//	  "type": "string"
+			//	}
 			Description: "The names to use for your new Lightsail disk.",
 			Type:        types.StringType,
 			Required:    true,
@@ -224,10 +230,11 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"iops": {
 			// Property: Iops
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Iops of the Lightsail disk",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Iops of the Lightsail disk",
+			//	  "type": "integer"
+			//	}
 			Description: "Iops of the Lightsail disk",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -238,10 +245,11 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"is_attached": {
 			// Property: IsAttached
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Check is Disk is attached state",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Check is Disk is attached state",
+			//	  "type": "boolean"
+			//	}
 			Description: "Check is Disk is attached state",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -252,21 +260,22 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"location": {
 			// Property: Location
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Location of a resource.",
-			//   "properties": {
-			//     "AvailabilityZone": {
-			//       "description": "The Availability Zone in which to create your disk. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
-			//       "type": "string"
-			//     },
-			//     "RegionName": {
-			//       "description": "The Region Name in which to create your disk.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Location of a resource.",
+			//	  "properties": {
+			//	    "AvailabilityZone": {
+			//	      "description": "The Availability Zone in which to create your disk. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
+			//	      "type": "string"
+			//	    },
+			//	    "RegionName": {
+			//	      "description": "The Region Name in which to create your disk.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Location of a resource.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -300,10 +309,11 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"path": {
 			// Property: Path
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Path of the  attached Disk",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Path of the  attached Disk",
+			//	  "type": "string"
+			//	}
 			Description: "Path of the  attached Disk",
 			Type:        types.StringType,
 			Computed:    true,
@@ -314,10 +324,11 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"resource_type": {
 			// Property: ResourceType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Resource type of Lightsail instance.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Resource type of Lightsail instance.",
+			//	  "type": "string"
+			//	}
 			Description: "Resource type of Lightsail instance.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -328,10 +339,11 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"size_in_gb": {
 			// Property: SizeInGb
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Size of the Lightsail disk",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Size of the Lightsail disk",
+			//	  "type": "integer"
+			//	}
 			Description: "Size of the Lightsail disk",
 			Type:        types.Int64Type,
 			Required:    true,
@@ -342,10 +354,11 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "State of the Lightsail disk",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "State of the Lightsail disk",
+			//	  "type": "string"
+			//	}
 			Description: "State of the Lightsail disk",
 			Type:        types.StringType,
 			Computed:    true,
@@ -356,10 +369,11 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"support_code": {
 			// Property: SupportCode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Support code to help identify any issues",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Support code to help identify any issues",
+			//	  "type": "string"
+			//	}
 			Description: "Support code to help identify any issues",
 			Type:        types.StringType,
 			Computed:    true,
@@ -370,34 +384,35 @@ func diskResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

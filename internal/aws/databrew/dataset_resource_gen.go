@@ -25,17 +25,18 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"format": {
 			// Property: Format
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Dataset format",
-			//   "enum": [
-			//     "CSV",
-			//     "JSON",
-			//     "PARQUET",
-			//     "EXCEL",
-			//     "ORC"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Dataset format",
+			//	  "enum": [
+			//	    "CSV",
+			//	    "JSON",
+			//	    "PARQUET",
+			//	    "EXCEL",
+			//	    "ORC"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Dataset format",
 			Type:        types.StringType,
 			Optional:    true,
@@ -56,77 +57,78 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"format_options": {
 			// Property: FormatOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Format options for dataset",
-			//   "properties": {
-			//     "Csv": {
-			//       "additionalProperties": false,
-			//       "description": "Csv options",
-			//       "properties": {
-			//         "Delimiter": {
-			//           "maxLength": 1,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "HeaderRow": {
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Excel": {
-			//       "additionalProperties": false,
-			//       "oneOf": [
-			//         {
-			//           "required": [
-			//             "SheetNames"
-			//           ]
-			//         },
-			//         {
-			//           "required": [
-			//             "SheetIndexes"
-			//           ]
-			//         }
-			//       ],
-			//       "properties": {
-			//         "HeaderRow": {
-			//           "type": "boolean"
-			//         },
-			//         "SheetIndexes": {
-			//           "insertionOrder": true,
-			//           "items": {
-			//             "type": "integer"
-			//           },
-			//           "maxItems": 1,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         },
-			//         "SheetNames": {
-			//           "insertionOrder": true,
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "maxItems": 1,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Json": {
-			//       "additionalProperties": false,
-			//       "description": "Json options",
-			//       "properties": {
-			//         "MultiLine": {
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Format options for dataset",
+			//	  "properties": {
+			//	    "Csv": {
+			//	      "additionalProperties": false,
+			//	      "description": "Csv options",
+			//	      "properties": {
+			//	        "Delimiter": {
+			//	          "maxLength": 1,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "HeaderRow": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Excel": {
+			//	      "additionalProperties": false,
+			//	      "oneOf": [
+			//	        {
+			//	          "required": [
+			//	            "SheetNames"
+			//	          ]
+			//	        },
+			//	        {
+			//	          "required": [
+			//	            "SheetIndexes"
+			//	          ]
+			//	        }
+			//	      ],
+			//	      "properties": {
+			//	        "HeaderRow": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "SheetIndexes": {
+			//	          "insertionOrder": true,
+			//	          "items": {
+			//	            "type": "integer"
+			//	          },
+			//	          "maxItems": 1,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        },
+			//	        "SheetNames": {
+			//	          "insertionOrder": true,
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 1,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Json": {
+			//	      "additionalProperties": false,
+			//	      "description": "Json options",
+			//	      "properties": {
+			//	        "MultiLine": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Format options for dataset",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -254,110 +256,111 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"input": {
 			// Property: Input
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Input",
-			//   "properties": {
-			//     "DataCatalogInputDefinition": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CatalogId": {
-			//           "description": "Catalog id",
-			//           "type": "string"
-			//         },
-			//         "DatabaseName": {
-			//           "description": "Database name",
-			//           "type": "string"
-			//         },
-			//         "TableName": {
-			//           "description": "Table name",
-			//           "type": "string"
-			//         },
-			//         "TempDirectory": {
-			//           "additionalProperties": false,
-			//           "description": "Input location",
-			//           "properties": {
-			//             "Bucket": {
-			//               "type": "string"
-			//             },
-			//             "Key": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Bucket"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "DatabaseInputDefinition": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DatabaseTableName": {
-			//           "description": "Database table name",
-			//           "type": "string"
-			//         },
-			//         "GlueConnectionName": {
-			//           "description": "Glue connection name",
-			//           "type": "string"
-			//         },
-			//         "QueryString": {
-			//           "description": "Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.",
-			//           "type": "string"
-			//         },
-			//         "TempDirectory": {
-			//           "additionalProperties": false,
-			//           "description": "Input location",
-			//           "properties": {
-			//             "Bucket": {
-			//               "type": "string"
-			//             },
-			//             "Key": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Bucket"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "GlueConnectionName"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Metadata": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "SourceArn": {
-			//           "description": "Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "S3InputDefinition": {
-			//       "additionalProperties": false,
-			//       "description": "Input location",
-			//       "properties": {
-			//         "Bucket": {
-			//           "type": "string"
-			//         },
-			//         "Key": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Bucket"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Input",
+			//	  "properties": {
+			//	    "DataCatalogInputDefinition": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CatalogId": {
+			//	          "description": "Catalog id",
+			//	          "type": "string"
+			//	        },
+			//	        "DatabaseName": {
+			//	          "description": "Database name",
+			//	          "type": "string"
+			//	        },
+			//	        "TableName": {
+			//	          "description": "Table name",
+			//	          "type": "string"
+			//	        },
+			//	        "TempDirectory": {
+			//	          "additionalProperties": false,
+			//	          "description": "Input location",
+			//	          "properties": {
+			//	            "Bucket": {
+			//	              "type": "string"
+			//	            },
+			//	            "Key": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Bucket"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "DatabaseInputDefinition": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DatabaseTableName": {
+			//	          "description": "Database table name",
+			//	          "type": "string"
+			//	        },
+			//	        "GlueConnectionName": {
+			//	          "description": "Glue connection name",
+			//	          "type": "string"
+			//	        },
+			//	        "QueryString": {
+			//	          "description": "Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.",
+			//	          "type": "string"
+			//	        },
+			//	        "TempDirectory": {
+			//	          "additionalProperties": false,
+			//	          "description": "Input location",
+			//	          "properties": {
+			//	            "Bucket": {
+			//	              "type": "string"
+			//	            },
+			//	            "Key": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Bucket"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "GlueConnectionName"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Metadata": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "SourceArn": {
+			//	          "description": "Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "S3InputDefinition": {
+			//	      "additionalProperties": false,
+			//	      "description": "Input location",
+			//	      "properties": {
+			//	        "Bucket": {
+			//	          "type": "string"
+			//	        },
+			//	        "Key": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Bucket"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Input",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -551,12 +554,13 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Dataset name",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Dataset name",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Dataset name",
 			Type:        types.StringType,
 			Required:    true,
@@ -570,208 +574,209 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"path_options": {
 			// Property: PathOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "PathOptions",
-			//   "properties": {
-			//     "FilesLimit": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "MaxFiles": {
-			//           "description": "Maximum number of files",
-			//           "type": "integer"
-			//         },
-			//         "Order": {
-			//           "description": "Order",
-			//           "enum": [
-			//             "ASCENDING",
-			//             "DESCENDING"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "OrderedBy": {
-			//           "description": "Ordered by",
-			//           "enum": [
-			//             "LAST_MODIFIED_DATE"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "MaxFiles"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "LastModifiedDateCondition": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Expression": {
-			//           "description": "Filtering expression for a parameter",
-			//           "maxLength": 1024,
-			//           "minLength": 4,
-			//           "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
-			//           "type": "string"
-			//         },
-			//         "ValuesMap": {
-			//           "insertionOrder": true,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "A key-value pair to associate expression variable names with their values",
-			//             "properties": {
-			//               "Value": {
-			//                 "maxLength": 1024,
-			//                 "minLength": 0,
-			//                 "type": "string"
-			//               },
-			//               "ValueReference": {
-			//                 "description": "Variable name",
-			//                 "maxLength": 128,
-			//                 "minLength": 2,
-			//                 "pattern": "^:[A-Za-z0-9_]+$",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "ValueReference",
-			//               "Value"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         }
-			//       },
-			//       "required": [
-			//         "Expression",
-			//         "ValuesMap"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Parameters": {
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "A key-value pair to associate dataset parameter name with its definition.",
-			//         "properties": {
-			//           "DatasetParameter": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "CreateColumn": {
-			//                 "description": "Add the value of this parameter as a column in a dataset.",
-			//                 "type": "boolean"
-			//               },
-			//               "DatetimeOptions": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Format": {
-			//                     "description": "Date/time format of a date parameter",
-			//                     "maxLength": 100,
-			//                     "minLength": 2,
-			//                     "type": "string"
-			//                   },
-			//                   "LocaleCode": {
-			//                     "description": "Locale code for a date parameter",
-			//                     "maxLength": 100,
-			//                     "minLength": 2,
-			//                     "pattern": "^[A-Za-z0-9_\\.#@\\-]+$",
-			//                     "type": "string"
-			//                   },
-			//                   "TimezoneOffset": {
-			//                     "description": "Timezone offset",
-			//                     "maxLength": 6,
-			//                     "minLength": 1,
-			//                     "pattern": "^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Format"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "Filter": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Expression": {
-			//                     "description": "Filtering expression for a parameter",
-			//                     "maxLength": 1024,
-			//                     "minLength": 4,
-			//                     "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
-			//                     "type": "string"
-			//                   },
-			//                   "ValuesMap": {
-			//                     "insertionOrder": true,
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "description": "A key-value pair to associate expression variable names with their values",
-			//                       "properties": {
-			//                         "Value": {
-			//                           "maxLength": 1024,
-			//                           "minLength": 0,
-			//                           "type": "string"
-			//                         },
-			//                         "ValueReference": {
-			//                           "description": "Variable name",
-			//                           "maxLength": 128,
-			//                           "minLength": 2,
-			//                           "pattern": "^:[A-Za-z0-9_]+$",
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "ValueReference",
-			//                         "Value"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "type": "array"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Expression",
-			//                   "ValuesMap"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "Name": {
-			//                 "description": "Parameter name",
-			//                 "maxLength": 255,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "Type": {
-			//                 "description": "Parameter type",
-			//                 "enum": [
-			//                   "String",
-			//                   "Number",
-			//                   "Datetime"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Name",
-			//               "Type"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "PathParameterName": {
-			//             "description": "Parameter name",
-			//             "maxLength": 255,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "PathParameterName",
-			//           "DatasetParameter"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "PathOptions",
+			//	  "properties": {
+			//	    "FilesLimit": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "MaxFiles": {
+			//	          "description": "Maximum number of files",
+			//	          "type": "integer"
+			//	        },
+			//	        "Order": {
+			//	          "description": "Order",
+			//	          "enum": [
+			//	            "ASCENDING",
+			//	            "DESCENDING"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "OrderedBy": {
+			//	          "description": "Ordered by",
+			//	          "enum": [
+			//	            "LAST_MODIFIED_DATE"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "MaxFiles"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "LastModifiedDateCondition": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Expression": {
+			//	          "description": "Filtering expression for a parameter",
+			//	          "maxLength": 1024,
+			//	          "minLength": 4,
+			//	          "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
+			//	          "type": "string"
+			//	        },
+			//	        "ValuesMap": {
+			//	          "insertionOrder": true,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "A key-value pair to associate expression variable names with their values",
+			//	            "properties": {
+			//	              "Value": {
+			//	                "maxLength": 1024,
+			//	                "minLength": 0,
+			//	                "type": "string"
+			//	              },
+			//	              "ValueReference": {
+			//	                "description": "Variable name",
+			//	                "maxLength": 128,
+			//	                "minLength": 2,
+			//	                "pattern": "^:[A-Za-z0-9_]+$",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "ValueReference",
+			//	              "Value"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Expression",
+			//	        "ValuesMap"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Parameters": {
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "A key-value pair to associate dataset parameter name with its definition.",
+			//	        "properties": {
+			//	          "DatasetParameter": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "CreateColumn": {
+			//	                "description": "Add the value of this parameter as a column in a dataset.",
+			//	                "type": "boolean"
+			//	              },
+			//	              "DatetimeOptions": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Format": {
+			//	                    "description": "Date/time format of a date parameter",
+			//	                    "maxLength": 100,
+			//	                    "minLength": 2,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "LocaleCode": {
+			//	                    "description": "Locale code for a date parameter",
+			//	                    "maxLength": 100,
+			//	                    "minLength": 2,
+			//	                    "pattern": "^[A-Za-z0-9_\\.#@\\-]+$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "TimezoneOffset": {
+			//	                    "description": "Timezone offset",
+			//	                    "maxLength": 6,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Format"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "Filter": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Expression": {
+			//	                    "description": "Filtering expression for a parameter",
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 4,
+			//	                    "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "ValuesMap": {
+			//	                    "insertionOrder": true,
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "A key-value pair to associate expression variable names with their values",
+			//	                      "properties": {
+			//	                        "Value": {
+			//	                          "maxLength": 1024,
+			//	                          "minLength": 0,
+			//	                          "type": "string"
+			//	                        },
+			//	                        "ValueReference": {
+			//	                          "description": "Variable name",
+			//	                          "maxLength": 128,
+			//	                          "minLength": 2,
+			//	                          "pattern": "^:[A-Za-z0-9_]+$",
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "ValueReference",
+			//	                        "Value"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "type": "array"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Expression",
+			//	                  "ValuesMap"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "Name": {
+			//	                "description": "Parameter name",
+			//	                "maxLength": 255,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "Type": {
+			//	                "description": "Parameter type",
+			//	                "enum": [
+			//	                  "String",
+			//	                  "Number",
+			//	                  "Datetime"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Name",
+			//	              "Type"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "PathParameterName": {
+			//	            "description": "Parameter name",
+			//	            "maxLength": 255,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "PathParameterName",
+			//	          "DatasetParameter"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "PathOptions",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1041,32 +1046,33 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

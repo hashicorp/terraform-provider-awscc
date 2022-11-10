@@ -23,21 +23,22 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"alternate_path_hints": {
 			// Property: AlternatePathHints
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ComponentArn": {
-			//         "type": "string"
-			//       },
-			//       "ComponentId": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ComponentArn": {
+			//	        "type": "string"
+			//	      },
+			//	      "ComponentId": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"component_arn": {
@@ -68,531 +69,532 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"explanations": {
 			// Property: Explanations
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Acl": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "AclRule": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Cidr": {
-			//             "type": "string"
-			//           },
-			//           "Egress": {
-			//             "type": "boolean"
-			//           },
-			//           "PortRange": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "From": {
-			//                 "type": "integer"
-			//               },
-			//               "To": {
-			//                 "type": "integer"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Protocol": {
-			//             "type": "string"
-			//           },
-			//           "RuleAction": {
-			//             "type": "string"
-			//           },
-			//           "RuleNumber": {
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Address": {
-			//         "type": "string"
-			//       },
-			//       "Addresses": {
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "AttachedTo": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "AvailabilityZones": {
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Cidrs": {
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "ClassicLoadBalancerListener": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "InstancePort": {
-			//             "type": "integer"
-			//           },
-			//           "LoadBalancerPort": {
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Component": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "CustomerGateway": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Destination": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "DestinationVpc": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Direction": {
-			//         "type": "string"
-			//       },
-			//       "ElasticLoadBalancerListener": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "ExplanationCode": {
-			//         "type": "string"
-			//       },
-			//       "IngressRouteTable": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "InternetGateway": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "LoadBalancerArn": {
-			//         "type": "string"
-			//       },
-			//       "LoadBalancerListenerPort": {
-			//         "type": "integer"
-			//       },
-			//       "LoadBalancerTarget": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Address": {
-			//             "type": "string"
-			//           },
-			//           "AvailabilityZone": {
-			//             "type": "string"
-			//           },
-			//           "Instance": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Arn": {
-			//                 "type": "string"
-			//               },
-			//               "Id": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Port": {
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "LoadBalancerTargetGroup": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "LoadBalancerTargetGroups": {
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Arn": {
-			//               "type": "string"
-			//             },
-			//             "Id": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "LoadBalancerTargetPort": {
-			//         "type": "integer"
-			//       },
-			//       "MissingComponent": {
-			//         "type": "string"
-			//       },
-			//       "NatGateway": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "NetworkInterface": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "PacketField": {
-			//         "type": "string"
-			//       },
-			//       "Port": {
-			//         "type": "integer"
-			//       },
-			//       "PortRanges": {
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "From": {
-			//               "type": "integer"
-			//             },
-			//             "To": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "PrefixList": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Protocols": {
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "RouteTable": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "RouteTableRoute": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "NatGatewayId": {
-			//             "type": "string"
-			//           },
-			//           "NetworkInterfaceId": {
-			//             "type": "string"
-			//           },
-			//           "Origin": {
-			//             "type": "string"
-			//           },
-			//           "TransitGatewayId": {
-			//             "type": "string"
-			//           },
-			//           "VpcPeeringConnectionId": {
-			//             "type": "string"
-			//           },
-			//           "destinationCidr": {
-			//             "type": "string"
-			//           },
-			//           "destinationPrefixListId": {
-			//             "type": "string"
-			//           },
-			//           "egressOnlyInternetGatewayId": {
-			//             "type": "string"
-			//           },
-			//           "gatewayId": {
-			//             "type": "string"
-			//           },
-			//           "instanceId": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "SecurityGroup": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "SecurityGroupRule": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Cidr": {
-			//             "type": "string"
-			//           },
-			//           "Direction": {
-			//             "type": "string"
-			//           },
-			//           "PortRange": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "From": {
-			//                 "type": "integer"
-			//               },
-			//               "To": {
-			//                 "type": "integer"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "PrefixListId": {
-			//             "type": "string"
-			//           },
-			//           "Protocol": {
-			//             "type": "string"
-			//           },
-			//           "SecurityGroupId": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "SecurityGroups": {
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Arn": {
-			//               "type": "string"
-			//             },
-			//             "Id": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "SourceVpc": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "State": {
-			//         "type": "string"
-			//       },
-			//       "Subnet": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "SubnetRouteTable": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Vpc": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "VpcPeeringConnection": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "VpnConnection": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "VpnGateway": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "vpcEndpoint": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Acl": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "AclRule": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Cidr": {
+			//	            "type": "string"
+			//	          },
+			//	          "Egress": {
+			//	            "type": "boolean"
+			//	          },
+			//	          "PortRange": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "From": {
+			//	                "type": "integer"
+			//	              },
+			//	              "To": {
+			//	                "type": "integer"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Protocol": {
+			//	            "type": "string"
+			//	          },
+			//	          "RuleAction": {
+			//	            "type": "string"
+			//	          },
+			//	          "RuleNumber": {
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Address": {
+			//	        "type": "string"
+			//	      },
+			//	      "Addresses": {
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "AttachedTo": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "AvailabilityZones": {
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Cidrs": {
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "ClassicLoadBalancerListener": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "InstancePort": {
+			//	            "type": "integer"
+			//	          },
+			//	          "LoadBalancerPort": {
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Component": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "CustomerGateway": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Destination": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "DestinationVpc": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Direction": {
+			//	        "type": "string"
+			//	      },
+			//	      "ElasticLoadBalancerListener": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "ExplanationCode": {
+			//	        "type": "string"
+			//	      },
+			//	      "IngressRouteTable": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "InternetGateway": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "LoadBalancerArn": {
+			//	        "type": "string"
+			//	      },
+			//	      "LoadBalancerListenerPort": {
+			//	        "type": "integer"
+			//	      },
+			//	      "LoadBalancerTarget": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Address": {
+			//	            "type": "string"
+			//	          },
+			//	          "AvailabilityZone": {
+			//	            "type": "string"
+			//	          },
+			//	          "Instance": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Arn": {
+			//	                "type": "string"
+			//	              },
+			//	              "Id": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Port": {
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "LoadBalancerTargetGroup": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "LoadBalancerTargetGroups": {
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Arn": {
+			//	              "type": "string"
+			//	            },
+			//	            "Id": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "LoadBalancerTargetPort": {
+			//	        "type": "integer"
+			//	      },
+			//	      "MissingComponent": {
+			//	        "type": "string"
+			//	      },
+			//	      "NatGateway": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "NetworkInterface": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "PacketField": {
+			//	        "type": "string"
+			//	      },
+			//	      "Port": {
+			//	        "type": "integer"
+			//	      },
+			//	      "PortRanges": {
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "From": {
+			//	              "type": "integer"
+			//	            },
+			//	            "To": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "PrefixList": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Protocols": {
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "RouteTable": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "RouteTableRoute": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "NatGatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "NetworkInterfaceId": {
+			//	            "type": "string"
+			//	          },
+			//	          "Origin": {
+			//	            "type": "string"
+			//	          },
+			//	          "TransitGatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "VpcPeeringConnectionId": {
+			//	            "type": "string"
+			//	          },
+			//	          "destinationCidr": {
+			//	            "type": "string"
+			//	          },
+			//	          "destinationPrefixListId": {
+			//	            "type": "string"
+			//	          },
+			//	          "egressOnlyInternetGatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "gatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "instanceId": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "SecurityGroup": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "SecurityGroupRule": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Cidr": {
+			//	            "type": "string"
+			//	          },
+			//	          "Direction": {
+			//	            "type": "string"
+			//	          },
+			//	          "PortRange": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "From": {
+			//	                "type": "integer"
+			//	              },
+			//	              "To": {
+			//	                "type": "integer"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "PrefixListId": {
+			//	            "type": "string"
+			//	          },
+			//	          "Protocol": {
+			//	            "type": "string"
+			//	          },
+			//	          "SecurityGroupId": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "SecurityGroups": {
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Arn": {
+			//	              "type": "string"
+			//	            },
+			//	            "Id": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "SourceVpc": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "State": {
+			//	        "type": "string"
+			//	      },
+			//	      "Subnet": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "SubnetRouteTable": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Vpc": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "VpcPeeringConnection": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "VpnConnection": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "VpnGateway": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "vpcEndpoint": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"acl": {
@@ -1886,12 +1888,13 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"filter_in_arns": {
 			// Property: FilterInArns
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -1903,282 +1906,283 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"forward_path_components": {
 			// Property: ForwardPathComponents
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "AclRule": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Cidr": {
-			//             "type": "string"
-			//           },
-			//           "Egress": {
-			//             "type": "boolean"
-			//           },
-			//           "PortRange": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "From": {
-			//                 "type": "integer"
-			//               },
-			//               "To": {
-			//                 "type": "integer"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Protocol": {
-			//             "type": "string"
-			//           },
-			//           "RuleAction": {
-			//             "type": "string"
-			//           },
-			//           "RuleNumber": {
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Component": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "DestinationVpc": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "InboundHeader": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "DestinationAddresses": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "DestinationPortRanges": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "From": {
-			//                   "type": "integer"
-			//                 },
-			//                 "To": {
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "Protocol": {
-			//             "type": "string"
-			//           },
-			//           "SourceAddresses": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "SourcePortRanges": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "From": {
-			//                   "type": "integer"
-			//                 },
-			//                 "To": {
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "OutboundHeader": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "DestinationAddresses": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "DestinationPortRanges": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "From": {
-			//                   "type": "integer"
-			//                 },
-			//                 "To": {
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "Protocol": {
-			//             "type": "string"
-			//           },
-			//           "SourceAddresses": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "SourcePortRanges": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "From": {
-			//                   "type": "integer"
-			//                 },
-			//                 "To": {
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "RouteTableRoute": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "NatGatewayId": {
-			//             "type": "string"
-			//           },
-			//           "NetworkInterfaceId": {
-			//             "type": "string"
-			//           },
-			//           "Origin": {
-			//             "type": "string"
-			//           },
-			//           "TransitGatewayId": {
-			//             "type": "string"
-			//           },
-			//           "VpcPeeringConnectionId": {
-			//             "type": "string"
-			//           },
-			//           "destinationCidr": {
-			//             "type": "string"
-			//           },
-			//           "destinationPrefixListId": {
-			//             "type": "string"
-			//           },
-			//           "egressOnlyInternetGatewayId": {
-			//             "type": "string"
-			//           },
-			//           "gatewayId": {
-			//             "type": "string"
-			//           },
-			//           "instanceId": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "SecurityGroupRule": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Cidr": {
-			//             "type": "string"
-			//           },
-			//           "Direction": {
-			//             "type": "string"
-			//           },
-			//           "PortRange": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "From": {
-			//                 "type": "integer"
-			//               },
-			//               "To": {
-			//                 "type": "integer"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "PrefixListId": {
-			//             "type": "string"
-			//           },
-			//           "Protocol": {
-			//             "type": "string"
-			//           },
-			//           "SecurityGroupId": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "SequenceNumber": {
-			//         "type": "integer"
-			//       },
-			//       "SourceVpc": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Subnet": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Vpc": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "AclRule": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Cidr": {
+			//	            "type": "string"
+			//	          },
+			//	          "Egress": {
+			//	            "type": "boolean"
+			//	          },
+			//	          "PortRange": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "From": {
+			//	                "type": "integer"
+			//	              },
+			//	              "To": {
+			//	                "type": "integer"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Protocol": {
+			//	            "type": "string"
+			//	          },
+			//	          "RuleAction": {
+			//	            "type": "string"
+			//	          },
+			//	          "RuleNumber": {
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Component": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "DestinationVpc": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "InboundHeader": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "DestinationAddresses": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "DestinationPortRanges": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "From": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "To": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "Protocol": {
+			//	            "type": "string"
+			//	          },
+			//	          "SourceAddresses": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "SourcePortRanges": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "From": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "To": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "OutboundHeader": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "DestinationAddresses": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "DestinationPortRanges": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "From": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "To": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "Protocol": {
+			//	            "type": "string"
+			//	          },
+			//	          "SourceAddresses": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "SourcePortRanges": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "From": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "To": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "RouteTableRoute": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "NatGatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "NetworkInterfaceId": {
+			//	            "type": "string"
+			//	          },
+			//	          "Origin": {
+			//	            "type": "string"
+			//	          },
+			//	          "TransitGatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "VpcPeeringConnectionId": {
+			//	            "type": "string"
+			//	          },
+			//	          "destinationCidr": {
+			//	            "type": "string"
+			//	          },
+			//	          "destinationPrefixListId": {
+			//	            "type": "string"
+			//	          },
+			//	          "egressOnlyInternetGatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "gatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "instanceId": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "SecurityGroupRule": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Cidr": {
+			//	            "type": "string"
+			//	          },
+			//	          "Direction": {
+			//	            "type": "string"
+			//	          },
+			//	          "PortRange": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "From": {
+			//	                "type": "integer"
+			//	              },
+			//	              "To": {
+			//	                "type": "integer"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "PrefixListId": {
+			//	            "type": "string"
+			//	          },
+			//	          "Protocol": {
+			//	            "type": "string"
+			//	          },
+			//	          "SecurityGroupId": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "SequenceNumber": {
+			//	        "type": "integer"
+			//	      },
+			//	      "SourceVpc": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Subnet": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Vpc": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"acl_rule": {
@@ -2824,9 +2828,10 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"network_insights_analysis_arn": {
 			// Property: NetworkInsightsAnalysisArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2836,9 +2841,10 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"network_insights_analysis_id": {
 			// Property: NetworkInsightsAnalysisId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2848,9 +2854,10 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"network_insights_path_id": {
 			// Property: NetworkInsightsPathId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2860,9 +2867,10 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"network_path_found": {
 			// Property: NetworkPathFound
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2872,282 +2880,283 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"return_path_components": {
 			// Property: ReturnPathComponents
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "AclRule": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Cidr": {
-			//             "type": "string"
-			//           },
-			//           "Egress": {
-			//             "type": "boolean"
-			//           },
-			//           "PortRange": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "From": {
-			//                 "type": "integer"
-			//               },
-			//               "To": {
-			//                 "type": "integer"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Protocol": {
-			//             "type": "string"
-			//           },
-			//           "RuleAction": {
-			//             "type": "string"
-			//           },
-			//           "RuleNumber": {
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Component": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "DestinationVpc": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "InboundHeader": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "DestinationAddresses": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "DestinationPortRanges": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "From": {
-			//                   "type": "integer"
-			//                 },
-			//                 "To": {
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "Protocol": {
-			//             "type": "string"
-			//           },
-			//           "SourceAddresses": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "SourcePortRanges": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "From": {
-			//                   "type": "integer"
-			//                 },
-			//                 "To": {
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "OutboundHeader": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "DestinationAddresses": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "DestinationPortRanges": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "From": {
-			//                   "type": "integer"
-			//                 },
-			//                 "To": {
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "Protocol": {
-			//             "type": "string"
-			//           },
-			//           "SourceAddresses": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "SourcePortRanges": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "From": {
-			//                   "type": "integer"
-			//                 },
-			//                 "To": {
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "RouteTableRoute": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "NatGatewayId": {
-			//             "type": "string"
-			//           },
-			//           "NetworkInterfaceId": {
-			//             "type": "string"
-			//           },
-			//           "Origin": {
-			//             "type": "string"
-			//           },
-			//           "TransitGatewayId": {
-			//             "type": "string"
-			//           },
-			//           "VpcPeeringConnectionId": {
-			//             "type": "string"
-			//           },
-			//           "destinationCidr": {
-			//             "type": "string"
-			//           },
-			//           "destinationPrefixListId": {
-			//             "type": "string"
-			//           },
-			//           "egressOnlyInternetGatewayId": {
-			//             "type": "string"
-			//           },
-			//           "gatewayId": {
-			//             "type": "string"
-			//           },
-			//           "instanceId": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "SecurityGroupRule": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Cidr": {
-			//             "type": "string"
-			//           },
-			//           "Direction": {
-			//             "type": "string"
-			//           },
-			//           "PortRange": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "From": {
-			//                 "type": "integer"
-			//               },
-			//               "To": {
-			//                 "type": "integer"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "PrefixListId": {
-			//             "type": "string"
-			//           },
-			//           "Protocol": {
-			//             "type": "string"
-			//           },
-			//           "SecurityGroupId": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "SequenceNumber": {
-			//         "type": "integer"
-			//       },
-			//       "SourceVpc": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Subnet": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Vpc": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "AclRule": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Cidr": {
+			//	            "type": "string"
+			//	          },
+			//	          "Egress": {
+			//	            "type": "boolean"
+			//	          },
+			//	          "PortRange": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "From": {
+			//	                "type": "integer"
+			//	              },
+			//	              "To": {
+			//	                "type": "integer"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Protocol": {
+			//	            "type": "string"
+			//	          },
+			//	          "RuleAction": {
+			//	            "type": "string"
+			//	          },
+			//	          "RuleNumber": {
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Component": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "DestinationVpc": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "InboundHeader": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "DestinationAddresses": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "DestinationPortRanges": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "From": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "To": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "Protocol": {
+			//	            "type": "string"
+			//	          },
+			//	          "SourceAddresses": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "SourcePortRanges": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "From": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "To": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "OutboundHeader": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "DestinationAddresses": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "DestinationPortRanges": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "From": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "To": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "Protocol": {
+			//	            "type": "string"
+			//	          },
+			//	          "SourceAddresses": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "SourcePortRanges": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "From": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "To": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "RouteTableRoute": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "NatGatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "NetworkInterfaceId": {
+			//	            "type": "string"
+			//	          },
+			//	          "Origin": {
+			//	            "type": "string"
+			//	          },
+			//	          "TransitGatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "VpcPeeringConnectionId": {
+			//	            "type": "string"
+			//	          },
+			//	          "destinationCidr": {
+			//	            "type": "string"
+			//	          },
+			//	          "destinationPrefixListId": {
+			//	            "type": "string"
+			//	          },
+			//	          "egressOnlyInternetGatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "gatewayId": {
+			//	            "type": "string"
+			//	          },
+			//	          "instanceId": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "SecurityGroupRule": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Cidr": {
+			//	            "type": "string"
+			//	          },
+			//	          "Direction": {
+			//	            "type": "string"
+			//	          },
+			//	          "PortRange": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "From": {
+			//	                "type": "integer"
+			//	              },
+			//	              "To": {
+			//	                "type": "integer"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "PrefixListId": {
+			//	            "type": "string"
+			//	          },
+			//	          "Protocol": {
+			//	            "type": "string"
+			//	          },
+			//	          "SecurityGroupId": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "SequenceNumber": {
+			//	        "type": "integer"
+			//	      },
+			//	      "SourceVpc": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Subnet": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Vpc": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"acl_rule": {
@@ -3793,9 +3802,10 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"start_date": {
 			// Property: StartDate
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -3805,14 +3815,15 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "running",
-			//     "failed",
-			//     "succeeded"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "running",
+			//	    "failed",
+			//	    "succeeded"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -3822,9 +3833,10 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"status_message": {
 			// Property: StatusMessage
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -3834,24 +3846,25 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

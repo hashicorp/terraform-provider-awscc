@@ -25,12 +25,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"api_gateway_id": {
 			// Property: ApiGatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 10,
-			//   "minLength": 10,
-			//   "pattern": "^[a-z0-9]{10}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 10,
+			//	  "minLength": 10,
+			//	  "pattern": "^[a-z0-9]{10}$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -40,25 +41,26 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"api_gateway_proxy": {
 			// Property: ApiGatewayProxy
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "EndpointType": {
-			//       "enum": [
-			//         "REGIONAL",
-			//         "PRIVATE"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "StageName": {
-			//       "maxLength": 128,
-			//       "minLength": 1,
-			//       "pattern": "^[-a-zA-Z0-9_]*$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "EndpointType": {
+			//	      "enum": [
+			//	        "REGIONAL",
+			//	        "PRIVATE"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "StageName": {
+			//	      "maxLength": 128,
+			//	      "minLength": 1,
+			//	      "pattern": "^[-a-zA-Z0-9_]*$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"endpoint_type": {
@@ -102,12 +104,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_identifier": {
 			// Property: ApplicationIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 14,
-			//   "minLength": 14,
-			//   "pattern": "^app-([0-9A-Za-z]{10}$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 14,
+			//	  "minLength": 14,
+			//	  "pattern": "^app-([0-9A-Za-z]{10}$)",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -117,12 +120,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -132,12 +136,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"environment_identifier": {
 			// Property: EnvironmentIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 14,
-			//   "minLength": 14,
-			//   "pattern": "^env-([0-9A-Za-z]{10}$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 14,
+			//	  "minLength": 14,
+			//	  "pattern": "^env-([0-9A-Za-z]{10}$)",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -153,12 +158,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 63,
-			//   "minLength": 3,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 63,
+			//	  "minLength": 3,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -173,12 +179,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"nlb_arn": {
 			// Property: NlbArn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:(aws[a-zA-Z-]*)?:elasticloadbalancing:[a-zA-Z0-9\\\\-]+:\\\\w{12}:[a-zA-Z_0-9+=,.@\\\\-_\\/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:elasticloadbalancing:[a-zA-Z0-9\\\\-]+:\\\\w{12}:[a-zA-Z_0-9+=,.@\\\\-_\\/]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -188,12 +195,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"nlb_name": {
 			// Property: NlbName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 32,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 32,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -203,12 +211,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"proxy_type": {
 			// Property: ProxyType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "API_GATEWAY"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "API_GATEWAY"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -225,12 +234,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"proxy_url": {
 			// Property: ProxyUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": "^http://[-a-zA-Z0-9+\\x38@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\\x38@#/%=~_|]$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": "^http://[-a-zA-Z0-9+\\x38@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\\x38@#/%=~_|]$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -240,12 +250,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"stage_name": {
 			// Property: StageName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[-a-zA-Z0-9_]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[-a-zA-Z0-9_]*$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -255,35 +266,36 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A label for tagging Environment resource",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "A string used to identify this tag",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "A string containing the value for the tag",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A label for tagging Environment resource",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "A string used to identify this tag",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "A string containing the value for the tag",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -317,12 +329,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 21,
-			//   "minLength": 12,
-			//   "pattern": "^vpc-[-a-f0-9]{8}([-a-f0-9]{9})?$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 21,
+			//	  "minLength": 12,
+			//	  "pattern": "^vpc-[-a-f0-9]{8}([-a-f0-9]{9})?$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -338,12 +351,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_link_id": {
 			// Property: VpcLinkId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 10,
-			//   "minLength": 10,
-			//   "pattern": "^[a-z0-9]{10}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 10,
+			//	  "minLength": 10,
+			//	  "pattern": "^[a-z0-9]{10}$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

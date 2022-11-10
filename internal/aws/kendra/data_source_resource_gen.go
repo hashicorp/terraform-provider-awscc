@@ -25,10 +25,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -38,285 +39,286 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"custom_document_enrichment_configuration": {
 			// Property: CustomDocumentEnrichmentConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "InlineConfigurations": {
-			//       "description": "List of InlineCustomDocumentEnrichmentConfigurations",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Condition": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ConditionDocumentAttributeKey": {
-			//                 "maxLength": 200,
-			//                 "minLength": 1,
-			//                 "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
-			//                 "type": "string"
-			//               },
-			//               "ConditionOnValue": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DateValue": {
-			//                     "type": "string"
-			//                   },
-			//                   "LongValue": {
-			//                     "format": "int64",
-			//                     "type": "integer"
-			//                   },
-			//                   "StringListValue": {
-			//                     "items": {
-			//                       "type": "string"
-			//                     },
-			//                     "type": "array"
-			//                   },
-			//                   "StringValue": {
-			//                     "maxLength": 2048,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "Operator": {
-			//                 "enum": [
-			//                   "GreaterThan",
-			//                   "GreaterThanOrEquals",
-			//                   "LessThan",
-			//                   "LessThanOrEquals",
-			//                   "Equals",
-			//                   "NotEquals",
-			//                   "Contains",
-			//                   "NotContains",
-			//                   "Exists",
-			//                   "NotExists",
-			//                   "BeginsWith"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "ConditionDocumentAttributeKey",
-			//               "Operator"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "DocumentContentDeletion": {
-			//             "type": "boolean"
-			//           },
-			//           "Target": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "TargetDocumentAttributeKey": {
-			//                 "maxLength": 200,
-			//                 "minLength": 1,
-			//                 "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
-			//                 "type": "string"
-			//               },
-			//               "TargetDocumentAttributeValue": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DateValue": {
-			//                     "type": "string"
-			//                   },
-			//                   "LongValue": {
-			//                     "format": "int64",
-			//                     "type": "integer"
-			//                   },
-			//                   "StringListValue": {
-			//                     "items": {
-			//                       "type": "string"
-			//                     },
-			//                     "type": "array"
-			//                   },
-			//                   "StringValue": {
-			//                     "maxLength": 2048,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "TargetDocumentAttributeValueDeletion": {
-			//                 "type": "boolean"
-			//               }
-			//             },
-			//             "required": [
-			//               "TargetDocumentAttributeKey"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 100,
-			//       "type": "array"
-			//     },
-			//     "PostExtractionHookConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "InvocationCondition": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ConditionDocumentAttributeKey": {
-			//               "maxLength": 200,
-			//               "minLength": 1,
-			//               "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
-			//               "type": "string"
-			//             },
-			//             "ConditionOnValue": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "DateValue": {
-			//                   "type": "string"
-			//                 },
-			//                 "LongValue": {
-			//                   "format": "int64",
-			//                   "type": "integer"
-			//                 },
-			//                 "StringListValue": {
-			//                   "items": {
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array"
-			//                 },
-			//                 "StringValue": {
-			//                   "maxLength": 2048,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "Operator": {
-			//               "enum": [
-			//                 "GreaterThan",
-			//                 "GreaterThanOrEquals",
-			//                 "LessThan",
-			//                 "LessThanOrEquals",
-			//                 "Equals",
-			//                 "NotEquals",
-			//                 "Contains",
-			//                 "NotContains",
-			//                 "Exists",
-			//                 "NotExists",
-			//                 "BeginsWith"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "ConditionDocumentAttributeKey",
-			//             "Operator"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "LambdaArn": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "S3Bucket": {
-			//           "maxLength": 63,
-			//           "minLength": 3,
-			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "LambdaArn",
-			//         "S3Bucket"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "PreExtractionHookConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "InvocationCondition": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ConditionDocumentAttributeKey": {
-			//               "maxLength": 200,
-			//               "minLength": 1,
-			//               "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
-			//               "type": "string"
-			//             },
-			//             "ConditionOnValue": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "DateValue": {
-			//                   "type": "string"
-			//                 },
-			//                 "LongValue": {
-			//                   "format": "int64",
-			//                   "type": "integer"
-			//                 },
-			//                 "StringListValue": {
-			//                   "items": {
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array"
-			//                 },
-			//                 "StringValue": {
-			//                   "maxLength": 2048,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "Operator": {
-			//               "enum": [
-			//                 "GreaterThan",
-			//                 "GreaterThanOrEquals",
-			//                 "LessThan",
-			//                 "LessThanOrEquals",
-			//                 "Equals",
-			//                 "NotEquals",
-			//                 "Contains",
-			//                 "NotContains",
-			//                 "Exists",
-			//                 "NotExists",
-			//                 "BeginsWith"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "ConditionDocumentAttributeKey",
-			//             "Operator"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "LambdaArn": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "S3Bucket": {
-			//           "maxLength": 63,
-			//           "minLength": 3,
-			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "LambdaArn",
-			//         "S3Bucket"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "RoleArn": {
-			//       "description": "Role ARN",
-			//       "maxLength": 1284,
-			//       "minLength": 1,
-			//       "pattern": "",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "InlineConfigurations": {
+			//	      "description": "List of InlineCustomDocumentEnrichmentConfigurations",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Condition": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ConditionDocumentAttributeKey": {
+			//	                "maxLength": 200,
+			//	                "minLength": 1,
+			//	                "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
+			//	                "type": "string"
+			//	              },
+			//	              "ConditionOnValue": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DateValue": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "LongValue": {
+			//	                    "format": "int64",
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "StringListValue": {
+			//	                    "items": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "type": "array"
+			//	                  },
+			//	                  "StringValue": {
+			//	                    "maxLength": 2048,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "Operator": {
+			//	                "enum": [
+			//	                  "GreaterThan",
+			//	                  "GreaterThanOrEquals",
+			//	                  "LessThan",
+			//	                  "LessThanOrEquals",
+			//	                  "Equals",
+			//	                  "NotEquals",
+			//	                  "Contains",
+			//	                  "NotContains",
+			//	                  "Exists",
+			//	                  "NotExists",
+			//	                  "BeginsWith"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "ConditionDocumentAttributeKey",
+			//	              "Operator"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "DocumentContentDeletion": {
+			//	            "type": "boolean"
+			//	          },
+			//	          "Target": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "TargetDocumentAttributeKey": {
+			//	                "maxLength": 200,
+			//	                "minLength": 1,
+			//	                "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
+			//	                "type": "string"
+			//	              },
+			//	              "TargetDocumentAttributeValue": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DateValue": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "LongValue": {
+			//	                    "format": "int64",
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "StringListValue": {
+			//	                    "items": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "type": "array"
+			//	                  },
+			//	                  "StringValue": {
+			//	                    "maxLength": 2048,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "TargetDocumentAttributeValueDeletion": {
+			//	                "type": "boolean"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "TargetDocumentAttributeKey"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 100,
+			//	      "type": "array"
+			//	    },
+			//	    "PostExtractionHookConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "InvocationCondition": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ConditionDocumentAttributeKey": {
+			//	              "maxLength": 200,
+			//	              "minLength": 1,
+			//	              "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
+			//	              "type": "string"
+			//	            },
+			//	            "ConditionOnValue": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "DateValue": {
+			//	                  "type": "string"
+			//	                },
+			//	                "LongValue": {
+			//	                  "format": "int64",
+			//	                  "type": "integer"
+			//	                },
+			//	                "StringListValue": {
+			//	                  "items": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array"
+			//	                },
+			//	                "StringValue": {
+			//	                  "maxLength": 2048,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "Operator": {
+			//	              "enum": [
+			//	                "GreaterThan",
+			//	                "GreaterThanOrEquals",
+			//	                "LessThan",
+			//	                "LessThanOrEquals",
+			//	                "Equals",
+			//	                "NotEquals",
+			//	                "Contains",
+			//	                "NotContains",
+			//	                "Exists",
+			//	                "NotExists",
+			//	                "BeginsWith"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "ConditionDocumentAttributeKey",
+			//	            "Operator"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "LambdaArn": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "S3Bucket": {
+			//	          "maxLength": 63,
+			//	          "minLength": 3,
+			//	          "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "LambdaArn",
+			//	        "S3Bucket"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "PreExtractionHookConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "InvocationCondition": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ConditionDocumentAttributeKey": {
+			//	              "maxLength": 200,
+			//	              "minLength": 1,
+			//	              "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
+			//	              "type": "string"
+			//	            },
+			//	            "ConditionOnValue": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "DateValue": {
+			//	                  "type": "string"
+			//	                },
+			//	                "LongValue": {
+			//	                  "format": "int64",
+			//	                  "type": "integer"
+			//	                },
+			//	                "StringListValue": {
+			//	                  "items": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array"
+			//	                },
+			//	                "StringValue": {
+			//	                  "maxLength": 2048,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "Operator": {
+			//	              "enum": [
+			//	                "GreaterThan",
+			//	                "GreaterThanOrEquals",
+			//	                "LessThan",
+			//	                "LessThanOrEquals",
+			//	                "Equals",
+			//	                "NotEquals",
+			//	                "Contains",
+			//	                "NotContains",
+			//	                "Exists",
+			//	                "NotExists",
+			//	                "BeginsWith"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "ConditionDocumentAttributeKey",
+			//	            "Operator"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "LambdaArn": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "S3Bucket": {
+			//	          "maxLength": 63,
+			//	          "minLength": 3,
+			//	          "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "LambdaArn",
+			//	        "S3Bucket"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "RoleArn": {
+			//	      "description": "Role ARN",
+			//	      "maxLength": 1284,
+			//	      "minLength": 1,
+			//	      "pattern": "",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"inline_configurations": {
@@ -783,1720 +785,1721 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"data_source_configuration": {
 			// Property: DataSourceConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "oneOf": [
-			//     {
-			//       "required": [
-			//         "S3Configuration"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "SharePointConfiguration"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "SalesforceConfiguration"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "OneDriveConfiguration"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "ServiceNowConfiguration"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "DatabaseConfiguration"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "ConfluenceConfiguration"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "GoogleDriveConfiguration"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "WebCrawlerConfiguration"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "WorkDocsConfiguration"
-			//       ]
-			//     }
-			//   ],
-			//   "properties": {
-			//     "ConfluenceConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AttachmentConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AttachmentFieldMappings": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DataSourceFieldName": {
-			//                     "enum": [
-			//                       "AUTHOR",
-			//                       "CONTENT_TYPE",
-			//                       "CREATED_DATE",
-			//                       "DISPLAY_URL",
-			//                       "FILE_SIZE",
-			//                       "ITEM_TYPE",
-			//                       "PARENT_ID",
-			//                       "SPACE_KEY",
-			//                       "SPACE_NAME",
-			//                       "URL",
-			//                       "VERSION"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "DateFieldFormat": {
-			//                     "maxLength": 40,
-			//                     "minLength": 4,
-			//                     "type": "string"
-			//                   },
-			//                   "IndexFieldName": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "DataSourceFieldName",
-			//                   "IndexFieldName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 11,
-			//               "minItems": 1,
-			//               "type": "array"
-			//             },
-			//             "CrawlAttachments": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "BlogConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "BlogFieldMappings": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DataSourceFieldName": {
-			//                     "enum": [
-			//                       "AUTHOR",
-			//                       "DISPLAY_URL",
-			//                       "ITEM_TYPE",
-			//                       "LABELS",
-			//                       "PUBLISH_DATE",
-			//                       "SPACE_KEY",
-			//                       "SPACE_NAME",
-			//                       "URL",
-			//                       "VERSION"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "DateFieldFormat": {
-			//                     "maxLength": 40,
-			//                     "minLength": 4,
-			//                     "type": "string"
-			//                   },
-			//                   "IndexFieldName": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "DataSourceFieldName",
-			//                   "IndexFieldName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 9,
-			//               "minItems": 1,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ExclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "InclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "PageConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "PageFieldMappings": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DataSourceFieldName": {
-			//                     "enum": [
-			//                       "AUTHOR",
-			//                       "CONTENT_STATUS",
-			//                       "CREATED_DATE",
-			//                       "DISPLAY_URL",
-			//                       "ITEM_TYPE",
-			//                       "LABELS",
-			//                       "MODIFIED_DATE",
-			//                       "PARENT_ID",
-			//                       "SPACE_KEY",
-			//                       "SPACE_NAME",
-			//                       "URL",
-			//                       "VERSION"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "DateFieldFormat": {
-			//                     "maxLength": 40,
-			//                     "minLength": 4,
-			//                     "type": "string"
-			//                   },
-			//                   "IndexFieldName": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "DataSourceFieldName",
-			//                   "IndexFieldName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 12,
-			//               "minItems": 1,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "SecretArn": {
-			//           "maxLength": 1284,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         },
-			//         "ServerUrl": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "^(https?|ftp|file)://([^\\s]*)",
-			//           "type": "string"
-			//         },
-			//         "SpaceConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "CrawlArchivedSpaces": {
-			//               "type": "boolean"
-			//             },
-			//             "CrawlPersonalSpaces": {
-			//               "type": "boolean"
-			//             },
-			//             "ExcludeSpaces": {
-			//               "items": {
-			//                 "maxLength": 255,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array"
-			//             },
-			//             "IncludeSpaces": {
-			//               "items": {
-			//                 "maxLength": 255,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array"
-			//             },
-			//             "SpaceFieldMappings": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DataSourceFieldName": {
-			//                     "enum": [
-			//                       "DISPLAY_URL",
-			//                       "ITEM_TYPE",
-			//                       "SPACE_KEY",
-			//                       "URL"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "DateFieldFormat": {
-			//                     "maxLength": 40,
-			//                     "minLength": 4,
-			//                     "type": "string"
-			//                   },
-			//                   "IndexFieldName": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "DataSourceFieldName",
-			//                   "IndexFieldName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 4,
-			//               "minItems": 1,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "Version": {
-			//           "enum": [
-			//             "CLOUD",
-			//             "SERVER"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "VpcConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "SecurityGroupIds": {
-			//               "items": {
-			//                 "maxLength": 200,
-			//                 "minLength": 1,
-			//                 "pattern": "[\\-0-9a-zA-Z]+",
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 10,
-			//               "type": "array"
-			//             },
-			//             "SubnetIds": {
-			//               "items": {
-			//                 "maxLength": 200,
-			//                 "minLength": 1,
-			//                 "pattern": "[\\-0-9a-zA-Z]+",
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 6,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "SubnetIds",
-			//             "SecurityGroupIds"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "ServerUrl",
-			//         "SecretArn",
-			//         "Version"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "DatabaseConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AclConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AllowedGroupsColumnName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "AllowedGroupsColumnName"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "ColumnConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ChangeDetectingColumns": {
-			//               "items": {
-			//                 "maxLength": 100,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 5,
-			//               "minItems": 1,
-			//               "type": "array"
-			//             },
-			//             "DocumentDataColumnName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "DocumentIdColumnName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "DocumentTitleColumnName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "FieldMappings": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DataSourceFieldName": {
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "DateFieldFormat": {
-			//                     "maxLength": 40,
-			//                     "minLength": 4,
-			//                     "type": "string"
-			//                   },
-			//                   "IndexFieldName": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "DataSourceFieldName",
-			//                   "IndexFieldName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "DocumentIdColumnName",
-			//             "DocumentDataColumnName",
-			//             "ChangeDetectingColumns"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "ConnectionConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DatabaseHost": {
-			//               "maxLength": 253,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "DatabaseName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "DatabasePort": {
-			//               "maximum": 65535,
-			//               "minimum": 1,
-			//               "type": "integer"
-			//             },
-			//             "SecretArn": {
-			//               "maxLength": 1284,
-			//               "minLength": 1,
-			//               "pattern": "",
-			//               "type": "string"
-			//             },
-			//             "TableName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "DatabaseHost",
-			//             "DatabasePort",
-			//             "DatabaseName",
-			//             "TableName",
-			//             "SecretArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "DatabaseEngineType": {
-			//           "enum": [
-			//             "RDS_AURORA_MYSQL",
-			//             "RDS_AURORA_POSTGRESQL",
-			//             "RDS_MYSQL",
-			//             "RDS_POSTGRESQL"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "SqlConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "QueryIdentifiersEnclosingOption": {
-			//               "enum": [
-			//                 "DOUBLE_QUOTES",
-			//                 "NONE"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "VpcConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "SecurityGroupIds": {
-			//               "items": {
-			//                 "maxLength": 200,
-			//                 "minLength": 1,
-			//                 "pattern": "[\\-0-9a-zA-Z]+",
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 10,
-			//               "type": "array"
-			//             },
-			//             "SubnetIds": {
-			//               "items": {
-			//                 "maxLength": 200,
-			//                 "minLength": 1,
-			//                 "pattern": "[\\-0-9a-zA-Z]+",
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 6,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "SubnetIds",
-			//             "SecurityGroupIds"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "ConnectionConfiguration",
-			//         "ColumnConfiguration",
-			//         "DatabaseEngineType"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "GoogleDriveConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "ExcludeMimeTypes": {
-			//           "items": {
-			//             "maxLength": 256,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 30,
-			//           "minItems": 0,
-			//           "type": "array"
-			//         },
-			//         "ExcludeSharedDrives": {
-			//           "items": {
-			//             "maxLength": 256,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "minItems": 0,
-			//           "type": "array"
-			//         },
-			//         "ExcludeUserAccounts": {
-			//           "items": {
-			//             "maxLength": 256,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "minItems": 0,
-			//           "type": "array"
-			//         },
-			//         "ExclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "FieldMappings": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DataSourceFieldName": {
-			//                 "maxLength": 100,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "DateFieldFormat": {
-			//                 "maxLength": 40,
-			//                 "minLength": 4,
-			//                 "type": "string"
-			//               },
-			//               "IndexFieldName": {
-			//                 "maxLength": 30,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "DataSourceFieldName",
-			//               "IndexFieldName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "InclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "SecretArn": {
-			//           "maxLength": 1284,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "SecretArn"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "OneDriveConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DisableLocalGroups": {
-			//           "type": "boolean"
-			//         },
-			//         "ExclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "FieldMappings": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DataSourceFieldName": {
-			//                 "maxLength": 100,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "DateFieldFormat": {
-			//                 "maxLength": 40,
-			//                 "minLength": 4,
-			//                 "type": "string"
-			//               },
-			//               "IndexFieldName": {
-			//                 "maxLength": 30,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "DataSourceFieldName",
-			//               "IndexFieldName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "InclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "OneDriveUsers": {
-			//           "additionalProperties": false,
-			//           "oneOf": [
-			//             {
-			//               "required": [
-			//                 "OneDriveUserList"
-			//               ]
-			//             },
-			//             {
-			//               "required": [
-			//                 "OneDriveUserS3Path"
-			//               ]
-			//             }
-			//           ],
-			//           "properties": {
-			//             "OneDriveUserList": {
-			//               "items": {
-			//                 "maxLength": 256,
-			//                 "minLength": 1,
-			//                 "pattern": "",
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 100,
-			//               "minItems": 1,
-			//               "type": "array"
-			//             },
-			//             "OneDriveUserS3Path": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Bucket": {
-			//                   "maxLength": 63,
-			//                   "minLength": 3,
-			//                   "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//                   "type": "string"
-			//                 },
-			//                 "Key": {
-			//                   "maxLength": 1024,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Bucket",
-			//                 "Key"
-			//               ],
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "SecretArn": {
-			//           "maxLength": 1284,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         },
-			//         "TenantDomain": {
-			//           "maxLength": 256,
-			//           "minLength": 1,
-			//           "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-z]{2,}$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "TenantDomain",
-			//         "SecretArn",
-			//         "OneDriveUsers"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "S3Configuration": {
-			//       "additionalProperties": false,
-			//       "description": "S3 data source configuration",
-			//       "properties": {
-			//         "AccessControlListConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "KeyPath": {
-			//               "maxLength": 1024,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "BucketName": {
-			//           "maxLength": 63,
-			//           "minLength": 3,
-			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//           "type": "string"
-			//         },
-			//         "DocumentsMetadataConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "S3Prefix": {
-			//               "maxLength": 1024,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ExclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "InclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "InclusionPrefixes": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketName"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "SalesforceConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "ChatterFeedConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DocumentDataFieldName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "DocumentTitleFieldName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "FieldMappings": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DataSourceFieldName": {
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "DateFieldFormat": {
-			//                     "maxLength": 40,
-			//                     "minLength": 4,
-			//                     "type": "string"
-			//                   },
-			//                   "IndexFieldName": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "DataSourceFieldName",
-			//                   "IndexFieldName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             },
-			//             "IncludeFilterTypes": {
-			//               "items": {
-			//                 "enum": [
-			//                   "ACTIVE_USER",
-			//                   "STANDARD_USER"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 2,
-			//               "minItems": 1,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "DocumentDataFieldName"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "CrawlAttachments": {
-			//           "type": "boolean"
-			//         },
-			//         "ExcludeAttachmentFilePatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "IncludeAttachmentFilePatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "KnowledgeArticleConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "CustomKnowledgeArticleTypeConfigurations": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DocumentDataFieldName": {
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "DocumentTitleFieldName": {
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "FieldMappings": {
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "properties": {
-			//                         "DataSourceFieldName": {
-			//                           "maxLength": 100,
-			//                           "minLength": 1,
-			//                           "type": "string"
-			//                         },
-			//                         "DateFieldFormat": {
-			//                           "maxLength": 40,
-			//                           "minLength": 4,
-			//                           "type": "string"
-			//                         },
-			//                         "IndexFieldName": {
-			//                           "maxLength": 30,
-			//                           "minLength": 1,
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "DataSourceFieldName",
-			//                         "IndexFieldName"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "maxItems": 100,
-			//                     "type": "array"
-			//                   },
-			//                   "Name": {
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Name",
-			//                   "DocumentDataFieldName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 10,
-			//               "minItems": 1,
-			//               "type": "array"
-			//             },
-			//             "IncludedStates": {
-			//               "items": {
-			//                 "enum": [
-			//                   "DRAFT",
-			//                   "PUBLISHED",
-			//                   "ARCHIVED"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 3,
-			//               "minItems": 1,
-			//               "type": "array"
-			//             },
-			//             "StandardKnowledgeArticleTypeConfiguration": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "DocumentDataFieldName": {
-			//                   "maxLength": 100,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "DocumentTitleFieldName": {
-			//                   "maxLength": 100,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "FieldMappings": {
-			//                   "items": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "DataSourceFieldName": {
-			//                         "maxLength": 100,
-			//                         "minLength": 1,
-			//                         "type": "string"
-			//                       },
-			//                       "DateFieldFormat": {
-			//                         "maxLength": 40,
-			//                         "minLength": 4,
-			//                         "type": "string"
-			//                       },
-			//                       "IndexFieldName": {
-			//                         "maxLength": 30,
-			//                         "minLength": 1,
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "DataSourceFieldName",
-			//                       "IndexFieldName"
-			//                     ],
-			//                     "type": "object"
-			//                   },
-			//                   "maxItems": 100,
-			//                   "type": "array"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "DocumentDataFieldName"
-			//               ],
-			//               "type": "object"
-			//             }
-			//           },
-			//           "required": [
-			//             "IncludedStates"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "SecretArn": {
-			//           "maxLength": 1284,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         },
-			//         "ServerUrl": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "^(https?|ftp|file)://([^\\s]*)",
-			//           "type": "string"
-			//         },
-			//         "StandardObjectAttachmentConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DocumentTitleFieldName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "FieldMappings": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DataSourceFieldName": {
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "DateFieldFormat": {
-			//                     "maxLength": 40,
-			//                     "minLength": 4,
-			//                     "type": "string"
-			//                   },
-			//                   "IndexFieldName": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "DataSourceFieldName",
-			//                   "IndexFieldName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "StandardObjectConfigurations": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DocumentDataFieldName": {
-			//                 "maxLength": 100,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "DocumentTitleFieldName": {
-			//                 "maxLength": 100,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "FieldMappings": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "DataSourceFieldName": {
-			//                       "maxLength": 100,
-			//                       "minLength": 1,
-			//                       "type": "string"
-			//                     },
-			//                     "DateFieldFormat": {
-			//                       "maxLength": 40,
-			//                       "minLength": 4,
-			//                       "type": "string"
-			//                     },
-			//                     "IndexFieldName": {
-			//                       "maxLength": 30,
-			//                       "minLength": 1,
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "DataSourceFieldName",
-			//                     "IndexFieldName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "maxItems": 100,
-			//                 "type": "array"
-			//               },
-			//               "Name": {
-			//                 "enum": [
-			//                   "ACCOUNT",
-			//                   "CAMPAIGN",
-			//                   "CASE",
-			//                   "CONTACT",
-			//                   "CONTRACT",
-			//                   "DOCUMENT",
-			//                   "GROUP",
-			//                   "IDEA",
-			//                   "LEAD",
-			//                   "OPPORTUNITY",
-			//                   "PARTNER",
-			//                   "PRICEBOOK",
-			//                   "PRODUCT",
-			//                   "PROFILE",
-			//                   "SOLUTION",
-			//                   "TASK",
-			//                   "USER"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Name",
-			//               "DocumentDataFieldName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "maxItems": 17,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "required": [
-			//         "ServerUrl",
-			//         "SecretArn"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ServiceNowConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AuthenticationType": {
-			//           "enum": [
-			//             "HTTP_BASIC",
-			//             "OAUTH2"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "HostUrl": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         },
-			//         "KnowledgeArticleConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "CrawlAttachments": {
-			//               "type": "boolean"
-			//             },
-			//             "DocumentDataFieldName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "DocumentTitleFieldName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "ExcludeAttachmentFilePatterns": {
-			//               "items": {
-			//                 "maxLength": 50,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             },
-			//             "FieldMappings": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DataSourceFieldName": {
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "DateFieldFormat": {
-			//                     "maxLength": 40,
-			//                     "minLength": 4,
-			//                     "type": "string"
-			//                   },
-			//                   "IndexFieldName": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "DataSourceFieldName",
-			//                   "IndexFieldName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             },
-			//             "FilterQuery": {
-			//               "maxLength": 2048,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "IncludeAttachmentFilePatterns": {
-			//               "items": {
-			//                 "maxLength": 50,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "DocumentDataFieldName"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "SecretArn": {
-			//           "maxLength": 1284,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         },
-			//         "ServiceCatalogConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "CrawlAttachments": {
-			//               "type": "boolean"
-			//             },
-			//             "DocumentDataFieldName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "DocumentTitleFieldName": {
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "ExcludeAttachmentFilePatterns": {
-			//               "items": {
-			//                 "maxLength": 50,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             },
-			//             "FieldMappings": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "DataSourceFieldName": {
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "DateFieldFormat": {
-			//                     "maxLength": 40,
-			//                     "minLength": 4,
-			//                     "type": "string"
-			//                   },
-			//                   "IndexFieldName": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "DataSourceFieldName",
-			//                   "IndexFieldName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             },
-			//             "IncludeAttachmentFilePatterns": {
-			//               "items": {
-			//                 "maxLength": 50,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "DocumentDataFieldName"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "ServiceNowBuildVersion": {
-			//           "enum": [
-			//             "LONDON",
-			//             "OTHERS"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "HostUrl",
-			//         "SecretArn",
-			//         "ServiceNowBuildVersion"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "SharePointConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "SharePoint configuration",
-			//       "properties": {
-			//         "CrawlAttachments": {
-			//           "type": "boolean"
-			//         },
-			//         "DisableLocalGroups": {
-			//           "type": "boolean"
-			//         },
-			//         "DocumentTitleFieldName": {
-			//           "maxLength": 100,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "ExclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "FieldMappings": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DataSourceFieldName": {
-			//                 "maxLength": 100,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "DateFieldFormat": {
-			//                 "maxLength": 40,
-			//                 "minLength": 4,
-			//                 "type": "string"
-			//               },
-			//               "IndexFieldName": {
-			//                 "maxLength": 30,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "DataSourceFieldName",
-			//               "IndexFieldName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "InclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "SecretArn": {
-			//           "maxLength": 1284,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         },
-			//         "SharePointVersion": {
-			//           "enum": [
-			//             "SHAREPOINT_ONLINE",
-			//             "SHAREPOINT_2013",
-			//             "SHAREPOINT_2016"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "SslCertificateS3Path": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Bucket": {
-			//               "maxLength": 63,
-			//               "minLength": 3,
-			//               "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//               "type": "string"
-			//             },
-			//             "Key": {
-			//               "maxLength": 1024,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Bucket",
-			//             "Key"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Urls": {
-			//           "items": {
-			//             "maxLength": 2048,
-			//             "minLength": 1,
-			//             "pattern": "^(https?|ftp|file)://([^\\s]*)",
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "UseChangeLog": {
-			//           "type": "boolean"
-			//         },
-			//         "VpcConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "SecurityGroupIds": {
-			//               "items": {
-			//                 "maxLength": 200,
-			//                 "minLength": 1,
-			//                 "pattern": "[\\-0-9a-zA-Z]+",
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 10,
-			//               "type": "array"
-			//             },
-			//             "SubnetIds": {
-			//               "items": {
-			//                 "maxLength": 200,
-			//                 "minLength": 1,
-			//                 "pattern": "[\\-0-9a-zA-Z]+",
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 6,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "SubnetIds",
-			//             "SecurityGroupIds"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "Urls",
-			//         "SecretArn",
-			//         "SharePointVersion"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "WebCrawlerConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AuthenticationConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "BasicAuthentication": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Credentials": {
-			//                     "maxLength": 1284,
-			//                     "minLength": 1,
-			//                     "pattern": "",
-			//                     "type": "string"
-			//                   },
-			//                   "Host": {
-			//                     "maxLength": 253,
-			//                     "minLength": 1,
-			//                     "pattern": "([^\\s]*)",
-			//                     "type": "string"
-			//                   },
-			//                   "Port": {
-			//                     "maximum": 65535,
-			//                     "minimum": 1,
-			//                     "type": "integer"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Host",
-			//                   "Port",
-			//                   "Credentials"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 10,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CrawlDepth": {
-			//           "maximum": 10,
-			//           "minimum": 1,
-			//           "type": "integer"
-			//         },
-			//         "MaxContentSizePerPageInMegaBytes": {
-			//           "maximum": 50,
-			//           "minimum": 0,
-			//           "type": "number"
-			//         },
-			//         "MaxLinksPerPage": {
-			//           "maximum": 1000,
-			//           "minimum": 1,
-			//           "type": "integer"
-			//         },
-			//         "MaxUrlsPerMinuteCrawlRate": {
-			//           "maximum": 300,
-			//           "minimum": 1,
-			//           "type": "integer"
-			//         },
-			//         "ProxyConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Credentials": {
-			//               "maxLength": 1284,
-			//               "minLength": 1,
-			//               "pattern": "",
-			//               "type": "string"
-			//             },
-			//             "Host": {
-			//               "maxLength": 253,
-			//               "minLength": 1,
-			//               "pattern": "([^\\s]*)",
-			//               "type": "string"
-			//             },
-			//             "Port": {
-			//               "maximum": 65535,
-			//               "minimum": 1,
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "required": [
-			//             "Host",
-			//             "Port"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "UrlExclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "UrlInclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "Urls": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "SeedUrlConfiguration": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "SeedUrls": {
-			//                   "items": {
-			//                     "maxLength": 2048,
-			//                     "minLength": 1,
-			//                     "pattern": "^(https?)://([^\\s]*)",
-			//                     "type": "string"
-			//                   },
-			//                   "maxItems": 100,
-			//                   "minItems": 0,
-			//                   "type": "array"
-			//                 },
-			//                 "WebCrawlerMode": {
-			//                   "enum": [
-			//                     "HOST_ONLY",
-			//                     "SUBDOMAINS",
-			//                     "EVERYTHING"
-			//                   ],
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "SeedUrls"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "SiteMapsConfiguration": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "SiteMaps": {
-			//                   "items": {
-			//                     "maxLength": 2048,
-			//                     "minLength": 1,
-			//                     "pattern": "^(https?):\\/\\/([^\\s]*)",
-			//                     "type": "string"
-			//                   },
-			//                   "maxItems": 3,
-			//                   "minItems": 0,
-			//                   "type": "array"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "SiteMaps"
-			//               ],
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "Urls"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "WorkDocsConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CrawlComments": {
-			//           "type": "boolean"
-			//         },
-			//         "ExclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "FieldMappings": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DataSourceFieldName": {
-			//                 "maxLength": 100,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "DateFieldFormat": {
-			//                 "maxLength": 40,
-			//                 "minLength": 4,
-			//                 "type": "string"
-			//               },
-			//               "IndexFieldName": {
-			//                 "maxLength": 30,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "DataSourceFieldName",
-			//               "IndexFieldName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "InclusionPatterns": {
-			//           "items": {
-			//             "maxLength": 50,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         },
-			//         "OrganizationId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "pattern": "d-[0-9a-fA-F]{10}",
-			//           "type": "string"
-			//         },
-			//         "UseChangeLog": {
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "required": [
-			//         "OrganizationId"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "oneOf": [
+			//	    {
+			//	      "required": [
+			//	        "S3Configuration"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "SharePointConfiguration"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "SalesforceConfiguration"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "OneDriveConfiguration"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "ServiceNowConfiguration"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "DatabaseConfiguration"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "ConfluenceConfiguration"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "GoogleDriveConfiguration"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "WebCrawlerConfiguration"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "WorkDocsConfiguration"
+			//	      ]
+			//	    }
+			//	  ],
+			//	  "properties": {
+			//	    "ConfluenceConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AttachmentConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AttachmentFieldMappings": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DataSourceFieldName": {
+			//	                    "enum": [
+			//	                      "AUTHOR",
+			//	                      "CONTENT_TYPE",
+			//	                      "CREATED_DATE",
+			//	                      "DISPLAY_URL",
+			//	                      "FILE_SIZE",
+			//	                      "ITEM_TYPE",
+			//	                      "PARENT_ID",
+			//	                      "SPACE_KEY",
+			//	                      "SPACE_NAME",
+			//	                      "URL",
+			//	                      "VERSION"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DateFieldFormat": {
+			//	                    "maxLength": 40,
+			//	                    "minLength": 4,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "IndexFieldName": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "DataSourceFieldName",
+			//	                  "IndexFieldName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 11,
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            },
+			//	            "CrawlAttachments": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "BlogConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "BlogFieldMappings": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DataSourceFieldName": {
+			//	                    "enum": [
+			//	                      "AUTHOR",
+			//	                      "DISPLAY_URL",
+			//	                      "ITEM_TYPE",
+			//	                      "LABELS",
+			//	                      "PUBLISH_DATE",
+			//	                      "SPACE_KEY",
+			//	                      "SPACE_NAME",
+			//	                      "URL",
+			//	                      "VERSION"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DateFieldFormat": {
+			//	                    "maxLength": 40,
+			//	                    "minLength": 4,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "IndexFieldName": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "DataSourceFieldName",
+			//	                  "IndexFieldName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 9,
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ExclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "InclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "PageConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "PageFieldMappings": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DataSourceFieldName": {
+			//	                    "enum": [
+			//	                      "AUTHOR",
+			//	                      "CONTENT_STATUS",
+			//	                      "CREATED_DATE",
+			//	                      "DISPLAY_URL",
+			//	                      "ITEM_TYPE",
+			//	                      "LABELS",
+			//	                      "MODIFIED_DATE",
+			//	                      "PARENT_ID",
+			//	                      "SPACE_KEY",
+			//	                      "SPACE_NAME",
+			//	                      "URL",
+			//	                      "VERSION"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DateFieldFormat": {
+			//	                    "maxLength": 40,
+			//	                    "minLength": 4,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "IndexFieldName": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "DataSourceFieldName",
+			//	                  "IndexFieldName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 12,
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "SecretArn": {
+			//	          "maxLength": 1284,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        },
+			//	        "ServerUrl": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "^(https?|ftp|file)://([^\\s]*)",
+			//	          "type": "string"
+			//	        },
+			//	        "SpaceConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "CrawlArchivedSpaces": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "CrawlPersonalSpaces": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "ExcludeSpaces": {
+			//	              "items": {
+			//	                "maxLength": 255,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            },
+			//	            "IncludeSpaces": {
+			//	              "items": {
+			//	                "maxLength": 255,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            },
+			//	            "SpaceFieldMappings": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DataSourceFieldName": {
+			//	                    "enum": [
+			//	                      "DISPLAY_URL",
+			//	                      "ITEM_TYPE",
+			//	                      "SPACE_KEY",
+			//	                      "URL"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DateFieldFormat": {
+			//	                    "maxLength": 40,
+			//	                    "minLength": 4,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "IndexFieldName": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "DataSourceFieldName",
+			//	                  "IndexFieldName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 4,
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "Version": {
+			//	          "enum": [
+			//	            "CLOUD",
+			//	            "SERVER"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "VpcConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "SecurityGroupIds": {
+			//	              "items": {
+			//	                "maxLength": 200,
+			//	                "minLength": 1,
+			//	                "pattern": "[\\-0-9a-zA-Z]+",
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 10,
+			//	              "type": "array"
+			//	            },
+			//	            "SubnetIds": {
+			//	              "items": {
+			//	                "maxLength": 200,
+			//	                "minLength": 1,
+			//	                "pattern": "[\\-0-9a-zA-Z]+",
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 6,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "SubnetIds",
+			//	            "SecurityGroupIds"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ServerUrl",
+			//	        "SecretArn",
+			//	        "Version"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "DatabaseConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AclConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AllowedGroupsColumnName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "AllowedGroupsColumnName"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "ColumnConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ChangeDetectingColumns": {
+			//	              "items": {
+			//	                "maxLength": 100,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 5,
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            },
+			//	            "DocumentDataColumnName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "DocumentIdColumnName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "DocumentTitleColumnName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "FieldMappings": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DataSourceFieldName": {
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DateFieldFormat": {
+			//	                    "maxLength": 40,
+			//	                    "minLength": 4,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "IndexFieldName": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "DataSourceFieldName",
+			//	                  "IndexFieldName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "DocumentIdColumnName",
+			//	            "DocumentDataColumnName",
+			//	            "ChangeDetectingColumns"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "ConnectionConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DatabaseHost": {
+			//	              "maxLength": 253,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "DatabaseName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "DatabasePort": {
+			//	              "maximum": 65535,
+			//	              "minimum": 1,
+			//	              "type": "integer"
+			//	            },
+			//	            "SecretArn": {
+			//	              "maxLength": 1284,
+			//	              "minLength": 1,
+			//	              "pattern": "",
+			//	              "type": "string"
+			//	            },
+			//	            "TableName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "DatabaseHost",
+			//	            "DatabasePort",
+			//	            "DatabaseName",
+			//	            "TableName",
+			//	            "SecretArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "DatabaseEngineType": {
+			//	          "enum": [
+			//	            "RDS_AURORA_MYSQL",
+			//	            "RDS_AURORA_POSTGRESQL",
+			//	            "RDS_MYSQL",
+			//	            "RDS_POSTGRESQL"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "SqlConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "QueryIdentifiersEnclosingOption": {
+			//	              "enum": [
+			//	                "DOUBLE_QUOTES",
+			//	                "NONE"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "VpcConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "SecurityGroupIds": {
+			//	              "items": {
+			//	                "maxLength": 200,
+			//	                "minLength": 1,
+			//	                "pattern": "[\\-0-9a-zA-Z]+",
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 10,
+			//	              "type": "array"
+			//	            },
+			//	            "SubnetIds": {
+			//	              "items": {
+			//	                "maxLength": 200,
+			//	                "minLength": 1,
+			//	                "pattern": "[\\-0-9a-zA-Z]+",
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 6,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "SubnetIds",
+			//	            "SecurityGroupIds"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ConnectionConfiguration",
+			//	        "ColumnConfiguration",
+			//	        "DatabaseEngineType"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "GoogleDriveConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "ExcludeMimeTypes": {
+			//	          "items": {
+			//	            "maxLength": 256,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 30,
+			//	          "minItems": 0,
+			//	          "type": "array"
+			//	        },
+			//	        "ExcludeSharedDrives": {
+			//	          "items": {
+			//	            "maxLength": 256,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "minItems": 0,
+			//	          "type": "array"
+			//	        },
+			//	        "ExcludeUserAccounts": {
+			//	          "items": {
+			//	            "maxLength": 256,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "minItems": 0,
+			//	          "type": "array"
+			//	        },
+			//	        "ExclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "FieldMappings": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DataSourceFieldName": {
+			//	                "maxLength": 100,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "DateFieldFormat": {
+			//	                "maxLength": 40,
+			//	                "minLength": 4,
+			//	                "type": "string"
+			//	              },
+			//	              "IndexFieldName": {
+			//	                "maxLength": 30,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "DataSourceFieldName",
+			//	              "IndexFieldName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "InclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "SecretArn": {
+			//	          "maxLength": 1284,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "SecretArn"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "OneDriveConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DisableLocalGroups": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "ExclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "FieldMappings": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DataSourceFieldName": {
+			//	                "maxLength": 100,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "DateFieldFormat": {
+			//	                "maxLength": 40,
+			//	                "minLength": 4,
+			//	                "type": "string"
+			//	              },
+			//	              "IndexFieldName": {
+			//	                "maxLength": 30,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "DataSourceFieldName",
+			//	              "IndexFieldName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "InclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "OneDriveUsers": {
+			//	          "additionalProperties": false,
+			//	          "oneOf": [
+			//	            {
+			//	              "required": [
+			//	                "OneDriveUserList"
+			//	              ]
+			//	            },
+			//	            {
+			//	              "required": [
+			//	                "OneDriveUserS3Path"
+			//	              ]
+			//	            }
+			//	          ],
+			//	          "properties": {
+			//	            "OneDriveUserList": {
+			//	              "items": {
+			//	                "maxLength": 256,
+			//	                "minLength": 1,
+			//	                "pattern": "",
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            },
+			//	            "OneDriveUserS3Path": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Bucket": {
+			//	                  "maxLength": 63,
+			//	                  "minLength": 3,
+			//	                  "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+			//	                  "type": "string"
+			//	                },
+			//	                "Key": {
+			//	                  "maxLength": 1024,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Bucket",
+			//	                "Key"
+			//	              ],
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "SecretArn": {
+			//	          "maxLength": 1284,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        },
+			//	        "TenantDomain": {
+			//	          "maxLength": 256,
+			//	          "minLength": 1,
+			//	          "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-z]{2,}$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "TenantDomain",
+			//	        "SecretArn",
+			//	        "OneDriveUsers"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "S3Configuration": {
+			//	      "additionalProperties": false,
+			//	      "description": "S3 data source configuration",
+			//	      "properties": {
+			//	        "AccessControlListConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "KeyPath": {
+			//	              "maxLength": 1024,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "BucketName": {
+			//	          "maxLength": 63,
+			//	          "minLength": 3,
+			//	          "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+			//	          "type": "string"
+			//	        },
+			//	        "DocumentsMetadataConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "S3Prefix": {
+			//	              "maxLength": 1024,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ExclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "InclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "InclusionPrefixes": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketName"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "SalesforceConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "ChatterFeedConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DocumentDataFieldName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "DocumentTitleFieldName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "FieldMappings": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DataSourceFieldName": {
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DateFieldFormat": {
+			//	                    "maxLength": 40,
+			//	                    "minLength": 4,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "IndexFieldName": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "DataSourceFieldName",
+			//	                  "IndexFieldName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            },
+			//	            "IncludeFilterTypes": {
+			//	              "items": {
+			//	                "enum": [
+			//	                  "ACTIVE_USER",
+			//	                  "STANDARD_USER"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 2,
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "DocumentDataFieldName"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "CrawlAttachments": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "ExcludeAttachmentFilePatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "IncludeAttachmentFilePatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "KnowledgeArticleConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "CustomKnowledgeArticleTypeConfigurations": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DocumentDataFieldName": {
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DocumentTitleFieldName": {
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "FieldMappings": {
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "properties": {
+			//	                        "DataSourceFieldName": {
+			//	                          "maxLength": 100,
+			//	                          "minLength": 1,
+			//	                          "type": "string"
+			//	                        },
+			//	                        "DateFieldFormat": {
+			//	                          "maxLength": 40,
+			//	                          "minLength": 4,
+			//	                          "type": "string"
+			//	                        },
+			//	                        "IndexFieldName": {
+			//	                          "maxLength": 30,
+			//	                          "minLength": 1,
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "DataSourceFieldName",
+			//	                        "IndexFieldName"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "maxItems": 100,
+			//	                    "type": "array"
+			//	                  },
+			//	                  "Name": {
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Name",
+			//	                  "DocumentDataFieldName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 10,
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            },
+			//	            "IncludedStates": {
+			//	              "items": {
+			//	                "enum": [
+			//	                  "DRAFT",
+			//	                  "PUBLISHED",
+			//	                  "ARCHIVED"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 3,
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            },
+			//	            "StandardKnowledgeArticleTypeConfiguration": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "DocumentDataFieldName": {
+			//	                  "maxLength": 100,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "DocumentTitleFieldName": {
+			//	                  "maxLength": 100,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "FieldMappings": {
+			//	                  "items": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "DataSourceFieldName": {
+			//	                        "maxLength": 100,
+			//	                        "minLength": 1,
+			//	                        "type": "string"
+			//	                      },
+			//	                      "DateFieldFormat": {
+			//	                        "maxLength": 40,
+			//	                        "minLength": 4,
+			//	                        "type": "string"
+			//	                      },
+			//	                      "IndexFieldName": {
+			//	                        "maxLength": 30,
+			//	                        "minLength": 1,
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "DataSourceFieldName",
+			//	                      "IndexFieldName"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  },
+			//	                  "maxItems": 100,
+			//	                  "type": "array"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "DocumentDataFieldName"
+			//	              ],
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "IncludedStates"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "SecretArn": {
+			//	          "maxLength": 1284,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        },
+			//	        "ServerUrl": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "^(https?|ftp|file)://([^\\s]*)",
+			//	          "type": "string"
+			//	        },
+			//	        "StandardObjectAttachmentConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DocumentTitleFieldName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "FieldMappings": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DataSourceFieldName": {
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DateFieldFormat": {
+			//	                    "maxLength": 40,
+			//	                    "minLength": 4,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "IndexFieldName": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "DataSourceFieldName",
+			//	                  "IndexFieldName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "StandardObjectConfigurations": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DocumentDataFieldName": {
+			//	                "maxLength": 100,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "DocumentTitleFieldName": {
+			//	                "maxLength": 100,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "FieldMappings": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "DataSourceFieldName": {
+			//	                      "maxLength": 100,
+			//	                      "minLength": 1,
+			//	                      "type": "string"
+			//	                    },
+			//	                    "DateFieldFormat": {
+			//	                      "maxLength": 40,
+			//	                      "minLength": 4,
+			//	                      "type": "string"
+			//	                    },
+			//	                    "IndexFieldName": {
+			//	                      "maxLength": 30,
+			//	                      "minLength": 1,
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "DataSourceFieldName",
+			//	                    "IndexFieldName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "maxItems": 100,
+			//	                "type": "array"
+			//	              },
+			//	              "Name": {
+			//	                "enum": [
+			//	                  "ACCOUNT",
+			//	                  "CAMPAIGN",
+			//	                  "CASE",
+			//	                  "CONTACT",
+			//	                  "CONTRACT",
+			//	                  "DOCUMENT",
+			//	                  "GROUP",
+			//	                  "IDEA",
+			//	                  "LEAD",
+			//	                  "OPPORTUNITY",
+			//	                  "PARTNER",
+			//	                  "PRICEBOOK",
+			//	                  "PRODUCT",
+			//	                  "PROFILE",
+			//	                  "SOLUTION",
+			//	                  "TASK",
+			//	                  "USER"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Name",
+			//	              "DocumentDataFieldName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 17,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ServerUrl",
+			//	        "SecretArn"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ServiceNowConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AuthenticationType": {
+			//	          "enum": [
+			//	            "HTTP_BASIC",
+			//	            "OAUTH2"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "HostUrl": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        },
+			//	        "KnowledgeArticleConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "CrawlAttachments": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "DocumentDataFieldName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "DocumentTitleFieldName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "ExcludeAttachmentFilePatterns": {
+			//	              "items": {
+			//	                "maxLength": 50,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            },
+			//	            "FieldMappings": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DataSourceFieldName": {
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DateFieldFormat": {
+			//	                    "maxLength": 40,
+			//	                    "minLength": 4,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "IndexFieldName": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "DataSourceFieldName",
+			//	                  "IndexFieldName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            },
+			//	            "FilterQuery": {
+			//	              "maxLength": 2048,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "IncludeAttachmentFilePatterns": {
+			//	              "items": {
+			//	                "maxLength": 50,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "DocumentDataFieldName"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "SecretArn": {
+			//	          "maxLength": 1284,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        },
+			//	        "ServiceCatalogConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "CrawlAttachments": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "DocumentDataFieldName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "DocumentTitleFieldName": {
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "ExcludeAttachmentFilePatterns": {
+			//	              "items": {
+			//	                "maxLength": 50,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            },
+			//	            "FieldMappings": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "DataSourceFieldName": {
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "DateFieldFormat": {
+			//	                    "maxLength": 40,
+			//	                    "minLength": 4,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "IndexFieldName": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "DataSourceFieldName",
+			//	                  "IndexFieldName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            },
+			//	            "IncludeAttachmentFilePatterns": {
+			//	              "items": {
+			//	                "maxLength": 50,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "DocumentDataFieldName"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "ServiceNowBuildVersion": {
+			//	          "enum": [
+			//	            "LONDON",
+			//	            "OTHERS"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "HostUrl",
+			//	        "SecretArn",
+			//	        "ServiceNowBuildVersion"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "SharePointConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "SharePoint configuration",
+			//	      "properties": {
+			//	        "CrawlAttachments": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "DisableLocalGroups": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "DocumentTitleFieldName": {
+			//	          "maxLength": 100,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "ExclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "FieldMappings": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DataSourceFieldName": {
+			//	                "maxLength": 100,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "DateFieldFormat": {
+			//	                "maxLength": 40,
+			//	                "minLength": 4,
+			//	                "type": "string"
+			//	              },
+			//	              "IndexFieldName": {
+			//	                "maxLength": 30,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "DataSourceFieldName",
+			//	              "IndexFieldName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "InclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "SecretArn": {
+			//	          "maxLength": 1284,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        },
+			//	        "SharePointVersion": {
+			//	          "enum": [
+			//	            "SHAREPOINT_ONLINE",
+			//	            "SHAREPOINT_2013",
+			//	            "SHAREPOINT_2016"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "SslCertificateS3Path": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Bucket": {
+			//	              "maxLength": 63,
+			//	              "minLength": 3,
+			//	              "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+			//	              "type": "string"
+			//	            },
+			//	            "Key": {
+			//	              "maxLength": 1024,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Bucket",
+			//	            "Key"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Urls": {
+			//	          "items": {
+			//	            "maxLength": 2048,
+			//	            "minLength": 1,
+			//	            "pattern": "^(https?|ftp|file)://([^\\s]*)",
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "UseChangeLog": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "VpcConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "SecurityGroupIds": {
+			//	              "items": {
+			//	                "maxLength": 200,
+			//	                "minLength": 1,
+			//	                "pattern": "[\\-0-9a-zA-Z]+",
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 10,
+			//	              "type": "array"
+			//	            },
+			//	            "SubnetIds": {
+			//	              "items": {
+			//	                "maxLength": 200,
+			//	                "minLength": 1,
+			//	                "pattern": "[\\-0-9a-zA-Z]+",
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 6,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "SubnetIds",
+			//	            "SecurityGroupIds"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Urls",
+			//	        "SecretArn",
+			//	        "SharePointVersion"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "WebCrawlerConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AuthenticationConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "BasicAuthentication": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Credentials": {
+			//	                    "maxLength": 1284,
+			//	                    "minLength": 1,
+			//	                    "pattern": "",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Host": {
+			//	                    "maxLength": 253,
+			//	                    "minLength": 1,
+			//	                    "pattern": "([^\\s]*)",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Port": {
+			//	                    "maximum": 65535,
+			//	                    "minimum": 1,
+			//	                    "type": "integer"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Host",
+			//	                  "Port",
+			//	                  "Credentials"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 10,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CrawlDepth": {
+			//	          "maximum": 10,
+			//	          "minimum": 1,
+			//	          "type": "integer"
+			//	        },
+			//	        "MaxContentSizePerPageInMegaBytes": {
+			//	          "maximum": 50,
+			//	          "minimum": 0,
+			//	          "type": "number"
+			//	        },
+			//	        "MaxLinksPerPage": {
+			//	          "maximum": 1000,
+			//	          "minimum": 1,
+			//	          "type": "integer"
+			//	        },
+			//	        "MaxUrlsPerMinuteCrawlRate": {
+			//	          "maximum": 300,
+			//	          "minimum": 1,
+			//	          "type": "integer"
+			//	        },
+			//	        "ProxyConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Credentials": {
+			//	              "maxLength": 1284,
+			//	              "minLength": 1,
+			//	              "pattern": "",
+			//	              "type": "string"
+			//	            },
+			//	            "Host": {
+			//	              "maxLength": 253,
+			//	              "minLength": 1,
+			//	              "pattern": "([^\\s]*)",
+			//	              "type": "string"
+			//	            },
+			//	            "Port": {
+			//	              "maximum": 65535,
+			//	              "minimum": 1,
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Host",
+			//	            "Port"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "UrlExclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "UrlInclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "Urls": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "SeedUrlConfiguration": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "SeedUrls": {
+			//	                  "items": {
+			//	                    "maxLength": 2048,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^(https?)://([^\\s]*)",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "maxItems": 100,
+			//	                  "minItems": 0,
+			//	                  "type": "array"
+			//	                },
+			//	                "WebCrawlerMode": {
+			//	                  "enum": [
+			//	                    "HOST_ONLY",
+			//	                    "SUBDOMAINS",
+			//	                    "EVERYTHING"
+			//	                  ],
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "SeedUrls"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "SiteMapsConfiguration": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "SiteMaps": {
+			//	                  "items": {
+			//	                    "maxLength": 2048,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^(https?):\\/\\/([^\\s]*)",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "maxItems": 3,
+			//	                  "minItems": 0,
+			//	                  "type": "array"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "SiteMaps"
+			//	              ],
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Urls"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "WorkDocsConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CrawlComments": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "ExclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "FieldMappings": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DataSourceFieldName": {
+			//	                "maxLength": 100,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "DateFieldFormat": {
+			//	                "maxLength": 40,
+			//	                "minLength": 4,
+			//	                "type": "string"
+			//	              },
+			//	              "IndexFieldName": {
+			//	                "maxLength": 30,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "DataSourceFieldName",
+			//	              "IndexFieldName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "InclusionPatterns": {
+			//	          "items": {
+			//	            "maxLength": 50,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        },
+			//	        "OrganizationId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "pattern": "d-[0-9a-fA-F]{10}",
+			//	          "type": "string"
+			//	        },
+			//	        "UseChangeLog": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "OrganizationId"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"confluence_configuration": {
@@ -4968,12 +4971,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description of data source",
-			//   "maxLength": 1000,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description of data source",
+			//	  "maxLength": 1000,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Description of data source",
 			Type:        types.StringType,
 			Optional:    true,
@@ -4988,12 +4992,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ID of data source",
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ID of data source",
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "ID of data source",
 			Type:        types.StringType,
 			Computed:    true,
@@ -5004,12 +5009,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"index_id": {
 			// Property: IndexId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ID of Index",
-			//   "maxLength": 36,
-			//   "minLength": 36,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ID of Index",
+			//	  "maxLength": 36,
+			//	  "minLength": 36,
+			//	  "type": "string"
+			//	}
 			Description: "ID of Index",
 			Type:        types.StringType,
 			Required:    true,
@@ -5020,12 +5026,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of data source",
-			//   "maxLength": 1000,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of data source",
+			//	  "maxLength": 1000,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Name of data source",
 			Type:        types.StringType,
 			Required:    true,
@@ -5036,13 +5043,14 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Role ARN",
-			//   "maxLength": 1284,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Role ARN",
+			//	  "maxLength": 1284,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "Role ARN",
 			Type:        types.StringType,
 			Optional:    true,
@@ -5057,11 +5065,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"schedule": {
 			// Property: Schedule
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Schedule",
-			//   "maxLength": 1000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Schedule",
+			//	  "maxLength": 1000,
+			//	  "type": "string"
+			//	}
 			Description: "Schedule",
 			Type:        types.StringType,
 			Optional:    true,
@@ -5076,34 +5085,35 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tags for labeling the data source",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A label for tagging Kendra resources",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "A string used to identify this tag",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "A string containing the value for the tag",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Tags for labeling the data source",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A label for tagging Kendra resources",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "A string used to identify this tag",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "A string containing the value for the tag",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array"
+			//	}
 			Description: "Tags for labeling the data source",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -5139,23 +5149,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Data source type",
-			//   "enum": [
-			//     "S3",
-			//     "SHAREPOINT",
-			//     "SALESFORCE",
-			//     "ONEDRIVE",
-			//     "SERVICENOW",
-			//     "DATABASE",
-			//     "CUSTOM",
-			//     "CONFLUENCE",
-			//     "GOOGLEDRIVE",
-			//     "WEBCRAWLER",
-			//     "WORKDOCS"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Data source type",
+			//	  "enum": [
+			//	    "S3",
+			//	    "SHAREPOINT",
+			//	    "SALESFORCE",
+			//	    "ONEDRIVE",
+			//	    "SERVICENOW",
+			//	    "DATABASE",
+			//	    "CUSTOM",
+			//	    "CONFLUENCE",
+			//	    "GOOGLEDRIVE",
+			//	    "WEBCRAWLER",
+			//	    "WORKDOCS"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Data source type",
 			Type:        types.StringType,
 			Required:    true,

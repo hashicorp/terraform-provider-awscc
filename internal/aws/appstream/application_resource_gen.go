@@ -23,18 +23,20 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"app_block_arn": {
 			// Property: AppBlockArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -44,14 +46,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"attributes_to_delete": {
 			// Property: AttributesToDelete
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Type:     types.SetType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -62,9 +65,10 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -74,9 +78,10 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -87,9 +92,10 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"display_name": {
 			// Property: DisplayName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -100,22 +106,23 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"icon_s3_location": {
 			// Property: IconS3Location
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "S3Bucket": {
-			//       "type": "string"
-			//     },
-			//     "S3Key": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3Bucket",
-			//     "S3Key"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "S3Bucket": {
+			//	      "type": "string"
+			//	    },
+			//	    "S3Key": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3Bucket",
+			//	    "S3Key"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"s3_bucket": {
@@ -135,14 +142,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"instance_families": {
 			// Property: InstanceFamilies
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Type:     types.SetType{ElemType: types.StringType},
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -152,9 +160,10 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"launch_parameters": {
 			// Property: LaunchParameters
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -165,18 +174,20 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"launch_path": {
 			// Property: LaunchPath
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -186,14 +197,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"platforms": {
 			// Property: Platforms
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Type:     types.SetType{ElemType: types.StringType},
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -203,27 +215,28 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "TagKey": {
-			//         "type": "string"
-			//       },
-			//       "TagValue": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "TagKey",
-			//       "TagValue"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "TagKey": {
+			//	        "type": "string"
+			//	      },
+			//	      "TagValue": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "TagKey",
+			//	      "TagValue"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"tag_key": {
@@ -248,9 +261,10 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"working_directory": {
 			// Property: WorkingDirectory
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,

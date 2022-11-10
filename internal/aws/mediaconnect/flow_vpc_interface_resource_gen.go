@@ -23,10 +23,11 @@ func flowVpcInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		"flow_arn": {
 			// Property: FlowArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
 			Type:        types.StringType,
 			Required:    true,
@@ -37,10 +38,11 @@ func flowVpcInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
+			//	  "type": "string"
+			//	}
 			Description: "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
 			Type:        types.StringType,
 			Required:    true,
@@ -51,13 +53,14 @@ func flowVpcInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		"network_interface_ids": {
 			// Property: NetworkInterfaceIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "IDs of the network interfaces created in customer's account by MediaConnect.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "IDs of the network interfaces created in customer's account by MediaConnect.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "IDs of the network interfaces created in customer's account by MediaConnect.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -68,10 +71,11 @@ func flowVpcInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Role Arn MediaConnect can assumes to create ENIs in customer's account.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Role Arn MediaConnect can assumes to create ENIs in customer's account.",
+			//	  "type": "string"
+			//	}
 			Description: "Role Arn MediaConnect can assumes to create ENIs in customer's account.",
 			Type:        types.StringType,
 			Required:    true,
@@ -79,13 +83,14 @@ func flowVpcInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		"security_group_ids": {
 			// Property: SecurityGroupIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Security Group IDs to be used on ENI.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Security Group IDs to be used on ENI.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Security Group IDs to be used on ENI.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
@@ -93,10 +98,11 @@ func flowVpcInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_id": {
 			// Property: SubnetId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Subnet must be in the AZ of the Flow",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Subnet must be in the AZ of the Flow",
+			//	  "type": "string"
+			//	}
 			Description: "Subnet must be in the AZ of the Flow",
 			Type:        types.StringType,
 			Required:    true,

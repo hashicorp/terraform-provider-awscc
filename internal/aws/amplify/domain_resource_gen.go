@@ -25,12 +25,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"app_id": {
 			// Property: AppId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 20,
-			//   "minLength": 1,
-			//   "pattern": "d[a-z0-9]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 20,
+			//	  "minLength": 1,
+			//	  "pattern": "d[a-z0-9]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -44,11 +45,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "pattern": "(?s).*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "pattern": "(?s).*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -58,16 +60,17 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"auto_sub_domain_creation_patterns": {
 			// Property: AutoSubDomainCreationPatterns
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "maxLength": 2048,
-			//     "minLength": 1,
-			//     "pattern": "(?s).+",
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "maxLength": 2048,
+			//	    "minLength": 1,
+			//	    "pattern": "(?s).+",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -82,11 +85,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"auto_sub_domain_iam_role": {
 			// Property: AutoSubDomainIAMRole
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "pattern": "^$|^arn:.+:iam::\\d{12}:role.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "pattern": "^$|^arn:.+:iam::\\d{12}:role.+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -101,10 +105,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_record": {
 			// Property: CertificateRecord
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -114,11 +119,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -131,9 +137,10 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"domain_status": {
 			// Property: DomainStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -143,9 +150,10 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"enable_auto_sub_domain": {
 			// Property: EnableAutoSubDomain
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
@@ -156,10 +164,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"status_reason": {
 			// Property: StatusReason
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -169,32 +178,33 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"sub_domain_settings": {
 			// Property: SubDomainSettings
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "BranchName": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "pattern": "(?s).+",
-			//         "type": "string"
-			//       },
-			//       "Prefix": {
-			//         "maxLength": 255,
-			//         "pattern": "(?s).*",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Prefix",
-			//       "BranchName"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 255,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "BranchName": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "pattern": "(?s).+",
+			//	        "type": "string"
+			//	      },
+			//	      "Prefix": {
+			//	        "maxLength": 255,
+			//	        "pattern": "(?s).*",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Prefix",
+			//	      "BranchName"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 255,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"branch_name": {

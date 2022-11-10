@@ -25,9 +25,10 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -37,53 +38,54 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 		"container_provider": {
 			// Property: ContainerProvider
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Container provider of the virtual cluster.",
-			//   "properties": {
-			//     "Id": {
-			//       "description": "The ID of the container cluster",
-			//       "maxLength": 100,
-			//       "minLength": 1,
-			//       "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
-			//       "type": "string"
-			//     },
-			//     "Info": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "EksInfo": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Namespace": {
-			//               "maxLength": 63,
-			//               "minLength": 1,
-			//               "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Namespace"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "EksInfo"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Type": {
-			//       "description": "The type of the container provider",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Type",
-			//     "Id",
-			//     "Info"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Container provider of the virtual cluster.",
+			//	  "properties": {
+			//	    "Id": {
+			//	      "description": "The ID of the container cluster",
+			//	      "maxLength": 100,
+			//	      "minLength": 1,
+			//	      "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
+			//	      "type": "string"
+			//	    },
+			//	    "Info": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "EksInfo": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Namespace": {
+			//	              "maxLength": 63,
+			//	              "minLength": 1,
+			//	              "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Namespace"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "EksInfo"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Type": {
+			//	      "description": "The type of the container provider",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Type",
+			//	    "Id",
+			//	    "Info"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Container provider of the virtual cluster.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -138,12 +140,13 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Id of the virtual cluster.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Id of the virtual cluster.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Id of the virtual cluster.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -154,13 +157,14 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the virtual cluster.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the virtual cluster.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+			//	  "type": "string"
+			//	}
 			Description: "Name of the virtual cluster.",
 			Type:        types.StringType,
 			Required:    true,
@@ -175,31 +179,32 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this virtual cluster.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "An arbitrary set of tags (key-value pairs) for this virtual cluster.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this virtual cluster.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "An arbitrary set of tags (key-value pairs) for this virtual cluster.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this virtual cluster.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

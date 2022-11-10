@@ -23,10 +23,11 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		"content_type": {
 			// Property: ContentType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The content type for the model.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The content type for the model.",
+			//	  "type": "string"
+			//	}
 			Description: "The content type for the model.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -39,10 +40,11 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description that identifies this model.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description that identifies this model.",
+			//	  "type": "string"
+			//	}
 			Description: "A description that identifies this model.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -54,10 +56,11 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for the model. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for the model. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name.",
+			//	  "type": "string"
+			//	}
 			Description: "A name for the model. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -70,10 +73,11 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		"rest_api_id": {
 			// Property: RestApiId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of a REST API with which to associate this model.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of a REST API with which to associate this model.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of a REST API with which to associate this model.",
 			Type:        types.StringType,
 			Required:    true,
@@ -84,10 +88,11 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		"schema": {
 			// Property: Schema
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The schema to use to transform data to one or more output formats. Specify null ({}) if you don't want to specify a schema.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The schema to use to transform data to one or more output formats. Specify null ({}) if you don't want to specify a schema.",
+			//	  "type": "string"
+			//	}
 			Description: "The schema to use to transform data to one or more output formats. Specify null ({}) if you don't want to specify a schema.",
 			Type:        types.StringType,
 			Optional:    true,

@@ -24,9 +24,10 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 		"created_date": {
 			// Property: CreatedDate
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -36,9 +37,10 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 		"destination": {
 			// Property: Destination
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -48,9 +50,10 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 		"destination_ip": {
 			// Property: DestinationIp
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -62,9 +65,10 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 		"destination_port": {
 			// Property: DestinationPort
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Optional: true,
 			Computed: true,
@@ -76,9 +80,10 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 		"network_insights_path_arn": {
 			// Property: NetworkInsightsPathArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -88,9 +93,10 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 		"network_insights_path_id": {
 			// Property: NetworkInsightsPathId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -100,13 +106,14 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 		"protocol": {
 			// Property: Protocol
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "tcp",
-			//     "udp"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "tcp",
+			//	    "udp"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -122,9 +129,10 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 		"source": {
 			// Property: Source
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -134,9 +142,10 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 		"source_ip": {
 			// Property: SourceIp
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -148,25 +157,26 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

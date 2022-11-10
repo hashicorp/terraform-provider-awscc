@@ -25,10 +25,11 @@ func observabilityConfigurationResource(ctx context.Context) (resource.Resource,
 		"latest": {
 			// Property: Latest
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "It's set to true for the configuration with the highest Revision among all configurations that share the same Name. It's set to false otherwise.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "It's set to true for the configuration with the highest Revision among all configurations that share the same Name. It's set to false otherwise.",
+			//	  "type": "boolean"
+			//	}
 			Description: "It's set to true for the configuration with the highest Revision among all configurations that share the same Name. It's set to false otherwise.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -39,13 +40,14 @@ func observabilityConfigurationResource(ctx context.Context) (resource.Resource,
 		"observability_configuration_arn": {
 			// Property: ObservabilityConfigurationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of this ObservabilityConfiguration",
-			//   "maxLength": 1011,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of this ObservabilityConfiguration",
+			//	  "maxLength": 1011,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of this ObservabilityConfiguration",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,13 +58,14 @@ func observabilityConfigurationResource(ctx context.Context) (resource.Resource,
 		"observability_configuration_name": {
 			// Property: ObservabilityConfigurationName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for the observability configuration. When you use it for the first time in an AWS Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.",
-			//   "maxLength": 32,
-			//   "minLength": 4,
-			//   "pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for the observability configuration. When you use it for the first time in an AWS Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.",
+			//	  "maxLength": 32,
+			//	  "minLength": 4,
+			//	  "pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}",
+			//	  "type": "string"
+			//	}
 			Description: "A name for the observability configuration. When you use it for the first time in an AWS Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -79,10 +82,11 @@ func observabilityConfigurationResource(ctx context.Context) (resource.Resource,
 		"observability_configuration_revision": {
 			// Property: ObservabilityConfigurationRevision
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The revision of this observability configuration. It's unique among all the active configurations ('Status': 'ACTIVE') that share the same ObservabilityConfigurationName.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The revision of this observability configuration. It's unique among all the active configurations ('Status': 'ACTIVE') that share the same ObservabilityConfigurationName.",
+			//	  "type": "integer"
+			//	}
 			Description: "The revision of this observability configuration. It's unique among all the active configurations ('Status': 'ACTIVE') that share the same ObservabilityConfigurationName.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -93,22 +97,23 @@ func observabilityConfigurationResource(ctx context.Context) (resource.Resource,
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of metadata items that you can associate with your observability configuration resource. A tag is a key-value pair.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of metadata items that you can associate with your observability configuration resource. A tag is a key-value pair.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of metadata items that you can associate with your observability configuration resource. A tag is a key-value pair.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -143,23 +148,24 @@ func observabilityConfigurationResource(ctx context.Context) (resource.Resource,
 		"trace_configuration": {
 			// Property: TraceConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing.",
-			//   "properties": {
-			//     "Vendor": {
-			//       "description": "The implementation provider chosen for tracing App Runner services.",
-			//       "enum": [
-			//         "AWSXRAY"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Vendor"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing.",
+			//	  "properties": {
+			//	    "Vendor": {
+			//	      "description": "The implementation provider chosen for tracing App Runner services.",
+			//	      "enum": [
+			//	        "AWSXRAY"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Vendor"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

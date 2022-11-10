@@ -24,10 +24,11 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Service profile Arn. Returned after successful create.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Service profile Arn. Returned after successful create.",
+			//	  "type": "string"
+			//	}
 			Description: "Service profile Arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,11 +39,12 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Service profile Id. Returned after successful create.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Service profile Id. Returned after successful create.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Service profile Id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -53,70 +55,71 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"lo_ra_wan": {
 			// Property: LoRaWAN
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation",
-			//   "properties": {
-			//     "AddGwMetadata": {
-			//       "type": "boolean"
-			//     },
-			//     "ChannelMask": {
-			//       "type": "string"
-			//     },
-			//     "DevStatusReqFreq": {
-			//       "type": "integer"
-			//     },
-			//     "DlBucketSize": {
-			//       "type": "integer"
-			//     },
-			//     "DlRate": {
-			//       "type": "integer"
-			//     },
-			//     "DlRatePolicy": {
-			//       "type": "string"
-			//     },
-			//     "DrMax": {
-			//       "type": "integer"
-			//     },
-			//     "DrMin": {
-			//       "type": "integer"
-			//     },
-			//     "HrAllowed": {
-			//       "type": "boolean"
-			//     },
-			//     "MinGwDiversity": {
-			//       "type": "integer"
-			//     },
-			//     "NwkGeoLoc": {
-			//       "type": "boolean"
-			//     },
-			//     "PrAllowed": {
-			//       "type": "boolean"
-			//     },
-			//     "RaAllowed": {
-			//       "type": "boolean"
-			//     },
-			//     "ReportDevStatusBattery": {
-			//       "type": "boolean"
-			//     },
-			//     "ReportDevStatusMargin": {
-			//       "type": "boolean"
-			//     },
-			//     "TargetPer": {
-			//       "type": "integer"
-			//     },
-			//     "UlBucketSize": {
-			//       "type": "integer"
-			//     },
-			//     "UlRate": {
-			//       "type": "integer"
-			//     },
-			//     "UlRatePolicy": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation",
+			//	  "properties": {
+			//	    "AddGwMetadata": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "ChannelMask": {
+			//	      "type": "string"
+			//	    },
+			//	    "DevStatusReqFreq": {
+			//	      "type": "integer"
+			//	    },
+			//	    "DlBucketSize": {
+			//	      "type": "integer"
+			//	    },
+			//	    "DlRate": {
+			//	      "type": "integer"
+			//	    },
+			//	    "DlRatePolicy": {
+			//	      "type": "string"
+			//	    },
+			//	    "DrMax": {
+			//	      "type": "integer"
+			//	    },
+			//	    "DrMin": {
+			//	      "type": "integer"
+			//	    },
+			//	    "HrAllowed": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "MinGwDiversity": {
+			//	      "type": "integer"
+			//	    },
+			//	    "NwkGeoLoc": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "PrAllowed": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "RaAllowed": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "ReportDevStatusBattery": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "ReportDevStatusMargin": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "TargetPer": {
+			//	      "type": "integer"
+			//	    },
+			//	    "UlBucketSize": {
+			//	      "type": "integer"
+			//	    },
+			//	    "UlRate": {
+			//	      "type": "integer"
+			//	    },
+			//	    "UlRatePolicy": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -284,11 +287,12 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of service profile",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of service profile",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Name of service profile",
 			Type:        types.StringType,
 			Optional:    true,
@@ -303,29 +307,30 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the service profile.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the service profile.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the service profile.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

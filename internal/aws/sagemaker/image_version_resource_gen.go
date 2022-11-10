@@ -25,13 +25,14 @@ func imageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"base_image": {
 			// Property: BaseImage
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The registry path of the container image on which this image version is based.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": ".+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The registry path of the container image on which this image version is based.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": ".+",
+			//	  "type": "string"
+			//	}
 			Description: "The registry path of the container image on which this image version is based.",
 			Type:        types.StringType,
 			Required:    true,
@@ -46,13 +47,14 @@ func imageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"container_image": {
 			// Property: ContainerImage
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The registry path of the container image that contains this image version.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": ".+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The registry path of the container image that contains this image version.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": ".+",
+			//	  "type": "string"
+			//	}
 			Description: "The registry path of the container image that contains this image version.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -63,13 +65,14 @@ func imageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"image_arn": {
 			// Property: ImageArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the parent image.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-z0-9]([-.]?[a-z0-9])*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the parent image.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-z0-9]([-.]?[a-z0-9])*$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the parent image.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -80,13 +83,14 @@ func imageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"image_name": {
 			// Property: ImageName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the image this version belongs to.",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[A-Za-z0-9]([-.]?[A-Za-z0-9])*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the image this version belongs to.",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[A-Za-z0-9]([-.]?[A-Za-z0-9])*$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the image this version belongs to.",
 			Type:        types.StringType,
 			Required:    true,
@@ -101,13 +105,14 @@ func imageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"image_version_arn": {
 			// Property: ImageVersionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the image version.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image-version\\/[a-z0-9]([-.]?[a-z0-9])*\\/[0-9]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the image version.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image-version\\/[a-z0-9]([-.]?[a-z0-9])*\\/[0-9]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the image version.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -118,11 +123,12 @@ func imageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version number of the image version.",
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The version number of the image version.",
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Description: "The version number of the image version.",
 			Type:        types.Int64Type,
 			Computed:    true,

@@ -23,9 +23,10 @@ func warmPoolResource(ctx context.Context) (resource.Resource, error) {
 		"auto_scaling_group_name": {
 			// Property: AutoScalingGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,15 +36,16 @@ func warmPoolResource(ctx context.Context) (resource.Resource, error) {
 		"instance_reuse_policy": {
 			// Property: InstanceReusePolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ReuseOnScaleIn": {
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ReuseOnScaleIn": {
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"reuse_on_scale_in": {
@@ -66,9 +68,10 @@ func warmPoolResource(ctx context.Context) (resource.Resource, error) {
 		"max_group_prepared_capacity": {
 			// Property: MaxGroupPreparedCapacity
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Optional: true,
 			Computed: true,
@@ -79,9 +82,10 @@ func warmPoolResource(ctx context.Context) (resource.Resource, error) {
 		"min_size": {
 			// Property: MinSize
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Optional: true,
 			Computed: true,
@@ -92,9 +96,10 @@ func warmPoolResource(ctx context.Context) (resource.Resource, error) {
 		"pool_state": {
 			// Property: PoolState
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,

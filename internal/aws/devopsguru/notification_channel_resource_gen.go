@@ -25,67 +25,68 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 		"config": {
 			// Property: Config
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Information about notification channels you have configured with DevOps Guru.",
-			//   "properties": {
-			//     "Filters": {
-			//       "additionalProperties": false,
-			//       "description": "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
-			//       "properties": {
-			//         "MessageTypes": {
-			//           "description": "DevOps Guru message types to filter for",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "description": "DevOps Guru NotificationMessageType Enum",
-			//             "enum": [
-			//               "NEW_INSIGHT",
-			//               "CLOSED_INSIGHT",
-			//               "NEW_ASSOCIATION",
-			//               "SEVERITY_UPGRADED",
-			//               "NEW_RECOMMENDATION"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "maxItems": 5,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         },
-			//         "Severities": {
-			//           "description": "DevOps Guru insight severities to filter for",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "description": "DevOps Guru Insight Severity Enum",
-			//             "enum": [
-			//               "LOW",
-			//               "MEDIUM",
-			//               "HIGH"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "maxItems": 3,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Sns": {
-			//       "additionalProperties": false,
-			//       "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
-			//       "properties": {
-			//         "TopicArn": {
-			//           "maxLength": 1024,
-			//           "minLength": 36,
-			//           "pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Information about notification channels you have configured with DevOps Guru.",
+			//	  "properties": {
+			//	    "Filters": {
+			//	      "additionalProperties": false,
+			//	      "description": "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
+			//	      "properties": {
+			//	        "MessageTypes": {
+			//	          "description": "DevOps Guru message types to filter for",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "description": "DevOps Guru NotificationMessageType Enum",
+			//	            "enum": [
+			//	              "NEW_INSIGHT",
+			//	              "CLOSED_INSIGHT",
+			//	              "NEW_ASSOCIATION",
+			//	              "SEVERITY_UPGRADED",
+			//	              "NEW_RECOMMENDATION"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 5,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        },
+			//	        "Severities": {
+			//	          "description": "DevOps Guru insight severities to filter for",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "description": "DevOps Guru Insight Severity Enum",
+			//	            "enum": [
+			//	              "LOW",
+			//	              "MEDIUM",
+			//	              "HIGH"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 3,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Sns": {
+			//	      "additionalProperties": false,
+			//	      "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
+			//	      "properties": {
+			//	        "TopicArn": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 36,
+			//	          "pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Information about notification channels you have configured with DevOps Guru.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -178,13 +179,14 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of a notification channel.",
-			//   "maxLength": 36,
-			//   "minLength": 36,
-			//   "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of a notification channel.",
+			//	  "maxLength": 36,
+			//	  "minLength": 36,
+			//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of a notification channel.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -25,12 +25,13 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eA human-readable description of the streaming image.\u003c/p\u003e",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eA human-readable description of the streaming image.\u003c/p\u003e",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "<p>A human-readable description of the streaming image.</p>",
 			Type:        types.StringType,
 			Optional:    true,
@@ -45,11 +46,12 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"ec_2_image_id": {
 			// Property: Ec2ImageId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe ID of an EC2 machine image with which to create this streaming image.\u003c/p\u003e",
-			//   "pattern": "^ami-[0-9A-z]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe ID of an EC2 machine image with which to create this streaming image.\u003c/p\u003e",
+			//	  "pattern": "^ami-[0-9A-z]+$",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The ID of an EC2 machine image with which to create this streaming image.</p>",
 			Type:        types.StringType,
 			Required:    true,
@@ -63,29 +65,30 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_configuration": {
 			// Property: EncryptionConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "\u003cp\u003eTODO\u003c/p\u003e",
-			//   "properties": {
-			//     "KeyArn": {
-			//       "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
-			//       "minLength": 4,
-			//       "pattern": "^arn:.*",
-			//       "type": "string"
-			//     },
-			//     "KeyType": {
-			//       "description": "\u003cp/\u003e",
-			//       "enum": [
-			//         "CUSTOMER_MANAGED_KEY"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "KeyType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "\u003cp\u003eTODO\u003c/p\u003e",
+			//	  "properties": {
+			//	    "KeyArn": {
+			//	      "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
+			//	      "minLength": 4,
+			//	      "pattern": "^arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "KeyType": {
+			//	      "description": "\u003cp/\u003e",
+			//	      "enum": [
+			//	        "CUSTOMER_MANAGED_KEY"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "KeyType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "<p>TODO</p>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -124,13 +127,14 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"eula_ids": {
 			// Property: EulaIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.\u003c/p\u003e",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.\u003c/p\u003e",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "<p>The list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.</p>",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -141,12 +145,13 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eA friendly name for a streaming image resource.\u003c/p\u003e",
-			//   "maxLength": 64,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eA friendly name for a streaming image resource.\u003c/p\u003e",
+			//	  "maxLength": 64,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "<p>A friendly name for a streaming image resource.</p>",
 			Type:        types.StringType,
 			Required:    true,
@@ -157,10 +162,11 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"owner": {
 			// Property: Owner
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.\u003c/p\u003e",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.\u003c/p\u003e",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -171,11 +177,12 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"platform": {
 			// Property: Platform
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe platform of the streaming image, either WINDOWS or LINUX.\u003c/p\u003e",
-			//   "pattern": "^[a-zA-Z]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe platform of the streaming image, either WINDOWS or LINUX.\u003c/p\u003e",
+			//	  "pattern": "^[a-zA-Z]*$",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The platform of the streaming image, either WINDOWS or LINUX.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -186,9 +193,10 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"streaming_image_id": {
 			// Property: StreamingImageId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -198,10 +206,11 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"studio_id": {
 			// Property: StudioId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe studioId. \u003c/p\u003e",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe studioId. \u003c/p\u003e",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The studioId. </p>",
 			Type:        types.StringType,
 			Required:    true,
@@ -212,16 +221,17 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

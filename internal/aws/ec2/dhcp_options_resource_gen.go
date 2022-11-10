@@ -24,9 +24,10 @@ func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 		"dhcp_options_id": {
 			// Property: DhcpOptionsId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -36,10 +37,11 @@ func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "This value is used to complete unqualified DNS hostnames.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "This value is used to complete unqualified DNS hostnames.",
+			//	  "type": "string"
+			//	}
 			Description: "This value is used to complete unqualified DNS hostnames.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -52,14 +54,15 @@ func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 		"domain_name_servers": {
 			// Property: DomainNameServers
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -75,14 +78,15 @@ func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 		"netbios_name_servers": {
 			// Property: NetbiosNameServers
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IPv4 addresses of up to four NetBIOS name servers.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The IPv4 addresses of up to four NetBIOS name servers.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The IPv4 addresses of up to four NetBIOS name servers.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -98,10 +102,11 @@ func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 		"netbios_node_type": {
 			// Property: NetbiosNodeType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The NetBIOS node type (1, 2, 4, or 8).",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The NetBIOS node type (1, 2, 4, or 8).",
+			//	  "type": "integer"
+			//	}
 			Description: "The NetBIOS node type (1, 2, 4, or 8).",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -114,14 +119,15 @@ func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 		"ntp_servers": {
 			// Property: NtpServers
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IPv4 addresses of up to four Network Time Protocol (NTP) servers.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "The IPv4 addresses of up to four Network Time Protocol (NTP) servers.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "The IPv4 addresses of up to four Network Time Protocol (NTP) servers.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -134,32 +140,33 @@ func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Any tags assigned to the DHCP options set.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "Any tags assigned to the DHCP options set.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "Any tags assigned to the DHCP options set.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

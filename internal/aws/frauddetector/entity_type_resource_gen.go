@@ -25,10 +25,11 @@ func entityTypeResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The entity type ARN.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The entity type ARN.",
+			//	  "type": "string"
+			//	}
 			Description: "The entity type ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,10 +40,11 @@ func entityTypeResource(ctx context.Context) (resource.Resource, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The timestamp when the entity type was created.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The timestamp when the entity type was created.",
+			//	  "type": "string"
+			//	}
 			Description: "The timestamp when the entity type was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -53,12 +55,13 @@ func entityTypeResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The entity type description.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The entity type description.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The entity type description.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -73,10 +76,11 @@ func entityTypeResource(ctx context.Context) (resource.Resource, error) {
 		"last_updated_time": {
 			// Property: LastUpdatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The timestamp when the entity type was last updated.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The timestamp when the entity type was last updated.",
+			//	  "type": "string"
+			//	}
 			Description: "The timestamp when the entity type was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -87,13 +91,14 @@ func entityTypeResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the entity type.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9a-z_-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the entity type.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9a-z_-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the entity type.",
 			Type:        types.StringType,
 			Required:    true,
@@ -108,33 +113,34 @@ func entityTypeResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tags associated with this entity type.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "Tags associated with this entity type.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "Tags associated with this entity type.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

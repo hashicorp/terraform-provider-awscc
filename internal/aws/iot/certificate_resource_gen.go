@@ -24,9 +24,10 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -36,11 +37,12 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"ca_certificate_pem": {
 			// Property: CACertificatePem
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 65536,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 65536,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -56,13 +58,14 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_mode": {
 			// Property: CertificateMode
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "DEFAULT",
-			//     "SNI_ONLY"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "DEFAULT",
+			//	    "SNI_ONLY"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -80,11 +83,12 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_pem": {
 			// Property: CertificatePem
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 65536,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 65536,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -99,9 +103,10 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_signing_request": {
 			// Property: CertificateSigningRequest
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -114,9 +119,10 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -126,16 +132,17 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "ACTIVE",
-			//     "INACTIVE",
-			//     "REVOKED",
-			//     "PENDING_TRANSFER",
-			//     "PENDING_ACTIVATION"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "ACTIVE",
+			//	    "INACTIVE",
+			//	    "REVOKED",
+			//	    "PENDING_TRANSFER",
+			//	    "PENDING_ACTIVATION"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{

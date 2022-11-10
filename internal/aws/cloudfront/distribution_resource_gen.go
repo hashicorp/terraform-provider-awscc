@@ -24,763 +24,764 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"distribution_config": {
 			// Property: DistributionConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Aliases": {
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "CNAMEs": {
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "CacheBehaviors": {
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "AllowedMethods": {
-			//             "default": [
-			//               "GET",
-			//               "HEAD"
-			//             ],
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           },
-			//           "CachePolicyId": {
-			//             "type": "string"
-			//           },
-			//           "CachedMethods": {
-			//             "default": [
-			//               "GET",
-			//               "HEAD"
-			//             ],
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           },
-			//           "Compress": {
-			//             "default": false,
-			//             "type": "boolean"
-			//           },
-			//           "DefaultTTL": {
-			//             "default": 86400,
-			//             "type": "number"
-			//           },
-			//           "FieldLevelEncryptionId": {
-			//             "default": "",
-			//             "type": "string"
-			//           },
-			//           "ForwardedValues": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Cookies": {
-			//                 "additionalProperties": false,
-			//                 "default": {
-			//                   "Forward": "none"
-			//                 },
-			//                 "properties": {
-			//                   "Forward": {
-			//                     "type": "string"
-			//                   },
-			//                   "WhitelistedNames": {
-			//                     "items": {
-			//                       "type": "string"
-			//                     },
-			//                     "type": "array",
-			//                     "uniqueItems": false
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Forward"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "Headers": {
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": false
-			//               },
-			//               "QueryString": {
-			//                 "type": "boolean"
-			//               },
-			//               "QueryStringCacheKeys": {
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": false
-			//               }
-			//             },
-			//             "required": [
-			//               "QueryString"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "FunctionAssociations": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "EventType": {
-			//                   "type": "string"
-			//                 },
-			//                 "FunctionARN": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           },
-			//           "LambdaFunctionAssociations": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "EventType": {
-			//                   "type": "string"
-			//                 },
-			//                 "IncludeBody": {
-			//                   "type": "boolean"
-			//                 },
-			//                 "LambdaFunctionARN": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           },
-			//           "MaxTTL": {
-			//             "default": 31536000,
-			//             "type": "number"
-			//           },
-			//           "MinTTL": {
-			//             "default": 0,
-			//             "type": "number"
-			//           },
-			//           "OriginRequestPolicyId": {
-			//             "type": "string"
-			//           },
-			//           "PathPattern": {
-			//             "type": "string"
-			//           },
-			//           "RealtimeLogConfigArn": {
-			//             "type": "string"
-			//           },
-			//           "ResponseHeadersPolicyId": {
-			//             "type": "string"
-			//           },
-			//           "SmoothStreaming": {
-			//             "default": false,
-			//             "type": "boolean"
-			//           },
-			//           "TargetOriginId": {
-			//             "type": "string"
-			//           },
-			//           "TrustedKeyGroups": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           },
-			//           "TrustedSigners": {
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           },
-			//           "ViewerProtocolPolicy": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "PathPattern",
-			//           "TargetOriginId",
-			//           "ViewerProtocolPolicy"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "Comment": {
-			//       "default": "",
-			//       "type": "string"
-			//     },
-			//     "CustomErrorResponses": {
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ErrorCachingMinTTL": {
-			//             "default": 300,
-			//             "type": "number"
-			//           },
-			//           "ErrorCode": {
-			//             "type": "integer"
-			//           },
-			//           "ResponseCode": {
-			//             "type": "integer"
-			//           },
-			//           "ResponsePagePath": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "ErrorCode"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "CustomOrigin": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DNSName": {
-			//           "type": "string"
-			//         },
-			//         "HTTPPort": {
-			//           "default": 80,
-			//           "type": "integer"
-			//         },
-			//         "HTTPSPort": {
-			//           "default": 443,
-			//           "type": "integer"
-			//         },
-			//         "OriginProtocolPolicy": {
-			//           "type": "string"
-			//         },
-			//         "OriginSSLProtocols": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         }
-			//       },
-			//       "required": [
-			//         "DNSName",
-			//         "OriginProtocolPolicy",
-			//         "OriginSSLProtocols"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "DefaultCacheBehavior": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AllowedMethods": {
-			//           "default": [
-			//             "GET",
-			//             "HEAD"
-			//           ],
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "CachePolicyId": {
-			//           "default": "",
-			//           "type": "string"
-			//         },
-			//         "CachedMethods": {
-			//           "default": [
-			//             "GET",
-			//             "HEAD"
-			//           ],
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "Compress": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "DefaultTTL": {
-			//           "default": 86400,
-			//           "type": "number"
-			//         },
-			//         "FieldLevelEncryptionId": {
-			//           "default": "",
-			//           "type": "string"
-			//         },
-			//         "ForwardedValues": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Cookies": {
-			//               "additionalProperties": false,
-			//               "default": {
-			//                 "Forward": "none"
-			//               },
-			//               "properties": {
-			//                 "Forward": {
-			//                   "type": "string"
-			//                 },
-			//                 "WhitelistedNames": {
-			//                   "items": {
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Forward"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "Headers": {
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             },
-			//             "QueryString": {
-			//               "type": "boolean"
-			//             },
-			//             "QueryStringCacheKeys": {
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             }
-			//           },
-			//           "required": [
-			//             "QueryString"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "FunctionAssociations": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "EventType": {
-			//                 "type": "string"
-			//               },
-			//               "FunctionARN": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "LambdaFunctionAssociations": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "EventType": {
-			//                 "type": "string"
-			//               },
-			//               "IncludeBody": {
-			//                 "type": "boolean"
-			//               },
-			//               "LambdaFunctionARN": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "MaxTTL": {
-			//           "default": 31536000,
-			//           "type": "number"
-			//         },
-			//         "MinTTL": {
-			//           "default": 0,
-			//           "type": "number"
-			//         },
-			//         "OriginRequestPolicyId": {
-			//           "default": "",
-			//           "type": "string"
-			//         },
-			//         "RealtimeLogConfigArn": {
-			//           "default": "",
-			//           "type": "string"
-			//         },
-			//         "ResponseHeadersPolicyId": {
-			//           "default": "",
-			//           "type": "string"
-			//         },
-			//         "SmoothStreaming": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "TargetOriginId": {
-			//           "type": "string"
-			//         },
-			//         "TrustedKeyGroups": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "TrustedSigners": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "ViewerProtocolPolicy": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "TargetOriginId",
-			//         "ViewerProtocolPolicy"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "DefaultRootObject": {
-			//       "default": "",
-			//       "type": "string"
-			//     },
-			//     "Enabled": {
-			//       "type": "boolean"
-			//     },
-			//     "HttpVersion": {
-			//       "default": "http1.1",
-			//       "type": "string"
-			//     },
-			//     "IPV6Enabled": {
-			//       "type": "boolean"
-			//     },
-			//     "Logging": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Bucket": {
-			//           "type": "string"
-			//         },
-			//         "IncludeCookies": {
-			//           "default": false,
-			//           "type": "boolean"
-			//         },
-			//         "Prefix": {
-			//           "default": "",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Bucket"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "OriginGroups": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Items": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "FailoverCriteria": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "StatusCodes": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "Items": {
-			//                         "items": {
-			//                           "type": "integer"
-			//                         },
-			//                         "type": "array",
-			//                         "uniqueItems": false
-			//                       },
-			//                       "Quantity": {
-			//                         "type": "integer"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "Quantity",
-			//                       "Items"
-			//                     ],
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "StatusCodes"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "Id": {
-			//                 "type": "string"
-			//               },
-			//               "Members": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Items": {
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "properties": {
-			//                         "OriginId": {
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "OriginId"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "type": "array",
-			//                     "uniqueItems": false
-			//                   },
-			//                   "Quantity": {
-			//                     "type": "integer"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Quantity",
-			//                   "Items"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "Id",
-			//               "FailoverCriteria",
-			//               "Members"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "Quantity": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "required": [
-			//         "Quantity"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Origins": {
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ConnectionAttempts": {
-			//             "type": "integer"
-			//           },
-			//           "ConnectionTimeout": {
-			//             "type": "integer"
-			//           },
-			//           "CustomOriginConfig": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "HTTPPort": {
-			//                 "default": 80,
-			//                 "type": "integer"
-			//               },
-			//               "HTTPSPort": {
-			//                 "default": 443,
-			//                 "type": "integer"
-			//               },
-			//               "OriginKeepaliveTimeout": {
-			//                 "default": 5,
-			//                 "type": "integer"
-			//               },
-			//               "OriginProtocolPolicy": {
-			//                 "type": "string"
-			//               },
-			//               "OriginReadTimeout": {
-			//                 "default": 30,
-			//                 "type": "integer"
-			//               },
-			//               "OriginSSLProtocols": {
-			//                 "default": [
-			//                   "TLSv1",
-			//                   "SSLv3"
-			//                 ],
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": false
-			//               }
-			//             },
-			//             "required": [
-			//               "OriginProtocolPolicy"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "DomainName": {
-			//             "type": "string"
-			//           },
-			//           "Id": {
-			//             "type": "string"
-			//           },
-			//           "OriginAccessControlId": {
-			//             "type": "string"
-			//           },
-			//           "OriginCustomHeaders": {
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "HeaderName": {
-			//                   "type": "string"
-			//                 },
-			//                 "HeaderValue": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "HeaderValue",
-			//                 "HeaderName"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           },
-			//           "OriginPath": {
-			//             "default": "",
-			//             "type": "string"
-			//           },
-			//           "OriginShield": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Enabled": {
-			//                 "type": "boolean"
-			//               },
-			//               "OriginShieldRegion": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "S3OriginConfig": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "OriginAccessIdentity": {
-			//                 "default": "",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "required": [
-			//           "DomainName",
-			//           "Id"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "PriceClass": {
-			//       "default": "PriceClass_All",
-			//       "type": "string"
-			//     },
-			//     "Restrictions": {
-			//       "additionalProperties": false,
-			//       "default": {
-			//         "GeoRestriction": {
-			//           "RestrictionType": "none"
-			//         }
-			//       },
-			//       "properties": {
-			//         "GeoRestriction": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Locations": {
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             },
-			//             "RestrictionType": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "RestrictionType"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "GeoRestriction"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "S3Origin": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DNSName": {
-			//           "type": "string"
-			//         },
-			//         "OriginAccessIdentity": {
-			//           "default": "",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "DNSName"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ViewerCertificate": {
-			//       "additionalProperties": false,
-			//       "default": {
-			//         "CloudFrontDefaultCertificate": true
-			//       },
-			//       "properties": {
-			//         "AcmCertificateArn": {
-			//           "type": "string"
-			//         },
-			//         "CloudFrontDefaultCertificate": {
-			//           "type": "boolean"
-			//         },
-			//         "IamCertificateId": {
-			//           "type": "string"
-			//         },
-			//         "MinimumProtocolVersion": {
-			//           "type": "string"
-			//         },
-			//         "SslSupportMethod": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "WebACLId": {
-			//       "default": "",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Enabled",
-			//     "DefaultCacheBehavior"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Aliases": {
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "CNAMEs": {
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "CacheBehaviors": {
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "AllowedMethods": {
+			//	            "default": [
+			//	              "GET",
+			//	              "HEAD"
+			//	            ],
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          },
+			//	          "CachePolicyId": {
+			//	            "type": "string"
+			//	          },
+			//	          "CachedMethods": {
+			//	            "default": [
+			//	              "GET",
+			//	              "HEAD"
+			//	            ],
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          },
+			//	          "Compress": {
+			//	            "default": false,
+			//	            "type": "boolean"
+			//	          },
+			//	          "DefaultTTL": {
+			//	            "default": 86400,
+			//	            "type": "number"
+			//	          },
+			//	          "FieldLevelEncryptionId": {
+			//	            "default": "",
+			//	            "type": "string"
+			//	          },
+			//	          "ForwardedValues": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Cookies": {
+			//	                "additionalProperties": false,
+			//	                "default": {
+			//	                  "Forward": "none"
+			//	                },
+			//	                "properties": {
+			//	                  "Forward": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "WhitelistedNames": {
+			//	                    "items": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "type": "array",
+			//	                    "uniqueItems": false
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Forward"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "Headers": {
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": false
+			//	              },
+			//	              "QueryString": {
+			//	                "type": "boolean"
+			//	              },
+			//	              "QueryStringCacheKeys": {
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": false
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "QueryString"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "FunctionAssociations": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "EventType": {
+			//	                  "type": "string"
+			//	                },
+			//	                "FunctionARN": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          },
+			//	          "LambdaFunctionAssociations": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "EventType": {
+			//	                  "type": "string"
+			//	                },
+			//	                "IncludeBody": {
+			//	                  "type": "boolean"
+			//	                },
+			//	                "LambdaFunctionARN": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          },
+			//	          "MaxTTL": {
+			//	            "default": 31536000,
+			//	            "type": "number"
+			//	          },
+			//	          "MinTTL": {
+			//	            "default": 0,
+			//	            "type": "number"
+			//	          },
+			//	          "OriginRequestPolicyId": {
+			//	            "type": "string"
+			//	          },
+			//	          "PathPattern": {
+			//	            "type": "string"
+			//	          },
+			//	          "RealtimeLogConfigArn": {
+			//	            "type": "string"
+			//	          },
+			//	          "ResponseHeadersPolicyId": {
+			//	            "type": "string"
+			//	          },
+			//	          "SmoothStreaming": {
+			//	            "default": false,
+			//	            "type": "boolean"
+			//	          },
+			//	          "TargetOriginId": {
+			//	            "type": "string"
+			//	          },
+			//	          "TrustedKeyGroups": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          },
+			//	          "TrustedSigners": {
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          },
+			//	          "ViewerProtocolPolicy": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "PathPattern",
+			//	          "TargetOriginId",
+			//	          "ViewerProtocolPolicy"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "Comment": {
+			//	      "default": "",
+			//	      "type": "string"
+			//	    },
+			//	    "CustomErrorResponses": {
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ErrorCachingMinTTL": {
+			//	            "default": 300,
+			//	            "type": "number"
+			//	          },
+			//	          "ErrorCode": {
+			//	            "type": "integer"
+			//	          },
+			//	          "ResponseCode": {
+			//	            "type": "integer"
+			//	          },
+			//	          "ResponsePagePath": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "ErrorCode"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "CustomOrigin": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DNSName": {
+			//	          "type": "string"
+			//	        },
+			//	        "HTTPPort": {
+			//	          "default": 80,
+			//	          "type": "integer"
+			//	        },
+			//	        "HTTPSPort": {
+			//	          "default": 443,
+			//	          "type": "integer"
+			//	        },
+			//	        "OriginProtocolPolicy": {
+			//	          "type": "string"
+			//	        },
+			//	        "OriginSSLProtocols": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "DNSName",
+			//	        "OriginProtocolPolicy",
+			//	        "OriginSSLProtocols"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "DefaultCacheBehavior": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AllowedMethods": {
+			//	          "default": [
+			//	            "GET",
+			//	            "HEAD"
+			//	          ],
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "CachePolicyId": {
+			//	          "default": "",
+			//	          "type": "string"
+			//	        },
+			//	        "CachedMethods": {
+			//	          "default": [
+			//	            "GET",
+			//	            "HEAD"
+			//	          ],
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "Compress": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "DefaultTTL": {
+			//	          "default": 86400,
+			//	          "type": "number"
+			//	        },
+			//	        "FieldLevelEncryptionId": {
+			//	          "default": "",
+			//	          "type": "string"
+			//	        },
+			//	        "ForwardedValues": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Cookies": {
+			//	              "additionalProperties": false,
+			//	              "default": {
+			//	                "Forward": "none"
+			//	              },
+			//	              "properties": {
+			//	                "Forward": {
+			//	                  "type": "string"
+			//	                },
+			//	                "WhitelistedNames": {
+			//	                  "items": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Forward"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "Headers": {
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            },
+			//	            "QueryString": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "QueryStringCacheKeys": {
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "QueryString"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "FunctionAssociations": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "EventType": {
+			//	                "type": "string"
+			//	              },
+			//	              "FunctionARN": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "LambdaFunctionAssociations": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "EventType": {
+			//	                "type": "string"
+			//	              },
+			//	              "IncludeBody": {
+			//	                "type": "boolean"
+			//	              },
+			//	              "LambdaFunctionARN": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "MaxTTL": {
+			//	          "default": 31536000,
+			//	          "type": "number"
+			//	        },
+			//	        "MinTTL": {
+			//	          "default": 0,
+			//	          "type": "number"
+			//	        },
+			//	        "OriginRequestPolicyId": {
+			//	          "default": "",
+			//	          "type": "string"
+			//	        },
+			//	        "RealtimeLogConfigArn": {
+			//	          "default": "",
+			//	          "type": "string"
+			//	        },
+			//	        "ResponseHeadersPolicyId": {
+			//	          "default": "",
+			//	          "type": "string"
+			//	        },
+			//	        "SmoothStreaming": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "TargetOriginId": {
+			//	          "type": "string"
+			//	        },
+			//	        "TrustedKeyGroups": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "TrustedSigners": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "ViewerProtocolPolicy": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "TargetOriginId",
+			//	        "ViewerProtocolPolicy"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "DefaultRootObject": {
+			//	      "default": "",
+			//	      "type": "string"
+			//	    },
+			//	    "Enabled": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "HttpVersion": {
+			//	      "default": "http1.1",
+			//	      "type": "string"
+			//	    },
+			//	    "IPV6Enabled": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "Logging": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Bucket": {
+			//	          "type": "string"
+			//	        },
+			//	        "IncludeCookies": {
+			//	          "default": false,
+			//	          "type": "boolean"
+			//	        },
+			//	        "Prefix": {
+			//	          "default": "",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Bucket"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "OriginGroups": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Items": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "FailoverCriteria": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "StatusCodes": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "Items": {
+			//	                        "items": {
+			//	                          "type": "integer"
+			//	                        },
+			//	                        "type": "array",
+			//	                        "uniqueItems": false
+			//	                      },
+			//	                      "Quantity": {
+			//	                        "type": "integer"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "Quantity",
+			//	                      "Items"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "StatusCodes"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "Id": {
+			//	                "type": "string"
+			//	              },
+			//	              "Members": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Items": {
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "properties": {
+			//	                        "OriginId": {
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "OriginId"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "type": "array",
+			//	                    "uniqueItems": false
+			//	                  },
+			//	                  "Quantity": {
+			//	                    "type": "integer"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Quantity",
+			//	                  "Items"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Id",
+			//	              "FailoverCriteria",
+			//	              "Members"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "Quantity": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Quantity"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Origins": {
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ConnectionAttempts": {
+			//	            "type": "integer"
+			//	          },
+			//	          "ConnectionTimeout": {
+			//	            "type": "integer"
+			//	          },
+			//	          "CustomOriginConfig": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "HTTPPort": {
+			//	                "default": 80,
+			//	                "type": "integer"
+			//	              },
+			//	              "HTTPSPort": {
+			//	                "default": 443,
+			//	                "type": "integer"
+			//	              },
+			//	              "OriginKeepaliveTimeout": {
+			//	                "default": 5,
+			//	                "type": "integer"
+			//	              },
+			//	              "OriginProtocolPolicy": {
+			//	                "type": "string"
+			//	              },
+			//	              "OriginReadTimeout": {
+			//	                "default": 30,
+			//	                "type": "integer"
+			//	              },
+			//	              "OriginSSLProtocols": {
+			//	                "default": [
+			//	                  "TLSv1",
+			//	                  "SSLv3"
+			//	                ],
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": false
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "OriginProtocolPolicy"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "DomainName": {
+			//	            "type": "string"
+			//	          },
+			//	          "Id": {
+			//	            "type": "string"
+			//	          },
+			//	          "OriginAccessControlId": {
+			//	            "type": "string"
+			//	          },
+			//	          "OriginCustomHeaders": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "HeaderName": {
+			//	                  "type": "string"
+			//	                },
+			//	                "HeaderValue": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "HeaderValue",
+			//	                "HeaderName"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          },
+			//	          "OriginPath": {
+			//	            "default": "",
+			//	            "type": "string"
+			//	          },
+			//	          "OriginShield": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Enabled": {
+			//	                "type": "boolean"
+			//	              },
+			//	              "OriginShieldRegion": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "S3OriginConfig": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "OriginAccessIdentity": {
+			//	                "default": "",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "DomainName",
+			//	          "Id"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "PriceClass": {
+			//	      "default": "PriceClass_All",
+			//	      "type": "string"
+			//	    },
+			//	    "Restrictions": {
+			//	      "additionalProperties": false,
+			//	      "default": {
+			//	        "GeoRestriction": {
+			//	          "RestrictionType": "none"
+			//	        }
+			//	      },
+			//	      "properties": {
+			//	        "GeoRestriction": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Locations": {
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            },
+			//	            "RestrictionType": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "RestrictionType"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "GeoRestriction"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "S3Origin": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DNSName": {
+			//	          "type": "string"
+			//	        },
+			//	        "OriginAccessIdentity": {
+			//	          "default": "",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "DNSName"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ViewerCertificate": {
+			//	      "additionalProperties": false,
+			//	      "default": {
+			//	        "CloudFrontDefaultCertificate": true
+			//	      },
+			//	      "properties": {
+			//	        "AcmCertificateArn": {
+			//	          "type": "string"
+			//	        },
+			//	        "CloudFrontDefaultCertificate": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "IamCertificateId": {
+			//	          "type": "string"
+			//	        },
+			//	        "MinimumProtocolVersion": {
+			//	          "type": "string"
+			//	        },
+			//	        "SslSupportMethod": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "WebACLId": {
+			//	      "default": "",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Enabled",
+			//	    "DefaultCacheBehavior"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"aliases": {
@@ -2044,9 +2045,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2056,9 +2058,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2068,26 +2071,27 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

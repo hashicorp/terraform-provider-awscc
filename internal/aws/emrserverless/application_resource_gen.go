@@ -25,12 +25,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_id": {
 			// Property: ApplicationId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the EMR Serverless Application.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the EMR Serverless Application.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the EMR Serverless Application.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -41,10 +42,11 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the EMR Serverless Application.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the EMR Serverless Application.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the EMR Serverless Application.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -55,18 +57,19 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"auto_start_configuration": {
 			// Property: AutoStartConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configuration for Auto Start of Application.",
-			//   "properties": {
-			//     "Enabled": {
-			//       "default": true,
-			//       "description": "If set to true, the Application will automatically start. Defaults to true.",
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration for Auto Start of Application.",
+			//	  "properties": {
+			//	    "Enabled": {
+			//	      "default": true,
+			//	      "description": "If set to true, the Application will automatically start. Defaults to true.",
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Configuration for Auto Start of Application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -92,22 +95,23 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"auto_stop_configuration": {
 			// Property: AutoStopConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configuration for Auto Stop of Application.",
-			//   "properties": {
-			//     "Enabled": {
-			//       "default": true,
-			//       "description": "If set to true, the Application will automatically stop after being idle. Defaults to true.",
-			//       "type": "boolean"
-			//     },
-			//     "IdleTimeoutMinutes": {
-			//       "description": "The amount of time [in minutes] to wait before auto stopping the Application when idle. Defaults to 15 minutes.",
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration for Auto Stop of Application.",
+			//	  "properties": {
+			//	    "Enabled": {
+			//	      "default": true,
+			//	      "description": "If set to true, the Application will automatically stop after being idle. Defaults to true.",
+			//	      "type": "boolean"
+			//	    },
+			//	    "IdleTimeoutMinutes": {
+			//	      "description": "The amount of time [in minutes] to wait before auto stopping the Application when idle. Defaults to 15 minutes.",
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Configuration for Auto Stop of Application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -143,77 +147,78 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"initial_capacity": {
 			// Property: InitialCapacity
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Initial capacity initialized when an Application is started.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "description": "Worker type for an analytics framework.",
-			//         "maxLength": 50,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z]+[-_]*[a-zA-Z]+$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "WorkerConfiguration": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Cpu": {
-			//                 "description": "Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.",
-			//                 "maxLength": 15,
-			//                 "minLength": 1,
-			//                 "pattern": "^[1-9][0-9]*(\\s)?(vCPU|vcpu|VCPU)?$",
-			//                 "type": "string"
-			//               },
-			//               "Disk": {
-			//                 "description": "Per worker Disk resource. GB is the only supported unit and specifying GB is optional",
-			//                 "maxLength": 15,
-			//                 "minLength": 1,
-			//                 "pattern": "^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)$",
-			//                 "type": "string"
-			//               },
-			//               "Memory": {
-			//                 "description": "Per worker memory resource. GB is the only supported unit and specifying GB is optional.",
-			//                 "maxLength": 15,
-			//                 "minLength": 1,
-			//                 "pattern": "^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)?$",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Cpu",
-			//               "Memory"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "WorkerCount": {
-			//             "description": "Initial count of workers to be initialized when an Application is started. This count will be continued to be maintained until the Application is stopped",
-			//             "format": "int64",
-			//             "maximum": 1000000,
-			//             "minimum": 1,
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "required": [
-			//           "WorkerCount",
-			//           "WorkerConfiguration"
-			//         ],
-			//         "type": "object"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Initial capacity initialized when an Application is started.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "Worker type for an analytics framework.",
+			//	        "maxLength": 50,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z]+[-_]*[a-zA-Z]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "WorkerConfiguration": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Cpu": {
+			//	                "description": "Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.",
+			//	                "maxLength": 15,
+			//	                "minLength": 1,
+			//	                "pattern": "^[1-9][0-9]*(\\s)?(vCPU|vcpu|VCPU)?$",
+			//	                "type": "string"
+			//	              },
+			//	              "Disk": {
+			//	                "description": "Per worker Disk resource. GB is the only supported unit and specifying GB is optional",
+			//	                "maxLength": 15,
+			//	                "minLength": 1,
+			//	                "pattern": "^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)$",
+			//	                "type": "string"
+			//	              },
+			//	              "Memory": {
+			//	                "description": "Per worker memory resource. GB is the only supported unit and specifying GB is optional.",
+			//	                "maxLength": 15,
+			//	                "minLength": 1,
+			//	                "pattern": "^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)?$",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Cpu",
+			//	              "Memory"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "WorkerCount": {
+			//	            "description": "Initial count of workers to be initialized when an Application is started. This count will be continued to be maintained until the Application is stopped",
+			//	            "format": "int64",
+			//	            "maximum": 1000000,
+			//	            "minimum": 1,
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "WorkerCount",
+			//	          "WorkerConfiguration"
+			//	        ],
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Initial capacity initialized when an Application is started.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -297,38 +302,39 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"maximum_capacity": {
 			// Property: MaximumCapacity
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Maximum allowed cumulative resources for an Application. No new resources will be created once the limit is hit.",
-			//   "properties": {
-			//     "Cpu": {
-			//       "description": "Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.",
-			//       "maxLength": 15,
-			//       "minLength": 1,
-			//       "pattern": "^[1-9][0-9]*(\\s)?(vCPU|vcpu|VCPU)?$",
-			//       "type": "string"
-			//     },
-			//     "Disk": {
-			//       "description": "Per worker Disk resource. GB is the only supported unit and specifying GB is optional",
-			//       "maxLength": 15,
-			//       "minLength": 1,
-			//       "pattern": "^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)$",
-			//       "type": "string"
-			//     },
-			//     "Memory": {
-			//       "description": "Per worker memory resource. GB is the only supported unit and specifying GB is optional.",
-			//       "maxLength": 15,
-			//       "minLength": 1,
-			//       "pattern": "^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)?$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Cpu",
-			//     "Memory"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Maximum allowed cumulative resources for an Application. No new resources will be created once the limit is hit.",
+			//	  "properties": {
+			//	    "Cpu": {
+			//	      "description": "Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.",
+			//	      "maxLength": 15,
+			//	      "minLength": 1,
+			//	      "pattern": "^[1-9][0-9]*(\\s)?(vCPU|vcpu|VCPU)?$",
+			//	      "type": "string"
+			//	    },
+			//	    "Disk": {
+			//	      "description": "Per worker Disk resource. GB is the only supported unit and specifying GB is optional",
+			//	      "maxLength": 15,
+			//	      "minLength": 1,
+			//	      "pattern": "^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)$",
+			//	      "type": "string"
+			//	    },
+			//	    "Memory": {
+			//	      "description": "Per worker memory resource. GB is the only supported unit and specifying GB is optional.",
+			//	      "maxLength": 15,
+			//	      "minLength": 1,
+			//	      "pattern": "^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)?$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Cpu",
+			//	    "Memory"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Maximum allowed cumulative resources for an Application. No new resources will be created once the limit is hit.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -377,13 +383,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "User friendly Application name.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[A-Za-z0-9._\\/#-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "User friendly Application name.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[A-Za-z0-9._\\/#-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "User friendly Application name.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -400,43 +407,44 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"network_configuration": {
 			// Property: NetworkConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Network Configuration for customer VPC connectivity.",
-			//   "properties": {
-			//     "SecurityGroupIds": {
-			//       "description": "The ID of the security groups in the VPC to which you want to connect your job or application.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "description": "Identifier of a security group",
-			//         "maxLength": 32,
-			//         "minLength": 1,
-			//         "pattern": "^[-0-9a-zA-Z]+",
-			//         "type": "string"
-			//       },
-			//       "maxItems": 5,
-			//       "minItems": 1,
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "SubnetIds": {
-			//       "description": "The ID of the subnets in the VPC to which you want to connect your job or application.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "description": "Identifier of a subnet",
-			//         "maxLength": 32,
-			//         "minLength": 1,
-			//         "pattern": "^[-0-9a-zA-Z]+",
-			//         "type": "string"
-			//       },
-			//       "maxItems": 16,
-			//       "minItems": 1,
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Network Configuration for customer VPC connectivity.",
+			//	  "properties": {
+			//	    "SecurityGroupIds": {
+			//	      "description": "The ID of the security groups in the VPC to which you want to connect your job or application.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "description": "Identifier of a security group",
+			//	        "maxLength": 32,
+			//	        "minLength": 1,
+			//	        "pattern": "^[-0-9a-zA-Z]+",
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 5,
+			//	      "minItems": 1,
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "SubnetIds": {
+			//	      "description": "The ID of the subnets in the VPC to which you want to connect your job or application.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "description": "Identifier of a subnet",
+			//	        "maxLength": 32,
+			//	        "minLength": 1,
+			//	        "pattern": "^[-0-9a-zA-Z]+",
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 16,
+			//	      "minItems": 1,
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Network Configuration for customer VPC connectivity.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -481,13 +489,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"release_label": {
 			// Property: ReleaseLabel
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "EMR release label.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[A-Za-z0-9._/-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "EMR release label.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[A-Za-z0-9._/-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "EMR release label.",
 			Type:        types.StringType,
 			Required:    true,
@@ -502,37 +511,38 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tag map with key and value",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 128 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "^[A-Za-z0-9 /_.:=+@-]+$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "pattern": "^[A-Za-z0-9 /_.:=+@-]*$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Tag map with key and value",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 128 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "^[A-Za-z0-9 /_.:=+@-]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "pattern": "^[A-Za-z0-9 /_.:=+@-]*$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Tag map with key and value",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -567,10 +577,11 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of the application",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of the application",
+			//	  "type": "string"
+			//	}
 			Description: "The type of the application",
 			Type:        types.StringType,
 			Required:    true,

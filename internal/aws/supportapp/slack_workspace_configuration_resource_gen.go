@@ -25,13 +25,14 @@ func slackWorkspaceConfigurationResource(ctx context.Context) (resource.Resource
 		"team_id": {
 			// Property: TeamId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The team ID in Slack, which uniquely identifies a workspace.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^\\S+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The team ID in Slack, which uniquely identifies a workspace.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^\\S+$",
+			//	  "type": "string"
+			//	}
 			Description: "The team ID in Slack, which uniquely identifies a workspace.",
 			Type:        types.StringType,
 			Required:    true,
@@ -46,13 +47,14 @@ func slackWorkspaceConfigurationResource(ctx context.Context) (resource.Resource
 		"version_id": {
 			// Property: VersionId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9]+$",
+			//	  "type": "string"
+			//	}
 			Description: "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
 			Type:        types.StringType,
 			Optional:    true,

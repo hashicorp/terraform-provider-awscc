@@ -25,24 +25,25 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"app_config_resource": {
 			// Property: AppConfigResource
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ApplicationId": {
-			//       "pattern": "[a-z0-9]{4,7}",
-			//       "type": "string"
-			//     },
-			//     "EnvironmentId": {
-			//       "pattern": "[a-z0-9]{4,7}",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ApplicationId",
-			//     "EnvironmentId"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ApplicationId": {
+			//	      "pattern": "[a-z0-9]{4,7}",
+			//	      "type": "string"
+			//	    },
+			//	    "EnvironmentId": {
+			//	      "pattern": "[a-z0-9]{4,7}",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ApplicationId",
+			//	    "EnvironmentId"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"application_id": {
@@ -72,12 +73,13 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 0,
-			//   "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 0,
+			//	  "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -87,52 +89,53 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"data_delivery": {
 			// Property: DataDelivery
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Destinations for data.",
-			//   "oneOf": [
-			//     {
-			//       "required": [
-			//         "S3"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "LogGroup"
-			//       ]
-			//     }
-			//   ],
-			//   "properties": {
-			//     "LogGroup": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "^[-a-zA-Z0-9._/]+$",
-			//       "type": "string"
-			//     },
-			//     "S3": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "BucketName": {
-			//           "maxLength": 63,
-			//           "minLength": 3,
-			//           "pattern": "^[a-z0-9][-a-z0-9]*[a-z0-9]$",
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 1,
-			//           "pattern": "^[-a-zA-Z0-9!_.*'()/]*$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketName"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Destinations for data.",
+			//	  "oneOf": [
+			//	    {
+			//	      "required": [
+			//	        "S3"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "LogGroup"
+			//	      ]
+			//	    }
+			//	  ],
+			//	  "properties": {
+			//	    "LogGroup": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "^[-a-zA-Z0-9._/]+$",
+			//	      "type": "string"
+			//	    },
+			//	    "S3": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "BucketName": {
+			//	          "maxLength": 63,
+			//	          "minLength": 3,
+			//	          "pattern": "^[a-z0-9][-a-z0-9]*[a-z0-9]$",
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 1,
+			//	          "pattern": "^[-a-zA-Z0-9!_.*'()/]*$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketName"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Destinations for data.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -206,11 +209,12 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 160,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 160,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -224,12 +228,13 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 127,
-			//   "minLength": 1,
-			//   "pattern": "[-a-zA-Z0-9._]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 127,
+			//	  "minLength": 1,
+			//	  "pattern": "[-a-zA-Z0-9._]*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -243,36 +248,37 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

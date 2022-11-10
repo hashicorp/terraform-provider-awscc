@@ -23,18 +23,19 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		"cloudfront_origin_access_identity_config": {
 			// Property: CloudFrontOriginAccessIdentityConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Comment": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Comment"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Comment": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Comment"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"comment": {
@@ -49,9 +50,10 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -61,9 +63,10 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		"s3_canonical_user_id": {
 			// Property: S3CanonicalUserId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

@@ -23,10 +23,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the Amazon ECS cluster, such as arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the Amazon ECS cluster, such as arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the Amazon ECS cluster, such as arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,12 +38,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"capacity_providers": {
 			// Property: CapacityProviders
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -53,10 +55,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_name": {
 			// Property: ClusterName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A user-generated string that you use to identify your cluster. If you don't specify a name, AWS CloudFormation generates a unique physical ID for the name.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A user-generated string that you use to identify your cluster. If you don't specify a name, AWS CloudFormation generates a unique physical ID for the name.",
+			//	  "type": "string"
+			//	}
 			Description: "A user-generated string that you use to identify your cluster. If you don't specify a name, AWS CloudFormation generates a unique physical ID for the name.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -69,22 +72,23 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_settings": {
 			// Property: ClusterSettings
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The setting to use when creating a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.",
-			//     "properties": {
-			//       "Name": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The setting to use when creating a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.",
+			//	    "properties": {
+			//	      "Name": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -116,48 +120,49 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"configuration": {
 			// Property: Configuration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The configurations to be set at cluster level.",
-			//   "properties": {
-			//     "ExecuteCommandConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for ExecuteCommand.",
-			//       "properties": {
-			//         "KmsKeyId": {
-			//           "type": "string"
-			//         },
-			//         "LogConfiguration": {
-			//           "additionalProperties": false,
-			//           "description": "The session logging configuration for ExecuteCommand.",
-			//           "properties": {
-			//             "CloudWatchEncryptionEnabled": {
-			//               "type": "boolean"
-			//             },
-			//             "CloudWatchLogGroupName": {
-			//               "type": "string"
-			//             },
-			//             "S3BucketName": {
-			//               "type": "string"
-			//             },
-			//             "S3EncryptionEnabled": {
-			//               "type": "boolean"
-			//             },
-			//             "S3KeyPrefix": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "Logging": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The configurations to be set at cluster level.",
+			//	  "properties": {
+			//	    "ExecuteCommandConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for ExecuteCommand.",
+			//	      "properties": {
+			//	        "KmsKeyId": {
+			//	          "type": "string"
+			//	        },
+			//	        "LogConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "description": "The session logging configuration for ExecuteCommand.",
+			//	          "properties": {
+			//	            "CloudWatchEncryptionEnabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "CloudWatchLogGroupName": {
+			//	              "type": "string"
+			//	            },
+			//	            "S3BucketName": {
+			//	              "type": "string"
+			//	            },
+			//	            "S3EncryptionEnabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "S3KeyPrefix": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "Logging": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The configurations to be set at cluster level.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -261,25 +266,26 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"default_capacity_provider_strategy": {
 			// Property: DefaultCapacityProviderStrategy
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A capacity provider strategy consists of one or more capacity providers along with the `base` and `weight` to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProviders API is used to associate a capacity provider with a cluster. Only capacity providers with an `ACTIVE` or `UPDATING` status can be used.",
-			//     "properties": {
-			//       "Base": {
-			//         "type": "integer"
-			//       },
-			//       "CapacityProvider": {
-			//         "type": "string"
-			//       },
-			//       "Weight": {
-			//         "type": "integer"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A capacity provider strategy consists of one or more capacity providers along with the `base` and `weight` to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProviders API is used to associate a capacity provider with a cluster. Only capacity providers with an `ACTIVE` or `UPDATING` status can be used.",
+			//	    "properties": {
+			//	      "Base": {
+			//	        "type": "integer"
+			//	      },
+			//	      "CapacityProvider": {
+			//	        "type": "string"
+			//	      },
+			//	      "Weight": {
+			//	        "type": "integer"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"base": {
@@ -320,22 +326,23 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.",
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

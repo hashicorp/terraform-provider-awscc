@@ -25,11 +25,12 @@ func hookTypeConfigResource(ctx context.Context) (resource.Resource, error) {
 		"configuration": {
 			// Property: Configuration
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The configuration data for the extension, in this account and region.",
-			//   "pattern": "[\\s\\S]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The configuration data for the extension, in this account and region.",
+			//	  "pattern": "[\\s\\S]+",
+			//	  "type": "string"
+			//	}
 			Description: "The configuration data for the extension, in this account and region.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -44,15 +45,16 @@ func hookTypeConfigResource(ctx context.Context) (resource.Resource, error) {
 		"configuration_alias": {
 			// Property: ConfigurationAlias
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "default",
-			//   "description": "An alias by which to refer to this extension configuration data.",
-			//   "enum": [
-			//     "default"
-			//   ],
-			//   "pattern": "^[a-zA-Z0-9]{1,256}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "default",
+			//	  "description": "An alias by which to refer to this extension configuration data.",
+			//	  "enum": [
+			//	    "default"
+			//	  ],
+			//	  "pattern": "^[a-zA-Z0-9]{1,256}$",
+			//	  "type": "string"
+			//	}
 			Description: "An alias by which to refer to this extension configuration data.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -72,11 +74,12 @@ func hookTypeConfigResource(ctx context.Context) (resource.Resource, error) {
 		"configuration_arn": {
 			// Property: ConfigurationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
-			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type(-configuration)?/hook/.+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
+			//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type(-configuration)?/hook/.+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -87,11 +90,12 @@ func hookTypeConfigResource(ctx context.Context) (resource.Resource, error) {
 		"type_arn": {
 			// Property: TypeArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the type without version number.",
-			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the type without version number.",
+			//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the type without version number.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -106,11 +110,12 @@ func hookTypeConfigResource(ctx context.Context) (resource.Resource, error) {
 		"type_name": {
 			// Property: TypeName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//   "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+			//	  "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,

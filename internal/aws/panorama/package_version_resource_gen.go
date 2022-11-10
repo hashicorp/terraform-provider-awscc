@@ -25,9 +25,10 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"is_latest_patch": {
 			// Property: IsLatestPatch
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -37,9 +38,10 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"mark_latest": {
 			// Property: MarkLatest
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
@@ -50,12 +52,13 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"owner_account": {
 			// Property: OwnerAccount
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 12,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9a-z\\_]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 12,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9a-z\\_]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -71,11 +74,12 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"package_arn": {
 			// Property: PackageArn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -85,12 +89,13 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"package_id": {
 			// Property: PackageId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -104,12 +109,13 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"package_name": {
 			// Property: PackageName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -119,12 +125,13 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"package_version": {
 			// Property: PackageVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^([0-9]+)\\.([0-9]+)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^([0-9]+)\\.([0-9]+)$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -138,12 +145,13 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"patch_version": {
 			// Property: PatchVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^[a-z0-9]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-z0-9]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -157,9 +165,10 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"registered_time": {
 			// Property: RegisteredTime
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -169,15 +178,16 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "REGISTER_PENDING",
-			//     "REGISTER_COMPLETED",
-			//     "FAILED",
-			//     "DELETING"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "REGISTER_PENDING",
+			//	    "REGISTER_COMPLETED",
+			//	    "FAILED",
+			//	    "DELETING"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -187,11 +197,12 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"status_description": {
 			// Property: StatusDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -201,12 +212,13 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"updated_latest_patch_version": {
 			// Property: UpdatedLatestPatchVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^[a-z0-9]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-z0-9]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,

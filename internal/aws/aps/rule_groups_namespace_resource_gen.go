@@ -25,11 +25,12 @@ func ruleGroupsNamespaceResource(ctx context.Context) (resource.Resource, error)
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The RuleGroupsNamespace ARN.",
-			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:rulegroupsnamespace/[a-zA-Z0-9-]+/[0-9A-Za-z][-.0-9A-Z_a-z]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The RuleGroupsNamespace ARN.",
+			//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:rulegroupsnamespace/[a-zA-Z0-9-]+/[0-9A-Za-z][-.0-9A-Z_a-z]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The RuleGroupsNamespace ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,10 +41,11 @@ func ruleGroupsNamespaceResource(ctx context.Context) (resource.Resource, error)
 		"data": {
 			// Property: Data
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The RuleGroupsNamespace data.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The RuleGroupsNamespace data.",
+			//	  "type": "string"
+			//	}
 			Description: "The RuleGroupsNamespace data.",
 			Type:        types.StringType,
 			Required:    true,
@@ -51,12 +53,13 @@ func ruleGroupsNamespaceResource(ctx context.Context) (resource.Resource, error)
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The RuleGroupsNamespace name.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The RuleGroupsNamespace name.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The RuleGroupsNamespace name.",
 			Type:        types.StringType,
 			Required:    true,
@@ -70,35 +73,36 @@ func ruleGroupsNamespaceResource(ctx context.Context) (resource.Resource, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -131,11 +135,12 @@ func ruleGroupsNamespaceResource(ctx context.Context) (resource.Resource, error)
 		"workspace": {
 			// Property: Workspace
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Required to identify a specific APS Workspace associated with this RuleGroupsNamespace.",
-			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Required to identify a specific APS Workspace associated with this RuleGroupsNamespace.",
+			//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Required to identify a specific APS Workspace associated with this RuleGroupsNamespace.",
 			Type:        types.StringType,
 			Required:    true,

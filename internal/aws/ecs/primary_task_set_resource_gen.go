@@ -23,10 +23,11 @@ func primaryTaskSetResource(ctx context.Context) (resource.Resource, error) {
 		"cluster": {
 			// Property: Cluster
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
+			//	  "type": "string"
+			//	}
 			Description: "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
 			Type:        types.StringType,
 			Required:    true,
@@ -37,10 +38,11 @@ func primaryTaskSetResource(ctx context.Context) (resource.Resource, error) {
 		"service": {
 			// Property: Service
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
+			//	  "type": "string"
+			//	}
 			Description: "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
 			Type:        types.StringType,
 			Required:    true,
@@ -51,10 +53,11 @@ func primaryTaskSetResource(ctx context.Context) (resource.Resource, error) {
 		"task_set_id": {
 			// Property: TaskSetId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID or full Amazon Resource Name (ARN) of the task set.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID or full Amazon Resource Name (ARN) of the task set.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID or full Amazon Resource Name (ARN) of the task set.",
 			Type:        types.StringType,
 			Required:    true,

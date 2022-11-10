@@ -25,10 +25,11 @@ func labelResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The label ARN.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The label ARN.",
+			//	  "type": "string"
+			//	}
 			Description: "The label ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,10 +40,11 @@ func labelResource(ctx context.Context) (resource.Resource, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The timestamp when the label was created.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The timestamp when the label was created.",
+			//	  "type": "string"
+			//	}
 			Description: "The timestamp when the label was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -53,12 +55,13 @@ func labelResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The label description.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The label description.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The label description.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -73,10 +76,11 @@ func labelResource(ctx context.Context) (resource.Resource, error) {
 		"last_updated_time": {
 			// Property: LastUpdatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The timestamp when the label was last updated.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The timestamp when the label was last updated.",
+			//	  "type": "string"
+			//	}
 			Description: "The timestamp when the label was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -87,13 +91,14 @@ func labelResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the label.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9a-z_-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the label.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9a-z_-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the label.",
 			Type:        types.StringType,
 			Required:    true,
@@ -108,33 +113,34 @@ func labelResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tags associated with this label.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "Tags associated with this label.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "Tags associated with this label.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

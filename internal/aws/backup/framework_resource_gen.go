@@ -25,10 +25,11 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of `CreationTime` is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.",
-			//   "type": "number"
-			// }
+			//
+			//	{
+			//	  "description": "The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of `CreationTime` is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.",
+			//	  "type": "number"
+			//	}
 			Description: "The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of `CreationTime` is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.",
 			Type:        types.Float64Type,
 			Computed:    true,
@@ -39,10 +40,11 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 		"deployment_status": {
 			// Property: DeploymentStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The deployment status of a framework. The statuses are: `CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED`",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The deployment status of a framework. The statuses are: `CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED`",
+			//	  "type": "string"
+			//	}
 			Description: "The deployment status of a framework. The statuses are: `CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED`",
 			Type:        types.StringType,
 			Computed:    true,
@@ -53,10 +55,11 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 		"framework_arn": {
 			// Property: FrameworkArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An Amazon Resource Name (ARN) that uniquely identifies Framework as a resource",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "An Amazon Resource Name (ARN) that uniquely identifies Framework as a resource",
+			//	  "type": "string"
+			//	}
 			Description: "An Amazon Resource Name (ARN) that uniquely identifies Framework as a resource",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,94 +70,95 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 		"framework_controls": {
 			// Property: FrameworkControls
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Contains detailed information about all of the controls of a framework. Each framework must contain at least one control.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ControlInputParameters": {
-			//         "description": "A list of ParameterName and ParameterValue pairs.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ParameterName": {
-			//               "type": "string"
-			//             },
-			//             "ParameterValue": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "ParameterName",
-			//             "ParameterValue"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "ControlName": {
-			//         "description": "The name of a control. This name is between 1 and 256 characters.",
-			//         "type": "string"
-			//       },
-			//       "ControlScope": {
-			//         "additionalProperties": false,
-			//         "description": "The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans.",
-			//         "properties": {
-			//           "ComplianceResourceIds": {
-			//             "description": "The ID of the only AWS resource that you want your control scope to contain.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "ComplianceResourceTypes": {
-			//             "description": "Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "Tags": {
-			//             "description": "Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "A key-value pair to associate with a resource.",
-			//               "properties": {
-			//                 "Key": {
-			//                   "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//                   "maxLength": 128,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "Value": {
-			//                   "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//                   "maxLength": 256,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "required": [
-			//       "ControlName"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Contains detailed information about all of the controls of a framework. Each framework must contain at least one control.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ControlInputParameters": {
+			//	        "description": "A list of ParameterName and ParameterValue pairs.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ParameterName": {
+			//	              "type": "string"
+			//	            },
+			//	            "ParameterValue": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "ParameterName",
+			//	            "ParameterValue"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "ControlName": {
+			//	        "description": "The name of a control. This name is between 1 and 256 characters.",
+			//	        "type": "string"
+			//	      },
+			//	      "ControlScope": {
+			//	        "additionalProperties": false,
+			//	        "description": "The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans.",
+			//	        "properties": {
+			//	          "ComplianceResourceIds": {
+			//	            "description": "The ID of the only AWS resource that you want your control scope to contain.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "ComplianceResourceTypes": {
+			//	            "description": "Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "Tags": {
+			//	            "description": "Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "A key-value pair to associate with a resource.",
+			//	              "properties": {
+			//	                "Key": {
+			//	                  "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	                  "maxLength": 128,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "Value": {
+			//	                  "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	                  "maxLength": 256,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "ControlName"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Contains detailed information about all of the controls of a framework. Each framework must contain at least one control.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -269,12 +273,13 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 		"framework_description": {
 			// Property: FrameworkDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An optional description of the framework with a maximum 1,024 characters.",
-			//   "maxLength": 1024,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "An optional description of the framework with a maximum 1,024 characters.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "An optional description of the framework with a maximum 1,024 characters.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -289,13 +294,14 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 		"framework_name": {
 			// Property: FrameworkName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z][_a-zA-Z0-9]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z][_a-zA-Z0-9]*",
+			//	  "type": "string"
+			//	}
 			Description: "The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
 			Type:        types.StringType,
 			Optional:    true,
@@ -312,10 +318,11 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 		"framework_status": {
 			// Property: FrameworkStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn AWS Config recording on or off for each resource. The statuses are:\n\n`ACTIVE` when recording is turned on for all resources governed by the framework.\n\n`PARTIALLY_ACTIVE` when recording is turned off for at least one resource governed by the framework.\n\n`INACTIVE` when recording is turned off for all resources governed by the framework.\n\n`UNAVAILABLE` when AWS Backup is unable to validate recording status at this time.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn AWS Config recording on or off for each resource. The statuses are:\n\n`ACTIVE` when recording is turned on for all resources governed by the framework.\n\n`PARTIALLY_ACTIVE` when recording is turned off for at least one resource governed by the framework.\n\n`INACTIVE` when recording is turned off for all resources governed by the framework.\n\n`UNAVAILABLE` when AWS Backup is unable to validate recording status at this time.",
+			//	  "type": "string"
+			//	}
 			Description: "A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn AWS Config recording on or off for each resource. The statuses are:\n\n`ACTIVE` when recording is turned on for all resources governed by the framework.\n\n`PARTIALLY_ACTIVE` when recording is turned off for at least one resource governed by the framework.\n\n`INACTIVE` when recording is turned off for all resources governed by the framework.\n\n`UNAVAILABLE` when AWS Backup is unable to validate recording status at this time.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -326,30 +333,31 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 		"framework_tags": {
 			// Property: FrameworkTags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

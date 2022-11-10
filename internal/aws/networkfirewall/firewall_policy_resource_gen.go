@@ -25,12 +25,13 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 512,
-			//   "minLength": 1,
-			//   "pattern": "^.*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 512,
+			//	  "minLength": 1,
+			//	  "pattern": "^.*$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -45,162 +46,175 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"firewall_policy": {
 			// Property: FirewallPolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "StatefulDefaultActions": {
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "StatefulEngineOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "RuleOrder": {
-			//           "enum": [
-			//             "DEFAULT_ACTION_ORDER",
-			//             "STRICT_ORDER"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "StatefulRuleGroupReferences": {
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Priority": {
-			//             "maximum": 65535,
-			//             "minimum": 1,
-			//             "type": "integer"
-			//           },
-			//           "ResourceArn": {
-			//             "description": "A resource ARN.",
-			//             "maxLength": 256,
-			//             "minLength": 1,
-			//             "pattern": "^(arn:aws.*)$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "ResourceArn"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "StatelessCustomActions": {
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ActionDefinition": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "PublishMetricAction": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Dimensions": {
-			//                     "insertionOrder": true,
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "properties": {
-			//                         "Value": {
-			//                           "maxLength": 128,
-			//                           "minLength": 1,
-			//                           "pattern": "^[a-zA-Z0-9-_ ]+$",
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "Value"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "type": "array",
-			//                     "uniqueItems": false
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Dimensions"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "ActionName": {
-			//             "maxLength": 128,
-			//             "minLength": 1,
-			//             "pattern": "^[a-zA-Z0-9]+$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "ActionName",
-			//           "ActionDefinition"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "StatelessDefaultActions": {
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "StatelessFragmentDefaultActions": {
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "StatelessRuleGroupReferences": {
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Priority": {
-			//             "maximum": 65535,
-			//             "minimum": 1,
-			//             "type": "integer"
-			//           },
-			//           "ResourceArn": {
-			//             "description": "A resource ARN.",
-			//             "maxLength": 256,
-			//             "minLength": 1,
-			//             "pattern": "^(arn:aws.*)$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "ResourceArn",
-			//           "Priority"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     }
-			//   },
-			//   "required": [
-			//     "StatelessDefaultActions",
-			//     "StatelessFragmentDefaultActions"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "StatefulDefaultActions": {
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "StatefulEngineOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "RuleOrder": {
+			//	          "enum": [
+			//	            "DEFAULT_ACTION_ORDER",
+			//	            "STRICT_ORDER"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "StatefulRuleGroupReferences": {
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Override": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Action": {
+			//	                "enum": [
+			//	                  "DROP_TO_ALERT"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Priority": {
+			//	            "maximum": 65535,
+			//	            "minimum": 1,
+			//	            "type": "integer"
+			//	          },
+			//	          "ResourceArn": {
+			//	            "description": "A resource ARN.",
+			//	            "maxLength": 256,
+			//	            "minLength": 1,
+			//	            "pattern": "^(arn:aws.*)$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "ResourceArn"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "StatelessCustomActions": {
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ActionDefinition": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "PublishMetricAction": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Dimensions": {
+			//	                    "insertionOrder": true,
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "properties": {
+			//	                        "Value": {
+			//	                          "maxLength": 128,
+			//	                          "minLength": 1,
+			//	                          "pattern": "^[a-zA-Z0-9-_ ]+$",
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "Value"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "type": "array",
+			//	                    "uniqueItems": false
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Dimensions"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "ActionName": {
+			//	            "maxLength": 128,
+			//	            "minLength": 1,
+			//	            "pattern": "^[a-zA-Z0-9]+$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "ActionName",
+			//	          "ActionDefinition"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "StatelessDefaultActions": {
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "StatelessFragmentDefaultActions": {
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "StatelessRuleGroupReferences": {
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Priority": {
+			//	            "maximum": 65535,
+			//	            "minimum": 1,
+			//	            "type": "integer"
+			//	          },
+			//	          "ResourceArn": {
+			//	            "description": "A resource ARN.",
+			//	            "maxLength": 256,
+			//	            "minLength": 1,
+			//	            "pattern": "^(arn:aws.*)$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "ResourceArn",
+			//	          "Priority"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "StatelessDefaultActions",
+			//	    "StatelessFragmentDefaultActions"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"stateful_default_actions": {
@@ -243,6 +257,32 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 						// Property: StatefulRuleGroupReferences
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"override": {
+									// Property: Override
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"action": {
+												// Property: Action
+												Type:     types.StringType,
+												Optional: true,
+												Computed: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"DROP_TO_ALERT",
+													}),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+										},
+									),
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
 								"priority": {
 									// Property: Priority
 									Type:     types.Int64Type,
@@ -378,13 +418,14 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"firewall_policy_arn": {
 			// Property: FirewallPolicyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A resource ARN.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^(arn:aws.*)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A resource ARN.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^(arn:aws.*)$",
+			//	  "type": "string"
+			//	}
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -395,12 +436,13 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"firewall_policy_id": {
 			// Property: FirewallPolicyId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 36,
-			//   "minLength": 36,
-			//   "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 36,
+			//	  "minLength": 36,
+			//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -410,12 +452,13 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"firewall_policy_name": {
 			// Property: FirewallPolicyName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -429,33 +472,34 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "^.*$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 255,
-			//         "minLength": 0,
-			//         "pattern": "^.*$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "^.*$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 255,
+			//	        "minLength": 0,
+			//	        "pattern": "^.*$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -507,6 +551,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"action":                             "Action",
 		"action_definition":                  "ActionDefinition",
 		"action_name":                        "ActionName",
 		"description":                        "Description",
@@ -516,6 +561,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"firewall_policy_id":                 "FirewallPolicyId",
 		"firewall_policy_name":               "FirewallPolicyName",
 		"key":                                "Key",
+		"override":                           "Override",
 		"priority":                           "Priority",
 		"publish_metric_action":              "PublishMetricAction",
 		"resource_arn":                       "ResourceArn",

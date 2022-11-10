@@ -24,9 +24,10 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -36,9 +37,10 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		"rule_name": {
 			// Property: RuleName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -50,25 +52,26 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -92,1493 +95,1494 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		"topic_rule_payload": {
 			// Property: TopicRulePayload
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Actions": {
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "CloudwatchAlarm": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "AlarmName": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "StateReason": {
-			//                 "type": "string"
-			//               },
-			//               "StateValue": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "AlarmName",
-			//               "StateReason",
-			//               "StateValue",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "CloudwatchLogs": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "LogGroupName": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "LogGroupName",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "CloudwatchMetric": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "MetricName": {
-			//                 "type": "string"
-			//               },
-			//               "MetricNamespace": {
-			//                 "type": "string"
-			//               },
-			//               "MetricTimestamp": {
-			//                 "type": "string"
-			//               },
-			//               "MetricUnit": {
-			//                 "type": "string"
-			//               },
-			//               "MetricValue": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "MetricName",
-			//               "MetricValue",
-			//               "MetricNamespace",
-			//               "MetricUnit",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "DynamoDB": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "HashKeyField": {
-			//                 "type": "string"
-			//               },
-			//               "HashKeyType": {
-			//                 "type": "string"
-			//               },
-			//               "HashKeyValue": {
-			//                 "type": "string"
-			//               },
-			//               "PayloadField": {
-			//                 "type": "string"
-			//               },
-			//               "RangeKeyField": {
-			//                 "type": "string"
-			//               },
-			//               "RangeKeyType": {
-			//                 "type": "string"
-			//               },
-			//               "RangeKeyValue": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "TableName": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "TableName",
-			//               "HashKeyField",
-			//               "HashKeyValue",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "DynamoDBv2": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "PutItem": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "TableName": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "TableName"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Elasticsearch": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Endpoint": {
-			//                 "type": "string"
-			//               },
-			//               "Id": {
-			//                 "type": "string"
-			//               },
-			//               "Index": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "Type": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Type",
-			//               "Endpoint",
-			//               "Index",
-			//               "Id",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Firehose": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BatchMode": {
-			//                 "type": "boolean"
-			//               },
-			//               "DeliveryStreamName": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "Separator": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "DeliveryStreamName",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Http": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Auth": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Sigv4": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "RoleArn": {
-			//                         "type": "string"
-			//                       },
-			//                       "ServiceName": {
-			//                         "type": "string"
-			//                       },
-			//                       "SigningRegion": {
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "ServiceName",
-			//                       "SigningRegion",
-			//                       "RoleArn"
-			//                     ],
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "ConfirmationUrl": {
-			//                 "type": "string"
-			//               },
-			//               "Headers": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Key": {
-			//                       "type": "string"
-			//                     },
-			//                     "Value": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Value",
-			//                     "Key"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": true
-			//               },
-			//               "Url": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Url"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "IotAnalytics": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BatchMode": {
-			//                 "type": "boolean"
-			//               },
-			//               "ChannelName": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "ChannelName",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "IotEvents": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BatchMode": {
-			//                 "type": "boolean"
-			//               },
-			//               "InputName": {
-			//                 "type": "string"
-			//               },
-			//               "MessageId": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "InputName",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "IotSiteWise": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "PutAssetPropertyValueEntries": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "AssetId": {
-			//                       "type": "string"
-			//                     },
-			//                     "EntryId": {
-			//                       "type": "string"
-			//                     },
-			//                     "PropertyAlias": {
-			//                       "type": "string"
-			//                     },
-			//                     "PropertyId": {
-			//                       "type": "string"
-			//                     },
-			//                     "PropertyValues": {
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "properties": {
-			//                           "Quality": {
-			//                             "type": "string"
-			//                           },
-			//                           "Timestamp": {
-			//                             "additionalProperties": false,
-			//                             "properties": {
-			//                               "OffsetInNanos": {
-			//                                 "type": "string"
-			//                               },
-			//                               "TimeInSeconds": {
-			//                                 "type": "string"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "TimeInSeconds"
-			//                             ],
-			//                             "type": "object"
-			//                           },
-			//                           "Value": {
-			//                             "additionalProperties": false,
-			//                             "properties": {
-			//                               "BooleanValue": {
-			//                                 "type": "string"
-			//                               },
-			//                               "DoubleValue": {
-			//                                 "type": "string"
-			//                               },
-			//                               "IntegerValue": {
-			//                                 "type": "string"
-			//                               },
-			//                               "StringValue": {
-			//                                 "type": "string"
-			//                               }
-			//                             },
-			//                             "type": "object"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "Value",
-			//                           "Timestamp"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "type": "array",
-			//                       "uniqueItems": true
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "PropertyValues"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": true
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "PutAssetPropertyValueEntries",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Kafka": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ClientProperties": {
-			//                 "additionalProperties": false,
-			//                 "patternProperties": {
-			//                   "": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "DestinationArn": {
-			//                 "type": "string"
-			//               },
-			//               "Key": {
-			//                 "type": "string"
-			//               },
-			//               "Partition": {
-			//                 "type": "string"
-			//               },
-			//               "Topic": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "DestinationArn",
-			//               "Topic",
-			//               "ClientProperties"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Kinesis": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "PartitionKey": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "StreamName": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "StreamName",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Lambda": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "FunctionArn": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Location": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DeviceId": {
-			//                 "type": "string"
-			//               },
-			//               "Latitude": {
-			//                 "type": "string"
-			//               },
-			//               "Longitude": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "Timestamp": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Unit": {
-			//                     "type": "string"
-			//                   },
-			//                   "Value": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Value"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "TrackerName": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "RoleArn",
-			//               "TrackerName",
-			//               "DeviceId",
-			//               "Latitude",
-			//               "Longitude"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "OpenSearch": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Endpoint": {
-			//                 "type": "string"
-			//               },
-			//               "Id": {
-			//                 "type": "string"
-			//               },
-			//               "Index": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "Type": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Type",
-			//               "Endpoint",
-			//               "Index",
-			//               "Id",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Republish": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Headers": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "ContentType": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 0,
-			//                     "type": "string"
-			//                   },
-			//                   "CorrelationData": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 0,
-			//                     "type": "string"
-			//                   },
-			//                   "MessageExpiry": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 0,
-			//                     "type": "string"
-			//                   },
-			//                   "PayloadFormatIndicator": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 0,
-			//                     "type": "string"
-			//                   },
-			//                   "ResponseTopic": {
-			//                     "maxLength": 1024,
-			//                     "minLength": 0,
-			//                     "type": "string"
-			//                   },
-			//                   "UserProperties": {
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "properties": {
-			//                         "Key": {
-			//                           "maxLength": 1024,
-			//                           "minLength": 0,
-			//                           "type": "string"
-			//                         },
-			//                         "Value": {
-			//                           "maxLength": 1024,
-			//                           "minLength": 0,
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "Key",
-			//                         "Value"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "maxItems": 100,
-			//                     "minItems": 1,
-			//                     "type": "array"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "Qos": {
-			//                 "type": "integer"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "Topic": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Topic",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "S3": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BucketName": {
-			//                 "type": "string"
-			//               },
-			//               "CannedAcl": {
-			//                 "enum": [
-			//                   "private",
-			//                   "public-read",
-			//                   "public-read-write",
-			//                   "aws-exec-read",
-			//                   "authenticated-read",
-			//                   "bucket-owner-read",
-			//                   "bucket-owner-full-control",
-			//                   "log-delivery-write"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Key": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "BucketName",
-			//               "Key",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Sns": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "MessageFormat": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "TargetArn": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "TargetArn",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Sqs": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "QueueUrl": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "UseBase64": {
-			//                 "type": "boolean"
-			//               }
-			//             },
-			//             "required": [
-			//               "RoleArn",
-			//               "QueueUrl"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "StepFunctions": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ExecutionNamePrefix": {
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "StateMachineName": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "StateMachineName",
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Timestream": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DatabaseName": {
-			//                 "type": "string"
-			//               },
-			//               "Dimensions": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Name": {
-			//                       "type": "string"
-			//                     },
-			//                     "Value": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Name",
-			//                     "Value"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "maxItems": 128,
-			//                 "minItems": 1,
-			//                 "type": "array"
-			//               },
-			//               "RoleArn": {
-			//                 "type": "string"
-			//               },
-			//               "TableName": {
-			//                 "type": "string"
-			//               },
-			//               "Timestamp": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Unit": {
-			//                     "type": "string"
-			//                   },
-			//                   "Value": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Value",
-			//                   "Unit"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "RoleArn",
-			//               "DatabaseName",
-			//               "TableName",
-			//               "Dimensions"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "AwsIotSqlVersion": {
-			//       "type": "string"
-			//     },
-			//     "Description": {
-			//       "type": "string"
-			//     },
-			//     "ErrorAction": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CloudwatchAlarm": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AlarmName": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "StateReason": {
-			//               "type": "string"
-			//             },
-			//             "StateValue": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "AlarmName",
-			//             "StateReason",
-			//             "StateValue",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "CloudwatchLogs": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "LogGroupName": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "LogGroupName",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "CloudwatchMetric": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "MetricName": {
-			//               "type": "string"
-			//             },
-			//             "MetricNamespace": {
-			//               "type": "string"
-			//             },
-			//             "MetricTimestamp": {
-			//               "type": "string"
-			//             },
-			//             "MetricUnit": {
-			//               "type": "string"
-			//             },
-			//             "MetricValue": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "MetricName",
-			//             "MetricValue",
-			//             "MetricNamespace",
-			//             "MetricUnit",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "DynamoDB": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "HashKeyField": {
-			//               "type": "string"
-			//             },
-			//             "HashKeyType": {
-			//               "type": "string"
-			//             },
-			//             "HashKeyValue": {
-			//               "type": "string"
-			//             },
-			//             "PayloadField": {
-			//               "type": "string"
-			//             },
-			//             "RangeKeyField": {
-			//               "type": "string"
-			//             },
-			//             "RangeKeyType": {
-			//               "type": "string"
-			//             },
-			//             "RangeKeyValue": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "TableName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "TableName",
-			//             "HashKeyField",
-			//             "HashKeyValue",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "DynamoDBv2": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "PutItem": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "TableName": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "TableName"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "Elasticsearch": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Endpoint": {
-			//               "type": "string"
-			//             },
-			//             "Id": {
-			//               "type": "string"
-			//             },
-			//             "Index": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "Type": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Type",
-			//             "Endpoint",
-			//             "Index",
-			//             "Id",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Firehose": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "BatchMode": {
-			//               "type": "boolean"
-			//             },
-			//             "DeliveryStreamName": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "Separator": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "DeliveryStreamName",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Http": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Auth": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Sigv4": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "RoleArn": {
-			//                       "type": "string"
-			//                     },
-			//                     "ServiceName": {
-			//                       "type": "string"
-			//                     },
-			//                     "SigningRegion": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "ServiceName",
-			//                     "SigningRegion",
-			//                     "RoleArn"
-			//                   ],
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "ConfirmationUrl": {
-			//               "type": "string"
-			//             },
-			//             "Headers": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Key": {
-			//                     "type": "string"
-			//                   },
-			//                   "Value": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Value",
-			//                   "Key"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             },
-			//             "Url": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Url"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "IotAnalytics": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "BatchMode": {
-			//               "type": "boolean"
-			//             },
-			//             "ChannelName": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "ChannelName",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "IotEvents": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "BatchMode": {
-			//               "type": "boolean"
-			//             },
-			//             "InputName": {
-			//               "type": "string"
-			//             },
-			//             "MessageId": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "InputName",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "IotSiteWise": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "PutAssetPropertyValueEntries": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "AssetId": {
-			//                     "type": "string"
-			//                   },
-			//                   "EntryId": {
-			//                     "type": "string"
-			//                   },
-			//                   "PropertyAlias": {
-			//                     "type": "string"
-			//                   },
-			//                   "PropertyId": {
-			//                     "type": "string"
-			//                   },
-			//                   "PropertyValues": {
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "properties": {
-			//                         "Quality": {
-			//                           "type": "string"
-			//                         },
-			//                         "Timestamp": {
-			//                           "additionalProperties": false,
-			//                           "properties": {
-			//                             "OffsetInNanos": {
-			//                               "type": "string"
-			//                             },
-			//                             "TimeInSeconds": {
-			//                               "type": "string"
-			//                             }
-			//                           },
-			//                           "required": [
-			//                             "TimeInSeconds"
-			//                           ],
-			//                           "type": "object"
-			//                         },
-			//                         "Value": {
-			//                           "additionalProperties": false,
-			//                           "properties": {
-			//                             "BooleanValue": {
-			//                               "type": "string"
-			//                             },
-			//                             "DoubleValue": {
-			//                               "type": "string"
-			//                             },
-			//                             "IntegerValue": {
-			//                               "type": "string"
-			//                             },
-			//                             "StringValue": {
-			//                               "type": "string"
-			//                             }
-			//                           },
-			//                           "type": "object"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "Value",
-			//                         "Timestamp"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "type": "array",
-			//                     "uniqueItems": true
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "PropertyValues"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "PutAssetPropertyValueEntries",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Kafka": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ClientProperties": {
-			//               "additionalProperties": false,
-			//               "patternProperties": {
-			//                 "": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "DestinationArn": {
-			//               "type": "string"
-			//             },
-			//             "Key": {
-			//               "type": "string"
-			//             },
-			//             "Partition": {
-			//               "type": "string"
-			//             },
-			//             "Topic": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "DestinationArn",
-			//             "Topic",
-			//             "ClientProperties"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Kinesis": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "PartitionKey": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "StreamName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "StreamName",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Lambda": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "FunctionArn": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "Location": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DeviceId": {
-			//               "type": "string"
-			//             },
-			//             "Latitude": {
-			//               "type": "string"
-			//             },
-			//             "Longitude": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "Timestamp": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Unit": {
-			//                   "type": "string"
-			//                 },
-			//                 "Value": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Value"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "TrackerName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "RoleArn",
-			//             "TrackerName",
-			//             "DeviceId",
-			//             "Latitude",
-			//             "Longitude"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "OpenSearch": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Endpoint": {
-			//               "type": "string"
-			//             },
-			//             "Id": {
-			//               "type": "string"
-			//             },
-			//             "Index": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "Type": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Type",
-			//             "Endpoint",
-			//             "Index",
-			//             "Id",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Republish": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Headers": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "ContentType": {
-			//                   "maxLength": 1024,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 },
-			//                 "CorrelationData": {
-			//                   "maxLength": 1024,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 },
-			//                 "MessageExpiry": {
-			//                   "maxLength": 1024,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 },
-			//                 "PayloadFormatIndicator": {
-			//                   "maxLength": 1024,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 },
-			//                 "ResponseTopic": {
-			//                   "maxLength": 1024,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 },
-			//                 "UserProperties": {
-			//                   "items": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "Key": {
-			//                         "maxLength": 1024,
-			//                         "minLength": 0,
-			//                         "type": "string"
-			//                       },
-			//                       "Value": {
-			//                         "maxLength": 1024,
-			//                         "minLength": 0,
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "Key",
-			//                       "Value"
-			//                     ],
-			//                     "type": "object"
-			//                   },
-			//                   "maxItems": 100,
-			//                   "minItems": 1,
-			//                   "type": "array"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "Qos": {
-			//               "type": "integer"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "Topic": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Topic",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "S3": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "BucketName": {
-			//               "type": "string"
-			//             },
-			//             "CannedAcl": {
-			//               "enum": [
-			//                 "private",
-			//                 "public-read",
-			//                 "public-read-write",
-			//                 "aws-exec-read",
-			//                 "authenticated-read",
-			//                 "bucket-owner-read",
-			//                 "bucket-owner-full-control",
-			//                 "log-delivery-write"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "Key": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "BucketName",
-			//             "Key",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Sns": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "MessageFormat": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "TargetArn": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "TargetArn",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Sqs": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "QueueUrl": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "UseBase64": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "RoleArn",
-			//             "QueueUrl"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "StepFunctions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ExecutionNamePrefix": {
-			//               "type": "string"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "StateMachineName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "StateMachineName",
-			//             "RoleArn"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Timestream": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DatabaseName": {
-			//               "type": "string"
-			//             },
-			//             "Dimensions": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Name": {
-			//                     "type": "string"
-			//                   },
-			//                   "Value": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Name",
-			//                   "Value"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 128,
-			//               "minItems": 1,
-			//               "type": "array"
-			//             },
-			//             "RoleArn": {
-			//               "type": "string"
-			//             },
-			//             "TableName": {
-			//               "type": "string"
-			//             },
-			//             "Timestamp": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Unit": {
-			//                   "type": "string"
-			//                 },
-			//                 "Value": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Value",
-			//                 "Unit"
-			//               ],
-			//               "type": "object"
-			//             }
-			//           },
-			//           "required": [
-			//             "RoleArn",
-			//             "DatabaseName",
-			//             "TableName",
-			//             "Dimensions"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RuleDisabled": {
-			//       "type": "boolean"
-			//     },
-			//     "Sql": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Actions",
-			//     "Sql"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Actions": {
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "CloudwatchAlarm": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "AlarmName": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "StateReason": {
+			//	                "type": "string"
+			//	              },
+			//	              "StateValue": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "AlarmName",
+			//	              "StateReason",
+			//	              "StateValue",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "CloudwatchLogs": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "LogGroupName": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "LogGroupName",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "CloudwatchMetric": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "MetricName": {
+			//	                "type": "string"
+			//	              },
+			//	              "MetricNamespace": {
+			//	                "type": "string"
+			//	              },
+			//	              "MetricTimestamp": {
+			//	                "type": "string"
+			//	              },
+			//	              "MetricUnit": {
+			//	                "type": "string"
+			//	              },
+			//	              "MetricValue": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "MetricName",
+			//	              "MetricValue",
+			//	              "MetricNamespace",
+			//	              "MetricUnit",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "DynamoDB": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "HashKeyField": {
+			//	                "type": "string"
+			//	              },
+			//	              "HashKeyType": {
+			//	                "type": "string"
+			//	              },
+			//	              "HashKeyValue": {
+			//	                "type": "string"
+			//	              },
+			//	              "PayloadField": {
+			//	                "type": "string"
+			//	              },
+			//	              "RangeKeyField": {
+			//	                "type": "string"
+			//	              },
+			//	              "RangeKeyType": {
+			//	                "type": "string"
+			//	              },
+			//	              "RangeKeyValue": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "TableName": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "TableName",
+			//	              "HashKeyField",
+			//	              "HashKeyValue",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "DynamoDBv2": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "PutItem": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "TableName": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "TableName"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Elasticsearch": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Endpoint": {
+			//	                "type": "string"
+			//	              },
+			//	              "Id": {
+			//	                "type": "string"
+			//	              },
+			//	              "Index": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "Type": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Type",
+			//	              "Endpoint",
+			//	              "Index",
+			//	              "Id",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Firehose": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BatchMode": {
+			//	                "type": "boolean"
+			//	              },
+			//	              "DeliveryStreamName": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "Separator": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "DeliveryStreamName",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Http": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Auth": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Sigv4": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "RoleArn": {
+			//	                        "type": "string"
+			//	                      },
+			//	                      "ServiceName": {
+			//	                        "type": "string"
+			//	                      },
+			//	                      "SigningRegion": {
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "ServiceName",
+			//	                      "SigningRegion",
+			//	                      "RoleArn"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "ConfirmationUrl": {
+			//	                "type": "string"
+			//	              },
+			//	              "Headers": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Key": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Value": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Value",
+			//	                    "Key"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": true
+			//	              },
+			//	              "Url": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Url"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "IotAnalytics": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BatchMode": {
+			//	                "type": "boolean"
+			//	              },
+			//	              "ChannelName": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "ChannelName",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "IotEvents": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BatchMode": {
+			//	                "type": "boolean"
+			//	              },
+			//	              "InputName": {
+			//	                "type": "string"
+			//	              },
+			//	              "MessageId": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "InputName",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "IotSiteWise": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "PutAssetPropertyValueEntries": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "AssetId": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "EntryId": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "PropertyAlias": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "PropertyId": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "PropertyValues": {
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "properties": {
+			//	                          "Quality": {
+			//	                            "type": "string"
+			//	                          },
+			//	                          "Timestamp": {
+			//	                            "additionalProperties": false,
+			//	                            "properties": {
+			//	                              "OffsetInNanos": {
+			//	                                "type": "string"
+			//	                              },
+			//	                              "TimeInSeconds": {
+			//	                                "type": "string"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "TimeInSeconds"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          },
+			//	                          "Value": {
+			//	                            "additionalProperties": false,
+			//	                            "properties": {
+			//	                              "BooleanValue": {
+			//	                                "type": "string"
+			//	                              },
+			//	                              "DoubleValue": {
+			//	                                "type": "string"
+			//	                              },
+			//	                              "IntegerValue": {
+			//	                                "type": "string"
+			//	                              },
+			//	                              "StringValue": {
+			//	                                "type": "string"
+			//	                              }
+			//	                            },
+			//	                            "type": "object"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "Value",
+			//	                          "Timestamp"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "type": "array",
+			//	                      "uniqueItems": true
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "PropertyValues"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": true
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "PutAssetPropertyValueEntries",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Kafka": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ClientProperties": {
+			//	                "additionalProperties": false,
+			//	                "patternProperties": {
+			//	                  "": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "DestinationArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "Key": {
+			//	                "type": "string"
+			//	              },
+			//	              "Partition": {
+			//	                "type": "string"
+			//	              },
+			//	              "Topic": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "DestinationArn",
+			//	              "Topic",
+			//	              "ClientProperties"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Kinesis": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "PartitionKey": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "StreamName": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "StreamName",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Lambda": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "FunctionArn": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Location": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DeviceId": {
+			//	                "type": "string"
+			//	              },
+			//	              "Latitude": {
+			//	                "type": "string"
+			//	              },
+			//	              "Longitude": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "Timestamp": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Unit": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Value": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Value"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "TrackerName": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "RoleArn",
+			//	              "TrackerName",
+			//	              "DeviceId",
+			//	              "Latitude",
+			//	              "Longitude"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "OpenSearch": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Endpoint": {
+			//	                "type": "string"
+			//	              },
+			//	              "Id": {
+			//	                "type": "string"
+			//	              },
+			//	              "Index": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "Type": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Type",
+			//	              "Endpoint",
+			//	              "Index",
+			//	              "Id",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Republish": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Headers": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "ContentType": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 0,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "CorrelationData": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 0,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "MessageExpiry": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 0,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PayloadFormatIndicator": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 0,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "ResponseTopic": {
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 0,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "UserProperties": {
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "properties": {
+			//	                        "Key": {
+			//	                          "maxLength": 1024,
+			//	                          "minLength": 0,
+			//	                          "type": "string"
+			//	                        },
+			//	                        "Value": {
+			//	                          "maxLength": 1024,
+			//	                          "minLength": 0,
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "Key",
+			//	                        "Value"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "maxItems": 100,
+			//	                    "minItems": 1,
+			//	                    "type": "array"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "Qos": {
+			//	                "type": "integer"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "Topic": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Topic",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "S3": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BucketName": {
+			//	                "type": "string"
+			//	              },
+			//	              "CannedAcl": {
+			//	                "enum": [
+			//	                  "private",
+			//	                  "public-read",
+			//	                  "public-read-write",
+			//	                  "aws-exec-read",
+			//	                  "authenticated-read",
+			//	                  "bucket-owner-read",
+			//	                  "bucket-owner-full-control",
+			//	                  "log-delivery-write"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Key": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "BucketName",
+			//	              "Key",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Sns": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "MessageFormat": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "TargetArn": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "TargetArn",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Sqs": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "QueueUrl": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "UseBase64": {
+			//	                "type": "boolean"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "RoleArn",
+			//	              "QueueUrl"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "StepFunctions": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ExecutionNamePrefix": {
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "StateMachineName": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "StateMachineName",
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Timestream": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DatabaseName": {
+			//	                "type": "string"
+			//	              },
+			//	              "Dimensions": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Name": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Value": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Name",
+			//	                    "Value"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "maxItems": 128,
+			//	                "minItems": 1,
+			//	                "type": "array"
+			//	              },
+			//	              "RoleArn": {
+			//	                "type": "string"
+			//	              },
+			//	              "TableName": {
+			//	                "type": "string"
+			//	              },
+			//	              "Timestamp": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Unit": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Value": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Value",
+			//	                  "Unit"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "RoleArn",
+			//	              "DatabaseName",
+			//	              "TableName",
+			//	              "Dimensions"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "AwsIotSqlVersion": {
+			//	      "type": "string"
+			//	    },
+			//	    "Description": {
+			//	      "type": "string"
+			//	    },
+			//	    "ErrorAction": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CloudwatchAlarm": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AlarmName": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "StateReason": {
+			//	              "type": "string"
+			//	            },
+			//	            "StateValue": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "AlarmName",
+			//	            "StateReason",
+			//	            "StateValue",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "CloudwatchLogs": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "LogGroupName": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "LogGroupName",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "CloudwatchMetric": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "MetricName": {
+			//	              "type": "string"
+			//	            },
+			//	            "MetricNamespace": {
+			//	              "type": "string"
+			//	            },
+			//	            "MetricTimestamp": {
+			//	              "type": "string"
+			//	            },
+			//	            "MetricUnit": {
+			//	              "type": "string"
+			//	            },
+			//	            "MetricValue": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "MetricName",
+			//	            "MetricValue",
+			//	            "MetricNamespace",
+			//	            "MetricUnit",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "DynamoDB": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "HashKeyField": {
+			//	              "type": "string"
+			//	            },
+			//	            "HashKeyType": {
+			//	              "type": "string"
+			//	            },
+			//	            "HashKeyValue": {
+			//	              "type": "string"
+			//	            },
+			//	            "PayloadField": {
+			//	              "type": "string"
+			//	            },
+			//	            "RangeKeyField": {
+			//	              "type": "string"
+			//	            },
+			//	            "RangeKeyType": {
+			//	              "type": "string"
+			//	            },
+			//	            "RangeKeyValue": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "TableName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "TableName",
+			//	            "HashKeyField",
+			//	            "HashKeyValue",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "DynamoDBv2": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "PutItem": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "TableName": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "TableName"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "Elasticsearch": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Endpoint": {
+			//	              "type": "string"
+			//	            },
+			//	            "Id": {
+			//	              "type": "string"
+			//	            },
+			//	            "Index": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "Type": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Type",
+			//	            "Endpoint",
+			//	            "Index",
+			//	            "Id",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Firehose": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "BatchMode": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "DeliveryStreamName": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "Separator": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "DeliveryStreamName",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Http": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Auth": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Sigv4": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "RoleArn": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "ServiceName": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "SigningRegion": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "ServiceName",
+			//	                    "SigningRegion",
+			//	                    "RoleArn"
+			//	                  ],
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "ConfirmationUrl": {
+			//	              "type": "string"
+			//	            },
+			//	            "Headers": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Key": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Value": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Value",
+			//	                  "Key"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            },
+			//	            "Url": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Url"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "IotAnalytics": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "BatchMode": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "ChannelName": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "ChannelName",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "IotEvents": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "BatchMode": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "InputName": {
+			//	              "type": "string"
+			//	            },
+			//	            "MessageId": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "InputName",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "IotSiteWise": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "PutAssetPropertyValueEntries": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "AssetId": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "EntryId": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PropertyAlias": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PropertyId": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PropertyValues": {
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "properties": {
+			//	                        "Quality": {
+			//	                          "type": "string"
+			//	                        },
+			//	                        "Timestamp": {
+			//	                          "additionalProperties": false,
+			//	                          "properties": {
+			//	                            "OffsetInNanos": {
+			//	                              "type": "string"
+			//	                            },
+			//	                            "TimeInSeconds": {
+			//	                              "type": "string"
+			//	                            }
+			//	                          },
+			//	                          "required": [
+			//	                            "TimeInSeconds"
+			//	                          ],
+			//	                          "type": "object"
+			//	                        },
+			//	                        "Value": {
+			//	                          "additionalProperties": false,
+			//	                          "properties": {
+			//	                            "BooleanValue": {
+			//	                              "type": "string"
+			//	                            },
+			//	                            "DoubleValue": {
+			//	                              "type": "string"
+			//	                            },
+			//	                            "IntegerValue": {
+			//	                              "type": "string"
+			//	                            },
+			//	                            "StringValue": {
+			//	                              "type": "string"
+			//	                            }
+			//	                          },
+			//	                          "type": "object"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "Value",
+			//	                        "Timestamp"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "type": "array",
+			//	                    "uniqueItems": true
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "PropertyValues"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "PutAssetPropertyValueEntries",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Kafka": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ClientProperties": {
+			//	              "additionalProperties": false,
+			//	              "patternProperties": {
+			//	                "": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "DestinationArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "Key": {
+			//	              "type": "string"
+			//	            },
+			//	            "Partition": {
+			//	              "type": "string"
+			//	            },
+			//	            "Topic": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "DestinationArn",
+			//	            "Topic",
+			//	            "ClientProperties"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Kinesis": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "PartitionKey": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "StreamName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "StreamName",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Lambda": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "FunctionArn": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "Location": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DeviceId": {
+			//	              "type": "string"
+			//	            },
+			//	            "Latitude": {
+			//	              "type": "string"
+			//	            },
+			//	            "Longitude": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "Timestamp": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Unit": {
+			//	                  "type": "string"
+			//	                },
+			//	                "Value": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Value"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "TrackerName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "RoleArn",
+			//	            "TrackerName",
+			//	            "DeviceId",
+			//	            "Latitude",
+			//	            "Longitude"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "OpenSearch": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Endpoint": {
+			//	              "type": "string"
+			//	            },
+			//	            "Id": {
+			//	              "type": "string"
+			//	            },
+			//	            "Index": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "Type": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Type",
+			//	            "Endpoint",
+			//	            "Index",
+			//	            "Id",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Republish": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Headers": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "ContentType": {
+			//	                  "maxLength": 1024,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                },
+			//	                "CorrelationData": {
+			//	                  "maxLength": 1024,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                },
+			//	                "MessageExpiry": {
+			//	                  "maxLength": 1024,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                },
+			//	                "PayloadFormatIndicator": {
+			//	                  "maxLength": 1024,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                },
+			//	                "ResponseTopic": {
+			//	                  "maxLength": 1024,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                },
+			//	                "UserProperties": {
+			//	                  "items": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "Key": {
+			//	                        "maxLength": 1024,
+			//	                        "minLength": 0,
+			//	                        "type": "string"
+			//	                      },
+			//	                      "Value": {
+			//	                        "maxLength": 1024,
+			//	                        "minLength": 0,
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "Key",
+			//	                      "Value"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  },
+			//	                  "maxItems": 100,
+			//	                  "minItems": 1,
+			//	                  "type": "array"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "Qos": {
+			//	              "type": "integer"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "Topic": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Topic",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "S3": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "BucketName": {
+			//	              "type": "string"
+			//	            },
+			//	            "CannedAcl": {
+			//	              "enum": [
+			//	                "private",
+			//	                "public-read",
+			//	                "public-read-write",
+			//	                "aws-exec-read",
+			//	                "authenticated-read",
+			//	                "bucket-owner-read",
+			//	                "bucket-owner-full-control",
+			//	                "log-delivery-write"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "Key": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "BucketName",
+			//	            "Key",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Sns": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "MessageFormat": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "TargetArn": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "TargetArn",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Sqs": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "QueueUrl": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "UseBase64": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "RoleArn",
+			//	            "QueueUrl"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "StepFunctions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ExecutionNamePrefix": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "StateMachineName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "StateMachineName",
+			//	            "RoleArn"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Timestream": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DatabaseName": {
+			//	              "type": "string"
+			//	            },
+			//	            "Dimensions": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Name": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Value": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Name",
+			//	                  "Value"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 128,
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            },
+			//	            "RoleArn": {
+			//	              "type": "string"
+			//	            },
+			//	            "TableName": {
+			//	              "type": "string"
+			//	            },
+			//	            "Timestamp": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Unit": {
+			//	                  "type": "string"
+			//	                },
+			//	                "Value": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Value",
+			//	                "Unit"
+			//	              ],
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "RoleArn",
+			//	            "DatabaseName",
+			//	            "TableName",
+			//	            "Dimensions"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RuleDisabled": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "Sql": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Actions",
+			//	    "Sql"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"actions": {

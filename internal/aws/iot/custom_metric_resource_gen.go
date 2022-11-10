@@ -25,11 +25,12 @@ func customMetricResource(ctx context.Context) (resource.Resource, error) {
 		"display_name": {
 			// Property: DisplayName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.",
-			//   "maxLength": 128,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.",
+			//	  "maxLength": 128,
+			//	  "type": "string"
+			//	}
 			Description: "Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -44,12 +45,13 @@ func customMetricResource(ctx context.Context) (resource.Resource, error) {
 		"metric_arn": {
 			// Property: MetricArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Number (ARN) of the custom metric.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Number (ARN) of the custom metric.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Number (ARN) of the custom metric.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,13 +62,14 @@ func customMetricResource(ctx context.Context) (resource.Resource, error) {
 		"metric_name": {
 			// Property: MetricName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with aws: . Cannot be updated once defined.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9:_-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with aws: . Cannot be updated once defined.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9:_-]+",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with aws: . Cannot be updated once defined.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -83,16 +86,17 @@ func customMetricResource(ctx context.Context) (resource.Resource, error) {
 		"metric_type": {
 			// Property: MetricType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of the custom metric. Types include string-list, ip-address-list, number-list, and number.",
-			//   "enum": [
-			//     "string-list",
-			//     "ip-address-list",
-			//     "number-list",
-			//     "number"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of the custom metric. Types include string-list, ip-address-list, number-list, and number.",
+			//	  "enum": [
+			//	    "string-list",
+			//	    "ip-address-list",
+			//	    "number-list",
+			//	    "number"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The type of the custom metric. Types include string-list, ip-address-list, number-list, and number.",
 			Type:        types.StringType,
 			Required:    true,
@@ -111,36 +115,37 @@ func customMetricResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The tag's key.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The tag's value.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The tag's key.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The tag's value.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

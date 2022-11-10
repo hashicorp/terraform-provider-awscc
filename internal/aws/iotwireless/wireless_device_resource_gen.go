@@ -25,10 +25,11 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Wireless device arn. Returned after successful create.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Wireless device arn. Returned after successful create.",
+			//	  "type": "string"
+			//	}
 			Description: "Wireless device arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,11 +40,12 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Wireless device description",
-			//   "maxLength": 2048,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Wireless device description",
+			//	  "maxLength": 2048,
+			//	  "type": "string"
+			//	}
 			Description: "Wireless device description",
 			Type:        types.StringType,
 			Optional:    true,
@@ -58,11 +60,12 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"destination_name": {
 			// Property: DestinationName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Wireless device destination name",
-			//   "maxLength": 128,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Wireless device destination name",
+			//	  "maxLength": 128,
+			//	  "type": "string"
+			//	}
 			Description: "Wireless device destination name",
 			Type:        types.StringType,
 			Required:    true,
@@ -73,11 +76,12 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Wireless device Id. Returned after successful create.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Wireless device Id. Returned after successful create.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Wireless device Id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -88,11 +92,12 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"last_uplink_received_at": {
 			// Property: LastUplinkReceivedAt
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The date and time when the most recent uplink was received.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The date and time when the most recent uplink was received.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The date and time when the most recent uplink was received.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -104,162 +109,163 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"lo_ra_wan": {
 			// Property: LoRaWAN
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device.",
-			//   "oneOf": [
-			//     {
-			//       "required": [
-			//         "OtaaV11"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "OtaaV10x"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "AbpV11"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "AbpV10x"
-			//       ]
-			//     }
-			//   ],
-			//   "properties": {
-			//     "AbpV10x": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DevAddr": {
-			//           "pattern": "[a-fA-F0-9]{8}",
-			//           "type": "string"
-			//         },
-			//         "SessionKeys": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AppSKey": {
-			//               "pattern": "[a-fA-F0-9]{32}",
-			//               "type": "string"
-			//             },
-			//             "NwkSKey": {
-			//               "pattern": "[a-fA-F0-9]{32}",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "NwkSKey",
-			//             "AppSKey"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "DevAddr",
-			//         "SessionKeys"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "AbpV11": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DevAddr": {
-			//           "pattern": "[a-fA-F0-9]{8}",
-			//           "type": "string"
-			//         },
-			//         "SessionKeys": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AppSKey": {
-			//               "pattern": "[a-fA-F0-9]{32}",
-			//               "type": "string"
-			//             },
-			//             "FNwkSIntKey": {
-			//               "pattern": "[a-fA-F0-9]{32}",
-			//               "type": "string"
-			//             },
-			//             "NwkSEncKey": {
-			//               "pattern": "[a-fA-F0-9]{32}",
-			//               "type": "string"
-			//             },
-			//             "SNwkSIntKey": {
-			//               "pattern": "[a-fA-F0-9]{32}",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "FNwkSIntKey",
-			//             "SNwkSIntKey",
-			//             "NwkSEncKey",
-			//             "AppSKey"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "DevAddr",
-			//         "SessionKeys"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "DevEui": {
-			//       "pattern": "[a-f0-9]{16}",
-			//       "type": "string"
-			//     },
-			//     "DeviceProfileId": {
-			//       "maxLength": 256,
-			//       "type": "string"
-			//     },
-			//     "OtaaV10x": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AppEui": {
-			//           "pattern": "[a-fA-F0-9]{16}",
-			//           "type": "string"
-			//         },
-			//         "AppKey": {
-			//           "pattern": "[a-fA-F0-9]{32}",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "AppKey",
-			//         "AppEui"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "OtaaV11": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AppKey": {
-			//           "pattern": "[a-fA-F0-9]{32}",
-			//           "type": "string"
-			//         },
-			//         "JoinEui": {
-			//           "pattern": "[a-fA-F0-9]{16}",
-			//           "type": "string"
-			//         },
-			//         "NwkKey": {
-			//           "pattern": "[a-fA-F0-9]{32}",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "AppKey",
-			//         "NwkKey",
-			//         "JoinEui"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ServiceProfileId": {
-			//       "maxLength": 256,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device.",
+			//	  "oneOf": [
+			//	    {
+			//	      "required": [
+			//	        "OtaaV11"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "OtaaV10x"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "AbpV11"
+			//	      ]
+			//	    },
+			//	    {
+			//	      "required": [
+			//	        "AbpV10x"
+			//	      ]
+			//	    }
+			//	  ],
+			//	  "properties": {
+			//	    "AbpV10x": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DevAddr": {
+			//	          "pattern": "[a-fA-F0-9]{8}",
+			//	          "type": "string"
+			//	        },
+			//	        "SessionKeys": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AppSKey": {
+			//	              "pattern": "[a-fA-F0-9]{32}",
+			//	              "type": "string"
+			//	            },
+			//	            "NwkSKey": {
+			//	              "pattern": "[a-fA-F0-9]{32}",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "NwkSKey",
+			//	            "AppSKey"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "DevAddr",
+			//	        "SessionKeys"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "AbpV11": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DevAddr": {
+			//	          "pattern": "[a-fA-F0-9]{8}",
+			//	          "type": "string"
+			//	        },
+			//	        "SessionKeys": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AppSKey": {
+			//	              "pattern": "[a-fA-F0-9]{32}",
+			//	              "type": "string"
+			//	            },
+			//	            "FNwkSIntKey": {
+			//	              "pattern": "[a-fA-F0-9]{32}",
+			//	              "type": "string"
+			//	            },
+			//	            "NwkSEncKey": {
+			//	              "pattern": "[a-fA-F0-9]{32}",
+			//	              "type": "string"
+			//	            },
+			//	            "SNwkSIntKey": {
+			//	              "pattern": "[a-fA-F0-9]{32}",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "FNwkSIntKey",
+			//	            "SNwkSIntKey",
+			//	            "NwkSEncKey",
+			//	            "AppSKey"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "DevAddr",
+			//	        "SessionKeys"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "DevEui": {
+			//	      "pattern": "[a-f0-9]{16}",
+			//	      "type": "string"
+			//	    },
+			//	    "DeviceProfileId": {
+			//	      "maxLength": 256,
+			//	      "type": "string"
+			//	    },
+			//	    "OtaaV10x": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AppEui": {
+			//	          "pattern": "[a-fA-F0-9]{16}",
+			//	          "type": "string"
+			//	        },
+			//	        "AppKey": {
+			//	          "pattern": "[a-fA-F0-9]{32}",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "AppKey",
+			//	        "AppEui"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "OtaaV11": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AppKey": {
+			//	          "pattern": "[a-fA-F0-9]{32}",
+			//	          "type": "string"
+			//	        },
+			//	        "JoinEui": {
+			//	          "pattern": "[a-fA-F0-9]{16}",
+			//	          "type": "string"
+			//	        },
+			//	        "NwkKey": {
+			//	          "pattern": "[a-fA-F0-9]{32}",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "AppKey",
+			//	        "NwkKey",
+			//	        "JoinEui"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ServiceProfileId": {
+			//	      "maxLength": 256,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -496,11 +502,12 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Wireless device name",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Wireless device name",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Wireless device name",
 			Type:        types.StringType,
 			Optional:    true,
@@ -515,29 +522,30 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -579,10 +587,11 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"thing_arn": {
 			// Property: ThingArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Thing arn. Passed into update to associate Thing with Wireless device.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Thing arn. Passed into update to associate Thing with Wireless device.",
+			//	  "type": "string"
+			//	}
 			Description: "Thing arn. Passed into update to associate Thing with Wireless device.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -594,10 +603,11 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"thing_name": {
 			// Property: ThingName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
+			//	  "type": "string"
+			//	}
 			Description: "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -608,14 +618,15 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Wireless device type, currently only Sidewalk and LoRa",
-			//   "enum": [
-			//     "Sidewalk",
-			//     "LoRaWAN"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Wireless device type, currently only Sidewalk and LoRa",
+			//	  "enum": [
+			//	    "Sidewalk",
+			//	    "LoRaWAN"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Wireless device type, currently only Sidewalk and LoRa",
 			Type:        types.StringType,
 			Required:    true,

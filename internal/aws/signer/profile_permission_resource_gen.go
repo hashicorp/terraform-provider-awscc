@@ -25,9 +25,10 @@ func profilePermissionResource(ctx context.Context) (resource.Resource, error) {
 		"action": {
 			// Property: Action
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -37,9 +38,10 @@ func profilePermissionResource(ctx context.Context) (resource.Resource, error) {
 		"principal": {
 			// Property: Principal
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -49,9 +51,10 @@ func profilePermissionResource(ctx context.Context) (resource.Resource, error) {
 		"profile_name": {
 			// Property: ProfileName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -61,10 +64,11 @@ func profilePermissionResource(ctx context.Context) (resource.Resource, error) {
 		"profile_version": {
 			// Property: ProfileVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "^[0-9a-zA-Z]{10}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "^[0-9a-zA-Z]{10}$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -79,9 +83,10 @@ func profilePermissionResource(ctx context.Context) (resource.Resource, error) {
 		"statement_id": {
 			// Property: StatementId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

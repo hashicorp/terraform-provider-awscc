@@ -24,10 +24,11 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"ami_type": {
 			// Property: AmiType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AMI type for your node group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AMI type for your node group.",
+			//	  "type": "string"
+			//	}
 			Description: "The AMI type for your node group.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -40,9 +41,10 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -52,10 +54,11 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"capacity_type": {
 			// Property: CapacityType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The capacity type of your managed node group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The capacity type of your managed node group.",
+			//	  "type": "string"
+			//	}
 			Description: "The capacity type of your managed node group.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -68,11 +71,12 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_name": {
 			// Property: ClusterName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the cluster to create the node group in.",
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the cluster to create the node group in.",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Name of the cluster to create the node group in.",
 			Type:        types.StringType,
 			Required:    true,
@@ -86,10 +90,11 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"disk_size": {
 			// Property: DiskSize
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The root device disk size (in GiB) for your node group instances.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The root device disk size (in GiB) for your node group instances.",
+			//	  "type": "integer"
+			//	}
 			Description: "The root device disk size (in GiB) for your node group instances.",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -102,11 +107,12 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"force_update_enabled": {
 			// Property: ForceUpdateEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "default": false,
-			//   "description": "Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "default": false,
+			//	  "description": "Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -120,9 +126,10 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -132,15 +139,16 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"instance_types": {
 			// Property: InstanceTypes
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specify the instance types for a node group.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "Specify the instance types for a node group.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "Specify the instance types for a node group.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -154,10 +162,11 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"labels": {
 			// Property: Labels
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
+			//	  "type": "object"
+			//	}
 			Description: "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
@@ -169,25 +178,26 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"launch_template": {
 			// Property: LaunchTemplate
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object representing a node group's launch template specification.",
-			//   "properties": {
-			//     "Id": {
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "Name": {
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "Version": {
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object representing a node group's launch template specification.",
+			//	  "properties": {
+			//	    "Id": {
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "Name": {
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "Version": {
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object representing a node group's launch template specification.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -238,10 +248,11 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"node_role": {
 			// Property: NodeRole
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the IAM role to associate with your node group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the IAM role to associate with your node group.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the IAM role to associate with your node group.",
 			Type:        types.StringType,
 			Required:    true,
@@ -252,11 +263,12 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"nodegroup_name": {
 			// Property: NodegroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique name to give your node group.",
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unique name to give your node group.",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The unique name to give your node group.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -272,10 +284,11 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"release_version": {
 			// Property: ReleaseVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AMI version of the Amazon EKS-optimized AMI to use with your node group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AMI version of the Amazon EKS-optimized AMI to use with your node group.",
+			//	  "type": "string"
+			//	}
 			Description: "The AMI version of the Amazon EKS-optimized AMI to use with your node group.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -287,27 +300,28 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"remote_access": {
 			// Property: RemoteAccess
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The remote access (SSH) configuration to use with your node group.",
-			//   "properties": {
-			//     "Ec2SshKey": {
-			//       "type": "string"
-			//     },
-			//     "SourceSecurityGroups": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     }
-			//   },
-			//   "required": [
-			//     "Ec2SshKey"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The remote access (SSH) configuration to use with your node group.",
+			//	  "properties": {
+			//	    "Ec2SshKey": {
+			//	      "type": "string"
+			//	    },
+			//	    "SourceSecurityGroups": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Ec2SshKey"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The remote access (SSH) configuration to use with your node group.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -338,25 +352,26 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"scaling_config": {
 			// Property: ScalingConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The scaling configuration details for the Auto Scaling group that is created for your node group.",
-			//   "properties": {
-			//     "DesiredSize": {
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "MaxSize": {
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     },
-			//     "MinSize": {
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The scaling configuration details for the Auto Scaling group that is created for your node group.",
+			//	  "properties": {
+			//	    "DesiredSize": {
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "MaxSize": {
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    },
+			//	    "MinSize": {
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The scaling configuration details for the Auto Scaling group that is created for your node group.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -407,15 +422,16 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"subnets": {
 			// Property: Subnets
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The subnets to use for the Auto Scaling group that is created for your node group.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "The subnets to use for the Auto Scaling group that is created for your node group.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "The subnets to use for the Auto Scaling group that is created for your node group.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
@@ -427,10 +443,11 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
+			//	  "type": "object"
+			//	}
 			Description: "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
@@ -442,30 +459,31 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"taints": {
 			// Property: Taints
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "An object representing a Taint specification for AWS EKS Nodegroup.",
-			//     "properties": {
-			//       "Effect": {
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Key": {
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "An object representing a Taint specification for AWS EKS Nodegroup.",
+			//	    "properties": {
+			//	      "Effect": {
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Key": {
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -517,24 +535,25 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"update_config": {
 			// Property: UpdateConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The node group update configuration.",
-			//   "properties": {
-			//     "MaxUnavailable": {
-			//       "description": "The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100. ",
-			//       "minimum": 1,
-			//       "type": "number"
-			//     },
-			//     "MaxUnavailablePercentage": {
-			//       "description": "The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.",
-			//       "maximum": 100,
-			//       "minimum": 1,
-			//       "type": "number"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The node group update configuration.",
+			//	  "properties": {
+			//	    "MaxUnavailable": {
+			//	      "description": "The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100. ",
+			//	      "minimum": 1,
+			//	      "type": "number"
+			//	    },
+			//	    "MaxUnavailablePercentage": {
+			//	      "description": "The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.",
+			//	      "maximum": 100,
+			//	      "minimum": 1,
+			//	      "type": "number"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The node group update configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -575,10 +594,11 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Kubernetes version to use for your managed nodes.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Kubernetes version to use for your managed nodes.",
+			//	  "type": "string"
+			//	}
 			Description: "The Kubernetes version to use for your managed nodes.",
 			Type:        types.StringType,
 			Optional:    true,

@@ -24,10 +24,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Resource Group ARN.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Resource Group ARN.",
+			//	  "type": "string"
+			//	}
 			Description: "The Resource Group ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,36 +39,37 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		"configuration": {
 			// Property: Configuration
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Parameters": {
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Name": {
-			//               "type": "string"
-			//             },
-			//             "Values": {
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Type": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Parameters": {
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Name": {
+			//	              "type": "string"
+			//	            },
+			//	            "Values": {
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Type": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"parameters": {
@@ -120,11 +122,12 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the resource group",
-			//   "maxLength": 512,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the resource group",
+			//	  "maxLength": 512,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the resource group",
 			Type:        types.StringType,
 			Optional:    true,
@@ -139,11 +142,12 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the resource group",
-			//   "maxLength": 128,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the resource group",
+			//	  "maxLength": 128,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the resource group",
 			Type:        types.StringType,
 			Required:    true,
@@ -157,52 +161,53 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		"resource_query": {
 			// Property: ResourceQuery
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Query": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "ResourceTypeFilters": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "StackIdentifier": {
-			//           "type": "string"
-			//         },
-			//         "TagFilters": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Key": {
-			//                 "type": "string"
-			//               },
-			//               "Values": {
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Type": {
-			//       "enum": [
-			//         "TAG_FILTERS_1_0",
-			//         "CLOUDFORMATION_STACK_1_0"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Query": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "ResourceTypeFilters": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "StackIdentifier": {
+			//	          "type": "string"
+			//	        },
+			//	        "TagFilters": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Key": {
+			//	                "type": "string"
+			//	              },
+			//	              "Values": {
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Type": {
+			//	      "enum": [
+			//	        "TAG_FILTERS_1_0",
+			//	        "CLOUDFORMATION_STACK_1_0"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"query": {
@@ -291,12 +296,13 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		"resources": {
 			// Property: Resources
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -307,22 +313,23 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

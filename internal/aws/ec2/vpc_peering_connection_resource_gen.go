@@ -23,9 +23,10 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,10 +36,11 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		"peer_owner_id": {
 			// Property: PeerOwnerId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AWS account ID of the owner of the accepter VPC.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AWS account ID of the owner of the accepter VPC.",
+			//	  "type": "string"
+			//	}
 			Description: "The AWS account ID of the owner of the accepter VPC.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -51,10 +53,11 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		"peer_region": {
 			// Property: PeerRegion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.",
+			//	  "type": "string"
+			//	}
 			Description: "The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -67,10 +70,11 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		"peer_role_arn": {
 			// Property: PeerRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -84,10 +88,11 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		"peer_vpc_id": {
 			// Property: PeerVpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.",
 			Type:        types.StringType,
 			Required:    true,
@@ -98,30 +103,31 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -148,10 +154,11 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the VPC.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the VPC.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the VPC.",
 			Type:        types.StringType,
 			Required:    true,

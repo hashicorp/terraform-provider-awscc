@@ -24,12 +24,13 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 		"account_id": {
 			// Property: AccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
-			//   "maxLength": 12,
-			//   "minLength": 12,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
+			//	  "maxLength": 12,
+			//	  "minLength": 12,
+			//	  "type": "string"
+			//	}
 			Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
 			Type:        types.StringType,
 			Required:    true,
@@ -43,167 +44,168 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 		"audit_check_configurations": {
 			// Property: AuditCheckConfigurations
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specifies which audit checks are enabled and disabled for this account.",
-			//   "properties": {
-			//     "AuthenticatedCognitoRoleOverlyPermissiveCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "CaCertificateExpiringCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "CaCertificateKeyQualityCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ConflictingClientIdsCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "DeviceCertificateExpiringCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "DeviceCertificateKeyQualityCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "DeviceCertificateSharedCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "IotPolicyOverlyPermissiveCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "IotRoleAliasAllowsAccessToUnusedServicesCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "IotRoleAliasOverlyPermissiveCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "LoggingDisabledCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RevokedCaCertificateStillActiveCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RevokedDeviceCertificateStillActiveCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "UnauthenticatedCognitoRoleOverlyPermissiveCheck": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration for a specific audit check.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if the check is enabled.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specifies which audit checks are enabled and disabled for this account.",
+			//	  "properties": {
+			//	    "AuthenticatedCognitoRoleOverlyPermissiveCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "CaCertificateExpiringCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "CaCertificateKeyQualityCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ConflictingClientIdsCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "DeviceCertificateExpiringCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "DeviceCertificateKeyQualityCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "DeviceCertificateSharedCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "IotPolicyOverlyPermissiveCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "IotRoleAliasAllowsAccessToUnusedServicesCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "IotRoleAliasOverlyPermissiveCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "LoggingDisabledCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RevokedCaCertificateStillActiveCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RevokedDeviceCertificateStillActiveCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "UnauthenticatedCognitoRoleOverlyPermissiveCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Specifies which audit checks are enabled and disabled for this account.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -536,34 +538,35 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 		"audit_notification_target_configurations": {
 			// Property: AuditNotificationTargetConfigurations
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Information about the targets to which audit notifications are sent.",
-			//   "properties": {
-			//     "Sns": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "description": "True if notifications to the target are enabled.",
-			//           "type": "boolean"
-			//         },
-			//         "RoleArn": {
-			//           "description": "The ARN of the role that grants permission to send notifications to the target.",
-			//           "maxLength": 2048,
-			//           "minLength": 20,
-			//           "type": "string"
-			//         },
-			//         "TargetArn": {
-			//           "description": "The ARN of the target (SNS topic) to which audit notifications are sent.",
-			//           "maxLength": 2048,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Information about the targets to which audit notifications are sent.",
+			//	  "properties": {
+			//	    "Sns": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if notifications to the target are enabled.",
+			//	          "type": "boolean"
+			//	        },
+			//	        "RoleArn": {
+			//	          "description": "The ARN of the role that grants permission to send notifications to the target.",
+			//	          "maxLength": 2048,
+			//	          "minLength": 20,
+			//	          "type": "string"
+			//	        },
+			//	        "TargetArn": {
+			//	          "description": "The ARN of the target (SNS topic) to which audit notifications are sent.",
+			//	          "maxLength": 2048,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Information about the targets to which audit notifications are sent.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -626,12 +629,13 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.",
 			Type:        types.StringType,
 			Required:    true,

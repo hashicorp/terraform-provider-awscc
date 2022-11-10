@@ -24,15 +24,16 @@ func robotResource(ctx context.Context) (resource.Resource, error) {
 		"architecture": {
 			// Property: Architecture
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The target architecture of the robot.",
-			//   "enum": [
-			//     "X86_64",
-			//     "ARM64",
-			//     "ARMHF"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The target architecture of the robot.",
+			//	  "enum": [
+			//	    "X86_64",
+			//	    "ARM64",
+			//	    "ARMHF"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The target architecture of the robot.",
 			Type:        types.StringType,
 			Required:    true,
@@ -50,10 +51,11 @@ func robotResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -63,12 +65,13 @@ func robotResource(ctx context.Context) (resource.Resource, error) {
 		"fleet": {
 			// Property: Fleet
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the fleet.",
-			//   "maxLength": 1224,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the fleet.",
+			//	  "maxLength": 1224,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the fleet.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -84,12 +87,13 @@ func robotResource(ctx context.Context) (resource.Resource, error) {
 		"greengrass_group_id": {
 			// Property: GreengrassGroupId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Greengrass group id.",
-			//   "maxLength": 1224,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Greengrass group id.",
+			//	  "maxLength": 1224,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The Greengrass group id.",
 			Type:        types.StringType,
 			Required:    true,
@@ -103,12 +107,13 @@ func robotResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the robot.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the robot.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name for the robot.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -124,19 +129,20 @@ func robotResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A key-value pair to associate with a resource.",
-			//   "patternProperties": {
-			//     "": {
-			//       "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//       "maxLength": 256,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A key-value pair to associate with a resource.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	      "maxLength": 256,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A key-value pair to associate with a resource.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

@@ -25,13 +25,14 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the unique Amazon Resource Name (ARN) for the profile.",
-			//   "maxLength": 1600,
-			//   "minLength": 20,
-			//   "pattern": "arn:.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the profile.",
+			//	  "maxLength": 1600,
+			//	  "minLength": 20,
+			//	  "pattern": "arn:.*",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the unique Amazon Resource Name (ARN) for the profile.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -42,12 +43,13 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		"as_2_id": {
 			// Property: As2Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AS2 identifier agreed with a trading partner.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AS2 identifier agreed with a trading partner.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "AS2 identifier agreed with a trading partner.",
 			Type:        types.StringType,
 			Required:    true,
@@ -58,18 +60,19 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_ids": {
 			// Property: CertificateIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "description": "A unique identifier for the certificate.",
-			//     "maxLength": 22,
-			//     "minLength": 22,
-			//     "pattern": "^cert-([0-9a-f]{17})$",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "description": "A unique identifier for the certificate.",
+			//	    "maxLength": 22,
+			//	    "minLength": 22,
+			//	    "pattern": "^cert-([0-9a-f]{17})$",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -86,13 +89,14 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		"profile_id": {
 			// Property: ProfileId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A unique identifier for the profile",
-			//   "maxLength": 19,
-			//   "minLength": 19,
-			//   "pattern": "^p-([0-9a-f]{17})$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A unique identifier for the profile",
+			//	  "maxLength": 19,
+			//	  "minLength": 19,
+			//	  "pattern": "^p-([0-9a-f]{17})$",
+			//	  "type": "string"
+			//	}
 			Description: "A unique identifier for the profile",
 			Type:        types.StringType,
 			Computed:    true,
@@ -103,14 +107,15 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		"profile_type": {
 			// Property: ProfileType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Enum specifying whether the profile is local or associated with a trading partner.",
-			//   "enum": [
-			//     "LOCAL",
-			//     "PARTNER"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Enum specifying whether the profile is local or associated with a trading partner.",
+			//	  "enum": [
+			//	    "LOCAL",
+			//	    "PARTNER"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Enum specifying whether the profile is local or associated with a trading partner.",
 			Type:        types.StringType,
 			Required:    true,
@@ -127,36 +132,37 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Creates a key-value pair for a specific resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The name assigned to the tag that you create.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "Contains one or more values that you assigned to the key name you create.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Creates a key-value pair for a specific resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The name assigned to the tag that you create.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "Contains one or more values that you assigned to the key name you create.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

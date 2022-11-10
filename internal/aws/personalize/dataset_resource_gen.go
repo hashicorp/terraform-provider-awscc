@@ -25,12 +25,13 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"dataset_arn": {
 			// Property: DatasetArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the dataset",
-			//   "maxLength": 256,
-			//   "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the dataset",
+			//	  "maxLength": 256,
+			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the dataset",
 			Type:        types.StringType,
 			Computed:    true,
@@ -41,12 +42,13 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"dataset_group_arn": {
 			// Property: DatasetGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the dataset group to add the dataset to",
-			//   "maxLength": 256,
-			//   "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the dataset group to add the dataset to",
+			//	  "maxLength": 256,
+			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the dataset group to add the dataset to",
 			Type:        types.StringType,
 			Required:    true,
@@ -61,51 +63,52 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"dataset_import_job": {
 			// Property: DatasetImportJob
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Initial DatasetImportJob for the created dataset",
-			//   "properties": {
-			//     "DataSource": {
-			//       "additionalProperties": false,
-			//       "description": "The Amazon S3 bucket that contains the training data to import.",
-			//       "properties": {
-			//         "DataLocation": {
-			//           "description": "The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.",
-			//           "maxLength": 256,
-			//           "pattern": "(s3|http|https)://.+",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "DatasetArn": {
-			//       "description": "The ARN of the dataset that receives the imported data",
-			//       "maxLength": 256,
-			//       "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//       "type": "string"
-			//     },
-			//     "DatasetImportJobArn": {
-			//       "description": "The ARN of the dataset import job",
-			//       "maxLength": 256,
-			//       "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//       "type": "string"
-			//     },
-			//     "JobName": {
-			//       "description": "The name for the dataset import job.",
-			//       "maxLength": 63,
-			//       "minLength": 1,
-			//       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//       "type": "string"
-			//     },
-			//     "RoleArn": {
-			//       "description": "The ARN of the IAM role that has permissions to read from the Amazon S3 data source.",
-			//       "maxLength": 256,
-			//       "pattern": "arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Initial DatasetImportJob for the created dataset",
+			//	  "properties": {
+			//	    "DataSource": {
+			//	      "additionalProperties": false,
+			//	      "description": "The Amazon S3 bucket that contains the training data to import.",
+			//	      "properties": {
+			//	        "DataLocation": {
+			//	          "description": "The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.",
+			//	          "maxLength": 256,
+			//	          "pattern": "(s3|http|https)://.+",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "DatasetArn": {
+			//	      "description": "The ARN of the dataset that receives the imported data",
+			//	      "maxLength": 256,
+			//	      "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	      "type": "string"
+			//	    },
+			//	    "DatasetImportJobArn": {
+			//	      "description": "The ARN of the dataset import job",
+			//	      "maxLength": 256,
+			//	      "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	      "type": "string"
+			//	    },
+			//	    "JobName": {
+			//	      "description": "The name for the dataset import job.",
+			//	      "maxLength": 63,
+			//	      "minLength": 1,
+			//	      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	      "type": "string"
+			//	    },
+			//	    "RoleArn": {
+			//	      "description": "The ARN of the IAM role that has permissions to read from the Amazon S3 data source.",
+			//	      "maxLength": 256,
+			//	      "pattern": "arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Initial DatasetImportJob for the created dataset",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -203,16 +206,17 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"dataset_type": {
 			// Property: DatasetType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of dataset",
-			//   "enum": [
-			//     "Interactions",
-			//     "Items",
-			//     "Users"
-			//   ],
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of dataset",
+			//	  "enum": [
+			//	    "Interactions",
+			//	    "Items",
+			//	    "Users"
+			//	  ],
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "The type of dataset",
 			Type:        types.StringType,
 			Required:    true,
@@ -231,13 +235,14 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the dataset",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the dataset",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the dataset",
 			Type:        types.StringType,
 			Required:    true,
@@ -252,12 +257,13 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"schema_arn": {
 			// Property: SchemaArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the schema to associate with the dataset. The schema defines the dataset fields.",
-			//   "maxLength": 256,
-			//   "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the schema to associate with the dataset. The schema defines the dataset fields.",
+			//	  "maxLength": 256,
+			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the schema to associate with the dataset. The schema defines the dataset fields.",
 			Type:        types.StringType,
 			Required:    true,

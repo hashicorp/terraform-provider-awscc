@@ -25,11 +25,12 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"aws_account_id": {
 			// Property: AwsAccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AWS account ID associated with the Environment",
-			//   "pattern": "^[a-zA-Z0-9]{1,26}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AWS account ID associated with the Environment",
+			//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
+			//	  "type": "string"
+			//	}
 			Description: "AWS account ID associated with the Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,15 +41,16 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"data_bundles": {
 			// Property: DataBundles
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARNs of FinSpace Data Bundles to install",
-			//   "items": {
-			//     "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d*:data-bundle/[0-9A-Za-z_-]{1,128}$",
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "ARNs of FinSpace Data Bundles to install",
+			//	  "items": {
+			//	    "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d*:data-bundle/[0-9A-Za-z_-]{1,128}$",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "ARNs of FinSpace Data Bundles to install",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -64,11 +66,12 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"dedicated_service_account_id": {
 			// Property: DedicatedServiceAccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ID for FinSpace created account used to store Environment artifacts",
-			//   "pattern": "^[a-zA-Z0-9]{1,26}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ID for FinSpace created account used to store Environment artifacts",
+			//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
+			//	  "type": "string"
+			//	}
 			Description: "ID for FinSpace created account used to store Environment artifacts",
 			Type:        types.StringType,
 			Computed:    true,
@@ -79,11 +82,12 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description of the Environment",
-			//   "pattern": "^[a-zA-Z0-9. ]{1,1000}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description of the Environment",
+			//	  "pattern": "^[a-zA-Z0-9. ]{1,1000}$",
+			//	  "type": "string"
+			//	}
 			Description: "Description of the Environment",
 			Type:        types.StringType,
 			Optional:    true,
@@ -98,11 +102,12 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"environment_arn": {
 			// Property: EnvironmentArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARN of the Environment",
-			//   "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:environment/[0-9A-Za-z_-]{1,128}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ARN of the Environment",
+			//	  "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:environment/[0-9A-Za-z_-]{1,128}$",
+			//	  "type": "string"
+			//	}
 			Description: "ARN of the Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -113,11 +118,12 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"environment_id": {
 			// Property: EnvironmentId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique identifier for representing FinSpace Environment",
-			//   "pattern": "^[a-zA-Z0-9]{1,26}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique identifier for representing FinSpace Environment",
+			//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
+			//	  "type": "string"
+			//	}
 			Description: "Unique identifier for representing FinSpace Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -128,11 +134,12 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"environment_url": {
 			// Property: EnvironmentUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "URL used to login to the Environment",
-			//   "pattern": "^[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "URL used to login to the Environment",
+			//	  "pattern": "^[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
+			//	  "type": "string"
+			//	}
 			Description: "URL used to login to the Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -143,14 +150,15 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"federation_mode": {
 			// Property: FederationMode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Federation mode used with the Environment",
-			//   "enum": [
-			//     "LOCAL",
-			//     "FEDERATED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Federation mode used with the Environment",
+			//	  "enum": [
+			//	    "LOCAL",
+			//	    "FEDERATED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Federation mode used with the Environment",
 			Type:        types.StringType,
 			Optional:    true,
@@ -168,45 +176,46 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"federation_parameters": {
 			// Property: FederationParameters
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Additional parameters to identify Federation mode",
-			//   "properties": {
-			//     "ApplicationCallBackURL": {
-			//       "description": "SAML metadata URL to link with the Environment",
-			//       "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
-			//       "type": "string"
-			//     },
-			//     "AttributeMap": {
-			//       "description": "Attribute map for SAML configuration",
-			//       "type": "object"
-			//     },
-			//     "FederationProviderName": {
-			//       "description": "Federation provider name to link with the Environment",
-			//       "maxLength": 32,
-			//       "minLength": 1,
-			//       "pattern": "[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+",
-			//       "type": "string"
-			//     },
-			//     "FederationURN": {
-			//       "description": "SAML metadata URL to link with the Environment",
-			//       "pattern": "",
-			//       "type": "string"
-			//     },
-			//     "SamlMetadataDocument": {
-			//       "description": "SAML metadata document to link the federation provider to the Environment",
-			//       "maxLength": 10000000,
-			//       "minLength": 1000,
-			//       "pattern": ".*",
-			//       "type": "string"
-			//     },
-			//     "SamlMetadataURL": {
-			//       "description": "SAML metadata URL to link with the Environment",
-			//       "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "Additional parameters to identify Federation mode",
+			//	  "properties": {
+			//	    "ApplicationCallBackURL": {
+			//	      "description": "SAML metadata URL to link with the Environment",
+			//	      "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
+			//	      "type": "string"
+			//	    },
+			//	    "AttributeMap": {
+			//	      "description": "Attribute map for SAML configuration",
+			//	      "type": "object"
+			//	    },
+			//	    "FederationProviderName": {
+			//	      "description": "Federation provider name to link with the Environment",
+			//	      "maxLength": 32,
+			//	      "minLength": 1,
+			//	      "pattern": "[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+",
+			//	      "type": "string"
+			//	    },
+			//	    "FederationURN": {
+			//	      "description": "SAML metadata URL to link with the Environment",
+			//	      "pattern": "",
+			//	      "type": "string"
+			//	    },
+			//	    "SamlMetadataDocument": {
+			//	      "description": "SAML metadata document to link the federation provider to the Environment",
+			//	      "maxLength": 10000000,
+			//	      "minLength": 1000,
+			//	      "pattern": ".*",
+			//	      "type": "string"
+			//	    },
+			//	    "SamlMetadataURL": {
+			//	      "description": "SAML metadata URL to link with the Environment",
+			//	      "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Additional parameters to identify Federation mode",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -295,11 +304,12 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_id": {
 			// Property: KmsKeyId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
 			Type:        types.StringType,
 			Optional:    true,
@@ -312,11 +322,12 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the Environment",
-			//   "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]{1,255}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the Environment",
+			//	  "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]{1,255}$",
+			//	  "type": "string"
+			//	}
 			Description: "Name of the Environment",
 			Type:        types.StringType,
 			Required:    true,
@@ -327,11 +338,12 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"sage_maker_studio_domain_url": {
 			// Property: SageMakerStudioDomainUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "SageMaker Studio Domain URL associated with the Environment",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "SageMaker Studio Domain URL associated with the Environment",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "SageMaker Studio Domain URL associated with the Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -342,22 +354,23 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "State of the Environment",
-			//   "enum": [
-			//     "CREATE_REQUESTED",
-			//     "CREATING",
-			//     "CREATED",
-			//     "DELETE_REQUESTED",
-			//     "DELETING",
-			//     "DELETED",
-			//     "FAILED_CREATION",
-			//     "FAILED_DELETION",
-			//     "RETRY_DELETION",
-			//     "SUSPENDED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "State of the Environment",
+			//	  "enum": [
+			//	    "CREATE_REQUESTED",
+			//	    "CREATING",
+			//	    "CREATED",
+			//	    "DELETE_REQUESTED",
+			//	    "DELETING",
+			//	    "DELETED",
+			//	    "FAILED_CREATION",
+			//	    "FAILED_DELETION",
+			//	    "RETRY_DELETION",
+			//	    "SUSPENDED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "State of the Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -368,33 +381,34 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"superuser_parameters": {
 			// Property: SuperuserParameters
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Parameters of the first Superuser for the FinSpace Environment",
-			//   "properties": {
-			//     "EmailAddress": {
-			//       "description": "Email address",
-			//       "maxLength": 128,
-			//       "minLength": 1,
-			//       "pattern": "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+",
-			//       "type": "string"
-			//     },
-			//     "FirstName": {
-			//       "description": "First name",
-			//       "maxLength": 50,
-			//       "minLength": 1,
-			//       "pattern": "^[a-zA-Z0-9]{1,50}$",
-			//       "type": "string"
-			//     },
-			//     "LastName": {
-			//       "description": "Last name",
-			//       "maxLength": 50,
-			//       "minLength": 1,
-			//       "pattern": "^[a-zA-Z0-9]{1,50}$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "Parameters of the first Superuser for the FinSpace Environment",
+			//	  "properties": {
+			//	    "EmailAddress": {
+			//	      "description": "Email address",
+			//	      "maxLength": 128,
+			//	      "minLength": 1,
+			//	      "pattern": "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+",
+			//	      "type": "string"
+			//	    },
+			//	    "FirstName": {
+			//	      "description": "First name",
+			//	      "maxLength": 50,
+			//	      "minLength": 1,
+			//	      "pattern": "^[a-zA-Z0-9]{1,50}$",
+			//	      "type": "string"
+			//	    },
+			//	    "LastName": {
+			//	      "description": "Last name",
+			//	      "maxLength": 50,
+			//	      "minLength": 1,
+			//	      "pattern": "^[a-zA-Z0-9]{1,50}$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Parameters of the first Superuser for the FinSpace Environment",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

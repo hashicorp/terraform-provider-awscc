@@ -23,9 +23,10 @@ func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.R
 		"analyzed_eni_count": {
 			// Property: AnalyzedEniCount
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,9 +36,10 @@ func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.R
 		"end_date": {
 			// Property: EndDate
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -47,14 +49,15 @@ func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.R
 		"findings_found": {
 			// Property: FindingsFound
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "true",
-			//     "false",
-			//     "unknown"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "true",
+			//	    "false",
+			//	    "unknown"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -64,9 +67,10 @@ func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.R
 		"network_insights_access_scope_analysis_arn": {
 			// Property: NetworkInsightsAccessScopeAnalysisArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -76,9 +80,10 @@ func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.R
 		"network_insights_access_scope_analysis_id": {
 			// Property: NetworkInsightsAccessScopeAnalysisId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -88,9 +93,10 @@ func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.R
 		"network_insights_access_scope_id": {
 			// Property: NetworkInsightsAccessScopeId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -100,9 +106,10 @@ func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.R
 		"start_date": {
 			// Property: StartDate
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -112,14 +119,15 @@ func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.R
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "running",
-			//     "failed",
-			//     "succeeded"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "running",
+			//	    "failed",
+			//	    "succeeded"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -129,9 +137,10 @@ func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.R
 		"status_message": {
 			// Property: StatusMessage
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -141,25 +150,26 @@ func networkInsightsAccessScopeAnalysisResource(ctx context.Context) (resource.R
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

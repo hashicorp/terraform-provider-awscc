@@ -25,26 +25,27 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		"anomaly_detector_config": {
 			// Property: AnomalyDetectorConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configuration options for the AnomalyDetector",
-			//   "properties": {
-			//     "AnomalyDetectorFrequency": {
-			//       "description": "Frequency of anomaly detection",
-			//       "enum": [
-			//         "PT5M",
-			//         "PT10M",
-			//         "PT1H",
-			//         "P1D"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "AnomalyDetectorFrequency"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration options for the AnomalyDetector",
+			//	  "properties": {
+			//	    "AnomalyDetectorFrequency": {
+			//	      "description": "Frequency of anomaly detection",
+			//	      "enum": [
+			//	        "PT5M",
+			//	        "PT10M",
+			//	        "PT1H",
+			//	        "P1D"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "AnomalyDetectorFrequency"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Configuration options for the AnomalyDetector",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -69,12 +70,13 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		"anomaly_detector_description": {
 			// Property: AnomalyDetectorDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description for the AnomalyDetector.",
-			//   "maxLength": 256,
-			//   "pattern": ".*\\S.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description for the AnomalyDetector.",
+			//	  "maxLength": 256,
+			//	  "pattern": ".*\\S.*",
+			//	  "type": "string"
+			//	}
 			Description: "A description for the AnomalyDetector.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -90,13 +92,14 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		"anomaly_detector_name": {
 			// Property: AnomalyDetectorName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name for the Amazon Lookout for Metrics Anomaly Detector",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name for the Amazon Lookout for Metrics Anomaly Detector",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	  "type": "string"
+			//	}
 			Description: "Name for the Amazon Lookout for Metrics Anomaly Detector",
 			Type:        types.StringType,
 			Optional:    true,
@@ -113,11 +116,12 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 256,
-			//   "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 256,
+			//	  "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -127,13 +131,14 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_arn": {
 			// Property: KmsKeyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "KMS key used to encrypt the AnomalyDetector data",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "KMS key used to encrypt the AnomalyDetector data",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*",
+			//	  "type": "string"
+			//	}
 			Description: "KMS key used to encrypt the AnomalyDetector data",
 			Type:        types.StringType,
 			Optional:    true,
@@ -149,430 +154,431 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		"metric_set_list": {
 			// Property: MetricSetList
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of metric sets for anomaly detection",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "DimensionList": {
-			//         "description": "Dimensions for this MetricSet.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "description": "Name of a column in the data.",
-			//           "maxLength": 63,
-			//           "minLength": 1,
-			//           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//           "type": "string"
-			//         },
-			//         "minItems": 0,
-			//         "type": "array"
-			//       },
-			//       "MetricList": {
-			//         "description": "Metrics captured by this MetricSet.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AggregationFunction": {
-			//               "description": "Operator used to aggregate metric values",
-			//               "enum": [
-			//                 "AVG",
-			//                 "SUM"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "MetricName": {
-			//               "description": "Name of a column in the data.",
-			//               "maxLength": 63,
-			//               "minLength": 1,
-			//               "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//               "type": "string"
-			//             },
-			//             "Namespace": {
-			//               "maxLength": 255,
-			//               "minLength": 1,
-			//               "pattern": "[^:].*",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "MetricName",
-			//             "AggregationFunction"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "minItems": 1,
-			//         "type": "array"
-			//       },
-			//       "MetricSetDescription": {
-			//         "description": "A description for the MetricSet.",
-			//         "maxLength": 256,
-			//         "pattern": ".*\\S.*",
-			//         "type": "string"
-			//       },
-			//       "MetricSetFrequency": {
-			//         "description": "A frequency period to aggregate the data",
-			//         "enum": [
-			//           "PT5M",
-			//           "PT10M",
-			//           "PT1H",
-			//           "P1D"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "MetricSetName": {
-			//         "description": "The name of the MetricSet.",
-			//         "maxLength": 63,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//         "type": "string"
-			//       },
-			//       "MetricSource": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "AppFlowConfig": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "FlowName": {
-			//                 "maxLength": 256,
-			//                 "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
-			//                 "type": "string"
-			//               },
-			//               "RoleArn": {
-			//                 "maxLength": 256,
-			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "RoleArn",
-			//               "FlowName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "CloudwatchConfig": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "RoleArn": {
-			//                 "maxLength": 256,
-			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "RoleArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "RDSSourceConfig": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DBInstanceIdentifier": {
-			//                 "maxLength": 63,
-			//                 "minLength": 1,
-			//                 "pattern": "",
-			//                 "type": "string"
-			//               },
-			//               "DatabaseHost": {
-			//                 "maxLength": 253,
-			//                 "minLength": 1,
-			//                 "pattern": ".*\\S.*",
-			//                 "type": "string"
-			//               },
-			//               "DatabaseName": {
-			//                 "maxLength": 64,
-			//                 "minLength": 1,
-			//                 "pattern": "[a-zA-Z0-9_]+",
-			//                 "type": "string"
-			//               },
-			//               "DatabasePort": {
-			//                 "maximum": 65535,
-			//                 "minimum": 1,
-			//                 "type": "integer"
-			//               },
-			//               "RoleArn": {
-			//                 "maxLength": 256,
-			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//                 "type": "string"
-			//               },
-			//               "SecretManagerArn": {
-			//                 "maxLength": 256,
-			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
-			//                 "type": "string"
-			//               },
-			//               "TableName": {
-			//                 "maxLength": 100,
-			//                 "minLength": 1,
-			//                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
-			//                 "type": "string"
-			//               },
-			//               "VpcConfiguration": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "SecurityGroupIdList": {
-			//                     "items": {
-			//                       "maxLength": 255,
-			//                       "minLength": 1,
-			//                       "pattern": "[-0-9a-zA-Z]+",
-			//                       "type": "string"
-			//                     },
-			//                     "type": "array"
-			//                   },
-			//                   "SubnetIdList": {
-			//                     "items": {
-			//                       "maxLength": 255,
-			//                       "pattern": "[\\-0-9a-zA-Z]+",
-			//                       "type": "string"
-			//                     },
-			//                     "type": "array"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "SubnetIdList",
-			//                   "SecurityGroupIdList"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "DBInstanceIdentifier",
-			//               "DatabaseHost",
-			//               "DatabasePort",
-			//               "SecretManagerArn",
-			//               "DatabaseName",
-			//               "TableName",
-			//               "RoleArn",
-			//               "VpcConfiguration"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "RedshiftSourceConfig": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ClusterIdentifier": {
-			//                 "maxLength": 63,
-			//                 "minLength": 1,
-			//                 "pattern": "",
-			//                 "type": "string"
-			//               },
-			//               "DatabaseHost": {
-			//                 "maxLength": 253,
-			//                 "minLength": 1,
-			//                 "pattern": ".*\\S.*",
-			//                 "type": "string"
-			//               },
-			//               "DatabaseName": {
-			//                 "maxLength": 100,
-			//                 "minLength": 1,
-			//                 "pattern": "[a-z0-9]+",
-			//                 "type": "string"
-			//               },
-			//               "DatabasePort": {
-			//                 "maximum": 65535,
-			//                 "minimum": 1,
-			//                 "type": "integer"
-			//               },
-			//               "RoleArn": {
-			//                 "maxLength": 256,
-			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//                 "type": "string"
-			//               },
-			//               "SecretManagerArn": {
-			//                 "maxLength": 256,
-			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
-			//                 "type": "string"
-			//               },
-			//               "TableName": {
-			//                 "maxLength": 100,
-			//                 "minLength": 1,
-			//                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
-			//                 "type": "string"
-			//               },
-			//               "VpcConfiguration": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "SecurityGroupIdList": {
-			//                     "items": {
-			//                       "maxLength": 255,
-			//                       "minLength": 1,
-			//                       "pattern": "[-0-9a-zA-Z]+",
-			//                       "type": "string"
-			//                     },
-			//                     "type": "array"
-			//                   },
-			//                   "SubnetIdList": {
-			//                     "items": {
-			//                       "maxLength": 255,
-			//                       "pattern": "[\\-0-9a-zA-Z]+",
-			//                       "type": "string"
-			//                     },
-			//                     "type": "array"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "SubnetIdList",
-			//                   "SecurityGroupIdList"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "ClusterIdentifier",
-			//               "DatabaseHost",
-			//               "DatabasePort",
-			//               "SecretManagerArn",
-			//               "DatabaseName",
-			//               "TableName",
-			//               "RoleArn",
-			//               "VpcConfiguration"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "S3SourceConfig": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "FileFormatDescriptor": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "CsvFormatDescriptor": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "Charset": {
-			//                         "maxLength": 63,
-			//                         "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//                         "type": "string"
-			//                       },
-			//                       "ContainsHeader": {
-			//                         "type": "boolean"
-			//                       },
-			//                       "Delimiter": {
-			//                         "maxLength": 1,
-			//                         "pattern": "[^\\r\\n]",
-			//                         "type": "string"
-			//                       },
-			//                       "FileCompression": {
-			//                         "enum": [
-			//                           "NONE",
-			//                           "GZIP"
-			//                         ],
-			//                         "type": "string"
-			//                       },
-			//                       "HeaderList": {
-			//                         "items": {
-			//                           "description": "Name of a column in the data.",
-			//                           "maxLength": 63,
-			//                           "minLength": 1,
-			//                           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//                           "type": "string"
-			//                         },
-			//                         "type": "array"
-			//                       },
-			//                       "QuoteSymbol": {
-			//                         "maxLength": 1,
-			//                         "pattern": "[^\\r\\n]|^$",
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   },
-			//                   "JsonFormatDescriptor": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "Charset": {
-			//                         "maxLength": 63,
-			//                         "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//                         "type": "string"
-			//                       },
-			//                       "FileCompression": {
-			//                         "enum": [
-			//                           "NONE",
-			//                           "GZIP"
-			//                         ],
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "HistoricalDataPathList": {
-			//                 "items": {
-			//                   "maxLength": 1024,
-			//                   "pattern": "^s3://[a-z0-9].+$",
-			//                   "type": "string"
-			//                 },
-			//                 "maxItems": 1,
-			//                 "minItems": 1,
-			//                 "type": "array"
-			//               },
-			//               "RoleArn": {
-			//                 "maxLength": 256,
-			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//                 "type": "string"
-			//               },
-			//               "TemplatedPathList": {
-			//                 "items": {
-			//                   "maxLength": 1024,
-			//                   "pattern": "^s3://[a-zA-Z0-9_\\-\\/ {}=]+$",
-			//                   "type": "string"
-			//                 },
-			//                 "maxItems": 1,
-			//                 "minItems": 1,
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "required": [
-			//               "RoleArn",
-			//               "FileFormatDescriptor"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Offset": {
-			//         "description": "Offset, in seconds, between the frequency interval and the time at which the metrics are available.",
-			//         "maximum": 432000,
-			//         "minimum": 0,
-			//         "type": "integer"
-			//       },
-			//       "TimestampColumn": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ColumnFormat": {
-			//             "description": "A timestamp format for the timestamps in the dataset",
-			//             "maxLength": 63,
-			//             "pattern": ".*\\S.*",
-			//             "type": "string"
-			//           },
-			//           "ColumnName": {
-			//             "description": "Name of a column in the data.",
-			//             "maxLength": 63,
-			//             "minLength": 1,
-			//             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Timezone": {
-			//         "maxLength": 60,
-			//         "pattern": ".*\\S.*",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "MetricSetName",
-			//       "MetricList",
-			//       "MetricSource"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 1,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of metric sets for anomaly detection",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "DimensionList": {
+			//	        "description": "Dimensions for this MetricSet.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "description": "Name of a column in the data.",
+			//	          "maxLength": 63,
+			//	          "minLength": 1,
+			//	          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	          "type": "string"
+			//	        },
+			//	        "minItems": 0,
+			//	        "type": "array"
+			//	      },
+			//	      "MetricList": {
+			//	        "description": "Metrics captured by this MetricSet.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AggregationFunction": {
+			//	              "description": "Operator used to aggregate metric values",
+			//	              "enum": [
+			//	                "AVG",
+			//	                "SUM"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "MetricName": {
+			//	              "description": "Name of a column in the data.",
+			//	              "maxLength": 63,
+			//	              "minLength": 1,
+			//	              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	              "type": "string"
+			//	            },
+			//	            "Namespace": {
+			//	              "maxLength": 255,
+			//	              "minLength": 1,
+			//	              "pattern": "[^:].*",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "MetricName",
+			//	            "AggregationFunction"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "minItems": 1,
+			//	        "type": "array"
+			//	      },
+			//	      "MetricSetDescription": {
+			//	        "description": "A description for the MetricSet.",
+			//	        "maxLength": 256,
+			//	        "pattern": ".*\\S.*",
+			//	        "type": "string"
+			//	      },
+			//	      "MetricSetFrequency": {
+			//	        "description": "A frequency period to aggregate the data",
+			//	        "enum": [
+			//	          "PT5M",
+			//	          "PT10M",
+			//	          "PT1H",
+			//	          "P1D"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "MetricSetName": {
+			//	        "description": "The name of the MetricSet.",
+			//	        "maxLength": 63,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	        "type": "string"
+			//	      },
+			//	      "MetricSource": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "AppFlowConfig": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "FlowName": {
+			//	                "maxLength": 256,
+			//	                "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
+			//	                "type": "string"
+			//	              },
+			//	              "RoleArn": {
+			//	                "maxLength": 256,
+			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "RoleArn",
+			//	              "FlowName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "CloudwatchConfig": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "RoleArn": {
+			//	                "maxLength": 256,
+			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "RoleArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "RDSSourceConfig": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DBInstanceIdentifier": {
+			//	                "maxLength": 63,
+			//	                "minLength": 1,
+			//	                "pattern": "",
+			//	                "type": "string"
+			//	              },
+			//	              "DatabaseHost": {
+			//	                "maxLength": 253,
+			//	                "minLength": 1,
+			//	                "pattern": ".*\\S.*",
+			//	                "type": "string"
+			//	              },
+			//	              "DatabaseName": {
+			//	                "maxLength": 64,
+			//	                "minLength": 1,
+			//	                "pattern": "[a-zA-Z0-9_]+",
+			//	                "type": "string"
+			//	              },
+			//	              "DatabasePort": {
+			//	                "maximum": 65535,
+			//	                "minimum": 1,
+			//	                "type": "integer"
+			//	              },
+			//	              "RoleArn": {
+			//	                "maxLength": 256,
+			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+			//	                "type": "string"
+			//	              },
+			//	              "SecretManagerArn": {
+			//	                "maxLength": 256,
+			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
+			//	                "type": "string"
+			//	              },
+			//	              "TableName": {
+			//	                "maxLength": 100,
+			//	                "minLength": 1,
+			//	                "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+			//	                "type": "string"
+			//	              },
+			//	              "VpcConfiguration": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "SecurityGroupIdList": {
+			//	                    "items": {
+			//	                      "maxLength": 255,
+			//	                      "minLength": 1,
+			//	                      "pattern": "[-0-9a-zA-Z]+",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "type": "array"
+			//	                  },
+			//	                  "SubnetIdList": {
+			//	                    "items": {
+			//	                      "maxLength": 255,
+			//	                      "pattern": "[\\-0-9a-zA-Z]+",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "type": "array"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "SubnetIdList",
+			//	                  "SecurityGroupIdList"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "DBInstanceIdentifier",
+			//	              "DatabaseHost",
+			//	              "DatabasePort",
+			//	              "SecretManagerArn",
+			//	              "DatabaseName",
+			//	              "TableName",
+			//	              "RoleArn",
+			//	              "VpcConfiguration"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "RedshiftSourceConfig": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ClusterIdentifier": {
+			//	                "maxLength": 63,
+			//	                "minLength": 1,
+			//	                "pattern": "",
+			//	                "type": "string"
+			//	              },
+			//	              "DatabaseHost": {
+			//	                "maxLength": 253,
+			//	                "minLength": 1,
+			//	                "pattern": ".*\\S.*",
+			//	                "type": "string"
+			//	              },
+			//	              "DatabaseName": {
+			//	                "maxLength": 100,
+			//	                "minLength": 1,
+			//	                "pattern": "[a-z0-9]+",
+			//	                "type": "string"
+			//	              },
+			//	              "DatabasePort": {
+			//	                "maximum": 65535,
+			//	                "minimum": 1,
+			//	                "type": "integer"
+			//	              },
+			//	              "RoleArn": {
+			//	                "maxLength": 256,
+			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+			//	                "type": "string"
+			//	              },
+			//	              "SecretManagerArn": {
+			//	                "maxLength": 256,
+			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
+			//	                "type": "string"
+			//	              },
+			//	              "TableName": {
+			//	                "maxLength": 100,
+			//	                "minLength": 1,
+			//	                "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+			//	                "type": "string"
+			//	              },
+			//	              "VpcConfiguration": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "SecurityGroupIdList": {
+			//	                    "items": {
+			//	                      "maxLength": 255,
+			//	                      "minLength": 1,
+			//	                      "pattern": "[-0-9a-zA-Z]+",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "type": "array"
+			//	                  },
+			//	                  "SubnetIdList": {
+			//	                    "items": {
+			//	                      "maxLength": 255,
+			//	                      "pattern": "[\\-0-9a-zA-Z]+",
+			//	                      "type": "string"
+			//	                    },
+			//	                    "type": "array"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "SubnetIdList",
+			//	                  "SecurityGroupIdList"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "ClusterIdentifier",
+			//	              "DatabaseHost",
+			//	              "DatabasePort",
+			//	              "SecretManagerArn",
+			//	              "DatabaseName",
+			//	              "TableName",
+			//	              "RoleArn",
+			//	              "VpcConfiguration"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "S3SourceConfig": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "FileFormatDescriptor": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "CsvFormatDescriptor": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "Charset": {
+			//	                        "maxLength": 63,
+			//	                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	                        "type": "string"
+			//	                      },
+			//	                      "ContainsHeader": {
+			//	                        "type": "boolean"
+			//	                      },
+			//	                      "Delimiter": {
+			//	                        "maxLength": 1,
+			//	                        "pattern": "[^\\r\\n]",
+			//	                        "type": "string"
+			//	                      },
+			//	                      "FileCompression": {
+			//	                        "enum": [
+			//	                          "NONE",
+			//	                          "GZIP"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      },
+			//	                      "HeaderList": {
+			//	                        "items": {
+			//	                          "description": "Name of a column in the data.",
+			//	                          "maxLength": 63,
+			//	                          "minLength": 1,
+			//	                          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	                          "type": "string"
+			//	                        },
+			//	                        "type": "array"
+			//	                      },
+			//	                      "QuoteSymbol": {
+			//	                        "maxLength": 1,
+			//	                        "pattern": "[^\\r\\n]|^$",
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  },
+			//	                  "JsonFormatDescriptor": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "Charset": {
+			//	                        "maxLength": 63,
+			//	                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	                        "type": "string"
+			//	                      },
+			//	                      "FileCompression": {
+			//	                        "enum": [
+			//	                          "NONE",
+			//	                          "GZIP"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "HistoricalDataPathList": {
+			//	                "items": {
+			//	                  "maxLength": 1024,
+			//	                  "pattern": "^s3://[a-z0-9].+$",
+			//	                  "type": "string"
+			//	                },
+			//	                "maxItems": 1,
+			//	                "minItems": 1,
+			//	                "type": "array"
+			//	              },
+			//	              "RoleArn": {
+			//	                "maxLength": 256,
+			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+			//	                "type": "string"
+			//	              },
+			//	              "TemplatedPathList": {
+			//	                "items": {
+			//	                  "maxLength": 1024,
+			//	                  "pattern": "^s3://[a-zA-Z0-9_\\-\\/ {}=]+$",
+			//	                  "type": "string"
+			//	                },
+			//	                "maxItems": 1,
+			//	                "minItems": 1,
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "RoleArn",
+			//	              "FileFormatDescriptor"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Offset": {
+			//	        "description": "Offset, in seconds, between the frequency interval and the time at which the metrics are available.",
+			//	        "maximum": 432000,
+			//	        "minimum": 0,
+			//	        "type": "integer"
+			//	      },
+			//	      "TimestampColumn": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ColumnFormat": {
+			//	            "description": "A timestamp format for the timestamps in the dataset",
+			//	            "maxLength": 63,
+			//	            "pattern": ".*\\S.*",
+			//	            "type": "string"
+			//	          },
+			//	          "ColumnName": {
+			//	            "description": "Name of a column in the data.",
+			//	            "maxLength": 63,
+			//	            "minLength": 1,
+			//	            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Timezone": {
+			//	        "maxLength": 60,
+			//	        "pattern": ".*\\S.*",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "MetricSetName",
+			//	      "MetricList",
+			//	      "MetricSource"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 1,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "List of metric sets for anomaly detection",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

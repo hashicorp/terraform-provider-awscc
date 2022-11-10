@@ -25,15 +25,16 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"data_location_constraint": {
 			// Property: DataLocationConstraint
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Data Location Constraint of the Policy.",
-			//   "enum": [
-			//     "AnyLocation",
-			//     "SameContinent",
-			//     "SameCountry"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Data Location Constraint of the Policy.",
+			//	  "enum": [
+			//	    "AnyLocation",
+			//	    "SameContinent",
+			//	    "SameCountry"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Data Location Constraint of the Policy.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -52,31 +53,33 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"policy": {
 			// Property: Policy
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "patternProperties": {
-			//     "": {
-			//       "additionalProperties": false,
-			//       "description": "Failure Policy.",
-			//       "properties": {
-			//         "RpoInSecs": {
-			//           "description": "RPO in seconds.",
-			//           "type": "integer"
-			//         },
-			//         "RtoInSecs": {
-			//           "description": "RTO in seconds.",
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "required": [
-			//         "RtoInSecs",
-			//         "RpoInSecs"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "additionalProperties": false,
+			//	      "description": "Failure Policy.",
+			//	      "properties": {
+			//	        "RpoInSecs": {
+			//	          "description": "RPO in seconds.",
+			//	          "type": "integer"
+			//	        },
+			//	        "RtoInSecs": {
+			//	          "description": "RTO in seconds.",
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "RtoInSecs",
+			//	        "RpoInSecs"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			//
 			// Pattern: ""
 			Attributes: tfsdk.MapNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -107,11 +110,12 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"policy_arn": {
 			// Property: PolicyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name (ARN) of the Resiliency Policy.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name (ARN) of the Resiliency Policy.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -122,11 +126,12 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"policy_description": {
 			// Property: PolicyDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description of Resiliency Policy.",
-			//   "maxLength": 500,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description of Resiliency Policy.",
+			//	  "maxLength": 500,
+			//	  "type": "string"
+			//	}
 			Description: "Description of Resiliency Policy.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -141,11 +146,12 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"policy_name": {
 			// Property: PolicyName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of Resiliency Policy.",
-			//   "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of Resiliency Policy.",
+			//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
+			//	  "type": "string"
+			//	}
 			Description: "Name of Resiliency Policy.",
 			Type:        types.StringType,
 			Required:    true,
@@ -156,16 +162,18 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "patternProperties": {
-			//     "": {
-			//       "maxLength": 256,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "maxLength": 256,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			//
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
@@ -177,17 +185,18 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"tier": {
 			// Property: Tier
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Resiliency Policy Tier.",
-			//   "enum": [
-			//     "MissionCritical",
-			//     "Critical",
-			//     "Important",
-			//     "CoreServices",
-			//     "NonCritical"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Resiliency Policy Tier.",
+			//	  "enum": [
+			//	    "MissionCritical",
+			//	    "Critical",
+			//	    "Important",
+			//	    "CoreServices",
+			//	    "NonCritical"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Resiliency Policy Tier.",
 			Type:        types.StringType,
 			Required:    true,

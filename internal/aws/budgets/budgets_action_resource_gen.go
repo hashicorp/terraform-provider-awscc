@@ -24,9 +24,10 @@ func budgetsActionResource(ctx context.Context) (resource.Resource, error) {
 		"action_id": {
 			// Property: ActionId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -36,26 +37,27 @@ func budgetsActionResource(ctx context.Context) (resource.Resource, error) {
 		"action_threshold": {
 			// Property: ActionThreshold
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Type": {
-			//       "enum": [
-			//         "PERCENTAGE",
-			//         "ABSOLUTE_VALUE"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Value": {
-			//       "type": "number"
-			//     }
-			//   },
-			//   "required": [
-			//     "Value",
-			//     "Type"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Type": {
+			//	      "enum": [
+			//	        "PERCENTAGE",
+			//	        "ABSOLUTE_VALUE"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Value": {
+			//	      "type": "number"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Value",
+			//	    "Type"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"type": {
@@ -81,14 +83,15 @@ func budgetsActionResource(ctx context.Context) (resource.Resource, error) {
 		"action_type": {
 			// Property: ActionType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "APPLY_IAM_POLICY",
-			//     "APPLY_SCP_POLICY",
-			//     "RUN_SSM_DOCUMENTS"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "APPLY_IAM_POLICY",
+			//	    "APPLY_SCP_POLICY",
+			//	    "RUN_SSM_DOCUMENTS"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -105,13 +108,14 @@ func budgetsActionResource(ctx context.Context) (resource.Resource, error) {
 		"approval_model": {
 			// Property: ApprovalModel
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "AUTOMATIC",
-			//     "MANUAL"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "AUTOMATIC",
+			//	    "MANUAL"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -128,9 +132,10 @@ func budgetsActionResource(ctx context.Context) (resource.Resource, error) {
 		"budget_name": {
 			// Property: BudgetName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -140,98 +145,99 @@ func budgetsActionResource(ctx context.Context) (resource.Resource, error) {
 		"definition": {
 			// Property: Definition
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "IamActionDefinition": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Groups": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         },
-			//         "PolicyArn": {
-			//           "type": "string"
-			//         },
-			//         "Roles": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         },
-			//         "Users": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "required": [
-			//         "PolicyArn"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ScpActionDefinition": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "PolicyId": {
-			//           "type": "string"
-			//         },
-			//         "TargetIds": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "required": [
-			//         "PolicyId",
-			//         "TargetIds"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "SsmActionDefinition": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "InstanceIds": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         },
-			//         "Region": {
-			//           "type": "string"
-			//         },
-			//         "Subtype": {
-			//           "enum": [
-			//             "STOP_EC2_INSTANCES",
-			//             "STOP_RDS_INSTANCES"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Subtype",
-			//         "Region",
-			//         "InstanceIds"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "IamActionDefinition": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Groups": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        },
+			//	        "PolicyArn": {
+			//	          "type": "string"
+			//	        },
+			//	        "Roles": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        },
+			//	        "Users": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "PolicyArn"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ScpActionDefinition": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "PolicyId": {
+			//	          "type": "string"
+			//	        },
+			//	        "TargetIds": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "PolicyId",
+			//	        "TargetIds"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "SsmActionDefinition": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "InstanceIds": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        },
+			//	        "Region": {
+			//	          "type": "string"
+			//	        },
+			//	        "Subtype": {
+			//	          "enum": [
+			//	            "STOP_EC2_INSTANCES",
+			//	            "STOP_RDS_INSTANCES"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Subtype",
+			//	        "Region",
+			//	        "InstanceIds"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"iam_action_definition": {
@@ -355,22 +361,24 @@ func budgetsActionResource(ctx context.Context) (resource.Resource, error) {
 		"execution_role_arn": {
 			// Property: ExecutionRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 		},
 		"notification_type": {
 			// Property: NotificationType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "ACTUAL",
-			//     "FORECASTED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "ACTUAL",
+			//	    "FORECASTED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -383,31 +391,32 @@ func budgetsActionResource(ctx context.Context) (resource.Resource, error) {
 		"subscribers": {
 			// Property: Subscribers
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Address": {
-			//         "type": "string"
-			//       },
-			//       "Type": {
-			//         "enum": [
-			//           "SNS",
-			//           "EMAIL"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Type",
-			//       "Address"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 11,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Address": {
+			//	        "type": "string"
+			//	      },
+			//	      "Type": {
+			//	        "enum": [
+			//	          "SNS",
+			//	          "EMAIL"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Type",
+			//	      "Address"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 11,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"address": {

@@ -25,12 +25,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the domain.",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the domain.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the domain.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -41,13 +42,14 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the domain.",
-			//   "maxLength": 50,
-			//   "minLength": 2,
-			//   "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the domain.",
+			//	  "maxLength": 50,
+			//	  "minLength": 2,
+			//	  "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the domain.",
 			Type:        types.StringType,
 			Required:    true,
@@ -62,10 +64,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_key": {
 			// Property: EncryptionKey
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of an AWS Key Management Service (AWS KMS) key associated with a domain.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of an AWS Key Management Service (AWS KMS) key associated with a domain.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of an AWS Key Management Service (AWS KMS) key associated with a domain.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -77,13 +80,14 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the domain. This field is used for GetAtt",
-			//   "maxLength": 50,
-			//   "minLength": 2,
-			//   "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the domain. This field is used for GetAtt",
+			//	  "maxLength": 50,
+			//	  "minLength": 2,
+			//	  "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the domain. This field is used for GetAtt",
 			Type:        types.StringType,
 			Computed:    true,
@@ -94,11 +98,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"owner": {
 			// Property: Owner
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The 12-digit account ID of the AWS account that owns the domain. This field is used for GetAtt",
-			//   "pattern": "[0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The 12-digit account ID of the AWS account that owns the domain. This field is used for GetAtt",
+			//	  "pattern": "[0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "The 12-digit account ID of the AWS account that owns the domain. This field is used for GetAtt",
 			Type:        types.StringType,
 			Computed:    true,
@@ -109,12 +114,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"permissions_policy_document": {
 			// Property: PermissionsPolicyDocument
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The access control resource policy on the provided domain.",
-			//   "maxLength": 5120,
-			//   "minLength": 2,
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "The access control resource policy on the provided domain.",
+			//	  "maxLength": 5120,
+			//	  "minLength": 2,
+			//	  "type": "object"
+			//	}
 			Description: "The access control resource policy on the provided domain.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
@@ -126,33 +132,34 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -25,11 +25,12 @@ func dNSSECResource(ctx context.Context) (resource.Resource, error) {
 		"hosted_zone_id": {
 			// Property: HostedZoneId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique string (ID) used to identify a hosted zone.",
-			//   "pattern": "^[A-Z0-9]{1,32}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unique string (ID) used to identify a hosted zone.",
+			//	  "pattern": "^[A-Z0-9]{1,32}$",
+			//	  "type": "string"
+			//	}
 			Description: "The unique string (ID) used to identify a hosted zone.",
 			Type:        types.StringType,
 			Required:    true,

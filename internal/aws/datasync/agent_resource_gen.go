@@ -25,12 +25,13 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"activation_key": {
 			// Property: ActivationKey
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Activation key of the Agent.",
-			//   "maxLength": 29,
-			//   "pattern": "[A-Z0-9]{5}(-[A-Z0-9]{5}){4}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Activation key of the Agent.",
+			//	  "maxLength": 29,
+			//	  "pattern": "[A-Z0-9]{5}(-[A-Z0-9]{5}){4}",
+			//	  "type": "string"
+			//	}
 			Description: "Activation key of the Agent.",
 			Type:        types.StringType,
 			Required:    true,
@@ -46,12 +47,13 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"agent_arn": {
 			// Property: AgentArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The DataSync Agent ARN.",
-			//   "maxLength": 128,
-			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The DataSync Agent ARN.",
+			//	  "maxLength": 128,
+			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
+			//	  "type": "string"
+			//	}
 			Description: "The DataSync Agent ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -62,13 +64,14 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"agent_name": {
 			// Property: AgentName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name configured for the agent. Text reference used to identify the agent in the console.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name configured for the agent. Text reference used to identify the agent in the console.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The name configured for the agent. Text reference used to identify the agent in the console.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -84,15 +87,16 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_type": {
 			// Property: EndpointType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The service endpoints that the agent will connect to.",
-			//   "enum": [
-			//     "FIPS",
-			//     "PUBLIC",
-			//     "PRIVATE_LINK"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The service endpoints that the agent will connect to.",
+			//	  "enum": [
+			//	    "FIPS",
+			//	    "PUBLIC",
+			//	    "PRIVATE_LINK"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The service endpoints that the agent will connect to.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -103,16 +107,17 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"security_group_arns": {
 			// Property: SecurityGroupArns
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARNs of the security group used to protect your data transfer task subnets.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "maxLength": 128,
-			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The ARNs of the security group used to protect your data transfer task subnets.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "maxLength": 128,
+			//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The ARNs of the security group used to protect your data transfer task subnets.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -130,16 +135,17 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_arns": {
 			// Property: SubnetArns
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "maxLength": 128,
-			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "maxLength": 128,
+			//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -157,38 +163,39 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key for an AWS resource tag.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for an AWS resource tag.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key for an AWS resource tag.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for an AWS resource tag.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -226,11 +233,12 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_endpoint_id": {
 			// Property: VpcEndpointId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the VPC endpoint that the agent has access to.",
-			//   "pattern": "^vpce-[0-9a-f]{17}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the VPC endpoint that the agent has access to.",
+			//	  "pattern": "^vpce-[0-9a-f]{17}$",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the VPC endpoint that the agent has access to.",
 			Type:        types.StringType,
 			Optional:    true,

@@ -25,11 +25,12 @@ func dedicatedIpPoolResource(ctx context.Context) (resource.Resource, error) {
 		"pool_name": {
 			// Property: PoolName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the dedicated IP pool.",
-			//   "pattern": "^[a-z0-9_-]{0,64}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the dedicated IP pool.",
+			//	  "pattern": "^[a-z0-9_-]{0,64}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the dedicated IP pool.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -45,11 +46,12 @@ func dedicatedIpPoolResource(ctx context.Context) (resource.Resource, error) {
 		"scaling_mode": {
 			// Property: ScalingMode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
-			//   "pattern": "^(STANDARD|MANAGED)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
+			//	  "pattern": "^(STANDARD|MANAGED)$",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
 			Type:        types.StringType,
 			Optional:    true,

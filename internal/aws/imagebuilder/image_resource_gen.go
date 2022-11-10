@@ -24,10 +24,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the image.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the image.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the image.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,10 +39,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"container_recipe_arn": {
 			// Property: ContainerRecipeArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -54,10 +56,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"distribution_configuration_arn": {
 			// Property: DistributionConfigurationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the distribution configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the distribution configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the distribution configuration.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -70,10 +73,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"enhanced_image_metadata_enabled": {
 			// Property: EnhancedImageMetadataEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Collects additional information about the image being created, including the operating system (OS) version and package list.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Collects additional information about the image being created, including the operating system (OS) version and package list.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Collects additional information about the image being created, including the operating system (OS) version and package list.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -86,10 +90,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"image_id": {
 			// Property: ImageId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AMI ID of the EC2 AMI in current region.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AMI ID of the EC2 AMI in current region.",
+			//	  "type": "string"
+			//	}
 			Description: "The AMI ID of the EC2 AMI in current region.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -100,10 +105,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"image_recipe_arn": {
 			// Property: ImageRecipeArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -116,23 +122,24 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"image_tests_configuration": {
 			// Property: ImageTestsConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The image tests configuration used when creating this image.",
-			//   "properties": {
-			//     "ImageTestsEnabled": {
-			//       "description": "ImageTestsEnabled",
-			//       "type": "boolean"
-			//     },
-			//     "TimeoutMinutes": {
-			//       "description": "TimeoutMinutes",
-			//       "maximum": 1440,
-			//       "minimum": 60,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The image tests configuration used when creating this image.",
+			//	  "properties": {
+			//	    "ImageTestsEnabled": {
+			//	      "description": "ImageTestsEnabled",
+			//	      "type": "boolean"
+			//	    },
+			//	    "TimeoutMinutes": {
+			//	      "description": "TimeoutMinutes",
+			//	      "maximum": 1440,
+			//	      "minimum": 60,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The image tests configuration used when creating this image.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -171,10 +178,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"image_uri": {
 			// Property: ImageUri
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "URI for containers created in current Region with default ECR image tag",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "URI for containers created in current Region with default ECR image tag",
+			//	  "type": "string"
+			//	}
 			Description: "URI for containers created in current Region with default ECR image tag",
 			Type:        types.StringType,
 			Computed:    true,
@@ -185,10 +193,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"infrastructure_configuration_arn": {
 			// Property: InfrastructureConfigurationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the infrastructure configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the infrastructure configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the infrastructure configuration.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -201,10 +210,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the image.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the image.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the image.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -215,16 +225,17 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The tags associated with the image.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The tags associated with the image.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The tags associated with the image.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

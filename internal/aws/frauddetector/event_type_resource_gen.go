@@ -25,10 +25,11 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the event type.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the event type.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the event type.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,10 +40,11 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time when the event type was created.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time when the event type was created.",
+			//	  "type": "string"
+			//	}
 			Description: "The time when the event type was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -53,12 +55,13 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the event type.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the event type.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the event type.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -73,68 +76,69 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 		"entity_types": {
 			// Property: EntityTypes
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Arn": {
-			//         "type": "string"
-			//       },
-			//       "CreatedTime": {
-			//         "description": "The time when the event type was created.",
-			//         "type": "string"
-			//       },
-			//       "Description": {
-			//         "description": "The description.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Inline": {
-			//         "type": "boolean"
-			//       },
-			//       "LastUpdatedTime": {
-			//         "description": "The time when the event type was last updated.",
-			//         "type": "string"
-			//       },
-			//       "Name": {
-			//         "type": "string"
-			//       },
-			//       "Tags": {
-			//         "description": "Tags associated with this event type.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Key": {
-			//               "maxLength": 128,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "maxLength": 256,
-			//               "minLength": 0,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Key",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "maxItems": 200,
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Arn": {
+			//	        "type": "string"
+			//	      },
+			//	      "CreatedTime": {
+			//	        "description": "The time when the event type was created.",
+			//	        "type": "string"
+			//	      },
+			//	      "Description": {
+			//	        "description": "The description.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Inline": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "LastUpdatedTime": {
+			//	        "description": "The time when the event type was last updated.",
+			//	        "type": "string"
+			//	      },
+			//	      "Name": {
+			//	        "type": "string"
+			//	      },
+			//	      "Tags": {
+			//	        "description": "Tags associated with this event type.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Key": {
+			//	              "maxLength": 128,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "maxLength": 256,
+			//	              "minLength": 0,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Key",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "maxItems": 200,
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -243,124 +247,125 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 		"event_variables": {
 			// Property: EventVariables
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Arn": {
-			//         "type": "string"
-			//       },
-			//       "CreatedTime": {
-			//         "description": "The time when the event type was created.",
-			//         "type": "string"
-			//       },
-			//       "DataSource": {
-			//         "enum": [
-			//           "EVENT"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "DataType": {
-			//         "enum": [
-			//           "STRING",
-			//           "INTEGER",
-			//           "FLOAT",
-			//           "BOOLEAN"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "DefaultValue": {
-			//         "type": "string"
-			//       },
-			//       "Description": {
-			//         "description": "The description.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Inline": {
-			//         "type": "boolean"
-			//       },
-			//       "LastUpdatedTime": {
-			//         "description": "The time when the event type was last updated.",
-			//         "type": "string"
-			//       },
-			//       "Name": {
-			//         "type": "string"
-			//       },
-			//       "Tags": {
-			//         "description": "Tags associated with this event type.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Key": {
-			//               "maxLength": 128,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "maxLength": 256,
-			//               "minLength": 0,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Key",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "maxItems": 200,
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       },
-			//       "VariableType": {
-			//         "enum": [
-			//           "AUTH_CODE",
-			//           "AVS",
-			//           "BILLING_ADDRESS_L1",
-			//           "BILLING_ADDRESS_L2",
-			//           "BILLING_CITY",
-			//           "BILLING_COUNTRY",
-			//           "BILLING_NAME",
-			//           "BILLING_PHONE",
-			//           "BILLING_STATE",
-			//           "BILLING_ZIP",
-			//           "CARD_BIN",
-			//           "CATEGORICAL",
-			//           "CURRENCY_CODE",
-			//           "EMAIL_ADDRESS",
-			//           "FINGERPRINT",
-			//           "FRAUD_LABEL",
-			//           "FREE_FORM_TEXT",
-			//           "IP_ADDRESS",
-			//           "NUMERIC",
-			//           "ORDER_ID",
-			//           "PAYMENT_TYPE",
-			//           "PHONE_NUMBER",
-			//           "PRICE",
-			//           "PRODUCT_CATEGORY",
-			//           "SHIPPING_ADDRESS_L1",
-			//           "SHIPPING_ADDRESS_L2",
-			//           "SHIPPING_CITY",
-			//           "SHIPPING_COUNTRY",
-			//           "SHIPPING_NAME",
-			//           "SHIPPING_PHONE",
-			//           "SHIPPING_STATE",
-			//           "SHIPPING_ZIP",
-			//           "USERAGENT"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Arn": {
+			//	        "type": "string"
+			//	      },
+			//	      "CreatedTime": {
+			//	        "description": "The time when the event type was created.",
+			//	        "type": "string"
+			//	      },
+			//	      "DataSource": {
+			//	        "enum": [
+			//	          "EVENT"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "DataType": {
+			//	        "enum": [
+			//	          "STRING",
+			//	          "INTEGER",
+			//	          "FLOAT",
+			//	          "BOOLEAN"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "DefaultValue": {
+			//	        "type": "string"
+			//	      },
+			//	      "Description": {
+			//	        "description": "The description.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Inline": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "LastUpdatedTime": {
+			//	        "description": "The time when the event type was last updated.",
+			//	        "type": "string"
+			//	      },
+			//	      "Name": {
+			//	        "type": "string"
+			//	      },
+			//	      "Tags": {
+			//	        "description": "Tags associated with this event type.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Key": {
+			//	              "maxLength": 128,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "maxLength": 256,
+			//	              "minLength": 0,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Key",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "maxItems": 200,
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      },
+			//	      "VariableType": {
+			//	        "enum": [
+			//	          "AUTH_CODE",
+			//	          "AVS",
+			//	          "BILLING_ADDRESS_L1",
+			//	          "BILLING_ADDRESS_L2",
+			//	          "BILLING_CITY",
+			//	          "BILLING_COUNTRY",
+			//	          "BILLING_NAME",
+			//	          "BILLING_PHONE",
+			//	          "BILLING_STATE",
+			//	          "BILLING_ZIP",
+			//	          "CARD_BIN",
+			//	          "CATEGORICAL",
+			//	          "CURRENCY_CODE",
+			//	          "EMAIL_ADDRESS",
+			//	          "FINGERPRINT",
+			//	          "FRAUD_LABEL",
+			//	          "FREE_FORM_TEXT",
+			//	          "IP_ADDRESS",
+			//	          "NUMERIC",
+			//	          "ORDER_ID",
+			//	          "PAYMENT_TYPE",
+			//	          "PHONE_NUMBER",
+			//	          "PRICE",
+			//	          "PRODUCT_CATEGORY",
+			//	          "SHIPPING_ADDRESS_L1",
+			//	          "SHIPPING_ADDRESS_L2",
+			//	          "SHIPPING_CITY",
+			//	          "SHIPPING_COUNTRY",
+			//	          "SHIPPING_NAME",
+			//	          "SHIPPING_PHONE",
+			//	          "SHIPPING_STATE",
+			//	          "SHIPPING_ZIP",
+			//	          "USERAGENT"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -555,68 +560,69 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 		"labels": {
 			// Property: Labels
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Arn": {
-			//         "type": "string"
-			//       },
-			//       "CreatedTime": {
-			//         "description": "The time when the event type was created.",
-			//         "type": "string"
-			//       },
-			//       "Description": {
-			//         "description": "The description.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Inline": {
-			//         "type": "boolean"
-			//       },
-			//       "LastUpdatedTime": {
-			//         "description": "The time when the event type was last updated.",
-			//         "type": "string"
-			//       },
-			//       "Name": {
-			//         "type": "string"
-			//       },
-			//       "Tags": {
-			//         "description": "Tags associated with this event type.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Key": {
-			//               "maxLength": 128,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "maxLength": 256,
-			//               "minLength": 0,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Key",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "maxItems": 200,
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 2,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Arn": {
+			//	        "type": "string"
+			//	      },
+			//	      "CreatedTime": {
+			//	        "description": "The time when the event type was created.",
+			//	        "type": "string"
+			//	      },
+			//	      "Description": {
+			//	        "description": "The description.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Inline": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "LastUpdatedTime": {
+			//	        "description": "The time when the event type was last updated.",
+			//	        "type": "string"
+			//	      },
+			//	      "Name": {
+			//	        "type": "string"
+			//	      },
+			//	      "Tags": {
+			//	        "description": "Tags associated with this event type.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Key": {
+			//	              "maxLength": 128,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "maxLength": 256,
+			//	              "minLength": 0,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Key",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "maxItems": 200,
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 2,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -725,10 +731,11 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 		"last_updated_time": {
 			// Property: LastUpdatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time when the event type was last updated.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time when the event type was last updated.",
+			//	  "type": "string"
+			//	}
 			Description: "The time when the event type was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -739,13 +746,14 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the event type",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9a-z_-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the event type",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9a-z_-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the event type",
 			Type:        types.StringType,
 			Required:    true,
@@ -760,33 +768,34 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tags associated with this event type.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "Tags associated with this event type.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "Tags associated with this event type.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

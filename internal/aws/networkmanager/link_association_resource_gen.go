@@ -23,10 +23,11 @@ func linkAssociationResource(ctx context.Context) (resource.Resource, error) {
 		"device_id": {
 			// Property: DeviceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the device",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the device",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the device",
 			Type:        types.StringType,
 			Required:    true,
@@ -37,10 +38,11 @@ func linkAssociationResource(ctx context.Context) (resource.Resource, error) {
 		"global_network_id": {
 			// Property: GlobalNetworkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the global network.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the global network.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Required:    true,
@@ -51,10 +53,11 @@ func linkAssociationResource(ctx context.Context) (resource.Resource, error) {
 		"link_id": {
 			// Property: LinkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the link",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the link",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the link",
 			Type:        types.StringType,
 			Required:    true,

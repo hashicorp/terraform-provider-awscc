@@ -25,13 +25,14 @@ func resourceAssociationResource(ctx context.Context) (resource.Resource, error)
 		"application": {
 			// Property: Application
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name or the Id of the Application.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "\\w+|[a-z0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name or the Id of the Application.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "\\w+|[a-z0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "The name or the Id of the Application.",
 			Type:        types.StringType,
 			Required:    true,
@@ -43,10 +44,11 @@ func resourceAssociationResource(ctx context.Context) (resource.Resource, error)
 		"application_arn": {
 			// Property: ApplicationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -56,9 +58,10 @@ func resourceAssociationResource(ctx context.Context) (resource.Resource, error)
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -68,11 +71,12 @@ func resourceAssociationResource(ctx context.Context) (resource.Resource, error)
 		"resource": {
 			// Property: Resource
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name or the Id of the Resource.",
-			//   "pattern": "\\w+|arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name or the Id of the Resource.",
+			//	  "pattern": "\\w+|arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "The name or the Id of the Resource.",
 			Type:        types.StringType,
 			Required:    true,
@@ -83,10 +87,11 @@ func resourceAssociationResource(ctx context.Context) (resource.Resource, error)
 		"resource_arn": {
 			// Property: ResourceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -96,13 +101,14 @@ func resourceAssociationResource(ctx context.Context) (resource.Resource, error)
 		"resource_type": {
 			// Property: ResourceType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of the CFN Resource for now it's enum CFN_STACK.",
-			//   "enum": [
-			//     "CFN_STACK"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of the CFN Resource for now it's enum CFN_STACK.",
+			//	  "enum": [
+			//	    "CFN_STACK"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The type of the CFN Resource for now it's enum CFN_STACK.",
 			Type:        types.StringType,
 			Required:    true,

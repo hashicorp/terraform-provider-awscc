@@ -25,22 +25,23 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		"delivery_options": {
 			// Property: DeliveryOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
-			//   "properties": {
-			//     "SendingPoolName": {
-			//       "description": "The name of the dedicated IP pool to associate with the configuration set.",
-			//       "type": "string"
-			//     },
-			//     "TlsPolicy": {
-			//       "description": "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require , messages are only delivered if a TLS connection can be established. If the value is Optional , messages can be delivered in plain text if a TLS connection can't be established.",
-			//       "pattern": "REQUIRE|OPTIONAL",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
+			//	  "properties": {
+			//	    "SendingPoolName": {
+			//	      "description": "The name of the dedicated IP pool to associate with the configuration set.",
+			//	      "type": "string"
+			//	    },
+			//	    "TlsPolicy": {
+			//	      "description": "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require , messages are only delivered if a TLS connection can be established. If the value is Optional , messages can be delivered in plain text if a TLS connection can't be established.",
+			//	      "pattern": "REQUIRE|OPTIONAL",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -78,11 +79,12 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the configuration set.",
-			//   "pattern": "^[a-zA-Z0-9_-]{1,64}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the configuration set.",
+			//	  "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the configuration set.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -98,18 +100,19 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		"reputation_options": {
 			// Property: ReputationOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
-			//   "properties": {
-			//     "ReputationMetricsEnabled": {
-			//       "description": "If true , tracking of reputation metrics is enabled for the configuration set. If false , tracking of reputation metrics is disabled for the configuration set.",
-			//       "pattern": "true|false",
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
+			//	  "properties": {
+			//	    "ReputationMetricsEnabled": {
+			//	      "description": "If true , tracking of reputation metrics is enabled for the configuration set. If false , tracking of reputation metrics is disabled for the configuration set.",
+			//	      "pattern": "true|false",
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -134,17 +137,18 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		"sending_options": {
 			// Property: SendingOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object that defines whether or not Amazon SES can send email that you send using the configuration set.",
-			//   "properties": {
-			//     "SendingEnabled": {
-			//       "pattern": "true|false",
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object that defines whether or not Amazon SES can send email that you send using the configuration set.",
+			//	  "properties": {
+			//	    "SendingEnabled": {
+			//	      "pattern": "true|false",
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object that defines whether or not Amazon SES can send email that you send using the configuration set.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -168,24 +172,25 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		"suppression_options": {
 			// Property: SuppressionOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object that contains information about the suppression list preferences for your account.",
-			//   "properties": {
-			//     "SuppressedReasons": {
-			//       "description": "A list that contains the reasons that email addresses are automatically added to the suppression list for your account.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "description": "The reason that the address was added to the suppression list for your account",
-			//         "pattern": "BOUNCE|COMPLAINT",
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object that contains information about the suppression list preferences for your account.",
+			//	  "properties": {
+			//	    "SuppressedReasons": {
+			//	      "description": "A list that contains the reasons that email addresses are automatically added to the suppression list for your account.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "description": "The reason that the address was added to the suppression list for your account",
+			//	        "pattern": "BOUNCE|COMPLAINT",
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object that contains information about the suppression list preferences for your account.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -214,17 +219,18 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		"tracking_options": {
 			// Property: TrackingOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object that defines the open and click tracking options for emails that you send using the configuration set.",
-			//   "properties": {
-			//     "CustomRedirectDomain": {
-			//       "description": "The domain to use for tracking open and click events.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object that defines the open and click tracking options for emails that you send using the configuration set.",
+			//	  "properties": {
+			//	    "CustomRedirectDomain": {
+			//	      "description": "The domain to use for tracking open and click events.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object that defines the open and click tracking options for emails that you send using the configuration set.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -234,6 +240,102 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
+		"vdm_options": {
+			// Property: VdmOptions
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object that contains Virtual Deliverability Manager (VDM) settings for this configuration set.",
+			//	  "properties": {
+			//	    "DashboardOptions": {
+			//	      "additionalProperties": false,
+			//	      "description": "Preferences regarding the Dashboard feature.",
+			//	      "properties": {
+			//	        "EngagementMetrics": {
+			//	          "description": "Whether emails sent with this configuration set have engagement tracking enabled.",
+			//	          "pattern": "ENABLED|DISABLED",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "EngagementMetrics"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "GuardianOptions": {
+			//	      "additionalProperties": false,
+			//	      "description": "Preferences regarding the Guardian feature.",
+			//	      "properties": {
+			//	        "OptimizedSharedDelivery": {
+			//	          "description": "Whether emails sent with this configuration set have optimized delivery algorithm enabled.",
+			//	          "pattern": "ENABLED|DISABLED",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "OptimizedSharedDelivery"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			Description: "An object that contains Virtual Deliverability Manager (VDM) settings for this configuration set.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"dashboard_options": {
+						// Property: DashboardOptions
+						Description: "Preferences regarding the Dashboard feature.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"engagement_metrics": {
+									// Property: EngagementMetrics
+									Description: "Whether emails sent with this configuration set have engagement tracking enabled.",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("ENABLED|DISABLED"), ""),
+									},
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"guardian_options": {
+						// Property: GuardianOptions
+						Description: "Preferences regarding the Guardian feature.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"optimized_shared_delivery": {
+									// Property: OptimizedSharedDelivery
+									Description: "Whether emails sent with this configuration set have optimized delivery algorithm enabled.",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("ENABLED|DISABLED"), ""),
+									},
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
@@ -270,8 +372,12 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"custom_redirect_domain":     "CustomRedirectDomain",
+		"dashboard_options":          "DashboardOptions",
 		"delivery_options":           "DeliveryOptions",
+		"engagement_metrics":         "EngagementMetrics",
+		"guardian_options":           "GuardianOptions",
 		"name":                       "Name",
+		"optimized_shared_delivery":  "OptimizedSharedDelivery",
 		"reputation_metrics_enabled": "ReputationMetricsEnabled",
 		"reputation_options":         "ReputationOptions",
 		"sending_enabled":            "SendingEnabled",
@@ -281,6 +387,7 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		"suppression_options":        "SuppressionOptions",
 		"tls_policy":                 "TlsPolicy",
 		"tracking_options":           "TrackingOptions",
+		"vdm_options":                "VdmOptions",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

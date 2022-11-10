@@ -25,9 +25,10 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -37,9 +38,10 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		"last_modified_time": {
 			// Property: LastModifiedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -49,270 +51,271 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		"response_headers_policy_config": {
 			// Property: ResponseHeadersPolicyConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Comment": {
-			//       "type": "string"
-			//     },
-			//     "CorsConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AccessControlAllowCredentials": {
-			//           "type": "boolean"
-			//         },
-			//         "AccessControlAllowHeaders": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Items": {
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "Items"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "AccessControlAllowMethods": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Items": {
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "Items"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "AccessControlAllowOrigins": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Items": {
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "Items"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "AccessControlExposeHeaders": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Items": {
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "Items"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "AccessControlMaxAgeSec": {
-			//           "type": "integer"
-			//         },
-			//         "OriginOverride": {
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "required": [
-			//         "AccessControlAllowOrigins",
-			//         "AccessControlAllowHeaders",
-			//         "AccessControlAllowMethods",
-			//         "AccessControlAllowCredentials",
-			//         "OriginOverride"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "CustomHeadersConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Items": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Header": {
-			//                 "type": "string"
-			//               },
-			//               "Override": {
-			//                 "type": "boolean"
-			//               },
-			//               "Value": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Header",
-			//               "Value",
-			//               "Override"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         }
-			//       },
-			//       "required": [
-			//         "Items"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Name": {
-			//       "type": "string"
-			//     },
-			//     "SecurityHeadersConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "ContentSecurityPolicy": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ContentSecurityPolicy": {
-			//               "type": "string"
-			//             },
-			//             "Override": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "Override",
-			//             "ContentSecurityPolicy"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "ContentTypeOptions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Override": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "Override"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "FrameOptions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "FrameOption": {
-			//               "pattern": "^(DENY|SAMEORIGIN)$",
-			//               "type": "string"
-			//             },
-			//             "Override": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "Override",
-			//             "FrameOption"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "ReferrerPolicy": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Override": {
-			//               "type": "boolean"
-			//             },
-			//             "ReferrerPolicy": {
-			//               "pattern": "^(no-referrer|no-referrer-when-downgrade|origin|origin-when-cross-origin|same-origin|strict-origin|strict-origin-when-cross-origin|unsafe-url)$",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Override",
-			//             "ReferrerPolicy"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "StrictTransportSecurity": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AccessControlMaxAgeSec": {
-			//               "type": "integer"
-			//             },
-			//             "IncludeSubdomains": {
-			//               "type": "boolean"
-			//             },
-			//             "Override": {
-			//               "type": "boolean"
-			//             },
-			//             "Preload": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "Override",
-			//             "AccessControlMaxAgeSec"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "XSSProtection": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ModeBlock": {
-			//               "type": "boolean"
-			//             },
-			//             "Override": {
-			//               "type": "boolean"
-			//             },
-			//             "Protection": {
-			//               "type": "boolean"
-			//             },
-			//             "ReportUri": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Override",
-			//             "Protection"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ServerTimingHeadersConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "SamplingRate": {
-			//           "maximum": 100,
-			//           "minimum": 0,
-			//           "type": "number"
-			//         }
-			//       },
-			//       "required": [
-			//         "Enabled"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Comment": {
+			//	      "type": "string"
+			//	    },
+			//	    "CorsConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AccessControlAllowCredentials": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "AccessControlAllowHeaders": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Items": {
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Items"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "AccessControlAllowMethods": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Items": {
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Items"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "AccessControlAllowOrigins": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Items": {
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Items"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "AccessControlExposeHeaders": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Items": {
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Items"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "AccessControlMaxAgeSec": {
+			//	          "type": "integer"
+			//	        },
+			//	        "OriginOverride": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "AccessControlAllowOrigins",
+			//	        "AccessControlAllowHeaders",
+			//	        "AccessControlAllowMethods",
+			//	        "AccessControlAllowCredentials",
+			//	        "OriginOverride"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "CustomHeadersConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Items": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Header": {
+			//	                "type": "string"
+			//	              },
+			//	              "Override": {
+			//	                "type": "boolean"
+			//	              },
+			//	              "Value": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Header",
+			//	              "Value",
+			//	              "Override"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Items"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Name": {
+			//	      "type": "string"
+			//	    },
+			//	    "SecurityHeadersConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "ContentSecurityPolicy": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ContentSecurityPolicy": {
+			//	              "type": "string"
+			//	            },
+			//	            "Override": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Override",
+			//	            "ContentSecurityPolicy"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "ContentTypeOptions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Override": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Override"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "FrameOptions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "FrameOption": {
+			//	              "pattern": "^(DENY|SAMEORIGIN)$",
+			//	              "type": "string"
+			//	            },
+			//	            "Override": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Override",
+			//	            "FrameOption"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "ReferrerPolicy": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Override": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "ReferrerPolicy": {
+			//	              "pattern": "^(no-referrer|no-referrer-when-downgrade|origin|origin-when-cross-origin|same-origin|strict-origin|strict-origin-when-cross-origin|unsafe-url)$",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Override",
+			//	            "ReferrerPolicy"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "StrictTransportSecurity": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AccessControlMaxAgeSec": {
+			//	              "type": "integer"
+			//	            },
+			//	            "IncludeSubdomains": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "Override": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "Preload": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Override",
+			//	            "AccessControlMaxAgeSec"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "XSSProtection": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ModeBlock": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "Override": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "Protection": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "ReportUri": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Override",
+			//	            "Protection"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ServerTimingHeadersConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "SamplingRate": {
+			//	          "maximum": 100,
+			//	          "minimum": 0,
+			//	          "type": "number"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Enabled"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"comment": {

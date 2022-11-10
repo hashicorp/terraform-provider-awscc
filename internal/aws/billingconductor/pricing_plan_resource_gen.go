@@ -25,11 +25,12 @@ func pricingPlanResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Pricing Plan ARN",
-			//   "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingplan/[a-zA-Z0-9]{10}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Pricing Plan ARN",
+			//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingplan/[a-zA-Z0-9]{10}",
+			//	  "type": "string"
+			//	}
 			Description: "Pricing Plan ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,10 +41,11 @@ func pricingPlanResource(ctx context.Context) (resource.Resource, error) {
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Creation timestamp in UNIX epoch time format",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Creation timestamp in UNIX epoch time format",
+			//	  "type": "integer"
+			//	}
 			Description: "Creation timestamp in UNIX epoch time format",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -54,10 +56,11 @@ func pricingPlanResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1024,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1024,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -71,10 +74,11 @@ func pricingPlanResource(ctx context.Context) (resource.Resource, error) {
 		"last_modified_time": {
 			// Property: LastModifiedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Latest modified timestamp in UNIX epoch time format",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Latest modified timestamp in UNIX epoch time format",
+			//	  "type": "integer"
+			//	}
 			Description: "Latest modified timestamp in UNIX epoch time format",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -85,12 +89,13 @@ func pricingPlanResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -101,15 +106,16 @@ func pricingPlanResource(ctx context.Context) (resource.Resource, error) {
 		"pricing_rule_arns": {
 			// Property: PricingRuleArns
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "description": "Pricing Rule ARN",
-			//     "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingrule/[a-zA-Z0-9]{10}",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "description": "Pricing Rule ARN",
+			//	    "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingrule/[a-zA-Z0-9]{10}",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -124,10 +130,11 @@ func pricingPlanResource(ctx context.Context) (resource.Resource, error) {
 		"size": {
 			// Property: Size
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Number of associated pricing rules",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Number of associated pricing rules",
+			//	  "type": "integer"
+			//	}
 			Description: "Number of associated pricing rules",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -138,31 +145,32 @@ func pricingPlanResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

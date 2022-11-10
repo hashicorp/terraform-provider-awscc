@@ -23,10 +23,11 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"auth_type": {
 			// Property: AuthType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Optional customer-defined field, used in OpenAPI imports and exports without functional impact.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Optional customer-defined field, used in OpenAPI imports and exports without functional impact.",
+			//	  "type": "string"
+			//	}
 			Description: "Optional customer-defined field, used in OpenAPI imports and exports without functional impact.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -38,10 +39,11 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"authorizer_credentials": {
 			// Property: AuthorizerCredentials
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -53,9 +55,10 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"authorizer_id": {
 			// Property: AuthorizerId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -65,10 +68,11 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"authorizer_result_ttl_in_seconds": {
 			// Property: AuthorizerResultTtlInSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The TTL in seconds of cached authorizer results.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The TTL in seconds of cached authorizer results.",
+			//	  "type": "integer"
+			//	}
 			Description: "The TTL in seconds of cached authorizer results.",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -80,10 +84,11 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"authorizer_uri": {
 			// Property: AuthorizerUri
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the authorizer's Uniform Resource Identifier (URI).",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the authorizer's Uniform Resource Identifier (URI).",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the authorizer's Uniform Resource Identifier (URI).",
 			Type:        types.StringType,
 			Optional:    true,
@@ -95,10 +100,11 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"identity_source": {
 			// Property: IdentitySource
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identity source for which authorization is requested.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identity source for which authorization is requested.",
+			//	  "type": "string"
+			//	}
 			Description: "The identity source for which authorization is requested.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -110,10 +116,11 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"identity_validation_expression": {
 			// Property: IdentityValidationExpression
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A validation expression for the incoming identity token.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A validation expression for the incoming identity token.",
+			//	  "type": "string"
+			//	}
 			Description: "A validation expression for the incoming identity token.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -125,10 +132,11 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the authorizer.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the authorizer.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the authorizer.",
 			Type:        types.StringType,
 			Required:    true,
@@ -136,15 +144,16 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"provider_ar_ns": {
 			// Property: ProviderARNs
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
@@ -156,10 +165,11 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"rest_api_id": {
 			// Property: RestApiId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier of the API.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier of the API.",
+			//	  "type": "string"
+			//	}
 			Description: "The identifier of the API.",
 			Type:        types.StringType,
 			Required:    true,
@@ -170,10 +180,11 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The authorizer type.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The authorizer type.",
+			//	  "type": "string"
+			//	}
 			Description: "The authorizer type.",
 			Type:        types.StringType,
 			Required:    true,

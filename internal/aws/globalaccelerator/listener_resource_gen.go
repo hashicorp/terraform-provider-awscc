@@ -24,10 +24,11 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"accelerator_arn": {
 			// Property: AcceleratorArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the accelerator.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the accelerator.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the accelerator.",
 			Type:        types.StringType,
 			Required:    true,
@@ -38,15 +39,16 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"client_affinity": {
 			// Property: ClientAffinity
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "NONE",
-			//   "description": "Client affinity lets you direct all requests from a user to the same endpoint.",
-			//   "enum": [
-			//     "NONE",
-			//     "SOURCE_IP"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "NONE",
+			//	  "description": "Client affinity lets you direct all requests from a user to the same endpoint.",
+			//	  "enum": [
+			//	    "NONE",
+			//	    "SOURCE_IP"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Client affinity lets you direct all requests from a user to the same endpoint.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -65,10 +67,11 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"listener_arn": {
 			// Property: ListenerArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the listener.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the listener.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the listener.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -79,32 +82,33 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"port_ranges": {
 			// Property: PortRanges
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A port range to support for connections from  clients to your accelerator.",
-			//     "properties": {
-			//       "FromPort": {
-			//         "description": "A network port number",
-			//         "maximum": 65535,
-			//         "minimum": 0,
-			//         "type": "integer"
-			//       },
-			//       "ToPort": {
-			//         "description": "A network port number",
-			//         "maximum": 65535,
-			//         "minimum": 0,
-			//         "type": "integer"
-			//       }
-			//     },
-			//     "required": [
-			//       "FromPort",
-			//       "ToPort"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A port range to support for connections from  clients to your accelerator.",
+			//	    "properties": {
+			//	      "FromPort": {
+			//	        "description": "A network port number",
+			//	        "maximum": 65535,
+			//	        "minimum": 0,
+			//	        "type": "integer"
+			//	      },
+			//	      "ToPort": {
+			//	        "description": "A network port number",
+			//	        "maximum": 65535,
+			//	        "minimum": 0,
+			//	        "type": "integer"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "FromPort",
+			//	      "ToPort"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"from_port": {
@@ -132,15 +136,16 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"protocol": {
 			// Property: Protocol
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "TCP",
-			//   "description": "The protocol for the listener.",
-			//   "enum": [
-			//     "TCP",
-			//     "UDP"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "TCP",
+			//	  "description": "The protocol for the listener.",
+			//	  "enum": [
+			//	    "TCP",
+			//	    "UDP"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The protocol for the listener.",
 			Type:        types.StringType,
 			Optional:    true,

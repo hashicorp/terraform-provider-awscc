@@ -25,11 +25,12 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the EMR Studio.",
-			//   "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the EMR Studio.",
+			//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the EMR Studio.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,14 +41,15 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"auth_mode": {
 			// Property: AuthMode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.",
-			//   "enum": [
-			//     "SSO",
-			//     "IAM"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.",
+			//	  "enum": [
+			//	    "SSO",
+			//	    "IAM"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.",
 			Type:        types.StringType,
 			Required:    true,
@@ -64,13 +66,14 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"default_s3_location": {
 			// Property: DefaultS3Location
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.",
-			//   "maxLength": 10280,
-			//   "minLength": 6,
-			//   "pattern": "^s3://.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.",
+			//	  "maxLength": 10280,
+			//	  "minLength": 6,
+			//	  "pattern": "^s3://.*",
+			//	  "type": "string"
+			//	}
 			Description: "The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.",
 			Type:        types.StringType,
 			Required:    true,
@@ -82,12 +85,13 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A detailed description of the Studio.",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A detailed description of the Studio.",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "A detailed description of the Studio.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -102,13 +106,14 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"engine_security_group_id": {
 			// Property: EngineSecurityGroupId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.",
-			//   "maxLength": 256,
-			//   "minLength": 4,
-			//   "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.",
+			//	  "maxLength": 256,
+			//	  "minLength": 4,
+			//	  "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.",
 			Type:        types.StringType,
 			Required:    true,
@@ -123,12 +128,13 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"idp_auth_url": {
 			// Property: IdpAuthUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
-			//   "maxLength": 4096,
-			//   "pattern": "^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
+			//	  "maxLength": 4096,
+			//	  "pattern": "^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$",
+			//	  "type": "string"
+			//	}
 			Description: "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -144,12 +150,13 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"idp_relay_state_parameter_name": {
 			// Property: IdpRelayStateParameterName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of relay state parameter for external Identity Provider.",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of relay state parameter for external Identity Provider.",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "The name of relay state parameter for external Identity Provider.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -164,13 +171,14 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A descriptive name for the Amazon EMR Studio.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A descriptive name for the Amazon EMR Studio.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_-]+",
+			//	  "type": "string"
+			//	}
 			Description: "A descriptive name for the Amazon EMR Studio.",
 			Type:        types.StringType,
 			Required:    true,
@@ -182,11 +190,12 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"service_role": {
 			// Property: ServiceRole
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.",
-			//   "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.",
+			//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.",
 			Type:        types.StringType,
 			Required:    true,
@@ -200,13 +209,14 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"studio_id": {
 			// Property: StudioId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the EMR Studio.",
-			//   "maxLength": 256,
-			//   "minLength": 4,
-			//   "pattern": "^es-[0-9A-Z]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the EMR Studio.",
+			//	  "maxLength": 256,
+			//	  "minLength": 4,
+			//	  "pattern": "^es-[0-9A-Z]+",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the EMR Studio.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -217,16 +227,17 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_ids": {
 			// Property: SubnetIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of up to 5 subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.",
-			//   "items": {
-			//     "description": "Identifier of a subnet",
-			//     "pattern": "",
-			//     "type": "string"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of up to 5 subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.",
+			//	  "items": {
+			//	    "description": "Identifier of a subnet",
+			//	    "pattern": "",
+			//	    "type": "string"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "A list of up to 5 subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
@@ -237,37 +248,38 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of tags to associate with the Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "An arbitrary set of tags (key-value pairs) for this EMR Studio.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "pattern": "[a-zA-Z+-=._:/]+$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of tags to associate with the Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "An arbitrary set of tags (key-value pairs) for this EMR Studio.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "pattern": "[a-zA-Z+-=._:/]+$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of tags to associate with the Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -301,12 +313,13 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"url": {
 			// Property: Url
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique Studio access URL.",
-			//   "maxLength": 4096,
-			//   "pattern": "^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unique Studio access URL.",
+			//	  "maxLength": 4096,
+			//	  "pattern": "^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$",
+			//	  "type": "string"
+			//	}
 			Description: "The unique Studio access URL.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -317,11 +330,12 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"user_role": {
 			// Property: UserRole
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.",
-			//   "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.",
+			//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -337,11 +351,12 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.",
-			//   "pattern": "^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.",
+			//	  "pattern": "^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.",
 			Type:        types.StringType,
 			Required:    true,
@@ -355,11 +370,12 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"workspace_security_group_id": {
 			// Property: WorkspaceSecurityGroupId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.",
-			//   "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.",
+			//	  "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.",
 			Type:        types.StringType,
 			Required:    true,

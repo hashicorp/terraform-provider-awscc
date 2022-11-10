@@ -24,359 +24,360 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"api_passthrough": {
 			// Property: ApiPassthrough
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "These are fields to be overridden in a certificate at the time of issuance. These requires an API_Passthrough template be used or they will be ignored.",
-			//   "properties": {
-			//     "Extensions": {
-			//       "additionalProperties": false,
-			//       "description": "Structure that contains X.500 extensions for a Certificate.",
-			//       "properties": {
-			//         "CertificatePolicies": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "Structure that contains X.509 Policy information.",
-			//             "properties": {
-			//               "CertPolicyId": {
-			//                 "description": "String that contains X.509 ObjectIdentifier information.",
-			//                 "type": "string"
-			//               },
-			//               "PolicyQualifiers": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "description": "Structure that contains X.509 Policy qualifier information.",
-			//                   "properties": {
-			//                     "PolicyQualifierId": {
-			//                       "type": "string"
-			//                     },
-			//                     "Qualifier": {
-			//                       "additionalProperties": false,
-			//                       "description": "Structure that contains a X.509 policy qualifier.",
-			//                       "properties": {
-			//                         "CpsUri": {
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "CpsUri"
-			//                       ],
-			//                       "type": "object"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "PolicyQualifierId",
-			//                     "Qualifier"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "required": [
-			//               "CertPolicyId"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "CustomExtensions": {
-			//           "description": "Array of X.509 extensions for a certificate.",
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "Structure that contains X.509 extension information for a certificate.",
-			//             "properties": {
-			//               "Critical": {
-			//                 "type": "boolean"
-			//               },
-			//               "ObjectIdentifier": {
-			//                 "description": "String that contains X.509 ObjectIdentifier information.",
-			//                 "type": "string"
-			//               },
-			//               "Value": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "ObjectIdentifier",
-			//               "Value"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "ExtendedKeyUsage": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "Structure that contains X.509 ExtendedKeyUsage information.",
-			//             "properties": {
-			//               "ExtendedKeyUsageObjectIdentifier": {
-			//                 "description": "String that contains X.509 ObjectIdentifier information.",
-			//                 "type": "string"
-			//               },
-			//               "ExtendedKeyUsageType": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "KeyUsage": {
-			//           "additionalProperties": false,
-			//           "description": "Structure that contains X.509 KeyUsage information.",
-			//           "properties": {
-			//             "CRLSign": {
-			//               "default": false,
-			//               "type": "boolean"
-			//             },
-			//             "DataEncipherment": {
-			//               "default": false,
-			//               "type": "boolean"
-			//             },
-			//             "DecipherOnly": {
-			//               "default": false,
-			//               "type": "boolean"
-			//             },
-			//             "DigitalSignature": {
-			//               "default": false,
-			//               "type": "boolean"
-			//             },
-			//             "EncipherOnly": {
-			//               "default": false,
-			//               "type": "boolean"
-			//             },
-			//             "KeyAgreement": {
-			//               "default": false,
-			//               "type": "boolean"
-			//             },
-			//             "KeyCertSign": {
-			//               "default": false,
-			//               "type": "boolean"
-			//             },
-			//             "KeyEncipherment": {
-			//               "default": false,
-			//               "type": "boolean"
-			//             },
-			//             "NonRepudiation": {
-			//               "default": false,
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "SubjectAlternativeNames": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
-			//             "properties": {
-			//               "DirectoryName": {
-			//                 "additionalProperties": false,
-			//                 "description": "Structure that contains X.500 distinguished name information.",
-			//                 "properties": {
-			//                   "CommonName": {
-			//                     "type": "string"
-			//                   },
-			//                   "Country": {
-			//                     "type": "string"
-			//                   },
-			//                   "CustomAttributes": {
-			//                     "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "description": "Structure that contains X.500 attribute type and value.",
-			//                       "properties": {
-			//                         "ObjectIdentifier": {
-			//                           "description": "String that contains X.509 ObjectIdentifier information.",
-			//                           "type": "string"
-			//                         },
-			//                         "Value": {
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "ObjectIdentifier",
-			//                         "Value"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "type": "array"
-			//                   },
-			//                   "DistinguishedNameQualifier": {
-			//                     "type": "string"
-			//                   },
-			//                   "GenerationQualifier": {
-			//                     "type": "string"
-			//                   },
-			//                   "GivenName": {
-			//                     "type": "string"
-			//                   },
-			//                   "Initials": {
-			//                     "type": "string"
-			//                   },
-			//                   "Locality": {
-			//                     "type": "string"
-			//                   },
-			//                   "Organization": {
-			//                     "type": "string"
-			//                   },
-			//                   "OrganizationalUnit": {
-			//                     "type": "string"
-			//                   },
-			//                   "Pseudonym": {
-			//                     "type": "string"
-			//                   },
-			//                   "SerialNumber": {
-			//                     "type": "string"
-			//                   },
-			//                   "State": {
-			//                     "type": "string"
-			//                   },
-			//                   "Surname": {
-			//                     "type": "string"
-			//                   },
-			//                   "Title": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "DnsName": {
-			//                 "description": "String that contains X.509 DnsName information.",
-			//                 "type": "string"
-			//               },
-			//               "EdiPartyName": {
-			//                 "additionalProperties": false,
-			//                 "description": "Structure that contains X.509 EdiPartyName information.",
-			//                 "properties": {
-			//                   "NameAssigner": {
-			//                     "type": "string"
-			//                   },
-			//                   "PartyName": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "PartyName",
-			//                   "NameAssigner"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "IpAddress": {
-			//                 "description": "String that contains X.509 IpAddress information.",
-			//                 "type": "string"
-			//               },
-			//               "OtherName": {
-			//                 "additionalProperties": false,
-			//                 "description": "Structure that contains X.509 OtherName information.",
-			//                 "properties": {
-			//                   "TypeId": {
-			//                     "description": "String that contains X.509 ObjectIdentifier information.",
-			//                     "type": "string"
-			//                   },
-			//                   "Value": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "TypeId",
-			//                   "Value"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "RegisteredId": {
-			//                 "description": "String that contains X.509 ObjectIdentifier information.",
-			//                 "type": "string"
-			//               },
-			//               "Rfc822Name": {
-			//                 "description": "String that contains X.509 Rfc822Name information.",
-			//                 "type": "string"
-			//               },
-			//               "UniformResourceIdentifier": {
-			//                 "description": "String that contains X.509 UniformResourceIdentifier information.",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Subject": {
-			//       "additionalProperties": false,
-			//       "description": "Structure that contains X.500 distinguished name information.",
-			//       "properties": {
-			//         "CommonName": {
-			//           "type": "string"
-			//         },
-			//         "Country": {
-			//           "type": "string"
-			//         },
-			//         "CustomAttributes": {
-			//           "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "Structure that contains X.500 attribute type and value.",
-			//             "properties": {
-			//               "ObjectIdentifier": {
-			//                 "description": "String that contains X.509 ObjectIdentifier information.",
-			//                 "type": "string"
-			//               },
-			//               "Value": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "ObjectIdentifier",
-			//               "Value"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "DistinguishedNameQualifier": {
-			//           "type": "string"
-			//         },
-			//         "GenerationQualifier": {
-			//           "type": "string"
-			//         },
-			//         "GivenName": {
-			//           "type": "string"
-			//         },
-			//         "Initials": {
-			//           "type": "string"
-			//         },
-			//         "Locality": {
-			//           "type": "string"
-			//         },
-			//         "Organization": {
-			//           "type": "string"
-			//         },
-			//         "OrganizationalUnit": {
-			//           "type": "string"
-			//         },
-			//         "Pseudonym": {
-			//           "type": "string"
-			//         },
-			//         "SerialNumber": {
-			//           "type": "string"
-			//         },
-			//         "State": {
-			//           "type": "string"
-			//         },
-			//         "Surname": {
-			//           "type": "string"
-			//         },
-			//         "Title": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "These are fields to be overridden in a certificate at the time of issuance. These requires an API_Passthrough template be used or they will be ignored.",
+			//	  "properties": {
+			//	    "Extensions": {
+			//	      "additionalProperties": false,
+			//	      "description": "Structure that contains X.500 extensions for a Certificate.",
+			//	      "properties": {
+			//	        "CertificatePolicies": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "Structure that contains X.509 Policy information.",
+			//	            "properties": {
+			//	              "CertPolicyId": {
+			//	                "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                "type": "string"
+			//	              },
+			//	              "PolicyQualifiers": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "Structure that contains X.509 Policy qualifier information.",
+			//	                  "properties": {
+			//	                    "PolicyQualifierId": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "Qualifier": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "Structure that contains a X.509 policy qualifier.",
+			//	                      "properties": {
+			//	                        "CpsUri": {
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "CpsUri"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "PolicyQualifierId",
+			//	                    "Qualifier"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "CertPolicyId"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "CustomExtensions": {
+			//	          "description": "Array of X.509 extensions for a certificate.",
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "Structure that contains X.509 extension information for a certificate.",
+			//	            "properties": {
+			//	              "Critical": {
+			//	                "type": "boolean"
+			//	              },
+			//	              "ObjectIdentifier": {
+			//	                "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                "type": "string"
+			//	              },
+			//	              "Value": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "ObjectIdentifier",
+			//	              "Value"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "ExtendedKeyUsage": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "Structure that contains X.509 ExtendedKeyUsage information.",
+			//	            "properties": {
+			//	              "ExtendedKeyUsageObjectIdentifier": {
+			//	                "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                "type": "string"
+			//	              },
+			//	              "ExtendedKeyUsageType": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "KeyUsage": {
+			//	          "additionalProperties": false,
+			//	          "description": "Structure that contains X.509 KeyUsage information.",
+			//	          "properties": {
+			//	            "CRLSign": {
+			//	              "default": false,
+			//	              "type": "boolean"
+			//	            },
+			//	            "DataEncipherment": {
+			//	              "default": false,
+			//	              "type": "boolean"
+			//	            },
+			//	            "DecipherOnly": {
+			//	              "default": false,
+			//	              "type": "boolean"
+			//	            },
+			//	            "DigitalSignature": {
+			//	              "default": false,
+			//	              "type": "boolean"
+			//	            },
+			//	            "EncipherOnly": {
+			//	              "default": false,
+			//	              "type": "boolean"
+			//	            },
+			//	            "KeyAgreement": {
+			//	              "default": false,
+			//	              "type": "boolean"
+			//	            },
+			//	            "KeyCertSign": {
+			//	              "default": false,
+			//	              "type": "boolean"
+			//	            },
+			//	            "KeyEncipherment": {
+			//	              "default": false,
+			//	              "type": "boolean"
+			//	            },
+			//	            "NonRepudiation": {
+			//	              "default": false,
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "SubjectAlternativeNames": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
+			//	            "properties": {
+			//	              "DirectoryName": {
+			//	                "additionalProperties": false,
+			//	                "description": "Structure that contains X.500 distinguished name information.",
+			//	                "properties": {
+			//	                  "CommonName": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Country": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "CustomAttributes": {
+			//	                    "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "Structure that contains X.500 attribute type and value.",
+			//	                      "properties": {
+			//	                        "ObjectIdentifier": {
+			//	                          "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                          "type": "string"
+			//	                        },
+			//	                        "Value": {
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "ObjectIdentifier",
+			//	                        "Value"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "type": "array"
+			//	                  },
+			//	                  "DistinguishedNameQualifier": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "GenerationQualifier": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "GivenName": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Initials": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Locality": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Organization": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "OrganizationalUnit": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Pseudonym": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "SerialNumber": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "State": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Surname": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Title": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "DnsName": {
+			//	                "description": "String that contains X.509 DnsName information.",
+			//	                "type": "string"
+			//	              },
+			//	              "EdiPartyName": {
+			//	                "additionalProperties": false,
+			//	                "description": "Structure that contains X.509 EdiPartyName information.",
+			//	                "properties": {
+			//	                  "NameAssigner": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PartyName": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "PartyName",
+			//	                  "NameAssigner"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "IpAddress": {
+			//	                "description": "String that contains X.509 IpAddress information.",
+			//	                "type": "string"
+			//	              },
+			//	              "OtherName": {
+			//	                "additionalProperties": false,
+			//	                "description": "Structure that contains X.509 OtherName information.",
+			//	                "properties": {
+			//	                  "TypeId": {
+			//	                    "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Value": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "TypeId",
+			//	                  "Value"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "RegisteredId": {
+			//	                "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                "type": "string"
+			//	              },
+			//	              "Rfc822Name": {
+			//	                "description": "String that contains X.509 Rfc822Name information.",
+			//	                "type": "string"
+			//	              },
+			//	              "UniformResourceIdentifier": {
+			//	                "description": "String that contains X.509 UniformResourceIdentifier information.",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Subject": {
+			//	      "additionalProperties": false,
+			//	      "description": "Structure that contains X.500 distinguished name information.",
+			//	      "properties": {
+			//	        "CommonName": {
+			//	          "type": "string"
+			//	        },
+			//	        "Country": {
+			//	          "type": "string"
+			//	        },
+			//	        "CustomAttributes": {
+			//	          "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "Structure that contains X.500 attribute type and value.",
+			//	            "properties": {
+			//	              "ObjectIdentifier": {
+			//	                "description": "String that contains X.509 ObjectIdentifier information.",
+			//	                "type": "string"
+			//	              },
+			//	              "Value": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "ObjectIdentifier",
+			//	              "Value"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "DistinguishedNameQualifier": {
+			//	          "type": "string"
+			//	        },
+			//	        "GenerationQualifier": {
+			//	          "type": "string"
+			//	        },
+			//	        "GivenName": {
+			//	          "type": "string"
+			//	        },
+			//	        "Initials": {
+			//	          "type": "string"
+			//	        },
+			//	        "Locality": {
+			//	          "type": "string"
+			//	        },
+			//	        "Organization": {
+			//	          "type": "string"
+			//	        },
+			//	        "OrganizationalUnit": {
+			//	          "type": "string"
+			//	        },
+			//	        "Pseudonym": {
+			//	          "type": "string"
+			//	        },
+			//	        "SerialNumber": {
+			//	          "type": "string"
+			//	        },
+			//	        "State": {
+			//	          "type": "string"
+			//	        },
+			//	        "Surname": {
+			//	          "type": "string"
+			//	        },
+			//	        "Title": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "These are fields to be overridden in a certificate at the time of issuance. These requires an API_Passthrough template be used or they will be ignored.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1057,10 +1058,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the issued certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the issued certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the issued certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1071,10 +1073,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"certificate": {
 			// Property: Certificate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The issued certificate in base 64 PEM-encoded format.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The issued certificate in base 64 PEM-encoded format.",
+			//	  "type": "string"
+			//	}
 			Description: "The issued certificate in base 64 PEM-encoded format.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1085,10 +1088,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_authority_arn": {
 			// Property: CertificateAuthorityArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the private CA to issue the certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the private CA to issue the certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the private CA to issue the certificate.",
 			Type:        types.StringType,
 			Required:    true,
@@ -1099,11 +1103,12 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_signing_request": {
 			// Property: CertificateSigningRequest
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The certificate signing request (CSR) for the Certificate.",
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The certificate signing request (CSR) for the Certificate.",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The certificate signing request (CSR) for the Certificate.",
 			Type:        types.StringType,
 			Required:    true,
@@ -1118,10 +1123,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"signing_algorithm": {
 			// Property: SigningAlgorithm
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the algorithm that will be used to sign the Certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the algorithm that will be used to sign the Certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the algorithm that will be used to sign the Certificate.",
 			Type:        types.StringType,
 			Required:    true,
@@ -1132,10 +1138,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"template_arn": {
 			// Property: TemplateArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1 template.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1 template.",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1 template.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -1148,23 +1155,24 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"validity": {
 			// Property: Validity
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The time before which the Certificate will be valid.",
-			//   "properties": {
-			//     "Type": {
-			//       "type": "string"
-			//     },
-			//     "Value": {
-			//       "type": "number"
-			//     }
-			//   },
-			//   "required": [
-			//     "Value",
-			//     "Type"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The time before which the Certificate will be valid.",
+			//	  "properties": {
+			//	    "Type": {
+			//	      "type": "string"
+			//	    },
+			//	    "Value": {
+			//	      "type": "number"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Value",
+			//	    "Type"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The time before which the Certificate will be valid.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1188,23 +1196,24 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"validity_not_before": {
 			// Property: ValidityNotBefore
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The time after which the Certificate will be valid.",
-			//   "properties": {
-			//     "Type": {
-			//       "type": "string"
-			//     },
-			//     "Value": {
-			//       "type": "number"
-			//     }
-			//   },
-			//   "required": [
-			//     "Value",
-			//     "Type"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The time after which the Certificate will be valid.",
+			//	  "properties": {
+			//	    "Type": {
+			//	      "type": "string"
+			//	    },
+			//	    "Value": {
+			//	      "type": "number"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Value",
+			//	    "Type"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The time after which the Certificate will be valid.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

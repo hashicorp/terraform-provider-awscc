@@ -23,9 +23,10 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_arn": {
 			// Property: CertificateArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -36,9 +37,10 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"distribution_domain_name": {
 			// Property: DistributionDomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -48,9 +50,10 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"distribution_hosted_zone_id": {
 			// Property: DistributionHostedZoneId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -60,9 +63,10 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -74,18 +78,19 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_configuration": {
 			// Property: EndpointConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Types": {
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Types": {
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"types": {
@@ -108,18 +113,19 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"mutual_tls_authentication": {
 			// Property: MutualTlsAuthentication
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "TruststoreUri": {
-			//       "type": "string"
-			//     },
-			//     "TruststoreVersion": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "TruststoreUri": {
+			//	      "type": "string"
+			//	    },
+			//	    "TruststoreVersion": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"truststore_uri": {
@@ -151,9 +157,10 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"ownership_verification_certificate_arn": {
 			// Property: OwnershipVerificationCertificateArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -164,9 +171,10 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"regional_certificate_arn": {
 			// Property: RegionalCertificateArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -177,9 +185,10 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"regional_domain_name": {
 			// Property: RegionalDomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -189,9 +198,10 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"regional_hosted_zone_id": {
 			// Property: RegionalHostedZoneId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -201,9 +211,10 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"security_policy": {
 			// Property: SecurityPolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -214,21 +225,22 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
